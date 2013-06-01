@@ -1,0 +1,24 @@
+﻿<Window x:Class="GroupRenamer.PoststringWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="후미어 붙이기" Height="128" Width="400" ShowInTaskbar="False" Topmost="True"
+        WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="10,10,10,10" FocusManager.FocusedElement="{Binding ElementName=textBoxString}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42" />
+            <RowDefinition Height="24" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="붙일 문자열" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
+        <TextBox x:Name="textBoxString" Grid.Row="0" Grid.Column="1" Margin="0,10,0,10" />
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="buttonApply" Content="적용" Width="80" IsDefault="True" Click="buttonApply_Click" />
+            <Grid Margin="5,0,5,0" />
+            <Button x:Name="buttonCancel" Content="취소" Width="80" IsCancel="True" Click="buttonCancel_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

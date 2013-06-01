@@ -1,0 +1,30 @@
+﻿<Window x:Class="GroupRenamer.ReplaceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="문자열 바꾸기" Height="194" Width="400" ShowInTaskbar="False" Topmost="True"
+        WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="10,10,10,10" FocusManager.FocusedElement="{Binding ElementName=textBoxOriginal}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42" />
+            <RowDefinition Height="42" />
+            <RowDefinition Height="24" />
+            <RowDefinition Height="24" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="원본 문자열" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
+        <TextBlock Text="변경 문자열" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+        <TextBox x:Name="textBoxOriginal" Grid.Row="0" Grid.Column="1" Margin="0,10,0,10" />
+        <TextBox x:Name="textBoxReplace" Grid.Row="1" Grid.Column="1" Margin="0,10,0,10" />
+        <CheckBox x:Name="checkBoxExcludeExtension" Content="확장자 부분(.*)은 제외하고 문자열 바꾸기"
+                  Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="buttonApply" Content="적용" Width="80" IsDefault="True" Click="buttonApply_Click" />
+            <Grid Margin="5,0,5,0" />
+            <Button x:Name="buttonCancel" Content="취소" Width="80" IsCancel="True" Click="buttonCancel_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

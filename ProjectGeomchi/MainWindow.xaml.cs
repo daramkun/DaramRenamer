@@ -177,8 +177,8 @@ namespace GroupRenamer
 
 		private void menuItemCommitChanges_Click ( object sender, RoutedEventArgs e )
 		{
-			if ( MessageBox.Show ( "적용하시겠습니까? 적용 시 되돌릴 수 없습니다.",
-				"안내", MessageBoxButton.YesNo ) == MessageBoxResult.No )
+			if ( System.Windows.Forms.MessageBox.Show ( "적용하시겠습니까? 적용 시 되돌릴 수 없습니다.",
+				"안내", System.Windows.Forms.MessageBoxButtons.YesNo ) == System.Windows.Forms.DialogResult.No )
 				return;
 
 			foreach ( FileInfo fileInfo in fileInfoCollection )
@@ -191,12 +191,14 @@ namespace GroupRenamer
 				}
 				catch ( UnauthorizedAccessException ex )
 				{
-					MessageBox.Show ( String.Format ( "\"{0}\"파일의 경로를 변경할 권한이 없습니다.", fileInfo.OriginalName ) );
+					System.Windows.Forms.MessageBox.Show ( String.Format ( 
+						"\"{0}\"파일의 경로를 변경할 권한이 없습니다.", fileInfo.OriginalName ) );
 					Debug.WriteLine ( ex.Message );
 				}
 				catch ( Exception ex )
 				{
-					MessageBox.Show ( String.Format ( "\"{0}\"파일의 경로를 변경할 수 없었습니다.", fileInfo.OriginalName ) );
+					System.Windows.Forms.MessageBox.Show ( String.Format (
+						"\"{0}\"파일의 경로를 변경할 수 없었습니다.", fileInfo.OriginalName ) );
 					Debug.WriteLine ( ex.Message );
 				}
 			}

@@ -4,8 +4,6 @@
         xmlns:custom="clr-namespace:GroupRenamer"
         Title="프로젝트 검치" Width="640" Height="480"
         Icon="Resources/ProgramIcon.ico"
-        RenderOptions.BitmapScalingMode="HighQuality"
-        RenderOptions.EdgeMode="Aliased"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
@@ -151,7 +149,7 @@
                     <ToolTip Content="파일명 맨 뒤에 숫자를 붙입니다." />
                 </Button.ToolTip>
             </Button>
-            <Button x:Name="toolBarButtonIncreaseNumber">
+            <Button x:Name="toolBarButtonIncreaseNumber" Click="menuItemNumberIncrease_Click">
                 <Image Source="Images/chart_bar_add.png" />
                 <Button.ToolTip>
                     <ToolTip Content="숫자 값을 증가시키거나 감소시킵니다." />
@@ -225,7 +223,7 @@
         </ListView>
         <!-- StatusBar -->
         <StatusBar Grid.Row="3">
-            <TextBlock Text="프로젝트 검치 v1.003 (2013. 05. 23)" />
+            <TextBlock Text="프로젝트 검치 v1.004 (2013. 06. 11)" />
             <Separator />
             <Hyperlink x:Name="hyperLinkHomepage" Click="hyperLinkHomepage_Click">
                 홈페이지(http://www.daram.pe.kr)

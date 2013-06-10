@@ -15,7 +15,7 @@ namespace GroupRenamer
 	{
 		public App ()
 		{
-
+			System.Windows.Forms.Application.EnableVisualStyles ();
 		}
 	}
 }

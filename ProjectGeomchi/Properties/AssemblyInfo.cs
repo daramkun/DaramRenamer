@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle ( "Project Geomchi" )]
 [assembly: AssemblyDescription ( "" )]
 [assembly: AssemblyConfiguration ( "" )]
-[assembly: AssemblyCompany ( "" )]
+[assembly: AssemblyCompany ( "Daramkun's NEST" )]
 [assembly: AssemblyProduct ( "Project Geomchi" )]
 [assembly: AssemblyCopyright ( "Copyright © 2013 Daramkun All Rights Reserved" )]
 [assembly: AssemblyTrademark ( "" )]
@@ -51,5 +51,5 @@ using System.Windows;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 버전이 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion ( "1.0.0.3" )]
-[assembly: AssemblyFileVersion ( "1.0.0.3" )]
+[assembly: AssemblyVersion ( "1.0.0.4" )]
+[assembly: AssemblyFileVersion ( "1.0.0.4" )]

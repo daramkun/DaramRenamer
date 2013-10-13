@@ -30,9 +30,17 @@ namespace GroupRenamer
 			regexpList.Add ( @"\[(.*)\](.*) - ([0-9]*)(.*)\((([A-Z]|[a-z])*) ([0-9]*)x([0-9]*) (([A-Z]|[a-z]|[0-9])*) (([A-Z]|[a-z]|[0-9])*)\).(([0-9]|[a-z])*)" );
 			formStrList.Add ( @"[{1}] {2} - {3} ({4} {5}x{6} {7} {8}).{9}" );
 
-			// Filename - Number Format
+			// Filename - Number Filename Format
 			regexpList.Add ( @"(.*) - ([0-9]*).(([0-9]|[a-z])*)" );
 			formStrList.Add ( @"{1} - {2}.{3}" );
+
+			// Digital Camera Photo Filename Format
+			regexpList.Add ( @"([A-Z]*)([0-9]*).(([0-9]|[a-z])*)" );
+			formStrList.Add ( @"{1}{2}.{3}" );
+
+			// Windows Phone Photo Filename Format
+			regexpList.Add ( @"([A-Z]*)_([0-9]*).(([0-9]|[a-z])*)" );
+			formStrList.Add ( @"{1}_{2}.{3}" );
 		}
 
 		public string RegularExpression { get { return textBoxOriginal.Text; } }

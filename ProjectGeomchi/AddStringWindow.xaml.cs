@@ -16,11 +16,12 @@ namespace GroupRenamer
 	/// <summary>
 	/// PoststringWindow.xaml에 대한 상호 작용 논리
 	/// </summary>
-	public partial class PoststringWindow : Window
+	public partial class AddStringWindow : Window
 	{
 		public string String { get { return textBoxString.Text; } }
+		public bool IsPrestring { get { return radioIsPrestring.IsChecked.Value; } }
 
-		public PoststringWindow ()
+		public AddStringWindow ()
 		{
 			InitializeComponent ();
 		}

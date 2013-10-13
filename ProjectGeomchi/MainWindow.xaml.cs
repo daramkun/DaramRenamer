@@ -254,28 +254,16 @@ namespace GroupRenamer
 
 		private void menuItemPrestring_Click ( object sender, RoutedEventArgs e )
 		{
-			PrestringWindow window = new PrestringWindow ();
+			AddStringWindow window = new AddStringWindow ();
 			if ( window.ShowDialog () == false ) return;
 
 			SaveCurrentStateToUndoStack ();
 
 			string str = window.String;
+			string form = ( !window.IsPrestring ) ? "{0}{1}" : "{1}{0}";
 
 			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = str + fileInfo.ChangeName;
-		}
-
-		private void menuItemPoststring_Click ( object sender, RoutedEventArgs e )
-		{
-			PoststringWindow window = new PoststringWindow ();
-			if ( window.ShowDialog () == false ) return;
-
-			SaveCurrentStateToUndoStack ();
-
-			string str = window.String;
-
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = fileInfo.ChangeName + str;
+				fileInfo.ChangeName = string.Format ( form, str, fileInfo.ChangeName );
 		}
 		#endregion
 
@@ -597,7 +585,6 @@ namespace GroupRenamer
 		public static RoutedCommand CommandApplyCanc = new RoutedCommand ();
 		public static RoutedCommand CommandReplaceSt = new RoutedCommand ();
 		public static RoutedCommand CommandPrestring = new RoutedCommand ();
-		public static RoutedCommand CommandPoststrin = new RoutedCommand ();
 		public static RoutedCommand CommandDeleteNam = new RoutedCommand ();
 		public static RoutedCommand CommandDeleteBlo = new RoutedCommand ();
 		public static RoutedCommand CommandDelWoutNu = new RoutedCommand ();
@@ -653,11 +640,6 @@ namespace GroupRenamer
 		private void commandPrestring_Executed ( object sender, ExecutedRoutedEventArgs e )
 		{
 			menuItemPrestring_Click ( sender, e );
-		}
-
-		private void commandPoststrin_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemPoststring_Click ( sender, e );
 		}
 
 		private void commandDeleteNam_Executed ( object sender, ExecutedRoutedEventArgs e )

@@ -29,8 +29,7 @@
                 <MenuItem x:Name="menuItemCancel" Header="변경 취소(_A)" Click="menuItemCancel_Click" InputGestureText="Ctrl+D" />
                 <Separator />
                 <MenuItem x:Name="menuItemReplace" Header="문자열 바꾸기(_S)" Click="menuItemReplace_Click" InputGestureText="Ctrl+R" />
-                <MenuItem x:Name="menuItemPrestring" Header="전두어 붙이기(_F)" Click="menuItemPrestring_Click" InputGestureText="Ctrl+F" />
-                <MenuItem x:Name="menuItemPoststring" Header="후미어 붙이기(_L)" Click="menuItemPoststring_Click" InputGestureText="Ctrl+L" />
+                <MenuItem x:Name="menuItemPrestring" Header="문자열 붙이기(_F)" Click="menuItemPrestring_Click" InputGestureText="Ctrl+F" />
                 <Separator />
                 <MenuItem x:Name="menuItemDeleteName" Header="이름 지우기(_D)" Click="menuItemDeleteName_Click" InputGestureText="Ctrl+E" />
                 <MenuItem x:Name="menuItemDeleteEnclosed" Header="묶인 문자열 지우기(_T)" Click="menuItemDeleteEnclosed_Click" InputGestureText="Ctrl+T" />
@@ -109,13 +108,7 @@
             <Button x:Name="toolBarButtonPrestring" Click="menuItemPrestring_Click">
                 <Image Source="Images/shape_move_forwards.png" />
                 <Button.ToolTip>
-                    <ToolTip Content="이름 맨 앞에 지정한 문자열을 삽입합니다." />
-                </Button.ToolTip>
-            </Button>
-            <Button x:Name="toolBarButtonPoststring" Click="menuItemPoststring_Click">
-                <Image Source="Images/shape_move_backwards.png" />
-                <Button.ToolTip>
-                    <ToolTip Content="이름 맨 뒤에 지정한 문자열을 삽입합니다." />
+                    <ToolTip Content="이름 맨 앞 또는 맨 뒤에 지정한 문자열을 삽입합니다." />
                 </Button.ToolTip>
             </Button>
             <Separator />
@@ -233,7 +226,6 @@
         <CommandBinding Command="{x:Static custom:MainWindow.CommandApplyCanc}" Executed="commandApplyCanc_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandReplaceSt}" Executed="commandReplaceSt_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandPrestring}" Executed="commandPrestring_Executed" />
-        <CommandBinding Command="{x:Static custom:MainWindow.CommandPoststrin}" Executed="commandPoststrin_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandDeleteNam}" Executed="commandDeleteNam_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandDeleteBlo}" Executed="commandDeleteBlo_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandDelWoutNu}" Executed="commandDelWoutNu_Executed" />
@@ -258,7 +250,6 @@
         <KeyBinding Key="D" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandApplyCanc}" />
         <KeyBinding Key="R" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandReplaceSt}" />
         <KeyBinding Key="F" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandPrestring}" />
-        <KeyBinding Key="L" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandPoststrin}" />
         <KeyBinding Key="E" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandDeleteNam}" />
         <KeyBinding Key="T" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandDeleteBlo}" />
         <KeyBinding Key="N" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandDelWoutNu}" />

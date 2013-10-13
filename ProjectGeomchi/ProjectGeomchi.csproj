@@ -67,11 +67,8 @@
     <Compile Include="IncreaseWindow.xaml.cs">
       <DependentUpon>IncreaseWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PoststringWindow.xaml.cs">
-      <DependentUpon>PoststringWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PrestringWindow.xaml.cs">
-      <DependentUpon>PrestringWindow.xaml</DependentUpon>
+    <Compile Include="AddStringWindow.xaml.cs">
+      <DependentUpon>AddStringWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegularExpressionWindow.xaml.cs">
       <DependentUpon>RegularExpressionWindow.xaml</DependentUpon>
@@ -118,11 +115,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PoststringWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PrestringWindow.xaml">
+    <Page Include="AddStringWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,7 +169,6 @@
     <Resource Include="Images\brick_delete.png" />
     <Resource Include="Images\help.png" />
     <Resource Include="Images\layout_edit.png" />
-    <Resource Include="Images\shape_move_backwards.png" />
     <Resource Include="Images\shape_move_forwards.png" />
   </ItemGroup>
   <ItemGroup>

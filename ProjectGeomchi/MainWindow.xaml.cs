@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -500,6 +501,33 @@ namespace GroupRenamer
 			if ( dialog.ShowDialog () == System.Windows.Forms.DialogResult.Cancel ) return;
 			foreach ( FileInfo fileInfo in fileInfoCollection )
 				fileInfo.ChangePath = dialog.SelectedPath;
+		}
+		#endregion
+
+		#region Edit Menu - Regular Expression
+		private void menuItemRegularExpression_Click ( object sender, RoutedEventArgs e )
+		{
+			RegularExpressionWindow window = new RegularExpressionWindow ();
+			if ( window.ShowDialog () == false ) return;
+
+			Regex exp = new Regex ( window.RegularExpression, RegexOptions.IgnoreCase );
+			string formstr = window.FormatString;
+
+			foreach ( FileInfo fileInfo in fileInfoCollection )
+			{
+				try
+				{
+					Match match = exp.Match ( fileInfo.ChangeName );
+					GroupCollection group = match.Groups;
+					object [] groupArr = new object [ group.Count ];
+					for ( int i = 0; i < groupArr.Length; i++ )
+						groupArr [ i ] = group [ i ].Value.Trim ();
+					fileInfo.ChangeName = string.Format ( formstr, groupArr );
+				}
+				catch { }
+			}
+
+			SaveCurrentStateToUndoStack ();
 		}
 		#endregion
 

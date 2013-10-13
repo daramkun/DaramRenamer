@@ -45,6 +45,8 @@
                 <MenuItem x:Name="menuItemChangeExtension" Header="확장자 변경(_H)" Click="menuItemChangeExtension_Click" InputGestureText="Ctrl+H" />
                 <Separator />
                 <MenuItem x:Name="menuItemChangePath" Header="위치할 경로 변경(_P)" Click="menuItemChangePath_Click" InputGestureText="Ctrl+P" />
+                <Separator />
+                <MenuItem x:Name="menuItemRegularExpression" Header="정규표현식 일괄 변환(_G)" Click="menuItemRegularExpression_Click" InputGestureText="Ctrl+G" />
             </MenuItem>
             <MenuItem Header="항목(_I)">
                 <MenuItem x:Name="menuItemGotoUp" Header="항목 위로(_U)" Click="menuItemGotoUp_Click" InputGestureText="Ctrl+Up" />
@@ -54,7 +56,7 @@
                 <MenuItem x:Name="menuItemEditItem" Header="항목 임의 편집(_M)" Click="menuItemEditItem_Click" InputGestureText="Ctrl+Enter" />
             </MenuItem>
             <MenuItem Header="도움말(_H)">
-                <MenuItem x:Name="menuItemAbout" Header="이 프로그램에 대하여(_A)" Click="menuItemAbout_Click" InputGestureText="F1" />
+                <MenuItem x:Name="menuItemAbout" Header="이 프로그램에 대하여(_A)" Click="menuItemAbout_Click" />
             </MenuItem>
         </Menu>
         <!-- Toolbar -->
@@ -174,6 +176,13 @@
                 </Button.ToolTip>
             </Button>
             <Separator />
+            <Button x:Name="toolBarButtonRegularExpression" Click="menuItemRegularExpression_Click">
+                <Image Source="Images/database_table.png" />
+                <Button.ToolTip>
+                    <ToolTip Content="정규표현식을 이용해 파일 이름을 일괄 변경합니다." />
+                </Button.ToolTip>
+            </Button>
+            <Separator />
             <Button x:Name="toolBarButtonGotoUp" Click="menuItemGotoUp_Click">
                 <Image Source="Images/arrow_up.png" />
                 <Button.ToolTip>
@@ -190,13 +199,6 @@
                 <Image Source="Images/script_edit.png" />
                 <Button.ToolTip>
                     <ToolTip Content="항목을 수동으로 수정합니다." />
-                </Button.ToolTip>
-            </Button>
-            <Separator />
-            <Button x:Name="toolBarButtonAbout" Click="menuItemAbout_Click">
-                <Image Source="Images/help.png" />
-                <Button.ToolTip>
-                    <ToolTip Content="프로그램 버전 정보를 확인합니다." />
                 </Button.ToolTip>
             </Button>
         </ToolBar>
@@ -246,7 +248,6 @@
         <CommandBinding Command="{x:Static custom:MainWindow.CommandLowerItem}" Executed="commandLowerItem_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandItemsSort}" Executed="commandItemsSort_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandEditItems}" Executed="commandEditItems_Executed" />
-        <CommandBinding Command="{x:Static custom:MainWindow.CommandAboutProg}" Executed="commandAboutProg_Executed" />
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Key="O" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandOpenFiles}" />
@@ -272,6 +273,5 @@
         <KeyBinding Key="Down" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandLowerItem}" />
         <KeyBinding Key="S" Modifiers="Shift+Control" Command="{x:Static custom:MainWindow.CommandItemsSort}" />
         <KeyBinding Key="Enter" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandEditItems}" />
-        <KeyBinding Key="F1" Command="{x:Static custom:MainWindow.CommandAboutProg}" />
     </Window.InputBindings>
 </Window>

@@ -260,10 +260,13 @@ namespace GroupRenamer
 			SaveCurrentStateToUndoStack ();
 
 			string str = window.String;
-			string form = ( !window.IsPrestring ) ? "{0}{1}" : "{1}{0}";
+			string form = ( !window.IsPrestring ) ? "{1}{0}{2}" : "{0}{1}{2}";
 
 			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = string.Format ( form, str, fileInfo.ChangeName );
+			{
+				fileInfo.ChangeName = string.Format ( form, str, GetFilenameWithoutExtension ( fileInfo.ChangeName ),
+					GetExtensionWithoutFilename ( fileInfo.ChangeName ) );
+			}
 		}
 		#endregion
 

@@ -5,7 +5,7 @@
         WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <StackPanel Margin="10,10,10,10" Orientation="Vertical">
         <TextBlock Text="다람 리네이머" FontSize="24" FontWeight="ExtraBold" HorizontalAlignment="Center" Margin="0,0,0,10" />
-        <TextBlock Text="Version 1.005" HorizontalAlignment="Right" />
+        <TextBlock x:Name="versionString" Text="Version " HorizontalAlignment="Right" />
         <TextBlock Text="Made by Daramkun" HorizontalAlignment="Right" />
         <Button x:Name="buttonApply" Content="닫기" Margin="40,10,40,0" Height="24" IsDefault="True" Click="buttonApply_Click" />
     </StackPanel>

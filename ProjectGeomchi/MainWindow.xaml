@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <!-- Menu -->
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" IsMainMenu="True">
             <MenuItem Header="파일(_F)">
                 <MenuItem x:Name="menuItemOpenFiles" Header="변경할 파일 불러오기(_O)" Click="menuItemOpenFiles_Click" InputGestureText="Ctrl+O" />
                 <MenuItem x:Name="menuItemCloseFiles" Header="목록 삭제(_C)" Click="menuItemCloseFiles_Click" InputGestureText="Ctrl+Del" />
@@ -45,6 +45,9 @@
                 <Separator />
                 <MenuItem x:Name="menuItemChangePath" Header="위치할 경로 변경(_P)" Click="menuItemChangePath_Click" InputGestureText="Ctrl+P" />
                 <Separator />
+                <MenuItem x:Name="menuItemExtensionsToLower" Header="확장자 소문자로(_L)" Click="menuItemExtensionsToLower_Click" InputGestureText="Ctrl+L" />
+                <MenuItem x:Name="menuItemExtensionsToUpper" Header="확장자 대문자로(_K)" Click="menuItemExtensionsToUpper_Click" InputGestureText="Ctrl+K" />
+                <Separator />
                 <MenuItem x:Name="menuItemRegularExpression" Header="정규표현식 일괄 변환(_G)" Click="menuItemRegularExpression_Click" InputGestureText="Ctrl+G" />
             </MenuItem>
             <MenuItem Header="항목(_I)">
@@ -59,7 +62,7 @@
             </MenuItem>
         </Menu>
         <!-- Toolbar -->
-        <ToolBar Grid.Row="1">
+        <ToolBar Grid.Row="1" IsOverflowOpen="False">
             <Button x:Name="toolBarButtonOpen" Click="menuItemOpenFiles_Click">
                 <Image Source="Images/folder.png" />
                 <Button.ToolTip>
@@ -235,6 +238,8 @@
         <CommandBinding Command="{x:Static custom:MainWindow.CommandDelExtens}" Executed="commandDelExtens_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandAddExtens}" Executed="commandAddExtens_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandModExtens}" Executed="commandModExtens_Executed" />
+        <CommandBinding Command="{x:Static custom:MainWindow.CommandModExtens}" Executed="commandExtToLowe_Executed" />
+        <CommandBinding Command="{x:Static custom:MainWindow.CommandModExtens}" Executed="commandExtToUppe_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandChangePat}" Executed="commandChangePat_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandUpperItem}" Executed="commandUpperItem_Executed" />
         <CommandBinding Command="{x:Static custom:MainWindow.CommandLowerItem}" Executed="commandLowerItem_Executed" />
@@ -259,6 +264,8 @@
         <KeyBinding Key="X" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandDelExtens}" />
         <KeyBinding Key="A" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandAddExtens}" />
         <KeyBinding Key="H" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandModExtens}" />
+        <KeyBinding Key="L" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandExtToLowe}" />
+        <KeyBinding Key="K" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandExtToUppe}" />
         <KeyBinding Key="P" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandChangePat}" />
         <KeyBinding Key="Up" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandUpperItem}" />
         <KeyBinding Key="Down" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandLowerItem}" />

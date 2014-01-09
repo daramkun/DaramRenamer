@@ -495,6 +495,26 @@ namespace GroupRenamer
 		}
 		#endregion
 
+		#region Edit Menu - Extensions
+		private void menuItemExtensionsToLower_Click ( object sender, RoutedEventArgs e )
+		{
+			foreach ( FileInfo fileInfo in fileInfoCollection )
+			{
+				fileInfo.ChangeName = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.ChangeName ),
+					GetExtensionWithoutFilename ( fileInfo.ChangeName ).ToLower () );
+			}
+		}
+
+		private void menuItemExtensionsToUpper_Click ( object sender, RoutedEventArgs e )
+		{
+			foreach ( FileInfo fileInfo in fileInfoCollection )
+			{
+				fileInfo.ChangeName = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.ChangeName ),
+					GetExtensionWithoutFilename ( fileInfo.ChangeName ).ToUpper () );
+			}
+		}
+		#endregion
+
 		#region Edit Menu - Regular Expression
 		private void menuItemRegularExpression_Click ( object sender, RoutedEventArgs e )
 		{
@@ -597,6 +617,8 @@ namespace GroupRenamer
 		public static RoutedCommand CommandAddExtens = new RoutedCommand ();
 		public static RoutedCommand CommandDelExtens = new RoutedCommand ();
 		public static RoutedCommand CommandModExtens = new RoutedCommand ();
+		public static RoutedCommand CommandExtToLowe = new RoutedCommand ();
+		public static RoutedCommand CommandExtToUppe = new RoutedCommand ();
 		public static RoutedCommand CommandChangePat = new RoutedCommand ();
 		public static RoutedCommand CommandUpperItem = new RoutedCommand ();
 		public static RoutedCommand CommandLowerItem = new RoutedCommand ();
@@ -688,6 +710,16 @@ namespace GroupRenamer
 		private void commandModExtens_Executed ( object sender, ExecutedRoutedEventArgs e )
 		{
 			menuItemChangeExtension_Click ( sender, e );
+		}
+
+		private void commandExtToLowe_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+			menuItemExtensionsToLower_Click ( sender, e );
+		}
+
+		private void commandExtToUppe_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+			menuItemExtensionsToUpper_Click ( sender, e );
 		}
 
 		private void commandChangePat_Executed ( object sender, ExecutedRoutedEventArgs e )

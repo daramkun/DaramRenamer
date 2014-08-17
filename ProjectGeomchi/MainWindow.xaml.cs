@@ -20,9 +20,6 @@ using System.Windows.Shapes;
 
 namespace GroupRenamer
 {
-	/// <summary>
-	/// MainWindow.xaml에 대한 상호 작용 논리
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		#region Member variable
@@ -512,6 +509,7 @@ namespace GroupRenamer
 		#region Edit Menu - Extensions
 		private void menuItemExtensionsToLower_Click ( object sender, RoutedEventArgs e )
 		{
+			SaveCurrentStateToUndoStack ();
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
 				fileInfo.CN = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.CN ),
@@ -521,6 +519,7 @@ namespace GroupRenamer
 
 		private void menuItemExtensionsToUpper_Click ( object sender, RoutedEventArgs e )
 		{
+			SaveCurrentStateToUndoStack ();
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
 				fileInfo.CN = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.CN ),
@@ -534,6 +533,8 @@ namespace GroupRenamer
 		{
 			RegularExpressionWindow window = new RegularExpressionWindow ();
 			if ( window.ShowDialog () == false ) return;
+
+			SaveCurrentStateToUndoStack ();
 
 			Regex exp = new Regex ( window.RegularExpression, RegexOptions.IgnoreCase );
 			string formstr = window.FormatString;
@@ -551,8 +552,6 @@ namespace GroupRenamer
 				}
 				catch { }
 			} );
-
-			SaveCurrentStateToUndoStack ();
 		}
 		#endregion
 

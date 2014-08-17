@@ -8,13 +8,14 @@ using System.Windows;
 // 어셈블리와 관련된 정보를 수정하려면
 // 이 특성 값을 변경하십시오.
 [assembly: AssemblyTitle ( "Daram Renamer" )]
-[assembly: AssemblyDescription ( "" )]
+[assembly: AssemblyDescription ( "File re-naming batch application" )]
 [assembly: AssemblyConfiguration ( "" )]
 [assembly: AssemblyCompany ( "Daramkun's NEST" )]
 [assembly: AssemblyProduct ( "Daram Renamer" )]
-[assembly: AssemblyCopyright ( "Copyright © 2013-2014 Daramkun All Rights Reserved" )]
-[assembly: AssemblyTrademark ( "" )]
+[assembly: AssemblyCopyright ( "Copyright © 2013-2014 Daramkun" )]
+[assembly: AssemblyTrademark ( "DaramTools" )]
 [assembly: AssemblyCulture ( "" )]
+[assembly: NeutralResourcesLanguage ( "ko-KR" )]
 
 // ComVisible을 false로 설정하면 이 어셈블리의 형식이 COM 구성 요소에 
 // 표시되지 않습니다. COM에서 이 어셈블리의 형식에 액세스하려면 
@@ -56,3 +57,4 @@ using System.Windows;
 
 [assembly: DependencyAttribute ( "System.Drawing", LoadHint.Sometimes )]
 [assembly: DependencyAttribute ( "System.Windows.Forms", LoadHint.Sometimes )]
+[assembly: GuidAttribute ( "3FC6CD68-276B-4D9F-94A5-79A7E85B71A5" )]

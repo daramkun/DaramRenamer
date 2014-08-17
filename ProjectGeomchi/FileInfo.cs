@@ -4,41 +4,19 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GroupRenamer
 {
-	static class ObservableCollectionUtility
-	{
-		public static void Sort<TSource, TKey> ( this ObservableCollection<TSource> source, Func<TSource, TKey> keySelector, bool desc = false )
-		{
-			if ( source == null ) return;
-
-			Comparer<TKey> comparer = Comparer<TKey>.Default;
-			for ( int i = source.Count - 1; i >= 0; i-- )
-			{
-				for ( int j = 1; j <= i; j++ )
-				{
-					TSource o1 = source [ j - 1 ];
-					TSource o2 = source [ j ];
-					int comparison = comparer.Compare ( keySelector ( o1 ), keySelector ( o2 ) );
-					if ( desc && comparison < 0 )
-						source.Move ( j, j - 1 );
-					else if ( !desc && comparison > 0 )
-						source.Move ( j - 1, j );
-				}
-			}
-		}
-	}
-
 	[Serializable]
-	public class FileInfo : INotifyPropertyChanged
+	public class FileInfo : INotifyPropertyChanged, IComparable<FileInfo>
 	{
 		string originalName, changeName, originalPath, changePath;
 
-		public string OriginalName { get { return originalName; } set { originalName = value; PC ( "OriginalName" ); } }
-		public string ChangeName { get { return changeName; } set { changeName = value; PC ( "ChangeName" ); } }
-		public string OriginalPath { get { return originalPath; } set { originalPath = value; PC ( "ChangePath" ); } }
-		public string ChangePath { get { return changePath; } set { changePath = value; PC ( "ChangePath" ); } }
+		public string ON { get { return originalName; } set { originalName = value; PC ( "ON" ); } }
+		public string CN { get { return changeName; } set { changeName = value; PC ( "CN" ); } }
+		public string OP { get { return originalPath; } set { originalPath = value; PC ( "OP" ); } }
+		public string CP { get { return changePath; } set { changePath = value; PC ( "CP" ); } }
 
 		private void PC ( string p )
 		{
@@ -48,11 +26,24 @@ namespace GroupRenamer
 
 		public void Changed ()
 		{
-			OriginalName = changeName.Clone () as string;
-			OriginalPath = changePath.Clone () as string;
+			ON = changeName.Clone () as string;
+			OP = changePath.Clone () as string;
 		}
 
 		[field: NonSerialized]
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		public int CompareTo ( FileInfo other )
+		{
+			return changeName.CompareTo ( other.changeName );
+		}
+
+		public static ObservableCollection<FileInfo> Sort ( ObservableCollection<FileInfo> source )
+		{
+			if ( source == null ) return null;
+			List<FileInfo> list = source.ToList();
+			ParallelSort.QuicksortParallel<FileInfo> ( list );
+			return new ObservableCollection<FileInfo> ( list );
+		}
 	}
 }

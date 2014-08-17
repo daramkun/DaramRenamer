@@ -53,9 +53,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AboutWindow.xaml.cs">
-      <DependentUpon>AboutWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddExtensionWindow.xaml.cs">
       <DependentUpon>AddExtensionWindow.xaml</DependentUpon>
     </Compile>
@@ -80,13 +77,10 @@
     <Compile Include="DeleteEnclosedWindow.xaml.cs">
       <DependentUpon>DeleteEnclosedWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SameDigitCountWindow.xaml.cs">
-      <DependentUpon>SameDigitCountWindow.xaml</DependentUpon>
+    <Compile Include="DigitWindow.xaml.cs">
+      <DependentUpon>DigitWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AboutWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="ParallelSort.cs" />
     <Page Include="AddExtensionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,7 +126,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SameDigitCountWindow.xaml">
+    <Page Include="DigitWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,7 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\brick_delete.png" />
-    <Resource Include="Images\help.png" />
     <Resource Include="Images\layout_edit.png" />
     <Resource Include="Images\shape_move_forwards.png" />
   </ItemGroup>

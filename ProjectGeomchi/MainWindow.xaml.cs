@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -53,10 +54,10 @@ namespace GroupRenamer
 			string path = System.IO.Path.GetDirectoryName ( s );
 			fileInfoCollection.Add ( new FileInfo ()
 			{
-				OriginalName = filename.Clone () as string,
-				ChangeName = filename.Clone () as string,
-				OriginalPath = path.Clone () as string,
-				ChangePath = path.Clone () as string,
+				ON = filename.Clone () as string,
+				CN = filename.Clone () as string,
+				OP = path.Clone () as string,
+				CP = path.Clone () as string,
 			} );
 		}
 
@@ -139,8 +140,7 @@ namespace GroupRenamer
 			if ( e.Data.GetDataPresent ( DataFormats.FileDrop ) )
 			{
 				string [] temp = e.Data.GetData ( DataFormats.FileDrop ) as string [];
-				var data = from b in temp orderby b select b;
-				foreach ( string s in data )
+				foreach ( string s in from b in temp orderby b select b )
 					AddItem ( s );
 			}
 		}
@@ -186,20 +186,26 @@ namespace GroupRenamer
 			{
 				try
 				{
-					File.Move ( System.IO.Path.Combine ( fileInfo.OriginalPath, fileInfo.OriginalName ),
-						System.IO.Path.Combine ( fileInfo.ChangePath, fileInfo.ChangeName ) );
+					File.Move ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ),
+						System.IO.Path.Combine ( fileInfo.CP, fileInfo.CN ) );
 					fileInfo.Changed ();
 				}
 				catch ( UnauthorizedAccessException ex )
 				{
-					System.Windows.Forms.MessageBox.Show ( String.Format ( 
-						"\"{0}\"파일의 경로를 변경할 권한이 없습니다.", fileInfo.OriginalName ) );
+					System.Windows.Forms.MessageBox.Show ( String.Format (
+						"\"{0}\"파일의 경로를 변경할 권한이 없습니다.", fileInfo.ON ) );
+					Debug.WriteLine ( ex.Message );
+				}
+				catch ( FileNotFoundException ex )
+				{
+					System.Windows.Forms.MessageBox.Show ( String.Format (
+						"\"{0}\"원본 파일이 존재하지 않습니다.", fileInfo.ON ) );
 					Debug.WriteLine ( ex.Message );
 				}
 				catch ( Exception ex )
 				{
 					System.Windows.Forms.MessageBox.Show ( String.Format (
-						"\"{0}\"파일의 경로를 변경할 수 없었습니다.", fileInfo.OriginalName ) );
+						"\"{0}\"파일의 경로를 변경할 수 없었습니다.", fileInfo.ON ) );
 					Debug.WriteLine ( ex.Message );
 				}
 			}
@@ -245,11 +251,13 @@ namespace GroupRenamer
 			string replace = window.Replace;
 			bool isExcludeExt = window.IsExcludeExtension;
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = ( isExcludeExt ) ? (
-					GetFilenameWithoutExtension ( fileInfo.ChangeName ).Replace ( original, replace )
-						+ GetExtensionWithoutFilename ( fileInfo.ChangeName ) )
-						: fileInfo.ChangeName.Replace ( original, replace );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+			{
+				fileInfo.CN = ( isExcludeExt ) ? (
+					GetFilenameWithoutExtension ( fileInfo.CN ).Replace ( original, replace )
+						+ GetExtensionWithoutFilename ( fileInfo.CN ) )
+						: fileInfo.CN.Replace ( original, replace );
+			} );
 		}
 
 		private void menuItemPrestring_Click ( object sender, RoutedEventArgs e )
@@ -261,12 +269,12 @@ namespace GroupRenamer
 
 			string str = window.String;
 			string form = ( !window.IsPrestring ) ? "{1}{0}{2}" : "{0}{1}{2}";
-
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
-				fileInfo.ChangeName = string.Format ( form, str, GetFilenameWithoutExtension ( fileInfo.ChangeName ),
-					GetExtensionWithoutFilename ( fileInfo.ChangeName ) );
-			}
+				fileInfo.CN = string.Format ( form, str, GetFilenameWithoutExtension ( fileInfo.CN ),
+					GetExtensionWithoutFilename ( fileInfo.CN ) );
+			} );
 		}
 		#endregion
 
@@ -275,8 +283,8 @@ namespace GroupRenamer
 		{
 			SaveCurrentStateToUndoStack ();
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = GetExtensionWithoutFilename ( fileInfo.ChangeName );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN = GetExtensionWithoutFilename ( fileInfo.CN ) );
 		}
 
 		private void menuItemDeleteEnclosed_Click ( object sender, RoutedEventArgs e )
@@ -290,17 +298,17 @@ namespace GroupRenamer
 			string post = window.Poststring;
 			bool isAllDelete = window.IsDeleteAllEnclosed;
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
 				int first, last;
-				while ( ( first = fileInfo.ChangeName.IndexOf ( pre ) ) != -1 )
+				while ( ( first = fileInfo.CN.IndexOf ( pre ) ) != -1 )
 				{
-					last = fileInfo.ChangeName.IndexOf ( post, first + 1 );
+					last = fileInfo.CN.IndexOf ( post, first + 1 );
 					if ( last == -1 ) break;
-					fileInfo.ChangeName = fileInfo.ChangeName.Remove ( first, last - first + post.Length );
+					fileInfo.CN = fileInfo.CN.Remove ( first, last - first + post.Length );
 					if ( !isAllDelete ) break;
 				}
-			}
+			} );
 		}
 		#endregion
 
@@ -308,31 +316,31 @@ namespace GroupRenamer
 		private void menuItemDeleteWithoutNumber_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
-
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
 				StringBuilder sb = new StringBuilder ();
 
-				foreach ( char ch in GetFilenameWithoutExtension ( fileInfo.ChangeName ) )
+				foreach ( char ch in GetFilenameWithoutExtension ( fileInfo.CN ) )
 					if ( ch >= '0' && ch <= '9' )
 						sb.Append ( ch );
-				fileInfo.ChangeName = sb.ToString () + GetExtensionWithoutFilename ( fileInfo.ChangeName );
-			}
+				fileInfo.CN = sb.ToString () + GetExtensionWithoutFilename ( fileInfo.CN );
+			} );
 		}
 
 		private void menuItemSameNumberOfDigits_Click ( object sender, RoutedEventArgs e )
 		{
-			SameDigitCountWindow window = new SameDigitCountWindow ();
+			DigitWindow window = new DigitWindow ();
 			if ( window.ShowDialog () == false ) return;
 
 			SaveCurrentStateToUndoStack ();
 
 			int digitCount = window.DigitCount;
 			bool isOffsetFromBack = window.ProcessOffset == 0 ? true : false;
-
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
-				string filename = GetFilenameWithoutExtension ( fileInfo.ChangeName );
+				string filename = GetFilenameWithoutExtension ( fileInfo.CN );
 				if ( isOffsetFromBack ) filename = GetReverseString ( filename );
 
 				bool meetTheNumber = false;
@@ -357,7 +365,7 @@ namespace GroupRenamer
 					count++;
 				}
 
-				if ( !meetTheNumber ) continue;
+				if ( !meetTheNumber ) return;
 
 				string origin, temp;
 				origin = temp = sb.ToString ();
@@ -372,8 +380,8 @@ namespace GroupRenamer
 						temp = '0' + temp;
 
 				string filenameTemp = filename.Remove ( offset, origin.Length );
-				fileInfo.ChangeName = filenameTemp.Insert ( offset, temp ) + GetExtensionWithoutFilename ( fileInfo.ChangeName );
-			}
+				fileInfo.CN = filenameTemp.Insert ( offset, temp ) + GetExtensionWithoutFilename ( fileInfo.CN );
+			} );
 
 			GC.Collect ();
 		}
@@ -384,8 +392,8 @@ namespace GroupRenamer
 
 			int fileCount = 1;
 			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = GetFilenameWithoutExtension(fileInfo.ChangeName) + fileCount++ +
-					GetExtensionWithoutFilename ( fileInfo.ChangeName );
+				fileInfo.CN = GetFilenameWithoutExtension ( fileInfo.CN ) + fileCount++ +
+					GetExtensionWithoutFilename ( fileInfo.CN );
 		}
 
 		private void menuItemNumberIncrease_Click ( object sender, RoutedEventArgs e )
@@ -397,9 +405,9 @@ namespace GroupRenamer
 
 			bool isOffsetFromBack = window.ProcessOffset == 0 ? true : false;
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
-				string filename = GetFilenameWithoutExtension ( fileInfo.ChangeName );
+				string filename = GetFilenameWithoutExtension ( fileInfo.CN );
 				if ( isOffsetFromBack ) filename = GetReverseString ( filename );
 
 				bool meetTheNumber = false;
@@ -424,7 +432,7 @@ namespace GroupRenamer
 					count++;
 				}
 
-				if ( !meetTheNumber ) continue;
+				if ( !meetTheNumber ) return;
 
 				string origin, temp;
 				origin = sb.ToString ();
@@ -441,8 +449,8 @@ namespace GroupRenamer
 					temp = "0" + temp;
 
 				string filenameTemp = filename.Remove ( offset, origin.Length );
-				fileInfo.ChangeName = filenameTemp.Insert ( offset, temp ) + GetExtensionWithoutFilename ( fileInfo.ChangeName );
-			}
+				fileInfo.CN = filenameTemp.Insert ( offset, temp ) + GetExtensionWithoutFilename ( fileInfo.CN );
+			} );
 
 			GC.Collect ();
 		}
@@ -453,8 +461,8 @@ namespace GroupRenamer
 		{
 			SaveCurrentStateToUndoStack ();
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = GetFilenameWithoutExtension ( fileInfo.ChangeName );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN = GetFilenameWithoutExtension ( fileInfo.CN ) );
 		}
 
 		private void menuItemAddExtension_Click ( object sender, RoutedEventArgs e )
@@ -464,10 +472,10 @@ namespace GroupRenamer
 
 			SaveCurrentStateToUndoStack ();
 
-			string extension = window.Extension;
+			string extension = String.Format ( ".{0}", window.Extension );
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName += String.Format ( ".{0}", extension );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN += extension );
 		}
 
 		private void menuItemChangeExtension_Click ( object sender, RoutedEventArgs e )
@@ -477,11 +485,11 @@ namespace GroupRenamer
 
 			SaveCurrentStateToUndoStack ();
 
-			string extension = "." + window.Extension;
+			string extension = String.Format ( ".{0}", window.Extension );
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangeName = fileInfo.ChangeName.Replace ( GetExtensionWithoutFilename ( fileInfo.ChangeName ),
-					extension );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN = fileInfo.CN.Replace ( GetExtensionWithoutFilename ( fileInfo.CN ),
+					extension ) );
 		}
 		#endregion
 
@@ -490,28 +498,28 @@ namespace GroupRenamer
 		{
 			System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog ();
 			if ( dialog.ShowDialog () == System.Windows.Forms.DialogResult.Cancel ) return;
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.ChangePath = dialog.SelectedPath;
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CP = dialog.SelectedPath );
 		}
 		#endregion
 
 		#region Edit Menu - Extensions
 		private void menuItemExtensionsToLower_Click ( object sender, RoutedEventArgs e )
 		{
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
-				fileInfo.ChangeName = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.ChangeName ),
-					GetExtensionWithoutFilename ( fileInfo.ChangeName ).ToLower () );
-			}
+				fileInfo.CN = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.CN ),
+					GetExtensionWithoutFilename ( fileInfo.CN ).ToLower () );
+			} );
 		}
 
 		private void menuItemExtensionsToUpper_Click ( object sender, RoutedEventArgs e )
 		{
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
-				fileInfo.ChangeName = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.ChangeName ),
-					GetExtensionWithoutFilename ( fileInfo.ChangeName ).ToUpper () );
-			}
+				fileInfo.CN = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.CN ),
+					GetExtensionWithoutFilename ( fileInfo.CN ).ToUpper () );
+			} );
 		}
 		#endregion
 
@@ -524,19 +532,19 @@ namespace GroupRenamer
 			Regex exp = new Regex ( window.RegularExpression, RegexOptions.IgnoreCase );
 			string formstr = window.FormatString;
 
-			foreach ( FileInfo fileInfo in fileInfoCollection )
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
 				try
 				{
-					Match match = exp.Match ( fileInfo.ChangeName );
+					Match match = exp.Match ( fileInfo.CN );
 					GroupCollection group = match.Groups;
 					object [] groupArr = new object [ group.Count ];
 					for ( int i = 0; i < groupArr.Length; i++ )
 						groupArr [ i ] = group [ i ].Value.Trim ();
-					fileInfo.ChangeName = string.Format ( formstr, groupArr );
+					fileInfo.CN = string.Format ( formstr, groupArr );
 				}
 				catch { }
-			}
+			} );
 
 			SaveCurrentStateToUndoStack ();
 		}
@@ -567,7 +575,8 @@ namespace GroupRenamer
 
 		private void menuItemSort_Click ( object sender, RoutedEventArgs e )
 		{
-			fileInfoCollection.Sort ( p => p.ChangeName );
+			SaveCurrentStateToUndoStack ();
+			listViewFiles.ItemsSource = fileInfoCollection = FileInfo.Sort ( fileInfoCollection );
 		}
 
 		private void menuItemEditItem_Click ( object sender, RoutedEventArgs e )
@@ -575,26 +584,12 @@ namespace GroupRenamer
 			if ( listViewFiles.SelectedItems.Count != 1 ) return;
 
 			FileInfo fileInfo = listViewFiles.SelectedItem as FileInfo;
-			EditWindow window = new EditWindow ( fileInfo.ChangeName, fileInfo.ChangePath );
+			EditWindow window = new EditWindow ( fileInfo.CN, fileInfo.CP );
 			
 			if ( window.ShowDialog () == false ) return;
 
-			( listViewFiles.SelectedItem as FileInfo ).ChangeName = window.Filename;
-			( listViewFiles.SelectedItem as FileInfo ).ChangePath = window.Path;
-		}
-		#endregion
-
-		#region Help Menu
-		private void menuItemAbout_Click ( object sender, RoutedEventArgs e )
-		{
-			new AboutWindow ().ShowDialog ();
-		}
-		#endregion
-
-		#region Hyperlink
-		private void hyperLinkHomepage_Click ( object sender, RoutedEventArgs e )
-		{
-			Process.Start ( "http://www.daram.pe.kr" );
+			( listViewFiles.SelectedItem as FileInfo ).CN = window.Filename;
+			( listViewFiles.SelectedItem as FileInfo ).CP = window.Path;
 		}
 		#endregion
 
@@ -606,25 +601,10 @@ namespace GroupRenamer
 		public static RoutedCommand CommandUndoWorks = new RoutedCommand ();
 		public static RoutedCommand CommandRedoWorks = new RoutedCommand ();
 		public static RoutedCommand CommandApplyCanc = new RoutedCommand ();
-		public static RoutedCommand CommandReplaceSt = new RoutedCommand ();
-		public static RoutedCommand CommandPrestring = new RoutedCommand ();
-		public static RoutedCommand CommandDeleteNam = new RoutedCommand ();
-		public static RoutedCommand CommandDeleteBlo = new RoutedCommand ();
-		public static RoutedCommand CommandDelWoutNu = new RoutedCommand ();
-		public static RoutedCommand CommandSameDigit = new RoutedCommand ();
-		public static RoutedCommand CommandAddNumber = new RoutedCommand ();
-		public static RoutedCommand CommandIncreaseN = new RoutedCommand ();
-		public static RoutedCommand CommandAddExtens = new RoutedCommand ();
-		public static RoutedCommand CommandDelExtens = new RoutedCommand ();
-		public static RoutedCommand CommandModExtens = new RoutedCommand ();
-		public static RoutedCommand CommandExtToLowe = new RoutedCommand ();
-		public static RoutedCommand CommandExtToUppe = new RoutedCommand ();
-		public static RoutedCommand CommandChangePat = new RoutedCommand ();
 		public static RoutedCommand CommandUpperItem = new RoutedCommand ();
 		public static RoutedCommand CommandLowerItem = new RoutedCommand ();
 		public static RoutedCommand CommandItemsSort = new RoutedCommand ();
 		public static RoutedCommand CommandEditItems = new RoutedCommand ();
-		public static RoutedCommand CommandAboutProg = new RoutedCommand ();
 		#endregion
 		#region Executes
 		private void commandOpenFiles_Executed ( object sender, ExecutedRoutedEventArgs e )
@@ -657,76 +637,6 @@ namespace GroupRenamer
 			menuItemCancel_Click ( sender, e );
 		}
 
-		private void commandReplaceSt_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemReplace_Click ( sender, e );
-		}
-
-		private void commandPrestring_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemPrestring_Click ( sender, e );
-		}
-
-		private void commandDeleteNam_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemDeleteName_Click ( sender, e );
-		}
-
-		private void commandDeleteBlo_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemDeleteEnclosed_Click ( sender, e );
-		}
-
-		private void commandDelWoutNu_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemDeleteWithoutNumber_Click ( sender, e );
-		}
-
-		private void commandSameDigit_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemSameNumberOfDigits_Click ( sender, e );
-		}
-
-		private void commandAddNumber_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemAddNumbers_Click ( sender, e );
-		}
-
-		private void commandIncreaseN_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemNumberIncrease_Click ( sender, e );
-		}
-
-		private void commandAddExtens_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemAddExtension_Click ( sender, e );
-		}
-
-		private void commandDelExtens_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemDeleteExtension_Click ( sender, e );
-		}
-
-		private void commandModExtens_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemChangeExtension_Click ( sender, e );
-		}
-
-		private void commandExtToLowe_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemExtensionsToLower_Click ( sender, e );
-		}
-
-		private void commandExtToUppe_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemExtensionsToUpper_Click ( sender, e );
-		}
-
-		private void commandChangePat_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemChangePath_Click ( sender, e );
-		}
-
 		private void commandUpperItem_Executed ( object sender, ExecutedRoutedEventArgs e )
 		{
 			menuItemGotoUp_Click ( sender, e );
@@ -745,11 +655,6 @@ namespace GroupRenamer
 		private void commandEditItems_Executed ( object sender, ExecutedRoutedEventArgs e )
 		{
 			menuItemEditItem_Click ( sender, e );
-		}
-
-		private void commandAboutProg_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			menuItemAbout_Click ( sender, e );
 		}
 		#endregion
 		#endregion

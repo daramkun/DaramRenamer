@@ -1,7 +1,7 @@
 ﻿<Window x:Class="GroupRenamer.ChangeExtensionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="확장자 변경" Height="128" Width="400" ShowInTaskbar="False" Topmost="True"
+        Title="확장자 변경" Height="128" Width="280" ShowInTaskbar="False" Topmost="True"
         WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Margin="10,10,10,10" FocusManager.FocusedElement="{Binding ElementName=textBoxExtension}">
         <Grid.ColumnDefinitions>

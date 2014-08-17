@@ -193,19 +193,31 @@ namespace GroupRenamer
 				catch ( UnauthorizedAccessException ex )
 				{
 					System.Windows.Forms.MessageBox.Show ( String.Format (
-						"\"{0}\"파일의 경로를 변경할 권한이 없습니다.", fileInfo.ON ) );
+						"\"{0}\" 파일의 경로를 변경할 권한이 없습니다.", fileInfo.ON ) );
 					Debug.WriteLine ( ex.Message );
 				}
-				catch ( FileNotFoundException ex )
+				catch ( PathTooLongException ex )
 				{
 					System.Windows.Forms.MessageBox.Show ( String.Format (
-						"\"{0}\"원본 파일이 존재하지 않습니다.", fileInfo.ON ) );
+						"\"{0}\"파일의 경로가 너무 깁니다.", fileInfo.ON ) );
+					Debug.WriteLine ( ex.Message );
+				}
+				catch ( DirectoryNotFoundException ex )
+				{
+					System.Windows.Forms.MessageBox.Show ( String.Format (
+						"\"{0}\"의 디렉토리가 존재하지 않습니다.", fileInfo.ON ) );
+					Debug.WriteLine ( ex.Message );
+				}
+				catch ( IOException ex )
+				{
+					System.Windows.Forms.MessageBox.Show ( String.Format (
+						"\"{0}\" 경로에 파일이 이미 있거나 원본 파일을 찾을 수 없습니다.", fileInfo.ON ) );
 					Debug.WriteLine ( ex.Message );
 				}
 				catch ( Exception ex )
 				{
 					System.Windows.Forms.MessageBox.Show ( String.Format (
-						"\"{0}\"파일의 경로를 변경할 수 없었습니다.", fileInfo.ON ) );
+						"알 수 없는 이유로 파일의 경로를 변경할 수 없었습니다: {0}", fileInfo.ON ) );
 					Debug.WriteLine ( ex.Message );
 				}
 			}
@@ -421,21 +433,17 @@ namespace GroupRenamer
 						sb.Append ( ch );
 						meetTheNumber = true;
 					}
-					else
+					else if ( meetTheNumber )
 					{
-						if ( meetTheNumber )
-						{
-							if ( isOffsetFromBack ) offset = filename.Length - count;
-							break;
-						}
+						if ( isOffsetFromBack ) offset = filename.Length - count;
+						break;
 					}
 					count++;
 				}
 
 				if ( !meetTheNumber ) return;
 
-				string origin, temp;
-				origin = sb.ToString ();
+				string origin = sb.ToString (), temp;
 				if ( isOffsetFromBack )
 				{
 					filename = GetReverseString ( filename );
@@ -451,8 +459,6 @@ namespace GroupRenamer
 				string filenameTemp = filename.Remove ( offset, origin.Length );
 				fileInfo.CN = filenameTemp.Insert ( offset, temp ) + GetExtensionWithoutFilename ( fileInfo.CN );
 			} );
-
-			GC.Collect ();
 		}
 		#endregion
 

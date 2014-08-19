@@ -18,7 +18,7 @@ namespace GroupRenamer
 	/// </summary>
 	public partial class DigitWindow : Window
 	{
-		public int DigitCount { get { return int.Parse ( textBoxCount.Text ); } }
+		public int Value { get { return int.Parse ( textBoxCount.Text ); } }
 		public int ProcessOffset { get { return comboBoxOffset.SelectedIndex; } }
 
 		public DigitWindow ()

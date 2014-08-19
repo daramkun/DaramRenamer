@@ -344,65 +344,64 @@ namespace GroupRenamer
 
 			SaveCurrentStateToUndoStack ();
 
-			int digitCount = window.DigitCount;
+			int digitCount = window.Value;
 			bool isOffsetFromBack = window.ProcessOffset == 0 ? true : false;
 			
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
 				string filename = GetFilenameWithoutExtension ( fileInfo.CN );
-				if ( isOffsetFromBack ) filename = GetReverseString ( filename );
-
+				
 				bool meetTheNumber = false;
-				int offset = 0, count = 0;
-				StringBuilder sb = new StringBuilder ();
-				foreach ( char ch in filename )
+				int offset = 0, count = 0, size = 0;
+				foreach ( char ch in !isOffsetFromBack ? filename : filename.Reverse () )
 				{
 					if ( ( ch >= '0' && ch <= '9' ) )
 					{
-						if ( !meetTheNumber && !isOffsetFromBack ) offset = count;
-						sb.Append ( ch );
-						meetTheNumber = true;
+						if ( !meetTheNumber )
+						{
+							offset = count;
+							meetTheNumber = true;
+						}
+						++size;
 					}
 					else
 					{
 						if ( meetTheNumber )
 						{
-							if ( isOffsetFromBack ) offset = filename.Length - count;
+							if ( isOffsetFromBack )
+								offset = filename.Length - ( offset + size );
 							break;
 						}
 					}
-					count++;
+					++count;
 				}
 
-				if ( !meetTheNumber ) return;
+				if ( !meetTheNumber || size >= digitCount ) return;
 
-				string origin, temp;
-				origin = temp = sb.ToString ();
-				if ( isOffsetFromBack )
+				StringBuilder sb = new StringBuilder ();
+				sb.Append ( filename );
+				size = digitCount - size;
+				while ( size > 0 )
 				{
-					filename = GetReverseString ( filename );
-					temp = GetReverseString ( temp );
+					sb.Insert ( offset, '0' );
+					--size;
 				}
+				sb.Append ( GetExtensionWithoutFilename ( fileInfo.CN ) );
 
-				if ( digitCount > temp.Length )
-					for ( int i = 0; i < digitCount - temp.Length + 1; i++ )
-						temp = '0' + temp;
-
-				string filenameTemp = filename.Remove ( offset, origin.Length );
-				fileInfo.CN = filenameTemp.Insert ( offset, temp ) + GetExtensionWithoutFilename ( fileInfo.CN );
+				fileInfo.CN = sb.ToString ();
 			} );
-
-			GC.Collect ();
 		}
 
 		private void menuItemAddNumbers_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
 
-			int fileCount = 1;
-			foreach ( FileInfo fileInfo in fileInfoCollection )
-				fileInfo.CN = GetFilenameWithoutExtension ( fileInfo.CN ) + fileCount++ +
+			Parallel.For ( 0, fileInfoCollection.Count, (int i) =>
+			{
+				FileInfo fileInfo = fileInfoCollection [ i ];
+				fileInfo.CN = GetFilenameWithoutExtension ( fileInfo.CN ) + ++i +
 					GetExtensionWithoutFilename ( fileInfo.CN );
+			} );
 		}
 
 		private void menuItemNumberIncrease_Click ( object sender, RoutedEventArgs e )
@@ -412,49 +411,54 @@ namespace GroupRenamer
 
 			SaveCurrentStateToUndoStack ();
 
+			int increaseValue = window.IncreaseValue;
 			bool isOffsetFromBack = window.ProcessOffset == 0 ? true : false;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 			{
 				string filename = GetFilenameWithoutExtension ( fileInfo.CN );
-				if ( isOffsetFromBack ) filename = GetReverseString ( filename );
 
 				bool meetTheNumber = false;
-				int offset = 0, count = 0;
-				StringBuilder sb = new StringBuilder ();
-				foreach ( char ch in filename )
+				int offset = 0, count = 0, size = 0;
+				foreach ( char ch in !isOffsetFromBack ? filename : filename.Reverse () )
 				{
 					if ( ( ch >= '0' && ch <= '9' ) )
 					{
-						if ( !meetTheNumber && !isOffsetFromBack ) offset = count;
-						sb.Append ( ch );
-						meetTheNumber = true;
+						if ( !meetTheNumber )
+						{
+							offset = count;
+							meetTheNumber = true;
+						}
+						++size;
 					}
-					else if ( meetTheNumber )
+					else
 					{
-						if ( isOffsetFromBack ) offset = filename.Length - count;
-						break;
+						if ( meetTheNumber )
+						{
+							if ( isOffsetFromBack )
+								offset = filename.Length - ( offset + size );
+							break;
+						}
 					}
-					count++;
+					++count;
 				}
 
 				if ( !meetTheNumber ) return;
 
-				string origin = sb.ToString (), temp;
-				if ( isOffsetFromBack )
+				string origin = filename.Substring ( offset, size );
+				int number = int.Parse ( origin ) + increaseValue;
+
+				StringBuilder sb = new StringBuilder ();
+				sb.Append ( number );
+				int nsize = origin.Length - origin.Length;
+				while ( nsize > 0 )
 				{
-					filename = GetReverseString ( filename );
-					origin = GetReverseString ( origin );
+					sb.Insert ( offset, '0' );
+					--nsize;
 				}
+				filename = filename.Remove ( offset, size ).Insert ( offset, sb.ToString () );
 
-				int digitCount = origin.Length;
-				int digit = int.Parse ( origin ) + window.IncreaseValue;
-				temp = String.Format ( "{0}", digit );
-				for ( ; temp.Length < digitCount; )
-					temp = "0" + temp;
-
-				string filenameTemp = filename.Remove ( offset, origin.Length );
-				fileInfo.CN = filenameTemp.Insert ( offset, temp ) + GetExtensionWithoutFilename ( fileInfo.CN );
+				fileInfo.CN = filename + GetExtensionWithoutFilename ( fileInfo.CN );
 			} );
 		}
 		#endregion

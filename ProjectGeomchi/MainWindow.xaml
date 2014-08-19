@@ -20,6 +20,7 @@
                 <Separator />
                 <MenuItem x:Name="menuItemCommitChanges" Header="변경 적용(_S)" Click="menuItemCommitChanges_Click" InputGestureText="Ctrl+S" />
                 <Separator />
+				<MenuItem x:Name="menuItemCheckForUpdates" Header="업데이트 검사(_U)" Click="menuItemCheckForUpdates_Click" />
                 <MenuItem x:Name="menuItemExit" Header="종료(_X)" Click="menuItemExit_Click" />
             </MenuItem>
             <MenuItem Header="편집(_E)">

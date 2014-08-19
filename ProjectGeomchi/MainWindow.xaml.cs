@@ -57,26 +57,6 @@ namespace GroupRenamer
 				CP = path.Clone () as string,
 			} );
 		}
-
-		private string GetFilenameWithoutExtension ( string filename )
-		{
-			int lastDot = filename.LastIndexOf ( '.' );
-			return filename.Substring ( 0, lastDot );
-		}
-
-		private string GetExtensionWithoutFilename ( string filename )
-		{
-			int lastDot = filename.LastIndexOf ( '.' );
-			return filename.Substring ( lastDot, filename.Length - lastDot );
-		}
-
-		private string GetReverseString ( string str )
-		{
-			StringBuilder sb = new StringBuilder();
-			foreach ( char ch in str.Reverse () )
-				sb.Append ( ch );
-			return sb.ToString ();
-		}
 		#endregion
 
 		#region Undo and Redo
@@ -261,12 +241,7 @@ namespace GroupRenamer
 			bool isExcludeExt = window.IsExcludeExtension;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				fileInfo.CN = ( isExcludeExt ) ? (
-					GetFilenameWithoutExtension ( fileInfo.CN ).Replace ( original, replace )
-						+ GetExtensionWithoutFilename ( fileInfo.CN ) )
-						: fileInfo.CN.Replace ( original, replace );
-			} );
+				fileInfo.CN = FilenameProcessor.Replace ( fileInfo.CN, original, replace, isExcludeExt ) );
 		}
 
 		private void menuItemPrestring_Click ( object sender, RoutedEventArgs e )
@@ -277,13 +252,10 @@ namespace GroupRenamer
 			SaveCurrentStateToUndoStack ();
 
 			string str = window.String;
-			string form = ( !window.IsPrestring ) ? "{1}{0}{2}" : "{0}{1}{2}";
-			
+			bool isPrestring = window.IsPrestring;
+
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				fileInfo.CN = string.Format ( form, str, GetFilenameWithoutExtension ( fileInfo.CN ),
-					GetExtensionWithoutFilename ( fileInfo.CN ) );
-			} );
+				fileInfo.CN = isPrestring ? FilenameProcessor.Prestring ( fileInfo.CN, str ) : FilenameProcessor.Poststring ( fileInfo.CN, str ) );
 		}
 		#endregion
 
@@ -293,7 +265,7 @@ namespace GroupRenamer
 			SaveCurrentStateToUndoStack ();
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.CN = GetExtensionWithoutFilename ( fileInfo.CN ) );
+				fileInfo.CN = FilenameProcessor.DeleteName ( fileInfo.CN ) );
 		}
 
 		private void menuItemDeleteEnclosed_Click ( object sender, RoutedEventArgs e )
@@ -308,16 +280,7 @@ namespace GroupRenamer
 			bool isAllDelete = window.IsDeleteAllEnclosed;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				int first, last;
-				while ( ( first = fileInfo.CN.IndexOf ( pre ) ) != -1 )
-				{
-					last = fileInfo.CN.IndexOf ( post, first + 1 );
-					if ( last == -1 ) break;
-					fileInfo.CN = fileInfo.CN.Remove ( first, last - first + post.Length );
-					if ( !isAllDelete ) break;
-				}
-			} );
+				fileInfo.CN = FilenameProcessor.DeleteEnclosed ( fileInfo.CN, pre, post, isAllDelete ) );
 		}
 		#endregion
 
@@ -325,16 +288,9 @@ namespace GroupRenamer
 		private void menuItemDeleteWithoutNumber_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
-			
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				StringBuilder sb = new StringBuilder ();
 
-				foreach ( char ch in GetFilenameWithoutExtension ( fileInfo.CN ) )
-					if ( ch >= '0' && ch <= '9' )
-						sb.Append ( ch );
-				fileInfo.CN = sb.ToString () + GetExtensionWithoutFilename ( fileInfo.CN );
-			} );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN = FilenameProcessor.DeleteWithoutNumber ( fileInfo.CN ) );
 		}
 
 		private void menuItemSameNumberOfDigits_Click ( object sender, RoutedEventArgs e )
@@ -346,61 +302,19 @@ namespace GroupRenamer
 
 			int digitCount = window.Value;
 			bool isOffsetFromBack = window.ProcessOffset == 0 ? true : false;
-			
+
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				string filename = GetFilenameWithoutExtension ( fileInfo.CN );
-				
-				bool meetTheNumber = false;
-				int offset = 0, count = 0, size = 0;
-				foreach ( char ch in !isOffsetFromBack ? filename : filename.Reverse () )
-				{
-					if ( ( ch >= '0' && ch <= '9' ) )
-					{
-						if ( !meetTheNumber )
-						{
-							offset = count;
-							meetTheNumber = true;
-						}
-						++size;
-					}
-					else
-					{
-						if ( meetTheNumber )
-						{
-							if ( isOffsetFromBack )
-								offset = filename.Length - ( offset + size );
-							break;
-						}
-					}
-					++count;
-				}
-
-				if ( !meetTheNumber || size >= digitCount ) return;
-
-				StringBuilder sb = new StringBuilder ();
-				sb.Append ( filename );
-				size = digitCount - size;
-				while ( size > 0 )
-				{
-					sb.Insert ( offset, '0' );
-					--size;
-				}
-				sb.Append ( GetExtensionWithoutFilename ( fileInfo.CN ) );
-
-				fileInfo.CN = sb.ToString ();
-			} );
+				fileInfo.CN = FilenameProcessor.SameNumberOfDigit ( fileInfo.CN, digitCount, isOffsetFromBack ) );
 		}
 
 		private void menuItemAddNumbers_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
 
-			Parallel.For ( 0, fileInfoCollection.Count, (int i) =>
+			Parallel.For ( 1, fileInfoCollection.Count + 1, (int i) =>
 			{
-				FileInfo fileInfo = fileInfoCollection [ i ];
-				fileInfo.CN = GetFilenameWithoutExtension ( fileInfo.CN ) + ++i +
-					GetExtensionWithoutFilename ( fileInfo.CN );
+				FileInfo fileInfo = fileInfoCollection [ i - 1 ];
+				fileInfo.CN = FilenameProcessor.AddNumber ( fileInfo.CN, i );
 			} );
 		}
 
@@ -415,51 +329,7 @@ namespace GroupRenamer
 			bool isOffsetFromBack = window.ProcessOffset == 0 ? true : false;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				string filename = GetFilenameWithoutExtension ( fileInfo.CN );
-
-				bool meetTheNumber = false;
-				int offset = 0, count = 0, size = 0;
-				foreach ( char ch in !isOffsetFromBack ? filename : filename.Reverse () )
-				{
-					if ( ( ch >= '0' && ch <= '9' ) )
-					{
-						if ( !meetTheNumber )
-						{
-							offset = count;
-							meetTheNumber = true;
-						}
-						++size;
-					}
-					else
-					{
-						if ( meetTheNumber )
-						{
-							if ( isOffsetFromBack )
-								offset = filename.Length - ( offset + size );
-							break;
-						}
-					}
-					++count;
-				}
-
-				if ( !meetTheNumber ) return;
-
-				string origin = filename.Substring ( offset, size );
-				int number = int.Parse ( origin ) + increaseValue;
-
-				StringBuilder sb = new StringBuilder ();
-				sb.Append ( number );
-				int nsize = origin.Length - origin.Length;
-				while ( nsize > 0 )
-				{
-					sb.Insert ( offset, '0' );
-					--nsize;
-				}
-				filename = filename.Remove ( offset, size ).Insert ( offset, sb.ToString () );
-
-				fileInfo.CN = filename + GetExtensionWithoutFilename ( fileInfo.CN );
-			} );
+				fileInfo.CN = FilenameProcessor.NumberIncrese ( fileInfo.CN, increaseValue, isOffsetFromBack ) );
 		}
 		#endregion
 
@@ -469,7 +339,7 @@ namespace GroupRenamer
 			SaveCurrentStateToUndoStack ();
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.CN = GetFilenameWithoutExtension ( fileInfo.CN ) );
+				fileInfo.CN = FilenameProcessor.RemoveExtension ( fileInfo.CN ) );
 		}
 
 		private void menuItemAddExtension_Click ( object sender, RoutedEventArgs e )
@@ -479,10 +349,9 @@ namespace GroupRenamer
 
 			SaveCurrentStateToUndoStack ();
 
-			string extension = String.Format ( ".{0}", window.Extension );
-
+			string ext = window.Extension;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.CN += extension );
+				fileInfo.CN = FilenameProcessor.AddExtension ( fileInfo.CN, ext ) );
 		}
 
 		private void menuItemChangeExtension_Click ( object sender, RoutedEventArgs e )
@@ -492,11 +361,9 @@ namespace GroupRenamer
 
 			SaveCurrentStateToUndoStack ();
 
-			string extension = String.Format ( ".{0}", window.Extension );
-
+			string ext = window.Extension;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.CN = fileInfo.CN.Replace ( GetExtensionWithoutFilename ( fileInfo.CN ),
-					extension ) );
+				fileInfo.CN = FilenameProcessor.ChangeExtension ( fileInfo.CN, ext ) );
 		}
 		#endregion
 
@@ -515,20 +382,14 @@ namespace GroupRenamer
 		{
 			SaveCurrentStateToUndoStack ();
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				fileInfo.CN = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.CN ),
-					GetExtensionWithoutFilename ( fileInfo.CN ).ToLower () );
-			} );
+				fileInfo.CN = FilenameProcessor.ExtensionToLower ( fileInfo.CN ) );
 		}
 
 		private void menuItemExtensionsToUpper_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				fileInfo.CN = string.Format ( "{0}{1}", GetFilenameWithoutExtension ( fileInfo.CN ),
-					GetExtensionWithoutFilename ( fileInfo.CN ).ToUpper () );
-			} );
+				fileInfo.CN = FilenameProcessor.ExtensionToUpper ( fileInfo.CN ) );
 		}
 		#endregion
 
@@ -544,18 +405,7 @@ namespace GroupRenamer
 			string formstr = window.FormatString;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				try
-				{
-					Match match = exp.Match ( fileInfo.CN );
-					GroupCollection group = match.Groups;
-					object [] groupArr = new object [ group.Count ];
-					for ( int i = 0; i < groupArr.Length; i++ )
-						groupArr [ i ] = group [ i ].Value.Trim ();
-					fileInfo.CN = string.Format ( formstr, groupArr );
-				}
-				catch { }
-			} );
+				fileInfo.CN = FilenameProcessor.RegularExpression ( fileInfo.CN, exp, formstr ) );
 		}
 		#endregion
 

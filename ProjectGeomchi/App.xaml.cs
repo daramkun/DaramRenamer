@@ -29,7 +29,12 @@ namespace GroupRenamer
 		{
 			if ( e.Args.Length > 0 && e.Args [ 0 ] == "-c" )
 			{
-
+				int offset = 1;
+				switch ( e.Args [ offset ] )
+				{
+					case "-original": break;
+					case "-replace": break;
+				}
 				this.Shutdown ( 0 );
 			}
 

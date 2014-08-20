@@ -84,9 +84,6 @@ namespace GroupRenamer
 									argumentData.Add ( int.Parse ( e.Args [ ++offset ] ) );
 									argumentData.Add ( bool.Parse ( e.Args [ ++offset ] ) );
 									break;
-								case "add-num":
-									argumentData.Add ( int.Parse ( e.Args [ ++offset ] ) );
-									break;
 								case "regexp":
 									argumentData.Add ( new Regex ( e.Args [ ++offset ] ) );
 									argumentData.Add ( e.Args [ ++offset ] );
@@ -121,7 +118,7 @@ namespace GroupRenamer
 										fileInfo.CN = FilenameProcessor.SameNumberOfDigit ( fileInfo.CN, ( int ) argumentData [ 0 ], ( bool ) argumentData [ 1 ] );
 										break;
 									case "add-num":
-										fileInfo.CN = FilenameProcessor.AddNumber ( fileInfo.CN, ( int ) argumentData [ 0 ] );
+										fileInfo.CN = FilenameProcessor.AddNumber ( fileInfo.CN, files.IndexOf ( fileInfo ) + 1 );
 										break;
 									case "incr-num":
 										fileInfo.CN = FilenameProcessor.NumberIncrese ( fileInfo.CN, ( int ) argumentData [ 0 ], ( bool ) argumentData [ 1 ] );

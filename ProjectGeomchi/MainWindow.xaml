@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:custom="clr-namespace:GroupRenamer"
-        Title="다람 리네이머 - v1.100" Width="640" Height="480"
+        Title="다람 리네이머 - v1.200" Width="640" Height="480"
         Icon="Resources/ProgramIcon.ico"
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -18,8 +18,10 @@
 				<MenuItem x:Name="menuItemOpenFiles" Header="변경할 파일 불러오기(_O)" Click="menuItemOpenFiles_Click" InputGestureText="Ctrl+O" />
 				<MenuItem x:Name="menuItemCloseFiles" Header="목록 삭제(_C)" Click="menuItemCloseFiles_Click" InputGestureText="Ctrl+Del" />
                 <Separator />
-                <MenuItem x:Name="menuItemCommitChanges" Header="변경 적용(_S)" Click="menuItemCommitChanges_Click" InputGestureText="Ctrl+S" />
-                <Separator />
+				<MenuItem x:Name="menuItemCommitChanges" Header="변경 적용(_S)" Click="menuItemCommitChanges_Click" InputGestureText="Ctrl+S" />
+				<Separator />
+				<MenuItem x:Name="menuItemTurnOnOffHWA" Header="하드웨어 가속 켜기/끄기(_U)" Click="menuItemTurnOnOffHWA_Click" />
+				<Separator />
 				<MenuItem x:Name="menuItemCheckForUpdates" Header="업데이트 검사(_U)" Click="menuItemCheckForUpdates_Click" />
                 <MenuItem x:Name="menuItemExit" Header="종료(_X)" Click="menuItemExit_Click" />
             </MenuItem>
@@ -49,8 +51,12 @@
                 <MenuItem x:Name="menuItemExtensionsToLower" Header="확장자 소문자로(_L)" Click="menuItemExtensionsToLower_Click" />
                 <MenuItem x:Name="menuItemExtensionsToUpper" Header="확장자 대문자로(_K)" Click="menuItemExtensionsToUpper_Click" />
                 <Separator />
-                <MenuItem x:Name="menuItemRegularExpression" Header="정규표현식 일괄 변환(_G)" Click="menuItemRegularExpression_Click" />
-            </MenuItem>
+				<MenuItem x:Name="menuItemRegularExpression" Header="정규표현식 일괄 변환(_G)" Click="menuItemRegularExpression_Click" />
+				<Separator />
+				<MenuItem x:Name="menuItemAddCreationDate" Header="생성 날짜 추가(_E)" Click="menuItemAddCreationDate_Click" />
+				<MenuItem x:Name="menuItemAddLastWriteDate" Header="수정 날짜 추가(_W)" Click="menuItemAddLastWriteDate_Click" />
+				<MenuItem x:Name="menuItemAddLastAccessDate" Header="접근 날짜 추가(_Q)" Click="menuItemAddLastAccessDate_Click" />
+			</MenuItem>
 			<MenuItem Header="항목(_I)">
 				<MenuItem x:Name="menuItemGotoUp" Header="항목 위로(_U)" Click="menuItemGotoUp_Click" InputGestureText="Ctrl+Up" />
 				<MenuItem x:Name="menuItemGotoDown" Header="항목 아래로(_D)" Click="menuItemGotoDown_Click" InputGestureText="Ctrl+Down" />

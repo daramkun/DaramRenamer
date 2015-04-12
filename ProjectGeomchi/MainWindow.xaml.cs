@@ -14,10 +14,12 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GroupRenamer.Properties;
 
 namespace GroupRenamer
 {
@@ -42,6 +44,18 @@ namespace GroupRenamer
 
 			undoStack = new Stack<byte []> ();
 			redoStack = new Stack<byte []> ();
+
+			if ( !Settings.Default.HardwareTurnOn )
+				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
+			if ( RenderOptions.ProcessRenderMode == RenderMode.Default )
+				menuItemTurnOnOffHWA.IsChecked = true;
+		}
+
+		protected override void OnClosing ( System.ComponentModel.CancelEventArgs e )
+		{
+			Settings.Default.Save ();
+			base.OnClosing ( e );
 		}
 		#endregion
 
@@ -202,6 +216,22 @@ namespace GroupRenamer
 
 			undoStack.Clear ();
 			redoStack.Clear ();
+		}
+
+		private void menuItemTurnOnOffHWA_Click ( object sender, RoutedEventArgs e )
+		{
+			if ( menuItemTurnOnOffHWA.IsChecked )
+			{
+				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+				menuItemTurnOnOffHWA.IsChecked = false;
+				Settings.Default.HardwareTurnOn = false;
+			}
+			else
+			{
+				RenderOptions.ProcessRenderMode = RenderMode.Default;
+				menuItemTurnOnOffHWA.IsChecked = true;
+				Settings.Default.HardwareTurnOn = true;
+			}
 		}
 
 		private void menuItemCheckForUpdates_Click ( object sender, RoutedEventArgs e )
@@ -430,6 +460,35 @@ namespace GroupRenamer
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				fileInfo.CN = FilenameProcessor.RegularExpression ( fileInfo.CN, exp, formstr ) );
+		}
+		#endregion
+
+		#region Edit Menu - Date
+		private void menuItemAddCreationDate_Click ( object sender, RoutedEventArgs e )
+		{
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+			{
+				DateTime dateTime = File.GetCreationTime ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ) );
+				fileInfo.CN = dateTime.ToString ( "yyyyMMdd" ) + "_" + fileInfo.CN;
+			} );
+		}
+
+		private void menuItemAddLastWriteDate_Click ( object sender, RoutedEventArgs e )
+		{
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+			{
+				DateTime dateTime = File.GetLastWriteTime ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ) );
+				fileInfo.CN = dateTime.ToString ( "yyyyMMdd" ) + "_" + fileInfo.CN;
+			} );
+		}
+
+		private void menuItemAddLastAccessDate_Click ( object sender, RoutedEventArgs e )
+		{
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+			{
+				DateTime dateTime = File.GetLastAccessTime ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ) );
+				fileInfo.CN = dateTime.ToString ( "yyyyMMdd" ) + "_" + fileInfo.CN;
+			} );
 		}
 		#endregion
 

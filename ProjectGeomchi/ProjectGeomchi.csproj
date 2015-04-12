@@ -84,6 +84,11 @@
     <Compile Include="AddStringWindow.xaml.cs">
       <DependentUpon>AddStringWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="RegularExpressionWindow.xaml.cs">
       <DependentUpon>RegularExpressionWindow.xaml</DependentUpon>
     </Compile>
@@ -164,6 +169,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\delete.png" />

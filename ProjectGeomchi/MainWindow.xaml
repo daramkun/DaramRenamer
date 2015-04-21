@@ -32,8 +32,9 @@
                 <MenuItem x:Name="menuItemCancel" Header="변경 취소(_A)" Click="menuItemCancel_Click" InputGestureText="Ctrl+D" />
                 <Separator />
                 <MenuItem x:Name="menuItemReplace" Header="문자열 바꾸기(_S)" Click="menuItemReplace_Click" />
-                <MenuItem x:Name="menuItemPrestring" Header="문자열 붙이기(_F)" Click="menuItemPrestring_Click" />
-                <Separator />
+				<MenuItem x:Name="menuItemPrestring" Header="문자열 붙이기(_F)" Click="menuItemPrestring_Click" />
+				<MenuItem x:Name="menuItemTrim" Header="양 옆 빈 칸 지우기(_Z)" Click="menuItemTrim_Click" />
+				<Separator />
                 <MenuItem x:Name="menuItemDeleteName" Header="이름 지우기(_D)" Click="menuItemDeleteName_Click" />
                 <MenuItem x:Name="menuItemDeleteEnclosed" Header="묶인 문자열 지우기(_T)" Click="menuItemDeleteEnclosed_Click" />
                 <Separator />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -49,6 +50,17 @@ namespace GroupRenamer
 		{
 			return string.Format ( "{1}{0}{2}", adder, GetFilenameWithoutExtension ( filename ),
 				GetExtensionWithoutFilename ( filename ) );
+		}
+
+		public static string Trimming ( string filename, bool? lastCharactersTrimming )
+		{
+			if ( lastCharactersTrimming == null ) return filename.Trim ();
+			else
+			{
+				if ( lastCharactersTrimming.Value )
+					return filename.TrimEnd ();
+				else return filename.TrimStart ();
+			}
 		}
 
 		public static string DeleteName ( string filename )
@@ -214,6 +226,27 @@ namespace GroupRenamer
 				return string.Format ( formatString, groupArr );
 			}
 			catch { return filename; }
+		}
+
+		public static string AddCreationDate ( string filepath, string filename, bool lastLocationAdd )
+		{
+			DateTime dateTime = File.GetCreationTime ( System.IO.Path.Combine ( filepath, filename ) );
+			if ( !lastLocationAdd ) return dateTime.ToString ( "yyyyMMdd" ) + "_" + filename;
+			else return Path.GetFileNameWithoutExtension ( filename ) + "_" + dateTime.ToString ( "yyyyMMdd" ) + Path.GetExtension ( filename );
+		}
+
+		public static string AddLastWriteDate ( string filepath, string filename, bool lastLocationAdd )
+		{
+			DateTime dateTime = File.GetLastWriteTime ( System.IO.Path.Combine ( filepath, filename ) );
+			if ( !lastLocationAdd ) return dateTime.ToString ( "yyyyMMdd" ) + "_" + filename;
+			else return Path.GetFileNameWithoutExtension ( filename ) + "_" + dateTime.ToString ( "yyyyMMdd" ) + Path.GetExtension ( filename );
+		}
+
+		public static string AddLastAccessDate ( string filepath, string filename, bool lastLocationAdd )
+		{
+			DateTime dateTime = File.GetLastAccessTime ( System.IO.Path.Combine ( filepath, filename ) );
+			if ( !lastLocationAdd ) return dateTime.ToString ( "yyyyMMdd" ) + "_" + filename;
+			else return Path.GetFileNameWithoutExtension ( filename ) + "_" + dateTime.ToString ( "yyyyMMdd" ) + Path.GetExtension ( filename );
 		}
 	}
 }

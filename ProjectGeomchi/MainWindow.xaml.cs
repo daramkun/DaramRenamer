@@ -311,6 +311,13 @@ namespace GroupRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				fileInfo.CN = isPrestring ? FilenameProcessor.Prestring ( fileInfo.CN, str ) : FilenameProcessor.Poststring ( fileInfo.CN, str ) );
 		}
+
+		private void menuItemTrim_Click ( object sender, RoutedEventArgs e )
+		{
+			SaveCurrentStateToUndoStack ();
+
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.CN = FilenameProcessor.Trimming ( fileInfo.CN, null ) );
+		}
 		#endregion
 
 		#region Edit Menu - String Delete
@@ -466,29 +473,20 @@ namespace GroupRenamer
 		#region Edit Menu - Date
 		private void menuItemAddCreationDate_Click ( object sender, RoutedEventArgs e )
 		{
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				DateTime dateTime = File.GetCreationTime ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ) );
-				fileInfo.CN = dateTime.ToString ( "yyyyMMdd" ) + "_" + fileInfo.CN;
-			} );
+			SaveCurrentStateToUndoStack ();
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.CN = FilenameProcessor.AddCreationDate ( fileInfo.CP, fileInfo.CN, false ) );
 		}
 
 		private void menuItemAddLastWriteDate_Click ( object sender, RoutedEventArgs e )
 		{
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				DateTime dateTime = File.GetLastWriteTime ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ) );
-				fileInfo.CN = dateTime.ToString ( "yyyyMMdd" ) + "_" + fileInfo.CN;
-			} );
+			SaveCurrentStateToUndoStack ();
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.CN = FilenameProcessor.AddLastWriteDate ( fileInfo.CP, fileInfo.CN, false ) );
 		}
 
 		private void menuItemAddLastAccessDate_Click ( object sender, RoutedEventArgs e )
 		{
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				DateTime dateTime = File.GetLastAccessTime ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ) );
-				fileInfo.CN = dateTime.ToString ( "yyyyMMdd" ) + "_" + fileInfo.CN;
-			} );
+			SaveCurrentStateToUndoStack ();
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.CN = FilenameProcessor.AddLastAccessDate ( fileInfo.CP, fileInfo.CN, false ) );
 		}
 		#endregion
 

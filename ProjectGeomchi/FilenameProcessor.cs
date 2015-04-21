@@ -54,12 +54,14 @@ namespace GroupRenamer
 
 		public static string Trimming ( string filename, bool? lastCharactersTrimming )
 		{
-			if ( lastCharactersTrimming == null ) return filename.Trim ();
+			string ext = Path.GetExtension ( filename );
+			filename = Path.GetFileNameWithoutExtension ( filename );
+			if ( lastCharactersTrimming == null ) return filename.Trim () + ext;
 			else
 			{
 				if ( lastCharactersTrimming.Value )
-					return filename.TrimEnd ();
-				else return filename.TrimStart ();
+					return filename.TrimEnd () + ext;
+				else return filename.TrimStart () + ext;
 			}
 		}
 

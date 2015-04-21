@@ -77,6 +77,10 @@ namespace GroupRenamer
 								case "add-ext":
 								case "change-ext":
 								case "path":
+								case "trim":
+								case "add-creation-date":
+								case "add-last-write-date":
+								case "add-last-access-date":
 									argumentData.Add ( e.Args [ ++offset ] );
 									break;
 								case "same-num":
@@ -103,6 +107,12 @@ namespace GroupRenamer
 										break;
 									case "poststring":
 										fileInfo.CN = FilenameProcessor.Poststring ( fileInfo.CN, argumentData [ 0 ] as string );
+										break;
+									case "trim":
+										if ( argumentData [ 0 ] as string == "all")
+											fileInfo.CN = FilenameProcessor.Trimming ( fileInfo.CN, null );
+										else
+											fileInfo.CN = FilenameProcessor.Trimming ( fileInfo.CN, argumentData [ 0 ] as string == "left" ? false : true );
 										break;
 									case "del-name":
 										fileInfo.CN = FilenameProcessor.DeleteName ( fileInfo.CN );
@@ -143,6 +153,18 @@ namespace GroupRenamer
 										break;
 									case "path":
 										fileInfo.CP = argumentData [ 0 ] as string;
+										break;
+									case "add-creation-date":
+										fileInfo.CN = FilenameProcessor.AddCreationDate ( Path.Combine ( fileInfo.OP, fileInfo.ON ),
+											fileInfo.CN, argumentData [ 0 ] as string == "right" );
+										break;
+									case "add-last-write-date":
+										fileInfo.CN = FilenameProcessor.AddLastWriteDate ( Path.Combine ( fileInfo.OP, fileInfo.ON ),
+											fileInfo.CN, argumentData [ 0 ] as string == "right" );
+										break;
+									case "add-last-access-date":
+										fileInfo.CN = FilenameProcessor.AddLastAccessDate ( Path.Combine ( fileInfo.OP, fileInfo.ON ),
+											fileInfo.CN, argumentData [ 0 ] as string == "right" );
 										break;
 								}
 							} );

@@ -474,19 +474,25 @@ namespace GroupRenamer
 		private void menuItemAddCreationDate_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.CN = FilenameProcessor.AddCreationDate ( fileInfo.CP, fileInfo.CN, false ) );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN = FilenameProcessor.AddCreationDate ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ), fileInfo.CN, false )
+			);
 		}
 
 		private void menuItemAddLastWriteDate_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.CN = FilenameProcessor.AddLastWriteDate ( fileInfo.CP, fileInfo.CN, false ) );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN = FilenameProcessor.AddLastWriteDate ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ), fileInfo.CN, false )
+			);
 		}
 
 		private void menuItemAddLastAccessDate_Click ( object sender, RoutedEventArgs e )
 		{
 			SaveCurrentStateToUndoStack ();
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.CN = FilenameProcessor.AddLastAccessDate ( fileInfo.CP, fileInfo.CN, false ) );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				fileInfo.CN = FilenameProcessor.AddLastAccessDate ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ), fileInfo.CN, false )
+			);
 		}
 		#endregion
 

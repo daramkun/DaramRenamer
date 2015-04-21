@@ -228,23 +228,23 @@ namespace GroupRenamer
 			catch { return filename; }
 		}
 
-		public static string AddCreationDate ( string filepath, string filename, bool lastLocationAdd )
+		public static string AddCreationDate ( string original, string filename, bool lastLocationAdd )
 		{
-			DateTime dateTime = File.GetCreationTime ( System.IO.Path.Combine ( filepath, filename ) );
+			DateTime dateTime = File.GetCreationTime ( original );
 			if ( !lastLocationAdd ) return dateTime.ToString ( "yyyyMMdd" ) + "_" + filename;
 			else return Path.GetFileNameWithoutExtension ( filename ) + "_" + dateTime.ToString ( "yyyyMMdd" ) + Path.GetExtension ( filename );
 		}
 
-		public static string AddLastWriteDate ( string filepath, string filename, bool lastLocationAdd )
+		public static string AddLastWriteDate ( string original, string filename, bool lastLocationAdd )
 		{
-			DateTime dateTime = File.GetLastWriteTime ( System.IO.Path.Combine ( filepath, filename ) );
+			DateTime dateTime = File.GetLastWriteTime ( original );
 			if ( !lastLocationAdd ) return dateTime.ToString ( "yyyyMMdd" ) + "_" + filename;
 			else return Path.GetFileNameWithoutExtension ( filename ) + "_" + dateTime.ToString ( "yyyyMMdd" ) + Path.GetExtension ( filename );
 		}
 
-		public static string AddLastAccessDate ( string filepath, string filename, bool lastLocationAdd )
+		public static string AddLastAccessDate ( string original, string filename, bool lastLocationAdd )
 		{
-			DateTime dateTime = File.GetLastAccessTime ( System.IO.Path.Combine ( filepath, filename ) );
+			DateTime dateTime = File.GetLastAccessTime ( original );
 			if ( !lastLocationAdd ) return dateTime.ToString ( "yyyyMMdd" ) + "_" + filename;
 			else return Path.GetFileNameWithoutExtension ( filename ) + "_" + dateTime.ToString ( "yyyyMMdd" ) + Path.GetExtension ( filename );
 		}

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -248,11 +249,14 @@ namespace GroupRenamer
 					int end = text.IndexOf ( "</a></p>", begin );
 					if ( end == -1 ) { MessageBox.Show ( "업데이트를 확인할 수 없습니다." ); return; };
 					text = text.Substring ( end - 5, 5 );
-					if ( text != "1.100" )
+					Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
+					if ( text != string.Format ( "{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build ) )
+					{
 						if ( MessageBox.Show ( string.Format ( "업데이트가 있습니다 (버전: {0}). 홈페이지에서 다운로드해주세요.\r\n홈페이지로 바로 가려면 \"예\"를 눌러주세요.", text ),
 							"업데이트 확인", MessageBoxButton.YesNo ) == MessageBoxResult.Yes )
 							Process.Start ( "https://daram.pe.kr/2014/07/다람-리네이머/" );
-						else MessageBox.Show ( "업데이트가 없습니다.", "업데이트 확인" );
+					}
+					else MessageBox.Show ( "업데이트가 없습니다.", "업데이트 확인" );
 				}
 			}
 		}

@@ -63,15 +63,23 @@ namespace GroupRenamer
 		#region Utilities
 		private void AddItem ( string s )
 		{
-			string filename = System.IO.Path.GetFileName ( s );
-			string path = System.IO.Path.GetDirectoryName ( s );
-			fileInfoCollection.Add ( new FileInfo ()
+			if ( System.IO.File.Exists ( s ) )
 			{
-				ON = filename.Clone () as string,
-				CN = filename.Clone () as string,
-				OP = path.Clone () as string,
-				CP = path.Clone () as string,
-			} );
+				string filename = System.IO.Path.GetFileName ( s );
+				string path = System.IO.Path.GetDirectoryName ( s );
+				fileInfoCollection.Add ( new FileInfo ()
+				{
+					ON = filename.Clone () as string,
+					CN = filename.Clone () as string,
+					OP = path.Clone () as string,
+					CP = path.Clone () as string,
+				} );
+			}
+			else
+			{
+				foreach ( string ss in System.IO.Directory.GetFiles ( s ) )
+					AddItem ( ss );
+			}
 		}
 		#endregion
 

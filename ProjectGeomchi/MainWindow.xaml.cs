@@ -46,11 +46,14 @@ namespace GroupRenamer
 			undoStack = new Stack<byte []> ();
 			redoStack = new Stack<byte []> ();
 
-			if ( !Settings.Default.HardwareTurnOn )
-				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-
 			if ( RenderOptions.ProcessRenderMode == RenderMode.Default )
 				menuItemTurnOnOffHWA.IsChecked = true;
+
+			if ( Settings.Default.AutoRemoveTurnOn )
+				menuItemTurnOnOffAutoRemove.IsChecked = true;
+
+			Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
+			Title += string.Format ( "{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build );
 		}
 
 		protected override void OnClosing ( System.ComponentModel.CancelEventArgs e )
@@ -159,6 +162,24 @@ namespace GroupRenamer
 		}
 		#endregion
 
+		#region Window Handlers
+		private void Window_Activated ( object sender, EventArgs e )
+		{
+			if ( Settings.Default.AutoRemoveTurnOn )
+			{
+				Parallel.ForEach ( fileInfoCollection.ToArray(), ( fileInfo ) =>
+				{
+					try
+					{
+						if ( !File.Exists ( System.IO.Path.Combine ( fileInfo.OP, fileInfo.ON ) ) )
+							fileInfoCollection.Remove ( fileInfo );
+					}
+					catch { }
+				} );
+			}
+		}
+		#endregion
+
 		#region File Menu
 		private void menuItemOpenFiles_Click ( object sender, RoutedEventArgs e )
 		{
@@ -241,6 +262,12 @@ namespace GroupRenamer
 				menuItemTurnOnOffHWA.IsChecked = true;
 				Settings.Default.HardwareTurnOn = true;
 			}
+		}
+
+		private void menuItemTurnOnOffAutoRemove_Click ( object sender, RoutedEventArgs e )
+		{
+			menuItemTurnOnOffAutoRemove.IsChecked = !menuItemTurnOnOffAutoRemove.IsChecked;
+			Settings.Default.AutoRemoveTurnOn = menuItemTurnOnOffAutoRemove.IsChecked;
 		}
 
 		private void menuItemCheckForUpdates_Click ( object sender, RoutedEventArgs e )

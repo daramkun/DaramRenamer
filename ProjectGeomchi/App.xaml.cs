@@ -8,6 +8,9 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
+using GroupRenamer.Properties;
 
 namespace GroupRenamer
 {
@@ -19,6 +22,9 @@ namespace GroupRenamer
 		public App ()
 		{
 			System.Windows.Forms.Application.EnableVisualStyles ();
+
+			if ( !Settings.Default.HardwareTurnOn )
+				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{

@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:custom="clr-namespace:GroupRenamer"
-        Title="다람 리네이머 - v1.210" Width="640" Height="480"
+        Title="다람 리네이머 - v" Width="640" Height="480"
         Icon="Resources/ProgramIcon.ico"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Activated="Window_Activated">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="22" />
@@ -20,7 +20,8 @@
                 <Separator />
 				<MenuItem x:Name="menuItemCommitChanges" Header="변경 적용(_S)" Click="menuItemCommitChanges_Click" InputGestureText="Ctrl+S" />
 				<Separator />
-				<MenuItem x:Name="menuItemTurnOnOffHWA" Header="하드웨어 가속 켜기/끄기(_U)" Click="menuItemTurnOnOffHWA_Click" />
+				<MenuItem x:Name="menuItemTurnOnOffHWA" Header="하드웨어 가속 렌더링 켜기/끄기(_H)" Click="menuItemTurnOnOffHWA_Click" />
+				<MenuItem x:Name="menuItemTurnOnOffAutoRemove" Header="파일이 경로에 없으면 자동으로 리스트에서 제거(_A)" Click="menuItemTurnOnOffAutoRemove_Click" />
 				<Separator />
 				<MenuItem x:Name="menuItemCheckForUpdates" Header="업데이트 검사(_U)" Click="menuItemCheckForUpdates_Click" />
                 <MenuItem x:Name="menuItemExit" Header="종료(_X)" Click="menuItemExit_Click" />

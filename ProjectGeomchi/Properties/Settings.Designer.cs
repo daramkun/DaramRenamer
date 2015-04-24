@@ -34,5 +34,17 @@ namespace GroupRenamer.Properties {
                 this["HardwareTurnOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoRemoveTurnOn {
+            get {
+                return ((bool)(this["AutoRemoveTurnOn"]));
+            }
+            set {
+                this["AutoRemoveTurnOn"] = value;
+            }
+        }
     }
 }

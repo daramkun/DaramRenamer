@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Daramkun.DaramRenamer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HardwareTurnOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoRemoveTurnOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RegexpOriginal" Type="System.String" Scope="User">
+      <Value Profile="(Default)">XFsoLiopXF0oLiopIC0gKFswLTldKikoLiopXCgoKFtBLVpdfFthLXpdKSopIChbMC05XSopeChbMC05XSopICgoW0EtWl18W2Etel18WzAtOV0pKikgKChbQS1aXXxbYS16XXxbMC05XSkqKVwpLigoWzAtOV18W2Etel0pKik=;KC4qKSAtIChbMC05XSopLigoWzAtOV18W2Etel0pKik=;KFtBLVpdKikoWzAtOV0qKS4oKFswLTldfFthLXpdKSop;KFtBLVpdKilfKFswLTldKikuKChbMC05XXxbYS16XSkqKQ==;</Value>
+    </Setting>
+    <Setting Name="RegexpFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">W3sxfV0gezJ9IC0gezN9ICh7NH0gezV9eHs2fSB7N30gezh9KS57OX0=;ezF9IC0gezJ9LnszfQ==;ezF9ezJ9LnszfQ==;ezF9X3syfS57M30=;</Value>
+    </Setting>
+    <Setting Name="FileCopyWhenApply" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

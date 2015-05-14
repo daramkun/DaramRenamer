@@ -1,0 +1,804 @@
+﻿<Window x:Class="Daramkun.DaramRenamer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:custom="clr-namespace:Daramkun.DaramRenamer"
+		xmlns:setting="clr-namespace:Daramkun.DaramRenamer.Properties"
+        Title="다람 리네이머 - v" Width="680" Height="540"
+		xml:lang="ko-KR" Language="ko-KR"
+		Icon="Resources/ProgramIcon.ico" WindowStartupLocation="CenterScreen">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="28" />
+			<RowDefinition />
+			<RowDefinition Height="200" />
+		</Grid.RowDefinitions>
+
+		<ToolBarTray>
+			<ToolBar Grid.Row="0" ToolBarTray.IsLocked="True" Focusable="True">
+				<Button Click="ToolBarButton_Open_Click">
+					<Image Source="Resources/folder.png" />
+					<Button.ToolTip>
+						<ToolTip Content="이름을 일괄 변환할 파일을 불러옵니다." />
+					</Button.ToolTip>
+				</Button>
+				<Button Click="ToolBarButton_DeleteAll_Click">
+					<Image Source="Resources/delete.png" />
+					<Button.ToolTip>
+						<ToolTip Content="목록을 삭제합니다." />
+					</Button.ToolTip>
+				</Button>
+				<Button Click="ToolBarButton_Apply_Click">
+					<Image Source="Resources/accept.png" />
+					<Button.ToolTip>
+						<ToolTip Content="이름을 일괄 변경합니다." />
+					</Button.ToolTip>
+				</Button>
+				<Separator />
+				<Button Click="ToolBarButton_Undo_Click">
+					<Image Source="Resources/arrow_undo.png" />
+					<Button.ToolTip>
+						<ToolTip Content="이전 실행을 취소합니다." />
+					</Button.ToolTip>
+				</Button>
+				<Button Click="ToolBarButton_Redo_Click">
+					<Image Source="Resources/arrow_redo.png" />
+					<Button.ToolTip>
+						<ToolTip Content="실행 취소를 되돌립니다." />
+					</Button.ToolTip>
+				</Button>
+				<Separator />
+				<Button Click="ToolBarButton_Restore_Click">
+					<Image Source="Resources/arrow_rotate_anticlockwise.png" />
+					<Button.ToolTip>
+						<ToolTip Content="변경을 취소합니다." />
+					</Button.ToolTip>
+				</Button>
+				<Separator />
+				<Button Click="ToolBarButton_UpTo_Click">
+					<Image Source="Resources/arrow_up.png" />
+					<Button.ToolTip>
+						<ToolTip Content="선택한 항목을 보다 위로 올립니다." />
+					</Button.ToolTip>
+				</Button>
+				<Button Click="ToolBarButton_DownTo_Click">
+					<Image Source="Resources/arrow_down.png" />
+					<Button.ToolTip>
+						<ToolTip Content="선택한 항목을 보다 아래로 내립니다." />
+					</Button.ToolTip>
+				</Button>
+				<Button Click="ToolBarButton_Sort_Click">
+					<Image Source="Resources/rainbow.png" />
+					<Button.ToolTip>
+						<ToolTip Content="항목을 이름순으로 오름차순 정렬합니다." />
+					</Button.ToolTip>
+				</Button>
+				<Separator />
+				<Button Click="ToolBarButton_CheckUpdate_Click">
+					<Image Source="Resources/application_get.png" />
+					<Button.ToolTip>
+						<ToolTip Content="업데이트를 확인합니다." />
+					</Button.ToolTip>
+				</Button>
+				<Button Click="ToolBarButton_IssueTracker_Click">
+					<Image Source="Resources/email_go.png" />
+					<Button.ToolTip>
+						<ToolTip Content="버그 또는 건의 요청에 대해 피드백합니다." />
+					</Button.ToolTip>
+				</Button>
+			</ToolBar>
+		</ToolBarTray>
+
+		<ListView Name="listViewFiles" Grid.Row="1" Margin="5,5,5,5" AllowDrop="True"
+				  Focusable="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+				  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+				  DragEnter="ListView_DragEnter" Drop="ListView_Drop" KeyUp="ListView_KeyUp">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				</Style>
+			</ListView.ItemContainerStyle>
+			
+			<ListView.View>
+				<GridView>
+					<GridView.ColumnHeaderTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding}" Margin="0,4,0,4" />
+						</DataTemplate>
+					</GridView.ColumnHeaderTemplate>
+
+					<GridViewColumn Width="210">
+						<GridViewColumnHeader Content="원본 이름" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Grid HorizontalAlignment="Stretch">
+									<TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalName}" />
+								</Grid>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="210">
+						<GridViewColumnHeader Content="변경할 이름" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Grid HorizontalAlignment="Stretch">
+									<TextBox Foreground="DarkSlateBlue" IsReadOnly="True" IsReadOnlyCaretVisible="False" Text="{Binding ChangedName}" BorderThickness="0" Background="Transparent" MouseDoubleClick="TextBox_MouseDoubleClick" LostFocus="TextBox_LostFocus" PreviewKeyDown="TextBox_PreviewKeyDown" />
+								</Grid>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="110">
+						<GridViewColumnHeader Content="위치한 경로" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Grid HorizontalAlignment="Stretch">
+									<TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding OriginalPath}" />
+								</Grid>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="110">
+						<GridViewColumnHeader Content="위치할 경로" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Grid HorizontalAlignment="Stretch">
+									<TextBox Foreground="DarkSlateBlue" IsReadOnly="True" IsReadOnlyCaretVisible="False" Text="{Binding ChangedPath}" BorderThickness="0" Background="Transparent" MouseDoubleClick="TextBox_MouseDoubleClick" LostFocus="TextBox_LostFocus" PreviewKeyDown="TextBox_PreviewKeyDown" />
+								</Grid>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+				</GridView>
+			</ListView.View>
+		</ListView>
+		<TabControl Focusable="True" Grid.Row="2" Margin="5,0,5,5">
+			<!-- ========================================= -->
+			<!--                 문자열처리                 -->
+			<!-- ========================================= -->
+			<TabItem Header="문자열 처리">
+				<TabControl Focusable="True" Margin="5,5,5,5">
+					<TabItem Header="문자열 바꾸기">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="원본 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="바꿀 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="stringReplaceOriginalText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+							<TextBox Name="stringReplaceNewText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+							<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<CheckBox Name="stringReplaceIncludeExt" Content="확장자 포함" IsChecked="True" />
+							</StackPanel>
+							
+							<Button Content="실행" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Replace_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="문자열 붙이기">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="붙일 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="붙일 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="stringConcatText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="stringConcatPreRadio" Content="맨 앞에 붙이기" IsChecked="True" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="stringConcatPostRadio" Content="맨 뒤에 붙이기" />
+							</StackPanel>
+							
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Concat_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="양 옆 빈 칸 제거">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="제거할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="stringTrimAllRadio" Content="모두 제거" IsChecked="True" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="stringTrimPreRadio" Content="맨 앞만 제거" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="stringTrimPostRadio" Content="맨 뒤만 제거" />
+							</StackPanel>
+
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<CheckBox Name="stringTrimIncludeExt" Content="확장자 빈 칸 제거 포함" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Trim_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="묶인 문자열 제거">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="앞 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="뒤 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="stringEnclosedPreText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+							<TextBox Name="stringEnclosedPostText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+							<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<CheckBox Name="stringEnclosedAll" Content="모든 묶인 문자열에 대해 실행" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_DelEnclosed_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="이름 지우기">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<Button Content="실행" Grid.Row="1" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_DelName_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="이름 대소문자">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+							
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="처리 방법: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="stringUpLowUpper" Content="대문자로" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="stringUpLowLower" Content="소문자로" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="stringUpLowOneLetterUpper" Content="단어 맨 앞만 대문자로" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_LowUp_Click" />
+						</Grid>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<!-- ========================================= -->
+			<!--                 확장자처리                 -->
+			<!-- ========================================= -->
+			<TabItem Header="확장자 처리">
+				<TabControl Focusable="True" Margin="5,5,5,5">
+					<TabItem Header="확장자 추가">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="추가할 확장자: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBox Name="extAddExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+
+							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_AddExt_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="확장자 제거">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<Button Content="실행" Grid.Row="1" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_RemoveExt_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="확장자 변경">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="변경할 확장자: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBox Name="extChangeExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+
+							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_ChangeExt_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="확장자 대소문자">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="처리 방법: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="extUpLowUpper" Content="대문자로" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="extUpLowLower" Content="소문자로" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_LowUp_Click" />
+						</Grid>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<!-- ========================================= -->
+			<!--                  숫자처리                  -->
+			<!-- ========================================= -->
+			<TabItem Header="숫자 처리">
+				<TabControl Focusable="True" Margin="5,5,5,5">
+					<TabItem Header="숫자만 남기고 제거">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="처리 방법: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="numDelWoNoNumberWordOnly" Content="숫자로만 된 단어만 남김" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="numDelWoNoAllNumber" Content="모든 숫자 남김" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="Number_DeleteWithoutNumber_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="숫자 자리수 맞추기">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="자리수: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="numSameDigitCount" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MaxLines="1" PreviewTextInput="Digit_PreviewTextInput" >
+								<TextBox.InputScope>
+									<InputScope>
+										<InputScope.Names>
+											<InputScopeName NameValue="Number"/>
+										</InputScope.Names>
+									</InputScope>
+								</TextBox.InputScope>
+							</TextBox>
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="numSameDigitPre" Content="맨 앞 자리 수 변경" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="numSameDigitPost" Content="맨 뒷 자리 수 변경" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_SameDigits_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="번호 붙이기">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="간격: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="numAddNumTerm" Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" >
+								<TextBox.InputScope>
+									<InputScope>
+										<InputScope.Names>
+											<InputScopeName NameValue="Number"/>
+										</InputScope.Names>
+									</InputScope>
+								</TextBox.InputScope>
+							</TextBox>
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="numAddNumPre" Content="맨 앞에 추가" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="numAddNumPost" Content="맨 뒤에 추가" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_AddNum_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="숫자 증감">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="증감할 값: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="numAddSubNumTerm" Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" >
+								<TextBox.InputScope>
+									<InputScope>
+										<InputScope.Names>
+											<InputScopeName NameValue="Number"/>
+										</InputScope.Names>
+									</InputScope>
+								</TextBox.InputScope>
+							</TextBox>
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="numAddSubNumPre" Content="맨 앞에 추가" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="numAddSubNumPost" Content="맨 뒤에 추가" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_Increase_Click" />
+						</Grid>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<!-- ========================================= -->
+			<!--                    날짜                    -->
+			<!-- ========================================= -->
+			<TabItem Header="날짜">
+				<TabControl Focusable="True" Margin="5,5,5,5">
+					<TabItem Header="생성한 날짜 추가">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="형식: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="추가할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="dateCreatedFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="dateCreatedPre" Content="맨 앞에 추가" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="dateCreatedPost" Content="맨 뒤에 추가" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddCreation_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="마지막 접근 날짜 추가">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="형식: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="추가할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="dateAccessFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="dateAccessPre" Content="맨 앞에 추가" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="dateAccessPost" Content="맨 뒤에 추가" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastAccess_Click" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="마지막 수정 날짜 추가">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="형식: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="추가할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBox Name="dateWriteFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
+							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+								<RadioButton Name="dateWritePre" Content="맨 앞에 추가" />
+								<Grid Margin="5,0,0,0" />
+								<RadioButton Name="dateWritePost" Content="맨 뒤에 추가" IsChecked="True" />
+							</StackPanel>
+
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastWrite_Click" />
+						</Grid>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<!-- ========================================= -->
+			<!--                    경로                    -->
+			<!-- ========================================= -->
+			<TabItem Header="경로">
+				<TabControl Focusable="True" Margin="5,5,5,5">
+					<TabItem Header="경로 변경">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="바꿀 경로: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<Grid Grid.Row="0" Grid.Column="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition Width="84" />
+								</Grid.ColumnDefinitions>
+								<TextBox Name="pathToText" VerticalAlignment="Center" />
+								<Button Grid.Column="1" Margin="5,0,0,0" Content="찾아보기..." Click="Path_Change_Browse_Click" />
+							</Grid>
+							
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Path_Change_Click" />
+						</Grid>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<!-- ========================================= -->
+			<!--                 정규표현식                 -->
+			<!-- ========================================= -->
+			<TabItem Header="정규표현식">
+				<TabControl Focusable="True" Margin="5,5,5,5">
+					<TabItem Header="정규표현식">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Text="정규 표현식: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" />
+							<TextBlock Text="형식 문자열: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" />
+							<ComboBox Name="regexpOriginal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" />
+							<ComboBox Name="regexpReplace" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" />
+							
+							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="RegularExpression_Process_Click" />
+						</Grid>
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<!-- ========================================= -->
+			<!--                  일괄처리                  -->
+			<!-- ========================================= -->
+			<TabItem Header="일괄 처리">
+				<TabControl Focusable="True" Margin="5,5,5,5">
+					<TabItem Header="일괄 처리">
+						<TextBlock Text="이 기능은 준비 중입니다." VerticalAlignment="Center" HorizontalAlignment="Center" />
+					</TabItem>
+				</TabControl>
+			</TabItem>
+			<!-- ========================================= -->
+			<!--                    설정                    -->
+			<!-- ========================================= -->
+			<TabItem Header="설정">
+				<Grid Margin="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="5" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<Grid Grid.Column="0">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+
+						<CheckBox Name="checkHwAccel" Grid.Row="0" Content="가능한 경우 하드웨어 가속 렌더링 사용" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=HardwareTurnOn}" VerticalAlignment="Center" />
+						<CheckBox Name="checkAutoRemove" Grid.Row="1" Content="파일이 경로에 없는 경우 자동으로 리스트에서 제거" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=AutoRemoveTurnOn}" VerticalAlignment="Center" />
+						<CheckBox Name="checkFileCopy" Grid.Row="2" Content="원래 경로와 수정할 경로가 다른 경우 이동하지 않고 파일 복사" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FileCopyWhenApply}" VerticalAlignment="Center" />
+						
+					</Grid>
+
+					<Grid Grid.Column="2">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="20" />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						
+						<TextBlock Text="라이선스" />
+						<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" xml:space="preserve"><![CDATA[------------------------------
+1. Daram Renamer
+------------------------------
+The MIT License (MIT)
+
+Copyright (c) 2013-2015 Jin Jae-yeon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+------------------------------
+2. .NET Framework Redistributable Package
+------------------------------
+EULA: https://msdn.microsoft.com/en-us/library/ms994405.aspx
+
+------------------------------
+3. FamFamFam Silk Icons (Tab Icons)
+------------------------------
+Creative Commons License (CCL) 3.0 - BY
+
+------------------------------
+4. Syncfusion Metro Studio Icons (Program Icon)
+------------------------------
+Free
+
+------------------------------
+5. WPF TaskDialog
+------------------------------
+This work is licensed under the The Code Project Open License (CPOL) 1.02. To view a copy of this license, visit http://www.codeproject.com/info/cpol10.aspx.
+								
+Author: Sean A. Hanley
+Source: https://github.com/yadyn/WPF-Task-Dialog
+
+------------------------------
+6. WPF Native Folder Browser
+------------------------------
+Microsoft Public License (Ms-PL)
+
+This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, do not use the software.
+
+1. Definitions
+The terms "reproduce," "reproduction," "derivative works," and "distribution" have the same meaning here as under U.S. copyright law.
+A "contribution" is the original software, or any additions or changes to the software.
+A "contributor" is any person that distributes its contribution under this license.
+"Licensed patents" are a contributor's patent claims that read directly on its contribution.
+
+2. Grant of Rights
+(A) Copyright Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free copyright license to reproduce its contribution, prepare derivative works of its contribution, and distribute its contribution or any derivative works that you create.
+(B) Patent Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free license under its licensed patents to make, have made, use, sell, offer for sale, import, and/or otherwise dispose of its contribution in the software or derivative works of the contribution in the software.
+
+3. Conditions and Limitations
+(A) No Trademark License- This license does not grant you rights to use any contributors' name, logo, or trademarks.
+(B) If you bring a patent claim against any contributor over patents that you claim are infringed by the software, your patent license from such contributor to the software ends automatically.
+(C) If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.
+(D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
+(E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
+
+Source: https://wpffolderbrowser.codeplex.com							
+]]>
+						</TextBox>
+					</Grid>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
+
+	<Window.CommandBindings>
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandOpenFiles}" Executed="commandOpenFiles_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandClearList}" Executed="commandClearList_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandApplyFile}" Executed="commandApplyFile_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandUndoWorks}" Executed="commandUndoWorks_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandRedoWorks}" Executed="commandRedoWorks_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandApplyCanc}" Executed="commandApplyCanc_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandUpperItem}" Executed="commandUpperItem_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandLowerItem}" Executed="commandLowerItem_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandItemsSort}" Executed="commandItemsSort_Executed" />
+		<CommandBinding Command="{x:Static custom:MainWindow.CommandEditItems}" Executed="commandEditItems_Executed" />
+	</Window.CommandBindings>
+	<Window.InputBindings>
+		<KeyBinding Key="O" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandOpenFiles}" />
+		<KeyBinding Key="Delete" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandClearList}" />
+		<KeyBinding Key="S" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandApplyFile}" />
+		<KeyBinding Key="Z" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandUndoWorks}" />
+		<KeyBinding Key="Y" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandRedoWorks}" />
+		<KeyBinding Key="D" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandApplyCanc}" />
+		<KeyBinding Key="Up" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandUpperItem}" />
+		<KeyBinding Key="Down" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandLowerItem}" />
+		<KeyBinding Key="S" Modifiers="Shift+Control" Command="{x:Static custom:MainWindow.CommandItemsSort}" />
+		<KeyBinding Key="Enter" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandEditItems}" />
+	</Window.InputBindings>
+</Window>

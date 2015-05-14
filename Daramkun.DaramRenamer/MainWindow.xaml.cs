@@ -31,7 +31,7 @@ namespace Daramkun.DaramRenamer
 	public partial class MainWindow : Window
 	{
 		BinaryFormatter bf;
-		XmlSerializer xs;
+		//XmlSerializer xs;
 		ObservableCollection<FileInfo> fileInfoCollection;
 		Stack<byte []> undoStack;
 		Stack<byte []> redoStack;
@@ -45,7 +45,7 @@ namespace Daramkun.DaramRenamer
 			Title += string.Format ( "{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build );
 			
 			bf = new BinaryFormatter ();
-			xs = new XmlSerializer ( typeof ( ObservableCollection<FileInfo> ) );
+			//xs = new XmlSerializer ( typeof ( ObservableCollection<FileInfo> ) );
 			fileInfoCollection = new ObservableCollection<FileInfo> ();
 			listViewFiles.ItemsSource = fileInfoCollection;
 
@@ -152,8 +152,8 @@ namespace Daramkun.DaramRenamer
 			if ( undoStack.Count == 0 && fileInfoCollection.Count == 0 ) return;
 			using ( MemoryStream memStream = new MemoryStream () )
 			{
-				//bf.Serialize ( memStream, fileInfoCollection );
-				xs.Serialize ( memStream, fileInfoCollection );
+				bf.Serialize ( memStream, fileInfoCollection );
+				//xs.Serialize ( memStream, fileInfoCollection );
 				undoStack.Push ( memStream.ToArray () );
 			}
 		}
@@ -162,8 +162,8 @@ namespace Daramkun.DaramRenamer
 		{
 			using ( MemoryStream memStream = new MemoryStream () )
 			{
-				//bf.Serialize ( memStream, fileInfoCollection );
-				xs.Serialize ( memStream, fileInfoCollection );
+				bf.Serialize ( memStream, fileInfoCollection );
+				//xs.Serialize ( memStream, fileInfoCollection );
 				redoStack.Push ( memStream.ToArray () );
 			}
 		}
@@ -174,8 +174,8 @@ namespace Daramkun.DaramRenamer
 			SaveCurrentStateToRedoStack ();
 			using ( MemoryStream memStream = new MemoryStream ( undoStack.Pop () ) )
 			{
-				//fileInfoCollection = bf.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
-				fileInfoCollection = xs.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
+				fileInfoCollection = bf.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
+				//fileInfoCollection = xs.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
 				listViewFiles.ItemsSource = fileInfoCollection;
 			}
 			return true;
@@ -187,8 +187,8 @@ namespace Daramkun.DaramRenamer
 			SaveCurrentStateToUndoStack ();
 			using ( MemoryStream memStream = new MemoryStream ( redoStack.Pop () ) )
 			{
-				//fileInfoCollection = bf.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
-				fileInfoCollection = xs.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
+				fileInfoCollection = bf.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
+				//fileInfoCollection = xs.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
 				listViewFiles.ItemsSource = fileInfoCollection;
 			}
 			return true;

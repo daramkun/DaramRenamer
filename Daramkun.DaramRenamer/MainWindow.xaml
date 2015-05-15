@@ -4,7 +4,6 @@
 		xmlns:custom="clr-namespace:Daramkun.DaramRenamer"
 		xmlns:setting="clr-namespace:Daramkun.DaramRenamer.Properties"
         Width="680" Height="540"
-		xml:lang="ko-KR" Language="ko-KR"
 		Icon="Resources/ProgramIcon.ico" WindowStartupLocation="CenterScreen">
 	<Window.Resources>
 		<custom:ComboBoxBindingConverter x:Key="comboBoxBindingConverter" />
@@ -116,7 +115,7 @@
 						</DataTemplate>
 					</GridView.ColumnHeaderTemplate>
 
-					<GridViewColumn Width="210">
+					<GridViewColumn Width="200">
 						<GridViewColumnHeader Content="{x:Static setting:Resources.ListView_OriginalName}" />
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
@@ -126,7 +125,7 @@
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
-					<GridViewColumn Width="210">
+					<GridViewColumn Width="205">
 						<GridViewColumnHeader Content="{x:Static setting:Resources.ListView_ChangedName}" />
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
@@ -206,7 +205,7 @@
 							</Grid.RowDefinitions>
 
 							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ConcatString}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ConcatPos}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="stringConcatText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -231,7 +230,7 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_DeletePos}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="stringTrimAllRadio" Content="{x:Static setting:Resources.InTab_DelAll}" IsChecked="True" />

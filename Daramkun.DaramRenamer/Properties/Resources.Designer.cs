@@ -61,7 +61,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   모든 파일(*.*)|*.*과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   All Files(*.*)|*.*과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AllFiles {
             get {
@@ -70,7 +70,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   작업이 완료되었습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Transaction is completed.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ApplyComplete {
             get {
@@ -79,7 +79,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   지금까지 작업한 파일 이름 변경을 실제 파일에 적용합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Apply transaction your edited filenames changing.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ApplyWorked {
             get {
@@ -88,7 +88,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   작업 내용을 적용하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Are you apply transaction?과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AskApplyWorked {
             get {
@@ -97,7 +97,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   파일이 경로에 없는 경우 자동으로 리스트에서 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Auto remove the invalid file from list.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Autoremove {
             get {
@@ -106,7 +106,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   일괄 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Batch Process과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string BatchTab_BatchProcess {
             get {
@@ -115,7 +115,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   업데이트를 확인할 수 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Cannot check the update.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string CannotCheckUpdate {
             get {
@@ -124,7 +124,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   원래 경로와 수정할 경로가 다른 경우 이동하지 않고 파일 복사과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   File copy when difference between original path and changed path.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string CopyWhenTransaction {
             get {
@@ -133,7 +133,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   다람 리네이머과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   DARAM RENAMER과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DaramRenamer {
             get {
@@ -142,7 +142,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   생성한 날짜 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Add Creation Date과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DateTab_AddCreation {
             get {
@@ -151,7 +151,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   마지막 접근 날짜 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Add Last Access Date과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DateTab_AddLastAccess {
             get {
@@ -160,7 +160,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   마지막 수정 날짜 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Add Last Written Date과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DateTab_AddLastWrite {
             get {
@@ -169,7 +169,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   실행과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Do과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Do {
             get {
@@ -178,7 +178,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   오류가 발생하였습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Error raised.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ErrorRaised {
             get {
@@ -187,7 +187,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확장자 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Add extension과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ExtTab_AddExt {
             get {
@@ -196,7 +196,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확장자 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Delete extension과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ExtTab_DeleteExt {
             get {
@@ -205,7 +205,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확장자 변경과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Change extension과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ExtTab_ReplaceExt {
             get {
@@ -214,7 +214,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확장자 대소문자과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Extension casing과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ExtTab_UpperLower {
             get {
@@ -223,7 +223,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   가능한 경우 하드웨어 가속 렌더링 사용과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Use Hardware Accelerated Rendering when possible.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string HardwareRenderingSupport {
             get {
@@ -232,7 +232,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   추가할 확장자:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Add ext:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_AddExt {
             get {
@@ -241,7 +241,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   모든 묶인 문자열에 대해 실행과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   About all enclosed text과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_AllEnclosed {
             get {
@@ -250,7 +250,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   찾아보기...과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Browse...과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_Browse {
             get {
@@ -259,7 +259,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   변경할 확장자:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Change ext:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ChangeExt {
             get {
@@ -268,16 +268,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   붙일 위치:과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string InTab_ConcatPos {
-            get {
-                return ResourceManager.GetString("InTab_ConcatPos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   붙일 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Add Text:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ConcatString {
             get {
@@ -286,7 +277,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   모두 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Delete all과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_DelAll {
             get {
@@ -295,16 +286,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   제거할 위치:과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string InTab_DeletePos {
-            get {
-                return ResourceManager.GetString("InTab_DeletePos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   자리수:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Digit count:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_DigitCount {
             get {
@@ -313,7 +295,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   뒤 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   End text:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_EnclosedPost {
             get {
@@ -322,7 +304,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   앞 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Front text:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_EnclosedPre {
             get {
@@ -331,7 +313,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   형식:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Format:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_Format {
             get {
@@ -340,7 +322,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   형식 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Format:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_FormatString {
             get {
@@ -349,7 +331,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   증감할 값:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Value:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_IncDecValue {
             get {
@@ -358,7 +340,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확장자 포함과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Include extension과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_IncludeExt {
             get {
@@ -367,7 +349,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   간격:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Interval:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_Interval {
             get {
@@ -376,7 +358,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   원본 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Original text:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_OriginalString {
             get {
@@ -385,7 +367,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   바꿀 경로:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Path:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_Path {
             get {
@@ -394,7 +376,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   위치:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Position:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_Position {
             get {
@@ -403,7 +385,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   처리 방법:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Processing method:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ProcessMethod {
             get {
@@ -412,7 +394,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   정규 표현식:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Regexp:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_Regexp {
             get {
@@ -421,7 +403,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   숫자로만 된 단어만 남김과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Number word live과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_RemoveAllWordWithoutNum {
             get {
@@ -430,7 +412,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   모든 숫자 남김과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   All number live과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_RemoveWithoutAllNum {
             get {
@@ -439,7 +421,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   바꿀 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Replace text:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ReplaceString {
             get {
@@ -448,7 +430,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   소문자로과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   To Lowercase과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ToLower {
             get {
@@ -457,7 +439,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   맨 뒤과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   End과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ToPost {
             get {
@@ -466,7 +448,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   맨 앞과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Front과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ToPre {
             get {
@@ -475,7 +457,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   대문자로과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   To Uppercase과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ToUpper {
             get {
@@ -484,7 +466,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   단어 맨 앞만 대문자로과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   To Uppercase one letter과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ToUpperOneLetter {
             get {
@@ -493,7 +475,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확장자 빈 칸 제거 포함과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Include extension trimming과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_TrimWithExt {
             get {
@@ -502,7 +484,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   {0} 디렉토리가 없습니다. 그대로 진행하시려면 &apos;예&apos;를 눌러주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   {0} Directory is not there. If you want just continue, please click &apos;Yes&apos;.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string JustContinueWhenNoExistPath {
             get {
@@ -511,7 +493,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   라이선스과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   License과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string License {
             get {
@@ -520,7 +502,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   변경할 이름과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Changed Name과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ListView_ChangedName {
             get {
@@ -529,7 +511,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   위치할 경로과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Changed Path과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ListView_ChangedPath {
             get {
@@ -538,7 +520,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   원본 이름과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Original Name과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ListView_OriginalName {
             get {
@@ -547,7 +529,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   위치한 경로과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Original Path과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ListView_OriginalPath {
             get {
@@ -556,7 +538,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   일괄 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Batch Process과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_BatchProcess {
             get {
@@ -565,7 +547,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   날짜 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Date Process과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_DateProcess {
             get {
@@ -574,7 +556,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확장자 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Extension Process과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_ExtensionProcess {
             get {
@@ -583,7 +565,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   숫자 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Number Process과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_NumberProcess {
             get {
@@ -592,7 +574,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   경로과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Path과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_PathProcess {
             get {
@@ -601,7 +583,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   정규표현식과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Regular Expression과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_RegexpProcess {
             get {
@@ -610,7 +592,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   설정과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Settings과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_Settings {
             get {
@@ -619,7 +601,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   문자열 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   String Process과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_StringProcess {
             get {
@@ -628,7 +610,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   아니오(&amp;N)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   &amp;No과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string No {
             get {
@@ -637,7 +619,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   해당 디렉토리가 실제로 존재하지 않습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   This directory is not exist.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NoExistDirectory {
             get {
@@ -646,8 +628,8 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   {0} 버전에 대한 업데이트가 있습니다. 홈페이지에서 다운로드해주세요.
-        ///하단 버튼을 통해 홈페이지로 바로 가실 수 있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   {0} version found. Download from homepage.
+        ///Go to homepage with bottom button.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NoticeUpdate {
             get {
@@ -656,7 +638,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   업데이트가 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   No update found.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NoUpdate {
             get {
@@ -665,7 +647,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   번호 붙이기과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Add number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NumTab_AddNum {
             get {
@@ -674,7 +656,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   숫자만 남기고 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Delete without Number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NumTab_DelWithoutNum {
             get {
@@ -683,7 +665,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   숫자 증감과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Increase/Decrease과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NumTab_IncreaseDecrease {
             get {
@@ -692,7 +674,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   숫자 자리수 맞추기과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Same Digit count과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NumTab_SameDigits {
             get {
@@ -701,7 +683,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   확인(&amp;O)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   &amp;OK과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string OK {
             get {
@@ -710,7 +692,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   열기과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Open과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Open {
             get {
@@ -719,7 +701,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   &quot;{0}&quot; 경로에 파일이 이미 있거나 원본 파일을 찾을 수 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   File is already exist or no original file in &quot;{0}&quot;.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PathError_IOException {
             get {
@@ -728,7 +710,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   &quot;{0}&quot; 파일의 경로를 변경할 권한이 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   No authentication about file &quot;{0}&quot; for change.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PathError_NoAuthentication {
             get {
@@ -737,7 +719,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   &quot;{0}&quot;의 디렉토리가 존재하지 않습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Directory &quot;{0}&quot; is not exist.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PathError_NoPath {
             get {
@@ -746,7 +728,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   &quot;{0}&quot; 파일의 경로가 너무 깁니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   File &quot;{0}&quot;&apos;s path is too long.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PathError_PathIsTooLong {
             get {
@@ -755,7 +737,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   알 수 없는 이유로 파일의 경로를 변경할 수 없었습니다: {0}과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Cannot change path with Unknown exception: {0}과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PathError_Unknown {
             get {
@@ -764,7 +746,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   경로 변경과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Change Path과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PathTab_ChangePath {
             get {
@@ -773,7 +755,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   알 수 없는 오류가 발생했습니다. error.log를 참고해주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Unknown error raised. Please check &apos;error.log&apos; file.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PleaseCheckLog {
             get {
@@ -782,8 +764,8 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   Windows XP 이하의 운영체제는 더 이상 지원하지 않습니다.
-        ///XP 사용자의 경우 1.x 버전을 사용해주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Windows XP is not support.
+        ///If you use Windows XP, please use 1.x version.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PleaseUseLegacy {
             get {
@@ -792,7 +774,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   정규표현식과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Regular Expression과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string RegexpTab_RegularExpression {
             get {
@@ -801,7 +783,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   문자열 붙이기과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Concatenate test과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StringTab_Concat {
             get {
@@ -810,7 +792,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   묶인 문자열 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Remove enclosed text과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StringTab_DeleteEnclosed {
             get {
@@ -819,7 +801,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   이름 지우기과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Delete name과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StringTab_DeleteName {
             get {
@@ -828,7 +810,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   문자열 바꾸기과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Replace text과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StringTab_Replace {
             get {
@@ -837,7 +819,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   양 옆 빈 칸 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Trimming text과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StringTab_Trim {
             get {
@@ -846,7 +828,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   이름 대소문자과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Text casing과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string StringTab_UpperLower {
             get {
@@ -855,7 +837,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   {0}/{1}개의 파일에 대해 이름을 변경하였습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Completed the changed name {0}/{1}.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ThatFilesNameChanged {
             get {
@@ -864,7 +846,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   업데이트가 있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Update found.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ThereIsUpdate {
             get {
@@ -873,7 +855,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   이 기능은 준비 중입니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   This feature is not implemented과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ThisFeatureIsNotReady {
             get {
@@ -882,7 +864,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   이 프로그램의 버전은 현재 최신버전입니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   This program is lastest version.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ThisIsStable {
             get {
@@ -891,7 +873,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   홈페이지로(&amp;H)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   To &amp;Homepage과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToHomepage {
             get {
@@ -900,7 +882,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   업데이트를 확인합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Check the update.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_CheckUpdate {
             get {
@@ -909,7 +891,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   목록을 삭제합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Clear listview.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_ClearList {
             get {
@@ -918,7 +900,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   PayPal을 통해 기부합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Donation via PayPal.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_Donation {
             get {
@@ -927,7 +909,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   버그 또는 건의 요청에 대해 피드백합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Feedback about bugs or new features.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_Feedback {
             get {
@@ -936,7 +918,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   선택한 항목을 보다 아래로 내립니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Selected list item to down position.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_ItemToDown {
             get {
@@ -945,7 +927,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   선택한 항목을 보다 위로 올립니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Selected list item to up position.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_ItemToUp {
             get {
@@ -954,7 +936,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   이름을 일괄 변환할 파일을 불러옵니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Load file for editing과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_LoadFile {
             get {
@@ -963,7 +945,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   실행 취소를 되돌립니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Redo edited.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_Redo {
             get {
@@ -972,7 +954,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   변경을 취소합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Rollback edited.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_Rollback {
             get {
@@ -981,7 +963,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   항목을 이름순으로 오름차순 정렬합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Sort about name.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_Sort {
             get {
@@ -990,7 +972,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   이름을 일괄 변경합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Do Transaction.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_Transaction {
             get {
@@ -999,7 +981,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   이전 실행을 취소합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Undo edited.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ToolBar_Undo {
             get {
@@ -1008,7 +990,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   예(&amp;Y)과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   &amp;Yes과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Yes {
             get {

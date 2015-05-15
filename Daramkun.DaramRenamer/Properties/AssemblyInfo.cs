@@ -54,4 +54,4 @@ using System.Windows;
 [assembly: AssemblyVersion ( "2.0.0.*" )]
 [assembly: AssemblyFileVersion ( "2.0.0.0" )]
 [assembly: GuidAttribute ( "3FC6CD68-276B-4D9F-94A5-79A7E85B71A5" )]
-[assembly: NeutralResourcesLanguageAttribute ( "ko-KR" )]
+[assembly: NeutralResourcesLanguageAttribute ( "" )]

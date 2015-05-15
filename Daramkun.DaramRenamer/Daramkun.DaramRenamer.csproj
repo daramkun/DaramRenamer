@@ -75,15 +75,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ComboBoxBindingConverter.cs" />
-    <Compile Include="Properties\Resources.ko.Designer.cs">
-      <DependentUpon>Resources.ko.resx</DependentUpon>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Properties\Resources.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Resources.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="TaskDialog\CommandLink.xaml.cs">
@@ -149,13 +149,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.ko.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ko.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskDialog\Resources.resx" />
     <None Include="Properties\Settings.settings">

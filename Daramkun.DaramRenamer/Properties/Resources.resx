@@ -118,317 +118,317 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AllFiles" xml:space="preserve">
-    <value>All Files(*.*)|*.*</value>
+    <value>모든 파일(*.*)|*.*</value>
   </data>
   <data name="ApplyComplete" xml:space="preserve">
-    <value>Transaction is completed.</value>
+    <value>작업이 완료되었습니다.</value>
   </data>
   <data name="ApplyWorked" xml:space="preserve">
-    <value>Apply transaction your edited filenames changing.</value>
+    <value>지금까지 작업한 파일 이름 변경을 실제 파일에 적용합니다.</value>
   </data>
   <data name="AskApplyWorked" xml:space="preserve">
-    <value>Are you apply transaction?</value>
+    <value>작업 내용을 적용하시겠습니까?</value>
   </data>
   <data name="CannotCheckUpdate" xml:space="preserve">
-    <value>Cannot check the update.</value>
+    <value>업데이트를 확인할 수 없습니다.</value>
   </data>
   <data name="DaramRenamer" xml:space="preserve">
-    <value>DARAM RENAMER</value>
+    <value>다람 리네이머</value>
   </data>
   <data name="ErrorRaised" xml:space="preserve">
-    <value>Error raised.</value>
+    <value>오류가 발생하였습니다.</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>&amp;No</value>
+    <value>아니오(&amp;N)</value>
   </data>
   <data name="NoExistDirectory" xml:space="preserve">
-    <value>This directory is not exist.</value>
+    <value>해당 디렉토리가 실제로 존재하지 않습니다.</value>
   </data>
   <data name="NoticeUpdate" xml:space="preserve">
-    <value>{0} version found. Download from homepage.
-Go to homepage with bottom button.</value>
+    <value>{0} 버전에 대한 업데이트가 있습니다. 홈페이지에서 다운로드해주세요.
+하단 버튼을 통해 홈페이지로 바로 가실 수 있습니다.</value>
   </data>
   <data name="NoUpdate" xml:space="preserve">
-    <value>No update found.</value>
+    <value>업데이트가 없습니다.</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>&amp;OK</value>
+    <value>확인(&amp;O)</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>열기</value>
   </data>
   <data name="ThatFilesNameChanged" xml:space="preserve">
-    <value>Completed the changed name {0}/{1}.</value>
+    <value>{0}/{1}개의 파일에 대해 이름을 변경하였습니다.</value>
   </data>
   <data name="ThereIsUpdate" xml:space="preserve">
-    <value>Update found.</value>
+    <value>업데이트가 있습니다.</value>
   </data>
   <data name="ThisIsStable" xml:space="preserve">
-    <value>This program is lastest version.</value>
+    <value>이 프로그램의 버전은 현재 최신버전입니다.</value>
   </data>
   <data name="ToHomepage" xml:space="preserve">
-    <value>To &amp;Homepage</value>
+    <value>홈페이지로(&amp;H)</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>&amp;Yes</value>
+    <value>예(&amp;Y)</value>
   </data>
   <data name="Do" xml:space="preserve">
-    <value>Do</value>
+    <value>실행</value>
   </data>
   <data name="JustContinueWhenNoExistPath" xml:space="preserve">
-    <value>{0} Directory is not there. If you want just continue, please click 'Yes'.</value>
+    <value>{0} 디렉토리가 없습니다. 그대로 진행하시려면 '예'를 눌러주세요.</value>
   </data>
   <data name="License" xml:space="preserve">
-    <value>License</value>
+    <value>라이선스</value>
   </data>
   <data name="ListView_ChangedName" xml:space="preserve">
-    <value>Changed Name</value>
+    <value>변경할 이름</value>
   </data>
   <data name="ListView_ChangedPath" xml:space="preserve">
-    <value>Changed Path</value>
+    <value>위치할 경로</value>
   </data>
   <data name="ListView_OriginalName" xml:space="preserve">
-    <value>Original Name</value>
+    <value>원본 이름</value>
   </data>
   <data name="ListView_OriginalPath" xml:space="preserve">
-    <value>Original Path</value>
+    <value>위치한 경로</value>
   </data>
   <data name="MainTab_BatchProcess" xml:space="preserve">
-    <value>Batch Process</value>
+    <value>일괄 처리</value>
   </data>
   <data name="MainTab_DateProcess" xml:space="preserve">
-    <value>Date</value>
+    <value>날짜 처리</value>
   </data>
   <data name="MainTab_ExtensionProcess" xml:space="preserve">
-    <value>Extension</value>
+    <value>확장자 처리</value>
   </data>
   <data name="MainTab_NumberProcess" xml:space="preserve">
-    <value>Number</value>
+    <value>숫자 처리</value>
   </data>
   <data name="MainTab_RegexpProcess" xml:space="preserve">
-    <value>Regular Expression</value>
+    <value>정규표현식</value>
   </data>
   <data name="MainTab_Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>설정</value>
   </data>
   <data name="MainTab_StringProcess" xml:space="preserve">
-    <value>Text</value>
+    <value>문자열 처리</value>
   </data>
   <data name="PathError_IOException" xml:space="preserve">
-    <value>File is already exist or no original file in "{0}".</value>
+    <value>"{0}" 경로에 파일이 이미 있거나 원본 파일을 찾을 수 없습니다.</value>
   </data>
   <data name="PathError_NoAuthentication" xml:space="preserve">
-    <value>No authentication about file "{0}" for change.</value>
+    <value>"{0}" 파일의 경로를 변경할 권한이 없습니다.</value>
   </data>
   <data name="PathError_NoPath" xml:space="preserve">
-    <value>Directory "{0}" is not exist.</value>
+    <value>"{0}"의 디렉토리가 존재하지 않습니다.</value>
   </data>
   <data name="PathError_PathIsTooLong" xml:space="preserve">
-    <value>File "{0}"'s path is too long.</value>
+    <value>"{0}" 파일의 경로가 너무 깁니다.</value>
   </data>
   <data name="PathError_Unknown" xml:space="preserve">
-    <value>Cannot change path with Unknown exception: {0}</value>
+    <value>알 수 없는 이유로 파일의 경로를 변경할 수 없었습니다: {0}</value>
   </data>
   <data name="PleaseCheckLog" xml:space="preserve">
-    <value>Unknown error raised. Please check 'error.log' file.</value>
+    <value>알 수 없는 오류가 발생했습니다. error.log를 참고해주세요.</value>
   </data>
   <data name="PleaseUseLegacy" xml:space="preserve">
-    <value>Windows XP is not support.
-If you use Windows XP, please use 1.x version.</value>
+    <value>Windows XP 이하의 운영체제는 더 이상 지원하지 않습니다.
+XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   </data>
   <data name="ToolBar_CheckUpdate" xml:space="preserve">
-    <value>Check the update.</value>
+    <value>업데이트를 확인합니다.</value>
   </data>
   <data name="ToolBar_ClearList" xml:space="preserve">
-    <value>Clear listview.</value>
+    <value>목록을 삭제합니다.</value>
   </data>
   <data name="ToolBar_Donation" xml:space="preserve">
-    <value>Donation via PayPal.</value>
+    <value>PayPal을 통해 기부합니다.</value>
   </data>
   <data name="ToolBar_Feedback" xml:space="preserve">
-    <value>Feedback about bugs or new features.</value>
+    <value>버그 또는 건의 요청에 대해 피드백합니다.</value>
   </data>
   <data name="ToolBar_ItemToDown" xml:space="preserve">
-    <value>Selected list item to down position.</value>
+    <value>선택한 항목을 보다 아래로 내립니다.</value>
   </data>
   <data name="ToolBar_ItemToUp" xml:space="preserve">
-    <value>Selected list item to up position.</value>
+    <value>선택한 항목을 보다 위로 올립니다.</value>
   </data>
   <data name="ToolBar_LoadFile" xml:space="preserve">
-    <value>Load file for editing</value>
+    <value>이름을 일괄 변환할 파일을 불러옵니다.</value>
   </data>
   <data name="ToolBar_Redo" xml:space="preserve">
-    <value>Redo edited.</value>
+    <value>실행 취소를 되돌립니다.</value>
   </data>
   <data name="ToolBar_Rollback" xml:space="preserve">
-    <value>Rollback edited.</value>
+    <value>변경을 취소합니다.</value>
   </data>
   <data name="ToolBar_Sort" xml:space="preserve">
-    <value>Sort about name.</value>
+    <value>항목을 이름순으로 오름차순 정렬합니다.</value>
   </data>
   <data name="ToolBar_Transaction" xml:space="preserve">
-    <value>Do Transaction.</value>
+    <value>이름을 일괄 변경합니다.</value>
   </data>
   <data name="ToolBar_Undo" xml:space="preserve">
-    <value>Undo edited.</value>
+    <value>이전 실행을 취소합니다.</value>
   </data>
   <data name="Autoremove" xml:space="preserve">
-    <value>Auto remove the invalid file from list.</value>
+    <value>파일이 경로에 없는 경우 자동으로 리스트에서 제거.</value>
   </data>
   <data name="BatchTab_BatchProcess" xml:space="preserve">
-    <value>Batch Process</value>
+    <value>일괄 처리</value>
   </data>
   <data name="CopyWhenTransaction" xml:space="preserve">
-    <value>File copy when difference between original path and changed path.</value>
+    <value>원래 경로와 수정할 경로가 다른 경우 이동하지 않고 파일 복사.</value>
   </data>
   <data name="DateTab_AddCreation" xml:space="preserve">
-    <value>Add Creation Date</value>
+    <value>생성한 날짜 추가</value>
   </data>
   <data name="DateTab_AddLastAccess" xml:space="preserve">
-    <value>Add Last Access Date</value>
+    <value>마지막 접근 날짜 추가</value>
   </data>
   <data name="DateTab_AddLastWrite" xml:space="preserve">
-    <value>Add Last Written Date</value>
+    <value>마지막 수정 날짜 추가</value>
   </data>
   <data name="ExtTab_AddExt" xml:space="preserve">
-    <value>Add extension</value>
+    <value>확장자 추가</value>
   </data>
   <data name="ExtTab_DeleteExt" xml:space="preserve">
-    <value>Delete extension</value>
+    <value>확장자 제거</value>
   </data>
   <data name="ExtTab_ReplaceExt" xml:space="preserve">
-    <value>Change extension</value>
+    <value>확장자 변경</value>
   </data>
   <data name="ExtTab_UpperLower" xml:space="preserve">
-    <value>Extension casing</value>
+    <value>확장자 대소문자</value>
   </data>
   <data name="HardwareRenderingSupport" xml:space="preserve">
-    <value>Use Hardware Accelerated Rendering when possible.</value>
+    <value>가능한 경우 하드웨어 가속 렌더링 사용.</value>
   </data>
   <data name="InTab_AddExt" xml:space="preserve">
-    <value>Add ext:</value>
+    <value>추가할 확장자:</value>
   </data>
   <data name="InTab_AllEnclosed" xml:space="preserve">
-    <value>About all enclosed text</value>
+    <value>모든 묶인 문자열에 대해 실행</value>
   </data>
   <data name="InTab_Browse" xml:space="preserve">
-    <value>Browse...</value>
+    <value>찾아보기...</value>
   </data>
   <data name="InTab_ChangeExt" xml:space="preserve">
-    <value>Change ext:</value>
+    <value>변경할 확장자:</value>
   </data>
   <data name="InTab_ConcatString" xml:space="preserve">
-    <value>Add Text:</value>
+    <value>붙일 문자열:</value>
   </data>
   <data name="InTab_DelAll" xml:space="preserve">
-    <value>Delete all</value>
+    <value>모두 제거</value>
   </data>
   <data name="InTab_DigitCount" xml:space="preserve">
-    <value>Digit count:</value>
+    <value>자리수:</value>
   </data>
   <data name="InTab_EnclosedPost" xml:space="preserve">
-    <value>End text:</value>
+    <value>뒤 문자열:</value>
   </data>
   <data name="InTab_EnclosedPre" xml:space="preserve">
-    <value>Front text:</value>
+    <value>앞 문자열:</value>
   </data>
   <data name="InTab_Format" xml:space="preserve">
-    <value>Format:</value>
+    <value>형식:</value>
   </data>
   <data name="InTab_FormatString" xml:space="preserve">
-    <value>Format:</value>
+    <value>형식 문자열:</value>
   </data>
   <data name="InTab_IncDecValue" xml:space="preserve">
-    <value>Value:</value>
+    <value>증감할 값:</value>
   </data>
   <data name="InTab_IncludeExt" xml:space="preserve">
-    <value>Include extension</value>
+    <value>확장자 포함</value>
   </data>
   <data name="InTab_Interval" xml:space="preserve">
-    <value>Interval:</value>
+    <value>간격:</value>
   </data>
   <data name="InTab_OriginalString" xml:space="preserve">
-    <value>Original text:</value>
+    <value>원본 문자열:</value>
   </data>
   <data name="InTab_Path" xml:space="preserve">
-    <value>Path:</value>
+    <value>바꿀 경로:</value>
   </data>
   <data name="InTab_Position" xml:space="preserve">
-    <value>Position:</value>
+    <value>위치:</value>
   </data>
   <data name="InTab_ProcessMethod" xml:space="preserve">
-    <value>Treatment:</value>
+    <value>처리 방법:</value>
   </data>
   <data name="InTab_Regexp" xml:space="preserve">
-    <value>Regexp:</value>
+    <value>정규 표현식:</value>
   </data>
   <data name="InTab_RemoveAllWordWithoutNum" xml:space="preserve">
-    <value>Number word live</value>
+    <value>숫자로만 된 단어만 남김</value>
   </data>
   <data name="InTab_RemoveWithoutAllNum" xml:space="preserve">
-    <value>All number live</value>
+    <value>모든 숫자 남김</value>
   </data>
   <data name="InTab_ReplaceString" xml:space="preserve">
-    <value>Replace text:</value>
+    <value>바꿀 문자열:</value>
   </data>
   <data name="InTab_ToLower" xml:space="preserve">
-    <value>To Lowercase</value>
+    <value>소문자로</value>
   </data>
   <data name="InTab_ToPost" xml:space="preserve">
-    <value>End</value>
+    <value>맨 뒤</value>
   </data>
   <data name="InTab_ToPre" xml:space="preserve">
-    <value>Front</value>
+    <value>맨 앞</value>
   </data>
   <data name="InTab_ToUpper" xml:space="preserve">
-    <value>To Uppercase</value>
+    <value>대문자로</value>
   </data>
   <data name="InTab_ToUpperOneLetter" xml:space="preserve">
-    <value>To Uppercase one letter</value>
+    <value>단어 맨 앞만 대문자로</value>
   </data>
   <data name="InTab_TrimWithExt" xml:space="preserve">
-    <value>Include extension trimming</value>
+    <value>확장자 빈 칸 제거 포함</value>
   </data>
   <data name="MainTab_PathProcess" xml:space="preserve">
-    <value>Path</value>
+    <value>경로</value>
   </data>
   <data name="NumTab_AddNum" xml:space="preserve">
-    <value>Add number</value>
+    <value>번호 붙이기</value>
   </data>
   <data name="NumTab_DelWithoutNum" xml:space="preserve">
-    <value>Delete without Number</value>
+    <value>숫자만 남기고 제거</value>
   </data>
   <data name="NumTab_IncreaseDecrease" xml:space="preserve">
-    <value>Increase/Decrease</value>
+    <value>숫자 증감</value>
   </data>
   <data name="NumTab_SameDigits" xml:space="preserve">
-    <value>Same Digit count</value>
+    <value>숫자 자리수 맞추기</value>
   </data>
   <data name="PathTab_ChangePath" xml:space="preserve">
-    <value>Change Path</value>
+    <value>경로 변경</value>
   </data>
   <data name="RegexpTab_RegularExpression" xml:space="preserve">
-    <value>Regular Expression</value>
+    <value>정규표현식</value>
   </data>
   <data name="StringTab_Concat" xml:space="preserve">
-    <value>Concatenate test</value>
+    <value>문자열 붙이기</value>
   </data>
   <data name="StringTab_DeleteEnclosed" xml:space="preserve">
-    <value>Remove enclosed text</value>
+    <value>묶인 문자열 제거</value>
   </data>
   <data name="StringTab_DeleteName" xml:space="preserve">
-    <value>Delete name</value>
+    <value>이름 지우기</value>
   </data>
   <data name="StringTab_Replace" xml:space="preserve">
-    <value>Replace text</value>
+    <value>문자열 바꾸기</value>
   </data>
   <data name="StringTab_Trim" xml:space="preserve">
-    <value>Trimming text</value>
+    <value>양 옆 빈 칸 제거</value>
   </data>
   <data name="StringTab_UpperLower" xml:space="preserve">
-    <value>Text casing</value>
+    <value>이름 대소문자</value>
   </data>
   <data name="ThisFeatureIsNotReady" xml:space="preserve">
-    <value>This feature is not implemented</value>
+    <value>이 기능은 준비 중입니다.</value>
   </data>
 </root>

@@ -41,7 +41,6 @@ namespace Daramkun.DaramRenamer
 				currentVersion.Major, currentVersion.Minor, currentVersion.Build );
 			
 			bf = new BinaryFormatter ();
-			//xs = new XmlSerializer ( typeof ( ObservableCollection<FileInfo> ) );
 			fileInfoCollection = new ObservableCollection<FileInfo> ();
 			listViewFiles.ItemsSource = fileInfoCollection;
 

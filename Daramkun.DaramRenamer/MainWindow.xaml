@@ -22,83 +22,79 @@
 				<Button Click="ToolBarButton_Open_Click">
 					<Image Source="Resources/folder.png" />
 					<Button.ToolTip>
-						<ToolTip Content="이름을 일괄 변환할 파일을 불러옵니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_LoadFile}" />
 					</Button.ToolTip>
 				</Button>
 				<Button Click="ToolBarButton_DeleteAll_Click">
 					<Image Source="Resources/delete.png" />
 					<Button.ToolTip>
-						<ToolTip Content="목록을 삭제합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_ClearList}" />
 					</Button.ToolTip>
 				</Button>
 				<Button Click="ToolBarButton_Apply_Click">
 					<Image Source="Resources/accept.png" />
 					<Button.ToolTip>
-						<ToolTip Content="이름을 일괄 변경합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_Transaction}" />
 					</Button.ToolTip>
 				</Button>
 				<Separator />
 				<Button Click="ToolBarButton_Undo_Click">
 					<Image Source="Resources/arrow_undo.png" />
 					<Button.ToolTip>
-						<ToolTip Content="이전 실행을 취소합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_Undo}" />
 					</Button.ToolTip>
 				</Button>
 				<Button Click="ToolBarButton_Redo_Click">
 					<Image Source="Resources/arrow_redo.png" />
 					<Button.ToolTip>
-						<ToolTip Content="실행 취소를 되돌립니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_Redo}" />
 					</Button.ToolTip>
 				</Button>
 				<Separator />
 				<Button Click="ToolBarButton_Restore_Click">
 					<Image Source="Resources/arrow_rotate_anticlockwise.png" />
 					<Button.ToolTip>
-						<ToolTip Content="변경을 취소합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_Rollback}" />
 					</Button.ToolTip>
 				</Button>
 				<Separator />
 				<Button Click="ToolBarButton_UpTo_Click">
 					<Image Source="Resources/arrow_up.png" />
 					<Button.ToolTip>
-						<ToolTip Content="선택한 항목을 보다 위로 올립니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_ItemToUp}" />
 					</Button.ToolTip>
 				</Button>
 				<Button Click="ToolBarButton_DownTo_Click">
 					<Image Source="Resources/arrow_down.png" />
 					<Button.ToolTip>
-						<ToolTip Content="선택한 항목을 보다 아래로 내립니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_ItemToDown}" />
 					</Button.ToolTip>
 				</Button>
 				<Button Click="ToolBarButton_Sort_Click">
 					<Image Source="Resources/rainbow.png" />
 					<Button.ToolTip>
-						<ToolTip Content="항목을 이름순으로 오름차순 정렬합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_Sort}" />
 					</Button.ToolTip>
 				</Button>
 				<Separator />
 				<Button Click="ToolBarButton_CheckUpdate_Click">
 					<Image Source="Resources/application_get.png" />
 					<Button.ToolTip>
-						<ToolTip Content="업데이트를 확인합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_CheckUpdate}" />
 					</Button.ToolTip>
 				</Button>
 				<Button Click="ToolBarButton_IssueTracker_Click">
 					<Image Source="Resources/email_go.png" />
 					<Button.ToolTip>
-						<ToolTip Content="버그 또는 건의 요청에 대해 피드백합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_Feedback}" />
 					</Button.ToolTip>
 				</Button>
 				<Button Click="ToolBarButton_Donation_Click">
 					<Image Source="Resources/cup_add.png" />
 					<Button.ToolTip>
-						<ToolTip Content="PayPal을 통해 기부합니다." />
+						<ToolTip Content="{x:Static setting:Resources.ToolBar_Donation}" />
 					</Button.ToolTip>
 				</Button>
-			</ToolBar>
-
-			<ToolBar ToolBarTray.IsLocked="True" Focusable="True">
-				
 			</ToolBar>
 		</ToolBarTray>
 

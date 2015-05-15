@@ -324,6 +324,114 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   업데이트를 확인합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_CheckUpdate {
+            get {
+                return ResourceManager.GetString("ToolBar_CheckUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   목록을 삭제합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_ClearList {
+            get {
+                return ResourceManager.GetString("ToolBar_ClearList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   PayPal을 통해 기부합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_Donation {
+            get {
+                return ResourceManager.GetString("ToolBar_Donation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   버그 또는 건의 요청에 대해 피드백합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_Feedback {
+            get {
+                return ResourceManager.GetString("ToolBar_Feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   선택한 항목을 보다 아래로 내립니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_ItemToDown {
+            get {
+                return ResourceManager.GetString("ToolBar_ItemToDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   선택한 항목을 보다 위로 올립니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_ItemToUp {
+            get {
+                return ResourceManager.GetString("ToolBar_ItemToUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름을 일괄 변환할 파일을 불러옵니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_LoadFile {
+            get {
+                return ResourceManager.GetString("ToolBar_LoadFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   실행 취소를 되돌립니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_Redo {
+            get {
+                return ResourceManager.GetString("ToolBar_Redo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   변경을 취소합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_Rollback {
+            get {
+                return ResourceManager.GetString("ToolBar_Rollback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   항목을 이름순으로 오름차순 정렬합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_Sort {
+            get {
+                return ResourceManager.GetString("ToolBar_Sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름을 일괄 변경합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_Transaction {
+            get {
+                return ResourceManager.GetString("ToolBar_Transaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이전 실행을 취소합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ToolBar_Undo {
+            get {
+                return ResourceManager.GetString("ToolBar_Undo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   예(&amp;Y)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Yes {

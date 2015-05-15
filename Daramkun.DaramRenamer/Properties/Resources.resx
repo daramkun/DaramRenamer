@@ -209,4 +209,40 @@
     <value>Windows XP 이하의 운영체제는 더 이상 지원하지 않습니다.
 XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   </data>
+  <data name="ToolBar_CheckUpdate" xml:space="preserve">
+    <value>업데이트를 확인합니다.</value>
+  </data>
+  <data name="ToolBar_ClearList" xml:space="preserve">
+    <value>목록을 삭제합니다.</value>
+  </data>
+  <data name="ToolBar_Donation" xml:space="preserve">
+    <value>PayPal을 통해 기부합니다.</value>
+  </data>
+  <data name="ToolBar_Feedback" xml:space="preserve">
+    <value>버그 또는 건의 요청에 대해 피드백합니다.</value>
+  </data>
+  <data name="ToolBar_ItemToDown" xml:space="preserve">
+    <value>선택한 항목을 보다 아래로 내립니다.</value>
+  </data>
+  <data name="ToolBar_ItemToUp" xml:space="preserve">
+    <value>선택한 항목을 보다 위로 올립니다.</value>
+  </data>
+  <data name="ToolBar_LoadFile" xml:space="preserve">
+    <value>이름을 일괄 변환할 파일을 불러옵니다.</value>
+  </data>
+  <data name="ToolBar_Redo" xml:space="preserve">
+    <value>실행 취소를 되돌립니다.</value>
+  </data>
+  <data name="ToolBar_Rollback" xml:space="preserve">
+    <value>변경을 취소합니다.</value>
+  </data>
+  <data name="ToolBar_Sort" xml:space="preserve">
+    <value>항목을 이름순으로 오름차순 정렬합니다.</value>
+  </data>
+  <data name="ToolBar_Transaction" xml:space="preserve">
+    <value>이름을 일괄 변경합니다.</value>
+  </data>
+  <data name="ToolBar_Undo" xml:space="preserve">
+    <value>이전 실행을 취소합니다.</value>
+  </data>
 </root>

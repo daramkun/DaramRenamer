@@ -197,13 +197,13 @@ Go to homepage with bottom button.</value>
     <value>Batch Process</value>
   </data>
   <data name="MainTab_DateProcess" xml:space="preserve">
-    <value>Date Process</value>
+    <value>Date</value>
   </data>
   <data name="MainTab_ExtensionProcess" xml:space="preserve">
-    <value>Extension Process</value>
+    <value>Extension</value>
   </data>
   <data name="MainTab_NumberProcess" xml:space="preserve">
-    <value>Number Process</value>
+    <value>Number</value>
   </data>
   <data name="MainTab_RegexpProcess" xml:space="preserve">
     <value>Regular Expression</value>
@@ -212,7 +212,7 @@ Go to homepage with bottom button.</value>
     <value>Settings</value>
   </data>
   <data name="MainTab_StringProcess" xml:space="preserve">
-    <value>String Process</value>
+    <value>Text</value>
   </data>
   <data name="PathError_IOException" xml:space="preserve">
     <value>File is already exist or no original file in "{0}".</value>
@@ -357,7 +357,7 @@ If you use Windows XP, please use 1.x version.</value>
     <value>Position:</value>
   </data>
   <data name="InTab_ProcessMethod" xml:space="preserve">
-    <value>Processing method:</value>
+    <value>Treatment:</value>
   </data>
   <data name="InTab_Regexp" xml:space="preserve">
     <value>Regexp:</value>

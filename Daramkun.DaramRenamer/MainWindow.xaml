@@ -179,11 +179,11 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_OriginalString}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ReplaceString}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_OriginalString}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ReplaceString}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
-							<TextBox Name="stringReplaceOriginalText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-							<TextBox Name="stringReplaceNewText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+							<TextBox Name="stringReplaceOriginalText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+							<TextBox Name="stringReplaceNewText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
 							<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<CheckBox Name="stringReplaceIncludeExt" Content="{x:Static setting:Resources.InTab_IncludeExt}" IsChecked="True" />
 							</StackPanel>
@@ -204,13 +204,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ConcatString}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ConcatString}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="stringConcatText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="stringConcatPreRadio" Content="{x:Static setting:Resources.InTab_ToPre}" IsChecked="True" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="stringConcatPostRadio" Content="{x:Static setting:Resources.InTab_ToPost}" />
 							</StackPanel>
 
@@ -230,13 +230,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="stringTrimAllRadio" Content="{x:Static setting:Resources.InTab_DelAll}" IsChecked="True" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="stringTrimPreRadio" Content="{x:Static setting:Resources.InTab_ToPre}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="stringTrimPostRadio" Content="{x:Static setting:Resources.InTab_ToPost}" />
 							</StackPanel>
 
@@ -261,8 +261,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_EnclosedPre}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_EnclosedPost}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_EnclosedPre}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_EnclosedPost}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="stringEnclosedPreText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 							<TextBox Name="stringEnclosedPostText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
@@ -299,13 +299,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="stringUpLowUpper" Content="{x:Static setting:Resources.InTab_ToUpper}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="stringUpLowLower" Content="{x:Static setting:Resources.InTab_ToLower}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="stringUpLowOneLetterUpper" Content="{x:Static setting:Resources.InTab_ToUpperOneLetter}" IsChecked="True" />
 							</StackPanel>
 
@@ -331,7 +331,7 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_AddExt}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_AddExt}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 							<TextBox Name="extAddExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_AddExt_Click" />
@@ -363,7 +363,7 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ChangeExt}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ChangeExt}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 							<TextBox Name="extChangeExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_ChangeExt_Click" />
@@ -381,11 +381,11 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="extUpLowUpper" Content="{x:Static setting:Resources.InTab_ToUpper}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="extUpLowLower" Content="{x:Static setting:Resources.InTab_ToLower}" IsChecked="True" />
 							</StackPanel>
 
@@ -411,11 +411,11 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="numDelWoNoNumberWordOnly" Content="{x:Static setting:Resources.InTab_RemoveAllWordWithoutNum}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="numDelWoNoAllNumber" Content="{x:Static setting:Resources.InTab_RemoveWithoutAllNum}" IsChecked="True" />
 							</StackPanel>
 
@@ -435,8 +435,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_DigitCount}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_DigitCount}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="numSameDigitCount" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MaxLines="1" PreviewTextInput="Digit_PreviewTextInput" >
 								<TextBox.InputScope>
@@ -449,7 +449,7 @@
 							</TextBox>
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="numSameDigitPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="numSameDigitPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
@@ -469,8 +469,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Interval}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Interval}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="numAddNumTerm" Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" >
 								<TextBox.InputScope>
@@ -483,7 +483,7 @@
 							</TextBox>
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="numAddNumPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="numAddNumPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
@@ -503,8 +503,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_IncDecValue}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_IncDecValue}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="numAddSubNumTerm" Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" >
 								<TextBox.InputScope>
@@ -517,7 +517,7 @@
 							</TextBox>
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="numAddSubNumPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="numAddSubNumPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
@@ -544,13 +544,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="dateCreatedFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="dateCreatedPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="dateCreatedPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
@@ -570,13 +570,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="dateAccessFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="dateAccessPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="dateAccessPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
@@ -596,13 +596,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<TextBox Name="dateWriteFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<RadioButton Name="dateWritePre" Content="{x:Static setting:Resources.InTab_ToPre}" />
-								<Grid Margin="5,0,0,0" />
+								<Grid Margin="10,0,0,0" />
 								<RadioButton Name="dateWritePost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
@@ -629,7 +629,7 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Path}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Path}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
 
 							<Grid Grid.Row="0" Grid.Column="1">
 								<Grid.ColumnDefinitions>
@@ -663,8 +663,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Text="{x:Static setting:Resources.InTab_Regexp}" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" />
-							<TextBlock Text="{x:Static setting:Resources.InTab_FormatString}" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" />
+							<TextBlock Text="{x:Static setting:Resources.InTab_Regexp}" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" />
+							<TextBlock Text="{x:Static setting:Resources.InTab_FormatString}" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Margin="0,0,5,0" />
 							<ComboBox Name="regexpOriginal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Source={x:Static setting:Settings.Default}, Path=RegexpOriginal, Converter={StaticResource comboBoxBindingConverter}}" />
 							<ComboBox Name="regexpReplace" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Source={x:Static setting:Settings.Default}, Path=RegexpFormat, Converter={StaticResource comboBoxBindingConverter}}" />
 

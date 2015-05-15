@@ -385,7 +385,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   Processing method:과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Treatment:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ProcessMethod {
             get {
@@ -547,7 +547,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   Date Process과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Date과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_DateProcess {
             get {
@@ -556,7 +556,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   Extension Process과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Extension과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_ExtensionProcess {
             get {
@@ -565,7 +565,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   Number Process과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_NumberProcess {
             get {
@@ -601,7 +601,7 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   String Process과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Text과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MainTab_StringProcess {
             get {

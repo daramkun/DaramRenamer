@@ -311,6 +311,9 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="InTab_AllEnclosed" xml:space="preserve">
     <value>모든 묶인 문자열에 대해 실행</value>
   </data>
+  <data name="InTab_Browse" xml:space="preserve">
+    <value>찾아보기...</value>
+  </data>
   <data name="InTab_ChangeExt" xml:space="preserve">
     <value>변경할 확장자:</value>
   </data>
@@ -338,6 +341,9 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="InTab_Format" xml:space="preserve">
     <value>형식:</value>
   </data>
+  <data name="InTab_FormatString" xml:space="preserve">
+    <value>형식 문자열:</value>
+  </data>
   <data name="InTab_IncDecValue" xml:space="preserve">
     <value>증감할 값:</value>
   </data>
@@ -350,11 +356,17 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="InTab_OriginalString" xml:space="preserve">
     <value>원본 문자열:</value>
   </data>
+  <data name="InTab_Path" xml:space="preserve">
+    <value>바꿀 경로:</value>
+  </data>
   <data name="InTab_Position" xml:space="preserve">
     <value>위치:</value>
   </data>
   <data name="InTab_ProcessMethod" xml:space="preserve">
     <value>처리 방법:</value>
+  </data>
+  <data name="InTab_Regexp" xml:space="preserve">
+    <value>정규 표현식:</value>
   </data>
   <data name="InTab_RemoveAllWordWithoutNum" xml:space="preserve">
     <value>숫자로만 된 단어만 남김</value>

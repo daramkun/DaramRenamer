@@ -250,6 +250,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   찾아보기...과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_Browse {
+            get {
+                return ResourceManager.GetString("InTab_Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   변경할 확장자:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_ChangeExt {
@@ -331,6 +340,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   형식 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_FormatString {
+            get {
+                return ResourceManager.GetString("InTab_FormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   증감할 값:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_IncDecValue {
@@ -367,6 +385,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   바꿀 경로:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_Path {
+            get {
+                return ResourceManager.GetString("InTab_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   위치:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_Position {
@@ -381,6 +408,15 @@ namespace Daramkun.DaramRenamer.Properties {
         public static string InTab_ProcessMethod {
             get {
                 return ResourceManager.GetString("InTab_ProcessMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   정규 표현식:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_Regexp {
+            get {
+                return ResourceManager.GetString("InTab_Regexp", resourceCulture);
             }
         }
         

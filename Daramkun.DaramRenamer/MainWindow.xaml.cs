@@ -710,6 +710,13 @@ namespace Daramkun.DaramRenamer
 		#endregion
 
 		#region Regular Expression Process
+		private string ConvertCollectionToString ( ObservableCollection<string> value ) {
+			string [] arr = value.ToArray ();
+			for ( int i = 0; i < arr.Length; ++i )
+				arr [ i ] = System.Convert.ToBase64String ( Encoding.UTF8.GetBytes ( arr [ i ] ) );
+			return string.Join ( ";", arr );
+		}
+
 		private void RegularExpression_Process_Click ( object sender, RoutedEventArgs e )
 		{
 			if ( regexpOriginal.Text.Trim ().Length == 0 || regexpReplace.Text.Trim ().Length == 0 ) return;
@@ -724,9 +731,15 @@ namespace Daramkun.DaramRenamer
 			);
 
 			if ( ( regexpOriginal.ItemsSource as ObservableCollection<string> ).IndexOf ( regexpOriginal.Text ) < 0 )
+			{
 				( regexpOriginal.ItemsSource as ObservableCollection<string> ).Insert ( 0, regexpOriginal.Text );
+				Daramkun.DaramRenamer.Properties.Settings.Default.RegexpOriginal = ConvertCollectionToString ( regexpOriginal.ItemsSource as ObservableCollection<string> );
+			}
 			if ( ( regexpReplace.ItemsSource as ObservableCollection<string> ).IndexOf ( regexpReplace.Text ) < 0 )
+			{
 				( regexpReplace.ItemsSource as ObservableCollection<string> ).Insert ( 0, regexpReplace.Text );
+				Daramkun.DaramRenamer.Properties.Settings.Default.RegexpFormat = ConvertCollectionToString ( regexpReplace.ItemsSource as ObservableCollection<string> );
+			}
 		}
 		#endregion
 

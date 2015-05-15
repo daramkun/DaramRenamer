@@ -175,6 +175,18 @@
   <data name="JustContinueWhenNoExistPath" xml:space="preserve">
     <value>{0} 디렉토리가 없습니다. 그대로 진행하시려면 '예'를 눌러주세요.</value>
   </data>
+  <data name="ListView_ChangedName" xml:space="preserve">
+    <value>변경할 이름</value>
+  </data>
+  <data name="ListView_ChangedPath" xml:space="preserve">
+    <value>위치할 경로</value>
+  </data>
+  <data name="ListView_OriginalName" xml:space="preserve">
+    <value>원본 이름</value>
+  </data>
+  <data name="ListView_OriginalPath" xml:space="preserve">
+    <value>위치한 경로</value>
+  </data>
   <data name="PathError_IOException" xml:space="preserve">
     <value>"{0}" 경로에 파일이 이미 있거나 원본 파일을 찾을 수 없습니다.</value>
   </data>

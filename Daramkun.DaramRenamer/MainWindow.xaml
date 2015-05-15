@@ -121,7 +121,7 @@
 					</GridView.ColumnHeaderTemplate>
 
 					<GridViewColumn Width="210">
-						<GridViewColumnHeader Content="원본 이름" />
+						<GridViewColumnHeader Content="{x:Static setting:Resources.ListView_OriginalName}" />
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<Grid HorizontalAlignment="Stretch">
@@ -131,7 +131,7 @@
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
 					<GridViewColumn Width="210">
-						<GridViewColumnHeader Content="변경할 이름" />
+						<GridViewColumnHeader Content="{x:Static setting:Resources.ListView_ChangedName}" />
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<Grid HorizontalAlignment="Stretch">
@@ -141,7 +141,7 @@
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
 					<GridViewColumn Width="110">
-						<GridViewColumnHeader Content="위치한 경로" />
+						<GridViewColumnHeader Content="{x:Static setting:Resources.ListView_OriginalPath}" />
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<Grid HorizontalAlignment="Stretch">
@@ -151,7 +151,7 @@
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
 					<GridViewColumn Width="110">
-						<GridViewColumnHeader Content="위치할 경로" />
+						<GridViewColumnHeader Content="{x:Static setting:Resources.ListView_ChangedPath}" />
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
 								<Grid HorizontalAlignment="Stretch">

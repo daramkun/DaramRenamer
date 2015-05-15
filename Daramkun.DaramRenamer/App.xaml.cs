@@ -15,6 +15,13 @@ namespace Daramkun.DaramRenamer
 	{
 		public App ()
 		{
+			if ( Environment.OSVersion.Version <= new Version ( 5, 0 ) )
+			{
+				MessageBox.Show ( "Windows XP 이하의 운영체제는 더 이상 지원하지 않습니다.\nXP 사용자의 경우 1.x 버전을 사용해주세요.",
+					Daramkun.DaramRenamer.Properties.Resources.DaramRenamer, MessageBoxButton.OK, MessageBoxImage.Error );
+				Application.Current.Shutdown ( -1 );
+			}
+
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
 				Daramkun.DaramRenamer.MainWindow.SimpleErrorMessage ( "알 수 없는 오류가 발생했습니다. error.log를 참고해주세요." );

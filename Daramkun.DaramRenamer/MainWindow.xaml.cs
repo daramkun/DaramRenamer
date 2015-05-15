@@ -15,7 +15,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-//using System.Xml.Serialization;
 using Daramkun.DaramRenamer.Properties;
 using TaskDialogInterop;
 
@@ -207,10 +206,10 @@ namespace Daramkun.DaramRenamer
 			}
 		}
 
-		private void SimpleErrorMessage ( string message )
+		public static void SimpleErrorMessage ( string message )
 		{
 			TaskDialogOptions config = new TaskDialogOptions ();
-			config.Owner = this;
+			config.Owner = null;
 			config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
 			config.MainInstruction =  Daramkun.DaramRenamer.Properties.Resources.ErrorRaised;
 			config.Content = message;
@@ -295,7 +294,7 @@ namespace Daramkun.DaramRenamer
 
 			config = new TaskDialogOptions ();
 			config.Owner = this;
-			config.Title = "다람 리네이머";
+			config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
 			config.MainInstruction = "작업이 완료되었습니다.";
 			config.Content = string.Format ( "{0}/{1}개의 파일에 대해 이름을 변경하였습니다.", succeed, total );
 			config.MainIcon = VistaTaskDialogIcon.Information;

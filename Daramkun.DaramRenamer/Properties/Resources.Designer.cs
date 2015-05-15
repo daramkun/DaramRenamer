@@ -97,11 +97,38 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   파일이 경로에 없는 경우 자동으로 리스트에서 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Autoremove {
+            get {
+                return ResourceManager.GetString("Autoremove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   일괄 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_BatchProcess {
+            get {
+                return ResourceManager.GetString("BatchTab_BatchProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   업데이트를 확인할 수 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string CannotCheckUpdate {
             get {
                 return ResourceManager.GetString("CannotCheckUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   원래 경로와 수정할 경로가 다른 경우 이동하지 않고 파일 복사과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CopyWhenTransaction {
+            get {
+                return ResourceManager.GetString("CopyWhenTransaction", resourceCulture);
             }
         }
         
@@ -115,6 +142,42 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   생성한 날짜 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string DateTab_AddCreation {
+            get {
+                return ResourceManager.GetString("DateTab_AddCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   마지막 접근 날짜 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string DateTab_AddLastAccess {
+            get {
+                return ResourceManager.GetString("DateTab_AddLastAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   마지막 수정 날짜 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string DateTab_AddLastWrite {
+            get {
+                return ResourceManager.GetString("DateTab_AddLastWrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   실행과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Do {
+            get {
+                return ResourceManager.GetString("Do", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   오류가 발생하였습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ErrorRaised {
@@ -124,11 +187,65 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   확장자 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ExtTab_AddExt {
+            get {
+                return ResourceManager.GetString("ExtTab_AddExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확장자 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ExtTab_DeleteExt {
+            get {
+                return ResourceManager.GetString("ExtTab_DeleteExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확장자 변경과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ExtTab_ReplaceExt {
+            get {
+                return ResourceManager.GetString("ExtTab_ReplaceExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확장자 대소문자과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ExtTab_UpperLower {
+            get {
+                return ResourceManager.GetString("ExtTab_UpperLower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   가능한 경우 하드웨어 가속 렌더링 사용과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string HardwareRenderingSupport {
+            get {
+                return ResourceManager.GetString("HardwareRenderingSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} 디렉토리가 없습니다. 그대로 진행하시려면 &apos;예&apos;를 눌러주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string JustContinueWhenNoExistPath {
             get {
                 return ResourceManager.GetString("JustContinueWhenNoExistPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   라이선스과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string License {
+            get {
+                return ResourceManager.GetString("License", resourceCulture);
             }
         }
         
@@ -169,6 +286,78 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   일괄 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_BatchProcess {
+            get {
+                return ResourceManager.GetString("MainTab_BatchProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   날짜 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_DateProcess {
+            get {
+                return ResourceManager.GetString("MainTab_DateProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확장자 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_ExtensionProcess {
+            get {
+                return ResourceManager.GetString("MainTab_ExtensionProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   숫자 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_NumberProcess {
+            get {
+                return ResourceManager.GetString("MainTab_NumberProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   경로과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_PathProcess {
+            get {
+                return ResourceManager.GetString("MainTab_PathProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   정규표현식과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_RegexpProcess {
+            get {
+                return ResourceManager.GetString("MainTab_RegexpProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   설정과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_Settings {
+            get {
+                return ResourceManager.GetString("MainTab_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   문자열 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MainTab_StringProcess {
+            get {
+                return ResourceManager.GetString("MainTab_StringProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   아니오(&amp;N)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string No {
@@ -202,6 +391,42 @@ namespace Daramkun.DaramRenamer.Properties {
         public static string NoUpdate {
             get {
                 return ResourceManager.GetString("NoUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   번호 붙이기과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NumTab_AddNum {
+            get {
+                return ResourceManager.GetString("NumTab_AddNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   숫자만 남기고 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NumTab_DelWithoutNum {
+            get {
+                return ResourceManager.GetString("NumTab_DelWithoutNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   숫자 증감과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NumTab_IncreaseDecrease {
+            get {
+                return ResourceManager.GetString("NumTab_IncreaseDecrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   숫자 자리수 맞추기과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NumTab_SameDigits {
+            get {
+                return ResourceManager.GetString("NumTab_SameDigits", resourceCulture);
             }
         }
         
@@ -269,6 +494,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   경로 변경과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string PathTab_ChangePath {
+            get {
+                return ResourceManager.GetString("PathTab_ChangePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   알 수 없는 오류가 발생했습니다. error.log를 참고해주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string PleaseCheckLog {
@@ -288,6 +522,69 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   정규표현식과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RegexpTab_RegularExpression {
+            get {
+                return ResourceManager.GetString("RegexpTab_RegularExpression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   문자열 붙이기과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringTab_Concat {
+            get {
+                return ResourceManager.GetString("StringTab_Concat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   묶인 문자열 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringTab_DeleteEnclosed {
+            get {
+                return ResourceManager.GetString("StringTab_DeleteEnclosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름 지우기과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringTab_DeleteName {
+            get {
+                return ResourceManager.GetString("StringTab_DeleteName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   문자열 바꾸기과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringTab_Replace {
+            get {
+                return ResourceManager.GetString("StringTab_Replace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   양 옆 빈 칸 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringTab_Trim {
+            get {
+                return ResourceManager.GetString("StringTab_Trim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름 대소문자과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringTab_UpperLower {
+            get {
+                return ResourceManager.GetString("StringTab_UpperLower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0}/{1}개의 파일에 대해 이름을 변경하였습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ThatFilesNameChanged {
@@ -302,6 +599,15 @@ namespace Daramkun.DaramRenamer.Properties {
         public static string ThereIsUpdate {
             get {
                 return ResourceManager.GetString("ThereIsUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이 기능은 준비 중입니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ThisFeatureIsNotReady {
+            get {
+                return ResourceManager.GetString("ThisFeatureIsNotReady", resourceCulture);
             }
         }
         

@@ -159,13 +159,14 @@
 				</GridView>
 			</ListView.View>
 		</ListView>
+		
 		<TabControl Name="mainTabControl" Focusable="True" Grid.Row="2" Margin="5,0,5,5">
 			<!-- ========================================= -->
 			<!--                 문자열처리                 -->
 			<!-- ========================================= -->
-			<TabItem Header="문자열 처리">
+			<TabItem Header="{x:Static setting:Resources.MainTab_StringProcess}">
 				<TabControl Name="stringTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="문자열 바꾸기">
+					<TabItem Header="{x:Static setting:Resources.StringTab_Replace}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -187,11 +188,11 @@
 							<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 								<CheckBox Name="stringReplaceIncludeExt" Content="확장자 포함" IsChecked="True" />
 							</StackPanel>
-							
-							<Button Content="실행" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Replace_Click" />
+
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Replace_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="문자열 붙이기">
+					<TabItem Header="{x:Static setting:Resources.StringTab_Concat}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -213,11 +214,11 @@
 								<Grid Margin="5,0,0,0" />
 								<RadioButton Name="stringConcatPostRadio" Content="맨 뒤에 붙이기" />
 							</StackPanel>
-							
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Concat_Click" />
+
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Concat_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="양 옆 빈 칸 제거">
+					<TabItem Header="{x:Static setting:Resources.StringTab_Trim}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -244,10 +245,10 @@
 								<CheckBox Name="stringTrimIncludeExt" Content="확장자 빈 칸 제거 포함" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Trim_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Trim_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="묶인 문자열 제거">
+					<TabItem Header="{x:Static setting:Resources.StringTab_DeleteEnclosed}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -270,10 +271,10 @@
 								<CheckBox Name="stringEnclosedAll" Content="모든 묶인 문자열에 대해 실행" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_DelEnclosed_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_DelEnclosed_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="이름 지우기">
+					<TabItem Header="{x:Static setting:Resources.StringTab_DeleteName}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -284,10 +285,10 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<Button Content="실행" Grid.Row="1" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_DelName_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="1" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_DelName_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="이름 대소문자">
+					<TabItem Header="{x:Static setting:Resources.StringTab_UpperLower}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -309,7 +310,7 @@
 								<RadioButton Name="stringUpLowOneLetterUpper" Content="단어 맨 앞만 대문자로" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_LowUp_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_LowUp_Click" />
 						</Grid>
 					</TabItem>
 				</TabControl>
@@ -317,9 +318,9 @@
 			<!-- ========================================= -->
 			<!--                 확장자처리                 -->
 			<!-- ========================================= -->
-			<TabItem Header="확장자 처리">
+			<TabItem Header="{x:Static setting:Resources.MainTab_ExtensionProcess}">
 				<TabControl Name="extensionTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="확장자 추가">
+					<TabItem Header="{x:Static setting:Resources.ExtTab_AddExt}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -334,10 +335,10 @@
 							<TextBlock Grid.Row="0" Grid.Column="0" Text="추가할 확장자: " VerticalAlignment="Center" TextAlignment="Right" />
 							<TextBox Name="extAddExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 
-							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_AddExt_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_AddExt_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="확장자 제거">
+					<TabItem Header="{x:Static setting:Resources.ExtTab_DeleteExt}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -348,10 +349,10 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<Button Content="실행" Grid.Row="1" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_RemoveExt_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="1" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_RemoveExt_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="확장자 변경">
+					<TabItem Header="{x:Static setting:Resources.ExtTab_ReplaceExt}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -366,10 +367,10 @@
 							<TextBlock Grid.Row="0" Grid.Column="0" Text="변경할 확장자: " VerticalAlignment="Center" TextAlignment="Right" />
 							<TextBox Name="extChangeExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 
-							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_ChangeExt_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_ChangeExt_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="확장자 대소문자">
+					<TabItem Header="{x:Static setting:Resources.ExtTab_UpperLower}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -389,7 +390,7 @@
 								<RadioButton Name="extUpLowLower" Content="소문자로" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_LowUp_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_LowUp_Click" />
 						</Grid>
 					</TabItem>
 				</TabControl>
@@ -397,9 +398,9 @@
 			<!-- ========================================= -->
 			<!--                  숫자처리                  -->
 			<!-- ========================================= -->
-			<TabItem Header="숫자 처리">
+			<TabItem Header="{x:Static setting:Resources.MainTab_NumberProcess}">
 				<TabControl Name="numberTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="숫자만 남기고 제거">
+					<TabItem Header="{x:Static setting:Resources.NumTab_DelWithoutNum}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -419,10 +420,10 @@
 								<RadioButton Name="numDelWoNoAllNumber" Content="모든 숫자 남김" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="Number_DeleteWithoutNumber_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="Number_DeleteWithoutNumber_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="숫자 자리수 맞추기">
+					<TabItem Header="{x:Static setting:Resources.NumTab_SameDigits}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -453,10 +454,10 @@
 								<RadioButton Name="numSameDigitPost" Content="맨 뒷 자리 수 변경" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_SameDigits_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_SameDigits_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="번호 붙이기">
+					<TabItem Header="{x:Static setting:Resources.NumTab_AddNum}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -487,10 +488,10 @@
 								<RadioButton Name="numAddNumPost" Content="맨 뒤에 추가" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_AddNum_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_AddNum_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="숫자 증감">
+					<TabItem Header="{x:Static setting:Resources.NumTab_IncreaseDecrease}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -521,7 +522,7 @@
 								<RadioButton Name="numAddSubNumPost" Content="맨 뒤에 추가" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_Increase_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_Increase_Click" />
 						</Grid>
 					</TabItem>
 				</TabControl>
@@ -529,9 +530,9 @@
 			<!-- ========================================= -->
 			<!--                    날짜                    -->
 			<!-- ========================================= -->
-			<TabItem Header="날짜">
+			<TabItem Header="{x:Static setting:Resources.MainTab_DateProcess}">
 				<TabControl Name="dateTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="생성한 날짜 추가">
+					<TabItem Header="{x:Static setting:Resources.DateTab_AddCreation}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -554,10 +555,10 @@
 								<RadioButton Name="dateCreatedPost" Content="맨 뒤에 추가" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddCreation_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddCreation_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="마지막 접근 날짜 추가">
+					<TabItem Header="{x:Static setting:Resources.DateTab_AddLastAccess}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -580,10 +581,10 @@
 								<RadioButton Name="dateAccessPost" Content="맨 뒤에 추가" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastAccess_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastAccess_Click" />
 						</Grid>
 					</TabItem>
-					<TabItem Header="마지막 수정 날짜 추가">
+					<TabItem Header="{x:Static setting:Resources.DateTab_AddLastWrite}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -606,7 +607,7 @@
 								<RadioButton Name="dateWritePost" Content="맨 뒤에 추가" IsChecked="True" />
 							</StackPanel>
 
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastWrite_Click" />
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastWrite_Click" />
 						</Grid>
 					</TabItem>
 				</TabControl>
@@ -614,9 +615,9 @@
 			<!-- ========================================= -->
 			<!--                    경로                    -->
 			<!-- ========================================= -->
-			<TabItem Header="경로">
+			<TabItem Header="{x:Static setting:Resources.MainTab_PathProcess}">
 				<TabControl Name="pathTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="경로 변경">
+					<TabItem Header="{x:Static setting:Resources.PathTab_ChangePath}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -639,8 +640,8 @@
 								<TextBox Name="pathToText" VerticalAlignment="Center" />
 								<Button Grid.Column="1" Margin="5,0,0,0" Content="찾아보기..." Click="Path_Change_Browse_Click" />
 							</Grid>
-							
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Path_Change_Click" />
+
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Path_Change_Click" />
 						</Grid>
 					</TabItem>
 				</TabControl>
@@ -648,9 +649,9 @@
 			<!-- ========================================= -->
 			<!--                 정규표현식                 -->
 			<!-- ========================================= -->
-			<TabItem Header="정규표현식">
+			<TabItem Header="{x:Static setting:Resources.MainTab_RegexpProcess}">
 				<TabControl Name="regexpTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="정규표현식">
+					<TabItem Header="{x:Static setting:Resources.RegexpTab_RegularExpression}">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="100" />
@@ -667,8 +668,8 @@
 							<TextBlock Text="형식 문자열: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" />
 							<ComboBox Name="regexpOriginal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Source={x:Static setting:Settings.Default}, Path=RegexpOriginal, Converter={StaticResource comboBoxBindingConverter}}" />
 							<ComboBox Name="regexpReplace" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Source={x:Static setting:Settings.Default}, Path=RegexpFormat, Converter={StaticResource comboBoxBindingConverter}}" />
-							
-							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="RegularExpression_Process_Click" />
+
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="RegularExpression_Process_Click" />
 						</Grid>
 					</TabItem>
 				</TabControl>
@@ -676,17 +677,17 @@
 			<!-- ========================================= -->
 			<!--                  일괄처리                  -->
 			<!-- ========================================= -->
-			<TabItem Header="일괄 처리">
+			<TabItem Header="{x:Static setting:Resources.MainTab_BatchProcess}">
 				<TabControl Name="batchTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="일괄 처리">
-						<TextBlock Text="이 기능은 준비 중입니다." VerticalAlignment="Center" HorizontalAlignment="Center" />
+					<TabItem Header="{x:Static setting:Resources.BatchTab_BatchProcess}">
+						<TextBlock Text="{x:Static setting:Resources.ThisFeatureIsNotReady}" VerticalAlignment="Center" HorizontalAlignment="Center" />
 					</TabItem>
 				</TabControl>
 			</TabItem>
 			<!-- ========================================= -->
 			<!--                    설정                    -->
 			<!-- ========================================= -->
-			<TabItem Header="설정">
+			<TabItem Header="{x:Static setting:Resources.MainTab_Settings}">
 				<Grid Margin="5">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition />
@@ -705,9 +706,9 @@
 							<RowDefinition />
 						</Grid.RowDefinitions>
 
-						<CheckBox Name="checkHwAccel" Grid.Row="0" Content="가능한 경우 하드웨어 가속 렌더링 사용" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=HardwareTurnOn}" VerticalAlignment="Center" Checked="checkHwAccel_Checked" Unchecked="checkHwAccel_Checked" />
-						<CheckBox Name="checkAutoRemove" Grid.Row="1" Content="파일이 경로에 없는 경우 자동으로 리스트에서 제거" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=AutoRemoveTurnOn}" VerticalAlignment="Center" />
-						<CheckBox Name="checkFileCopy" Grid.Row="2" Content="원래 경로와 수정할 경로가 다른 경우 이동하지 않고 파일 복사" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FileCopyWhenApply}" VerticalAlignment="Center" />
+						<CheckBox Name="checkHwAccel" Grid.Row="0" Content="{x:Static setting:Resources.HardwareRenderingSupport}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=HardwareTurnOn}" VerticalAlignment="Center" Checked="checkHwAccel_Checked" Unchecked="checkHwAccel_Checked" />
+						<CheckBox Name="checkAutoRemove" Grid.Row="1" Content="{x:Static setting:Resources.Autoremove}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=AutoRemoveTurnOn}" VerticalAlignment="Center" />
+						<CheckBox Name="checkFileCopy" Grid.Row="2" Content="{x:Static setting:Resources.CopyWhenTransaction}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FileCopyWhenApply}" VerticalAlignment="Center" />
 						
 					</Grid>
 
@@ -716,8 +717,8 @@
 							<RowDefinition Height="20" />
 							<RowDefinition />
 						</Grid.RowDefinitions>
-						
-						<TextBlock Text="라이선스" />
+
+						<TextBlock Text="{x:Static setting:Resources.License}" />
 						<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve"><![CDATA[------------------------------
 1. Daram Renamer
 ------------------------------
@@ -778,8 +779,7 @@ A "contributor" is any person that distributes its contribution under this licen
 (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
 (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
 
-Source: https://wpffolderbrowser.codeplex.com							
-]]>
+Source: https://wpffolderbrowser.codeplex.com]]>
 						</TextBox>
 					</Grid>
 				</Grid>

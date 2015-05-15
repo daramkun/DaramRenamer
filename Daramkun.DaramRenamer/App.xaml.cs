@@ -15,6 +15,15 @@ namespace Daramkun.DaramRenamer
 	/// </summary>
 	public partial class App : Application
 	{
+		public static void ToggleLanguage ( string culture )
+		{
+			System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo ( culture );
+			System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo ( culture );
+			Application.Current.MainWindow.Close ();
+			Application.Current.MainWindow = new MainWindow ();
+			Application.Current.MainWindow.Show ();
+		}
+
 		public App ()
 		{
 			if ( Environment.OSVersion.Version <= new Version ( 5, 0 ) )

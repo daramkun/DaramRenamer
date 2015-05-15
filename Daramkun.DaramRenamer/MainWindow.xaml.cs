@@ -12,15 +12,10 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Serialization;
+//using System.Xml.Serialization;
 using Daramkun.DaramRenamer.Properties;
 using TaskDialogInterop;
 
@@ -92,7 +87,6 @@ namespace Daramkun.DaramRenamer
 		public static RoutedCommand CommandUpperItem = new RoutedCommand ();
 		public static RoutedCommand CommandLowerItem = new RoutedCommand ();
 		public static RoutedCommand CommandItemsSort = new RoutedCommand ();
-		public static RoutedCommand CommandEditItems = new RoutedCommand ();
 		#endregion
 		#region Executes
 		private void commandOpenFiles_Executed ( object sender, ExecutedRoutedEventArgs e )
@@ -137,12 +131,7 @@ namespace Daramkun.DaramRenamer
 
 		private void commandItemsSort_Executed ( object sender, ExecutedRoutedEventArgs e )
 		{
-			//menuItemSort_Click ( sender, e );
-		}
-
-		private void commandEditItems_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{
-			//menuItemEditItem_Click ( sender, e );
+			ToolBarButton_Sort_Click ( sender, e );
 		}
 		#endregion
 		#endregion

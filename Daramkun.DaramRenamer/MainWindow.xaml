@@ -9,7 +9,7 @@
 	<Window.Resources>
 		<custom:ComboBoxBindingConverter x:Key="comboBoxBindingConverter" />
 	</Window.Resources>
-	
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="28" />
@@ -17,8 +17,8 @@
 			<RowDefinition Height="200" />
 		</Grid.RowDefinitions>
 
-		<ToolBarTray>
-			<ToolBar Grid.Row="0" ToolBarTray.IsLocked="True" Focusable="True">
+		<ToolBarTray Grid.Row="0" ClipToBounds="False">
+			<ToolBar ToolBarTray.IsLocked="True" Focusable="True">
 				<Button Click="ToolBarButton_Open_Click">
 					<Image Source="Resources/folder.png" />
 					<Button.ToolTip>
@@ -96,10 +96,14 @@
 					</Button.ToolTip>
 				</Button>
 			</ToolBar>
+
+			<ToolBar ToolBarTray.IsLocked="True" Focusable="True">
+				
+			</ToolBar>
 		</ToolBarTray>
 
 		<ListView Name="listViewFiles" Grid.Row="1" Margin="5,5,5,5" AllowDrop="True"
-				  Focusable="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+				  Focusable="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
 				  ScrollViewer.HorizontalScrollBarVisibility="Auto"
 				  DragEnter="ListView_DragEnter" Drop="ListView_Drop" KeyUp="ListView_KeyUp">
 			<ListView.ItemContainerStyle>
@@ -159,12 +163,12 @@
 				</GridView>
 			</ListView.View>
 		</ListView>
-		<TabControl Focusable="True" Grid.Row="2" Margin="5,0,5,5">
+		<TabControl Name="mainTabControl" Focusable="True" Grid.Row="2" Margin="5,0,5,5">
 			<!-- ========================================= -->
 			<!--                 문자열처리                 -->
 			<!-- ========================================= -->
 			<TabItem Header="문자열 처리">
-				<TabControl Focusable="True" Margin="5,5,5,5">
+				<TabControl Name="stringTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="문자열 바꾸기">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
@@ -318,7 +322,7 @@
 			<!--                 확장자처리                 -->
 			<!-- ========================================= -->
 			<TabItem Header="확장자 처리">
-				<TabControl Focusable="True" Margin="5,5,5,5">
+				<TabControl Name="extensionTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="확장자 추가">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
@@ -398,7 +402,7 @@
 			<!--                  숫자처리                  -->
 			<!-- ========================================= -->
 			<TabItem Header="숫자 처리">
-				<TabControl Focusable="True" Margin="5,5,5,5">
+				<TabControl Name="numberTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="숫자만 남기고 제거">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
@@ -530,7 +534,7 @@
 			<!--                    날짜                    -->
 			<!-- ========================================= -->
 			<TabItem Header="날짜">
-				<TabControl Focusable="True" Margin="5,5,5,5">
+				<TabControl Name="dateTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="생성한 날짜 추가">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
@@ -615,7 +619,7 @@
 			<!--                    경로                    -->
 			<!-- ========================================= -->
 			<TabItem Header="경로">
-				<TabControl Focusable="True" Margin="5,5,5,5">
+				<TabControl Name="pathTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="경로 변경">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
@@ -649,7 +653,7 @@
 			<!--                 정규표현식                 -->
 			<!-- ========================================= -->
 			<TabItem Header="정규표현식">
-				<TabControl Focusable="True" Margin="5,5,5,5">
+				<TabControl Name="regexpTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="정규표현식">
 						<Grid Margin="5">
 							<Grid.ColumnDefinitions>
@@ -677,7 +681,7 @@
 			<!--                  일괄처리                  -->
 			<!-- ========================================= -->
 			<TabItem Header="일괄 처리">
-				<TabControl Focusable="True" Margin="5,5,5,5">
+				<TabControl Name="batchTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="일괄 처리">
 						<TextBlock Text="이 기능은 준비 중입니다." VerticalAlignment="Center" HorizontalAlignment="Center" />
 					</TabItem>
@@ -718,7 +722,7 @@
 						</Grid.RowDefinitions>
 						
 						<TextBlock Text="라이선스" />
-						<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" xml:space="preserve"><![CDATA[------------------------------
+						<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve"><![CDATA[------------------------------
 1. Daram Renamer
 ------------------------------
 The MIT License (MIT)
@@ -797,7 +801,6 @@ Source: https://wpffolderbrowser.codeplex.com
 		<CommandBinding Command="{x:Static custom:MainWindow.CommandUpperItem}" Executed="commandUpperItem_Executed" />
 		<CommandBinding Command="{x:Static custom:MainWindow.CommandLowerItem}" Executed="commandLowerItem_Executed" />
 		<CommandBinding Command="{x:Static custom:MainWindow.CommandItemsSort}" Executed="commandItemsSort_Executed" />
-		<CommandBinding Command="{x:Static custom:MainWindow.CommandEditItems}" Executed="commandEditItems_Executed" />
 	</Window.CommandBindings>
 	<Window.InputBindings>
 		<KeyBinding Key="O" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandOpenFiles}" />
@@ -809,6 +812,5 @@ Source: https://wpffolderbrowser.codeplex.com
 		<KeyBinding Key="Up" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandUpperItem}" />
 		<KeyBinding Key="Down" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandLowerItem}" />
 		<KeyBinding Key="S" Modifiers="Shift+Control" Command="{x:Static custom:MainWindow.CommandItemsSort}" />
-		<KeyBinding Key="Enter" Modifiers="Control" Command="{x:Static custom:MainWindow.CommandEditItems}" />
 	</Window.InputBindings>
 </Window>

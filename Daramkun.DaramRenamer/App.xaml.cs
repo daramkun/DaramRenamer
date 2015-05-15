@@ -18,9 +18,6 @@ namespace Daramkun.DaramRenamer
 	{
 		public App ()
 		{
-			if ( !Settings.Default.HardwareTurnOn )
-				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
 				MessageBox.Show ( "알 수 없는 오류가 발생했습니다. error.log를 참고해주세요." );
@@ -31,6 +28,8 @@ namespace Daramkun.DaramRenamer
 
 		protected override void OnStartup ( StartupEventArgs e )
 		{
+			if ( !Settings.Default.HardwareTurnOn )
+				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 			base.OnStartup ( e );
 		}
 	}

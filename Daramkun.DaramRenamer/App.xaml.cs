@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -20,7 +17,7 @@ namespace Daramkun.DaramRenamer
 		{
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
-				MessageBox.Show ( "알 수 없는 오류가 발생했습니다. error.log를 참고해주세요." );
+				Daramkun.DaramRenamer.MainWindow.SimpleErrorMessage ( "알 수 없는 오류가 발생했습니다. error.log를 참고해주세요." );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 					sw.WriteLine ( args.ExceptionObject.ToString () );
 			};

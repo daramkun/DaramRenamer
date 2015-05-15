@@ -180,13 +180,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="원본 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="바꿀 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_OriginalString}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ReplaceString}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="stringReplaceOriginalText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 							<TextBox Name="stringReplaceNewText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<CheckBox Name="stringReplaceIncludeExt" Content="확장자 포함" IsChecked="True" />
+								<CheckBox Name="stringReplaceIncludeExt" Content="{x:Static setting:Resources.InTab_IncludeExt}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Replace_Click" />
@@ -205,14 +205,14 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="붙일 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="붙일 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ConcatString}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ConcatPos}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="stringConcatText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="stringConcatPreRadio" Content="맨 앞에 붙이기" IsChecked="True" />
+								<RadioButton Name="stringConcatPreRadio" Content="{x:Static setting:Resources.InTab_ToPre}" IsChecked="True" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="stringConcatPostRadio" Content="맨 뒤에 붙이기" />
+								<RadioButton Name="stringConcatPostRadio" Content="{x:Static setting:Resources.InTab_ToPost}" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Concat_Click" />
@@ -231,18 +231,18 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="제거할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_DeletePos}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="stringTrimAllRadio" Content="모두 제거" IsChecked="True" />
+								<RadioButton Name="stringTrimAllRadio" Content="{x:Static setting:Resources.InTab_DelAll}" IsChecked="True" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="stringTrimPreRadio" Content="맨 앞만 제거" />
+								<RadioButton Name="stringTrimPreRadio" Content="{x:Static setting:Resources.InTab_ToPre}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="stringTrimPostRadio" Content="맨 뒤만 제거" />
+								<RadioButton Name="stringTrimPostRadio" Content="{x:Static setting:Resources.InTab_ToPost}" />
 							</StackPanel>
 
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<CheckBox Name="stringTrimIncludeExt" Content="확장자 빈 칸 제거 포함" IsChecked="True" />
+								<CheckBox Name="stringTrimIncludeExt" Content="{x:Static setting:Resources.InTab_TrimWithExt}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_Trim_Click" />
@@ -262,13 +262,13 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="앞 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="뒤 문자열: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_EnclosedPre}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_EnclosedPost}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="stringEnclosedPreText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 							<TextBox Name="stringEnclosedPostText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<CheckBox Name="stringEnclosedAll" Content="모든 묶인 문자열에 대해 실행" IsChecked="True" />
+								<CheckBox Name="stringEnclosedAll" Content="{x:Static setting:Resources.InTab_AllEnclosed}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_DelEnclosed_Click" />
@@ -299,15 +299,15 @@
 								<RowDefinition />
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
-							
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="처리 방법: " VerticalAlignment="Center" TextAlignment="Right" />
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="stringUpLowUpper" Content="대문자로" />
+								<RadioButton Name="stringUpLowUpper" Content="{x:Static setting:Resources.InTab_ToUpper}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="stringUpLowLower" Content="소문자로" />
+								<RadioButton Name="stringUpLowLower" Content="{x:Static setting:Resources.InTab_ToLower}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="stringUpLowOneLetterUpper" Content="단어 맨 앞만 대문자로" IsChecked="True" />
+								<RadioButton Name="stringUpLowOneLetterUpper" Content="{x:Static setting:Resources.InTab_ToUpperOneLetter}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_LowUp_Click" />
@@ -332,7 +332,7 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="추가할 확장자: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_AddExt}" VerticalAlignment="Center" TextAlignment="Right" />
 							<TextBox Name="extAddExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_AddExt_Click" />
@@ -364,7 +364,7 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="변경할 확장자: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ChangeExt}" VerticalAlignment="Center" TextAlignment="Right" />
 							<TextBox Name="extChangeExtensionText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_ChangeExt_Click" />
@@ -382,12 +382,12 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="처리 방법: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="extUpLowUpper" Content="대문자로" />
+								<RadioButton Name="extUpLowUpper" Content="{x:Static setting:Resources.InTab_ToUpper}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="extUpLowLower" Content="소문자로" IsChecked="True" />
+								<RadioButton Name="extUpLowLower" Content="{x:Static setting:Resources.InTab_ToLower}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="ExtensionProcess_LowUp_Click" />
@@ -412,12 +412,12 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="처리 방법: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_ProcessMethod}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="numDelWoNoNumberWordOnly" Content="숫자로만 된 단어만 남김" />
+								<RadioButton Name="numDelWoNoNumberWordOnly" Content="{x:Static setting:Resources.InTab_RemoveAllWordWithoutNum}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="numDelWoNoAllNumber" Content="모든 숫자 남김" IsChecked="True" />
+								<RadioButton Name="numDelWoNoAllNumber" Content="{x:Static setting:Resources.InTab_RemoveWithoutAllNum}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="Number_DeleteWithoutNumber_Click" />
@@ -436,8 +436,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="자리수: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_DigitCount}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="numSameDigitCount" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MaxLines="1" PreviewTextInput="Digit_PreviewTextInput" >
 								<TextBox.InputScope>
@@ -449,9 +449,9 @@
 								</TextBox.InputScope>
 							</TextBox>
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="numSameDigitPre" Content="맨 앞 자리 수 변경" />
+								<RadioButton Name="numSameDigitPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="numSameDigitPost" Content="맨 뒷 자리 수 변경" IsChecked="True" />
+								<RadioButton Name="numSameDigitPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_SameDigits_Click" />
@@ -470,8 +470,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="간격: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Interval}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="numAddNumTerm" Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" >
 								<TextBox.InputScope>
@@ -483,9 +483,9 @@
 								</TextBox.InputScope>
 							</TextBox>
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="numAddNumPre" Content="맨 앞에 추가" />
+								<RadioButton Name="numAddNumPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="numAddNumPost" Content="맨 뒤에 추가" IsChecked="True" />
+								<RadioButton Name="numAddNumPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_AddNum_Click" />
@@ -504,8 +504,8 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="증감할 값: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_IncDecValue}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="numAddSubNumTerm" Grid.Row="0" Grid.Column="1" Text="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" >
 								<TextBox.InputScope>
@@ -517,9 +517,9 @@
 								</TextBox.InputScope>
 							</TextBox>
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="numAddSubNumPre" Content="맨 앞에 추가" />
+								<RadioButton Name="numAddSubNumPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="numAddSubNumPost" Content="맨 뒤에 추가" IsChecked="True" />
+								<RadioButton Name="numAddSubNumPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Number_Increase_Click" />
@@ -545,14 +545,14 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="형식: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="추가할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="dateCreatedFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="dateCreatedPre" Content="맨 앞에 추가" />
+								<RadioButton Name="dateCreatedPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="dateCreatedPost" Content="맨 뒤에 추가" IsChecked="True" />
+								<RadioButton Name="dateCreatedPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddCreation_Click" />
@@ -571,14 +571,14 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="형식: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="추가할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="dateAccessFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="dateAccessPre" Content="맨 앞에 추가" />
+								<RadioButton Name="dateAccessPre" Content="{x:Static setting:Resources.InTab_ToPre}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="dateAccessPost" Content="맨 뒤에 추가" IsChecked="True" />
+								<RadioButton Name="dateAccessPost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastAccess_Click" />
@@ -597,14 +597,14 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="형식: " VerticalAlignment="Center" TextAlignment="Right" />
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="추가할 위치: " VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Format}" VerticalAlignment="Center" TextAlignment="Right" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Position}" VerticalAlignment="Center" TextAlignment="Right" />
 
 							<TextBox Name="dateWriteFormat" Grid.Row="0" Grid.Column="1" Text="yyyyMMdd" VerticalAlignment="Center" />
 							<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-								<RadioButton Name="dateWritePre" Content="맨 앞에 추가" />
+								<RadioButton Name="dateWritePre" Content="{x:Static setting:Resources.InTab_ToPre}" />
 								<Grid Margin="5,0,0,0" />
-								<RadioButton Name="dateWritePost" Content="맨 뒤에 추가" IsChecked="True" />
+								<RadioButton Name="dateWritePost" Content="{x:Static setting:Resources.InTab_ToPost}" IsChecked="True" />
 							</StackPanel>
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="Date_AddLastWrite_Click" />

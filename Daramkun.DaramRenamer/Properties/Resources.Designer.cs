@@ -232,6 +232,240 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   추가할 확장자:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_AddExt {
+            get {
+                return ResourceManager.GetString("InTab_AddExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   모든 묶인 문자열에 대해 실행과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_AllEnclosed {
+            get {
+                return ResourceManager.GetString("InTab_AllEnclosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   변경할 확장자:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ChangeExt {
+            get {
+                return ResourceManager.GetString("InTab_ChangeExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   붙일 위치:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ConcatPos {
+            get {
+                return ResourceManager.GetString("InTab_ConcatPos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   붙일 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ConcatString {
+            get {
+                return ResourceManager.GetString("InTab_ConcatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   모두 제거과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_DelAll {
+            get {
+                return ResourceManager.GetString("InTab_DelAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   제거할 위치:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_DeletePos {
+            get {
+                return ResourceManager.GetString("InTab_DeletePos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   자리수:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_DigitCount {
+            get {
+                return ResourceManager.GetString("InTab_DigitCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   뒤 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_EnclosedPost {
+            get {
+                return ResourceManager.GetString("InTab_EnclosedPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   앞 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_EnclosedPre {
+            get {
+                return ResourceManager.GetString("InTab_EnclosedPre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   형식:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_Format {
+            get {
+                return ResourceManager.GetString("InTab_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   증감할 값:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_IncDecValue {
+            get {
+                return ResourceManager.GetString("InTab_IncDecValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확장자 포함과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_IncludeExt {
+            get {
+                return ResourceManager.GetString("InTab_IncludeExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   간격:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_Interval {
+            get {
+                return ResourceManager.GetString("InTab_Interval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   원본 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_OriginalString {
+            get {
+                return ResourceManager.GetString("InTab_OriginalString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   위치:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_Position {
+            get {
+                return ResourceManager.GetString("InTab_Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   처리 방법:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ProcessMethod {
+            get {
+                return ResourceManager.GetString("InTab_ProcessMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   숫자로만 된 단어만 남김과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_RemoveAllWordWithoutNum {
+            get {
+                return ResourceManager.GetString("InTab_RemoveAllWordWithoutNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   모든 숫자 남김과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_RemoveWithoutAllNum {
+            get {
+                return ResourceManager.GetString("InTab_RemoveWithoutAllNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   바꿀 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ReplaceString {
+            get {
+                return ResourceManager.GetString("InTab_ReplaceString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   소문자로과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ToLower {
+            get {
+                return ResourceManager.GetString("InTab_ToLower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   맨 뒤과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ToPost {
+            get {
+                return ResourceManager.GetString("InTab_ToPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   맨 앞과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ToPre {
+            get {
+                return ResourceManager.GetString("InTab_ToPre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   대문자로과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ToUpper {
+            get {
+                return ResourceManager.GetString("InTab_ToUpper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   단어 맨 앞만 대문자로과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_ToUpperOneLetter {
+            get {
+                return ResourceManager.GetString("InTab_ToUpperOneLetter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확장자 빈 칸 제거 포함과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_TrimWithExt {
+            get {
+                return ResourceManager.GetString("InTab_TrimWithExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} 디렉토리가 없습니다. 그대로 진행하시려면 &apos;예&apos;를 눌러주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string JustContinueWhenNoExistPath {

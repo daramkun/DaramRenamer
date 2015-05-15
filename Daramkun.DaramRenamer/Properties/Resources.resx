@@ -305,6 +305,84 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="HardwareRenderingSupport" xml:space="preserve">
     <value>가능한 경우 하드웨어 가속 렌더링 사용</value>
   </data>
+  <data name="InTab_AddExt" xml:space="preserve">
+    <value>추가할 확장자:</value>
+  </data>
+  <data name="InTab_AllEnclosed" xml:space="preserve">
+    <value>모든 묶인 문자열에 대해 실행</value>
+  </data>
+  <data name="InTab_ChangeExt" xml:space="preserve">
+    <value>변경할 확장자:</value>
+  </data>
+  <data name="InTab_ConcatPos" xml:space="preserve">
+    <value>붙일 위치:</value>
+  </data>
+  <data name="InTab_ConcatString" xml:space="preserve">
+    <value>붙일 문자열:</value>
+  </data>
+  <data name="InTab_DelAll" xml:space="preserve">
+    <value>모두 제거</value>
+  </data>
+  <data name="InTab_DeletePos" xml:space="preserve">
+    <value>제거할 위치:</value>
+  </data>
+  <data name="InTab_DigitCount" xml:space="preserve">
+    <value>자리수:</value>
+  </data>
+  <data name="InTab_EnclosedPost" xml:space="preserve">
+    <value>뒤 문자열:</value>
+  </data>
+  <data name="InTab_EnclosedPre" xml:space="preserve">
+    <value>앞 문자열:</value>
+  </data>
+  <data name="InTab_Format" xml:space="preserve">
+    <value>형식:</value>
+  </data>
+  <data name="InTab_IncDecValue" xml:space="preserve">
+    <value>증감할 값:</value>
+  </data>
+  <data name="InTab_IncludeExt" xml:space="preserve">
+    <value>확장자 포함</value>
+  </data>
+  <data name="InTab_Interval" xml:space="preserve">
+    <value>간격:</value>
+  </data>
+  <data name="InTab_OriginalString" xml:space="preserve">
+    <value>원본 문자열:</value>
+  </data>
+  <data name="InTab_Position" xml:space="preserve">
+    <value>위치:</value>
+  </data>
+  <data name="InTab_ProcessMethod" xml:space="preserve">
+    <value>처리 방법:</value>
+  </data>
+  <data name="InTab_RemoveAllWordWithoutNum" xml:space="preserve">
+    <value>숫자로만 된 단어만 남김</value>
+  </data>
+  <data name="InTab_RemoveWithoutAllNum" xml:space="preserve">
+    <value>모든 숫자 남김</value>
+  </data>
+  <data name="InTab_ReplaceString" xml:space="preserve">
+    <value>바꿀 문자열:</value>
+  </data>
+  <data name="InTab_ToLower" xml:space="preserve">
+    <value>소문자로</value>
+  </data>
+  <data name="InTab_ToPost" xml:space="preserve">
+    <value>맨 뒤</value>
+  </data>
+  <data name="InTab_ToPre" xml:space="preserve">
+    <value>맨 앞</value>
+  </data>
+  <data name="InTab_ToUpper" xml:space="preserve">
+    <value>대문자로</value>
+  </data>
+  <data name="InTab_ToUpperOneLetter" xml:space="preserve">
+    <value>단어 맨 앞만 대문자로</value>
+  </data>
+  <data name="InTab_TrimWithExt" xml:space="preserve">
+    <value>확장자 빈 칸 제거 포함</value>
+  </data>
   <data name="MainTab_PathProcess" xml:space="preserve">
     <value>경로</value>
   </data>

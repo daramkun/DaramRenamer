@@ -6,6 +6,10 @@
         Title="다람 리네이머 - v" Width="680" Height="540"
 		xml:lang="ko-KR" Language="ko-KR"
 		Icon="Resources/ProgramIcon.ico" WindowStartupLocation="CenterScreen">
+	<Window.Resources>
+		<custom:ComboBoxBindingConverter x:Key="comboBoxBindingConverter" />
+	</Window.Resources>
+	
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="28" />
@@ -83,6 +87,12 @@
 					<Image Source="Resources/email_go.png" />
 					<Button.ToolTip>
 						<ToolTip Content="버그 또는 건의 요청에 대해 피드백합니다." />
+					</Button.ToolTip>
+				</Button>
+				<Button Click="ToolBarButton_Donation_Click">
+					<Image Source="Resources/cup_add.png" />
+					<Button.ToolTip>
+						<ToolTip Content="PayPal을 통해 기부합니다." />
 					</Button.ToolTip>
 				</Button>
 			</ToolBar>
@@ -655,8 +665,8 @@
 
 							<TextBlock Text="정규 표현식: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" />
 							<TextBlock Text="형식 문자열: " VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" />
-							<ComboBox Name="regexpOriginal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" />
-							<ComboBox Name="regexpReplace" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" />
+							<ComboBox Name="regexpOriginal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Source={x:Static setting:Settings.Default}, Path=RegexpOriginal, Converter={StaticResource comboBoxBindingConverter}}" />
+							<ComboBox Name="regexpReplace" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" IsEditable="True" ItemsSource="{Binding Source={x:Static setting:Settings.Default}, Path=RegexpFormat, Converter={StaticResource comboBoxBindingConverter}}" />
 							
 							<Button Content="실행" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Click="RegularExpression_Process_Click" />
 						</Grid>
@@ -695,7 +705,7 @@
 							<RowDefinition />
 						</Grid.RowDefinitions>
 
-						<CheckBox Name="checkHwAccel" Grid.Row="0" Content="가능한 경우 하드웨어 가속 렌더링 사용" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=HardwareTurnOn}" VerticalAlignment="Center" />
+						<CheckBox Name="checkHwAccel" Grid.Row="0" Content="가능한 경우 하드웨어 가속 렌더링 사용" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=HardwareTurnOn}" VerticalAlignment="Center" Checked="checkHwAccel_Checked" Unchecked="checkHwAccel_Checked" />
 						<CheckBox Name="checkAutoRemove" Grid.Row="1" Content="파일이 경로에 없는 경우 자동으로 리스트에서 제거" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=AutoRemoveTurnOn}" VerticalAlignment="Center" />
 						<CheckBox Name="checkFileCopy" Grid.Row="2" Content="원래 경로와 수정할 경로가 다른 경우 이동하지 않고 파일 복사" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FileCopyWhenApply}" VerticalAlignment="Center" />
 						

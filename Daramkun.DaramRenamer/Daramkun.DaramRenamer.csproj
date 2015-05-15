@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComboBoxBindingConverter.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="TaskDialog\CommandLink.xaml.cs">
       <DependentUpon>CommandLink.xaml</DependentUpon>
@@ -212,6 +213,7 @@
     <Resource Include="TaskDialog\Resources\exparr-up3.bmp" />
     <Resource Include="TaskDialog\Resources\shield-16.png" />
     <Resource Include="TaskDialog\Resources\shield-32.png" />
+    <Resource Include="Resources\cup_add.png" />
     <Content Include="TaskDialog\TaskDialog.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

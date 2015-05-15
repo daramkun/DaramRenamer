@@ -49,7 +49,7 @@ namespace Daramkun.DaramRenamer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"XFsoLiopXF0oLiopIC0gKFswLTldKikoLiopXCgoKFtBLVpdfFthLXpdKSopIChbMC05XSopeChbMC05XSopICgoW0EtWl18W2Etel18WzAtOV0pKikgKChbQS1aXXxbYS16XXxbMC05XSkqKVwpLigoWzAtOV18W2Etel0pKik=;KC4qKSAtIChbMC05XSopLigoWzAtOV18W2Etel0pKik=;KFtBLVpdKikoWzAtOV0qKS4oKFswLTldfFthLXpdKSop;KFtBLVpdKilfKFswLTldKikuKChbMC05XXxbYS16XSkqKQ==;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"XFsoLiopXF0oLiopIC0gKFswLTldKikoLiopXCgoKFtBLVpdfFthLXpdKSopIChbMC05XSopeChbMC05XSopICgoW0EtWl18W2Etel18WzAtOV0pKikgKChbQS1aXXxbYS16XXxbMC05XSkqKVwpLigoWzAtOV18W2Etel0pKik=;KC4qKSAtIChbMC05XSopLigoWzAtOV18W2Etel0pKik=;KFtBLVpdKikoWzAtOV0qKS4oKFswLTldfFthLXpdKSop;KFtBLVpdKilfKFswLTldKikuKChbMC05XXxbYS16XSkqKQ==")]
         public string RegexpOriginal {
             get {
                 return ((string)(this["RegexpOriginal"]));
@@ -62,7 +62,7 @@ namespace Daramkun.DaramRenamer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("W3sxfV0gezJ9IC0gezN9ICh7NH0gezV9eHs2fSB7N30gezh9KS57OX0=;ezF9IC0gezJ9LnszfQ==;ezF" +
-            "9ezJ9LnszfQ==;ezF9X3syfS57M30=;")]
+            "9ezJ9LnszfQ==;ezF9X3syfS57M30=")]
         public string RegexpFormat {
             get {
                 return ((string)(this["RegexpFormat"]));

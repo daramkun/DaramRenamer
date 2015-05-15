@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -395,6 +396,11 @@ namespace Daramkun.DaramRenamer
 		{
 			Process.Start ( "https://github.com/Daramkun/DaramRenamer/issues" );
 		}
+
+		private void ToolBarButton_Donation_Click ( object sender, RoutedEventArgs e )
+		{
+			Process.Start ( "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K96K9B2GBKJVA&lc=KR&item_name=DARAM%20WORLD&currency_code=USD&bn=PP%2dDonationsBF%3ax%2dclick%2dbut21%2egif%3aNonHosted" );
+		}
 		#endregion
 
 		#region ListView Subclasses
@@ -453,7 +459,10 @@ namespace Daramkun.DaramRenamer
 		#region String Process
 		private void StringProcess_Replace_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( stringReplaceOriginalText.Text.Trim ().Length == 0 || stringReplaceNewText.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
+
 			string originT = stringReplaceOriginalText.Text;
 			string newT = stringReplaceNewText.Text;
 			bool check = stringReplaceIncludeExt.IsChecked.Value;
@@ -464,7 +473,10 @@ namespace Daramkun.DaramRenamer
 
 		private void StringProcess_Concat_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( stringConcatText.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
+
 			bool where = stringConcatPreRadio.IsChecked.Value;
 			string concat = stringConcatText.Text;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
@@ -489,6 +501,8 @@ namespace Daramkun.DaramRenamer
 
 		private void StringProcess_DelEnclosed_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( stringEnclosedPreText.Text.Trim ().Length == 0 || stringEnclosedPostText.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
 
 			string pre = stringEnclosedPreText.Text;
@@ -525,6 +539,8 @@ namespace Daramkun.DaramRenamer
 		#region Extension Process
 		private void ExtensionProcess_AddExt_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( extAddExtensionText.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
 
 			string ext = extAddExtensionText.Text;
@@ -544,6 +560,8 @@ namespace Daramkun.DaramRenamer
 
 		private void ExtensionProcess_ChangeExt_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( extChangeExtensionText.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
 
 			string ext = extChangeExtensionText.Text;
@@ -630,6 +648,8 @@ namespace Daramkun.DaramRenamer
 		#region Date Process
 		private void Date_AddCreation_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( dateCreatedFormat.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
 
 			string format = dateCreatedFormat.Text;
@@ -642,6 +662,8 @@ namespace Daramkun.DaramRenamer
 
 		private void Date_AddLastAccess_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( dateAccessFormat.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
 
 			string format = dateAccessFormat.Text;
@@ -654,6 +676,8 @@ namespace Daramkun.DaramRenamer
 
 		private void Date_AddLastWrite_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( dateWriteFormat.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
 
 			string format = dateWriteFormat.Text;
@@ -679,6 +703,19 @@ namespace Daramkun.DaramRenamer
 
 		private void Path_Change_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( pathToText.Text.Trim ().Length == 0 ) return;
+			if ( !System.IO.Directory.Exists ( pathToText.Text ) )
+			{
+				TaskDialogOptions config = new TaskDialogOptions ();
+				config.Owner = this;
+				config.Title = "다람 리네이머";
+				config.MainInstruction = "해당 디렉토리가 실제로 존재하지 않습니다.";
+				config.Content = string.Format ( "{0} 디렉토리가 없습니다. 그대로 진행하시려면 '예'를 눌러주세요.", pathToText.Text );
+				config.MainIcon = VistaTaskDialogIcon.Warning;
+				config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, Daramkun.DaramRenamer.Properties.Resources.No };
+				if ( TaskDialog.Show ( config ).CustomButtonResult == 1 ) return;
+			}
+
 			SaveCurrentStateToUndoStack ();
 
 			string path = pathToText.Text;
@@ -690,6 +727,8 @@ namespace Daramkun.DaramRenamer
 		#region Regular Expression Process
 		private void RegularExpression_Process_Click ( object sender, RoutedEventArgs e )
 		{
+			if ( regexpOriginal.Text.Trim ().Length == 0 || regexpReplace.Text.Trim ().Length == 0 ) return;
+
 			SaveCurrentStateToUndoStack ();
 
 			Regex regex = new Regex ( regexpOriginal.Text );
@@ -698,6 +737,21 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				fileInfo.ChangedName = FilenameProcessor.RegularExpression ( fileInfo.ChangedName, regex, format )
 			);
+
+			if ( ( regexpOriginal.ItemsSource as ObservableCollection<string> ).IndexOf ( regexpOriginal.Text ) < 0 )
+				( regexpOriginal.ItemsSource as ObservableCollection<string> ).Insert ( 0, regexpOriginal.Text );
+			if ( ( regexpReplace.ItemsSource as ObservableCollection<string> ).IndexOf ( regexpReplace.Text ) < 0 )
+				( regexpReplace.ItemsSource as ObservableCollection<string> ).Insert ( 0, regexpReplace.Text );
+		}
+		#endregion
+
+		#region Settings
+		private void checkHwAccel_Checked ( object sender, RoutedEventArgs e )
+		{
+			if ( Settings.Default.HardwareTurnOn )
+				RenderOptions.ProcessRenderMode = RenderMode.Default;
+			else
+				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 		}
 		#endregion
 	}

@@ -70,6 +70,33 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   작업이 완료되었습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ApplyComplete {
+            get {
+                return ResourceManager.GetString("ApplyComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   지금까지 작업한 파일 이름 변경을 실제 파일에 적용합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ApplyWorked {
+            get {
+                return ResourceManager.GetString("ApplyWorked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   작업 내용을 적용하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string AskApplyWorked {
+            get {
+                return ResourceManager.GetString("AskApplyWorked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   업데이트를 확인할 수 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string CannotCheckUpdate {
@@ -97,11 +124,48 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   {0} 디렉토리가 없습니다. 그대로 진행하시려면 &apos;예&apos;를 눌러주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string JustContinueWhenNoExistPath {
+            get {
+                return ResourceManager.GetString("JustContinueWhenNoExistPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   아니오(&amp;N)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   해당 디렉토리가 실제로 존재하지 않습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string NoExistDirectory {
+            get {
+                return ResourceManager.GetString("NoExistDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} 버전에 대한 업데이트가 있습니다. 홈페이지에서 다운로드해주세요.
+        ///하단 버튼을 통해 홈페이지로 바로 가실 수 있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string NoticeUpdate {
+            get {
+                return ResourceManager.GetString("NoticeUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   업데이트가 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string NoUpdate {
+            get {
+                return ResourceManager.GetString("NoUpdate", resourceCulture);
             }
         }
         
@@ -120,6 +184,106 @@ namespace Daramkun.DaramRenamer.Properties {
         internal static string Open {
             get {
                 return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;{0}&quot; 경로에 파일이 이미 있거나 원본 파일을 찾을 수 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string PathError_IOException {
+            get {
+                return ResourceManager.GetString("PathError_IOException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;{0}&quot; 파일의 경로를 변경할 권한이 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string PathError_NoAuthentication {
+            get {
+                return ResourceManager.GetString("PathError_NoAuthentication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;{0}&quot;의 디렉토리가 존재하지 않습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string PathError_NoPath {
+            get {
+                return ResourceManager.GetString("PathError_NoPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &quot;{0}&quot; 파일의 경로가 너무 깁니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string PathError_PathIsTooLong {
+            get {
+                return ResourceManager.GetString("PathError_PathIsTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   알 수 없는 이유로 파일의 경로를 변경할 수 없었습니다: {0}과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string PathError_Unknown {
+            get {
+                return ResourceManager.GetString("PathError_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   알 수 없는 오류가 발생했습니다. error.log를 참고해주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string PleaseCheckLog {
+            get {
+                return ResourceManager.GetString("PleaseCheckLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Windows XP 이하의 운영체제는 더 이상 지원하지 않습니다.
+        ///XP 사용자의 경우 1.x 버전을 사용해주세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string PleaseUseLegacy {
+            get {
+                return ResourceManager.GetString("PleaseUseLegacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0}/{1}개의 파일에 대해 이름을 변경하였습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ThatFilesNameChanged {
+            get {
+                return ResourceManager.GetString("ThatFilesNameChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   업데이트가 있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ThereIsUpdate {
+            get {
+                return ResourceManager.GetString("ThereIsUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이 프로그램의 버전은 현재 최신버전입니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ThisIsStable {
+            get {
+                return ResourceManager.GetString("ThisIsStable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   홈페이지로(&amp;H)과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ToHomepage {
+            get {
+                return ResourceManager.GetString("ToHomepage", resourceCulture);
             }
         }
         

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:custom="clr-namespace:Daramkun.DaramRenamer"
 		xmlns:setting="clr-namespace:Daramkun.DaramRenamer.Properties"
-        Title="다람 리네이머 - v" Width="680" Height="540"
+        Width="680" Height="540"
 		xml:lang="ko-KR" Language="ko-KR"
 		Icon="Resources/ProgramIcon.ico" WindowStartupLocation="CenterScreen">
 	<Window.Resources>

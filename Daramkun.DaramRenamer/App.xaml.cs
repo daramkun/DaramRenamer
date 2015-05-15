@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -17,24 +19,48 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( Environment.OSVersion.Version <= new Version ( 5, 0 ) )
 			{
-				MessageBox.Show ( "Windows XP 이하의 운영체제는 더 이상 지원하지 않습니다.\nXP 사용자의 경우 1.x 버전을 사용해주세요.",
+				MessageBox.Show ( Daramkun.DaramRenamer.Properties.Resources.PleaseUseLegacy,
 					Daramkun.DaramRenamer.Properties.Resources.DaramRenamer, MessageBoxButton.OK, MessageBoxImage.Error );
 				Application.Current.Shutdown ( -1 );
 			}
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
-				Daramkun.DaramRenamer.MainWindow.SimpleErrorMessage ( "알 수 없는 오류가 발생했습니다. error.log를 참고해주세요." );
+				Daramkun.DaramRenamer.MainWindow.SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.PleaseCheckLog );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 					sw.WriteLine ( args.ExceptionObject.ToString () );
 			};
 		}
 
+		string [] args;
+
 		protected override void OnStartup ( StartupEventArgs e )
 		{
-			if ( !Settings.Default.HardwareTurnOn )
-				RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-			base.OnStartup ( e );
+			if ( e.Args.Length > 0 && e.Args [ 0 ] == "--cmd" )
+			{
+				Console.WriteLine ( "NOTICE: Sorry. Command Line Mode is not implemented in this version." );
+				this.Shutdown ( 0 );
+			}
+			else
+			{
+				if ( !Settings.Default.HardwareTurnOn )
+					RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
+				args = e.Args;
+
+				base.OnStartup ( e );
+			}
+		}
+
+		protected override void OnActivated ( EventArgs e )
+		{
+			if (args != null)
+			{
+				foreach ( string filename in args )
+					( MainWindow as MainWindow ).AddItem ( filename );
+				args = null;
+			}
+			base.OnActivated ( e );
 		}
 	}
 }

@@ -37,7 +37,8 @@ namespace Daramkun.DaramRenamer
 			InitializeComponent ();
 
 			Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
-			Title += string.Format ( "{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build );
+			Title = string.Format ( "{0} - v{1}.{2}{3}0", Daramkun.DaramRenamer.Properties.Resources.DaramRenamer, 
+				currentVersion.Major, currentVersion.Minor, currentVersion.Build );
 			
 			bf = new BinaryFormatter ();
 			//xs = new XmlSerializer ( typeof ( ObservableCollection<FileInfo> ) );
@@ -142,7 +143,6 @@ namespace Daramkun.DaramRenamer
 			using ( MemoryStream memStream = new MemoryStream () )
 			{
 				bf.Serialize ( memStream, fileInfoCollection );
-				//xs.Serialize ( memStream, fileInfoCollection );
 				undoStack.Push ( memStream.ToArray () );
 			}
 		}
@@ -152,7 +152,6 @@ namespace Daramkun.DaramRenamer
 			using ( MemoryStream memStream = new MemoryStream () )
 			{
 				bf.Serialize ( memStream, fileInfoCollection );
-				//xs.Serialize ( memStream, fileInfoCollection );
 				redoStack.Push ( memStream.ToArray () );
 			}
 		}
@@ -164,7 +163,6 @@ namespace Daramkun.DaramRenamer
 			using ( MemoryStream memStream = new MemoryStream ( undoStack.Pop () ) )
 			{
 				fileInfoCollection = bf.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
-				//fileInfoCollection = xs.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
 				listViewFiles.ItemsSource = fileInfoCollection;
 			}
 			return true;
@@ -177,7 +175,6 @@ namespace Daramkun.DaramRenamer
 			using ( MemoryStream memStream = new MemoryStream ( redoStack.Pop () ) )
 			{
 				fileInfoCollection = bf.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
-				//fileInfoCollection = xs.Deserialize ( memStream ) as ObservableCollection<FileInfo>;
 				listViewFiles.ItemsSource = fileInfoCollection;
 			}
 			return true;
@@ -185,7 +182,7 @@ namespace Daramkun.DaramRenamer
 		#endregion
 
 		#region Utilities
-		private void AddItem ( string s )
+		public void AddItem ( string s )
 		{
 			if ( System.IO.File.Exists ( s ) )
 			{
@@ -246,8 +243,8 @@ namespace Daramkun.DaramRenamer
 			TaskDialogOptions config = new TaskDialogOptions ();
 			config.Owner = this;
 			config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
-			config.MainInstruction = "작업 내용을 적용하시겠습니까?";
-			config.Content = "지금까지 작업한 파일 이름 변경을 실제 파일에 적용합니다.";
+			config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.AskApplyWorked;
+			config.Content = Daramkun.DaramRenamer.Properties.Resources.ApplyWorked;
 			config.MainIcon = VistaTaskDialogIcon.Warning;
 			config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.Yes, Daramkun.DaramRenamer.Properties.Resources.No };
 			if ( TaskDialog.Show ( config ).CustomButtonResult != 0 )
@@ -267,27 +264,27 @@ namespace Daramkun.DaramRenamer
 				}
 				catch ( UnauthorizedAccessException ex )
 				{
-					SimpleErrorMessage ( string.Format ( "\"{0}\" 파일의 경로를 변경할 권한이 없습니다.", fileInfo.OriginalName ) );
+					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoAuthentication, fileInfo.OriginalName ) );
 					Debug.WriteLine ( ex.Message );
 				}
 				catch ( PathTooLongException ex )
 				{
-					SimpleErrorMessage ( string.Format ( "\"{0}\"파일의 경로가 너무 깁니다.", fileInfo.OriginalName ) );
+					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_PathIsTooLong, fileInfo.OriginalName ) );
 					Debug.WriteLine ( ex.Message );
 				}
 				catch ( DirectoryNotFoundException ex )
 				{
-					SimpleErrorMessage ( string.Format ( "\"{0}\"의 디렉토리가 존재하지 않습니다.", fileInfo.OriginalName ) );
+					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoPath, fileInfo.OriginalName ) );
 					Debug.WriteLine ( ex.Message );
 				}
 				catch ( IOException ex )
 				{
-					SimpleErrorMessage ( string.Format ( "\"{0}\" 경로에 파일이 이미 있거나 원본 파일을 찾을 수 없습니다.", fileInfo.OriginalName ) );
+					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_IOException, fileInfo.OriginalName ) );
 					Debug.WriteLine ( ex.Message );
 				}
 				catch ( Exception ex )
 				{
-					SimpleErrorMessage ( string.Format ( "알 수 없는 이유로 파일의 경로를 변경할 수 없었습니다: {0}", fileInfo.OriginalName ) );
+					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_Unknown, fileInfo.OriginalName ) );
 					Debug.WriteLine ( ex.Message );
 				}
 			}
@@ -295,8 +292,8 @@ namespace Daramkun.DaramRenamer
 			config = new TaskDialogOptions ();
 			config.Owner = this;
 			config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
-			config.MainInstruction = "작업이 완료되었습니다.";
-			config.Content = string.Format ( "{0}/{1}개의 파일에 대해 이름을 변경하였습니다.", succeed, total );
+			config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.ApplyComplete;
+			config.Content = string.Format ( Daramkun.DaramRenamer.Properties.Resources.ThatFilesNameChanged, succeed, total );
 			config.MainIcon = VistaTaskDialogIcon.Information;
 			config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK };
 			TaskDialog.Show ( config );
@@ -358,10 +355,10 @@ namespace Daramkun.DaramRenamer
 					{
 						TaskDialogOptions config = new TaskDialogOptions ();
 						config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
-						config.MainInstruction = "업데이트가 있습니다.";
-						config.Content = string.Format ( "{0} 버전에 대한 업데이트가 있습니다. 홈페이지에서 다운로드해주세요.\r\n하단 버튼을 통해 홈페이지로 바로 가실 수 있습니다.", text );
+						config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.ThereIsUpdate;
+						config.Content = string.Format ( Daramkun.DaramRenamer.Properties.Resources.NoticeUpdate, text );
 						config.MainIcon = VistaTaskDialogIcon.Information;
-						config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, "홈페이지로(&H)" };
+						config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, Daramkun.DaramRenamer.Properties.Resources.ToHomepage };
 						if ( TaskDialog.Show ( config ).CustomButtonResult == 1 )
 							Process.Start ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
 					}
@@ -369,8 +366,8 @@ namespace Daramkun.DaramRenamer
 					{
 						TaskDialogOptions config = new TaskDialogOptions ();
 						config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
-						config.MainInstruction = "업데이트가 없습니다.";
-						config.Content = "이 프로그램의 버전은 현재 최신버전입니다.";
+						config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.NoUpdate;
+						config.Content = Daramkun.DaramRenamer.Properties.Resources.ThisIsStable;
 						config.MainIcon = VistaTaskDialogIcon.Information;
 						config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK };
 						TaskDialog.Show ( config );
@@ -696,9 +693,9 @@ namespace Daramkun.DaramRenamer
 			{
 				TaskDialogOptions config = new TaskDialogOptions ();
 				config.Owner = this;
-				config.Title = "다람 리네이머";
-				config.MainInstruction = "해당 디렉토리가 실제로 존재하지 않습니다.";
-				config.Content = string.Format ( "{0} 디렉토리가 없습니다. 그대로 진행하시려면 '예'를 눌러주세요.", pathToText.Text );
+				config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
+				config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.NoExistDirectory;
+				config.Content = string.Format ( Daramkun.DaramRenamer.Properties.Resources.JustContinueWhenNoExistPath, pathToText.Text );
 				config.MainIcon = VistaTaskDialogIcon.Warning;
 				config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, Daramkun.DaramRenamer.Properties.Resources.No };
 				if ( TaskDialog.Show ( config ).CustomButtonResult == 1 ) return;

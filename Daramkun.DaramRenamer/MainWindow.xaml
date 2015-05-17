@@ -793,7 +793,16 @@
 			<TabItem Header="{x:Static setting:Resources.MainTab_BatchProcess}">
 				<TabControl Name="batchTabControl" Focusable="True" Margin="5,5,5,5">
 					<TabItem Header="{x:Static setting:Resources.BatchTab_BatchProcess}">
-						<TextBlock Text="{x:Static setting:Resources.ThisFeatureIsNotReady}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+						<Grid Margin="5">
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBox Name="batchCommands" FontFamily="Consolas" Grid.Row="0" Grid.Column="0" Margin="0,0,0,5" AcceptsReturn="True" AcceptsTab="True" AllowDrop="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+							
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Style="{StaticResource DoButtonStyle}" />
+						</Grid>
 					</TabItem>
 				</TabControl>
 			</TabItem>
@@ -899,6 +908,14 @@ Source: https://wpffolderbrowser.codeplex.com
 ------------------------------
 Author: 斯克迪亚
 Source: http://www.cnblogs.com/SkyD/archive/2008/07/15/1243043.html
+
+------------------------------
+8. TagLib#
+------------------------------
+TagLib# is free/open source software, released under the LGPL.
+
+Author: Mono Project
+Source: https://github.com/mono/taglib-sharp
 ]]>
 						</TextBox>
 					</Grid>

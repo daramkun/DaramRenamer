@@ -451,7 +451,7 @@ namespace Daramkun.DaramRenamer
 			string newT = stringReplaceNewText.Text;
 			bool check = stringReplaceIncludeExt.IsChecked.Value;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.Replace ( fileInfo.ChangedName, originT, newT, !check )
+				FilenameProcessor.Replace ( fileInfo, originT, newT, !check )
 			);
 		}
 
@@ -464,10 +464,10 @@ namespace Daramkun.DaramRenamer
 			bool where = stringConcatPreRadio.IsChecked.Value;
 			string concat = stringConcatText.Text;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = ( where == true ? 
-					FilenameProcessor.Prestring ( fileInfo.ChangedName, concat ) :
-					FilenameProcessor.Poststring ( fileInfo.ChangedName, concat ) )
-			);
+			{
+				if ( where ) FilenameProcessor.Prestring ( fileInfo, concat );
+				else FilenameProcessor.Poststring ( fileInfo, concat );
+			} );
 		}
 
 		private void StringProcess_Trim_Click ( object sender, RoutedEventArgs e )
@@ -479,7 +479,7 @@ namespace Daramkun.DaramRenamer
 			if ( stringTrimPostRadio.IsChecked == true ) when = true;
 			bool check = stringTrimIncludeExt.IsChecked.Value;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.Trimming ( fileInfo.ChangedName, check, when )
+				FilenameProcessor.Trimming ( fileInfo, check, when )
 			);
 		}
 
@@ -493,8 +493,7 @@ namespace Daramkun.DaramRenamer
 			string post = stringEnclosedPostText.Text;
 			bool all = stringEnclosedAll.IsChecked.Value;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.DeleteEnclosed ( fileInfo.ChangedName,
-				pre, post, all )
+				FilenameProcessor.DeleteEnclosed ( fileInfo, pre, post, all )
 			);
 		}
 
@@ -502,7 +501,7 @@ namespace Daramkun.DaramRenamer
 		{
 			SaveCurrentStateToUndoStack ();
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.DeleteName ( fileInfo.ChangedName )
+				FilenameProcessor.DeleteName ( fileInfo )
 			);
 		}
 
@@ -513,10 +512,11 @@ namespace Daramkun.DaramRenamer
 			bool firstletter = stringUpLowOneLetterUpper.IsChecked.Value;
 			bool upper = stringUpLowUpper.IsChecked.Value;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = firstletter ?
-					FilenameProcessor.NameToUpperFirstLetterOnly(fileInfo.ChangedName ) :
-					( upper ? FilenameProcessor.NameToUpper ( fileInfo.ChangedName ) : FilenameProcessor.NameToLower(fileInfo.ChangedName) )
-			);
+			{
+				if ( firstletter ) FilenameProcessor.NameToUpperFirstLetterOnly ( fileInfo );
+				else if ( upper ) FilenameProcessor.NameToUpper ( fileInfo );
+				else FilenameProcessor.NameToLower ( fileInfo );
+			} );
 		}
 		#endregion
 
@@ -529,7 +529,7 @@ namespace Daramkun.DaramRenamer
 
 			string ext = extAddExtensionText.Text;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.AddExtension ( fileInfo.ChangedName, ext )
+				FilenameProcessor.AddExtension ( fileInfo, ext )
 			);
 		}
 
@@ -538,7 +538,7 @@ namespace Daramkun.DaramRenamer
 			SaveCurrentStateToUndoStack ();
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.RemoveExtension ( fileInfo.ChangedName )
+				FilenameProcessor.RemoveExtension ( fileInfo )
 			);
 		}
 
@@ -550,7 +550,7 @@ namespace Daramkun.DaramRenamer
 
 			string ext = extChangeExtensionText.Text;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.ChangeExtension ( fileInfo.ChangedName, ext )
+				FilenameProcessor.ChangeExtension ( fileInfo, ext )
 			);
 		}
 
@@ -560,9 +560,10 @@ namespace Daramkun.DaramRenamer
 
 			bool upper = extUpLowUpper.IsChecked.Value;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = upper ? FilenameProcessor.ExtensionToUpper ( fileInfo.ChangedName ) :
-					FilenameProcessor.ExtensionToLower ( fileInfo.ChangedName )
-			);
+			{
+				if ( upper ) FilenameProcessor.ExtensionToUpper ( fileInfo );
+				else FilenameProcessor.ExtensionToLower ( fileInfo );
+			} );
 		}
 		#endregion
 
@@ -573,9 +574,10 @@ namespace Daramkun.DaramRenamer
 
 			bool wordly = numDelWoNoNumberWordOnly.IsChecked.Value;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = wordly ? FilenameProcessor.DeleteWithoutNumberWordly ( fileInfo.ChangedName ) :
-					FilenameProcessor.DeleteWithoutNumber ( fileInfo.ChangedName )
-			);
+			{
+				if ( wordly ) FilenameProcessor.DeleteWithoutNumberWordly ( fileInfo );
+				else FilenameProcessor.DeleteWithoutNumber ( fileInfo );
+			} );
 		}
 
 		private void Digit_PreviewTextInput ( object sender, TextCompositionEventArgs e )
@@ -594,7 +596,7 @@ namespace Daramkun.DaramRenamer
 			bool pre = numSameDigitPre.IsChecked.Value;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.SameNumberOfDigit ( fileInfo.ChangedName, digits, !pre )
+				FilenameProcessor.SameNumberOfDigit ( fileInfo, digits, !pre )
 			);
 		}
 
@@ -610,7 +612,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.For ( 1, fileInfoCollection.Count, ( index ) =>
 			{
 				FileInfo fileInfo = fileInfoCollection [ index ];
-				fileInfo.ChangedName = FilenameProcessor.AddNumber ( fileInfo.ChangedName, index * term, !pre );
+				FilenameProcessor.AddNumber ( fileInfo, index * term, !pre );
 			} );
 		}
 
@@ -624,7 +626,7 @@ namespace Daramkun.DaramRenamer
 			bool pre = numAddSubNumPre.IsChecked.Value;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.NumberIncrese ( fileInfo.ChangedName, value, !pre )
+				FilenameProcessor.NumberIncrese ( fileInfo, value, !pre )
 			);
 		}
 		#endregion
@@ -640,7 +642,7 @@ namespace Daramkun.DaramRenamer
 			bool pre = dateCreatedPre.IsChecked.Value;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.AddCreationDate ( fileInfo.OriginalFullName, fileInfo.ChangedName, !pre, format )
+				FilenameProcessor.AddCreationDate ( fileInfo, !pre, format )
 			);
 		}
 
@@ -654,7 +656,7 @@ namespace Daramkun.DaramRenamer
 			bool pre = dateAccessPre.IsChecked.Value;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.AddLastAccessDate ( fileInfo.OriginalFullName, fileInfo.ChangedName, !pre, format )
+				FilenameProcessor.AddLastAccessDate ( fileInfo, !pre, format )
 			);
 		}
 
@@ -668,7 +670,7 @@ namespace Daramkun.DaramRenamer
 			bool pre = dateWritePre.IsChecked.Value;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.AddLastWriteDate ( fileInfo.OriginalFullName, fileInfo.ChangedName, !pre, format )
+				FilenameProcessor.AddLastWriteDate ( fileInfo, !pre, format )
 			);
 		}
 		#endregion
@@ -704,7 +706,7 @@ namespace Daramkun.DaramRenamer
 
 			string path = pathToText.Text;
 
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => fileInfo.ChangedPath = path );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => FilenameProcessor.ChangePath ( fileInfo, path ) );
 		}
 		#endregion
 
@@ -726,7 +728,7 @@ namespace Daramkun.DaramRenamer
 			string format = regexpReplace.Text;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				fileInfo.ChangedName = FilenameProcessor.RegularExpression ( fileInfo.ChangedName, regex, format )
+				FilenameProcessor.RegularExpression ( fileInfo, regex, format )
 			);
 
 			if ( ( regexpOriginal.ItemsSource as ObservableCollection<string> ).IndexOf ( regexpOriginal.Text ) < 0 )

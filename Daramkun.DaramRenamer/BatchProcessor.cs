@@ -29,6 +29,7 @@ namespace Daramkun.DaramRenamer
 				{
 					string function = cur.Substring ( 1, cur.IndexOf ( ':' ) - 1 );
 					bool started = false;
+					bool formatstarted = false;
 					bool backslashed = false;
 					for ( int i = function.Length + 2; i < cur.Length; ++i )
 					{
@@ -43,6 +44,7 @@ namespace Daramkun.DaramRenamer
 							{
 								backslashed = false;
 								started = false;
+								formatstarted = false;
 								arguments.Add ( builder.ToString () );
 								builder.Clear ();
 							}
@@ -50,9 +52,22 @@ namespace Daramkun.DaramRenamer
 								builder.Append ( ch );
 							else throw new Exception ( "Argument error." );
 						}
+						else if ( formatstarted && started == false )
+						{
+							if ( ch == '}' )
+							{
+								backslashed = false;
+								started = false;
+								formatstarted = false;
+								arguments.Add ( ConvertFormatString ( fileInfo, builder.ToString () ) );
+								builder.Clear ();
+							}
+							else builder.Append ( ch );
+						}
 						else
 						{
 							if ( ch == '"' ) started = true;
+							else if ( ch == '{' ) formatstarted = true;
 							else if ( ch == ' ' || ch == '\t' || ch == '\r' ) continue;
 							else throw new Exception ( "Script error." );
 						}
@@ -66,6 +81,24 @@ namespace Daramkun.DaramRenamer
 					
 				}
 			}
+		}
+
+		public static string ConvertFormatString ( FileInfo fileInfo, string formatString )
+		{
+			string argument = null;
+			if ( formatString.IndexOf ( ':' ) > 0 )
+			{
+				argument = formatString.Substring ( formatString.IndexOf ( ':' ) + 1 );
+				formatString = formatString.Substring ( 0, formatString.IndexOf ( ':' ) - 1 );
+			}
+
+			switch ( formatString )
+			{
+				case "filecreation":
+
+					break;
+			}
+			return null;
 		}
 
 		public static void ProcessFunction ( FileInfo fileInfo, string function, string [] arguments )

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -39,8 +40,81 @@ namespace Daramkun.DaramRenamer
 
 		public int CompareTo ( FileInfo other ) { return changeName.CompareTo ( other.changeName ); }
 
-		public void ToMove () { File.Move ( OriginalFullName, ChangedFullName ); Changed (); }
-		public void ToCopy () { File.Copy ( OriginalFullName, ChangedFullName ); Changed (); }
+		public bool ToMove ()
+		{
+			try
+			{
+				File.Move ( OriginalFullName, ChangedFullName );
+				Changed ();
+				return true;
+			}
+			catch ( UnauthorizedAccessException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoAuthentication, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( PathTooLongException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_PathIsTooLong, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( DirectoryNotFoundException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoPath, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( IOException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_IOException, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( Exception ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_Unknown, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			return false;
+		}
+		public bool ToCopy ()
+		{
+			try
+			{
+				File.Copy ( OriginalFullName, ChangedFullName );
+				Changed ();
+				return true;
+			}
+			catch ( UnauthorizedAccessException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoAuthentication, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( PathTooLongException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_PathIsTooLong, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( DirectoryNotFoundException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoPath, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( FileNotFoundException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_FileIsNotFound, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( IOException ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_IOException, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			catch ( Exception ex )
+			{
+				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_Unknown, OriginalName ) );
+				Debug.WriteLine ( ex.Message );
+			}
+			return false;
+		}
 
 		public static void Sort ( ObservableCollection<FileInfo> source )
 		{
@@ -52,7 +126,6 @@ namespace Daramkun.DaramRenamer
 	static class ParallelSort
 	{
 		public static void QuicksortParallel<T> ( ObservableCollection<T> arr ) where T : IComparable<T> { QuicksortParallel ( arr, 0, arr.Count - 1 ); }
-
 		private static void QuicksortParallel<T> ( ObservableCollection<T> arr, int left, int right ) where T : IComparable<T>
 		{
 			if ( right > left )
@@ -61,18 +134,13 @@ namespace Daramkun.DaramRenamer
 				Parallel.Invoke ( new Action [] { () => QuicksortParallel ( arr, left, pivot - 1 ), () => QuicksortParallel ( arr, pivot + 1, right ) } );
 			}
 		}
-
 		private static void Swap<T> ( ObservableCollection<T> a, int i, int j ) { T t = a [ i ]; a [ i ] = a [ j ]; a [ j ] = t; }
-
 		private static int Partition<T> ( ObservableCollection<T> arr, int low, int high ) where T : IComparable<T>
 		{
-			int pivotPos = ( high + low ) / 2;
+			int pivotPos = ( high + low ) / 2, left = low;
 			T pivot = arr [ pivotPos ];
 			Swap ( arr, low, pivotPos );
-
-			int left = low;
 			for ( int i = low + 1; i <= high; i++ ) if ( arr [ i ].CompareTo ( pivot ) < 0 ) Swap ( arr, i, ++left );
-
 			Swap ( arr, low, left );
 			return left;
 		}

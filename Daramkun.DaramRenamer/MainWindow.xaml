@@ -788,20 +788,29 @@
 				</TabControl>
 			</TabItem>
 			<!-- ========================================= -->
-			<!--                  일괄처리                  -->
+			<!--                  고급기능                  -->
 			<!-- ========================================= -->
-			<TabItem Header="{x:Static setting:Resources.MainTab_BatchProcess}">
+			<TabItem Header="{x:Static setting:Resources.MainTab_Advanced}">
 				<TabControl Name="batchTabControl" Focusable="True" Margin="5,5,5,5">
-					<TabItem Header="{x:Static setting:Resources.BatchTab_BatchProcess}">
+					<TabItem Header="{x:Static setting:Resources.AdvancedTab_BatchProcess}">
 						<Grid Margin="5">
 							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
 								<RowDefinition />
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
-
-							<TextBox Name="batchCommands" FontFamily="Consolas" Grid.Row="0" Grid.Column="0" Margin="0,0,0,5" AcceptsReturn="True" AcceptsTab="True" AllowDrop="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
 							
-							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Style="{StaticResource DoButtonStyle}" />
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition Width="80" />
+									<ColumnDefinition Width="80" />
+								</Grid.ColumnDefinitions>
+							</Grid>
+
+							<TextBox Grid.Row="1" Name="batchCommands" FontFamily="Consolas" Grid.Column="0" Margin="0,0,0,5" AcceptsReturn="True" AcceptsTab="True" AllowDrop="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Style="{StaticResource DoButtonStyle}" Click="BatchProcess_Process_Click" />
 						</Grid>
 					</TabItem>
 				</TabControl>

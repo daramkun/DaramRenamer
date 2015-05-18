@@ -61,6 +61,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   일괄 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AdvancedTab_BatchProcess {
+            get {
+                return ResourceManager.GetString("AdvancedTab_BatchProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   모든 파일(*.*)|*.*과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AllFiles {
@@ -102,15 +111,6 @@ namespace Daramkun.DaramRenamer.Properties {
         public static string Autoremove {
             get {
                 return ResourceManager.GetString("Autoremove", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   일괄 처리과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string BatchTab_BatchProcess {
-            get {
-                return ResourceManager.GetString("BatchTab_BatchProcess", resourceCulture);
             }
         }
         
@@ -538,11 +538,11 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
-        ///   일괄 처리과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   고급과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        public static string MainTab_BatchProcess {
+        public static string MainTab_Advanced {
             get {
-                return ResourceManager.GetString("MainTab_BatchProcess", resourceCulture);
+                return ResourceManager.GetString("MainTab_Advanced", resourceCulture);
             }
         }
         
@@ -697,6 +697,15 @@ namespace Daramkun.DaramRenamer.Properties {
         public static string Open {
             get {
                 return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} 파일을 찾을 수 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string PathError_FileIsNotFound {
+            get {
+                return ResourceManager.GetString("PathError_FileIsNotFound", resourceCulture);
             }
         }
         

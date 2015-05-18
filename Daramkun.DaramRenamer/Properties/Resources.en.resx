@@ -193,8 +193,8 @@ Go to homepage with bottom button.</value>
   <data name="ListView_OriginalPath" xml:space="preserve">
     <value>Original Path</value>
   </data>
-  <data name="MainTab_BatchProcess" xml:space="preserve">
-    <value>Batch Process</value>
+  <data name="MainTab_Advanced" xml:space="preserve">
+    <value>Advanced</value>
   </data>
   <data name="MainTab_DateProcess" xml:space="preserve">
     <value>Date</value>
@@ -275,7 +275,7 @@ If you use Windows XP, please use 1.x version.</value>
   <data name="Autoremove" xml:space="preserve">
     <value>Auto remove the invalid file from list.</value>
   </data>
-  <data name="BatchTab_BatchProcess" xml:space="preserve">
+  <data name="Advanced_BatchProcess" xml:space="preserve">
     <value>Batch Process</value>
   </data>
   <data name="CopyWhenTransaction" xml:space="preserve">
@@ -430,5 +430,8 @@ If you use Windows XP, please use 1.x version.</value>
   </data>
   <data name="ThisFeatureIsNotReady" xml:space="preserve">
     <value>This feature is not implemented</value>
+  </data>
+  <data name="PathError_FileIsNotFound" xml:space="preserve">
+    <value>{0} File is no exist.</value>
   </data>
 </root>

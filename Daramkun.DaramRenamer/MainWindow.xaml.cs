@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -254,38 +253,11 @@ namespace Daramkun.DaramRenamer
 			uint total = 0, succeed = 0;
 			foreach ( var fileInfo in fileInfoCollection )
 			{
-				try
-				{
-					++total;
-					if ( !Settings.Default.FileCopyWhenApply ) fileInfo.ToMove ();
-					else fileInfo.ToCopy ();
-					++succeed;
-				}
-				catch ( UnauthorizedAccessException ex )
-				{
-					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoAuthentication, fileInfo.OriginalName ) );
-					Debug.WriteLine ( ex.Message );
-				}
-				catch ( PathTooLongException ex )
-				{
-					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_PathIsTooLong, fileInfo.OriginalName ) );
-					Debug.WriteLine ( ex.Message );
-				}
-				catch ( DirectoryNotFoundException ex )
-				{
-					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoPath, fileInfo.OriginalName ) );
-					Debug.WriteLine ( ex.Message );
-				}
-				catch ( IOException ex )
-				{
-					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_IOException, fileInfo.OriginalName ) );
-					Debug.WriteLine ( ex.Message );
-				}
-				catch ( Exception ex )
-				{
-					SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_Unknown, fileInfo.OriginalName ) );
-					Debug.WriteLine ( ex.Message );
-				}
+				++total;
+				bool s = false;
+				if ( !Settings.Default.FileCopyWhenApply ) s = fileInfo.ToMove ();
+				else s = fileInfo.ToCopy ();
+				if ( s ) ++succeed;
 			}
 
 			config = new TaskDialogOptions ();
@@ -359,7 +331,7 @@ namespace Daramkun.DaramRenamer
 						config.MainIcon = VistaTaskDialogIcon.Information;
 						config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, Daramkun.DaramRenamer.Properties.Resources.ToHomepage };
 						if ( TaskDialog.Show ( config ).CustomButtonResult == 1 )
-							Process.Start ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
+							System.Diagnostics.Process.Start ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
 					}
 					else
 					{
@@ -378,12 +350,12 @@ namespace Daramkun.DaramRenamer
 
 		private void ToolBarButton_IssueTracker_Click ( object sender, RoutedEventArgs e )
 		{
-			Process.Start ( "https://github.com/Daramkun/DaramRenamer/issues" );
+			System.Diagnostics.Process.Start ( "https://github.com/Daramkun/DaramRenamer/issues" );
 		}
 
 		private void ToolBarButton_Donation_Click ( object sender, RoutedEventArgs e )
 		{
-			Process.Start ( "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K96K9B2GBKJVA&lc=KR&item_name=DARAM%20WORLD&currency_code=USD&bn=PP%2dDonationsBF%3ax%2dclick%2dbut21%2egif%3aNonHosted" );
+			System.Diagnostics.Process.Start ( "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K96K9B2GBKJVA&lc=KR&item_name=DARAM%20WORLD&currency_code=USD&bn=PP%2dDonationsBF%3ax%2dclick%2dbut21%2egif%3aNonHosted" );
 		}
 		#endregion
 
@@ -464,10 +436,8 @@ namespace Daramkun.DaramRenamer
 			bool where = stringConcatPreRadio.IsChecked.Value;
 			string concat = stringConcatText.Text;
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-			{
-				if ( where ) FilenameProcessor.Prestring ( fileInfo, concat );
-				else FilenameProcessor.Poststring ( fileInfo, concat );
-			} );
+				FilenameProcessor.Concat ( fileInfo, concat, where )
+			);
 		}
 
 		private void StringProcess_Trim_Click ( object sender, RoutedEventArgs e )
@@ -538,7 +508,7 @@ namespace Daramkun.DaramRenamer
 			SaveCurrentStateToUndoStack ();
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				FilenameProcessor.RemoveExtension ( fileInfo )
+				FilenameProcessor.DeleteExtension ( fileInfo )
 			);
 		}
 
@@ -611,8 +581,7 @@ namespace Daramkun.DaramRenamer
 
 			Parallel.For ( 1, fileInfoCollection.Count, ( index ) =>
 			{
-				FileInfo fileInfo = fileInfoCollection [ index ];
-				FilenameProcessor.AddNumber ( fileInfo, index * term, !pre );
+				FilenameProcessor.AddNumber ( fileInfoCollection [ index ], index * term, !pre );
 			} );
 		}
 
@@ -706,7 +675,9 @@ namespace Daramkun.DaramRenamer
 
 			string path = pathToText.Text;
 
-			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) => FilenameProcessor.ChangePath ( fileInfo, path ) );
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				FilenameProcessor.ChangePath ( fileInfo, path )
+			);
 		}
 		#endregion
 
@@ -741,6 +712,21 @@ namespace Daramkun.DaramRenamer
 				( regexpReplace.ItemsSource as ObservableCollection<string> ).Insert ( 0, regexpReplace.Text );
 				Daramkun.DaramRenamer.Properties.Settings.Default.RegexpFormat = ConvertCollectionToString ( regexpReplace.ItemsSource as ObservableCollection<string> );
 			}
+		}
+		#endregion
+
+		#region Batch Process
+		private void BatchProcess_Process_Click ( object sender, RoutedEventArgs e )
+		{
+			if ( batchCommands.Text.Trim ().Length == 0 ) return;
+
+			SaveCurrentStateToUndoStack ();
+
+			string commands = batchCommands.Text;
+
+			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
+				BatchProcessor.BatchProcess ( fileInfo, commands )
+			);
 		}
 		#endregion
 

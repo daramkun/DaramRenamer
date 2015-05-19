@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -138,6 +140,111 @@ namespace Daramkun.DaramRenamer
 					{
 						string [] split = argument.Split ( '-' );
 						return fileInfo.ChangedName.Substring ( int.Parse ( split [ 0 ] ), int.Parse ( split [ 1 ] ) );
+					}
+					break;
+
+				case "tag":
+					{
+						string [] split = argument.Split ( '.' );
+						switch ( split [ 0 ] )
+						{
+							case "aac":
+								break;
+
+							case "asf":
+								break;
+
+							case "flac":
+								break;
+
+							case "mp3":
+							case "id3":
+								break;
+
+							case "jpg":
+							case "jpeg":
+								break;
+
+							case "mpeg":
+								break;
+
+							case "mpeg4":
+							case "mp4":
+								break;
+
+							case "ogg":
+								break;
+
+							case "png":
+								break;
+
+							case "tif":
+								break;
+
+							case "mkv":
+							case "mka":
+								break;
+
+							case "gif":
+								break;
+
+							case "avi":
+							case "riff":
+								break;
+						}
+					}
+					break;
+
+				case "hash":
+					{
+						byte [] returnValue = null;
+						switch ( argument )
+						{
+							case "sha1":
+								{
+									using ( Stream stream = System.IO.File.Open ( fileInfo.OriginalFullName, System.IO.FileMode.Open ) )
+										returnValue = System.Security.Cryptography.SHA1.Create ().ComputeHash ( stream );
+								}
+								break;
+
+							case "sha256":
+								{
+									using ( Stream stream = System.IO.File.Open ( fileInfo.OriginalFullName, System.IO.FileMode.Open ) )
+										returnValue = System.Security.Cryptography.SHA256.Create ().ComputeHash ( stream );
+								}
+								break;
+
+							case "sha384":
+								{
+									using ( Stream stream = System.IO.File.Open ( fileInfo.OriginalFullName, System.IO.FileMode.Open ) )
+										returnValue = System.Security.Cryptography.SHA384.Create ().ComputeHash ( stream );
+								}
+								break;
+
+							case "sha512":
+								{
+									using ( Stream stream = System.IO.File.Open ( fileInfo.OriginalFullName, System.IO.FileMode.Open ) )
+										returnValue = System.Security.Cryptography.SHA512.Create ().ComputeHash ( stream );
+								}
+								break;
+
+							case "md5":
+								{
+									using ( Stream stream = System.IO.File.Open ( fileInfo.OriginalFullName, System.IO.FileMode.Open ) )
+										returnValue = MD5.Create ().ComputeHash ( stream );
+								}
+								break;
+
+							default:
+								throw new Exception ( "Not support this hash method." );
+						}
+
+						StringBuilder sBuilder = new StringBuilder ();
+						for ( int i = 0; i < returnValue.Length; i++ )
+						{
+							sBuilder.Append ( returnValue [ i ].ToString ( "x2" ) );
+						}
+						return sBuilder.ToString ();
 					}
 					break;
 			}

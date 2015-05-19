@@ -10,6 +10,7 @@ namespace Daramkun.DaramRenamer
 	public static class BatchProcessor
 	{
 		private static string [] NewLineSplitter = new [] { "\n" };
+		private static char [] WordSplitter = new [] { ' ', '\t', ',', ';', '-' };
 
 		public static void BatchProcess ( this FileInfo fileInfo, string batchScript )
 		{
@@ -94,8 +95,50 @@ namespace Daramkun.DaramRenamer
 
 			switch ( formatString )
 			{
-				case "filecreation":
+				case "ts":
+				case "timestamp":
+					{
+						string [] split = argument.Split ( ';' );
+						string format = ( split.Length == 2 ) ? split [ 1 ] : "yyyyMMdd";
+						switch ( split [ 0 ] )
+						{
+							case "create": return System.IO.File.GetCreationTime ( fileInfo.OriginalFullName ).ToString ( format );
+							case "lastaccess": return System.IO.File.GetLastAccessTime ( fileInfo.OriginalFullName ).ToString ( format );
+							case "lastwrite": return System.IO.File.GetLastWriteTime ( fileInfo.OriginalFullName ).ToString ( format );
+						}
+					}
+					break;
 
+				case "wfo":
+				case "word-from-originalname":
+					{
+						string [] split = fileInfo.OriginalName.Split ( WordSplitter, StringSplitOptions.RemoveEmptyEntries );
+						return split [ int.Parse ( argument ) ];
+					}
+					break;
+
+				case "wfc":
+				case "word-from-changedname":
+					{
+						string [] split = fileInfo.ChangedName.Split ( WordSplitter, StringSplitOptions.RemoveEmptyEntries );
+						return split [ int.Parse ( argument ) ];
+					}
+					break;
+
+				case "ssfo":
+				case "substr-from-originalname":
+					{
+						string [] split = argument.Split ( '-' );
+						return fileInfo.OriginalName.Substring ( int.Parse ( split [ 0 ] ), int.Parse ( split [ 1 ] ) );
+					}
+					break;
+
+				case "ssfc":
+				case "substr-from-changedname":
+					{
+						string [] split = argument.Split ( '-' );
+						return fileInfo.ChangedName.Substring ( int.Parse ( split [ 0 ] ), int.Parse ( split [ 1 ] ) );
+					}
 					break;
 			}
 			return null;

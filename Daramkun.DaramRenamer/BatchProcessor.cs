@@ -144,6 +144,7 @@ namespace Daramkun.DaramRenamer
 					}
 					break;
 
+				case "mi":
 				case "media-info":
 					{
 						using ( TagLib.File file = TagLib.File.Create ( fileInfo.OriginalFullName ) )
@@ -217,7 +218,27 @@ namespace Daramkun.DaramRenamer
 								case "audio-year":
 								case "video-year":
 									return file.Tag.Year.ToString ();
+
+								default:
+									throw new Exception ( "Not support this info argument." );
 							}
+						}
+					}
+					break;
+
+				case "di":
+				case "doc-info":
+					{
+						OpenDocumentTag.File file = new OpenDocumentTag.File ( fileInfo.OriginalFullName );
+						switch ( argument )
+						{
+							case "title":
+								return file.Title;
+							case "author":
+								return file.Author;
+
+							default:
+								throw new Exception ( "Not support this info argument." );
 						}
 					}
 					break;

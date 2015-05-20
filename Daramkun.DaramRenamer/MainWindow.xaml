@@ -882,7 +882,7 @@ Free
 5. WPF TaskDialog
 ------------------------------
 This work is licensed under the The Code Project Open License (CPOL) 1.02. To view a copy of this license, visit http://www.codeproject.com/info/cpol10.aspx.
-								
+
 Author: Sean A. Hanley
 Source: https://github.com/yadyn/WPF-Task-Dialog
 
@@ -924,8 +924,8 @@ Source: http://www.cnblogs.com/SkyD/archive/2008/07/15/1243043.html
 TagLib# is free/open source software, released under the LGPL.
 
 Author: Mono Project
-Source: https://github.com/mono/taglib-sharp
-]]>
+Original Source: https://github.com/mono/taglib-sharp
+Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/TagLib]]>
 						</TextBox>
 					</Grid>
 				</Grid>

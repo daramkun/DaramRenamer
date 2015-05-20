@@ -149,6 +149,7 @@ namespace Daramkun.DaramRenamer
 						switch ( split [ 0 ] )
 						{
 							case "aac":
+								TagLib.Aac.File file = new TagLib.Aac.File ( fileInfo.OriginalFullName );
 								break;
 
 							case "asf":

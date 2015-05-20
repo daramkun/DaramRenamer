@@ -13,6 +13,7 @@ namespace Daramkun.DaramRenamer
 	{
 		private static string [] NewLineSplitter = new [] { "\n" };
 		private static char [] WordSplitter = new [] { ' ', '\t', ',', ';', '-' };
+		private static char [] ArgumentsSplitter = new [] { '.' };
 
 		internal static void BatchProcess ( this FileInfo fileInfo, string batchScript )
 		{
@@ -147,7 +148,8 @@ namespace Daramkun.DaramRenamer
 					{
 						using ( TagLib.File file = TagLib.File.Create ( fileInfo.OriginalFullName ) )
 						{
-							switch ( argument )
+							string [] arguments = argument.Split ( ArgumentsSplitter, StringSplitOptions.RemoveEmptyEntries );
+							switch ( arguments [ 0 ] )
 							{
 								case "audio-bitrate":
 									return file.Properties.AudioBitrate.ToString ();
@@ -184,6 +186,37 @@ namespace Daramkun.DaramRenamer
 										if ( codec.MediaTypes == TagLib.MediaTypes.Photo )
 											return codec.Description;
 									return null;
+
+								case "audio-album":
+									return file.Tag.Album;
+								case "audio-album-artists":
+									return arguments.Length == 1 ? string.Join ( ",", file.Tag.AlbumArtists ) : file.Tag.AlbumArtists [ int.Parse ( arguments [ 1 ] ) ];
+								case "audio-composers":
+									return arguments.Length == 1 ? string.Join ( ",", file.Tag.Composers ) : file.Tag.Composers [ int.Parse ( arguments [ 1 ] ) ];
+								case "audio-conductor":
+									return file.Tag.Conductor;
+								case "video-copyright":
+								case "audio-copyright":
+									return file.Tag.Copyright;
+								case "audio-disc":
+									return file.Tag.Disc.ToString ();
+								case "audio-disc-count":
+									return file.Tag.DiscCount.ToString ();
+								case "audio-genre":
+								case "video-genre":
+									return arguments.Length == 1 ? string.Join ( ",", file.Tag.Genres ) : file.Tag.Genres [ int.Parse ( arguments [ 1 ] ) ];
+								case "audio-performers":
+									return arguments.Length == 1 ? string.Join ( ",", file.Tag.Performers ) : file.Tag.Performers [ int.Parse ( arguments [ 1 ] ) ];
+								case "audio-title":
+								case "video-title":
+									return file.Tag.Title;
+								case "audio-track":
+									return file.Tag.Track.ToString ();
+								case "audio-track-count":
+									return file.Tag.TrackCount.ToString ();
+								case "audio-year":
+								case "video-year":
+									return file.Tag.Year.ToString ();
 							}
 						}
 					}

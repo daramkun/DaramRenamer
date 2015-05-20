@@ -731,12 +731,22 @@ namespace Daramkun.DaramRenamer
 
 		private void BatchProcess_Import_Click ( object sender, RoutedEventArgs e )
 		{
-
+			Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog ();
+			ofd.Filter = "Daram Renamer Batchscript (*.drbs)|*.drbs";
+			if ( ofd.ShowDialog () == true )
+			{
+				batchCommands.Text = File.ReadAllText ( ofd.FileName );
+			}
 		}
 
 		private void BatchProcess_Export_Click ( object sender, RoutedEventArgs e )
 		{
-
+			Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog ();
+			sfd.Filter = "Daram Renamer Batchscript (*.drbs)|*.drbs";
+			if ( sfd.ShowDialog () == true )
+			{
+				File.WriteAllText ( sfd.FileName, batchCommands.Text );
+			}
 		}
 		#endregion
 

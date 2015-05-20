@@ -127,6 +127,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="28" />
 			<RowDefinition />
+			<RowDefinition Height="3" />
 			<RowDefinition Height="200" />
 		</Grid.RowDefinitions>
 
@@ -272,8 +273,10 @@
 				</GridView>
 			</ListView.View>
 		</ListView>
+
+		<GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" />
 		
-		<TabControl Name="mainTabControl" Focusable="True" Grid.Row="2" Margin="5,0,5,5">
+		<TabControl Name="mainTabControl" Focusable="True" Grid.Row="3" Margin="5,5,5,5">
 			<!-- ========================================= -->
 			<!--                 문자열처리                 -->
 			<!-- ========================================= -->
@@ -800,15 +803,25 @@
 								<RowDefinition Height="28" />
 							</Grid.RowDefinitions>
 							
-							<Grid>
+							<Grid VerticalAlignment="Center">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition />
 									<ColumnDefinition Width="80" />
 									<ColumnDefinition Width="80" />
 								</Grid.ColumnDefinitions>
+
+								<ComboBox Name="comboBoxBatchCondition" Grid.Column="0" SelectedIndex="0">
+									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_None}" />
+									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_Video}" />
+									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_Audio}" />
+									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_Image}" />
+								</ComboBox>
+
+								<Button Content="{x:Static setting:Resources.BatchTab_Load}" Grid.Column="1" Margin="5,0,0,0" />
+								<Button Content="{x:Static setting:Resources.BatchTab_Save}" Grid.Column="2" Margin="5,0,0,0" />
 							</Grid>
 
-							<TextBox Grid.Row="1" Name="batchCommands" FontFamily="Consolas" Grid.Column="0" Margin="0,0,0,5" AcceptsReturn="True" AcceptsTab="True" AllowDrop="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+							<TextBox Grid.Row="1" Name="batchCommands" FontFamily="Consolas" Grid.Column="0" Margin="0,5,0,5" AcceptsReturn="True" AcceptsTab="True" AllowDrop="False" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
 
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="3" Grid.ColumnSpan="2" IsDefault="True" Style="{StaticResource DoButtonStyle}" Click="BatchProcess_Process_Click" />
 						</Grid>

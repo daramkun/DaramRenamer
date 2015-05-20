@@ -434,4 +434,22 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="PathError_FileIsNotFound" xml:space="preserve">
     <value>{0} 파일을 찾을 수 없습니다.</value>
   </data>
+  <data name="BatchTab_Condition_Audio" xml:space="preserve">
+    <value>오디오 파일</value>
+  </data>
+  <data name="BatchTab_Condition_Image" xml:space="preserve">
+    <value>이미지 파일</value>
+  </data>
+  <data name="BatchTab_Condition_None" xml:space="preserve">
+    <value>&lt;&lt; 모든 파일 &gt;&gt;</value>
+  </data>
+  <data name="BatchTab_Condition_Video" xml:space="preserve">
+    <value>비디오 파일</value>
+  </data>
+  <data name="BatchTab_Load" xml:space="preserve">
+    <value>불러오기</value>
+  </data>
+  <data name="BatchTab_Save" xml:space="preserve">
+    <value>저장하기</value>
+  </data>
 </root>

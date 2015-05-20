@@ -434,4 +434,22 @@ If you use Windows XP, please use 1.x version.</value>
   <data name="PathError_FileIsNotFound" xml:space="preserve">
     <value>{0} File is no exist.</value>
   </data>
+  <data name="BatchTab_Condition_Audio" xml:space="preserve">
+    <value>Audio Files</value>
+  </data>
+  <data name="BatchTab_Condition_Image" xml:space="preserve">
+    <value>Image Files</value>
+  </data>
+  <data name="BatchTab_Condition_None" xml:space="preserve">
+    <value>&lt;&lt; ALL FILES &gt;&gt;</value>
+  </data>
+  <data name="BatchTab_Condition_Video" xml:space="preserve">
+    <value>Video Files</value>
+  </data>
+  <data name="BatchTab_Load" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="BatchTab_Save" xml:space="preserve">
+    <value>Export</value>
+  </data>
 </root>

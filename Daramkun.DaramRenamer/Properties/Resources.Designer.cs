@@ -115,6 +115,60 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   오디오 파일과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_Condition_Audio {
+            get {
+                return ResourceManager.GetString("BatchTab_Condition_Audio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이미지 파일과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_Condition_Image {
+            get {
+                return ResourceManager.GetString("BatchTab_Condition_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &lt;&lt; 모든 파일 &gt;&gt;과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_Condition_None {
+            get {
+                return ResourceManager.GetString("BatchTab_Condition_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비디오 파일과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_Condition_Video {
+            get {
+                return ResourceManager.GetString("BatchTab_Condition_Video", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   불러오기과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_Load {
+            get {
+                return ResourceManager.GetString("BatchTab_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   저장하기과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_Save {
+            get {
+                return ResourceManager.GetString("BatchTab_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   업데이트를 확인할 수 없습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string CannotCheckUpdate {

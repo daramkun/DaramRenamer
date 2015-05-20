@@ -14,7 +14,7 @@ namespace Daramkun.DaramRenamer
 		private static string [] NewLineSplitter = new [] { "\n" };
 		private static char [] WordSplitter = new [] { ' ', '\t', ',', ';', '-' };
 
-		public static void BatchProcess ( this FileInfo fileInfo, string batchScript )
+		internal static void BatchProcess ( this FileInfo fileInfo, string batchScript )
 		{
 			string [] lines = batchScript.Split ( NewLineSplitter, StringSplitOptions.RemoveEmptyEntries );
 
@@ -86,7 +86,7 @@ namespace Daramkun.DaramRenamer
 			}
 		}
 
-		public static string ConvertFormatString ( FileInfo fileInfo, string formatString )
+		internal static string ConvertFormatString ( FileInfo fileInfo, string formatString )
 		{
 			string argument = null;
 			if ( formatString.IndexOf ( ':' ) > 0 )
@@ -143,55 +143,48 @@ namespace Daramkun.DaramRenamer
 					}
 					break;
 
-				case "tag":
+				case "media-info":
 					{
-						string [] split = argument.Split ( '.' );
-						switch ( split [ 0 ] )
+						using ( TagLib.File file = TagLib.File.Create ( fileInfo.OriginalFullName ) )
 						{
-							case "aac":
-								TagLib.Aac.File file = new TagLib.Aac.File ( fileInfo.OriginalFullName );
-								break;
+							switch ( argument )
+							{
+								case "audio-bitrate":
+									return file.Properties.AudioBitrate.ToString ();
+								case "audio-samplerate":
+									return file.Properties.AudioSampleRate.ToString ();
+								case "audio-channels":
+									return file.Properties.AudioChannels.ToString ();
+								case "audio-bitspersample":
+									return file.Properties.BitsPerSample.ToString ();
+								case "audio-codec":
+									foreach ( var codec in file.Properties.Codecs )
+										if ( codec.MediaTypes == TagLib.MediaTypes.Audio )
+											return codec.Description;
+									return null;
 
-							case "asf":
-								break;
+								case "video-width":
+									return file.Properties.VideoWidth.ToString ();
+								case "video-height":
+									return file.Properties.VideoHeight.ToString ();
+								case "video-codec":
+									foreach ( var codec in file.Properties.Codecs )
+										if ( codec.MediaTypes == TagLib.MediaTypes.Video )
+											return codec.Description;
+									return null;
 
-							case "flac":
-								break;
-
-							case "mp3":
-							case "id3":
-								break;
-
-							case "jpg":
-							case "jpeg":
-								break;
-
-							case "mpeg":
-								break;
-
-							case "mpeg4":
-							case "mp4":
-								break;
-
-							case "ogg":
-								break;
-
-							case "png":
-								break;
-
-							case "tif":
-								break;
-
-							case "mkv":
-							case "mka":
-								break;
-
-							case "gif":
-								break;
-
-							case "avi":
-							case "riff":
-								break;
+								case "image-width":
+									return file.Properties.PhotoWidth.ToString ();
+								case "image-height":
+									return file.Properties.PhotoHeight.ToString ();
+								case "image-quality":
+									return file.Properties.PhotoQuality.ToString ();
+								case "image-codec":
+									foreach ( var codec in file.Properties.Codecs )
+										if ( codec.MediaTypes == TagLib.MediaTypes.Photo )
+											return codec.Description;
+									return null;
+							}
 						}
 					}
 					break;
@@ -252,7 +245,7 @@ namespace Daramkun.DaramRenamer
 			return null;
 		}
 
-		public static void ProcessFunction ( FileInfo fileInfo, string function, string [] arguments )
+		internal static void ProcessFunction ( FileInfo fileInfo, string function, string [] arguments )
 		{
 			switch ( function )
 			{

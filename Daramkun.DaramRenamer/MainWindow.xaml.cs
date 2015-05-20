@@ -728,6 +728,16 @@ namespace Daramkun.DaramRenamer
 				BatchProcessor.BatchProcess ( fileInfo, commands )
 			);
 		}
+
+		private void BatchProcess_Import_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void BatchProcess_Export_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
 		#endregion
 
 		#region Settings

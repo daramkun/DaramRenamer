@@ -284,5 +284,27 @@ namespace Daramkun.DaramRenamer
 			}
 			catch { }
 		}
+
+		public static void BatchScript ( this FileInfo fileInfo, string script, string condition = null )
+		{
+			if ( script == null || script.Trim () == "" ) return;
+			if ( condition != null || condition != ".*" )
+			{
+				bool found = false;
+				string ext = System.IO.Path.GetExtension ( fileInfo.OriginalFullName );
+				foreach ( var filter in condition.Split ( '|' ) )
+				{
+					if ( filter == ext )
+					{
+						found = true;
+						break;
+					}
+				}
+
+				if ( !found ) return;
+			}
+
+			fileInfo.BatchProcess ( script );
+		}
 	}
 }

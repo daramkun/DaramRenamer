@@ -70,6 +70,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -85,6 +87,7 @@
     </ApplicationDefinition>
     <Compile Include="BatchProcessor.cs" />
     <Compile Include="ComboBoxBindingConverter.cs" />
+    <Compile Include="OpenDocumentTag\File.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>

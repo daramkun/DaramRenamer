@@ -725,7 +725,7 @@ namespace Daramkun.DaramRenamer
 			string commands = batchCommands.Text;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				BatchProcessor.BatchProcess ( fileInfo, commands )
+				FilenameProcessor.BatchScript ( fileInfo, commands, ( comboBoxBatchCondition.SelectedItem as ComboBoxItem ).Tag as string )
 			);
 		}
 

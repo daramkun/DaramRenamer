@@ -108,6 +108,7 @@ namespace Daramkun.DaramRenamer
 						fileInfo.ChangedName = stringBuilder.ToString ();
 					else if ( cur [ 0 ] == '~' )
 						fileInfo.ChangedPath = stringBuilder.ToString ();
+					else throw new Exception ( "Target lost." );
 				}
 			}
 		}

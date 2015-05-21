@@ -455,4 +455,7 @@ If you use Windows XP, please use 1.x version.</value>
   <data name="FilenameAutoFix" xml:space="preserve">
     <value>Fix the filename automation when used unsupport character.</value>
   </data>
+  <data name="SyntaxError" xml:space="preserve">
+    <value>Syntex error in batch process script.</value>
+  </data>
 </root>

@@ -909,6 +909,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   일괄 실행 스크립트의 문법 오류가 발생했습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SyntaxError {
+            get {
+                return ResourceManager.GetString("SyntaxError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0}/{1}개의 파일에 대해 이름을 변경하였습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ThatFilesNameChanged {

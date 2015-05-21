@@ -455,4 +455,7 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="FilenameAutoFix" xml:space="preserve">
     <value>파일명에 허용되지 않은 문자는 자동으로 수정합니다.</value>
   </data>
+  <data name="SyntaxError" xml:space="preserve">
+    <value>일괄 실행 스크립트의 문법 오류가 발생했습니다.</value>
+  </data>
 </root>

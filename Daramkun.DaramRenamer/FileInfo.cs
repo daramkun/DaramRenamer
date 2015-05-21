@@ -23,6 +23,17 @@ namespace Daramkun.DaramRenamer
 		public string OriginalFullName { get { return Path.Combine ( OriginalPath, OriginalName ); } }
 		public string ChangedFullName { get { return Path.Combine ( ChangedPath, ChangedName ); } }
 
+		public FileInfo () { originalName = ""; changeName = ""; originalPath = ""; changePath = ""; }
+		public FileInfo ( FileInfo fileInfo ) { ValueCopy ( fileInfo ); }
+
+		public void ValueCopy ( FileInfo fileInfo )
+		{
+			OriginalName = fileInfo.OriginalName.Clone () as string;
+			ChangedName = fileInfo.ChangedName.Clone () as string;
+			OriginalPath = fileInfo.OriginalPath.Clone () as string;
+			ChangedPath = fileInfo.ChangedPath.Clone () as string;
+		}
+
 		private void PC ( string p )
 		{
 			if ( PropertyChanged != null )

@@ -726,10 +726,24 @@ namespace Daramkun.DaramRenamer
 			SaveCurrentStateToUndoStack ();
 
 			string commands = batchCommands.Text;
+			string tag = ( comboBoxBatchCondition.SelectedItem as ComboBoxItem ).Tag as string;
 
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
-				FilenameProcessor.BatchScript ( fileInfo, commands, ( comboBoxBatchCondition.SelectedItem as ComboBoxItem ).Tag as string )
-			);
+			{
+				FileInfo temp = new FileInfo ( fileInfo );
+				try
+				{
+					FilenameProcessor.BatchScript ( fileInfo, commands, tag );
+				}
+				catch
+				{
+					fileInfo.ValueCopy ( temp );
+					Dispatcher.BeginInvoke ( new Action ( () =>
+					{
+						MainWindow.SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.SyntaxError );
+					} ) );
+				}
+			} );
 		}
 
 		private void BatchProcess_Import_Click ( object sender, RoutedEventArgs e )

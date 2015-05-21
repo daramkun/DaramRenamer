@@ -288,7 +288,7 @@ namespace Daramkun.DaramRenamer
 		public static void BatchScript ( this FileInfo fileInfo, string script, string condition = null )
 		{
 			if ( script == null || script.Trim () == "" ) return;
-			if ( condition != null || condition != ".*" )
+			if ( condition != null && condition != ".*" )
 			{
 				bool found = false;
 				string ext = System.IO.Path.GetExtension ( fileInfo.OriginalFullName );
@@ -303,7 +303,6 @@ namespace Daramkun.DaramRenamer
 
 				if ( !found ) return;
 			}
-
 			fileInfo.BatchProcess ( script );
 		}
 	}

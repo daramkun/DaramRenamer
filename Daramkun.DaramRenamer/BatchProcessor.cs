@@ -82,7 +82,27 @@ namespace Daramkun.DaramRenamer
 				// Format Mode
 				else
 				{
-					
+					StringBuilder stringBuilder = new StringBuilder ();
+					bool started = false;
+					for ( int i = 0; i < cur.Length; ++i )
+					{
+						char ch = cur [ i ];
+						if ( started )
+						{
+							if ( ch == '}' )
+							{
+								started = false;
+								stringBuilder.Append ( ConvertFormatString ( fileInfo, builder.ToString () ) );
+								builder.Clear ();
+							}
+							else builder.Append ( ch );
+						}
+						else
+						{
+							if ( ch == '{' ) started = true;
+							else stringBuilder.Append ( ch );
+						}
+					}
 				}
 			}
 		}

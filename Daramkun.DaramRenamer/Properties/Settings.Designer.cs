@@ -83,5 +83,17 @@ namespace Daramkun.DaramRenamer.Properties {
                 this["FileCopyWhenApply"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FilenameAutoFix {
+            get {
+                return ((bool)(this["FilenameAutoFix"]));
+            }
+            set {
+                this["FilenameAutoFix"] = value;
+            }
+        }
     }
 }

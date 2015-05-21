@@ -452,4 +452,7 @@ If you use Windows XP, please use 1.x version.</value>
   <data name="BatchTab_Save" xml:space="preserve">
     <value>Export</value>
   </data>
+  <data name="FilenameAutoFix" xml:space="preserve">
+    <value>Fix the filename automation when used unsupport character.</value>
+  </data>
 </root>

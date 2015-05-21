@@ -29,6 +29,38 @@ namespace Daramkun.DaramRenamer
 				PropertyChanged ( this, new PropertyChangedEventArgs ( p ) );
 		}
 
+		private string ReplaceInvalidCharacter(char ch)
+		{
+			switch(ch)
+			{
+				case '?': return "？";
+				case '\\': return "＼";
+				case '/': return "／";
+				case '<': return "〈";
+				case '>': return "〉";
+				case '*': return "＊";
+				case '|': return "｜";
+				case ':': return "：";
+				case '"': return "＂";
+				default: return "";
+			}
+		}
+
+		public void FixFilename ()
+		{
+			foreach ( var ch in System.IO.Path.GetInvalidPathChars () )
+			{
+				if ( ChangedPath.IndexOf ( ch ) < 0 )
+					ChangedPath = ChangedPath.Replace ( "" + ch, ReplaceInvalidCharacter ( ch ) );
+			}
+
+			foreach ( var ch in System.IO.Path.GetInvalidFileNameChars () )
+			{
+				if ( ChangedName.IndexOf ( ch ) < 0 )
+					ChangedName = ChangedPath.Replace ( "" + ch, ReplaceInvalidCharacter ( ch ) );
+			}
+		}
+
 		public void Changed ()
 		{
 			OriginalName = changeName.Clone () as string;

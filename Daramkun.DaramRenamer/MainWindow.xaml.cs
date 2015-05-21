@@ -255,6 +255,9 @@ namespace Daramkun.DaramRenamer
 			{
 				++total;
 				bool s = false;
+				if ( Daramkun.DaramRenamer.Properties.Settings.Default.FilenameAutoFix )
+					fileInfo.FixFilename ();
+
 				if ( !Settings.Default.FileCopyWhenApply ) s = fileInfo.ToMove ();
 				else s = fileInfo.ToCopy ();
 				if ( s ) ++succeed;

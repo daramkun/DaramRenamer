@@ -277,6 +277,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   파일명에 허용되지 않은 문자는 자동으로 수정합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string FilenameAutoFix {
+            get {
+                return ResourceManager.GetString("FilenameAutoFix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   가능한 경우 하드웨어 가속 렌더링 사용.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string HardwareRenderingSupport {

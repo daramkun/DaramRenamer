@@ -458,4 +458,7 @@ If you use Windows XP, please use 1.x version.</value>
   <data name="SyntaxError" xml:space="preserve">
     <value>Syntex error in batch process script.</value>
   </data>
+  <data name="BatchTab_Condition_Document" xml:space="preserve">
+    <value>Document Files</value>
+  </data>
 </root>

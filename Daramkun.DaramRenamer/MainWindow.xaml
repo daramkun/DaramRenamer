@@ -815,6 +815,7 @@
 									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_Video}" Tag=".mp4|.avi|.ogv|.mpg|.mpeg|.mkv|.asf" />
 									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_Audio}" Tag=".mp3|.m4a|.aac|.asf|.mka|.ogg|.oga|.flac" />
 									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_Image}" Tag=".png|.jpg|.jpeg|.gif|.tiff|.tif" />
+									<ComboBoxItem Content="{x:Static setting:Resources.BatchTab_Condition_Document}" Tag=".docx|.pptx|.xlsx|.odt|.odp|.ods" />
 								</ComboBox>
 
 								<Button Content="{x:Static setting:Resources.BatchTab_Load}" Grid.Column="1" Margin="5,0,0,0" Click="BatchProcess_Import_Click" />

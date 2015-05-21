@@ -124,6 +124,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   문서 파일과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BatchTab_Condition_Document {
+            get {
+                return ResourceManager.GetString("BatchTab_Condition_Document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   이미지 파일과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string BatchTab_Condition_Image {

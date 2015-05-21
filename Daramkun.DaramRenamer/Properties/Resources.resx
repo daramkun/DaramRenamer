@@ -458,4 +458,7 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="SyntaxError" xml:space="preserve">
     <value>일괄 실행 스크립트의 문법 오류가 발생했습니다.</value>
   </data>
+  <data name="BatchTab_Condition_Document" xml:space="preserve">
+    <value>문서 파일</value>
+  </data>
 </root>

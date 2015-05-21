@@ -84,7 +84,7 @@ namespace Daramkun.DaramRenamer
 				{
 					StringBuilder stringBuilder = new StringBuilder ();
 					bool started = false;
-					for ( int i = 0; i < cur.Length; ++i )
+					for ( int i = 1; i < cur.Length; ++i )
 					{
 						char ch = cur [ i ];
 						if ( started )
@@ -103,6 +103,11 @@ namespace Daramkun.DaramRenamer
 							else stringBuilder.Append ( ch );
 						}
 					}
+
+					if ( cur [ 0 ] == '^' )
+						fileInfo.ChangedName = stringBuilder.ToString ();
+					else if ( cur [ 0 ] == '~' )
+						fileInfo.ChangedPath = stringBuilder.ToString ();
 				}
 			}
 		}
@@ -113,7 +118,7 @@ namespace Daramkun.DaramRenamer
 			if ( formatString.IndexOf ( ':' ) > 0 )
 			{
 				argument = formatString.Substring ( formatString.IndexOf ( ':' ) + 1 );
-				formatString = formatString.Substring ( 0, formatString.IndexOf ( ':' ) - 1 );
+				formatString = formatString.Substring ( 0, formatString.IndexOf ( ':' ) );
 			}
 
 			switch ( formatString )
@@ -315,6 +320,25 @@ namespace Daramkun.DaramRenamer
 						return sBuilder.ToString ();
 					}
 					break;
+
+				case "current-name":
+					return System.IO.Path.GetFileNameWithoutExtension ( fileInfo.ChangedName );
+
+				case "current-ext":
+					return System.IO.Path.GetExtension ( fileInfo.ChangedName );
+
+				case "current-path":
+					if ( argument == null || argument == "" ) return fileInfo.ChangedPath;
+					else
+					{
+						int count = int.Parse ( argument );
+						List<string> split_path = new List<string> ( fileInfo.ChangedPath.Split ( System.IO.Path.PathSeparator ) );
+						while ( split_path.Count > count )
+						{
+							split_path.RemoveAt ( count );
+						}
+						return string.Join ( "" + System.IO.Path.PathSeparator, split_path );
+					}
 			}
 			return null;
 		}

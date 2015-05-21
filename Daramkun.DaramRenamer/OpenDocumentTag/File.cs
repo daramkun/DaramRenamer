@@ -24,15 +24,23 @@ namespace Daramkun.DaramRenamer.OpenDocumentTag
 					{
 						var xml = new XmlDocument ();
 						xml.CreateComment ( new StreamReader ( entry.Open () ).ReadToEnd () );
-						
 
+						foreach ( var element in xml.DocumentElement.ChildNodes )
+						{
+							if ( ( element as XmlElement ).LocalName == "title" ) Title = ( element as XmlElement ).InnerText;
+							else if ( ( element as XmlElement ).LocalName == "creator" ) Author = ( element as XmlElement ).InnerText;
+						}
 					}
 					else if ( entry.Name == "meta.xml" )
 					{
 						var xml = new XmlDocument ();
 						xml.CreateComment ( new StreamReader ( entry.Open () ).ReadToEnd () );
-					
-	
+
+						foreach ( var element in xml.DocumentElement.ChildNodes [ 0 ].ChildNodes )
+						{
+							if ( ( element as XmlElement ).LocalName == "title" ) Title = ( element as XmlElement ).InnerText;
+							else if ( ( element as XmlElement ).LocalName == "creator" ) Author = ( element as XmlElement ).InnerText;
+						}	
 					}
 				}
 			}

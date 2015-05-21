@@ -212,7 +212,7 @@
 			</ToolBar>
 		</ToolBarTray>
 
-		<ListView Name="listViewFiles" Grid.Row="1" Margin="5,5,5,5" AllowDrop="True"
+		<ListView Name="listViewFiles" Grid.Row="1" Margin="5,5,5,2" AllowDrop="True"
 				  Focusable="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
 				  ScrollViewer.HorizontalScrollBarVisibility="Auto"
 				  DragEnter="ListView_DragEnter" Drop="ListView_Drop" KeyUp="ListView_KeyUp">
@@ -274,9 +274,9 @@
 			</ListView.View>
 		</ListView>
 
-		<GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" />
+		<GridSplitter Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" />
 		
-		<TabControl Name="mainTabControl" Focusable="True" Grid.Row="3" Margin="5,5,5,5">
+		<TabControl Name="mainTabControl" Focusable="True" Grid.Row="3" Margin="5,2,5,5">
 			<!-- ========================================= -->
 			<!--                 문자열처리                 -->
 			<!-- ========================================= -->

@@ -468,6 +468,17 @@
     <Resource Include="TaskDialog\Resources\shield-16.png" />
     <Resource Include="TaskDialog\Resources\shield-32.png" />
     <Resource Include="Resources\cup_add.png" />
+    <Resource Include="Resources\layout_edit.png" />
+    <Resource Include="Resources\shape_move_forwards.png" />
+    <Resource Include="Resources\pencil_delete.png" />
+    <Resource Include="Resources\brick_delete.png" />
+    <Resource Include="Resources\chart_line_delete.png" />
+    <Resource Include="Resources\chart_bar.png" />
+    <Resource Include="Resources\text_list_numbers.png" />
+    <Resource Include="Resources\chart_curve.png" />
+    <Resource Include="Resources\tag_blue_add.png" />
+    <Resource Include="Resources\tag_blue_delete.png" />
+    <Resource Include="Resources\tag_blue_edit.png" />
     <Content Include="TaskDialog\TaskDialog.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

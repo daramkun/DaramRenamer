@@ -84,6 +84,7 @@ namespace Daramkun.DaramRenamer
 				{
 					StringBuilder stringBuilder = new StringBuilder ();
 					bool started = false;
+					bool backslashed = false;
 					for ( int i = 1; i < cur.Length; ++i )
 					{
 						char ch = cur [ i ];
@@ -99,7 +100,12 @@ namespace Daramkun.DaramRenamer
 						}
 						else
 						{
-							if ( ch == '{' ) started = true;
+							if ( ch == '\\' && backslashed == false ) backslashed = true;
+							else if ( ch == '\\' && backslashed == true ) { stringBuilder.Append ( '\\' ); backslashed = false; }
+							else if ( ch == '{' && backslashed == true ) { stringBuilder.Append ( '{' ); backslashed = false; }
+							else if ( ch == '}' && backslashed == true ) { stringBuilder.Append ( '}' ); backslashed = false; }
+							else if ( ch == '}' && backslashed == false ) { throw new Exception ( "Syntax error." ); }
+							else if ( ch == '{' && backslashed == false ) started = true;
 							else stringBuilder.Append ( ch );
 						}
 					}
@@ -322,12 +328,15 @@ namespace Daramkun.DaramRenamer
 					}
 					break;
 
+				case "cn":
 				case "current-name":
 					return System.IO.Path.GetFileNameWithoutExtension ( fileInfo.ChangedName );
 
+				case "ce":
 				case "current-ext":
 					return System.IO.Path.GetExtension ( fileInfo.ChangedName );
 
+				case "cp":
 				case "current-path":
 					if ( argument == null || argument == "" ) return fileInfo.ChangedPath;
 					else
@@ -348,6 +357,7 @@ namespace Daramkun.DaramRenamer
 		{
 			switch ( function )
 			{
+				case "rp":
 				case "replace:":
 					if ( arguments.Length == 2 )
 						fileInfo.Replace ( arguments [ 0 ], arguments [ 1 ] );
@@ -355,6 +365,7 @@ namespace Daramkun.DaramRenamer
 						fileInfo.Replace ( arguments [ 0 ], arguments [ 1 ], bool.Parse ( arguments [ 2 ] ) );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "cc":
 				case "concat:":
 					if ( arguments.Length == 1 )
 						fileInfo.Concat ( arguments [ 0 ] );
@@ -362,6 +373,7 @@ namespace Daramkun.DaramRenamer
 						fileInfo.Concat ( arguments [ 0 ], bool.Parse ( arguments [ 1 ] ) );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "tr":
 				case "trim:":
 					if ( arguments.Length == 0 )
 						fileInfo.Trimming ();
@@ -371,6 +383,7 @@ namespace Daramkun.DaramRenamer
 						fileInfo.Trimming ( bool.Parse ( arguments [ 0 ] ), bool.Parse ( arguments [ 1 ] ) );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "db":
 				case "delblock:":
 					if ( arguments.Length == 2 )
 						fileInfo.DeleteEnclosed ( arguments [ 0 ], arguments [ 1 ] );
@@ -378,11 +391,13 @@ namespace Daramkun.DaramRenamer
 						fileInfo.DeleteEnclosed ( arguments [ 0 ], arguments [ 1 ], bool.Parse ( arguments [ 2 ] ) );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "dn":
 				case "delname:":
 					if ( arguments.Length == 0 )
 						fileInfo.DeleteName ();
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "ucn":
 				case "uppercasename:":
 					if ( arguments.Length == 0 || ( arguments.Length == 1 && arguments [ 0 ] == "false" ) )
 						fileInfo.NameToUpper ();
@@ -390,11 +405,13 @@ namespace Daramkun.DaramRenamer
 						fileInfo.NameToUpperFirstLetterOnly ();
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "lcn":
 				case "lowercasename:":
 					if ( arguments.Length == 0 )
 						fileInfo.NameToLower ();
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "on":
 				case "onlynum:":
 					if ( arguments.Length == 0 || ( arguments.Length == 1 && arguments [ 0 ] == "false" ) )
 						fileInfo.DeleteWithoutNumber ();
@@ -402,6 +419,7 @@ namespace Daramkun.DaramRenamer
 						fileInfo.DeleteWithoutNumberWordly ();
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "dc":
 				case "digitcount:":
 					if ( arguments.Length == 1 )
 						fileInfo.SameNumberOfDigit ( int.Parse ( arguments [ 0 ] ) );
@@ -411,6 +429,7 @@ namespace Daramkun.DaramRenamer
 					break;
 				//case "addnum:":
 				//	break;
+				case "ic":
 				case "increase:":
 					if ( arguments.Length == 1 )
 						fileInfo.NumberIncrese ( int.Parse ( arguments [ 0 ] ) );
@@ -418,31 +437,37 @@ namespace Daramkun.DaramRenamer
 						fileInfo.NumberIncrese ( int.Parse ( arguments [ 0 ] ), bool.Parse ( arguments [ 1 ] ) );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "ae":
 				case "addext:":
 					if ( arguments.Length == 1 )
 						fileInfo.AddExtension ( arguments [ 0 ] );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "de":
 				case "delext:":
 					if ( arguments.Length == 0 )
 						fileInfo.DeleteExtension ();
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "ce":
 				case "changeext:":
 					if ( arguments.Length == 1 )
 						fileInfo.ChangeExtension ( arguments [ 0 ] );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "uce":
 				case "uppercaseext:":
 					if ( arguments.Length == 0 )
 						fileInfo.ExtensionToUpper ();
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "lce":
 				case "lowercaseext:":
 					if ( arguments.Length == 0 )
 						fileInfo.ExtensionToLower ();
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "cd":
 				case "creationdate":
 					if ( arguments.Length == 0 )
 						fileInfo.AddCreationDate ();
@@ -452,6 +477,7 @@ namespace Daramkun.DaramRenamer
 						fileInfo.AddCreationDate ( bool.Parse ( arguments [ 0 ] ), arguments [ 1 ] );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "ad":
 				case "accessdate":
 					if ( arguments.Length == 0 )
 						fileInfo.AddLastAccessDate ();
@@ -461,6 +487,7 @@ namespace Daramkun.DaramRenamer
 						fileInfo.AddLastAccessDate ( bool.Parse ( arguments [ 0 ] ), arguments [ 1 ] );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "md":
 				case "modifydate":
 					if ( arguments.Length == 0 )
 						fileInfo.AddLastWriteDate ();
@@ -470,11 +497,13 @@ namespace Daramkun.DaramRenamer
 						fileInfo.AddLastWriteDate ( bool.Parse ( arguments [ 0 ] ), arguments [ 1 ] );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "cp":
 				case "changepath:":
 					if ( arguments.Length == 1 )
 						fileInfo.ChangePath ( arguments [ 0 ] );
 					else throw new Exception ( string.Format ( "Function Mode Argument error: {0}", function ) );
 					break;
+				case "re":
 				case "regexp:":
 					if ( arguments.Length == 2 )
 						fileInfo.RegularExpression ( new Regex ( arguments [ 0 ] ), arguments [ 1 ] );

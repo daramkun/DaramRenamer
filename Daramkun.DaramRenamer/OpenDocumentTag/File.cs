@@ -20,10 +20,10 @@ namespace Daramkun.DaramRenamer.OpenDocumentTag
 				var archive = new System.IO.Compression.ZipArchive ( stream );
 				foreach ( var entry in archive.Entries )
 				{
-					if ( entry.Name == "docProps/core.xml" )
+					if ( entry.FullName == "docProps/core.xml" )
 					{
 						var xml = new XmlDocument ();
-						xml.CreateComment ( new StreamReader ( entry.Open () ).ReadToEnd () );
+						xml.LoadXml ( new StreamReader ( entry.Open () ).ReadToEnd () );
 
 						foreach ( var element in xml.DocumentElement.ChildNodes )
 						{
@@ -31,10 +31,10 @@ namespace Daramkun.DaramRenamer.OpenDocumentTag
 							else if ( ( element as XmlElement ).LocalName == "creator" ) Author = ( element as XmlElement ).InnerText;
 						}
 					}
-					else if ( entry.Name == "meta.xml" )
+					else if ( entry.FullName == "meta.xml" )
 					{
 						var xml = new XmlDocument ();
-						xml.CreateComment ( new StreamReader ( entry.Open () ).ReadToEnd () );
+						xml.LoadXml ( new StreamReader ( entry.Open () ).ReadToEnd () );
 
 						foreach ( var element in xml.DocumentElement.ChildNodes [ 0 ].ChildNodes )
 						{

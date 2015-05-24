@@ -464,4 +464,13 @@ If you use Windows XP, please use 1.x version.</value>
   <data name="DirectExecute" xml:space="preserve">
     <value>If single action of Toolbar button, Execute directly</value>
   </data>
+  <data name="StringTab_Substring" xml:space="preserve">
+    <value>Substring</value>
+  </data>
+  <data name="InTab_Length" xml:space="preserve">
+    <value>Length:</value>
+  </data>
+  <data name="InTab_StartIndex" xml:space="preserve">
+    <value>Start Index:</value>
+  </data>
 </root>

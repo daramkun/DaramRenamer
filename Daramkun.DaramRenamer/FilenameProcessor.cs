@@ -90,6 +90,14 @@ namespace Daramkun.DaramRenamer
 			fileInfo.ChangedName = string.Join ( " ", split );
 		}
 
+		public static void SubstringName ( this FileInfo fileInfo, int startIndex, int length )
+		{
+			if ( length <= 0 )
+				fileInfo.ChangedName = fileInfo.ChangedName.Substring ( startIndex );
+			else
+				fileInfo.ChangedName = fileInfo.ChangedName.Substring ( startIndex, length );
+		}
+
 		public static void DeleteWithoutNumber ( this FileInfo fileInfo )
 		{
 			if ( fileInfo.ChangedName.Length == 0 ) return;

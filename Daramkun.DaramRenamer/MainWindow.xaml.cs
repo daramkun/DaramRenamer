@@ -443,8 +443,8 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( !Settings.Default.ExecuteDirect )
 			{
-			mainTabControl.SelectedIndex = 1;
-			stringTabControl.SelectedIndex = 1;
+				mainTabControl.SelectedIndex = 1;
+				stringTabControl.SelectedIndex = 1;
 			}
 			else ExtensionProcess_RemoveExt_Click ( sender, e );
 		}
@@ -636,6 +636,16 @@ namespace Daramkun.DaramRenamer
 				else if ( upper ) FilenameProcessor.NameToUpper ( fileInfo );
 				else FilenameProcessor.NameToLower ( fileInfo );
 			} );
+		}
+
+		private void StringProcess_Substring_Click ( object sender, RoutedEventArgs e )
+		{
+			SaveCurrentStateToUndoStack ();
+
+			int startIndex = int.Parse ( stringSubstringStartIndex.Text );
+			int length = 0;
+			if ( stringSubstringLength.Text.Trim ().Length > 0 )
+				length = int.Parse ( stringSubstringLength.Text );
 		}
 		#endregion
 

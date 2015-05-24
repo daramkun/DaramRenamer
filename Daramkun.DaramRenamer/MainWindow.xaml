@@ -488,6 +488,28 @@
 							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="2" Grid.ColumnSpan="2" IsDefault="True" Click="StringProcess_LowUp_Click" Style="{StaticResource DoButtonStyle}" />
 						</Grid>
 					</TabItem>
+					<TabItem Header="{x:Static setting:Resources.StringTab_Substring}">
+						<Grid Margin="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="24" />
+								<RowDefinition Height="24" />
+								<RowDefinition />
+								<RowDefinition Height="28" />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static setting:Resources.InTab_StartIndex}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static setting:Resources.InTab_Length}" VerticalAlignment="Center" TextAlignment="Right" Margin="0,0,5,0" />
+
+							<TextBox Name="stringSubstringStartIndex" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" />
+							<TextBox Name="stringSubstringLength" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" PreviewTextInput="Digit_PreviewTextInput" />
+
+							<Button Content="{x:Static setting:Resources.Do}" Grid.Row="4" Grid.ColumnSpan="2" IsDefault="True" Style="{StaticResource DoButtonStyle}" Click="StringProcess_Substring_Click" />
+						</Grid>
+					</TabItem>
 				</TabControl>
 			</TabItem>
 			<!-- ========================================= -->

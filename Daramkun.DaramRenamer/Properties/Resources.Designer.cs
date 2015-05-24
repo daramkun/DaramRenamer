@@ -439,6 +439,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   길이:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_Length {
+            get {
+                return ResourceManager.GetString("InTab_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   원본 문자열:과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string InTab_OriginalString {
@@ -507,6 +516,15 @@ namespace Daramkun.DaramRenamer.Properties {
         public static string InTab_ReplaceString {
             get {
                 return ResourceManager.GetString("InTab_ReplaceString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   시작 위치:과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InTab_StartIndex {
+            get {
+                return ResourceManager.GetString("InTab_StartIndex", resourceCulture);
             }
         }
         
@@ -905,6 +923,15 @@ namespace Daramkun.DaramRenamer.Properties {
         public static string StringTab_Replace {
             get {
                 return ResourceManager.GetString("StringTab_Replace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   하위 문자열과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringTab_Substring {
+            get {
+                return ResourceManager.GetString("StringTab_Substring", resourceCulture);
             }
         }
         

@@ -461,4 +461,7 @@ XP 사용자의 경우 1.x 버전을 사용해주세요.</value>
   <data name="BatchTab_Condition_Document" xml:space="preserve">
     <value>문서 파일</value>
   </data>
+  <data name="DirectExecute" xml:space="preserve">
+    <value>툴바 버튼이 단일 작업에 해당하는 경우 클릭만으로 실행합니다.</value>
+  </data>
 </root>

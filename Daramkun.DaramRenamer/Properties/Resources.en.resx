@@ -461,4 +461,7 @@ If you use Windows XP, please use 1.x version.</value>
   <data name="BatchTab_Condition_Document" xml:space="preserve">
     <value>Document Files</value>
   </data>
+  <data name="DirectExecute" xml:space="preserve">
+    <value>If single action of Toolbar button, Execute directly</value>
+  </data>
 </root>

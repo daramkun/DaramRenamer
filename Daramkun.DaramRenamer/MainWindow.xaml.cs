@@ -448,7 +448,7 @@ namespace Daramkun.DaramRenamer
 		#region String Process
 		private void StringProcess_Replace_Click ( object sender, RoutedEventArgs e )
 		{
-			if ( stringReplaceOriginalText.Text.Trim ().Length == 0 || stringReplaceNewText.Text.Trim ().Length == 0 ) return;
+			if ( stringReplaceOriginalText.Text.Length == 0 ) return;
 
 			SaveCurrentStateToUndoStack ();
 
@@ -463,7 +463,7 @@ namespace Daramkun.DaramRenamer
 
 		private void StringProcess_Concat_Click ( object sender, RoutedEventArgs e )
 		{
-			if ( stringConcatText.Text.Trim ().Length == 0 ) return;
+			if ( stringConcatText.Text.Length == 0 ) return;
 
 			SaveCurrentStateToUndoStack ();
 
@@ -490,7 +490,7 @@ namespace Daramkun.DaramRenamer
 
 		private void StringProcess_DelEnclosed_Click ( object sender, RoutedEventArgs e )
 		{
-			if ( stringEnclosedPreText.Text.Trim ().Length == 0 || stringEnclosedPostText.Text.Trim ().Length == 0 ) return;
+			if ( stringEnclosedPreText.Text.Length == 0 || stringEnclosedPostText.Text.Length == 0 ) return;
 
 			SaveCurrentStateToUndoStack ();
 

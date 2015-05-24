@@ -98,9 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="TagLib\Aac\AudioHeader.cs" />
     <Compile Include="TagLib\Aac\BitStream.cs" />
     <Compile Include="TagLib\Aac\File.cs" />
@@ -481,6 +478,12 @@
     <Resource Include="Resources\tag_blue_add.png" />
     <Resource Include="Resources\tag_blue_delete.png" />
     <Resource Include="Resources\tag_blue_edit.png" />
+    <Resource Include="Resources\textfield_rename.png" />
+    <Resource Include="Resources\text_uppercase.png" />
+    <Resource Include="Resources\text_lowercase.png" />
+    <Resource Include="Resources\date_add.png" />
+    <Resource Include="Resources\date_edit.png" />
+    <Resource Include="Resources\date_magnify.png" />
     <Content Include="TaskDialog\TaskDialog.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

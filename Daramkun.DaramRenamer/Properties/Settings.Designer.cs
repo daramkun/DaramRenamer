@@ -95,5 +95,17 @@ namespace Daramkun.DaramRenamer.Properties {
                 this["FilenameAutoFix"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExecuteDirect {
+            get {
+                return ((bool)(this["ExecuteDirect"]));
+            }
+            set {
+                this["ExecuteDirect"] = value;
+            }
+        }
     }
 }

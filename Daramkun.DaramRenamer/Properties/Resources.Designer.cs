@@ -232,6 +232,15 @@ namespace Daramkun.DaramRenamer.Properties {
         }
         
         /// <summary>
+        ///   툴바 버튼이 단일 작업에 해당하는 경우 클릭만으로 실행합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string DirectExecute {
+            get {
+                return ResourceManager.GetString("DirectExecute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   실행과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Do {

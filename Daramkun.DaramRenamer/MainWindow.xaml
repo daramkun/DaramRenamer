@@ -132,7 +132,7 @@
 		</Grid.RowDefinitions>
 
 		<ToolBarTray Grid.Row="0" ClipToBounds="False">
-			<ToolBar ToolBarTray.IsLocked="True" Focusable="True">
+			<ToolBar Focusable="True">
 				<Button Click="ToolBarButton_Open_Click">
 					<Image Source="Resources/folder.png" />
 					<Button.ToolTip>
@@ -208,6 +208,65 @@
 					<Button.ToolTip>
 						<ToolTip Content="{x:Static setting:Resources.ToolBar_Donation}" />
 					</Button.ToolTip>
+				</Button>
+			</ToolBar>
+			<ToolBar Focusable="True">
+				<Button>
+					<Image Source="Resources/layout_edit.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/shape_move_forwards.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/textfield_rename.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/brick_delete.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/pencil_delete.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/text_uppercase.png" />
+				</Button>
+			</ToolBar>
+			<ToolBar Focusable="True">
+				<Button>
+					<Image Source="Resources/tag_blue_add.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/tag_blue_delete.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/tag_blue_edit.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/text_lowercase.png" />
+				</Button>
+			</ToolBar>
+			<ToolBar Focusable="True">
+				<Button>
+					<Image Source="Resources/chart_line_delete.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/chart_bar.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/text_list_numbers.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/chart_curve.png" />
+				</Button>
+			</ToolBar>
+			<ToolBar Focusable="True">
+				<Button>
+					<Image Source="Resources/date_add.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/date_magnify.png" />
+				</Button>
+				<Button>
+					<Image Source="Resources/date_edit.png" />
 				</Button>
 			</ToolBar>
 		</ToolBarTray>
@@ -855,6 +914,7 @@
 						<CheckBox Name="checkAutoRemove" Grid.Row="1" Content="{x:Static setting:Resources.Autoremove}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=AutoRemoveTurnOn}" VerticalAlignment="Center" />
 						<CheckBox Name="checkFileCopy" Grid.Row="2" Content="{x:Static setting:Resources.CopyWhenTransaction}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FileCopyWhenApply}" VerticalAlignment="Center" />
 						<CheckBox Name="checkAutoFix" Grid.Row="3" Content="{x:Static setting:Resources.FilenameAutoFix}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FilenameAutoFix}" VerticalAlignment="Center" />
+						<CheckBox Name="checkDirectExecute" Grid.Row="4" Content="{x:Static setting:Resources.DirectExecute}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=DirectExecute}" VerticalAlignment="Center" />
 					</Grid>
 
 					<Grid Grid.Column="2">

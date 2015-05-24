@@ -25,7 +25,6 @@ namespace Daramkun.DaramRenamer
 	public partial class MainWindow : Window
 	{
 		BinaryFormatter bf;
-		//XmlSerializer xs;
 		ObservableCollection<FileInfo> fileInfoCollection;
 		Stack<byte []> undoStack;
 		Stack<byte []> redoStack;
@@ -55,7 +54,7 @@ namespace Daramkun.DaramRenamer
 			base.OnClosed ( e );
 		}
 
-		protected override void OnActivated ( EventArgs e )
+		protected override async void OnActivated ( EventArgs e )
 		{
 			if ( Settings.Default.AutoRemoveTurnOn )
 			{
@@ -70,6 +69,13 @@ namespace Daramkun.DaramRenamer
 					catch { }
 				} );
 			}
+
+			bool? checkUpdate = await CheckUpdate ();
+			if ( checkUpdate == true )
+			{
+				this.Title = this.Title + "^";
+			}
+
 			base.OnActivated ( e );
 		}
 		#endregion
@@ -212,9 +218,63 @@ namespace Daramkun.DaramRenamer
 			config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK };
 			TaskDialog.Show ( config );
 		}
+
+		public async Task<bool?> CheckUpdate ( bool messageShow = false )
+		{
+			HttpWebRequest req = HttpWebRequest.CreateHttp ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
+			HttpWebResponse res = await req.GetResponseAsync () as HttpWebResponse;
+			Stream stream = null;
+			string version = null;
+			bool checkUpdate = false;
+			try
+			{
+				stream = res.GetResponseStream ();
+				using ( StreamReader reader = new StreamReader ( stream ) )
+				{
+					stream = null;
+					string text = reader.ReadToEnd ();
+					int begin = text.IndexOf ( "<p>다운로드: <a href=\"" );
+					if ( begin == -1 ) { SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.CannotCheckUpdate ); version = null; return false; };
+					int end = text.IndexOf ( "</a></p>", begin );
+					if ( end == -1 ) { SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.CannotCheckUpdate ); version = null; return false; };
+					version = text.Substring ( end - 5, 5 );
+					Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
+					checkUpdate = version != string.Format ( "{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build );
+
+					if ( messageShow )
+					{
+						if ( checkUpdate == true )
+						{
+							TaskDialogOptions config = new TaskDialogOptions ();
+							config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
+							config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.ThereIsUpdate;
+							config.Content = string.Format ( Daramkun.DaramRenamer.Properties.Resources.NoticeUpdate, "" /*version*/ );
+							config.MainIcon = VistaTaskDialogIcon.Information;
+							config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, Daramkun.DaramRenamer.Properties.Resources.ToHomepage };
+							if ( TaskDialog.Show ( config ).CustomButtonResult == 1 )
+								System.Diagnostics.Process.Start ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
+						}
+						else
+						{
+							TaskDialogOptions config = new TaskDialogOptions ();
+							config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
+							config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.NoUpdate;
+							config.Content = Daramkun.DaramRenamer.Properties.Resources.ThisIsStable;
+							config.MainIcon = VistaTaskDialogIcon.Information;
+							config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK };
+							TaskDialog.Show ( config );
+						}
+					}
+				}
+			}
+			catch { version = null; return null; }
+			finally { if ( stream != null ) stream.Dispose (); }
+
+			return checkUpdate;
+		}
 		#endregion
 
-		#region ToolBar Button Events
+		#region Main ToolBar Button Events
 		private void ToolBarButton_Open_Click ( object sender, RoutedEventArgs e )
 		{
 			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog ();
@@ -307,48 +367,14 @@ namespace Daramkun.DaramRenamer
 			FileInfo.Sort ( fileInfoCollection );
 		}
 
-		private void ToolBarButton_CheckUpdate_Click ( object sender, RoutedEventArgs e )
+		private async void ToolBarButton_CheckUpdate_Click ( object sender, RoutedEventArgs e )
 		{
-			HttpWebRequest req = HttpWebRequest.CreateHttp ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
-			HttpWebResponse res = req.GetResponse () as HttpWebResponse;
-			Stream stream = null;
-			try
+			string version;
+			bool? checkUpdate = await CheckUpdate ( true );
+			if ( checkUpdate == null )
 			{
-				stream = res.GetResponseStream ();
-				using ( StreamReader reader = new StreamReader ( stream ) )
-				{
-					stream = null;
-					string text = reader.ReadToEnd ();
-					int begin = text.IndexOf ( "<p>다운로드: <a href=\"" );
-					if ( begin == -1 ) { SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.CannotCheckUpdate ); return; };
-					int end = text.IndexOf ( "</a></p>", begin );
-					if ( end == -1 ) { SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.CannotCheckUpdate ); return; };
-					text = text.Substring ( end - 5, 5 );
-					Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
-					if ( text != string.Format ( "{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build ) )
-					{
-						TaskDialogOptions config = new TaskDialogOptions ();
-						config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
-						config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.ThereIsUpdate;
-						config.Content = string.Format ( Daramkun.DaramRenamer.Properties.Resources.NoticeUpdate, text );
-						config.MainIcon = VistaTaskDialogIcon.Information;
-						config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, Daramkun.DaramRenamer.Properties.Resources.ToHomepage };
-						if ( TaskDialog.Show ( config ).CustomButtonResult == 1 )
-							System.Diagnostics.Process.Start ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
-					}
-					else
-					{
-						TaskDialogOptions config = new TaskDialogOptions ();
-						config.Title = Daramkun.DaramRenamer.Properties.Resources.DaramRenamer;
-						config.MainInstruction = Daramkun.DaramRenamer.Properties.Resources.NoUpdate;
-						config.Content = Daramkun.DaramRenamer.Properties.Resources.ThisIsStable;
-						config.MainIcon = VistaTaskDialogIcon.Information;
-						config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK };
-						TaskDialog.Show ( config );
-					}
-				}
+				SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.CannotCheckUpdate );
 			}
-			finally { if ( stream != null ) stream.Dispose (); }
 		}
 
 		private void ToolBarButton_IssueTracker_Click ( object sender, RoutedEventArgs e )
@@ -360,6 +386,10 @@ namespace Daramkun.DaramRenamer
 		{
 			System.Diagnostics.Process.Start ( "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K96K9B2GBKJVA&lc=KR&item_name=DARAM%20WORLD&currency_code=USD&bn=PP%2dDonationsBF%3ax%2dclick%2dbut21%2egif%3aNonHosted" );
 		}
+		#endregion
+
+		#region Sub ToolBar Button Events
+
 		#endregion
 
 		#region ListView Subclasses
@@ -428,6 +458,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.Replace ( fileInfo, originT, newT, !check )
 			);
+			stringReplaceOriginalText.Text = "";
 		}
 
 		private void StringProcess_Concat_Click ( object sender, RoutedEventArgs e )
@@ -441,6 +472,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.Concat ( fileInfo, concat, where )
 			);
+			stringConcatText.Text = "";
 		}
 
 		private void StringProcess_Trim_Click ( object sender, RoutedEventArgs e )
@@ -468,6 +500,8 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.DeleteEnclosed ( fileInfo, pre, post, all )
 			);
+			stringEnclosedPreText.Text = "";
+			stringEnclosedPostText.Text = "";
 		}
 
 		private void StringProcess_DelName_Click ( object sender, RoutedEventArgs e )
@@ -504,6 +538,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.AddExtension ( fileInfo, ext )
 			);
+			extAddExtensionText.Text = "";
 		}
 
 		private void ExtensionProcess_RemoveExt_Click ( object sender, RoutedEventArgs e )
@@ -525,6 +560,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.ChangeExtension ( fileInfo, ext )
 			);
+			extChangeExtensionText.Text = "";
 		}
 
 		private void ExtensionProcess_LowUp_Click ( object sender, RoutedEventArgs e )
@@ -616,6 +652,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.AddCreationDate ( fileInfo, !pre, format )
 			);
+			dateCreatedFormat.Text = "";
 		}
 
 		private void Date_AddLastAccess_Click ( object sender, RoutedEventArgs e )
@@ -630,6 +667,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.AddLastAccessDate ( fileInfo, !pre, format )
 			);
+			dateAccessFormat.Text = "";
 		}
 
 		private void Date_AddLastWrite_Click ( object sender, RoutedEventArgs e )
@@ -644,6 +682,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.AddLastWriteDate ( fileInfo, !pre, format )
 			);
+			dateWriteFormat.Text = "";
 		}
 		#endregion
 
@@ -681,6 +720,7 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.ChangePath ( fileInfo, path )
 			);
+			pathToText.Text = "";
 		}
 		#endregion
 
@@ -704,6 +744,9 @@ namespace Daramkun.DaramRenamer
 			Parallel.ForEach ( fileInfoCollection, ( FileInfo fileInfo ) =>
 				FilenameProcessor.RegularExpression ( fileInfo, regex, format )
 			);
+
+			regexpOriginal.Text = "";
+			regexpReplace.Text = "";
 
 			if ( ( regexpOriginal.ItemsSource as ObservableCollection<string> ).IndexOf ( regexpOriginal.Text ) < 0 )
 			{

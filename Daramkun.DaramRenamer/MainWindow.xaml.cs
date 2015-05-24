@@ -54,7 +54,7 @@ namespace Daramkun.DaramRenamer
 			base.OnClosed ( e );
 		}
 
-		protected override async void OnActivated ( EventArgs e )
+		protected override void OnActivated ( EventArgs e )
 		{
 			if ( Settings.Default.AutoRemoveTurnOn )
 			{
@@ -69,15 +69,19 @@ namespace Daramkun.DaramRenamer
 					catch { }
 				} );
 			}
+			base.OnActivated ( e );
+		}
+
+		protected override async void OnInitialized ( EventArgs e )
+		{
+			base.OnInitialized ( e );
 
 			bool? checkUpdate = await CheckUpdate ();
 			if ( checkUpdate == true )
 			{
 				this.Title = this.Title + "^";
 			}
-
-			base.OnActivated ( e );
-		}
+		}
 		#endregion
 
 		#region Shortcut Keys
@@ -391,87 +395,112 @@ namespace Daramkun.DaramRenamer
 		#region Sub ToolBar Button Events
 		private void SubToolbar_Replace_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 0;
+			stringTabControl.SelectedIndex = 0;
 		}
 
 		private void SubToolbar_Concat_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 0;
+			stringTabControl.SelectedIndex = 1;
 		}
 
 		private void SubToolbar_Trim_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 0;
+			stringTabControl.SelectedIndex = 2;
 		}
 
 		private void SubToolbar_DelEnclosed_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 0;
+			stringTabControl.SelectedIndex = 3;
 		}
 
 		private void SubToolbar_DelName_Click ( object sender, RoutedEventArgs e )
 		{
-
+			if ( !Settings.Default.ExecuteDirect )
+			{
+				mainTabControl.SelectedIndex = 0;
+				stringTabControl.SelectedIndex = 4;
+			}
+			else StringProcess_DelName_Click ( sender, e );
 		}
 
 		private void SubToolbar_StringLowUpper_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 0;
+			stringTabControl.SelectedIndex = 5;
 		}
 
 		private void SubToolbar_ExtAdd_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 1;
+			stringTabControl.SelectedIndex = 0;
 		}
 
 		private void SubToolbar_ExtDel_Click ( object sender, RoutedEventArgs e )
 		{
-
+			if ( !Settings.Default.ExecuteDirect )
+			{
+			mainTabControl.SelectedIndex = 1;
+			stringTabControl.SelectedIndex = 1;
+			}
+			else ExtensionProcess_RemoveExt_Click ( sender, e );
 		}
 
 		private void SubToolbar_ChangeExt_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 1;
+			stringTabControl.SelectedIndex = 2;
 		}
 
 		private void SubToolbar_ExtLowUpper_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 1;
+			stringTabControl.SelectedIndex = 3;
 		}
 
 		private void SubToolbar_DelWithoutNum_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 2;
+			stringTabControl.SelectedIndex = 0;
 		}
 
 		private void SubToolbar_DigitCount_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 2;
+			stringTabControl.SelectedIndex = 1;
 		}
 
 		private void SubToolbar_AddNum_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 2;
+			stringTabControl.SelectedIndex = 2;
 		}
 
 		private void SubToolbar_NumIncDec_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 2;
+			stringTabControl.SelectedIndex = 3;
 		}
 
 		private void SubToolbar_DateCreation_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 3;
+			stringTabControl.SelectedIndex = 0;
 		}
 
 		private void SubToolbar_DateLastAccess_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 3;
+			stringTabControl.SelectedIndex = 1;
 		}
 
 		private void SubToolbar_DateLastWrite_Click ( object sender, RoutedEventArgs e )
 		{
-
+			mainTabControl.SelectedIndex = 3;
+			stringTabControl.SelectedIndex = 2;
 		}
 		#endregion
 

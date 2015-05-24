@@ -914,7 +914,7 @@
 						<CheckBox Name="checkAutoRemove" Grid.Row="1" Content="{x:Static setting:Resources.Autoremove}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=AutoRemoveTurnOn}" VerticalAlignment="Center" />
 						<CheckBox Name="checkFileCopy" Grid.Row="2" Content="{x:Static setting:Resources.CopyWhenTransaction}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FileCopyWhenApply}" VerticalAlignment="Center" />
 						<CheckBox Name="checkAutoFix" Grid.Row="3" Content="{x:Static setting:Resources.FilenameAutoFix}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=FilenameAutoFix}" VerticalAlignment="Center" />
-						<CheckBox Name="checkDirectExecute" Grid.Row="4" Content="{x:Static setting:Resources.DirectExecute}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=DirectExecute}" VerticalAlignment="Center" />
+						<CheckBox Name="checkDirectExecute" Grid.Row="4" Content="{x:Static setting:Resources.DirectExecute}" IsChecked="{Binding Source={x:Static setting:Settings.Default}, Path=ExecuteDirect}" VerticalAlignment="Center" />
 					</Grid>
 
 					<Grid Grid.Column="2">

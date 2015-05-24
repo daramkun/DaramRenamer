@@ -389,7 +389,90 @@ namespace Daramkun.DaramRenamer
 		#endregion
 
 		#region Sub ToolBar Button Events
+		private void SubToolbar_Replace_Click ( object sender, RoutedEventArgs e )
+		{
 
+		}
+
+		private void SubToolbar_Concat_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_Trim_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_DelEnclosed_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_DelName_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_StringLowUpper_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_ExtAdd_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_ExtDel_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_ChangeExt_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_ExtLowUpper_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_DelWithoutNum_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_DigitCount_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_AddNum_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_NumIncDec_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_DateCreation_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_DateLastAccess_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void SubToolbar_DateLastWrite_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
 		#endregion
 
 		#region ListView Subclasses

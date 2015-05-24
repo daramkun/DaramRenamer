@@ -211,61 +211,61 @@
 				</Button>
 			</ToolBar>
 			<ToolBar Focusable="True">
-				<Button>
+				<Button Click="SubToolbar_Replace_Click">
 					<Image Source="Resources/layout_edit.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_Concat_Click">
 					<Image Source="Resources/shape_move_forwards.png" />
 				</Button>
-				<Button>
-					<Image Source="Resources/textfield_rename.png" />
+				<Button Click="SubToolbar_Trim_Click">
+					<Image Source="Resources/pilcrow.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_DelEnclosed_Click">
 					<Image Source="Resources/brick_delete.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_DelName_Click">
 					<Image Source="Resources/pencil_delete.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_StringLowUpper_Click">
 					<Image Source="Resources/text_uppercase.png" />
 				</Button>
 			</ToolBar>
 			<ToolBar Focusable="True">
-				<Button>
+				<Button Click="SubToolbar_ExtAdd_Click">
 					<Image Source="Resources/tag_blue_add.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_ExtDel_Click">
 					<Image Source="Resources/tag_blue_delete.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_ChangeExt_Click">
 					<Image Source="Resources/tag_blue_edit.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_ExtLowUpper_Click">
 					<Image Source="Resources/text_lowercase.png" />
 				</Button>
 			</ToolBar>
 			<ToolBar Focusable="True">
-				<Button>
+				<Button Click="SubToolbar_DelWithoutNum_Click">
 					<Image Source="Resources/chart_line_delete.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_DigitCount_Click">
 					<Image Source="Resources/chart_bar.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_AddNum_Click">
 					<Image Source="Resources/text_list_numbers.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_NumIncDec_Click">
 					<Image Source="Resources/chart_curve.png" />
 				</Button>
 			</ToolBar>
 			<ToolBar Focusable="True">
-				<Button>
+				<Button Click="SubToolbar_DateCreation_Click">
 					<Image Source="Resources/date_add.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_DateLastAccess_Click">
 					<Image Source="Resources/date_magnify.png" />
 				</Button>
-				<Button>
+				<Button Click="SubToolbar_DateLastWrite_Click">
 					<Image Source="Resources/date_edit.png" />
 				</Button>
 			</ToolBar>

@@ -8,6 +8,7 @@ License Details:
 http://daram.pe.kr/mit-license
 
 Open source Libraries:
-TagLib#
-WPF Task Dialog
-WPF Native Folder Browser
+[TagLib#](https://github.com/mono/taglib-sharp), [WPF Task Dialog](https://github.com/yadyn/WPF-Task-Dialog), [WPF Native Folder Browser](https://wpffolderbrowser.codeplex.com)
+
+Icons:
+[Metro Studio](http://www.syncfusion.com), [FamFamFam Silk Icon](http://www.famfamfam.com)

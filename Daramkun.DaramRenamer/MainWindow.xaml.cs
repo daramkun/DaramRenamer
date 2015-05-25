@@ -433,6 +433,12 @@ namespace Daramkun.DaramRenamer
 			stringTabControl.SelectedIndex = 5;
 		}
 
+		private void SubToolbar_StringSubstring_Click ( object sender, RoutedEventArgs e )
+		{
+			mainTabControl.SelectedIndex = 0;
+			stringTabControl.SelectedIndex = 6;
+		}
+
 		private void SubToolbar_ExtAdd_Click ( object sender, RoutedEventArgs e )
 		{
 			mainTabControl.SelectedIndex = 1;

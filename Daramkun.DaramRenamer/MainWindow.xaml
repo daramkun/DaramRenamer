@@ -213,60 +213,120 @@
 			<ToolBar Focusable="True">
 				<Button Click="SubToolbar_Replace_Click">
 					<Image Source="Resources/layout_edit.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.StringTab_Replace}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_Concat_Click">
 					<Image Source="Resources/shape_move_forwards.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.StringTab_Concat}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_Trim_Click">
 					<Image Source="Resources/pilcrow.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.StringTab_Trim}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_DelEnclosed_Click">
 					<Image Source="Resources/brick_delete.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.StringTab_DeleteEnclosed}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_DelName_Click">
 					<Image Source="Resources/pencil_delete.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.StringTab_DeleteName}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_StringLowUpper_Click">
 					<Image Source="Resources/text_uppercase.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.StringTab_UpperLower}" />
+					</Button.ToolTip>
 				</Button>
-			</ToolBar>
-			<ToolBar Focusable="True">
+				<Button Click="SubToolbar_StringSubstring_Click">
+					<Image Source="Resources/textfield_rename.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.StringTab_Substring}" />
+					</Button.ToolTip>
+				</Button>
+				
+				<Separator />
+				
 				<Button Click="SubToolbar_ExtAdd_Click">
 					<Image Source="Resources/tag_blue_add.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.ExtTab_AddExt}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_ExtDel_Click">
 					<Image Source="Resources/tag_blue_delete.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.ExtTab_DeleteExt}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_ChangeExt_Click">
 					<Image Source="Resources/tag_blue_edit.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.ExtTab_ReplaceExt}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_ExtLowUpper_Click">
 					<Image Source="Resources/text_lowercase.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.ExtTab_UpperLower}" />
+					</Button.ToolTip>
 				</Button>
-			</ToolBar>
-			<ToolBar Focusable="True">
+				
+				<Separator />
+				
 				<Button Click="SubToolbar_DelWithoutNum_Click">
 					<Image Source="Resources/chart_line_delete.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.NumTab_DelWithoutNum}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_DigitCount_Click">
 					<Image Source="Resources/chart_bar.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.NumTab_SameDigits}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_AddNum_Click">
 					<Image Source="Resources/text_list_numbers.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.NumTab_AddNum}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_NumIncDec_Click">
 					<Image Source="Resources/chart_curve.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.NumTab_IncreaseDecrease}" />
+					</Button.ToolTip>
 				</Button>
-			</ToolBar>
-			<ToolBar Focusable="True">
+				
+				<Separator />
+				
 				<Button Click="SubToolbar_DateCreation_Click">
 					<Image Source="Resources/date_add.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.DateTab_AddCreation}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_DateLastAccess_Click">
 					<Image Source="Resources/date_magnify.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.DateTab_AddLastAccess}" />
+					</Button.ToolTip>
 				</Button>
 				<Button Click="SubToolbar_DateLastWrite_Click">
 					<Image Source="Resources/date_edit.png" />
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static setting:Resources.DateTab_AddLastWrite}" />
+					</Button.ToolTip>
 				</Button>
 			</ToolBar>
 		</ToolBarTray>

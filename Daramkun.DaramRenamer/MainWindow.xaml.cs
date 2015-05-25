@@ -19,9 +19,6 @@ using TaskDialogInterop;
 
 namespace Daramkun.DaramRenamer
 {
-	/// <summary>
-	/// MainWindow.xaml에 대한 상호 작용 논리
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		BinaryFormatter bf;
@@ -256,7 +253,7 @@ namespace Daramkun.DaramRenamer
 							config.MainIcon = VistaTaskDialogIcon.Information;
 							config.CustomButtons = new [] { Daramkun.DaramRenamer.Properties.Resources.OK, Daramkun.DaramRenamer.Properties.Resources.ToHomepage };
 							if ( TaskDialog.Show ( config ).CustomButtonResult == 1 )
-								System.Diagnostics.Process.Start ( "http://daram.pe.kr/2014/07/다람-리네이머/" );
+								System.Diagnostics.Process.Start ( "https://github.com/Daramkun/DaramRenamer/releases" );
 						}
 						else
 						{

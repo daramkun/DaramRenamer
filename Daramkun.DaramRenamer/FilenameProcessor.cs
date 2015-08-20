@@ -223,7 +223,7 @@ namespace Daramkun.DaramRenamer
 
 		public static void AddExtension ( this FileInfo fileInfo, string ext )
 		{
-			fileInfo.ChangedName = string.Format ( "{0}.{1}", fileInfo.ChangedName, ext );
+			fileInfo.ChangedName = $"{fileInfo.ChangedName}.{ext}";
 		}
 
 		public static void DeleteExtension ( this FileInfo fileInfo )
@@ -234,43 +234,38 @@ namespace Daramkun.DaramRenamer
 		public static void ChangeExtension ( this FileInfo fileInfo, string ext )
 		{
 			string originalExt = Path.GetExtension ( fileInfo.ChangedName );
-			fileInfo.ChangedName = string.Format ( "{0}.{1}", fileInfo.ChangedName.Substring ( 0, fileInfo.ChangedName.LastIndexOf ( '.' ) ), ext );
+			fileInfo.ChangedName = $"{fileInfo.ChangedName.Substring ( 0, fileInfo.ChangedName.LastIndexOf ( '.' ) )}.{ext}";
 		}
 
 		public static void ExtensionToUpper ( this FileInfo fileInfo )
 		{
-			fileInfo.ChangedName = string.Format ( "{0}{1}", Path.GetFileNameWithoutExtension ( fileInfo.ChangedName ),
-					Path.GetExtension ( fileInfo.ChangedName ).ToUpper () );
+			fileInfo.ChangedName = $"{Path.GetFileNameWithoutExtension ( fileInfo.ChangedName )}{Path.GetExtension ( fileInfo.ChangedName ).ToUpper ()}";
 		}
 
 		public static void ExtensionToLower ( this FileInfo fileInfo )
 		{
-			fileInfo.ChangedName = string.Format ( "{0}{1}", Path.GetFileNameWithoutExtension ( fileInfo.ChangedName ),
-					Path.GetExtension ( fileInfo.ChangedName ).ToLower () );
+			fileInfo.ChangedName = $"{Path.GetFileNameWithoutExtension ( fileInfo.ChangedName )}{Path.GetExtension ( fileInfo.ChangedName ).ToLower ()}";
 		}
 
 		public static void AddCreationDate ( this FileInfo fileInfo, bool lastLocationAdd = true, string formatString = "yyyyMMdd" )
 		{
-			DateTime dateTime = File.GetCreationTime ( fileInfo.OriginalFullName );
-			if ( !lastLocationAdd ) fileInfo.ChangedName = dateTime.ToString ( formatString ) + fileInfo.ChangedName;
-			else fileInfo.ChangedName = Path.GetFileNameWithoutExtension ( fileInfo.ChangedName ) + dateTime.ToString ( formatString ) +
-				Path.GetExtension ( fileInfo.ChangedName );
+			var dateTime = File.GetCreationTime ( fileInfo.OriginalFullName ).ToString ( formatString );
+			if ( !lastLocationAdd ) fileInfo.ChangedName = $"{dateTime}{fileInfo.ChangedName}";
+			else fileInfo.ChangedName = $"{Path.GetFileNameWithoutExtension ( fileInfo.ChangedName )}{dateTime}{Path.GetExtension ( fileInfo.ChangedName )}";
 		}
 
 		public static void AddLastWriteDate ( this FileInfo fileInfo, bool lastLocationAdd = true, string formatString = "yyyyMMdd" )
 		{
-			DateTime dateTime = File.GetLastWriteTime ( fileInfo.OriginalFullName );
-			if ( !lastLocationAdd ) fileInfo.ChangedName = dateTime.ToString ( formatString ) + fileInfo.ChangedName;
-			else fileInfo.ChangedName = Path.GetFileNameWithoutExtension ( fileInfo.ChangedName ) + dateTime.ToString ( formatString ) +
-				Path.GetExtension ( fileInfo.ChangedName );
+			var dateTime = File.GetLastWriteTime ( fileInfo.OriginalFullName ).ToString ( formatString );
+			if ( !lastLocationAdd ) fileInfo.ChangedName = $"{dateTime}{fileInfo.ChangedName}";
+			else fileInfo.ChangedName = $"{Path.GetFileNameWithoutExtension ( fileInfo.ChangedName )}{dateTime}{Path.GetExtension ( fileInfo.ChangedName )}";
 		}
 
 		public static void AddLastAccessDate ( this FileInfo fileInfo, bool lastLocationAdd = true, string formatString = "yyyyMMdd" )
 		{
-			DateTime dateTime = File.GetLastAccessTime ( fileInfo.OriginalFullName );
-			if ( !lastLocationAdd ) fileInfo.ChangedName = dateTime.ToString ( formatString ) + fileInfo.ChangedName;
-			else fileInfo.ChangedName = Path.GetFileNameWithoutExtension ( fileInfo.ChangedName ) + dateTime.ToString ( formatString ) +
-				Path.GetExtension ( fileInfo.ChangedName );
+			var dateTime = File.GetLastAccessTime ( fileInfo.OriginalFullName ).ToString ( formatString );
+			if ( !lastLocationAdd ) fileInfo.ChangedName = $"{dateTime}{fileInfo.ChangedName}";
+			else fileInfo.ChangedName = $"{Path.GetFileNameWithoutExtension ( fileInfo.ChangedName )}{dateTime}{Path.GetExtension ( fileInfo.ChangedName )}";
 		}
 
 		public static void ChangePath ( this FileInfo fileInfo, string path )
@@ -288,7 +283,7 @@ namespace Daramkun.DaramRenamer
 				object [] groupArr = new object [ group.Count ];
 				for ( int i = 0; i < groupArr.Length; i++ )
 					groupArr [ i ] = group [ i ].Value.Trim ();
-				fileInfo.ChangedName = string.Format ( formatString, groupArr ) + ext;
+				fileInfo.ChangedName = $"{string.Format ( formatString, groupArr )}{ext}";
 			}
 			catch { }
 		}

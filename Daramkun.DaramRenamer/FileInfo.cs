@@ -15,10 +15,10 @@ namespace Daramkun.DaramRenamer
 	{
 		string originalName, changeName, originalPath, changePath;
 
-		public string OriginalName { get { return originalName; } set { originalName = value; PC ( "OriginalName" ); } }
-		public string ChangedName { get { return changeName; } set { changeName = value; PC ( "ChangedName" ); } }
-		public string OriginalPath { get { return originalPath; } set { originalPath = value; PC ( "OriginalPath" ); } }
-		public string ChangedPath { get { return changePath; } set { changePath = value; PC ( "ChangedPath" ); } }
+		public string OriginalName { get { return originalName; } set { originalName = value; PC ( nameof ( OriginalName ) ); } }
+		public string ChangedName { get { return changeName; } set { changeName = value; PC ( nameof ( ChangedName ) ); } }
+		public string OriginalPath { get { return originalPath; } set { originalPath = value; PC ( nameof ( OriginalPath ) ); } }
+		public string ChangedPath { get { return changePath; } set { changePath = value; PC ( nameof ( ChangedPath ) ); } }
 
 		public string OriginalFullName { get { return Path.Combine ( OriginalPath, OriginalName ); } }
 		public string ChangedFullName { get { return Path.Combine ( ChangedPath, ChangedName ); } }
@@ -28,10 +28,10 @@ namespace Daramkun.DaramRenamer
 
 		public void ValueCopy ( FileInfo fileInfo )
 		{
-			OriginalName = fileInfo.OriginalName.Clone () as string;
-			ChangedName = fileInfo.ChangedName.Clone () as string;
-			OriginalPath = fileInfo.OriginalPath.Clone () as string;
-			ChangedPath = fileInfo.ChangedPath.Clone () as string;
+			OriginalName = fileInfo.OriginalName;
+			ChangedName = fileInfo.ChangedName;
+			OriginalPath = fileInfo.OriginalPath;
+			ChangedPath = fileInfo.ChangedPath;
 		}
 
 		private void PC ( string p )
@@ -74,14 +74,14 @@ namespace Daramkun.DaramRenamer
 
 		public void Changed ()
 		{
-			OriginalName = changeName.Clone () as string;
-			OriginalPath = changePath.Clone () as string;
+			OriginalName = changeName;
+			OriginalPath = changePath;
 		}
 
 		[field: NonSerialized]
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public int CompareTo ( FileInfo other ) { return changeName.CompareTo ( other.changeName ); }
+		public int CompareTo ( FileInfo other ) => changeName.CompareTo ( other.changeName );
 
 		public bool ToMove ()
 		{

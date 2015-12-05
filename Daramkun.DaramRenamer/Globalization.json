@@ -1,0 +1,36 @@
+﻿{
+	"lang" : [
+		{
+			"culture" : "ko-KR",
+			"author" : "Daramkun",
+			"contents" : {
+				"daram_renamer" : "다람 리네이머",
+				"renamer" : "리네이머",
+				"settings" : "설정",
+				"license" : "라이센스",
+				"original_path" : "원본 경로",
+				"original_name" : "원본 이름",
+				"changed_path" : "변경 경로",
+				"changed_name" : "변경 이름",
+				"undo" : "실행 취소",
+				"redo" : "다시 실행"
+			}
+		},
+		{
+			"culture" : "en-US",
+			"author" : "Daramkun",
+			"contents" : {
+				"daram_renamer" : "Daram Renamer",
+				"renamer" : "Renamer",
+				"settings" : "Settings",
+				"license" : "Licenses",
+				"original_path" : "Original Path",
+				"original_name" : "Original Name",
+				"changed_path" : "Changed Path",
+				"changed_name" : "Changed Name",
+				"undo" : "Undo",
+				"redo" : "Redo"
+			}
+		}
+	]
+}

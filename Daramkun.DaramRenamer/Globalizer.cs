@@ -60,27 +60,27 @@ namespace Daramkun.DaramRenamer
 					gs = new FileStream ( $".\\Globalizations\\Globalization.{ci.DisplayName}.json", FileMode.Open );
 				else if ( File.Exists ( $"Globalization.{ci.DisplayName}.json" ) )
 					gs = new FileStream ( $"Globalization.{ci.DisplayName}.json", FileMode.Open );
-				else
-				{
-					if ( File.Exists ( $".\\Globalizations\\Globalization.{ci.DisplayName}.json" ) )
-						gs = new FileStream ( $".\\Globalizations\\Globalization.{ci.DisplayName}.json", FileMode.Open );
-					else if ( File.Exists ( $"Globalization.{ci.DisplayName}.json" ) )
-						gs = new FileStream ( $"Globalization.{ci.DisplayName}.json", FileMode.Open );
-					else continue;
-
-					gs.Position = 3;
-					var iggc = json2.ReadObject ( gs ) as GlobalizationContainer;
-					foreach ( var l in iggc.Languages )
-						if ( !Cultures.ContainsKey ( CultureInfo.GetCultureInfo ( l.Culture ) ) )
-							Cultures.Add ( CultureInfo.GetCultureInfo ( l.Culture ), l );
-
-					continue;
-				}
+				else continue;
 
 				gs.Position = 3;
 				var igc =  json.ReadObject ( gs ) as GlobalCulture;
 				Cultures.Add ( ci, igc );
             }
+
+			Stream gs2 = null;
+			if ( File.Exists ( ".\\Globalizations\\Globalization.json" ) )
+				gs2 = new FileStream ( ".\\Globalizations\\Globalization.json", FileMode.Open );
+			else if ( File.Exists ( "Globalization.json" ) )
+				gs2 = new FileStream ( "Globalization.json", FileMode.Open );
+
+			if ( gs2 != null )
+			{
+				gs2.Position = 3;
+				var iggc = json2.ReadObject ( gs2 ) as GlobalizationContainer;
+				foreach ( var l in iggc.Languages )
+					if ( !Cultures.ContainsKey ( CultureInfo.GetCultureInfo ( l.Culture ) ) )
+						Cultures.Add ( CultureInfo.GetCultureInfo ( l.Culture ), l );
+			}
 
 			using ( var stream = Assembly.GetExecutingAssembly ().GetManifestResourceStream ( "Daramkun.DaramRenamer.Globalization.json" ) )
 			{

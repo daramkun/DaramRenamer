@@ -8,236 +8,237 @@
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="720" Height="480"
 		DataContext="{x:Static self:Globalizer.Strings}">
-    <TabControl TabStripPlacement="Bottom">
-		<TabItem Header="{Binding Path=[renamer]}">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="28" />
-					<RowDefinition />
-				</Grid.RowDefinitions>
+    <Grid>
+        <TabControl TabStripPlacement="Bottom">
+            <TabItem Header="{Binding Path=[renamer]}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="28" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-				<ToolBarTray Grid.Row="0" ClipToBounds="False">
-					<ToolBar Focusable="True">
-						<Button>
-							<Image Source="Resources/folder.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/delete.png" />
-						</Button>
-						<Button >
-							<Image Source="Resources/accept.png" />
-						</Button>
-						<Separator />
-						<Button>
-							<Image Source="Resources/arrow_undo.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/arrow_redo.png" />
-						</Button>
-						<Separator />
-						<Button>
-							<Image Source="Resources/arrow_up.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/arrow_down.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/rainbow.png" />
-						</Button>
+                    <ToolBarTray Grid.Row="0" ClipToBounds="False">
+                        <ToolBar Focusable="True">
+                            <Button>
+                                <Image Source="Resources/folder.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/delete.png" />
+                            </Button>
+                            <Button >
+                                <Image Source="Resources/accept.png" />
+                            </Button>
+                            <Separator />
+                            <Button>
+                                <Image Source="Resources/arrow_undo.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/arrow_redo.png" />
+                            </Button>
+                            <Separator />
+                            <Button>
+                                <Image Source="Resources/arrow_up.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/arrow_down.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/rainbow.png" />
+                            </Button>
 
-						<Separator />
+                            <Separator />
 
-						<Button>
-							<Image Source="Resources/application_get.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/email_go.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/cup_add.png" />
-						</Button>
-						<Separator />
+                            <Button>
+                                <Image Source="Resources/application_get.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/email_go.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/cup_add.png" />
+                            </Button>
+                            <Separator />
 
-						<Button>
-							<Image Source="Resources/layout_edit.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/shape_move_forwards.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/pilcrow.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/brick_delete.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/pencil_delete.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/text_uppercase.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/textfield_rename.png" />
-						</Button>
+                            <Button>
+                                <Image Source="Resources/layout_edit.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/shape_move_forwards.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/pilcrow.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/brick_delete.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/pencil_delete.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/text_uppercase.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/textfield_rename.png" />
+                            </Button>
 
-						<Separator />
+                            <Separator />
 
-						<Button>
-							<Image Source="Resources/tag_blue_add.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/tag_blue_delete.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/tag_blue_edit.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/text_lowercase.png" />
-						</Button>
+                            <Button>
+                                <Image Source="Resources/tag_blue_add.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/tag_blue_delete.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/tag_blue_edit.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/text_lowercase.png" />
+                            </Button>
 
-						<Separator />
+                            <Separator />
 
-						<Button>
-							<Image Source="Resources/chart_line_delete.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/chart_bar.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/text_list_numbers.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/chart_curve.png" />
-						</Button>
+                            <Button>
+                                <Image Source="Resources/chart_line_delete.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/chart_bar.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/text_list_numbers.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/chart_curve.png" />
+                            </Button>
 
-						<Separator />
+                            <Separator />
 
-						<Button>
-							<Image Source="Resources/date_add.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/date_magnify.png" />
-						</Button>
-						<Button>
-							<Image Source="Resources/date_edit.png" />
-						</Button>
-					</ToolBar>
-				</ToolBarTray>
+                            <Button>
+                                <Image Source="Resources/date_add.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/date_magnify.png" />
+                            </Button>
+                            <Button>
+                                <Image Source="Resources/date_edit.png" />
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
 
-				<ListView Grid.Row="1" Name="listViewFiles" AllowDrop="True"
+                    <ListView Grid.Row="1" Name="listViewFiles" AllowDrop="True"
 				  Focusable="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
 				  ScrollViewer.HorizontalScrollBarVisibility="Auto" Drop="listViewFiles_Drop" DragEnter="listViewFiles_DragEnter" KeyUp="listViewFiles_KeyUp">
-					<ListView.ItemContainerStyle>
-						<Style TargetType="ListViewItem">
-							<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-						</Style>
-					</ListView.ItemContainerStyle>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
 
-					<ListView.View>
-						<GridView>
-							<GridView.ColumnHeaderTemplate>
-								<DataTemplate>
-									<TextBlock Text="{Binding}" Margin="0,4,0,4" />
-								</DataTemplate>
-							</GridView.ColumnHeaderTemplate>
+                        <ListView.View>
+                            <GridView>
+                                <GridView.ColumnHeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" Margin="0,4,0,4" />
+                                    </DataTemplate>
+                                </GridView.ColumnHeaderTemplate>
 
-							<GridViewColumn Width="200">
-								<GridViewColumnHeader Content="{Binding Path=[original_name]}" />
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<Grid HorizontalAlignment="Stretch">
-											<TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" />
-										</Grid>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="205">
-								<GridViewColumnHeader Content="{Binding Path=[changed_name]}" />
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<Grid HorizontalAlignment="Stretch">
-											<TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedFilename}" Background="Transparent" />
-										</Grid>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="110">
-								<GridViewColumnHeader Content="{Binding Path=[original_path]}" />
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<Grid HorizontalAlignment="Stretch">
-											<TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding OriginalPath}" />
-										</Grid>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-							<GridViewColumn Width="110">
-								<GridViewColumnHeader Content="{Binding Path=[changed_path]}" />
-								<GridViewColumn.CellTemplate>
-									<DataTemplate>
-										<Grid HorizontalAlignment="Stretch">
-											<TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedPath}" Background="Transparent" />
-										</Grid>
-									</DataTemplate>
-								</GridViewColumn.CellTemplate>
-							</GridViewColumn>
-						</GridView>
-					</ListView.View>
-					<ListView.ContextMenu>
-						<ContextMenu>
-							<MenuItem Header="{Binding Path=[undo]}" />
-							<MenuItem Header="{Binding Path=[redo]}" />
-							<Separator />
-							<MenuItem Header="Filename Process">
-								<MenuItem Header="Replace filename using Plain Text" />
-								<MenuItem Header="Replace filename using Regular Expression" />
-								<MenuItem Header="Concatenate filename" />
-								<MenuItem Header="Trimming filename" />
-								<MenuItem Header="Delete block of filename" />
-								<MenuItem Header="Delete filename" />
-								<MenuItem Header="Substring of filename" />
-								<MenuItem Header="Uppercast/Lowercast filename" />
-							</MenuItem>
-							<MenuItem Header="Extension Process">
-								<MenuItem Header="Add extension" />
-								<MenuItem Header="Add extension automate" />
-								<MenuItem Header="Delete extension" />
-								<MenuItem Header="Replace extension" />
-								<MenuItem Header="Uppercast/Lowercast extension" />
-							</MenuItem>
-							<MenuItem Header="Number Process">
-								<MenuItem Header="Delete without numbers" />
-								<MenuItem Header="Matching number count" />
-								<MenuItem Header="Add Index numbers" />
-								<MenuItem Header="Increase/Decrease numbers" />
-							</MenuItem>
-							<MenuItem Header="Date Process">
-								<MenuItem Header="Add Date to filename" />
-								<MenuItem Header="Delete Date from filename" />
-								<MenuItem Header="Increase/Decrease Date from filename" />
-							</MenuItem>
-							<MenuItem Header="Path Process">
-								<MenuItem Header="Change Path" />
-								<MenuItem Header="Move Path relative" />
-							</MenuItem>
-							<MenuItem Header="Tag Process">
-								<MenuItem Header="Add Media Tag to filename" />
-								<MenuItem Header="Add Document Tag to filename" />
-							</MenuItem>
-							<Separator />
-							<MenuItem Header="Check update" />
-						</ContextMenu>
-					</ListView.ContextMenu>
-				</ListView>
-			</Grid>
-		</TabItem>
-		<TabItem Header="{Binding Path=[settings]}">
-			<StackPanel>
-				
-			</StackPanel>
-		</TabItem>
-		<TabItem Header="{Binding Path=[license]}">
-			<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve" IsReadOnly="True"><![CDATA[------------------------------
+                                <GridViewColumn Width="225">
+                                    <GridViewColumnHeader Content="{Binding Path=[original_name]}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="230">
+                                    <GridViewColumnHeader Content="{Binding Path=[changed_name]}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedFilename}" Background="Transparent" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="105">
+                                    <GridViewColumnHeader Content="{Binding Path=[original_path]}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding OriginalPath}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="110">
+                                    <GridViewColumnHeader Content="{Binding Path=[changed_path]}" />
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedPath}" Background="Transparent" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{Binding Path=[undo]}" />
+                                <MenuItem Header="{Binding Path=[redo]}" />
+                                <Separator />
+                                <MenuItem Header="{Binding Path=[filename_processes]}">
+                                    <MenuItem Header="Replace filename using Plain Text" />
+                                    <MenuItem Header="Replace filename using Regular Expression" />
+                                    <MenuItem Header="Concatenate filename" />
+                                    <MenuItem Header="Trimming filename" />
+                                    <MenuItem Header="Delete block of filename" />
+                                    <MenuItem Header="Delete filename" />
+                                    <MenuItem Header="Substring of filename" />
+                                    <MenuItem Header="Uppercast/Lowercast filename" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[extension_processes]}">
+                                    <MenuItem Header="Add extension" />
+                                    <MenuItem Header="Add extension automate" />
+                                    <MenuItem Header="Delete extension" />
+                                    <MenuItem Header="Replace extension" />
+                                    <MenuItem Header="Uppercast/Lowercast extension" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[number_processes]}">
+                                    <MenuItem Header="Delete without numbers" />
+                                    <MenuItem Header="Matching number count" />
+                                    <MenuItem Header="Add Index numbers" />
+                                    <MenuItem Header="Increase/Decrease numbers" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[date_processes]}">
+                                    <MenuItem Header="Add Date to filename" />
+                                    <MenuItem Header="Delete Date from filename" />
+                                    <MenuItem Header="Increase/Decrease Date from filename" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[path_processes]}">
+                                    <MenuItem Header="Change Path" />
+                                    <MenuItem Header="Move Path relative" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[tag_processes]}">
+                                    <MenuItem Header="Add Media Tag to filename" />
+                                    <MenuItem Header="Add Document Tag to filename" />
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="{Binding Path=[check_update]}" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{Binding Path=[settings]}">
+                <StackPanel>
+
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{Binding Path=[license]}">
+                <TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve" IsReadOnly="True"><![CDATA[------------------------------
 1. Daram Renamer
 ------------------------------
 The MIT License (MIT)
@@ -312,8 +313,12 @@ TagLib# is free/open source software, released under the LGPL.
 
 Author: Mono Project
 Original Source: https://github.com/mono/taglib-sharp
-Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/TagLib]]>
+Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternLibs/TagLib]]>
 			</TextBox>
-		</TabItem>
-    </TabControl>
+            </TabItem>
+        </TabControl>
+        <Grid Background="Black" Opacity="0.25" Visibility="Hidden">
+            
+        </Grid>
+    </Grid>
 </Window>

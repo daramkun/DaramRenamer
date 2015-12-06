@@ -13,7 +13,14 @@
 				"changed_path" : "변경 경로",
 				"changed_name" : "변경 이름",
 				"undo" : "실행 취소",
-				"redo" : "다시 실행"
+				"redo" : "다시 실행",
+				"filename_processes" : "파일명 처리",
+				"extension_processes" : "확장자 처리",
+				"number_processes" : "숫자 처리",
+				"date_processes" : "날짜 처리",
+				"path_processes" : "경로 처리",
+				"tag_processes" : "태그 처리",
+				"check_update" : "업데이트 확인"
 			}
 		},
 		{

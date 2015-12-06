@@ -395,7 +395,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Processors\Date\" />
+    <Folder Include="Processors\Number\" />
+    <Folder Include="Processors\Path\" />
+    <Folder Include="Processors\Tag\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\accept.png" />
     <Resource Include="Resources\application_get.png" />

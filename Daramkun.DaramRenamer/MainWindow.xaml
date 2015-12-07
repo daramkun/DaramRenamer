@@ -8,6 +8,52 @@
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="720" Height="480"
 		DataContext="{x:Static self:Globalizer.Strings}">
+    <Window.Resources>
+        <ContextMenu x:Key="listViewContextMenu">
+            <MenuItem Header="{Binding Path=[undo]}" />
+            <MenuItem Header="{Binding Path=[redo]}" />
+            <Separator />
+            <MenuItem Header="{Binding Path=[filename_processes]}">
+                <MenuItem Header="{Binding Path=[process_replace_plain_text]}" />
+                <MenuItem Header="{Binding Path=[process_replace_regex_text]}" />
+                <MenuItem Header="{Binding Path=[process_concatenate_text]}" />
+                <MenuItem Header="{Binding Path=[process_trimming_text]}" />
+                <MenuItem Header="{Binding Path=[process_delete_block]}" />
+                <MenuItem Header="{Binding Path=[process_delete_text]}" />
+                <MenuItem Header="{Binding Path=[process_substring_text]}" />
+                <MenuItem Header="{Binding Path=[process_casecast_text]}" />
+            </MenuItem>
+            <MenuItem Header="{Binding Path=[extension_processes]}">
+                <MenuItem Header="{Binding Path=[process_add_extension]}" />
+                <MenuItem Header="{Binding Path=[process_add_extension_automatically]}" />
+                <MenuItem Header="{Binding Path=[process_delete_extension]}" />
+                <MenuItem Header="{Binding Path=[process_change_extension]}" />
+                <MenuItem Header="{Binding Path=[process_casecast_extension]}" />
+            </MenuItem>
+            <MenuItem Header="{Binding Path=[number_processes]}">
+                <MenuItem Header="{Binding Path=[process_delete_without_numbers]}" />
+                <MenuItem Header="{Binding Path=[process_matching_number_count]}" />
+                <MenuItem Header="{Binding Path=[process_add_index_numbers]}" />
+                <MenuItem Header="{Binding Path=[process_increase_decrease_numbers]}" />
+            </MenuItem>
+            <MenuItem Header="{Binding Path=[date_processes]}">
+                <MenuItem Header="{Binding Path=[process_add_date]}" />
+                <MenuItem Header="{Binding Path=[process_delete_date]}" />
+                <MenuItem Header="{Binding Path=[process_increase_decrease_date]}" />
+            </MenuItem>
+            <MenuItem Header="{Binding Path=[path_processes]}">
+                <MenuItem Header="{Binding Path=[process_change_path]}" />
+                <MenuItem Header="{Binding Path=[process_move_path_relative]}" />
+            </MenuItem>
+            <MenuItem Header="{Binding Path=[tag_processes]}">
+                <MenuItem Header="{Binding Path=[process_add_media_tag]}" />
+                <MenuItem Header="{Binding Path=[process_add_document_tag]}" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{Binding Path=[check_update]}" />
+        </ContextMenu>
+    </Window.Resources>
+    
     <Grid>
         <TabControl TabStripPlacement="Bottom">
             <TabItem Header="{Binding Path=[renamer]}">
@@ -18,7 +64,7 @@
                     </Grid.RowDefinitions>
 
                     <ToolBarTray Grid.Row="0" ClipToBounds="False">
-                        <ToolBar Focusable="True">
+                        <ToolBar Focusable="True" ToolBarTray.IsLocked="True">
                             <Button>
                                 <Image Source="Resources/folder.png" />
                             </Button>
@@ -126,8 +172,9 @@
                     </ToolBarTray>
 
                     <ListView Grid.Row="1" Name="listViewFiles" AllowDrop="True"
-				  Focusable="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
-				  ScrollViewer.HorizontalScrollBarVisibility="Auto" Drop="listViewFiles_Drop" DragEnter="listViewFiles_DragEnter" KeyUp="listViewFiles_KeyUp">
+                              Focusable="True" ContextMenu="{StaticResource listViewContextMenu}"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                              Drop="listViewFiles_Drop" DragEnter="listViewFiles_DragEnter" KeyUp="listViewFiles_KeyUp">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -184,51 +231,6 @@
                                 </GridViewColumn>
                             </GridView>
                         </ListView.View>
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="{Binding Path=[undo]}" />
-                                <MenuItem Header="{Binding Path=[redo]}" />
-                                <Separator />
-                                <MenuItem Header="{Binding Path=[filename_processes]}">
-                                    <MenuItem Header="Replace filename using Plain Text" />
-                                    <MenuItem Header="Replace filename using Regular Expression" />
-                                    <MenuItem Header="Concatenate filename" />
-                                    <MenuItem Header="Trimming filename" />
-                                    <MenuItem Header="Delete block of filename" />
-                                    <MenuItem Header="Delete filename" />
-                                    <MenuItem Header="Substring of filename" />
-                                    <MenuItem Header="Uppercast/Lowercast filename" />
-                                </MenuItem>
-                                <MenuItem Header="{Binding Path=[extension_processes]}">
-                                    <MenuItem Header="Add extension" />
-                                    <MenuItem Header="Add extension automate" />
-                                    <MenuItem Header="Delete extension" />
-                                    <MenuItem Header="Replace extension" />
-                                    <MenuItem Header="Uppercast/Lowercast extension" />
-                                </MenuItem>
-                                <MenuItem Header="{Binding Path=[number_processes]}">
-                                    <MenuItem Header="Delete without numbers" />
-                                    <MenuItem Header="Matching number count" />
-                                    <MenuItem Header="Add Index numbers" />
-                                    <MenuItem Header="Increase/Decrease numbers" />
-                                </MenuItem>
-                                <MenuItem Header="{Binding Path=[date_processes]}">
-                                    <MenuItem Header="Add Date to filename" />
-                                    <MenuItem Header="Delete Date from filename" />
-                                    <MenuItem Header="Increase/Decrease Date from filename" />
-                                </MenuItem>
-                                <MenuItem Header="{Binding Path=[path_processes]}">
-                                    <MenuItem Header="Change Path" />
-                                    <MenuItem Header="Move Path relative" />
-                                </MenuItem>
-                                <MenuItem Header="{Binding Path=[tag_processes]}">
-                                    <MenuItem Header="Add Media Tag to filename" />
-                                    <MenuItem Header="Add Document Tag to filename" />
-                                </MenuItem>
-                                <Separator />
-                                <MenuItem Header="{Binding Path=[check_update]}" />
-                            </ContextMenu>
-                        </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </TabItem>
@@ -318,7 +320,7 @@ Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.D
             </TabItem>
         </TabControl>
         <Grid Background="Black" Opacity="0.25" Visibility="Hidden">
-            
+
         </Grid>
     </Grid>
 </Window>

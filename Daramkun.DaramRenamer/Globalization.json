@@ -20,7 +20,37 @@
 				"date_processes" : "날짜 처리",
 				"path_processes" : "경로 처리",
 				"tag_processes" : "태그 처리",
-				"check_update" : "업데이트 확인"
+				"check_update" : "업데이트 확인",
+
+				"process_replace_plain_text" : "평문 파일명 치환",
+				"process_replace_regex_text" : "졍규표현식 파일명 치환",
+				"process_concatenate_text" : "문자열 추가",
+				"process_trimming_text" : "파일명 트림",
+				"process_delete_block" : "묶인 파일명 제거",
+				"process_delete_text" : "전체 파일명 제거",
+				"process_substring_text" : "하위문자열 생성",
+				"process_casecast_text" : "파일명 대소문자 변경",
+
+				"process_add_extension" : "확장자 추가",
+				"process_add_extension_automatically" : "자동으로 확장자 추가",
+				"process_delete_extension" : "확장자 제거",
+				"process_change_extension" : "확장자 치환",
+				"process_casecast_extension" : "확장자 대소문자 변경",
+
+				"process_delete_without_numbers" : "숫자만 남기고 제거",
+				"process_matching_number_count" : "숫자 자리수 맞추기",
+				"process_add_index_numbers" : "번호 붙이기",
+				"process_increase_decrease_numbers" : "숫자 증감",
+
+				"process_add_date" : "날짜 추가",
+				"process_delete_date" : "날짜 제거",
+				"process_increase_decrease_date" : "날짜 증감",
+
+				"process_change_path" : "경로 변경",
+				"process_move_path_relative" : "상대적 경로 이동",
+
+				"process_add_media_tag" : "미디어 태그 추가",
+				"process_add_document_tag" : "문서 태그 추가"
 			}
 		},
 		{

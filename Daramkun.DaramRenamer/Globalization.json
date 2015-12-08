@@ -8,19 +8,33 @@
 				"renamer" : "리네이머",
 				"settings" : "설정",
 				"license" : "라이센스",
+				
 				"original_path" : "원본 경로",
 				"original_name" : "원본 이름",
 				"changed_path" : "변경 경로",
 				"changed_name" : "변경 이름",
+
+				"open" : "열기",
+				"clear" : "정리",
+				"apply" : "적용",
+
 				"undo" : "실행 취소",
 				"redo" : "다시 실행",
+
+				"item_up" : "항목 위로",
+				"item_down" : "항목 아래로",
+				"item_sort" : "항목 정렬",
+				
+				"check_update" : "업데이트 확인",
+				"feedback" : "피드백",
+				"donate" : "기부",
+				
 				"filename_processes" : "파일명 처리",
 				"extension_processes" : "확장자 처리",
 				"number_processes" : "숫자 처리",
 				"date_processes" : "날짜 처리",
 				"path_processes" : "경로 처리",
 				"tag_processes" : "태그 처리",
-				"check_update" : "업데이트 확인",
 
 				"process_replace_plain_text" : "평문 파일명 치환",
 				"process_replace_regex_text" : "졍규표현식 파일명 치환",

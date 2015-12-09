@@ -10,15 +10,19 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class DeleteBlockProcessor : IProcessor
 	{
+		[Globalized ( "start_block" )]
 		public string StartText { get; set; }
+		[Globalized ( "end_block" )]
 		public string EndText { get; set; }
-		public bool DeleteAllBlock { get; set; }
+		[Globalized ( "delete_all_blocks" )]
+		public bool DeleteAllBlocks { get; set; }
+		[Globalized ( "include_extension" )]
 		public bool IncludeExtensions { get; set; }
 
 		public DeleteBlockProcessor(string start, string end, bool deleteAllBlock, bool includeExtensions = false )
 		{
 			StartText = start;EndText = end;
-			DeleteAllBlock = deleteAllBlock;
+			DeleteAllBlocks = deleteAllBlock;
 			IncludeExtensions = includeExtensions;
 		}
 
@@ -35,7 +39,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 				last = fn.IndexOf ( EndText, first + 1 );
 				if ( last == -1 ) break;
 				fn = fn.Remove ( first, last - first + EndText.Length );
-				if ( !DeleteAllBlock ) break;
+				if ( !DeleteAllBlocks ) break;
 			}
 
 			file.ChangedFilename = $"{fn}{ext}";

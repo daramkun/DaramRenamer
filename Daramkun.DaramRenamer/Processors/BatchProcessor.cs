@@ -12,6 +12,10 @@ namespace Daramkun.DaramRenamer.Processors
 		public ObservableCollection<IProcessor> Processors { get; } = new ObservableCollection<IProcessor> ();
 
 		public BatchProcessor () { }
+		public BatchProcessor ( string batchScript )
+		{
+
+		}
 
 		public bool Process ( FileInfo file )
 		{

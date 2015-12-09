@@ -1,6 +1,7 @@
 ﻿{
 	"lang" : [
 		{
+			"version" : "3.0.0.0",
 			"culture" : "ko-KR",
 			"author" : "Daramkun",
 			"contents" : {
@@ -64,10 +65,21 @@
 				"process_move_path_relative" : "상대적 경로 이동",
 
 				"process_add_media_tag" : "미디어 태그 추가",
-				"process_add_document_tag" : "문서 태그 추가"
+				"process_add_document_tag" : "문서 태그 추가",
+
+				"include_extension" : "확장자 포함",
+
+				"original_text" : "원본 텍스트",
+				"replace_text" : "바꿀 텍스트",
+				"original_regex" : "정규표현식",
+				"replace_format" : "구성 형식문자열",
+				"start_block" : "묶인 문자열 시작",
+				"end_block" : "묶인 문자열 끝",
+				"delete_all_blocks" : "모든 묶인 문자열 제거",
 			}
 		},
 		{
+			"version" : "3.0.0.0",
 			"culture" : "en-US",
 			"author" : "Daramkun",
 			"contents" : {

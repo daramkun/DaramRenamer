@@ -13,6 +13,60 @@ namespace Daramkun.DaramRenamer
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		public static RoutedCommand CommandOpenFiles = new RoutedCommand ();
+		public static RoutedCommand CommandClearList = new RoutedCommand ();
+		public static RoutedCommand CommandApplyFile = new RoutedCommand ();
+		public static RoutedCommand CommandUndoWorks = new RoutedCommand ();
+		public static RoutedCommand CommandRedoWorks = new RoutedCommand ();
+		public static RoutedCommand CommandUpperItem = new RoutedCommand ();
+		public static RoutedCommand CommandLowerItem = new RoutedCommand ();
+		public static RoutedCommand CommandItemsSort = new RoutedCommand ();
+
+		private void commandOpenFiles_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+			
+		}
+
+		private void commandClearList_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
+		private void commandApplyFile_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
+		private void commandUndoWorks_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
+		private void commandRedoWorks_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
+		private void commandApplyCanc_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
+		private void commandUpperItem_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
+		private void commandLowerItem_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
+		private void commandItemsSort_Executed ( object sender, ExecutedRoutedEventArgs e )
+		{
+
+		}
+
 		ObservableCollection<FileInfo> current = new ObservableCollection<FileInfo> ();
 		UndoManager<ObservableCollection<FileInfo>> undoManager = new UndoManager<ObservableCollection<FileInfo>> ();
 
@@ -61,6 +115,16 @@ namespace Daramkun.DaramRenamer
 				foreach ( FileInfo fileInfo in tempFileInfos ) current.Remove ( fileInfo );
 				if ( current.Count == 0 ) { undoManager.ClearAll (); }
 			}
+		}
+
+		private void Menu_System_Undo ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void Menu_System_Redo ( object sender, RoutedEventArgs e )
+		{
+
 		}
 	}
 }

@@ -11,8 +11,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ReplaceRegexpProcessor : IProcessor
 	{
+		[Globalized ( "original_regex" )]
 		public Regex RegularExpression { get; set; }
+		[Globalized ( "replace_format" )]
 		public string FormatString { get; set; }
+		[Globalized ( "include_extension" )]
 		public bool IncludeExtensions { get; set; }
 
 		public ReplaceRegexpProcessor ( Regex regexp, string format, bool includeExtensions = false )

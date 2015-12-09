@@ -27,6 +27,9 @@ namespace Daramkun.DaramRenamer
 		public List<GlobalCulture> Languages = new List<GlobalCulture> ();
 	}
 
+	[AttributeUsage ( AttributeTargets.Property, AllowMultiple = false, Inherited = true )]
+	public class GlobalizedAttribute : Attribute { public string Field { get; set; } public GlobalizedAttribute ( string field ) { Field = field; } }
+
 	public static class Globalizer
 	{
 		static Dictionary<CultureInfo, GlobalCulture> Cultures = new Dictionary<CultureInfo, GlobalCulture> ();

@@ -19,9 +19,10 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		[Globalized ( "include_extension" )]
 		public bool IncludeExtensions { get; set; }
 
-		public DeleteBlockProcessor(string start, string end, bool deleteAllBlock, bool includeExtensions = false )
+		public DeleteBlockProcessor () { StartText = ""; EndText = ""; DeleteAllBlocks = false; IncludeExtensions = false; }
+		public DeleteBlockProcessor ( string start, string end, bool deleteAllBlock, bool includeExtensions = false )
 		{
-			StartText = start;EndText = end;
+			StartText = start; EndText = end;
 			DeleteAllBlocks = deleteAllBlock;
 			IncludeExtensions = includeExtensions;
 		}
@@ -45,12 +46,6 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 			file.ChangedFilename = $"{fn}{ext}";
 
 			return true;
-		}
-
-		public override string ToString ()
-		{
-			if ( CultureInfo.CurrentUICulture == CultureInfo.GetCultureInfo ( "ko-KR" ) ) return "파일명 블록 제거";
-			return "Delete Block of filename";
 		}
 	}
 }

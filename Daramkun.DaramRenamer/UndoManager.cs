@@ -20,12 +20,12 @@ namespace Daramkun.DaramRenamer
 
 		public void SaveToUndoStack ( T fileInfoCollection )
 		{
-			if ( undoStack.Count == 0 && fileInfoCollection == null ) return;
 			using ( MemoryStream memStream = new MemoryStream () )
 			{
 				bf.Serialize ( memStream, fileInfoCollection );
 				undoStack.Push ( memStream.ToArray () );
 			}
+			ClearRedoStack ();
 		}
 
 		public void SaveToRedoStack ( T fileInfoCollection )

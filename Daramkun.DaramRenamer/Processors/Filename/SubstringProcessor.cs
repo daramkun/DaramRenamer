@@ -8,11 +8,15 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class SubstringProcessor : IProcessor
 	{
+		[Globalized ( "start_index" )]
 		public uint StartIndex { get; set; }
+		[Globalized ( "substring_length" )]
 		public uint? Length { get; set; }
+		[Globalized ( "include_extension" )]
 		public bool IncludeExtensions { get; set; }
 
-		public SubstringProcessor ( uint start, uint? length = null, bool includeExtensions = false)
+		public SubstringProcessor () { StartIndex = 0; Length = null; IncludeExtensions = false; }
+		public SubstringProcessor ( uint start, uint? length = null, bool includeExtensions = false )
 		{
 			StartIndex = start; Length = length;
 			IncludeExtensions = includeExtensions;

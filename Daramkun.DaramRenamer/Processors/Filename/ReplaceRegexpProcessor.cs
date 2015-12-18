@@ -18,6 +18,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		[Globalized ( "include_extension" )]
 		public bool IncludeExtensions { get; set; }
 
+		public ReplaceRegexpProcessor () { RegularExpression = new Regex ( "$^" ); FormatString = ""; IncludeExtensions = false; }
 		public ReplaceRegexpProcessor ( Regex regexp, string format, bool includeExtensions = false )
 		{
 			RegularExpression = regexp;
@@ -40,12 +41,6 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 			}
 			catch { return false; }
 			return true;
-		}
-
-		public override string ToString ()
-		{
-			if ( CultureInfo.CurrentUICulture == CultureInfo.GetCultureInfo ( "ko-KR" ) ) return "정규표현식 파일명 치환";
-			return "Replace Regular Expression Text Filename";
 		}
 	}
 }

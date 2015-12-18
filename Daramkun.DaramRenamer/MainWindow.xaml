@@ -104,22 +104,22 @@
 
                     <ToolBarTray Grid.Row="0" ClipToBounds="False">
                         <ToolBar Focusable="True" ToolBarTray.IsLocked="True">
-                            <Button Content="{StaticResource iconOpenButton}" ToolTip="{Binding Path=[open]}" />
-                            <Button Content="{StaticResource iconDeleteButton}" ToolTip="{Binding Path=[clear]}" />
-                            <Button Content="{StaticResource iconApplyButton}" ToolTip="{Binding Path=[apply]}" />
+                            <Button Content="{StaticResource iconOpenButton}" ToolTip="{Binding Path=[open]}" Click="Menu_System_Open" />
+                            <Button Content="{StaticResource iconDeleteButton}" ToolTip="{Binding Path=[clear]}" Click="Menu_System_Clear" />
+                            <Button Content="{StaticResource iconApplyButton}" ToolTip="{Binding Path=[apply]}" Click="Menu_System_Apply" />
                             <Separator />
-                            <Button Content="{StaticResource iconUndoButton}" ToolTip="{Binding Path=[undo]}" />
-                            <Button Content="{StaticResource iconRedoButton}" ToolTip="{Binding Path=[redo]}" />
+                            <Button Content="{StaticResource iconUndoButton}" ToolTip="{Binding Path=[undo]}" Click="Menu_System_Undo" />
+                            <Button Content="{StaticResource iconRedoButton}" ToolTip="{Binding Path=[redo]}" Click="Menu_System_Redo" />
                             <Separator />
-                            <Button Content="{StaticResource iconItemUp}" ToolTip="{Binding Path=[item_up]}" />
-                            <Button Content="{StaticResource iconItemDown}" ToolTip="{Binding Path=[item_down]}" />
-                            <Button Content="{StaticResource iconItemSort}" ToolTip="{Binding Path=[item_sort]}" />
+                            <Button Content="{StaticResource iconItemUp}" ToolTip="{Binding Path=[item_up]}" Click="Menu_System_ItemUp" />
+                            <Button Content="{StaticResource iconItemDown}" ToolTip="{Binding Path=[item_down]}" Click="Menu_System_ItemDown" />
+                            <Button Content="{StaticResource iconItemSort}" ToolTip="{Binding Path=[item_sort]}" Click="Menu_System_ItemSort" />
 
                             <Separator />
 
-                            <Button Content="{StaticResource iconCheckUpdate}" ToolTip="{Binding Path=[check_update]}" />
-                            <Button Content="{StaticResource iconFeedback}" ToolTip="{Binding Path=[feedback]}" />
-                            <Button Content="{StaticResource iconDonate}" ToolTip="{Binding Path=[donate]}" />
+                            <Button Content="{StaticResource iconCheckUpdate}" ToolTip="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
+                            <Button Content="{StaticResource iconFeedback}" ToolTip="{Binding Path=[feedback]}" Click="Menu_System_Feedback" />
+                            <Button Content="{StaticResource iconDonate}" ToolTip="{Binding Path=[donate]}" Click="Menu_System_Donate" />
                             <Separator />
 
                             <Button Content="{StaticResource iconReplaceText}" ToolTip="{Binding Path=[process_replace_plain_text]}" />
@@ -299,7 +299,7 @@ Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.D
             </TabItem>
         </TabControl>
         <Grid Name="backgroundGrid" Background="Black" Opacity="0.25" Visibility="Hidden" Grid.Row="0">
-
+            
         </Grid>
 
         <ProgressBar Name="progressBar" Grid.Row="1" />

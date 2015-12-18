@@ -13,6 +13,13 @@ namespace Daramkun.DaramRenamer
 		BothPoint,
 	}
 
+	public enum Casecast
+	{
+		AllToUppercase,
+		AllToLowercase,
+		UppercaseFirstLetter,
+	}
+
 	public interface IProcessor
 	{
 		bool Process ( FileInfo file );

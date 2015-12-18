@@ -23,6 +23,7 @@ namespace Daramkun.DaramRenamer
 		string originalFullPath;
 		string changedPath, changedFilename;
 		
+		[field: NonSerialized]
 		public event PropertyChangedEventHandler PropertyChanged;
 		
 		public string OriginalFullPath

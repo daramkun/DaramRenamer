@@ -10,8 +10,10 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class TrimmingProcessor : IProcessor
 	{
+		[Globalized ( "trim_pos" )]
 		public Position TrimPosition { get; set; }
 
+		public TrimmingProcessor () { TrimPosition = Position.BothPoint; }
 		public TrimmingProcessor ( Position pos )
 		{
 			TrimPosition = pos;
@@ -21,14 +23,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		{
 			string fn = Path.GetFileNameWithoutExtension ( file.ChangedFilename );
 			fn = TrimPosition == Position.StartPoint ? fn.TrimStart () : ( TrimPosition == Position.EndPoint ? fn.TrimEnd () : fn.Trim () );
-            file.ChangedFilename = $"{ fn }{ Path.GetExtension ( file.ChangedFilename ) }";
+			file.ChangedFilename = $"{ fn }{ Path.GetExtension ( file.ChangedFilename ) }";
 			return true;
-		}
-
-		public override string ToString ()
-		{
-			if ( CultureInfo.CurrentUICulture == CultureInfo.GetCultureInfo ( "ko-KR" ) ) return "양 옆 공백 제거";
-			return "Trimming Filename";
 		}
 	}
 }

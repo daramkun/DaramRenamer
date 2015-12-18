@@ -326,6 +326,7 @@
     <Compile Include="Processors\Extension\AddExtensionProcessor.cs" />
     <Compile Include="Processors\Extension\DeleteExtensionProcessor.cs" />
     <Compile Include="Processors\Extension\ReplaceExtensionProcessor.cs" />
+    <Compile Include="Processors\Filename\CasecastProcessor.cs" />
     <Compile Include="Processors\Filename\ConcatenateProcessor.cs" />
     <Compile Include="Processors\Filename\DeleteBlockProcessor.cs" />
     <Compile Include="Processors\Filename\DeleteFilenameProcessor.cs" />

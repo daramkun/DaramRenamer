@@ -9,6 +9,20 @@
 				"renamer" : "리네이머",
 				"settings" : "설정",
 				"license" : "라이센스",
+
+				"ok_button" : "확인",
+				"yes_button" : "예",
+				"no_button" : "아니오",
+				"cancel_button" : "취소",
+				"download_button" : "다운로드",
+
+				"open_files" : "파일 열기",
+				"all_files" : "모든 파일(*.*)|*.*",
+
+				"update_exist" : "업데이트가 있습니다.",
+				"no_update" : "업데이트가 없습니다.",
+				"current_stable" : "이 프로그램은 현재 최신버전입니다.",
+				"current_old" : "이 프로그램의 최신 버전 업데이트가 있습니다.",
 				
 				"original_path" : "원본 경로",
 				"original_name" : "원본 이름",
@@ -76,6 +90,11 @@
 				"start_block" : "묶인 문자열 시작",
 				"end_block" : "묶인 문자열 끝",
 				"delete_all_blocks" : "모든 묶인 문자열 제거",
+				"start_index" : "시작 지점",
+				"substring_length" : "길이",
+				"trim_pos" : "트림할 위치",
+				"casecast" : "대소문자 변경 방법"
+
 			}
 		},
 		{

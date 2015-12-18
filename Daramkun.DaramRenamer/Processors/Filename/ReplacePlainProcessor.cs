@@ -17,6 +17,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		[Globalized( "include_extension" )]
 		public bool IncludeExtensions { get; set; }
 
+		public ReplacePlainProcessor () { Original = ""; Replace = ""; IncludeExtensions = false; }
 		public ReplacePlainProcessor ( string original, string replace, bool includeExtensions = false )
 		{
 			Original = original; Replace = replace;
@@ -30,12 +31,6 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 			file.ChangedFilename = IncludeExtensions ? $"{ file.ChangedFilename.Replace ( Original, Replace ) }" :
 				$"{ Path.GetFileNameWithoutExtension ( file.ChangedFilename ).Replace ( Original, Replace ) }{ Path.GetExtension ( file.ChangedFilename ) }";
 			return true;
-		}
-
-		public override string ToString ()
-		{
-			if ( CultureInfo.CurrentUICulture == CultureInfo.GetCultureInfo ( "ko-KR" ) ) return "일반 텍스트 파일명 치환";
-			return "Replace Plain Text Filename";
 		}
 	}
 }

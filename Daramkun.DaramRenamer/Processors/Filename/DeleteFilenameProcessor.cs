@@ -15,11 +15,5 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 			file.ChangedFilename = Path.GetExtension ( file.ChangedFilename );
 			return true;
 		}
-
-		public override string ToString ()
-		{
-			if ( CultureInfo.CurrentUICulture == CultureInfo.GetCultureInfo ( "ko-KR" ) ) return "파일명 제거";
-			return "Delete Filename";
-		}
 	}
 }

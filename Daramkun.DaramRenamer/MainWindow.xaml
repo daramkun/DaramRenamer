@@ -8,6 +8,8 @@
         Title="{Binding Path=[daram_renamer]}" Width="720" Height="480"
 		DataContext="{x:Static local:Globalizer.Strings}">
     <Window.Resources>
+        <local:ComboBoxBindingConverter x:Key="comboBoxBindingConverter" />
+
         <Image x:Key="iconOpenButton" Source="Resources/folder.png" />
         <Image x:Key="iconDeleteButton" Source="Resources/delete.png" />
         <Image x:Key="iconApplyButton" Source="Resources/accept.png" />
@@ -214,9 +216,22 @@
                 </Grid>
             </TabItem>
             <TabItem Header="{Binding Path=[settings]}">
-                <StackPanel>
-
-                </StackPanel>
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <CheckBox Content="{Binding Path=[option_hw_accel_mode]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=HardwareAccelerationMode}" Margin="0,0,0,5" />
+                        <CheckBox Content="{Binding Path=[option_overwrite]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=Overwrite}" Margin="0,0,0,5" />
+                        <CheckBox Content="{Binding Path=[option_autofilenamefix]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=AutomaticFilenameFix}" Margin="0,0,0,5" />
+                        <CheckBox Content="{Binding Path=[option_autolistcleaning]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=AutomaticListCleaning}" Margin="0,0,0,5" />
+                        <CheckBox Content="{Binding Path=[option_savemethod]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=OptionSaveToRegistry}" Margin="0,0,0,5" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=[option_rename_mode]}" />
+                            <ComboBox SelectedIndex="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=RenameModeInteger}">
+                                <ComboBoxItem Content="{Binding Path=[option_rename_mode_move]}" />
+                                <ComboBoxItem Content="{Binding Path=[option_rename_mode_copy]}" />
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="{Binding Path=[license]}">
                 <TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve" IsReadOnly="True"><![CDATA[------------------------------

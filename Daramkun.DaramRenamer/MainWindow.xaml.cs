@@ -185,7 +185,9 @@ namespace Daramkun.DaramRenamer
 		{
 			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) =>
 			{
-				
+				ErrorCode errorMessage;
+				if ( Optionizer.SharedOptionizer.RenameMode == RenameMode.Move ) fileInfo.Move ( Optionizer.SharedOptionizer.Overwrite, out errorMessage );
+				else if ( Optionizer.SharedOptionizer.RenameMode == RenameMode.Copy ) fileInfo.Copy ( Optionizer.SharedOptionizer.Overwrite, out errorMessage );
 			} );
 		}
 

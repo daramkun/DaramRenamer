@@ -321,6 +321,7 @@
     <Compile Include="ExternalLibs\TaskDialog\TaskDialogViewModel.cs" />
     <Compile Include="ExternalLibs\TaskDialog\UnsafeNativeMethods.cs" />
     <Compile Include="ExternalLibs\TaskDialog\VistaActiveTaskDialog.cs" />
+    <Compile Include="Optionizer.cs" />
     <Compile Include="Processors\BatchProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionAutomatedProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionProcessor.cs" />

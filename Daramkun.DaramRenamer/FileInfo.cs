@@ -86,10 +86,11 @@ namespace Daramkun.DaramRenamer
 			}
 		}
 
-		public bool Move ( out ErrorCode errorMessage )
+		public bool Move ( bool overwrite, out ErrorCode errorMessage )
 		{
 			try
 			{
+				if ( overwrite && File.Exists ( ChangedFullPath ) ) File.Delete ( ChangedFullPath );
 				File.Move ( OriginalFullPath, ChangedFullPath );
 				Changed ();
 				errorMessage = ErrorCode.NoError;

@@ -43,7 +43,7 @@ namespace Daramkun.DaramRenamer
 			}
 			else
 			{
-				//if ( !Settings.Default.HardwareTurnOn )
+				if ( !Optionizer.SharedOptionizer.HardwareAccelerationMode )
 					RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
 				args = e.Args;
@@ -61,6 +61,12 @@ namespace Daramkun.DaramRenamer
 				args = null;
 			}
 			base.OnActivated ( e );
+		}
+
+		protected override void OnExit ( ExitEventArgs e )
+		{
+			Optionizer.SharedOptionizer.Save ();
+			base.OnExit ( e );
 		}
 	}
 }

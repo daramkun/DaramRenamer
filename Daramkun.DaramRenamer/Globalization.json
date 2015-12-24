@@ -93,8 +93,16 @@
 				"start_index" : "시작 지점",
 				"substring_length" : "길이",
 				"trim_pos" : "트림할 위치",
-				"casecast" : "대소문자 변경 방법"
+				"casecast" : "대소문자 변경 방법",
 
+				"option_hw_accel_mode" : "가능한 경우 프로그램 화면 하드웨어 가속 렌더링",
+				"option_rename_mode" : "이름 변경 방법: ",
+				"option_rename_mode_move" : "이동",
+				"option_rename_mode_copy" : "복사",
+				"option_overwrite" : "같은 이름의 파일이 있을 경우 덮어쓰기",
+				"option_autofilenamefix" : "자동으로 파일명 특수문자 수정하기",
+				"option_autolistcleaning" : "자동으로 존재하지 않는 파일 정리",
+				"option_savemethod" : "설정을 레지스트리에 저장하기"
 			}
 		},
 		{

@@ -8,6 +8,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TaskDialogInterop;
 
@@ -47,6 +48,8 @@ namespace Daramkun.DaramRenamer
 		{
 			InitializeComponent ();
 
+			optionRenameMode.SelectedIndex = Optionizer.SharedOptionizer.RenameModeInteger;
+			
 			Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
 			Title = string.Format ( "{3} - v{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build,
 				Globalizer.Strings [ "daram_renamer" ] );
@@ -77,14 +80,14 @@ namespace Daramkun.DaramRenamer
 
 		public void ShowPopup<T> () where T : IProcessor
 		{
-			backgroundGrid.Visibility = Visibility.Visible;
+			overlayWindowGrid.Visibility = Visibility.Visible;
 
 		}
 
 		public void ClosePopup ()
 		{
-			backgroundGrid.Children.Clear ();
-			backgroundGrid.Visibility = Visibility.Hidden;
+			overlayWindowGrid.Children.Clear ();
+			overlayWindowGrid.Visibility = Visibility.Hidden;
 		}
 
 		public async Task<bool?> CheckUpdate ( bool messageShow = false )
@@ -253,6 +256,21 @@ namespace Daramkun.DaramRenamer
 		private void Menu_System_Donate ( object sender, RoutedEventArgs e )
 		{
 			Process.Start ( "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K96K9B2GBKJVA&lc=KR&item_name=DARAM%20WORLD&currency_code=USD&bn=PP%2dDonationsBF%3ax%2dclick%2dbut21%2egif%3aNonHosted" );
+		}
+
+		private void ComboBox_SelectionChanged ( object sender, SelectionChangedEventArgs e )
+		{
+			Optionizer.SharedOptionizer.RenameModeInteger = ( sender as ComboBox ).SelectedIndex;
+		}
+
+		private void OK_Button ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void Cancel_Button ( object sender, RoutedEventArgs e )
+		{
+			ClosePopup ();
 		}
 	}
 }

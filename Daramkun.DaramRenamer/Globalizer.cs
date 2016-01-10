@@ -28,7 +28,12 @@ namespace Daramkun.DaramRenamer
 	}
 
 	[AttributeUsage ( AttributeTargets.Property, AllowMultiple = false, Inherited = true )]
-	public class GlobalizedAttribute : Attribute { public string Field { get; set; } public GlobalizedAttribute ( string field ) { Field = field; } }
+	public class GlobalizedAttribute : Attribute
+	{
+		public string Field { get; set; }
+		public uint Order { get; set; }
+		public GlobalizedAttribute ( string field, uint order = 0 ) { Field = field; Order = order; }
+	}
 
 	public static class Globalizer
 	{

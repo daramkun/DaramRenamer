@@ -10,11 +10,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ReplacePlainProcessor : IProcessor
 	{
-		[Globalized( "original_text" )]
+		[Globalized( "original_text", 0 )]
 		public string Original { get; set; }
-		[Globalized ( "replace_text" )]
+		[Globalized ( "replace_text", 1 )]
 		public string Replace { get; set; }
-		[Globalized( "include_extension" )]
+		[Globalized( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; }
 
 		public ReplacePlainProcessor () { Original = ""; Replace = ""; IncludeExtensions = false; }

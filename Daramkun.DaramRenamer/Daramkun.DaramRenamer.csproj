@@ -335,6 +335,9 @@
     <Compile Include="Processors\Filename\ReplaceRegexpProcessor.cs" />
     <Compile Include="Processors\Filename\SubstringProcessor.cs" />
     <Compile Include="Processors\Filename\TrimmingProcessor.cs" />
+    <Compile Include="SubWindow.xaml.cs">
+      <DependentUpon>SubWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UndoManager.cs" />
     <Compile Include="ExternalLibs\WPFFolderBrowser\interop\COMGuids.cs" />
     <Compile Include="ExternalLibs\WPFFolderBrowser\interop\errorhelper.cs" />
@@ -367,6 +370,10 @@
     <Page Include="ExternalLibs\TaskDialog\TaskDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SubWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

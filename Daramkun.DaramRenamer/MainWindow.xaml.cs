@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Daramkun.DaramRenamer.Processors.Filename;
 using TaskDialogInterop;
 
 namespace Daramkun.DaramRenamer
@@ -80,14 +81,21 @@ namespace Daramkun.DaramRenamer
 
 		public void ShowPopup<T> () where T : IProcessor
 		{
+			var window = new SubWindow ( Activator.CreateInstance<T> () );
+			window.OKButtonClicked += SubWindow_OKButtonClicked;
+			window.CancelButtonClicked += SubWindow_CancelButtonClicked;
+			window.VerticalAlignment = VerticalAlignment.Center;
+			window.HorizontalAlignment = HorizontalAlignment.Center;
+			overlayWindowContainer.Children.Add ( window );
 			overlayWindowGrid.Visibility = Visibility.Visible;
-
 		}
 
 		public void ClosePopup ()
 		{
 			overlayWindowGrid.Children.Clear ();
 			overlayWindowGrid.Visibility = Visibility.Hidden;
+
+			overlayWindowContainer.Children.Clear ();
 		}
 
 		public async Task<bool?> CheckUpdate ( bool messageShow = false )
@@ -222,7 +230,6 @@ namespace Daramkun.DaramRenamer
 				if ( lastIndex == 0 ) continue;
 				current.Move ( lastIndex, lastIndex - 1 );
 			}
-
 		}
 
 		private void Menu_System_ItemDown ( object sender, RoutedEventArgs e )
@@ -263,14 +270,21 @@ namespace Daramkun.DaramRenamer
 			Optionizer.SharedOptionizer.RenameModeInteger = ( sender as ComboBox ).SelectedIndex;
 		}
 
-		private void OK_Button ( object sender, RoutedEventArgs e )
+		private void SubWindow_OKButtonClicked ( object sender, RoutedEventArgs e)
 		{
 
+
+			ClosePopup ();
 		}
 
-		private void Cancel_Button ( object sender, RoutedEventArgs e )
+		private void SubWindow_CancelButtonClicked ( object sender, RoutedEventArgs e )
 		{
 			ClosePopup ();
+		}
+
+		private void ReplacePlainText_Click ( object sender, RoutedEventArgs e )
+		{
+			ShowPopup<ReplacePlainProcessor> ();
 		}
 	}
 }

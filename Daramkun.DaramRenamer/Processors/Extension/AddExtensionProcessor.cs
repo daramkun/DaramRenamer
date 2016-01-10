@@ -8,6 +8,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 {
 	public class AddExtensionProcessor : IProcessor
 	{
+		public string Name { get { return "process_add_extension"; } }
+
 		public string Extension { get; set; }
 
 		public AddExtensionProcessor ( string ext )

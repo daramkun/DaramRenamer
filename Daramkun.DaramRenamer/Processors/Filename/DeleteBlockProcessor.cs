@@ -10,6 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class DeleteBlockProcessor : IProcessor
 	{
+		public string Name { get { return "process_delete_block"; } }
+
 		[Globalized ( "start_block" )]
 		public string StartText { get; set; }
 		[Globalized ( "end_block" )]

@@ -10,6 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class TrimmingProcessor : IProcessor
 	{
+		public string Name { get { return "process_trimming_text"; } }
+
 		[Globalized ( "trim_pos" )]
 		public Position TrimPosition { get; set; }
 

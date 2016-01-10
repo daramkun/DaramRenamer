@@ -22,6 +22,7 @@ namespace Daramkun.DaramRenamer
 
 	public interface IProcessor
 	{
+		string Name { get; }
 		bool Process ( FileInfo file );
 	}
 }

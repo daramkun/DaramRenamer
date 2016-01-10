@@ -92,7 +92,6 @@ namespace Daramkun.DaramRenamer
 
 		public void ClosePopup ()
 		{
-			overlayWindowGrid.Children.Clear ();
 			overlayWindowGrid.Visibility = Visibility.Hidden;
 
 			overlayWindowContainer.Children.Clear ();

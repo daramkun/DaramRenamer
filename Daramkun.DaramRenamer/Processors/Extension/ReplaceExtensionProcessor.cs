@@ -9,6 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 {
 	public class ReplaceExtensionProcessor : IProcessor
 	{
+		public string Name { get { return "process_change_extension"; } }
+
 		public string Extension { get; set; }
 
 		public ReplaceExtensionProcessor ( string ext )

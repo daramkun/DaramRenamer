@@ -8,6 +8,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 {
 	public class AddExtensionAutomatedProcessor : IProcessor
 	{
+		public string Name { get { return "process_add_extension_automatically"; } }
+
 		public bool Process ( FileInfo file )
 		{
 			throw new NotImplementedException ();

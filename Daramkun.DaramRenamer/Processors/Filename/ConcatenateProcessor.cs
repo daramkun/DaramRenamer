@@ -10,6 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ConcatenateProcessor : IProcessor
 	{
+		public string Name { get { return "process_concatenate_text"; } }
+
 		public string ConcatenateText { get; set; }
 		public Position ConcatenatePosition { get; set; }
 		public bool IncludeExtensions { get; set; }

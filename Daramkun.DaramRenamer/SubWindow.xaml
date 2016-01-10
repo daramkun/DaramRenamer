@@ -133,11 +133,14 @@
 
 			<!-- Contents -->
 			<StackPanel Orientation="Vertical" Margin="10">
-				<Grid>
+				<Grid Name="contentGrid">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="120" />
 						<ColumnDefinition />
 					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						
+					</Grid.RowDefinitions>
 				</Grid>
 			</StackPanel>
 

@@ -9,6 +9,8 @@ namespace Daramkun.DaramRenamer.Processors
 {
 	public class BatchProcessor : IProcessor
 	{
+		public string Name { get { return "process_batch_process"; } }
+
 		public ObservableCollection<IProcessor> Processors { get; } = new ObservableCollection<IProcessor> ();
 
 		public BatchProcessor () { }

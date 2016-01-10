@@ -9,6 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 {
 	public class DeleteExtensionProcessor : IProcessor
 	{
+		public string Name { get { return "process_delete_extension"; } }
+
 		public bool Process ( FileInfo file )
 		{
 			file.ChangedFilename = Path.GetFileNameWithoutExtension ( file.ChangedFilename );

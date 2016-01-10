@@ -9,6 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class CasecastProcessor : IProcessor
 	{
+		public string Name { get { return "process_casecast_text"; } }
+
 		[Globalized ( "casecast" )]
 		public Casecast Casecast { get; set; }
 

@@ -11,6 +11,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ReplaceRegexpProcessor : IProcessor
 	{
+		public string Name { get { return "process_replace_regex_text"; } }
+
 		[Globalized ( "original_regex" )]
 		public Regex RegularExpression { get; set; }
 		[Globalized ( "replace_format" )]

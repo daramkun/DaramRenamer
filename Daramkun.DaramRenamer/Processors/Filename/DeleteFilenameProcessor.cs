@@ -10,6 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class DeleteFilenameProcessor : IProcessor
 	{
+		public string Name { get { return "process_delete_text"; } }
+
 		public bool Process ( FileInfo file )
 		{
 			file.ChangedFilename = Path.GetExtension ( file.ChangedFilename );

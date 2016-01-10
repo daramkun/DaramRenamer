@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,15 +32,30 @@ namespace Daramkun.DaramRenamer
 
 			Processor = processor;
 
+			overlayWindowTitle.Text = Globalizer.Strings [ processor.Name ];
+
 			Type type = processor.GetType ();
 			var props = type.GetProperties ();
+			Dictionary<uint, PropertyInfo> propDict = new Dictionary<uint, PropertyInfo> ();
 			foreach ( var prop in props )
 			{
 				object [] attrs = prop.GetCustomAttributes ( typeof ( GlobalizedAttribute ), true );
 				if ( attrs.Length > 0)
-				{
+					propDict.Add ( ( attrs [ 0 ] as GlobalizedAttribute ).Order, prop );
+			}
 
-				}
+			for ( int i = 0; i < propDict.Count; ++i )
+				contentGrid.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 24 ) } );
+
+			foreach ( var propPair in from p in propDict orderby p.Key select p )
+			{
+				var prop = propPair.Value;
+				object [] attrs = prop.GetCustomAttributes ( typeof ( GlobalizedAttribute ), true );
+				TextBlock textBlock = new TextBlock () { Text = Globalizer.Strings [ ( attrs [ 0 ] as GlobalizedAttribute ).Field ] };
+				//textBlock.SetValue ( Grid.RowProperty, propPair.Key );
+				//textBlock.SetValue ( Grid.ColumnProperty, 0 );
+				Grid.SetRow ( textBlock, ( int ) propPair.Key );
+				contentGrid.Children.Add ( textBlock );
 			}
 		}
 

@@ -10,6 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ReplacePlainProcessor : IProcessor
 	{
+		public string Name { get { return "process_replace_plain_text"; } }
+
 		[Globalized( "original_text", 0 )]
 		public string Original { get; set; }
 		[Globalized ( "replace_text", 1 )]

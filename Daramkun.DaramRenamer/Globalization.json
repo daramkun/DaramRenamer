@@ -51,8 +51,10 @@
 				"path_processes" : "경로 처리",
 				"tag_processes" : "태그 처리",
 
+				"process_batch_process" : "일괄 처리",
+
 				"process_replace_plain_text" : "평문 파일명 치환",
-				"process_replace_regex_text" : "졍규표현식 파일명 치환",
+				"process_replace_regex_text" : "정규표현식 파일명 치환",
 				"process_concatenate_text" : "문자열 추가",
 				"process_trimming_text" : "파일명 트림",
 				"process_delete_block" : "묶인 파일명 제거",

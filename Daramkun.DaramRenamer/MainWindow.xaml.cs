@@ -90,10 +90,18 @@ namespace Daramkun.DaramRenamer
 			overlayWindowGrid.Visibility = Visibility.Visible;
 		}
 
-		public void ClosePopup ()
+		public void ClosePopup ( bool apply = false )
 		{
 			overlayWindowGrid.Visibility = Visibility.Hidden;
-
+			if ( apply )
+			{
+				undoManager.SaveToUndoStack ( current );
+				var processor = ( overlayWindowContainer.Children [ 0 ] as SubWindow ).Processor;
+				Parallel.ForEach<FileInfo> ( current, ( fileInfo ) =>
+				{
+					processor.Process ( fileInfo );
+				} );
+			}
 			overlayWindowContainer.Children.Clear ();
 		}
 
@@ -271,9 +279,7 @@ namespace Daramkun.DaramRenamer
 
 		private void SubWindow_OKButtonClicked ( object sender, RoutedEventArgs e)
 		{
-
-
-			ClosePopup ();
+			ClosePopup ( true );
 		}
 
 		private void SubWindow_CancelButtonClicked ( object sender, RoutedEventArgs e )

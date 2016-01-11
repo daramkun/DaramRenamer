@@ -52,10 +52,39 @@ namespace Daramkun.DaramRenamer
 				var prop = propPair.Value;
 				object [] attrs = prop.GetCustomAttributes ( typeof ( GlobalizedAttribute ), true );
 				TextBlock textBlock = new TextBlock () { Text = Globalizer.Strings [ ( attrs [ 0 ] as GlobalizedAttribute ).Field ] };
-				//textBlock.SetValue ( Grid.RowProperty, propPair.Key );
-				//textBlock.SetValue ( Grid.ColumnProperty, 0 );
+				textBlock.VerticalAlignment = VerticalAlignment.Center;
 				Grid.SetRow ( textBlock, ( int ) propPair.Key );
+				Grid.SetColumn ( textBlock, 0 );
 				contentGrid.Children.Add ( textBlock );
+
+				Control control = null;
+
+				if ( prop.PropertyType == typeof ( string ) )
+				{
+					control = new TextBox ();
+					control.VerticalAlignment = VerticalAlignment.Center;
+					var binding = new Binding ();
+					binding.Source = Processor;
+					binding.Path = new PropertyPath ( prop.Name );
+					control.SetBinding ( TextBox.TextProperty, binding );
+				}
+				else if ( prop.PropertyType == typeof ( bool ) )
+				{
+					control = new CheckBox ();
+					control.VerticalAlignment = VerticalAlignment.Center;
+					var binding = new Binding ();
+					binding.Source = Processor;
+					binding.Path = new PropertyPath ( prop.Name );
+					control.SetBinding ( CheckBox.IsCheckedProperty, binding );
+				}
+
+				if ( control != null )
+				{
+					Grid.SetRow ( control, ( int ) propPair.Key );
+					Grid.SetColumn ( control, 1 );
+
+					contentGrid.Children.Add ( control );
+				}
 			}
 		}
 

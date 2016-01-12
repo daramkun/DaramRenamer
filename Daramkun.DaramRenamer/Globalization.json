@@ -89,6 +89,8 @@
 				"replace_text" : "바꿀 텍스트",
 				"original_regex" : "정규표현식",
 				"replace_format" : "구성 형식문자열",
+				"concat_text" : "붙일 문자열",
+				"concat_pos" : "붙일 위치",
 				"start_block" : "묶인 문자열 시작",
 				"end_block" : "묶인 문자열 끝",
 				"delete_all_blocks" : "모든 묶인 문자열 제거",
@@ -104,7 +106,14 @@
 				"option_overwrite" : "같은 이름의 파일이 있을 경우 덮어쓰기",
 				"option_autofilenamefix" : "자동으로 파일명 특수문자 수정하기",
 				"option_autolistcleaning" : "자동으로 존재하지 않는 파일 정리",
-				"option_savemethod" : "설정을 레지스트리에 저장하기"
+				"option_savemethod" : "설정을 레지스트리에 저장하기",
+
+				"position_front" : "처음",
+				"position_end" : "마지막",
+				"position_both" : "둘 다",
+				"casecast_lower" : "소문자로",
+				"casecast_upper" : "대문자로",
+				"casecast_upper_first_letter" : "첫 글자만 대문자로"
 			}
 		},
 		{

@@ -10,11 +10,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	{
 		public string Name { get { return "process_substring_text"; } }
 
-		[Globalized ( "start_index" )]
+		[Globalized ( "start_index", 0 )]
 		public uint StartIndex { get; set; }
-		[Globalized ( "substring_length" )]
+		[Globalized ( "substring_length", 1 )]
 		public uint? Length { get; set; }
-		[Globalized ( "include_extension" )]
+		[Globalized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; }
 
 		public SubstringProcessor () { StartIndex = 0; Length = null; IncludeExtensions = false; }

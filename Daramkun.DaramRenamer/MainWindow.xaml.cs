@@ -97,10 +97,7 @@ namespace Daramkun.DaramRenamer
 			{
 				undoManager.SaveToUndoStack ( current );
 				var processor = ( overlayWindowContainer.Children [ 0 ] as SubWindow ).Processor;
-				Parallel.ForEach<FileInfo> ( current, ( fileInfo ) =>
-				{
-					processor.Process ( fileInfo );
-				} );
+				Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => processor.Process ( fileInfo ) );
 			}
 			overlayWindowContainer.Children.Clear ();
 		}
@@ -257,10 +254,7 @@ namespace Daramkun.DaramRenamer
 			FileInfo.Sort ( current );
 		}
 
-		private async void Menu_System_CheckUpdate ( object sender, RoutedEventArgs e )
-		{
-			await CheckUpdate ( true );
-		}
+		private async void Menu_System_CheckUpdate ( object sender, RoutedEventArgs e ) { await CheckUpdate ( true ); }
 
 		private void Menu_System_Feedback ( object sender, RoutedEventArgs e )
 		{
@@ -277,19 +271,16 @@ namespace Daramkun.DaramRenamer
 			Optionizer.SharedOptionizer.RenameModeInteger = ( sender as ComboBox ).SelectedIndex;
 		}
 
-		private void SubWindow_OKButtonClicked ( object sender, RoutedEventArgs e)
-		{
-			ClosePopup ( true );
-		}
+		private void SubWindow_OKButtonClicked ( object sender, RoutedEventArgs e) { ClosePopup ( true ); }
+		private void SubWindow_CancelButtonClicked ( object sender, RoutedEventArgs e ) { ClosePopup (); }
 
-		private void SubWindow_CancelButtonClicked ( object sender, RoutedEventArgs e )
-		{
-			ClosePopup ();
-		}
-
-		private void ReplacePlainText_Click ( object sender, RoutedEventArgs e )
-		{
-			ShowPopup<ReplacePlainProcessor> ();
-		}
+		private void ReplacePlainText_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ReplacePlainProcessor> (); }
+		private void ReplaceRegex_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ReplaceRegexpProcessor> (); }
+		private void ConcatText_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ConcatenateProcessor> (); }
+		private void Trimming_Click ( object sender, RoutedEventArgs e ) { ShowPopup<TrimmingProcessor> (); }
+		private void DeleteBlock_Click ( object sender, RoutedEventArgs e ) { ShowPopup<DeleteBlockProcessor> (); }
+		private void DeleteText_Click ( object sender, RoutedEventArgs e ) { }
+		private void Substring_Click ( object sender, RoutedEventArgs e ) { ShowPopup<SubstringProcessor> (); }
+		private void Castcast_Click ( object sender, RoutedEventArgs e ) { ShowPopup<CasecastProcessor> (); }
 	}
 }

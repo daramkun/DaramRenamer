@@ -12,13 +12,13 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	{
 		public string Name { get { return "process_delete_block"; } }
 
-		[Globalized ( "start_block" )]
+		[Globalized ( "start_block", 0 )]
 		public string StartText { get; set; }
-		[Globalized ( "end_block" )]
+		[Globalized ( "end_block", 1 )]
 		public string EndText { get; set; }
-		[Globalized ( "delete_all_blocks" )]
+		[Globalized ( "delete_all_blocks", 2 )]
 		public bool DeleteAllBlocks { get; set; }
-		[Globalized ( "include_extension" )]
+		[Globalized ( "include_extension", 3 )]
 		public bool IncludeExtensions { get; set; }
 
 		public DeleteBlockProcessor () { StartText = ""; EndText = ""; DeleteAllBlocks = false; IncludeExtensions = false; }

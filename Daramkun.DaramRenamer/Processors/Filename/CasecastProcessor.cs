@@ -14,7 +14,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		[Globalized ( "casecast" )]
 		public Casecast Casecast { get; set; }
 
-		public CasecastProcessor () { Casecast = Casecast.UppercaseFirstLetter; }
+		public CasecastProcessor () { Casecast = Casecast.AllToLowercase; }
 		public CasecastProcessor ( Casecast casecast ) { Casecast = casecast; }
 
 		public bool Process ( FileInfo file )

@@ -13,11 +13,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	{
 		public string Name { get { return "process_replace_regex_text"; } }
 
-		[Globalized ( "original_regex" )]
+		[Globalized ( "original_regex", 0 )]
 		public Regex RegularExpression { get; set; }
-		[Globalized ( "replace_format" )]
+		[Globalized ( "replace_format", 1 )]
 		public string FormatString { get; set; }
-		[Globalized ( "include_extension" )]
+		[Globalized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; }
 
 		public ReplaceRegexpProcessor () { RegularExpression = new Regex ( "$^" ); FormatString = ""; IncludeExtensions = false; }

@@ -12,7 +12,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	{
 		public string Name { get { return "process_trimming_text"; } }
 
-		[Globalized ( "trim_pos" )]
+		[Globalized ( "trim_pos", 0 )]
 		public Position TrimPosition { get; set; }
 
 		public TrimmingProcessor () { TrimPosition = Position.BothPoint; }

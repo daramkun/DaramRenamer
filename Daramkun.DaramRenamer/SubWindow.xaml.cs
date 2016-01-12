@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Daramkun.DaramRenamer
 {
@@ -57,9 +50,9 @@ namespace Daramkun.DaramRenamer
 				Grid.SetColumn ( textBlock, 0 );
 				contentGrid.Children.Add ( textBlock );
 
-				Control control = null;
+				FrameworkElement control = null;
 
-				if ( prop.PropertyType == typeof ( string ) )
+				if ( prop.PropertyType == typeof ( string ) || prop.PropertyType == typeof ( Regex ) )
 				{
 					control = new TextBox ();
 					control.VerticalAlignment = VerticalAlignment.Center;
@@ -76,6 +69,77 @@ namespace Daramkun.DaramRenamer
 					binding.Source = Processor;
 					binding.Path = new PropertyPath ( prop.Name );
 					control.SetBinding ( CheckBox.IsCheckedProperty, binding );
+				}
+				else if ( prop.PropertyType == typeof ( Position ) )
+				{
+					control = new StackPanel () { Orientation = Orientation.Horizontal };
+					control.VerticalAlignment = VerticalAlignment.Center;
+					var radioPre = new RadioButton ();
+					radioPre.Content = Globalizer.Strings [ "position_front" ];
+					radioPre.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioPre.GroupName = prop.Name;
+					radioPre.Checked += ( sender, e ) => { prop.SetValue ( Processor, Position.StartPoint ); };
+					radioPre.IsChecked = ( ( Position ) prop.GetValue ( Processor ) ) == Position.StartPoint;
+					( control as StackPanel ).Children.Add ( radioPre );
+					var radioPost = new RadioButton ();
+					radioPost.Content = Globalizer.Strings [ "position_end" ];
+					radioPost.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioPost.GroupName = prop.Name;
+					radioPost.Checked += ( sender, e ) => { prop.SetValue ( Processor, Position.EndPoint ); };
+					radioPost.IsChecked = ( ( Position ) prop.GetValue ( Processor ) ) == Position.EndPoint;
+					( control as StackPanel ).Children.Add ( radioPost );
+					var radioBoth = new RadioButton ();
+					radioBoth.Content = Globalizer.Strings [ "position_both" ];
+					radioBoth.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioBoth.GroupName = prop.Name;
+					radioBoth.Checked += ( sender, e ) => { prop.SetValue ( Processor, Position.BothPoint ); };
+					radioBoth.IsChecked = ( ( Position ) prop.GetValue ( Processor ) ) == Position.BothPoint;
+					( control as StackPanel ).Children.Add ( radioBoth );
+				}
+				else if ( prop.PropertyType == typeof ( OnePointPosition ) )
+				{
+					control = new StackPanel () { Orientation = Orientation.Horizontal };
+					control.VerticalAlignment = VerticalAlignment.Center;
+					var radioPre = new RadioButton ();
+					radioPre.Content = Globalizer.Strings [ "position_front" ];
+					radioPre.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioPre.GroupName = prop.Name;
+					radioPre.Checked += ( sender, e ) => { prop.SetValue ( Processor, OnePointPosition.StartPoint ); };
+					radioPre.IsChecked = ( ( OnePointPosition ) prop.GetValue ( Processor ) ) == OnePointPosition.StartPoint;
+					( control as StackPanel ).Children.Add ( radioPre );
+					var radioPost = new RadioButton ();
+					radioPost.Content = Globalizer.Strings [ "position_end" ];
+					radioPost.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioPost.GroupName = prop.Name;
+					radioPost.Checked += ( sender, e ) => { prop.SetValue ( Processor, OnePointPosition.EndPoint ); };
+					radioPost.IsChecked = ( ( OnePointPosition ) prop.GetValue ( Processor ) ) == OnePointPosition.EndPoint;
+					( control as StackPanel ).Children.Add ( radioPost );
+				}
+				else if ( prop.PropertyType == typeof ( Casecast ) )
+				{
+					control = new StackPanel () { Orientation = Orientation.Horizontal };
+					control.VerticalAlignment = VerticalAlignment.Center;
+					var radioLower = new RadioButton ();
+					radioLower.Content = Globalizer.Strings [ "casecast_lower" ];
+					radioLower.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioLower.GroupName = prop.Name;
+					radioLower.Checked += ( sender, e ) => { prop.SetValue ( Processor, Casecast.AllToLowercase ); };
+					radioLower.IsChecked = ( ( Casecast ) prop.GetValue ( Processor ) ) == Casecast.AllToLowercase;
+					( control as StackPanel ).Children.Add ( radioLower );
+					var radioUpper = new RadioButton ();
+					radioUpper.Content = Globalizer.Strings [ "casecast_upper" ];
+					radioUpper.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioUpper.GroupName = prop.Name;
+					radioUpper.Checked += ( sender, e ) => { prop.SetValue ( Processor, Casecast.AllToUppercase ); };
+					radioUpper.IsChecked = ( ( Casecast ) prop.GetValue ( Processor ) ) == Casecast.AllToUppercase;
+					( control as StackPanel ).Children.Add ( radioUpper );
+					var radioUpperFirstLetter = new RadioButton ();
+					radioUpperFirstLetter.Content = Globalizer.Strings [ "casecast_upper_first_letter" ];
+					radioUpperFirstLetter.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioUpperFirstLetter.GroupName = prop.Name;
+					radioUpperFirstLetter.Checked += ( sender, e ) => { prop.SetValue ( Processor, Casecast.UppercaseFirstLetter ); };
+					radioUpperFirstLetter.IsChecked = ( ( Casecast ) prop.GetValue ( Processor ) ) == Casecast.UppercaseFirstLetter;
+					( control as StackPanel ).Children.Add ( radioUpperFirstLetter );
 				}
 
 				if ( control != null )

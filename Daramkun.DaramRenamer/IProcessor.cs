@@ -12,6 +12,11 @@ namespace Daramkun.DaramRenamer
 		EndPoint,
 		BothPoint,
 	}
+	public enum OnePointPosition
+	{
+		StartPoint,
+		EndPoint,
+	}
 
 	public enum Casecast
 	{

@@ -51,13 +51,13 @@
             <Separator />
             <MenuItem Header="{Binding Path=[filename_processes]}">
                 <MenuItem Header="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />
-                <MenuItem Header="{Binding Path=[process_replace_regex_text]}" />
-                <MenuItem Header="{Binding Path=[process_concatenate_text]}" />
-                <MenuItem Header="{Binding Path=[process_trimming_text]}" />
-                <MenuItem Header="{Binding Path=[process_delete_block]}" />
-                <MenuItem Header="{Binding Path=[process_delete_text]}" />
-                <MenuItem Header="{Binding Path=[process_substring_text]}" />
-                <MenuItem Header="{Binding Path=[process_casecast_text]}" />
+				<MenuItem Header="{Binding Path=[process_replace_regex_text]}" Click="ReplaceRegex_Click" />
+                <MenuItem Header="{Binding Path=[process_concatenate_text]}" Click="ConcatText_Click" />
+                <MenuItem Header="{Binding Path=[process_trimming_text]}" Click="Trimming_Click" />
+                <MenuItem Header="{Binding Path=[process_delete_block]}" Click="DeleteBlock_Click" />
+                <MenuItem Header="{Binding Path=[process_delete_text]}" Click="DeleteText_Click" />
+                <MenuItem Header="{Binding Path=[process_substring_text]}" Click="Substring_Click" />
+                <MenuItem Header="{Binding Path=[process_casecast_text]}" Click="Castcast_Click" />
             </MenuItem>
             <MenuItem Header="{Binding Path=[extension_processes]}">
                 <MenuItem Header="{Binding Path=[process_add_extension]}" />

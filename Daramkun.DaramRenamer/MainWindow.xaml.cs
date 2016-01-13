@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Daramkun.DaramRenamer.Processors.Extension;
 using Daramkun.DaramRenamer.Processors.Filename;
+using Daramkun.DaramRenamer.Processors.Number;
 using TaskDialogInterop;
 
 namespace Daramkun.DaramRenamer
@@ -44,6 +46,8 @@ namespace Daramkun.DaramRenamer
 
 		ObservableCollection<FileInfo> current = new ObservableCollection<FileInfo> ();
 		UndoManager<ObservableCollection<FileInfo>> undoManager = new UndoManager<ObservableCollection<FileInfo>> ();
+
+		public ObservableCollection<FileInfo> Files { get { return current; } }
 
 		public MainWindow ()
 		{
@@ -97,7 +101,9 @@ namespace Daramkun.DaramRenamer
 			{
 				undoManager.SaveToUndoStack ( current );
 				var processor = ( overlayWindowContainer.Children [ 0 ] as SubWindow ).Processor;
-				Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => processor.Process ( fileInfo ) );
+				if ( !processor.CannotMultithreadProcess )
+					Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => processor.Process ( fileInfo ) );
+				else foreach ( var fileInfo in current ) processor.Process ( fileInfo );
 			}
 			overlayWindowContainer.Children.Clear ();
 		}
@@ -279,8 +285,34 @@ namespace Daramkun.DaramRenamer
 		private void ConcatText_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ConcatenateProcessor> (); }
 		private void Trimming_Click ( object sender, RoutedEventArgs e ) { ShowPopup<TrimmingProcessor> (); }
 		private void DeleteBlock_Click ( object sender, RoutedEventArgs e ) { ShowPopup<DeleteBlockProcessor> (); }
-		private void DeleteText_Click ( object sender, RoutedEventArgs e ) { }
+		private void DeleteText_Click ( object sender, RoutedEventArgs e )
+		{
+			undoManager.SaveToUndoStack ( current );
+			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => new DeleteFilenameProcessor ().Process ( fileInfo ) );
+		}
 		private void Substring_Click ( object sender, RoutedEventArgs e ) { ShowPopup<SubstringProcessor> (); }
 		private void Castcast_Click ( object sender, RoutedEventArgs e ) { ShowPopup<CasecastProcessor> (); }
+
+		private void AddExtension_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddExtensionProcessor> (); }
+		private void AddExtensionAutomatically_Click ( object sender, RoutedEventArgs e )
+		{
+			undoManager.SaveToUndoStack ( current );
+			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => new AddExtensionAutomatedProcessor ().Process ( fileInfo ) );
+		}
+		private void RemoveExtension_Click ( object sender, RoutedEventArgs e )
+		{
+			undoManager.SaveToUndoStack ( current );
+			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => new DeleteExtensionProcessor ().Process ( fileInfo ) );
+		}
+		private void ChangeExtension_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ReplaceExtensionProcessor> (); }
+		private void CastcastExtension_Click ( object sender, RoutedEventArgs e ) { ShowPopup<CasecastExtensionProcessor> (); }
+
+		private void DeleteWithoutNumbers_Click ( object sender, RoutedEventArgs e )
+		{
+			undoManager.SaveToUndoStack ( current );
+			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => new DeleteWithoutNumbersProcessor ().Process ( fileInfo ) );
+		}
+		private void MatchingNumberCount_Click ( object sender, RoutedEventArgs e ) { ShowPopup<NumberCountMatchProcessor> (); }
+		private void AddIndexNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddIndexNumberProcessor> (); }
 	}
 }

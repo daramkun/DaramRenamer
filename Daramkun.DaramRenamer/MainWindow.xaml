@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Daramkun.DaramRenamer"
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="720" Height="480"
-		DataContext="{x:Static local:Globalizer.Strings}">
+		DataContext="{x:Static local:Globalizer.Strings}" MinWidth="720" MinHeight="480">
     <Window.Resources>
         <local:ComboBoxBindingConverter x:Key="comboBoxBindingConverter" />
 
@@ -60,16 +60,16 @@
                 <MenuItem Header="{Binding Path=[process_casecast_text]}" Click="Castcast_Click" />
             </MenuItem>
             <MenuItem Header="{Binding Path=[extension_processes]}">
-                <MenuItem Header="{Binding Path=[process_add_extension]}" />
-                <MenuItem Header="{Binding Path=[process_add_extension_automatically]}" />
-                <MenuItem Header="{Binding Path=[process_delete_extension]}" />
-                <MenuItem Header="{Binding Path=[process_change_extension]}" />
-                <MenuItem Header="{Binding Path=[process_casecast_extension]}" />
+                <MenuItem Header="{Binding Path=[process_add_extension]}" Click="AddExtension_Click" />
+                <MenuItem Header="{Binding Path=[process_add_extension_automatically]}" Click="AddExtensionAutomatically_Click" IsEnabled="False" />
+                <MenuItem Header="{Binding Path=[process_delete_extension]}" Click="RemoveExtension_Click" />
+                <MenuItem Header="{Binding Path=[process_change_extension]}" Click="ChangeExtension_Click" />
+                <MenuItem Header="{Binding Path=[process_casecast_extension]}" Click="CastcastExtension_Click" />
             </MenuItem>
             <MenuItem Header="{Binding Path=[number_processes]}">
-                <MenuItem Header="{Binding Path=[process_delete_without_numbers]}" />
-                <MenuItem Header="{Binding Path=[process_matching_number_count]}" />
-                <MenuItem Header="{Binding Path=[process_add_index_numbers]}" />
+				<MenuItem Header="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
+				<MenuItem Header="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
+                <MenuItem Header="{Binding Path=[process_add_index_numbers]}" Click="AddIndexNumbers_Click" />
                 <MenuItem Header="{Binding Path=[process_increase_decrease_numbers]}" />
             </MenuItem>
             <MenuItem Header="{Binding Path=[date_processes]}">
@@ -124,25 +124,25 @@
                             <Button Content="{StaticResource iconDonate}" ToolTip="{Binding Path=[donate]}" Click="Menu_System_Donate" />
                             <Separator />
 
-                            <Button Content="{StaticResource iconReplaceText}" ToolTip="{Binding Path=[process_replace_plain_text]}" />
-                            <Button Content="{StaticResource iconConcatText}" ToolTip="{Binding Path=[process_concatenate_text]}" />
-                            <Button Content="{StaticResource iconTrimText}" ToolTip="{Binding Path=[process_trimming_text]}" />
-                            <Button Content="{StaticResource iconDeleteBlock}" ToolTip="{Binding Path=[process_delete_block]}" />
-                            <Button Content="{StaticResource iconDeleteText}" ToolTip="{Binding Path=[process_delete_text]}" />
-                            <Button Content="{StaticResource iconSubstringText}" ToolTip="{Binding Path=[process_substring_text]}" />
-                            <Button Content="{StaticResource iconCasecastText}" ToolTip="{Binding Path=[process_casecast_text]}" />
+                            <Button Content="{StaticResource iconReplaceText}" ToolTip="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />
+                            <Button Content="{StaticResource iconConcatText}" ToolTip="{Binding Path=[process_concatenate_text]}" Click="ConcatText_Click" />
+                            <Button Content="{StaticResource iconTrimText}" ToolTip="{Binding Path=[process_trimming_text]}" Click="Trimming_Click" />
+                            <Button Content="{StaticResource iconDeleteBlock}" ToolTip="{Binding Path=[process_delete_block]}" Click="DeleteBlock_Click" />
+                            <Button Content="{StaticResource iconDeleteText}" ToolTip="{Binding Path=[process_delete_text]}" Click="DeleteText_Click" />
+                            <Button Content="{StaticResource iconSubstringText}" ToolTip="{Binding Path=[process_substring_text]}" Click="Substring_Click" />
+                            <Button Content="{StaticResource iconCasecastText}" ToolTip="{Binding Path=[process_casecast_text]}" Click="Castcast_Click" />
 
                             <Separator />
 
-                            <Button Content="{StaticResource iconAddExtension}" ToolTip="{Binding Path=[process_add_extension]}" />
-                            <Button Content="{StaticResource iconDeleteExtension}" ToolTip="{Binding Path=[process_delete_extension]}" />
-                            <Button Content="{StaticResource iconReplaceExtension}" ToolTip="{Binding Path=[process_change_extension]}" />
-                            <Button Content="{StaticResource iconCasecastExtension}" ToolTip="{Binding Path=[process_casecast_extension]}" />
+                            <Button Content="{StaticResource iconAddExtension}" ToolTip="{Binding Path=[process_add_extension]}" Click="AddExtension_Click" />
+                            <Button Content="{StaticResource iconDeleteExtension}" ToolTip="{Binding Path=[process_delete_extension]}" Click="RemoveExtension_Click" />
+                            <Button Content="{StaticResource iconReplaceExtension}" ToolTip="{Binding Path=[process_change_extension]}" Click="ChangeExtension_Click" />
+                            <Button Content="{StaticResource iconCasecastExtension}" ToolTip="{Binding Path=[process_casecast_extension]}" Click="CastcastExtension_Click" />
 
                             <Separator />
 
-                            <Button Content="{StaticResource iconDeleteWithoutNumber}" ToolTip="{Binding Path=[process_delete_without_numbers]}" />
-                            <Button Content="{StaticResource iconMatchNumberCount}" ToolTip="{Binding Path=[process_matching_number_count]}" />
+                            <Button Content="{StaticResource iconDeleteWithoutNumber}" ToolTip="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
+							<Button Content="{StaticResource iconMatchNumberCount}" ToolTip="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
                             <Button Content="{StaticResource iconAddIndex}" ToolTip="{Binding Path=[process_add_index_numbers]}" />
                             <Button Content="{StaticResource iconIncreaseDecreaseNumber}" ToolTip="{Binding Path=[process_increase_decrease_numbers]}" />
 
@@ -312,15 +312,23 @@ Original Source: https://github.com/mono/taglib-sharp
 Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternLibs/TagLib]]>
 			</TextBox>
             </TabItem>
+
+			<TabItem Header="{Binding Path=[contributers]}">
+				<TextBox TextWrapping="Wrap" IsReadOnly="True" VerticalScrollBarVisibility="Visible" xml:space="preserve"><![CDATA[= 다람 리네이머 기여자 목록(Contributers of Daram Renamer) =
+-- Main Contributers --
+1. Daramkun<https://github.com/Daramkun>
+
+-- Pull request Contributers --
+
+-- Bug repoters --
+
+]]>
+				</TextBox>
+			</TabItem>
         </TabControl>
         <Grid Name="overlayWindowGrid" Visibility="Hidden">
-            <Grid Background="Black" Opacity="0.25" Grid.Row="0">
-
-            </Grid>
-
-			<Grid Name="overlayWindowContainer">
-				
-			</Grid>
+			<Grid Background="Black" Opacity="0.25" Grid.Row="0" />
+			<Grid Name="overlayWindowContainer" />
         </Grid>
 
         <ProgressBar Name="progressBar" Grid.Row="1" />

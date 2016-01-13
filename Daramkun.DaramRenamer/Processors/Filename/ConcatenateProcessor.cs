@@ -11,20 +11,14 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	public class ConcatenateProcessor : IProcessor
 	{
 		public string Name { get { return "process_concatenate_text"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
 		[Globalized ( "concat_text", 0 )]
-		public string ConcatenateText { get; set; }
+		public string ConcatenateText { get; set; } = "";
 		[Globalized ( "concat_pos", 1 )]
-		public OnePointPosition ConcatenatePosition { get; set; }
+		public OnePointPosition ConcatenatePosition { get; set; } = OnePointPosition.EndPoint;
 		[Globalized ( "include_extension", 2 )]
-		public bool IncludeExtensions { get; set; }
-
-		public ConcatenateProcessor () { ConcatenateText = ""; ConcatenatePosition = OnePointPosition.EndPoint; IncludeExtensions = false; }
-		public ConcatenateProcessor ( string concat, OnePointPosition pos, bool includeExtensions = false )
-		{
-			ConcatenateText = concat; ConcatenatePosition = pos;
-			IncludeExtensions = includeExtensions;
-		}
+		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )
 		{

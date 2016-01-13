@@ -12,21 +12,14 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	public class ReplaceRegexpProcessor : IProcessor
 	{
 		public string Name { get { return "process_replace_regex_text"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
 		[Globalized ( "original_regex", 0 )]
-		public Regex RegularExpression { get; set; }
+		public Regex RegularExpression { get; set; } = new Regex ( "$^" );
 		[Globalized ( "replace_format", 1 )]
-		public string FormatString { get; set; }
+		public string FormatString { get; set; } = "";
 		[Globalized ( "include_extension", 2 )]
-		public bool IncludeExtensions { get; set; }
-
-		public ReplaceRegexpProcessor () { RegularExpression = new Regex ( "$^" ); FormatString = ""; IncludeExtensions = false; }
-		public ReplaceRegexpProcessor ( Regex regexp, string format, bool includeExtensions = false )
-		{
-			RegularExpression = regexp;
-			FormatString = format;
-			IncludeExtensions = includeExtensions;
-		}
+		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )
 		{

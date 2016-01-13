@@ -11,20 +11,14 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	public class ReplacePlainProcessor : IProcessor
 	{
 		public string Name { get { return "process_replace_plain_text"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
-		[Globalized( "original_text", 0 )]
-		public string Original { get; set; }
+		[Globalized ( "original_text", 0 )]
+		public string Original { get; set; } = "";
 		[Globalized ( "replace_text", 1 )]
-		public string Replace { get; set; }
-		[Globalized( "include_extension", 2 )]
-		public bool IncludeExtensions { get; set; }
-
-		public ReplacePlainProcessor () { Original = ""; Replace = ""; IncludeExtensions = false; }
-		public ReplacePlainProcessor ( string original, string replace, bool includeExtensions = false )
-		{
-			Original = original; Replace = replace;
-			IncludeExtensions = includeExtensions;
-		}
+		public string Replace { get; set; } = "";
+		[Globalized ( "include_extension", 2 )]
+		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )
 		{

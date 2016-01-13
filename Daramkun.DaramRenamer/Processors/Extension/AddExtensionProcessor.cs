@@ -9,17 +9,15 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 	public class AddExtensionProcessor : IProcessor
 	{
 		public string Name { get { return "process_add_extension"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
-		public string Extension { get; set; }
-
-		public AddExtensionProcessor ( string ext )
-		{
-			Extension = ext;
-		}
+		[Globalized ( "extension" )]
+		public string Extension { get; set; } = "";
 
 		public bool Process ( FileInfo file )
 		{
-			if ( Extension == null ) return false;
+			if ( Extension == null || Extension == "" ) return false;
+			if ( Extension [ 0 ] != '.' ) Extension = $".{Extension}";
 			file.ChangedFilename += Extension;
 			return true;
 		}

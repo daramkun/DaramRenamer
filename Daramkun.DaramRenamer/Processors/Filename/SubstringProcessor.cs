@@ -9,20 +9,14 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	public class SubstringProcessor : IProcessor
 	{
 		public string Name { get { return "process_substring_text"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
 		[Globalized ( "start_index", 0 )]
-		public uint StartIndex { get; set; }
+		public uint StartIndex { get; set; } = 0;
 		[Globalized ( "substring_length", 1 )]
-		public uint? Length { get; set; }
+		public uint? Length { get; set; } = null;
 		[Globalized ( "include_extension", 2 )]
-		public bool IncludeExtensions { get; set; }
-
-		public SubstringProcessor () { StartIndex = 0; Length = null; IncludeExtensions = false; }
-		public SubstringProcessor ( uint start, uint? length = null, bool includeExtensions = false )
-		{
-			StartIndex = start; Length = length;
-			IncludeExtensions = includeExtensions;
-		}
+		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )
 		{

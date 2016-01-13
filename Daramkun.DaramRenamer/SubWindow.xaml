@@ -129,10 +129,12 @@
 			<Grid Background="LightSkyBlue" Height="24" HorizontalAlignment="Stretch">
 				<Grid Background="SkyBlue" Height="13" VerticalAlignment="Bottom" />
 				<TextBlock Name="overlayWindowTitle" Text="asdf" Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="5,0,0,0" />
+
+				<Button VerticalAlignment="Center" HorizontalAlignment="Right" Content="X" Margin="5" FontSize="8" Width="14" Height="14" Style="{StaticResource ButtonStyle}" Background="LightPink" Foreground="White" Click="Cancel_Button" />
 			</Grid>
 
 			<!-- Contents -->
-			<StackPanel Orientation="Vertical" Margin="10">
+			<StackPanel Orientation="Vertical" Margin="15">
 				<Grid Name="contentGrid">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="120" />
@@ -145,7 +147,7 @@
 			</StackPanel>
 
 			<!-- Buttons -->
-			<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
+			<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,15">
 				<Button Style="{StaticResource ButtonStyle}" Content="{Binding Path=[ok_button]}" Width="64" Height="22" Margin="0,0,5,0" IsDefault="True" Click="OK_Button" />
 				<Button Style="{StaticResource ButtonStyle}" Content="{Binding Path=[cancel_button]}" Width="64" Height="22" Click="Cancel_Button" />
 			</StackPanel>

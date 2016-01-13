@@ -10,12 +10,10 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	public class CasecastProcessor : IProcessor
 	{
 		public string Name { get { return "process_casecast_text"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
 		[Globalized ( "casecast" )]
-		public Casecast Casecast { get; set; }
-
-		public CasecastProcessor () { Casecast = Casecast.AllToLowercase; }
-		public CasecastProcessor ( Casecast casecast ) { Casecast = casecast; }
+		public Casecast Casecast { get; set; } = Casecast.AllToLowercase;
 
 		public bool Process ( FileInfo file )
 		{

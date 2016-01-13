@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daramkun.DaramRenamer", "Daramkun.DaramRenamer\Daramkun.DaramRenamer.csproj", "{E18BB4A0-AC41-48F2-8940-427B5F7F93AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Daram Renamer", "Daram Renamer", "{7CA1A390-CF80-4277-8A2B-80C8FC069517}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E18BB4A0-AC41-48F2-8940-427B5F7F93AC} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
 	EndGlobalSection
 EndGlobal

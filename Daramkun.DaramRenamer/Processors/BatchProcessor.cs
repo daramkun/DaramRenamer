@@ -10,6 +10,7 @@ namespace Daramkun.DaramRenamer.Processors
 	public class BatchProcessor : IProcessor
 	{
 		public string Name { get { return "process_batch_process"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
 		public ObservableCollection<IProcessor> Processors { get; } = new ObservableCollection<IProcessor> ();
 

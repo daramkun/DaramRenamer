@@ -11,23 +11,16 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	public class DeleteBlockProcessor : IProcessor
 	{
 		public string Name { get { return "process_delete_block"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
 
 		[Globalized ( "start_block", 0 )]
-		public string StartText { get; set; }
+		public string StartText { get; set; } = "";
 		[Globalized ( "end_block", 1 )]
-		public string EndText { get; set; }
+		public string EndText { get; set; } = "";
 		[Globalized ( "delete_all_blocks", 2 )]
-		public bool DeleteAllBlocks { get; set; }
+		public bool DeleteAllBlocks { get; set; } = false;
 		[Globalized ( "include_extension", 3 )]
-		public bool IncludeExtensions { get; set; }
-
-		public DeleteBlockProcessor () { StartText = ""; EndText = ""; DeleteAllBlocks = false; IncludeExtensions = false; }
-		public DeleteBlockProcessor ( string start, string end, bool deleteAllBlock, bool includeExtensions = false )
-		{
-			StartText = start; EndText = end;
-			DeleteAllBlocks = deleteAllBlock;
-			IncludeExtensions = includeExtensions;
-		}
+		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )
 		{

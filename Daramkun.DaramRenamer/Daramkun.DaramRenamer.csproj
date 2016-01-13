@@ -325,6 +325,7 @@
     <Compile Include="Processors\BatchProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionAutomatedProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionProcessor.cs" />
+    <Compile Include="Processors\Extension\CasecastExtensionProcessor.cs" />
     <Compile Include="Processors\Extension\DeleteExtensionProcessor.cs" />
     <Compile Include="Processors\Extension\ReplaceExtensionProcessor.cs" />
     <Compile Include="Processors\Filename\CasecastProcessor.cs" />
@@ -335,6 +336,9 @@
     <Compile Include="Processors\Filename\ReplaceRegexpProcessor.cs" />
     <Compile Include="Processors\Filename\SubstringProcessor.cs" />
     <Compile Include="Processors\Filename\TrimmingProcessor.cs" />
+    <Compile Include="Processors\Number\AddIndexNumberProcessor.cs" />
+    <Compile Include="Processors\Number\DeleteWithoutNumbersProcessor.cs" />
+    <Compile Include="Processors\Number\NumberCountMatchProcessor.cs" />
     <Compile Include="SubWindow.xaml.cs">
       <DependentUpon>SubWindow.xaml</DependentUpon>
     </Compile>
@@ -406,7 +410,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Processors\Date\" />
-    <Folder Include="Processors\Number\" />
     <Folder Include="Processors\Path\" />
     <Folder Include="Processors\Tag\" />
   </ItemGroup>

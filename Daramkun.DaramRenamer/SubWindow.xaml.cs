@@ -162,6 +162,58 @@ namespace Daramkun.DaramRenamer
 					Grid.SetColumn ( ( ( control as Grid ).Children [ 2 ] as Button ), 2 );
 				}
 
+				if ( prop.PropertyType == typeof ( int ) )
+				{
+					var container = new Grid ();
+					container.VerticalAlignment = VerticalAlignment.Center;
+					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
+					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
+					container.ColumnDefinitions.Add ( new ColumnDefinition () );
+					container.ColumnDefinitions.Add ( new ColumnDefinition () { Width = new GridLength ( 24 ) } );
+					var text = new TextBox ();
+					text.VerticalAlignment = VerticalAlignment.Center;
+					text.PreviewTextInput += ( sender, e ) => { e.Handled = !Regex.IsMatch ( e.Text, "[\\-0-9][0-9]*" ); };
+					text.TextChanged += ( sender, e ) => { if ( text.Text.Trim () == "" ) text.Text = "0"; };
+					var textBinding = new Binding ();
+					textBinding.Source = Processor;
+					textBinding.Path = new PropertyPath ( prop.Name );
+					text.SetBinding ( TextBox.TextProperty, textBinding );
+					Grid.SetRowSpan ( text, 2 );
+					container.Children.Add ( text );
+
+					var upButton = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
+					upButton.VerticalAlignment = VerticalAlignment.Bottom;
+					upButton.Content = "▲";
+					upButton.FontSize = 7;
+					upButton.Click += ( sender, e ) =>
+					{
+						if ( text.Text == "" ) text.Text = "0";
+						var num = int.Parse ( text.Text ) + 1;
+						if ( num == int.MinValue ) num = int.MaxValue;
+						text.Text = num.ToString ();
+					};
+					Grid.SetRow ( upButton, 0 );
+					Grid.SetColumn ( upButton, 1 );
+					container.Children.Add ( upButton );
+
+					var downButton = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
+					downButton.VerticalAlignment = VerticalAlignment.Top;
+					downButton.Content = "▼";
+					downButton.FontSize = 7;
+					downButton.Click += ( sender, e ) =>
+					{
+						if ( text.Text == "" ) text.Text = "0";
+						var num = int.Parse ( text.Text ) - 1;
+						if ( num == int.MaxValue ) num = int.MinValue;
+						text.Text = num.ToString ();
+					};
+					Grid.SetRow ( downButton, 1 );
+					Grid.SetColumn ( downButton, 1 );
+					container.Children.Add ( downButton );
+
+					control = container;
+				}
+
 				if ( prop.PropertyType == typeof ( OnePointPosition ) || prop.PropertyType == typeof ( Position ) )
 				{
 					control = new StackPanel () { Orientation = Orientation.Horizontal };

@@ -70,23 +70,23 @@
 				<MenuItem Header="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
 				<MenuItem Header="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
                 <MenuItem Header="{Binding Path=[process_add_index_numbers]}" Click="AddIndexNumbers_Click" />
-                <MenuItem Header="{Binding Path=[process_increase_decrease_numbers]}" />
+                <MenuItem Header="{Binding Path=[process_increase_decrease_numbers]}" Click="IncreaseDecreaseNumbers_Click" />
             </MenuItem>
             <MenuItem Header="{Binding Path=[date_processes]}">
-                <MenuItem Header="{Binding Path=[process_add_date]}" />
-                <MenuItem Header="{Binding Path=[process_delete_date]}" />
-                <MenuItem Header="{Binding Path=[process_increase_decrease_date]}" />
+                <MenuItem Header="{Binding Path=[process_add_date]}" Click="AddDate_Click" />
+                <MenuItem Header="{Binding Path=[process_delete_date]}" Click="DeleteDate_Click" IsEnabled="False" />
+				<MenuItem Header="{Binding Path=[process_increase_decrease_date]}" Click="IncreaseDecreaseDate_Click" IsEnabled="False" />
             </MenuItem>
             <MenuItem Header="{Binding Path=[path_processes]}">
-                <MenuItem Header="{Binding Path=[process_change_path]}" />
-                <MenuItem Header="{Binding Path=[process_move_path_relative]}" />
+                <MenuItem Header="{Binding Path=[process_change_path]}" Click="ChangePath_Click" />
+				<MenuItem Header="{Binding Path=[process_move_path_relative]}" Click="MovePathRelative_Click" IsEnabled="False" />
             </MenuItem>
             <MenuItem Header="{Binding Path=[tag_processes]}">
-                <MenuItem Header="{Binding Path=[process_add_media_tag]}" />
-                <MenuItem Header="{Binding Path=[process_add_document_tag]}" />
+                <MenuItem Header="{Binding Path=[process_add_media_tag]}" Click="AddMediaTag_Click" />
+				<MenuItem Header="{Binding Path=[process_add_document_tag]}" Click="AddDocumentTag_Click" />
             </MenuItem>
             <Separator />
-            <MenuItem Header="{Binding Path=[check_update]}" />
+			<MenuItem Header="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
         </ContextMenu>
     </Window.Resources>
     

@@ -119,7 +119,11 @@
 				
 				"match_count" : "자리수",
 				"match_pos" : "자리수 맞출 숫자 위치",
-				"add_pos" : "붙일 위치"
+				"add_pos" : "붙일 위치",
+				"incdec_count" : "증감할 숫자",
+				"incdec_pos" : "증감할 위치",
+
+				"path_text" : "경로"
 			}
 		},
 		{

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using Daramkun.DaramRenamer.Processors.Extension;
 using Daramkun.DaramRenamer.Processors.Filename;
 using Daramkun.DaramRenamer.Processors.Number;
+using Daramkun.DaramRenamer.Processors.FilePath;
 using TaskDialogInterop;
 
 namespace Daramkun.DaramRenamer
@@ -314,5 +315,23 @@ namespace Daramkun.DaramRenamer
 		}
 		private void MatchingNumberCount_Click ( object sender, RoutedEventArgs e ) { ShowPopup<NumberCountMatchProcessor> (); }
 		private void AddIndexNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddIndexNumberProcessor> (); }
+		private void IncreaseDecreaseNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<IncreaseDecreaseNumbersProcessor> (); }
+
+		private void AddDate_Click ( object sender, RoutedEventArgs e ) { }
+		private void DeleteDate_Click ( object sender, RoutedEventArgs e ) { }
+		private void IncreaseDecreaseDate_Click ( object sender, RoutedEventArgs e ) { }
+
+		private void ChangePath_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ChangePathProcessor> (); }
+		private void MovePathRelative_Click ( object sender, RoutedEventArgs e ) { }
+
+		private void AddMediaTag_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
+
+		private void AddDocumentTag_Click ( object sender, RoutedEventArgs e )
+		{
+
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -272,6 +273,35 @@ namespace Daramkun.DaramRenamer
 					radioUpperFirstLetter.Checked += ( sender, e ) => { prop.SetValue ( Processor, Casecast.UppercaseFirstLetter ); };
 					radioUpperFirstLetter.IsChecked = ( ( Casecast ) prop.GetValue ( Processor ) ) == Casecast.UppercaseFirstLetter;
 					( control as StackPanel ).Children.Add ( radioUpperFirstLetter );
+				}
+
+				if ( prop.PropertyType == typeof ( DirectoryInfo))
+				{
+					var grid = new Grid ();
+					grid.ColumnDefinitions.Add ( new ColumnDefinition () );
+					grid.ColumnDefinitions.Add ( new ColumnDefinition () { Width = new GridLength ( 32 ) } );
+					var textBox = new TextBox ();
+					textBox.IsReadOnly = true;
+					textBox.Text = ( prop.GetValue ( Processor ) as DirectoryInfo ).FullName;
+					textBox.VerticalAlignment = VerticalAlignment.Center;
+					textBox.Margin = new Thickness ( 0, 0, 5, 0 );
+					grid.Children.Add ( textBox );
+					var button = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
+					button.Content = "...";
+					button.VerticalAlignment = VerticalAlignment.Center;
+					button.Click += ( sender, e ) =>
+					{
+						WPFFolderBrowser.WPFFolderBrowserDialog fbd = new WPFFolderBrowser.WPFFolderBrowserDialog ();
+						fbd.InitialDirectory = textBox.Text;
+						if ( fbd.ShowDialog () == true)
+						{
+							textBox.Text = fbd.FileName;
+							prop.SetValue ( Processor, new DirectoryInfo ( textBox.Text ) );
+						}
+					};
+					Grid.SetColumn ( button, 1 );
+					grid.Children.Add ( button );
+					control = grid;
 				}
 
 				if ( control != null )

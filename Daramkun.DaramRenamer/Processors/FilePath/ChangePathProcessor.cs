@@ -13,12 +13,12 @@ namespace Daramkun.DaramRenamer.Processors.FilePath
 		public bool CannotMultithreadProcess { get { return false; } }
 
 		[Globalized ( "path_text", 0 )]
-		public string Path { get; set; } = "";
+		public DirectoryInfo Path { get; set; } = new DirectoryInfo ( "C:\\" );
 
 		public bool Process ( FileInfo file )
 		{
-			if ( !Directory.Exists ( Path ) ) return false;
-			file.ChangedPath = Path;
+			if ( !Path.Exists ) return false;
+			file.ChangedPath = Path.FullName;
 			return true;
 		}
 	}

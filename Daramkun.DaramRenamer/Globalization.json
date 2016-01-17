@@ -123,7 +123,15 @@
 				"incdec_count" : "증감할 숫자",
 				"incdec_pos" : "증감할 위치",
 
-				"path_text" : "경로"
+				"path_text" : "경로",
+
+				"add_date_type" : "추가할 날짜 종류",
+				"add_date_format" : "날짜 형식",
+				"add_date_pos" : "추가할 위치",
+				"add_date_created" : "생성 날짜",
+				"add_date_modified" : "수정 날짜",
+				"add_date_accessed" : "접근 날짜",
+				"add_date_now" : "현재 날짜"
 			}
 		},
 		{

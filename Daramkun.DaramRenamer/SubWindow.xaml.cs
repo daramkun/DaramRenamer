@@ -275,7 +275,7 @@ namespace Daramkun.DaramRenamer
 					( control as StackPanel ).Children.Add ( radioUpperFirstLetter );
 				}
 
-				if ( prop.PropertyType == typeof ( DirectoryInfo))
+				if ( prop.PropertyType == typeof ( DirectoryInfo ) )
 				{
 					var grid = new Grid ();
 					grid.ColumnDefinitions.Add ( new ColumnDefinition () );
@@ -293,7 +293,7 @@ namespace Daramkun.DaramRenamer
 					{
 						WPFFolderBrowser.WPFFolderBrowserDialog fbd = new WPFFolderBrowser.WPFFolderBrowserDialog ();
 						fbd.InitialDirectory = textBox.Text;
-						if ( fbd.ShowDialog () == true)
+						if ( fbd.ShowDialog () == true )
 						{
 							textBox.Text = fbd.FileName;
 							prop.SetValue ( Processor, new DirectoryInfo ( textBox.Text ) );
@@ -302,6 +302,40 @@ namespace Daramkun.DaramRenamer
 					Grid.SetColumn ( button, 1 );
 					grid.Children.Add ( button );
 					control = grid;
+				}
+
+				if ( prop.PropertyType == typeof ( DateType ) )
+				{
+					control = new StackPanel () { Orientation = Orientation.Horizontal };
+					control.VerticalAlignment = VerticalAlignment.Center;
+					var radioCreated = new RadioButton ();
+					radioCreated.Content = Globalizer.Strings [ "add_date_created" ];
+					radioCreated.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioCreated.GroupName = prop.Name;
+					radioCreated.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.CreationDate ); };
+					radioCreated.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.CreationDate;
+					( control as StackPanel ).Children.Add ( radioCreated );
+					var radioModified = new RadioButton ();
+					radioModified.Content = Globalizer.Strings [ "add_date_modified" ];
+					radioModified.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioModified.GroupName = prop.Name;
+					radioModified.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.ModifiedDate ); };
+					radioModified.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.ModifiedDate;
+					( control as StackPanel ).Children.Add ( radioModified );
+					var radioAccessed = new RadioButton ();
+					radioAccessed.Content = Globalizer.Strings [ "add_date_accessed" ];
+					radioAccessed.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioAccessed.GroupName = prop.Name;
+					radioAccessed.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.AccessedDate ); };
+					radioAccessed.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.AccessedDate;
+					( control as StackPanel ).Children.Add ( radioAccessed );
+					var radioNow = new RadioButton ();
+					radioNow.Content = Globalizer.Strings [ "add_date_now" ];
+					radioNow.Margin = new Thickness ( 0, 0, 5, 0 );
+					radioNow.GroupName = prop.Name;
+					radioNow.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.Now ); };
+					radioNow.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.Now;
+					( control as StackPanel ).Children.Add ( radioNow );
 				}
 
 				if ( control != null )

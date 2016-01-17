@@ -15,6 +15,7 @@ using Daramkun.DaramRenamer.Processors.Filename;
 using Daramkun.DaramRenamer.Processors.Number;
 using Daramkun.DaramRenamer.Processors.FilePath;
 using TaskDialogInterop;
+using Daramkun.DaramRenamer.Processors.Date;
 
 namespace Daramkun.DaramRenamer
 {
@@ -317,7 +318,7 @@ namespace Daramkun.DaramRenamer
 		private void AddIndexNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddIndexNumberProcessor> (); }
 		private void IncreaseDecreaseNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<IncreaseDecreaseNumbersProcessor> (); }
 
-		private void AddDate_Click ( object sender, RoutedEventArgs e ) { }
+		private void AddDate_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddDateProcessor> (); }
 		private void DeleteDate_Click ( object sender, RoutedEventArgs e ) { }
 		private void IncreaseDecreaseDate_Click ( object sender, RoutedEventArgs e ) { }
 

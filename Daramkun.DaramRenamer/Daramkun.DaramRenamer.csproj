@@ -323,6 +323,7 @@
     <Compile Include="ExternalLibs\TaskDialog\VistaActiveTaskDialog.cs" />
     <Compile Include="Optionizer.cs" />
     <Compile Include="Processors\BatchProcessor.cs" />
+    <Compile Include="Processors\Date\AddDateProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionAutomatedProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionProcessor.cs" />
     <Compile Include="Processors\Extension\CasecastExtensionProcessor.cs" />
@@ -411,7 +412,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Processors\Date\" />
     <Folder Include="Processors\Tag\" />
   </ItemGroup>
   <ItemGroup>

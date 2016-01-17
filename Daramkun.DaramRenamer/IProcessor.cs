@@ -31,15 +31,12 @@ namespace Daramkun.DaramRenamer
 		AllToLowercase,
 	}
 
-	public enum DateTimeType
+	public enum DateType
 	{
-		CreationDateTime,
-		ModifiedDateTime,
-		AccessedDateTime,
-		NowDateTime,
-		NowTime,
-		TodayDate,
-		YesterdayDate,
+		CreationDate,
+		ModifiedDate,
+		AccessedDate,
+		Now,
 	}
 
 	public interface IProcessor

@@ -1,4 +1,4 @@
-﻿Daram Renamer [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Daramkun/DaramRenamer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![works badge](https://cdn.rawgit.com/nikku/works-on-my-machine/v0.2.0/badge.svg)](https://github.com/nikku/works-on-my-machine)
+﻿Daram Renamer [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Daramkun/DaramRenamer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![works badge](https://cdn.rawgit.com/nikku/works-on-my-machine/v0.2.0/badge.svg)](https://github.com/nikku/works-on-my-machine) [![version badge](https://img.shields.io/badge/version-3.00-green.svg)](https://shields.io)
 ==============
 Filename batch change application.
 

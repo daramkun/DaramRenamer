@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Daramkun.DaramRenamer.Properties;
 
 namespace Daramkun.DaramRenamer
 {
@@ -15,27 +15,18 @@ namespace Daramkun.DaramRenamer
 	/// </summary>
 	public partial class App : Application
 	{
-		public static void ToggleLanguage ( string culture )
-		{
-			System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo ( culture );
-			System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo ( culture );
-			Application.Current.MainWindow.Close ();
-			Application.Current.MainWindow = new MainWindow ();
-			Application.Current.MainWindow.Show ();
-		}
-
 		public App ()
 		{
 			if ( Environment.OSVersion.Version <= new Version ( 5, 0 ) )
 			{
-				MessageBox.Show ( Daramkun.DaramRenamer.Properties.Resources.PleaseUseLegacy,
-					Daramkun.DaramRenamer.Properties.Resources.DaramRenamer, MessageBoxButton.OK, MessageBoxImage.Error );
+				MessageBox.Show ( "Please execute Daram Renamer in Windows 7 or Higher version.", Globalizer.Strings [ "daram_renamer" ],
+					MessageBoxButton.OK, MessageBoxImage.Error );
 				Application.Current.Shutdown ( -1 );
 			}
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
-				Daramkun.DaramRenamer.MainWindow.SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.PleaseCheckLog );
+				//Daramkun.DaramRenamer.MainWindow.SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.PleaseCheckLog );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 					sw.WriteLine ( args.ExceptionObject.ToString () );
 			};
@@ -48,11 +39,11 @@ namespace Daramkun.DaramRenamer
 			if ( e.Args.Length > 0 && e.Args [ 0 ] == "--cmd" )
 			{
 				Console.WriteLine ( "NOTICE: Sorry. Command Line Mode is not implemented in this version." );
-				this.Shutdown ( 0 );
+				Shutdown ( 0 );
 			}
 			else
 			{
-				if ( !Settings.Default.HardwareTurnOn )
+				if ( !Optionizer.SharedOptionizer.HardwareAccelerationMode )
 					RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
 				args = e.Args;
@@ -63,13 +54,19 @@ namespace Daramkun.DaramRenamer
 
 		protected override void OnActivated ( EventArgs e )
 		{
-			if (args != null)
+			if ( args != null )
 			{
 				foreach ( string filename in args )
 					( MainWindow as MainWindow ).AddItem ( filename );
 				args = null;
 			}
 			base.OnActivated ( e );
+		}
+
+		protected override void OnExit ( ExitEventArgs e )
+		{
+			Optionizer.SharedOptionizer.Save ();
+			base.OnExit ( e );
 		}
 	}
 }

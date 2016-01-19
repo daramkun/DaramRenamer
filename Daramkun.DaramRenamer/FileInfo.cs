@@ -1,162 +1,129 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer
 {
-	[Serializable]
-	public class FileInfo : INotifyPropertyChanged, IComparable<FileInfo>
+	public enum ErrorCode
 	{
-		string originalName, changeName, originalPath, changePath;
+		NoError,
+		Unknown,
+        UnauthorizedAccess,
+		PathTooLong,
+		DirectoryNotFound,
+		IOError,
+		FailedOverwrite,
+	}
 
-		public string OriginalName { get { return originalName; } set { originalName = value; PC ( nameof ( OriginalName ) ); } }
-		public string ChangedName { get { return changeName; } set { changeName = value; PC ( nameof ( ChangedName ) ); } }
-		public string OriginalPath { get { return originalPath; } set { originalPath = value; PC ( nameof ( OriginalPath ) ); } }
-		public string ChangedPath { get { return changePath; } set { changePath = value; PC ( nameof ( ChangedPath ) ); } }
-
-		public string OriginalFullName { get { return Path.Combine ( OriginalPath, OriginalName ); } }
-		public string ChangedFullName { get { return Path.Combine ( ChangedPath, ChangedName ); } }
-
-		public FileInfo () { originalName = ""; changeName = ""; originalPath = ""; changePath = ""; }
-		public FileInfo ( FileInfo fileInfo ) { ValueCopy ( fileInfo ); }
-
-		public void ValueCopy ( FileInfo fileInfo )
-		{
-			OriginalName = fileInfo.OriginalName;
-			ChangedName = fileInfo.ChangedName;
-			OriginalPath = fileInfo.OriginalPath;
-			ChangedPath = fileInfo.ChangedPath;
-		}
-
-		private void PC ( string p )
-		{
-			if ( PropertyChanged != null )
-				PropertyChanged ( this, new PropertyChangedEventArgs ( p ) );
-		}
-
-		private string ReplaceInvalidCharacter(char ch)
-		{
-			switch(ch)
-			{
-				case '?': return "？";
-				case '\\': return "＼";
-				case '/': return "／";
-				case '<': return "〈";
-				case '>': return "〉";
-				case '*': return "＊";
-				case '|': return "｜";
-				case ':': return "：";
-				case '"': return "＂";
-				default: return "";
-			}
-		}
-
-		public void FixFilename ()
-		{
-			foreach ( var ch in System.IO.Path.GetInvalidPathChars () )
-			{
-				if ( ChangedPath.IndexOf ( ch ) < 0 )
-					ChangedPath = ChangedPath.Replace ( "" + ch, ReplaceInvalidCharacter ( ch ) );
-			}
-
-			foreach ( var ch in System.IO.Path.GetInvalidFileNameChars () )
-			{
-				if ( ChangedName.IndexOf ( ch ) < 0 )
-					ChangedName = ChangedPath.Replace ( "" + ch, ReplaceInvalidCharacter ( ch ) );
-			}
-		}
-
-		public void Changed ()
-		{
-			OriginalName = changeName;
-			OriginalPath = changePath;
-		}
-
+	[Serializable]
+	public class FileInfo : IComparable<FileInfo>, INotifyPropertyChanged
+	{
+		string originalFullPath;
+		string changedPath, changedFilename;
+		
 		[field: NonSerialized]
 		public event PropertyChangedEventHandler PropertyChanged;
+		
+		public string OriginalFullPath
+		{
+			get { return originalFullPath; }
+			private set
+			{
+				originalFullPath = value;
+				PC ( nameof ( OriginalFullPath ) );
+				PC ( nameof ( OriginalPath ) );
+				PC ( nameof ( OriginalFilename ) );
+			}
+		}
+		public string OriginalPath { get { return Path.GetDirectoryName ( OriginalFullPath ); } }
+		public string OriginalFilename { get { return Path.GetFileName ( OriginalFullPath ); } }
+		public string ChangedPath { get { return changedPath; } set { changedPath = value; PC ( nameof ( ChangedPath ) ); } }
+		public string ChangedFilename { get { return changedFilename; } set { changedFilename = value; PC ( nameof ( ChangedFilename ) ); } }
+		public string ChangedFullPath { get { return Path.Combine ( ChangedPath, ChangedFilename ); } }
 
-		public int CompareTo ( FileInfo other ) => changeName.CompareTo ( other.changeName );
+		public FileInfo ( string fullPath ) { OriginalFullPath = fullPath; ChangedFilename = OriginalFilename; ChangedPath = OriginalPath; }
+		public FileInfo ( FileInfo file )
+		{
+			OriginalFullPath = file.OriginalFullPath;
+			ChangedPath = file.ChangedPath;
+			ChangedFilename = file.ChangedFilename;
+		}
 
-		public bool ToMove ()
+		private char GetInvalidToValid ( char ch )
+		{
+			switch ( ch )
+			{
+				case '?': return '？';
+				case '\\': return '＼';
+				case '/': return '／';
+				case '<': return '〈';
+				case '>': return '〉';
+				case '*': return '＊';
+				case '|': return '｜';
+				case ':': return '：';
+				case '"': return '＂';
+				default: return ch;
+			}
+		}
+
+		public void ReplaceInvalidPathCharacters ()
+		{
+			foreach ( var ch in Path.GetInvalidPathChars () )
+			{
+				if ( ChangedPath.IndexOf ( ch ) < 0 )
+					ChangedPath = ChangedPath.Replace ( ch, GetInvalidToValid ( ch ) );
+			}
+		}
+
+		public void ReplaceInvalidFilenameCharacters ()
+		{
+			foreach ( var ch in Path.GetInvalidFileNameChars () )
+			{
+				if ( ChangedFilename.IndexOf ( ch ) < 0 )
+					ChangedFilename = ChangedFilename.Replace ( ch, GetInvalidToValid ( ch ) );
+			}
+		}
+
+		public bool Move ( bool overwrite, out ErrorCode errorMessage )
 		{
 			try
 			{
-				File.Move ( OriginalFullName, ChangedFullName );
+				if ( overwrite && File.Exists ( ChangedFullPath ) ) File.Delete ( ChangedFullPath );
+				File.Move ( OriginalFullPath, ChangedFullPath );
 				Changed ();
+				errorMessage = ErrorCode.NoError;
 				return true;
 			}
-			catch ( UnauthorizedAccessException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoAuthentication, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( PathTooLongException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_PathIsTooLong, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( DirectoryNotFoundException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoPath, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( IOException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_IOException, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( Exception ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_Unknown, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
+			catch ( UnauthorizedAccessException ) { errorMessage = ErrorCode.UnauthorizedAccess; }
+			catch ( PathTooLongException ) { errorMessage = ErrorCode.PathTooLong; }
+			catch ( DirectoryNotFoundException ) { errorMessage = ErrorCode.DirectoryNotFound; }
+			catch ( IOException ) { errorMessage = ErrorCode.IOError; }
+			catch ( Exception ) { errorMessage = ErrorCode.Unknown; }
 			return false;
 		}
-		public bool ToCopy ()
+
+		public bool Copy ( bool overwrite, out ErrorCode errorMessage )
 		{
 			try
 			{
-				File.Copy ( OriginalFullName, ChangedFullName );
+				File.Copy ( OriginalFullPath, ChangedFullPath, overwrite );
 				Changed ();
+				errorMessage = ErrorCode.NoError;
 				return true;
 			}
-			catch ( UnauthorizedAccessException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoAuthentication, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( PathTooLongException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_PathIsTooLong, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( DirectoryNotFoundException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_NoPath, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( FileNotFoundException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_FileIsNotFound, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( IOException ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_IOException, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
-			catch ( Exception ex )
-			{
-				MainWindow.SimpleErrorMessage ( string.Format ( Daramkun.DaramRenamer.Properties.Resources.PathError_Unknown, OriginalName ) );
-				Debug.WriteLine ( ex.Message );
-			}
+			catch ( UnauthorizedAccessException ) { errorMessage = ErrorCode.UnauthorizedAccess; }
+			catch ( PathTooLongException ) { errorMessage = ErrorCode.PathTooLong; }
+			catch ( DirectoryNotFoundException ) { errorMessage = ErrorCode.DirectoryNotFound; }
+			catch ( IOException ) { errorMessage = overwrite ? ErrorCode.FailedOverwrite : ErrorCode.IOError; }
+			catch ( Exception ) { errorMessage = ErrorCode.Unknown; }
 			return false;
+		}
+
+		private void Changed ()
+		{
+			OriginalFullPath = ChangedFullPath;
 		}
 
 		public static void Sort ( ObservableCollection<FileInfo> source )
@@ -164,12 +131,16 @@ namespace Daramkun.DaramRenamer
 			if ( source == null ) return;
 			ParallelSort.QuicksortParallel<FileInfo> ( source );
 		}
+
+		public int CompareTo ( FileInfo other ) => ChangedFilename.CompareTo ( other.ChangedFilename );
+
+		private void PC ( string name ) { if ( PropertyChanged != null ) PropertyChanged ( this, new PropertyChangedEventArgs ( name ) ); }
 	}
 
 	static class ParallelSort
 	{
-		public static void QuicksortParallel<T> ( ObservableCollection<T> arr ) where T : IComparable<T> { QuicksortParallel ( arr, 0, arr.Count - 1 ); }
-		private static void QuicksortParallel<T> ( ObservableCollection<T> arr, int left, int right ) where T : IComparable<T>
+		public static void QuicksortParallel<T>( ObservableCollection<T> arr ) where T : IComparable<T> { QuicksortParallel ( arr, 0, arr.Count - 1 ); }
+		private static void QuicksortParallel<T>( ObservableCollection<T> arr, int left, int right ) where T : IComparable<T>
 		{
 			if ( right > left )
 			{
@@ -177,13 +148,15 @@ namespace Daramkun.DaramRenamer
 				Parallel.Invoke ( new Action [] { () => QuicksortParallel ( arr, left, pivot - 1 ), () => QuicksortParallel ( arr, pivot + 1, right ) } );
 			}
 		}
-		private static void Swap<T> ( ObservableCollection<T> a, int i, int j ) { T t = a [ i ]; a [ i ] = a [ j ]; a [ j ] = t; }
-		private static int Partition<T> ( ObservableCollection<T> arr, int low, int high ) where T : IComparable<T>
+		private static void Swap<T>( ObservableCollection<T> a, int i, int j ) { T t = a [ i ]; a [ i ] = a [ j ]; a [ j ] = t; }
+		private static int Partition<T>( ObservableCollection<T> arr, int low, int high ) where T : IComparable<T>
 		{
 			int pivotPos = ( high + low ) / 2, left = low;
 			T pivot = arr [ pivotPos ];
 			Swap ( arr, low, pivotPos );
-			for ( int i = low + 1; i <= high; i++ ) if ( arr [ i ].CompareTo ( pivot ) < 0 ) Swap ( arr, i, ++left );
+			for ( int i = low + 1; i <= high; i++ )
+				if ( arr [ i ].CompareTo ( pivot ) < 0 )
+					Swap ( arr, i, ++left );
 			Swap ( arr, low, left );
 			return left;
 		}

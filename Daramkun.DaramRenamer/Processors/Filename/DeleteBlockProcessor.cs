@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Daramkun.DaramRenamer.Processors.Filename
+{
+	public class DeleteBlockProcessor : IProcessor
+	{
+		public string Name { get { return "process_delete_block"; } }
+		public bool CannotMultithreadProcess { get { return false; } }
+
+		[Globalized ( "start_block", 0 )]
+		public string StartText { get; set; } = "";
+		[Globalized ( "end_block", 1 )]
+		public string EndText { get; set; } = "";
+		[Globalized ( "delete_all_blocks", 2 )]
+		public bool DeleteAllBlocks { get; set; } = false;
+		[Globalized ( "include_extension", 3 )]
+		public bool IncludeExtensions { get; set; } = false;
+
+		public bool Process ( FileInfo file )
+		{
+			if ( StartText == null || StartText.Length == 0 ) return false;
+			if ( EndText == null || EndText.Length == 0 ) return false;
+			string fn = !IncludeExtensions ? Path.GetFileNameWithoutExtension ( file.ChangedFilename ) : file.ChangedFilename;
+			string ext = !IncludeExtensions ? Path.GetExtension ( file.ChangedFilename ) : "";
+			
+			int first, last;
+			while ( ( first = fn.IndexOf ( StartText ) ) != -1 )
+			{
+				last = fn.IndexOf ( EndText, first + 1 );
+				if ( last == -1 ) break;
+				fn = fn.Remove ( first, last - first + EndText.Length );
+				if ( !DeleteAllBlocks ) break;
+			}
+
+			file.ChangedFilename = $"{fn}{ext}";
+
+			return true;
+		}
+	}
+}

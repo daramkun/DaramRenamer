@@ -1,0 +1,205 @@
+﻿{
+	"lang" : [
+		{
+			"version" : "3.0.0.0",
+			"culture" : "ko-KR",
+			"author" : "Daramkun",
+			"contents" : {
+				"daram_renamer" : "다람 리네이머",
+				"renamer" : "리네이머",
+				"settings" : "설정",
+				"license" : "라이센스",
+				"contributers" : "기여자",
+
+				"ok_button" : "확인",
+				"yes_button" : "예",
+				"no_button" : "아니오",
+				"cancel_button" : "취소",
+				"download_button" : "내려받기",
+
+				"open_files" : "파일 열기",
+				"all_files" : "모든 파일(*.*)|*.*",
+
+				"update_exist" : "업데이트가 있습니다.",
+				"no_update" : "업데이트가 없습니다.",
+				"current_stable" : "이 프로그램은 현재 최신버전입니다.",
+				"current_old" : "이 프로그램의 최신 버전 업데이트가 있습니다.",
+				
+				"original_path" : "원본 경로",
+				"original_name" : "원본 이름",
+				"changed_path" : "변경 경로",
+				"changed_name" : "변경 이름",
+
+				"open" : "열기",
+				"clear" : "정리",
+				"apply" : "적용",
+
+				"undo" : "실행 취소",
+				"redo" : "다시 실행",
+
+				"item_up" : "항목 위로",
+				"item_down" : "항목 아래로",
+				"item_sort" : "항목 정렬",
+				
+				"check_update" : "업데이트 확인",
+				"feedback" : "피드백",
+				"donate" : "기부",
+				
+				"filename_processes" : "파일명 처리",
+				"extension_processes" : "확장자 처리",
+				"number_processes" : "숫자 처리",
+				"date_processes" : "날짜 처리",
+				"path_processes" : "경로 처리",
+				"properties_processes" : "속성 처리",
+
+				"process_batch_process" : "일괄 처리",
+
+				"process_replace_plain_text" : "평문 파일명 치환",
+				"process_replace_regex_text" : "정규표현식 파일명 치환",
+				"process_concatenate_text" : "문자열 추가",
+				"process_trimming_text" : "파일명 트림",
+				"process_delete_block" : "묶인 파일명 제거",
+				"process_delete_text" : "전체 파일명 제거",
+				"process_substring_text" : "하위문자열 생성",
+				"process_casecast_text" : "파일명 대소문자 변경",
+
+				"process_add_extension" : "확장자 추가",
+				"process_add_extension_automatically" : "자동으로 확장자 추가",
+				"process_delete_extension" : "확장자 제거",
+				"process_change_extension" : "확장자 치환",
+				"process_casecast_extension" : "확장자 대소문자 변경",
+
+				"process_delete_without_numbers" : "숫자만 남기고 제거",
+				"process_matching_number_count" : "숫자 자리수 맞추기",
+				"process_add_index_numbers" : "번호 붙이기",
+				"process_increase_decrease_numbers" : "숫자 증감",
+
+				"process_add_date" : "날짜 추가",
+				"process_delete_date" : "날짜 제거",
+				"process_increase_decrease_date" : "날짜 증감",
+
+				"process_change_path" : "경로 변경",
+				"process_move_path_relative" : "상대적 경로 이동",
+
+				"process_add_media_tag" : "미디어 태그 추가",
+				"process_add_document_tag" : "문서 태그 추가",
+				"process_add_file_hash" : "파일 해시 추가",
+
+				"include_extension" : "확장자 포함",
+
+				"original_text" : "원본 텍스트",
+				"replace_text" : "바꿀 텍스트",
+				"original_regex" : "정규표현식",
+				"replace_format" : "구성 형식문자열",
+				"concat_text" : "붙일 문자열",
+				"concat_pos" : "붙일 위치",
+				"start_block" : "묶인 문자열 시작",
+				"end_block" : "묶인 문자열 끝",
+				"delete_all_blocks" : "모든 묶인 문자열 제거",
+				"start_index" : "시작 지점",
+				"substring_length" : "길이",
+				"trim_pos" : "트림할 위치",
+				"casecast" : "대소문자 변경 방법",
+				"extension" : "확장자",
+
+				"option_hw_accel_mode" : "가능한 경우 프로그램 화면 하드웨어 가속 렌더링",
+				"option_rename_mode" : "이름 변경 방법: ",
+				"option_rename_mode_move" : "이동",
+				"option_rename_mode_copy" : "복사",
+				"option_overwrite" : "같은 이름의 파일이 있을 경우 덮어쓰기",
+				"option_autofilenamefix" : "자동으로 파일명 특수문자 수정하기",
+				"option_autolistcleaning" : "자동으로 존재하지 않는 파일 정리",
+				"option_savemethod" : "설정을 레지스트리에 저장하기",
+
+				"position_front" : "처음",
+				"position_end" : "마지막",
+				"position_both" : "둘 다",
+				"casecast_lower" : "소문자로",
+				"casecast_upper" : "대문자로",
+				"casecast_upper_first_letter" : "첫 글자만 대문자로",
+				
+				"match_count" : "자리수",
+				"match_pos" : "자리수 맞출 숫자 위치",
+				"add_pos" : "붙일 위치",
+				"incdec_count" : "증감할 숫자",
+				"incdec_pos" : "증감할 위치",
+
+				"path_text" : "경로",
+
+				"add_date_type" : "추가할 날짜 종류",
+				"add_date_format" : "날짜 형식",
+				"add_date_pos" : "추가할 위치",
+				"add_date_created" : "생성 날짜",
+				"add_date_modified" : "수정 날짜",
+				"add_date_accessed" : "접근 날짜",
+				"add_date_now" : "현재 날짜",
+
+				"media_tag_type" : "미디어 태기 종류",
+				"media_tag_args" : "태그 추가 인자",
+				"media_tag_pos" : "미디어 태그 붙일 위치",
+
+				"media_tag_audio_album" : "음악 앨범",
+				"media_tag_audio_album_artists" : "음악 앨범 음악가 목록",
+				"media_tag_audio_composers" : "음악 작곡가 목록",
+				"media_tag_audio_copyright" : "음악 저작권",
+				"media_tag_audio_disc" : "음악 디스크",
+				"media_tag_audio_disc_count" : "음악 총 디스크 수",
+				"media_tag_audio_genres" : "음악 장르 목록",
+				"media_tag_audio_performers" : "참여 음악가 목록",
+				"media_tag_audio_title" : "음악 제목",
+				"media_tag_audio_track" : "음악 트랙번호",
+				"media_tag_audio_track_count" : "음악 총 트랙 수",
+				"media_tag_audio_year" : "음악 앨범 발매년도",
+				"media_tag_audio_duration" : "음악 길이",
+				"media_tag_audio_codec" : "음악 코덱",
+				"media_tag_audio_samplerate" : "음악 샘플레이트",
+				"media_tag_audio_bitrate" : "음악 비트레이트",
+				"media_tag_audio_bitspersample" : "음악 샘플 당 비트 수",
+				"media_tag_audio_channels" : "음악 채널 수",
+				"media_tag_image_width" : "이미지 가로 크기",
+				"media_tag_image_height" : "이미지 세로 크기",
+				"media_tag_image_quality" : "이미지 품질",
+				"media_tag_image_codec" : "이미지 코덱",
+				"media_tag_video_genres" : "영상 장르",
+				"media_tag_video_title" : "영상 제목",
+				"media_tag_video_year" : "영상 발매년도",
+				"media_tag_video_duration" : "영상 길이",
+				"media_tag_video_width" : "영상 가로 크기",
+				"media_tag_video_height" : "영상 세로 크기",
+				"media_tag_video_codec" : "영상 코덱",
+
+				"document_tag_type" : "문서 태그 종류",
+				"document_tag_pos" : "문서 태그 붙일 위치",
+
+				"document_tag_title" : "문서 제목",
+				"document_tag_author" : "문서 작성자",
+
+				"hash_type" : "해시 종류",
+				"hash_pos" : "해시 붙일 위치",
+
+				"hash_md5" : "MD5",
+				"hash_sha1" : "SHA1",
+				"hash_sha256" : "SHA256",
+				"hash_sha384" : "SHA384",
+				"hash_sha512" : "SHA512"
+			}
+		},
+		{
+			"version" : "3.0.0.0",
+			"culture" : "en-US",
+			"author" : "Daramkun",
+			"contents" : {
+				"daram_renamer" : "Daram Renamer",
+				"renamer" : "Renamer",
+				"settings" : "Settings",
+				"license" : "Licenses",
+				"original_path" : "Original Path",
+				"original_name" : "Original Name",
+				"changed_path" : "Changed Path",
+				"changed_name" : "Changed Name",
+				"undo" : "Undo",
+				"redo" : "Redo"
+			}
+		}
+	]
+}

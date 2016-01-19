@@ -134,7 +134,7 @@
 				"add_date_accessed" : "접근 날짜",
 				"add_date_now" : "현재 날짜",
 
-				"media_tag_type" : "미디어 태기 종류",
+				"media_tag_type" : "미디어 태그 종류",
 				"media_tag_args" : "태그 추가 인자",
 				"media_tag_pos" : "미디어 태그 붙일 위치",
 
@@ -193,12 +193,179 @@
 				"renamer" : "Renamer",
 				"settings" : "Settings",
 				"license" : "Licenses",
+				"contributers" : "Contributors",
+
+				"ok_button" : "OK",
+				"yes_button" : "Yes",
+				"no_button" : "No",
+				"cancel_button" : "Cancel",
+				"download_button" : "Download",
+
+				"open_files" : "Open files",
+				"all_files" : "All files(*.*)|*.*",
+
+				"update_exist" : "There is update.",
+				"no_update" : "This is Up-to-date.",
+				"current_stable" : "This program is latest version.",
+				"current_old" : "There is newest version of this program.",
+				
 				"original_path" : "Original Path",
 				"original_name" : "Original Name",
 				"changed_path" : "Changed Path",
 				"changed_name" : "Changed Name",
-				"undo" : "Undo",
-				"redo" : "Redo"
+
+				"open" : "Open",
+				"clear" : "Clear",
+				"apply" : "Apply",
+
+				"undo" : "Undo...",
+				"redo" : "Redo...",
+
+				"item_up" : "Item to up",
+				"item_down" : "Item to down",
+				"item_sort" : "Sort items",
+				
+				"check_update" : "Check update",
+				"feedback" : "Feedback",
+				"donate" : "Donate",
+				
+				"filename_processes" : "Filename Process",
+				"extension_processes" : "Extension Process",
+				"number_processes" : "Number Process",
+				"date_processes" : "Date Process",
+				"path_processes" : "Path Process",
+				"properties_processes" : "Properties Process",
+
+				"process_batch_process" : "Batch Process",
+
+				"process_replace_plain_text" : "Replace Plain Text",
+				"process_replace_regex_text" : "Replace Regular Expression",
+				"process_concatenate_text" : "Concatenate Text",
+				"process_trimming_text" : "Trimming Filename",
+				"process_delete_block" : "Delete Blocked Text",
+				"process_delete_text" : "Delete Filename",
+				"process_substring_text" : "Substring",
+				"process_casecast_text" : "Casecast Filename",
+
+				"process_add_extension" : "Add Extension",
+				"process_add_extension_automatically" : "Add Extension Automatically",
+				"process_delete_extension" : "Delete Extension",
+				"process_change_extension" : "Change Extension",
+				"process_casecast_extension" : "Casecast Extension",
+
+				"process_delete_without_numbers" : "Delete without Numbers",
+				"process_matching_number_count" : "Matching Number count",
+				"process_add_index_numbers" : "Add Index numbers",
+				"process_increase_decrease_numbers" : "Numbers Increase or decrease",
+
+				"process_add_date" : "Add Date",
+				"process_delete_date" : "Delete Date",
+				"process_increase_decrease_date" : "Dates Increase or decrease",
+
+				"process_change_path" : "Change Path",
+				"process_move_path_relative" : "Move Path relative",
+
+				"process_add_media_tag" : "Add Meta Tag",
+				"process_add_document_tag" : "Add Document Tag",
+				"process_add_file_hash" : "Add File Hash",
+
+				"include_extension" : "Include Extension",
+
+				"original_text" : "Original Text",
+				"replace_text" : "Replace Text",
+				"original_regex" : "Regular Expression",
+				"replace_format" : "Replace Format",
+				"concat_text" : "Concat Text",
+				"concat_pos" : "Position",
+				"start_block" : "Block Start",
+				"end_block" : "Block End",
+				"delete_all_blocks" : "Delete All Blocked.",
+				"start_index" : "Start Index",
+				"substring_length" : "Length",
+				"trim_pos" : "Position",
+				"casecast" : "Casecast Method",
+				"extension" : "Extension",
+
+				"option_hw_accel_mode" : "Hardware Acceleration Screen Rendering if you can.",
+				"option_rename_mode" : "Rename mode: ",
+				"option_rename_mode_move" : "Move",
+				"option_rename_mode_copy" : "Copy",
+				"option_overwrite" : "Overwrite if destination file is already exist.",
+				"option_autofilenamefix" : "Fix Filename special characters automatically.",
+				"option_autolistcleaning" : "Clear Nowhere Filename list automatically.",
+				"option_savemethod" : "Save settings to registry.",
+
+				"position_front" : "Front",
+				"position_end" : "End",
+				"position_both" : "Both",
+				"casecast_lower" : "To Lower",
+				"casecast_upper" : "To Upper",
+				"casecast_upper_first_letter" : "Upper first letter only",
+				
+				"match_count" : "Match count",
+				"match_pos" : "Position",
+				"add_pos" : "Position",
+				"incdec_count" : "Count",
+				"incdec_pos" : "Position",
+
+				"path_text" : "Path",
+
+				"add_date_type" : "Adding Date Type",
+				"add_date_format" : "Date Format",
+				"add_date_pos" : "Position",
+				"add_date_created" : "Creation",
+				"add_date_modified" : "Last written",
+				"add_date_accessed" : "Last access",
+				"add_date_now" : "Today",
+
+				"media_tag_type" : "Media Tag Type",
+				"media_tag_args" : "Tag Argument",
+				"media_tag_pos" : "Position",
+
+				"media_tag_audio_album" : "Audio Album",
+				"media_tag_audio_album_artists" : "Audio Album Artists",
+				"media_tag_audio_composers" : "Audio Composers",
+				"media_tag_audio_copyright" : "Audio Copyright",
+				"media_tag_audio_disc" : "Audio Disc",
+				"media_tag_audio_disc_count" : "Audio Disc Count",
+				"media_tag_audio_genres" : "Audio Genres",
+				"media_tag_audio_performers" : "Audio Performers",
+				"media_tag_audio_title" : "Audio Title",
+				"media_tag_audio_track" : "Audio Track",
+				"media_tag_audio_track_count" : "Audio Track Count",
+				"media_tag_audio_year" : "Audio Album Year",
+				"media_tag_audio_duration" : "Audio Duration",
+				"media_tag_audio_codec" : "Audio Codec",
+				"media_tag_audio_samplerate" : "Audio Samplerate",
+				"media_tag_audio_bitrate" : "Audio Bitrate",
+				"media_tag_audio_bitspersample" : "Audio Bits per sample",
+				"media_tag_audio_channels" : "Audio Channels",
+				"media_tag_image_width" : "Image Width",
+				"media_tag_image_height" : "Image Height",
+				"media_tag_image_quality" : "Image Quality",
+				"media_tag_image_codec" : "Image Codec",
+				"media_tag_video_genres" : "Video Genres",
+				"media_tag_video_title" : "Video Title",
+				"media_tag_video_year" : "Video Year",
+				"media_tag_video_duration" : "Video Duration",
+				"media_tag_video_width" : "Video Width",
+				"media_tag_video_height" : "Video Height",
+				"media_tag_video_codec" : "Video Codec",
+
+				"document_tag_type" : "Document Tag Type",
+				"document_tag_pos" : "Position",
+
+				"document_tag_title" : "Document Title",
+				"document_tag_author" : "Document Author",
+
+				"hash_type" : "Hash Type",
+				"hash_pos" : "Position",
+
+				"hash_md5" : "MD5",
+				"hash_sha1" : "SHA1",
+				"hash_sha256" : "SHA256",
+				"hash_sha384" : "SHA384",
+				"hash_sha512" : "SHA512"
 			}
 		}
 	]

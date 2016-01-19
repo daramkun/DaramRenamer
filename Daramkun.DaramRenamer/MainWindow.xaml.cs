@@ -16,6 +16,7 @@ using Daramkun.DaramRenamer.Processors.Number;
 using Daramkun.DaramRenamer.Processors.FilePath;
 using TaskDialogInterop;
 using Daramkun.DaramRenamer.Processors.Date;
+using Daramkun.DaramRenamer.Processors.Tag;
 
 namespace Daramkun.DaramRenamer
 {
@@ -319,20 +320,14 @@ namespace Daramkun.DaramRenamer
 		private void IncreaseDecreaseNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<IncreaseDecreaseNumbersProcessor> (); }
 
 		private void AddDate_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddDateProcessor> (); }
-		private void DeleteDate_Click ( object sender, RoutedEventArgs e ) { }
-		private void IncreaseDecreaseDate_Click ( object sender, RoutedEventArgs e ) { }
+		private void DeleteDate_Click ( object sender, RoutedEventArgs e ) { /* TODO */ }
+		private void IncreaseDecreaseDate_Click ( object sender, RoutedEventArgs e ) { /* TODO */ }
 
 		private void ChangePath_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ChangePathProcessor> (); }
-		private void MovePathRelative_Click ( object sender, RoutedEventArgs e ) { }
+		private void MovePathRelative_Click ( object sender, RoutedEventArgs e ) { /* TODO */ }
 
-		private void AddMediaTag_Click ( object sender, RoutedEventArgs e )
-		{
-
-		}
-
-		private void AddDocumentTag_Click ( object sender, RoutedEventArgs e )
-		{
-
-		}
+		private void AddMediaTag_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddMediaTagProcessor> (); }
+		private void AddDocumentTag_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddDocumentTagProcessor> (); }
+		private void AddFileHash_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddHashProcessor> (); }
 	}
 }

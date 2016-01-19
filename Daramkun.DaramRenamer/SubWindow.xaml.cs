@@ -338,6 +338,49 @@ namespace Daramkun.DaramRenamer
 					( control as StackPanel ).Children.Add ( radioNow );
 				}
 
+				if ( prop.PropertyType == typeof ( MediaTag ) )
+				{
+					var comboBox = new ComboBox ();
+					comboBox.VerticalAlignment = VerticalAlignment.Center;
+					foreach ( var item in new [] { "media_tag_audio_album", "media_tag_audio_album_artists", "media_tag_audio_composers",
+						"media_tag_audio_copyright", "media_tag_audio_disc", "media_tag_audio_disc_count", "media_tag_audio_genres",
+						"media_tag_audio_performers", "media_tag_audio_title", "media_tag_audio_track", "media_tag_audio_track_count",
+						"media_tag_audio_year", "media_tag_audio_duration", "media_tag_audio_codec", "media_tag_audio_samplerate",
+						"media_tag_audio_bitrate", "media_tag_audio_bitspersample", "media_tag_audio_channels", "media_tag_image_width",
+						"media_tag_image_height", "media_tag_image_quality", "media_tag_image_codec", "media_tag_video_genres",
+						"media_tag_video_title", "media_tag_video_year", "media_tag_video_duration", "media_tag_video_width",
+						"media_tag_video_height", "media_tag_video_codec" } )
+						comboBox.Items.Add ( Globalizer.Strings [ item ] );
+					comboBox.SelectedIndex = ( int ) ( MediaTag ) prop.GetValue ( Processor );
+					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( MediaTag ) comboBox.SelectedIndex ); };
+
+					control = comboBox;
+				}
+
+				if ( prop.PropertyType == typeof ( DocumentTag ) )
+				{
+					var comboBox = new ComboBox ();
+					comboBox.VerticalAlignment = VerticalAlignment.Center;
+					foreach ( var item in new [] { "document_tag_title", "document_tag_author" } )
+						comboBox.Items.Add ( Globalizer.Strings [ item ] );
+					comboBox.SelectedIndex = ( int ) ( DocumentTag ) prop.GetValue ( Processor );
+					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( DocumentTag ) comboBox.SelectedIndex ); };
+
+					control = comboBox;
+				}
+
+				if ( prop.PropertyType == typeof ( HashType ) )
+				{
+					var comboBox = new ComboBox ();
+					comboBox.VerticalAlignment = VerticalAlignment.Center;
+					foreach ( var item in new [] { "hash_md5", "hash_sha1", "hash_sha256", "hash_sha384", "hash_sha512" } )
+						comboBox.Items.Add ( Globalizer.Strings [ item ] );
+					comboBox.SelectedIndex = ( int ) ( HashType ) prop.GetValue ( Processor );
+					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( HashType ) comboBox.SelectedIndex ); };
+
+					control = comboBox;
+				}
+
 				if ( control != null )
 				{
 					Grid.SetRow ( control, ( int ) propPair.Key );

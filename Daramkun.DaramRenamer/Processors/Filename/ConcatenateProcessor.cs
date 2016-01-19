@@ -14,20 +14,20 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public bool CannotMultithreadProcess { get { return false; } }
 
 		[Globalized ( "concat_text", 0 )]
-		public string ConcatenateText { get; set; } = "";
+		public string Text { get; set; } = "";
 		[Globalized ( "concat_pos", 1 )]
-		public OnePointPosition ConcatenatePosition { get; set; } = OnePointPosition.EndPoint;
+		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 		[Globalized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )
 		{
-			if ( ConcatenateText == null || ConcatenateText.Length == 0 ) return false;
+			if ( Text == null || Text.Length == 0 ) return false;
 			string fn = !IncludeExtensions ? Path.GetFileNameWithoutExtension ( file.ChangedFilename ) : file.ChangedFilename;
 			string ext = !IncludeExtensions ? Path.GetExtension ( file.ChangedFilename ) : "";
-			file.ChangedFilename = ConcatenatePosition == OnePointPosition.StartPoint ? $"{ConcatenateText}{fn}{ext}" :
-				( ConcatenatePosition == OnePointPosition.EndPoint ? $"{fn}{ConcatenateText}{ext}" :
-				$"{ConcatenateText}{fn}{ConcatenateText}{ext}" );
+			file.ChangedFilename = Position == OnePointPosition.StartPoint ? $"{Text}{fn}{ext}" :
+				( Position == OnePointPosition.EndPoint ? $"{fn}{Text}{ext}" :
+				$"{Text}{fn}{Text}{ext}" );
 			return true;
 		}
 	}

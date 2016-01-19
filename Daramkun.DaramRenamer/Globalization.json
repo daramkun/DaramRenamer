@@ -15,7 +15,7 @@
 				"yes_button" : "예",
 				"no_button" : "아니오",
 				"cancel_button" : "취소",
-				"download_button" : "다운로드",
+				"download_button" : "내려받기",
 
 				"open_files" : "파일 열기",
 				"all_files" : "모든 파일(*.*)|*.*",
@@ -50,7 +50,7 @@
 				"number_processes" : "숫자 처리",
 				"date_processes" : "날짜 처리",
 				"path_processes" : "경로 처리",
-				"tag_processes" : "태그 처리",
+				"properties_processes" : "속성 처리",
 
 				"process_batch_process" : "일괄 처리",
 
@@ -83,6 +83,7 @@
 
 				"process_add_media_tag" : "미디어 태그 추가",
 				"process_add_document_tag" : "문서 태그 추가",
+				"process_add_file_hash" : "파일 해시 추가",
 
 				"include_extension" : "확장자 포함",
 
@@ -131,7 +132,56 @@
 				"add_date_created" : "생성 날짜",
 				"add_date_modified" : "수정 날짜",
 				"add_date_accessed" : "접근 날짜",
-				"add_date_now" : "현재 날짜"
+				"add_date_now" : "현재 날짜",
+
+				"media_tag_type" : "미디어 태기 종류",
+				"media_tag_args" : "태그 추가 인자",
+				"media_tag_pos" : "미디어 태그 붙일 위치",
+
+				"media_tag_audio_album" : "음악 앨범",
+				"media_tag_audio_album_artists" : "음악 앨범 음악가 목록",
+				"media_tag_audio_composers" : "음악 작곡가 목록",
+				"media_tag_audio_copyright" : "음악 저작권",
+				"media_tag_audio_disc" : "음악 디스크",
+				"media_tag_audio_disc_count" : "음악 총 디스크 수",
+				"media_tag_audio_genres" : "음악 장르 목록",
+				"media_tag_audio_performers" : "참여 음악가 목록",
+				"media_tag_audio_title" : "음악 제목",
+				"media_tag_audio_track" : "음악 트랙번호",
+				"media_tag_audio_track_count" : "음악 총 트랙 수",
+				"media_tag_audio_year" : "음악 앨범 발매년도",
+				"media_tag_audio_duration" : "음악 길이",
+				"media_tag_audio_codec" : "음악 코덱",
+				"media_tag_audio_samplerate" : "음악 샘플레이트",
+				"media_tag_audio_bitrate" : "음악 비트레이트",
+				"media_tag_audio_bitspersample" : "음악 샘플 당 비트 수",
+				"media_tag_audio_channels" : "음악 채널 수",
+				"media_tag_image_width" : "이미지 가로 크기",
+				"media_tag_image_height" : "이미지 세로 크기",
+				"media_tag_image_quality" : "이미지 품질",
+				"media_tag_image_codec" : "이미지 코덱",
+				"media_tag_video_genres" : "영상 장르",
+				"media_tag_video_title" : "영상 제목",
+				"media_tag_video_year" : "영상 발매년도",
+				"media_tag_video_duration" : "영상 길이",
+				"media_tag_video_width" : "영상 가로 크기",
+				"media_tag_video_height" : "영상 세로 크기",
+				"media_tag_video_codec" : "영상 코덱",
+
+				"document_tag_type" : "문서 태그 종류",
+				"document_tag_pos" : "문서 태그 붙일 위치",
+
+				"document_tag_title" : "문서 제목",
+				"document_tag_author" : "문서 작성자",
+
+				"hash_type" : "해시 종류",
+				"hash_pos" : "해시 붙일 위치",
+
+				"hash_md5" : "MD5",
+				"hash_sha1" : "SHA1",
+				"hash_sha256" : "SHA256",
+				"hash_sha384" : "SHA384",
+				"hash_sha512" : "SHA512"
 			}
 		},
 		{

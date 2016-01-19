@@ -342,6 +342,9 @@
     <Compile Include="Processors\Number\IncreaseDecreaseNumbersProcessor.cs" />
     <Compile Include="Processors\Number\NumberCountMatchProcessor.cs" />
     <Compile Include="Processors\FilePath\ChangePathProcessor.cs" />
+    <Compile Include="Processors\Tag\AddDocumentTagProcessor.cs" />
+    <Compile Include="Processors\Tag\AddHashProcessor.cs" />
+    <Compile Include="Processors\Tag\AddMediaTagProcessor.cs" />
     <Compile Include="SubWindow.xaml.cs">
       <DependentUpon>SubWindow.xaml</DependentUpon>
     </Compile>
@@ -411,9 +414,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Processors\Tag\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\accept.png" />
     <Resource Include="Resources\application_get.png" />

@@ -39,6 +39,56 @@ namespace Daramkun.DaramRenamer
 		Now,
 	}
 
+	public enum MediaTag
+	{
+		AudioBitrate,
+		AudioSamplerate,
+		AudioChannels,
+		AudioBitsPerSample,
+		AudioCodec,
+		AudioAlbum,
+		AudioAlbumArtists,
+		AudioComposers,
+		AudioConductor,
+		AudioCopyright,
+		AudioDisc,
+		AudioDiscCount,
+		AudioGenres,
+		AudioPerformers,
+		AudioTitle,
+		AudioTrack,
+		AudioTrackCount,
+		AudioYear,
+		AudioDuration,
+		VideoWidth,
+		VideoHeight,
+		VideoCodec,
+		VideoCopyright,
+		VideoGenres,
+		VideoTitle,
+		VideoYear,
+		VideoDuration,
+		ImageWidth,
+		ImageHeight,
+		ImageCodec,
+		ImageQuality,
+	}
+
+	public enum DocumentTag
+	{
+		Title,
+		Author,
+	}
+
+	public enum HashType
+	{
+		MD5,
+		SHA1,
+		SHA256,
+		SHA384,
+		SHA512,
+	}
+
 	public interface IProcessor
 	{
 		string Name { get; }

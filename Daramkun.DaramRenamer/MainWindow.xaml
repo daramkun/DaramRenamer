@@ -81,9 +81,10 @@
                 <MenuItem Header="{Binding Path=[process_change_path]}" Click="ChangePath_Click" />
 				<MenuItem Header="{Binding Path=[process_move_path_relative]}" Click="MovePathRelative_Click" IsEnabled="False" />
             </MenuItem>
-            <MenuItem Header="{Binding Path=[tag_processes]}">
+			<MenuItem Header="{Binding Path=[properties_processes]}">
                 <MenuItem Header="{Binding Path=[process_add_media_tag]}" Click="AddMediaTag_Click" />
 				<MenuItem Header="{Binding Path=[process_add_document_tag]}" Click="AddDocumentTag_Click" />
+				<MenuItem Header="{Binding Path=[process_add_file_hash]}" Click="AddFileHash_Click" />
             </MenuItem>
             <Separator />
 			<MenuItem Header="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
@@ -143,12 +144,12 @@
 
                             <Button Content="{StaticResource iconDeleteWithoutNumber}" ToolTip="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
 							<Button Content="{StaticResource iconMatchNumberCount}" ToolTip="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
-                            <Button Content="{StaticResource iconAddIndex}" ToolTip="{Binding Path=[process_add_index_numbers]}" />
-                            <Button Content="{StaticResource iconIncreaseDecreaseNumber}" ToolTip="{Binding Path=[process_increase_decrease_numbers]}" />
+							<Button Content="{StaticResource iconAddIndex}" ToolTip="{Binding Path=[process_add_index_numbers]}" Click="AddIndexNumbers_Click" />
+							<Button Content="{StaticResource iconIncreaseDecreaseNumber}" ToolTip="{Binding Path=[process_increase_decrease_numbers]}" Click="IncreaseDecreaseNumbers_Click" />
 
                             <Separator />
 
-                            <Button Content="{StaticResource iconAddDate}" ToolTip="{Binding Path=[process_add_date]}" />
+							<Button Content="{StaticResource iconAddDate}" ToolTip="{Binding Path=[process_add_date]}" Click="AddDate_Click" />
                         </ToolBar>
                     </ToolBarTray>
 

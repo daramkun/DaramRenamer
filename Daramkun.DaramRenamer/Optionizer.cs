@@ -67,13 +67,13 @@ namespace Daramkun.DaramRenamer
 				if ( daramworldKey != null)
 				{
 					var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer" );
-					if ( renamerKey != null)
+					if ( renamerKey != null )
 					{
-						SharedOptionizer.RenameMode = ( RenameMode ) ( int ) renamerKey.GetValue ( "rename_mode" );
-						SharedOptionizer.HardwareAccelerationMode = ( bool ) renamerKey.GetValue ( "hw_accel_mode" );
-						SharedOptionizer.AutomaticFilenameFix = ( bool ) renamerKey.GetValue ( "auto_name_fix" );
-						SharedOptionizer.AutomaticListCleaning = ( bool ) renamerKey.GetValue ( "auto_list_clean" );
-						SharedOptionizer.Overwrite = ( bool ) renamerKey.GetValue ( "overwrite" );
+						SharedOptionizer.RenameMode = ( RenameMode ) ( int ) renamerKey.GetValue ( "rename_mode", RenameMode.Move );
+						SharedOptionizer.HardwareAccelerationMode = ( int ) renamerKey.GetValue ( "hw_accel_mode", 1 ) == 1 ? true : false;
+						SharedOptionizer.AutomaticFilenameFix = ( int ) renamerKey.GetValue ( "auto_name_fix", 0 ) == 1 ? true : false;
+						SharedOptionizer.AutomaticListCleaning = ( int ) renamerKey.GetValue ( "auto_list_clean", 0 ) == 1 ? true : false;
+						SharedOptionizer.Overwrite = ( int ) renamerKey.GetValue ( "overwrite", 0 ) == 1 ? true : false;
 						SharedOptionizer.OptionSaveToRegistry = true;
 					}
 				}
@@ -95,11 +95,11 @@ namespace Daramkun.DaramRenamer
 				var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer", true );
 				if ( renamerKey == null ) renamerKey = daramworldKey.CreateSubKey ( "Daram Renamer", true );
 
-				renamerKey.SetValue ( "rename_mode", ( int ) RenameMode );
-				renamerKey.SetValue ( "hw_accel_mode", HardwareAccelerationMode );
-				renamerKey.SetValue ( "auto_name_fix", AutomaticFilenameFix );
-				renamerKey.SetValue ( "auto_list_clean", AutomaticListCleaning );
-				renamerKey.SetValue ( "overwrite", Overwrite );
+				renamerKey.SetValue ( "rename_mode", ( int ) RenameMode, RegistryValueKind.DWord );
+				renamerKey.SetValue ( "hw_accel_mode", HardwareAccelerationMode ? 1 : 0, RegistryValueKind.DWord );
+				renamerKey.SetValue ( "auto_name_fix", AutomaticFilenameFix ? 1 : 0, RegistryValueKind.DWord );
+				renamerKey.SetValue ( "auto_list_clean", AutomaticListCleaning ? 1 : 0, RegistryValueKind.DWord );
+				renamerKey.SetValue ( "overwrite", Overwrite ? 1 : 0, RegistryValueKind.DWord );
 			}
 			else
 			{

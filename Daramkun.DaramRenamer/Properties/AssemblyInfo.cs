@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration ( "" )]
 [assembly: AssemblyCompany ( "DARAM WORLD" )]
 [assembly: AssemblyProduct ( "Daram Renamer" )]
-[assembly: AssemblyCopyright ( "Copyright © 2013-2015 Daramkun" )]
+[assembly: AssemblyCopyright ( "Copyright © 2013-2016 Daramkun" )]
 [assembly: AssemblyTrademark ( "DaramTools®" )]
 [assembly: AssemblyCulture ( "" )]
 

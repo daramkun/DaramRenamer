@@ -61,7 +61,7 @@ namespace Daramkun.DaramRenamer
 			}
 			else
 			{
-				var userKey = RegistryKey.OpenBaseKey ( RegistryHive.CurrentUser, RegistryView.Default );
+				var userKey = Registry.CurrentUser;
 				var swKey = userKey.OpenSubKey ( "SOFTWARE" );
 				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD" );
 				if ( daramworldKey != null)
@@ -88,12 +88,12 @@ namespace Daramkun.DaramRenamer
 			{
 				if ( File.Exists ( "DaramRenamer.config.json" ) ) File.Delete ( "DaramRenamer.config.json" );
 
-				var userKey = RegistryKey.OpenBaseKey ( RegistryHive.CurrentUser, RegistryView.Default );
-				var swKey = userKey.OpenSubKey ( "SOFTWARE" );
-				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD" );
-				if ( daramworldKey == null ) daramworldKey = swKey.CreateSubKey ( "DARAM WORLD" );
-				var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer" );
-				if ( renamerKey == null ) renamerKey = daramworldKey.CreateSubKey ( "Daram Renamer" );
+				var userKey = Registry.CurrentUser;
+				var swKey = userKey.OpenSubKey ( "SOFTWARE", true );
+				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD", true );
+				if ( daramworldKey == null ) daramworldKey = swKey.CreateSubKey ( "DARAM WORLD", true );
+				var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer", true );
+				if ( renamerKey == null ) renamerKey = daramworldKey.CreateSubKey ( "Daram Renamer", true );
 
 				renamerKey.SetValue ( "rename_mode", ( int ) RenameMode );
 				renamerKey.SetValue ( "hw_accel_mode", HardwareAccelerationMode );
@@ -103,14 +103,14 @@ namespace Daramkun.DaramRenamer
 			}
 			else
 			{
-				var userKey = RegistryKey.OpenBaseKey ( RegistryHive.CurrentUser, RegistryView.Default );
-				var swKey = userKey.OpenSubKey ( "SOFTWARE" );
-				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD" );
+				var userKey = Registry.CurrentUser;
+				var swKey = userKey.OpenSubKey ( "SOFTWARE", true );
+				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD", true );
 				if ( daramworldKey != null )
 				{
-					var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer" );
+					var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer", true );
 					if ( renamerKey != null )
-						daramworldKey.DeleteSubKey ( "Daram Renamer" );
+						daramworldKey.DeleteSubKey ( "Daram Renamer", true );
 				}
 
 				Dictionary<string, string> map = new Dictionary<string, string> ()

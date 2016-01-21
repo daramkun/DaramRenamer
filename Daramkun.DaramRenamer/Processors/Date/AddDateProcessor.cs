@@ -15,7 +15,7 @@ namespace Daramkun.DaramRenamer.Processors.Date
 		[Globalized ( "add_date_type", 0 )]
 		public DateType Type { get; set; } = DateType.CreationDate;
 		[Globalized ( "add_date_format", 1 )]
-		public string Format { get; set; } = "yyyyMMdd";
+		public string Format { get; set; } = "yyMMdd";
 		[Globalized ( "add_date_pos", 2 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 

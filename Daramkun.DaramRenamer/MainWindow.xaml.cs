@@ -17,6 +17,8 @@ using Daramkun.DaramRenamer.Processors.FilePath;
 using TaskDialogInterop;
 using Daramkun.DaramRenamer.Processors.Date;
 using Daramkun.DaramRenamer.Processors.Tag;
+using System.Threading;
+using System.Windows.Media;
 
 namespace Daramkun.DaramRenamer
 {
@@ -207,12 +209,23 @@ namespace Daramkun.DaramRenamer
 
 		private void Menu_System_Apply ( object sender, RoutedEventArgs e )
 		{
+			progressBar.Foreground = Brushes.Green;
+			progressBar.Maximum = current.Count;
+			int failed = 0;
 			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) =>
 			{
-				ErrorCode errorMessage;
+				ErrorCode errorMessage = ErrorCode.NoError;
 				if ( Optionizer.SharedOptionizer.RenameMode == RenameMode.Move ) fileInfo.Move ( Optionizer.SharedOptionizer.Overwrite, out errorMessage );
 				else if ( Optionizer.SharedOptionizer.RenameMode == RenameMode.Copy ) fileInfo.Copy ( Optionizer.SharedOptionizer.Overwrite, out errorMessage );
+				Dispatcher.BeginInvoke ( ( Action ) ( () => { ++progressBar.Value; } ) );
+				if ( errorMessage != ErrorCode.NoError )
+					Interlocked.Increment ( ref failed );
 			} );
+			if ( failed != 0 )
+				progressBar.Foreground = Brushes.Red;
+			MessageBox ( Globalizer.Strings [ "applied" ], string.Format ( Globalizer.Strings [ "applied_message" ],
+				progressBar.Value - failed, progressBar.Maximum ),
+				VistaTaskDialogIcon.Information, Globalizer.Strings [ "ok_button" ] );
 		}
 
 		private void Menu_System_Undo ( object sender, RoutedEventArgs e )

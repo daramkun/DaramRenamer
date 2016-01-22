@@ -19,6 +19,7 @@ using Daramkun.DaramRenamer.Processors.Date;
 using Daramkun.DaramRenamer.Processors.Tag;
 using System.Threading;
 using System.Windows.Media;
+using Daramkun.DaramRenamer.Processors;
 
 namespace Daramkun.DaramRenamer
 {
@@ -88,9 +89,16 @@ namespace Daramkun.DaramRenamer
 					AddItem ( ss );
 		}
 
-		public void ShowPopup<T> () where T : IProcessor
+		public void ShowPopup<T> ( params object [] args ) where T : IProcessor
 		{
-			var window = new SubWindow ( Activator.CreateInstance<T> () );
+			T processor = Activator.CreateInstance<T> ();
+			if ( processor is ManualEditProcessor )
+			{
+				( processor as ManualEditProcessor ).ChangeName = ( args [ 0 ] as FileInfo ).ChangedFilename;
+				( processor as ManualEditProcessor ).ChangePath = ( args [ 0 ] as FileInfo ).ChangedPath;
+				( processor as ManualEditProcessor ).ProcessingFileInfo = args [ 0 ] as FileInfo;
+			}
+			var window = new SubWindow ( processor );
 			window.OKButtonClicked += SubWindow_OKButtonClicked;
 			window.CancelButtonClicked += SubWindow_CancelButtonClicked;
 			window.VerticalAlignment = VerticalAlignment.Center;
@@ -106,9 +114,16 @@ namespace Daramkun.DaramRenamer
 			{
 				undoManager.SaveToUndoStack ( current );
 				var processor = ( overlayWindowContainer.Children [ 0 ] as SubWindow ).Processor;
-				if ( !processor.CannotMultithreadProcess )
-					Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => processor.Process ( fileInfo ) );
-				else foreach ( var fileInfo in current ) processor.Process ( fileInfo );
+				if ( processor is ManualEditProcessor )
+				{
+					processor.Process ( ( processor as ManualEditProcessor ).ProcessingFileInfo );
+				}
+				else
+				{
+					if ( !processor.CannotMultithreadProcess )
+						Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => processor.Process ( fileInfo ) );
+					else foreach ( var fileInfo in current ) processor.Process ( fileInfo );
+				}
 			}
 			overlayWindowContainer.Children.Clear ();
 		}
@@ -156,6 +171,13 @@ namespace Daramkun.DaramRenamer
 			finally { if ( stream != null ) stream.Dispose (); }
 
 			return checkUpdate;
+		}
+
+		private void Item_DoubleClick ( object sender, RoutedEventArgs e )
+		{
+			if ( ( sender as ListViewItem ).Content == null ) return;
+			FileInfo info = ( sender as ListViewItem ).Content as FileInfo;
+			ShowPopup<ManualEditProcessor> ( info );
 		}
 
 		private void listViewFiles_DragEnter ( object sender, DragEventArgs e )

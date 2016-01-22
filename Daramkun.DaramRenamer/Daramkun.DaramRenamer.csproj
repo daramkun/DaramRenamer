@@ -337,6 +337,7 @@
     <Compile Include="Processors\Filename\ReplaceRegexpProcessor.cs" />
     <Compile Include="Processors\Filename\SubstringProcessor.cs" />
     <Compile Include="Processors\Filename\TrimmingProcessor.cs" />
+    <Compile Include="Processors\ManualEditProcessor.cs" />
     <Compile Include="Processors\Number\AddIndexNumberProcessor.cs" />
     <Compile Include="Processors\Number\DeleteWithoutNumbersProcessor.cs" />
     <Compile Include="Processors\Number\IncreaseDecreaseNumbersProcessor.cs" />

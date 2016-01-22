@@ -55,6 +55,7 @@
 				"path_processes": "경로 처리",
 				"properties_processes": "속성 처리",
 
+				"process_manual_edit": "수동 편집",
 				"process_batch_process": "일괄 처리",
 
 				"process_replace_plain_text": "평문 파일명 치환",
@@ -241,7 +242,8 @@
 				"date_processes": "Date Process",
 				"path_processes": "Path Process",
 				"properties_processes": "Properties Process",
-
+				
+				"process_manual_edit": "Manual Editting",
 				"process_batch_process": "Batch Process",
 
 				"process_replace_plain_text": "Replace Plain Text",

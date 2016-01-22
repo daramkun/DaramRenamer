@@ -26,9 +26,13 @@ namespace Daramkun.DaramRenamer
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
-				//Daramkun.DaramRenamer.MainWindow.SimpleErrorMessage ( Daramkun.DaramRenamer.Properties.Resources.PleaseCheckLog );
+				Daramkun.DaramRenamer.MainWindow.MessageBox ( Globalizer.Strings [ "error_raised" ], Globalizer.Strings [ "please_check_log" ],
+					TaskDialogInterop.VistaTaskDialogIcon.Error, "OK" );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
+				{
 					sw.WriteLine ( args.ExceptionObject.ToString () );
+					sw.WriteLine ( "==========================================================" );
+				}
 			};
 		}
 

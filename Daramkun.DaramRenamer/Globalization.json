@@ -21,7 +21,10 @@
 				"all_files": "모든 파일(*.*)|*.*",
 
 				"applied": "적용되었습니다.",
-				"applied_message":  "{0}/{1}개의 항목이 적용되었습니다.",
+				"applied_message": "{0}/{1}개의 항목이 적용되었습니다.",
+
+				"error_raised": "오류가 발생했습니다.",
+				"please_check_log": "로그 파일을 확인해주세요.",
 
 				"update_exist": "업데이트가 있습니다.",
 				"no_update": "업데이트가 없습니다.",
@@ -210,6 +213,9 @@
 
 				"applied": "Applied.",
 				"applied_message":  "{0}/{1} Items is applied.",
+
+				"error_raised": "Error raised.",
+				"please_check_log": "Please check the log file.",
 
 				"update_exist": "There is update.",
 				"no_update": "This is Up-to-date.",

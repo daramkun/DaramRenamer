@@ -274,7 +274,7 @@ TagLib# is free/open source software, released under the LGPL.
 
 Author: Mono Project
 Original Source: https://github.com/mono/taglib-sharp
-Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternLibs/TagLib]]>
+Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternalLibs/TagLib]]>
 			</TextBox>
 			</TabItem>
 		</TabControl>

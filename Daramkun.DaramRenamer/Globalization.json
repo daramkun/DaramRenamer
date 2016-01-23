@@ -212,7 +212,7 @@
 				"all_files": "All files(*.*)|*.*",
 
 				"applied": "Applied.",
-				"applied_message":  "{0}/{1} Items is applied.",
+				"applied_message": "{0}/{1} Items is applied.",
 
 				"error_raised": "Error raised.",
 				"please_check_log": "Please check the log file.",
@@ -248,7 +248,7 @@
 				"date_processes": "Date Process",
 				"path_processes": "Path Process",
 				"properties_processes": "Properties Process",
-				
+
 				"process_manual_edit": "Manual Editting",
 				"process_batch_process": "Batch Process",
 

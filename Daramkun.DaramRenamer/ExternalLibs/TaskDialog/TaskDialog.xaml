@@ -24,15 +24,15 @@
 			</ResourceDictionary.MergedDictionaries>
 			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 			<local:NotNullToVisibilityConverter x:Key="NotNullToVisibilityConverter"/>
-			<BitmapImage x:Key="ExpArrUp1" UriSource="Resources/exparr-up1.bmp" />
-			<BitmapImage x:Key="ExpArrUp2" UriSource="Resources/exparr-up2.bmp" />
-			<BitmapImage x:Key="ExpArrUp3" UriSource="Resources/exparr-up3.bmp" />
-			<BitmapImage x:Key="ExpArrDown1" UriSource="Resources/exparr-down1.bmp" />
-			<BitmapImage x:Key="ExpArrDown2" UriSource="Resources/exparr-down2.bmp" />
-			<BitmapImage x:Key="ExpArrDown3" UriSource="Resources/exparr-down3.bmp" />
-			<BitmapImage x:Key="ExpArr1" UriSource="Resources/exparr-down1.bmp" />
-			<BitmapImage x:Key="ExpArr2" UriSource="Resources/exparr-down2.bmp" />
-			<BitmapImage x:Key="ExpArr3" UriSource="Resources/exparr-down3.bmp" />
+			<BitmapImage x:Key="ExpArrUp1" UriSource="Resources/exparr-up1.png" />
+			<BitmapImage x:Key="ExpArrUp2" UriSource="Resources/exparr-up2.png" />
+			<BitmapImage x:Key="ExpArrUp3" UriSource="Resources/exparr-up3.png" />
+			<BitmapImage x:Key="ExpArrDown1" UriSource="Resources/exparr-down1.png" />
+			<BitmapImage x:Key="ExpArrDown2" UriSource="Resources/exparr-down2.png" />
+			<BitmapImage x:Key="ExpArrDown3" UriSource="Resources/exparr-down3.png" />
+			<BitmapImage x:Key="ExpArr1" UriSource="Resources/exparr-down1.png" />
+			<BitmapImage x:Key="ExpArr2" UriSource="Resources/exparr-down2.png" />
+			<BitmapImage x:Key="ExpArr3" UriSource="Resources/exparr-down3.png" />
 			<BitmapImage x:Key="CmdElevated" UriSource="Resources/shield-16.png" />
 		</ResourceDictionary>
 	</Window.Resources>

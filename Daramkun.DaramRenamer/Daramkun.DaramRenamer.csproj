@@ -63,7 +63,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ComboBoxBindingConverter.cs" />
     <Compile Include="FileInfo.cs" />
     <EmbeddedResource Include="Globalization.json" />
     <Compile Include="Globalizer.cs" />
@@ -450,14 +449,14 @@
     <Resource Include="ExternalLibs\TaskDialog\Resources\cmdarr1.png" />
     <Resource Include="ExternalLibs\TaskDialog\Resources\cmdarr2.png" />
     <Resource Include="ExternalLibs\TaskDialog\Resources\cmdarr3.png" />
-    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-down1.bmp" />
-    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-down2.bmp" />
-    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-down3.bmp" />
-    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-up1.bmp" />
-    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-up2.bmp" />
-    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-up3.bmp" />
     <Resource Include="ExternalLibs\TaskDialog\Resources\shield-16.png" />
     <Resource Include="ExternalLibs\TaskDialog\Resources\shield-32.png" />
+    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-down1.png" />
+    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-down2.png" />
+    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-down3.png" />
+    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-up1.png" />
+    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-up2.png" />
+    <Resource Include="ExternalLibs\TaskDialog\Resources\exparr-up3.png" />
     <Content Include="ExternalLibs\TaskDialog\TaskDialog.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

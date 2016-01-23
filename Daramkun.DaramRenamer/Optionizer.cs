@@ -15,6 +15,9 @@ namespace Daramkun.DaramRenamer
 
 	public class Optionizer
 	{
+		const string Filename = "DaramRenamer.config.json";
+		const string Key = "Daram Renamer";
+
 		public static Optionizer SharedOptionizer { get; private set; }
 
 		static DataContractJsonSerializer serializer = new DataContractJsonSerializer ( typeof ( Dictionary<string, string> ),
@@ -44,11 +47,11 @@ namespace Daramkun.DaramRenamer
 		{
 			SharedOptionizer = new Optionizer ();
 
-			if ( File.Exists ( "DaramRenamer.config.json" ) )
+			if ( File.Exists ( Filename ) )
 			{
 				SharedOptionizer.OptionSaveToRegistry = false;
 
-				using ( Stream stream = File.Open ( "DaramRenamer.config.json", FileMode.Open ) )
+				using ( Stream stream = File.Open ( Filename, FileMode.Open ) )
 				{
 					var file = serializer.ReadObject ( stream ) as Dictionary<string, string>;
 					SharedOptionizer.RenameMode = ( RenameMode ) int.Parse ( file [ "rename_mode" ] );
@@ -66,7 +69,7 @@ namespace Daramkun.DaramRenamer
 				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD" );
 				if ( daramworldKey != null)
 				{
-					var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer" );
+					var renamerKey = daramworldKey.OpenSubKey ( Key );
 					if ( renamerKey != null )
 					{
 						SharedOptionizer.RenameMode = ( RenameMode ) ( int ) renamerKey.GetValue ( "rename_mode", RenameMode.Move );
@@ -86,14 +89,14 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( OptionSaveToRegistry )
 			{
-				if ( File.Exists ( "DaramRenamer.config.json" ) ) File.Delete ( "DaramRenamer.config.json" );
+				if ( File.Exists ( Filename ) ) File.Delete ( Filename );
 
 				var userKey = Registry.CurrentUser;
 				var swKey = userKey.OpenSubKey ( "SOFTWARE", true );
 				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD", true );
 				if ( daramworldKey == null ) daramworldKey = swKey.CreateSubKey ( "DARAM WORLD", true );
-				var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer", true );
-				if ( renamerKey == null ) renamerKey = daramworldKey.CreateSubKey ( "Daram Renamer", true );
+				var renamerKey = daramworldKey.OpenSubKey ( Key, true );
+				if ( renamerKey == null ) renamerKey = daramworldKey.CreateSubKey ( Key, true );
 
 				renamerKey.SetValue ( "rename_mode", ( int ) RenameMode, RegistryValueKind.DWord );
 				renamerKey.SetValue ( "hw_accel_mode", HardwareAccelerationMode ? 1 : 0, RegistryValueKind.DWord );
@@ -108,9 +111,9 @@ namespace Daramkun.DaramRenamer
 				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD", true );
 				if ( daramworldKey != null )
 				{
-					var renamerKey = daramworldKey.OpenSubKey ( "Daram Renamer", true );
+					var renamerKey = daramworldKey.OpenSubKey ( Key, true );
 					if ( renamerKey != null )
-						daramworldKey.DeleteSubKey ( "Daram Renamer", true );
+						daramworldKey.DeleteSubKey ( Key, true );
 				}
 
 				Dictionary<string, string> map = new Dictionary<string, string> ()
@@ -122,7 +125,7 @@ namespace Daramkun.DaramRenamer
 					{ "overwrite", Overwrite.ToString ().ToLower () },
 				};
 
-				using ( Stream stream = File.Open ( "DaramRenamer.config.json", FileMode.Create ) )
+				using ( Stream stream = File.Open ( Filename, FileMode.Create ) )
 					serializer.WriteObject ( stream, map );
 			}
 		}

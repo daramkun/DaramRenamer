@@ -3,7 +3,151 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Daramkun.DaramRenamer"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+	<Application.Resources>
+		<Image x:Key="iconOpenButton" Source="Resources/folder.png" />
+		<Image x:Key="iconDeleteButton" Source="Resources/delete.png" />
+		<Image x:Key="iconApplyButton" Source="Resources/accept.png" />
+
+		<Image x:Key="iconUndoButton" Source="Resources/arrow_undo.png" />
+		<Image x:Key="iconRedoButton" Source="Resources/arrow_redo.png" />
+
+		<Image x:Key="iconItemUp" Source="Resources/arrow_up.png" />
+		<Image x:Key="iconItemDown" Source="Resources/arrow_down.png" />
+		<Image x:Key="iconItemSort" Source="Resources/rainbow.png" />
+
+		<Image x:Key="iconCheckUpdate" Source="Resources/application_get.png" />
+		<Image x:Key="iconFeedback" Source="Resources/email_go.png" />
+		<Image x:Key="iconDonate" Source="Resources/cup_add.png" />
+
+		<Image x:Key="iconReplaceText" Source="Resources/layout_edit.png" />
+		<Image x:Key="iconConcatText" Source="Resources/shape_move_forwards.png" />
+		<Image x:Key="iconTrimText" Source="Resources/pilcrow.png" />
+		<Image x:Key="iconDeleteBlock" Source="Resources/brick_delete.png" />
+		<Image x:Key="iconDeleteText" Source="Resources/pencil_delete.png" />
+		<Image x:Key="iconCasecastText" Source="Resources/text_uppercase.png" />
+		<Image x:Key="iconSubstringText" Source="Resources/textfield_rename.png" />
+
+		<Image x:Key="iconAddExtension" Source="Resources/tag_blue_add.png" />
+		<Image x:Key="iconDeleteExtension" Source="Resources/tag_blue_delete.png" />
+		<Image x:Key="iconReplaceExtension" Source="Resources/tag_blue_edit.png" />
+		<Image x:Key="iconCasecastExtension" Source="Resources/text_lowercase.png" />
+
+		<Image x:Key="iconDeleteWithoutNumber" Source="Resources/chart_line_delete.png" />
+		<Image x:Key="iconMatchNumberCount" Source="Resources/chart_bar.png" />
+		<Image x:Key="iconAddIndex" Source="Resources/text_list_numbers.png" />
+		<Image x:Key="iconIncreaseDecreaseNumber" Source="Resources/chart_curve.png" />
+
+		<Image x:Key="iconAddDate" Source="Resources/date_add.png" />
+		
+		<Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+			<Setter Property="Background" Value="WhiteSmoke" />
+			<Setter Property="Foreground" Value="DarkSlateGray" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="back" Opacity="0.8" CornerRadius="3">
+							<Border.BitmapEffect>
+								<OuterGlowBitmapEffect Opacity="0.7" GlowSize="0" GlowColor="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Button.Background).(SolidColorBrush.Color)}" />
+							</Border.BitmapEffect>
+							<Border.Background>
+								<LinearGradientBrush StartPoint="0,0" EndPoint="0,1.5">
+									<GradientBrush.GradientStops>
+										<GradientStopCollection>
+											<GradientStop Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Button.Background).(SolidColorBrush.Color)}" Offset="0"/>
+											<GradientStop Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Button.Background).(SolidColorBrush.Color)}" Offset="0.4"/>
+											<GradientStop Color="#FFF" Offset="1"/>
+										</GradientStopCollection>
+									</GradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Border.Background>
+							<Border x:Name="fore" BorderThickness="1" CornerRadius="3" BorderBrush="#5555">
+								<Border.Background>
+									<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+										<GradientBrush.GradientStops>
+											<GradientStopCollection>
+												<GradientStop Color="#6FFF" Offset="0.5"/>
+												<GradientStop Color="#1111" Offset="0.51"/>
+											</GradientStopCollection>
+										</GradientBrush.GradientStops>
+									</LinearGradientBrush>
+								</Border.Background>
+								<ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
+							</Border>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Trigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation To="6" Duration="0:0:0.1" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+											<ColorAnimation To="#AFFF" BeginTime="0:0:0.1" Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+											<ColorAnimation To="#3FFF" BeginTime="0:0:0.1" Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.EnterActions>
+								<Trigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.ExitActions>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Trigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation To="3" Duration="0:0:0.1" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+											<ColorAnimation To="#3AAA" Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+											<ColorAnimation To="#2111" Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.EnterActions>
+								<Trigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.ExitActions>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False">
+								<Setter Property="Foreground" Value="#B444"/>
+								<Trigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation To="0" Duration="0:0:0.1" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+											<DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="content" Storyboard.TargetProperty="(ContentPresenter.BitmapEffect).(DropShadowBitmapEffect.Opacity)" />
+											<DoubleAnimation To="-135" Duration="0:0:0.1" Storyboard.TargetName="content" Storyboard.TargetProperty="(ContentPresenter.BitmapEffect).(DropShadowBitmapEffect.Direction)" />
+											<ColorAnimation To="#FFF" Duration="0:0:0.1" Storyboard.TargetName="content" Storyboard.TargetProperty="(ContentPresenter.BitmapEffect).(DropShadowBitmapEffect.Color)" />
+											<ColorAnimation To="#D555" Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" />
+											<ColorAnimation To="#CEEE" Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+											<ColorAnimation To="#CDDD" Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.EnterActions>
+								<Trigger.ExitActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+											<DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="content" Storyboard.TargetProperty="(ContentPresenter.BitmapEffect).(DropShadowBitmapEffect.Opacity)" />
+											<DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="content" Storyboard.TargetProperty="(ContentPresenter.BitmapEffect).(DropShadowBitmapEffect.Direction)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="content" Storyboard.TargetProperty="(ContentPresenter.BitmapEffect).(DropShadowBitmapEffect.Color)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+											<ColorAnimation Duration="0:0:0.1" Storyboard.TargetName="fore" Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+										</Storyboard>
+									</BeginStoryboard>
+								</Trigger.ExitActions>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Application.Resources>
 </Application>

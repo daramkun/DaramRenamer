@@ -11,6 +11,8 @@
 				"settings": "설정",
 				"license": "라이센스",
 
+				"tip": "파일명 리스트를 오른쪽 클릭하면 더 많은 기능을 사용할 수 있습니다.",
+
 				"ok_button": "확인",
 				"yes_button": "예",
 				"no_button": "아니오",
@@ -201,6 +203,8 @@
 				"renamer": "Renamer",
 				"settings": "Settings",
 				"license": "Licenses",
+
+				"tip": "You can use more features when you right-click to filename listbox.",
 
 				"ok_button": "OK",
 				"yes_button": "Yes",

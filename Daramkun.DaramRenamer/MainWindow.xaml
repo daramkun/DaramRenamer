@@ -199,12 +199,21 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="{Binding Path=[license]}">
-				<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve" IsReadOnly="True"><![CDATA[------------------------------
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="22" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<TextBlock Text="Current Translation Author: " />
+						<TextBlock Name="translationAuthor" />
+					</StackPanel>
+					<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve" IsReadOnly="True"><![CDATA[------------------------------
 1. Daram Renamer
 ------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2013-2015 진재연(Jin Jae-yeon)
+Copyright (c) 2013-2016 진재연(Jin Jae-yeon)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -275,7 +284,8 @@ TagLib# is free/open source software, released under the LGPL.
 Author: Mono Project
 Original Source: https://github.com/mono/taglib-sharp
 Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternalLibs/TagLib]]>
-			</TextBox>
+					</TextBox>
+				</Grid>
 			</TabItem>
 		</TabControl>
 		<TextBlock Text="{Binding Path=[tip]}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,3,3" FontSize="8" />

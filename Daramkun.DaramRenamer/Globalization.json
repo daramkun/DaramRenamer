@@ -1,10 +1,11 @@
 ﻿{
 	"lang": [
 		{
-			"version": "3.0.0.0",
+			"version": "3.0.1.0",
 			"target": "daram_renamer",
 			"culture": "ko-KR",
 			"author": "Daramkun",
+			"contact": "daramkun@daram.pe.kr",
 			"contents": {
 				"daram_renamer": "다람 리네이머",
 				"renamer": "리네이머",
@@ -194,10 +195,11 @@
 			}
 		},
 		{
-			"version": "3.0.0.0",
+			"version": "3.0.1.0",
 			"target": "daram_renamer",
 			"culture": "en-US",
 			"author": "Daramkun",
+			"contact": "daramkun@daram.pe.kr",
 			"contents": {
 				"daram_renamer": "Daram Renamer",
 				"renamer": "Renamer",

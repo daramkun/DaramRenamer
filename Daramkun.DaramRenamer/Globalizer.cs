@@ -20,6 +20,8 @@ namespace Daramkun.DaramRenamer
 		public string Culture;
 		[DataMember ( Name = "author" )]
 		public string Author;
+		[DataMember ( Name = "contact", IsRequired = false )]
+		public string Contact;
 		[DataMember ( Name = "contents" )]
 		public Dictionary<string, string> Contents;
 	}
@@ -73,8 +75,8 @@ namespace Daramkun.DaramRenamer
 				Stream gs = null;
 				if ( File.Exists ( $".\\Globalizations\\Globalization.{ci.DisplayName}.json" ) )
 					gs = new FileStream ( $".\\Globalizations\\Globalization.{ci.DisplayName}.json", FileMode.Open );
-				else if ( File.Exists ( $"Globalization.{ci.DisplayName}.json" ) )
-					gs = new FileStream ( $"Globalization.{ci.DisplayName}.json", FileMode.Open );
+				else if ( File.Exists ( $"Globalization.{ci}.json" ) )
+					gs = new FileStream ( $"Globalization.{ci}.json", FileMode.Open );
 				else continue;
 
 				gs.Position = 3;

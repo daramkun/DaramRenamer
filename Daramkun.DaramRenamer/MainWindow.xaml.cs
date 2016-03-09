@@ -62,8 +62,9 @@ namespace Daramkun.DaramRenamer
 			optionRenameMode.SelectedIndex = Optionizer.SharedOptionizer.RenameModeInteger;
 			
 			Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
-			Title = string.Format ( "{3} - v{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build,
-				Globalizer.Strings [ "daram_renamer" ] );
+			Title = $"{Globalizer.Strings [ "daram_renamer" ]} - v{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
+			translationAuthor.Text = Globalizer.Culture.Contact != null ? $"{Globalizer.Culture.Author}<{Globalizer.Culture.Contact}> - {Globalizer.Culture.Culture}" :
+				$"{Globalizer.Culture.Author} - {Globalizer.Culture.Culture}";
 
 			listViewFiles.ItemsSource = current;
 		}

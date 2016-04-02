@@ -46,7 +46,7 @@ namespace Daramkun.DaramRenamer
 
 		public T LoadFromRedoStack ()
 		{
-			if ( IsUndoStackEmpty ) return null;
+			if ( IsRedoStackEmpty ) return null;
 			using ( MemoryStream memStream = new MemoryStream ( redoStack.Pop () ) )
 				return bf.Deserialize ( memStream ) as T;
 		}

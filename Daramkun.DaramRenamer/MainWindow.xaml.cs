@@ -20,6 +20,7 @@ using Daramkun.DaramRenamer.Processors.Tag;
 using System.Threading;
 using System.Windows.Media;
 using Daramkun.DaramRenamer.Processors;
+using System.Windows.Threading;
 
 namespace Daramkun.DaramRenamer
 {
@@ -234,6 +235,7 @@ namespace Daramkun.DaramRenamer
 		{
 			progressBar.Foreground = Brushes.Green;
 			progressBar.Maximum = current.Count;
+			progressBar.Value = 0;
 			int failed = 0;
 			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) =>
 			{
@@ -246,6 +248,7 @@ namespace Daramkun.DaramRenamer
 			} );
 			if ( failed != 0 )
 				progressBar.Foreground = Brushes.Red;
+			Application.Current.Dispatcher.Invoke ( DispatcherPriority.Background, new ThreadStart ( delegate { } ) );
 			MessageBox ( Globalizer.Strings [ "applied" ], string.Format ( Globalizer.Strings [ "applied_message" ],
 				progressBar.Value, progressBar.Maximum ),
 				VistaTaskDialogIcon.Information, Globalizer.Strings [ "ok_button" ] );

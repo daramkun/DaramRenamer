@@ -41,6 +41,7 @@ namespace Daramkun.DaramRenamer
 			for ( int i = 0; i < propDict.Count; ++i )
 				contentGrid.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 24 ) } );
 
+			FrameworkElement firstControl = null;
 			foreach ( var propPair in from p in propDict orderby p.Key select p )
 			{
 				var prop = propPair.Value;
@@ -387,8 +388,13 @@ namespace Daramkun.DaramRenamer
 					Grid.SetColumn ( control, 1 );
 
 					contentGrid.Children.Add ( control );
+
+						firstControl = control;
 				}
 			}
+
+			if ( firstControl != null )
+				firstControl.Focus ();
 		}
 
 		private void OK_Button ( object sender, RoutedEventArgs e )

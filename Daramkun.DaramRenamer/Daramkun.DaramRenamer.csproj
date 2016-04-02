@@ -70,6 +70,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\APKDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\BMPDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\CABDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\CRTDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\DMGDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\DOCXDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\FLACDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\GIFDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\GZDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\ICODetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\JPEGDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\MIDIDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\MP3Detector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\OGGDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\PDFDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\PNGDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\PPTXDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\PSDDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\RARDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\TARDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\TIFFDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\XARDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\XLSXDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\ZDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\ZIPDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\_3GPDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\_7ZDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\ExtDetector.cs" />
     <Compile Include="FileInfo.cs" />
     <EmbeddedResource Include="Globalization.json" />
     <Compile Include="Globalizer.cs" />

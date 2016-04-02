@@ -24,7 +24,7 @@
 			</MenuItem>
 			<MenuItem Header="{Binding Path=[extension_processes]}">
 				<MenuItem Header="{Binding Path=[process_add_extension]}" Click="AddExtension_Click" />
-				<MenuItem Header="{Binding Path=[process_add_extension_automatically]}" Click="AddExtensionAutomatically_Click" IsEnabled="False" />
+				<MenuItem Header="{Binding Path=[process_add_extension_automatically]}" Click="AddExtensionAutomatically_Click" />
 				<MenuItem Header="{Binding Path=[process_delete_extension]}" Click="RemoveExtension_Click" />
 				<MenuItem Header="{Binding Path=[process_change_extension]}" Click="ChangeExtension_Click" />
 				<MenuItem Header="{Binding Path=[process_casecast_extension]}" Click="CastcastExtension_Click" />

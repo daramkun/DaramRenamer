@@ -389,6 +389,7 @@ namespace Daramkun.DaramRenamer
 
 					contentGrid.Children.Add ( control );
 
+					if ( firstControl == null )
 						firstControl = control;
 				}
 			}

@@ -16,7 +16,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		[Globalized ( "concat_text", 0 )]
 		public string Text { get; set; } = "";
 		[Globalized ( "concat_pos", 1 )]
-		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
+		public OnePointPosition Position { get; set; } = OnePointPosition.StartPoint;
 		[Globalized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; } = false;
 

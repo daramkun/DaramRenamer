@@ -247,7 +247,7 @@ namespace Daramkun.DaramRenamer
 			if ( failed != 0 )
 				progressBar.Foreground = Brushes.Red;
 			MessageBox ( Globalizer.Strings [ "applied" ], string.Format ( Globalizer.Strings [ "applied_message" ],
-				progressBar.Value - failed, progressBar.Maximum ),
+				progressBar.Value, progressBar.Maximum ),
 				VistaTaskDialogIcon.Information, Globalizer.Strings [ "ok_button" ] );
 		}
 

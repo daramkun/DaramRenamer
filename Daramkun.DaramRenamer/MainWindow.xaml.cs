@@ -87,7 +87,7 @@ namespace Daramkun.DaramRenamer
 			if ( System.IO.File.Exists ( s ) )
 				current.Add ( new FileInfo ( s ) );
 			else
-				foreach ( string ss in System.IO.Directory.GetFiles ( s ) )
+				foreach ( string ss in System.IO.Directory.GetFiles ( s, "*.*", SearchOption.AllDirectories ) )
 					AddItem ( ss );
 		}
 

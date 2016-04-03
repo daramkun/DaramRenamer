@@ -233,6 +233,8 @@ namespace Daramkun.DaramRenamer
 
 		private void Menu_System_Apply ( object sender, RoutedEventArgs e )
 		{
+			undoManager.ClearUndoStack ();
+
 			progressBar.Foreground = Brushes.Green;
 			progressBar.Maximum = current.Count;
 			progressBar.Value = 0;

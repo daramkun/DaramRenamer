@@ -36,7 +36,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 							chars [ 0 ] = char.ToUpper ( chars [ 0 ] );
 							fn [ i ] = new string ( chars );
 						}
-						file.ChangedFilename = string.Join ( " ", fn );
+						file.ChangedFilename = $"{string.Join ( " ", fn )}{ext}";
 					}
 					break;
 

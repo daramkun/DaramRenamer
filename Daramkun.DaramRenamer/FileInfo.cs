@@ -134,7 +134,7 @@ namespace Daramkun.DaramRenamer
 
 		public int CompareTo ( FileInfo other ) => ChangedFilename.CompareTo ( other.ChangedFilename );
 
-		private void PC ( string name ) { if ( PropertyChanged != null ) PropertyChanged ( this, new PropertyChangedEventArgs ( name ) ); }
+		private void PC ( string name ) { PropertyChanged?.Invoke ( this, new PropertyChangedEventArgs ( name ) ); }
 	}
 
 	static class ParallelSort

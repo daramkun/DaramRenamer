@@ -31,8 +31,8 @@
 
 			<!-- Buttons -->
 			<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,15">
-				<Button Style="{StaticResource ButtonStyle}" Content="{Binding Path=[ok_button]}" Width="64" Height="22" Margin="0,0,5,0" IsDefault="True" Click="OK_Button" />
-				<Button Style="{StaticResource ButtonStyle}" Content="{Binding Path=[cancel_button]}" Width="64" Height="22" Click="Cancel_Button" IsCancel="True" />
+				<Button Style="{StaticResource ButtonStyle}" Name="btnOKButton" Content="{Binding Path=[ok_button]}" Width="64" Height="22" Margin="0,0,5,0" IsDefault="True" Click="OK_Button" />
+				<Button Style="{StaticResource ButtonStyle}" Name="btnCancelButton" Content="{Binding Path=[cancel_button]}" Width="64" Height="22" Click="Cancel_Button" IsCancel="True" />
 			</StackPanel>
 		</StackPanel>
 	</Border>

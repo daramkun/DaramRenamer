@@ -4,9 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace Daramkun.DaramRenamer
 {
@@ -394,18 +396,23 @@ namespace Daramkun.DaramRenamer
 				}
 			}
 
-			if ( firstControl != null )
-				firstControl.Focus ();
+			Dispatcher.BeginInvoke ( DispatcherPriority.Loaded, new Action ( () =>
+			{
+				btnOKButton?.Focus ();
+				firstControl?.Focus ();
+			} ) );
 		}
 
 		private void OK_Button ( object sender, RoutedEventArgs e )
 		{
-			if ( OKButtonClicked != null ) OKButtonClicked ( this, e );
+			btnOKButton?.Focus ();
+			OKButtonClicked?.Invoke ( this, e );
 		}
 
 		private void Cancel_Button ( object sender, RoutedEventArgs e )
 		{
-			if ( CancelButtonClicked != null ) CancelButtonClicked ( this, e );
+			btnCancelButton?.Focus ();
+			CancelButtonClicked?.Invoke ( this, e );
 		}
 	}
 }

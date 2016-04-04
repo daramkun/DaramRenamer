@@ -37,7 +37,7 @@
 			</MenuItem>
 			<MenuItem Header="{Binding Path=[date_processes]}">
 				<MenuItem Header="{Binding Path=[process_add_date]}" Click="AddDate_Click" />
-				<MenuItem Header="{Binding Path=[process_delete_date]}" Click="DeleteDate_Click" IsEnabled="False" />
+				<MenuItem Header="{Binding Path=[process_delete_date]}" Click="DeleteDate_Click" />
 				<MenuItem Header="{Binding Path=[process_increase_decrease_date]}" Click="IncreaseDecreaseDate_Click" IsEnabled="False" />
 			</MenuItem>
 			<MenuItem Header="{Binding Path=[path_processes]}">

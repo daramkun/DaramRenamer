@@ -358,6 +358,7 @@
     <Compile Include="Optionizer.cs" />
     <Compile Include="Processors\BatchProcessor.cs" />
     <Compile Include="Processors\Date\AddDateProcessor.cs" />
+    <Compile Include="Processors\Date\DeleteDateProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionAutomatedProcessor.cs" />
     <Compile Include="Processors\Extension\AddExtensionProcessor.cs" />
     <Compile Include="Processors\Extension\CasecastExtensionProcessor.cs" />

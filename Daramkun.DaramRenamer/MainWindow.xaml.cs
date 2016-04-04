@@ -361,7 +361,11 @@ namespace Daramkun.DaramRenamer
 		private void IncreaseDecreaseNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<IncreaseDecreaseNumbersProcessor> (); }
 
 		private void AddDate_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddDateProcessor> (); }
-		private void DeleteDate_Click ( object sender, RoutedEventArgs e ) { /* TODO */ }
+		private void DeleteDate_Click ( object sender, RoutedEventArgs e )
+		{
+			undoManager.SaveToUndoStack ( current );
+			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => new DeleteDateProcessor ().Process ( fileInfo ) );
+		}
 		private void IncreaseDecreaseDate_Click ( object sender, RoutedEventArgs e ) { /* TODO */ }
 
 		private void ChangePath_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ChangePathProcessor> (); }

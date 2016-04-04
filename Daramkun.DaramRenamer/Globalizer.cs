@@ -4,8 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.Text;
+
+using JsonSerializer = System.Runtime.Serialization.Json.DataContractJsonSerializer;
+using JsonSerializerSettings = System.Runtime.Serialization.Json.DataContractJsonSerializerSettings;
 
 namespace Daramkun.DaramRenamer
 {
@@ -61,43 +63,55 @@ namespace Daramkun.DaramRenamer
 
 		static Globalizer ()
 		{
-			var json = new DataContractJsonSerializer ( typeof ( GlobalCulture ), new DataContractJsonSerializerSettings ()
-			{
-				UseSimpleDictionaryFormat = true
-			} );
-			var json2 = new DataContractJsonSerializer ( typeof ( GlobalizationContainer ), new DataContractJsonSerializerSettings ()
-			{
-				UseSimpleDictionaryFormat = true
-			} );
+			var json = new JsonSerializer ( typeof ( GlobalCulture ), new JsonSerializerSettings () { UseSimpleDictionaryFormat = true } );
+			var json2 = new JsonSerializer ( typeof ( GlobalizationContainer ), new JsonSerializerSettings () { UseSimpleDictionaryFormat = true } );
 
+			var queue = new Queue<GlobalCulture> ();
+			
 			foreach ( var ci in CultureInfo.GetCultures ( CultureTypes.AllCultures ) )
 			{
-				Stream gs = null;
-				if ( File.Exists ( $".\\Globalizations\\Globalization.{ci.DisplayName}.json" ) )
-					gs = new FileStream ( $".\\Globalizations\\Globalization.{ci.DisplayName}.json", FileMode.Open );
-				else if ( File.Exists ( $"Globalization.{ci}.json" ) )
-					gs = new FileStream ( $"Globalization.{ci}.json", FileMode.Open );
-				else continue;
+				var globalizationFiles = new string [] {
+					$".\\Globalizations\\Globalization.{ci}.json",
+					$".\\Globalizations\\Globalization.{Target}.{ci}.json",
+					$"Globalization.{ci}.json",
+					$"Globalization.{Target}.{ci}.json"
+				};
+				foreach ( var globalizationFile in globalizationFiles )
+				{
+					Stream gs = null;
+					if ( File.Exists ( globalizationFile ) ) gs = new FileStream ( globalizationFile, FileMode.Open );
+					else continue;
 
-				gs.Position = 3;
-				var igc =  json.ReadObject ( gs ) as GlobalCulture;
-				if ( igc.Target != Target ) continue;
-				Cultures.Add ( ci, igc );
+					gs.Position = 3;
+					var igc = json.ReadObject ( gs ) as GlobalCulture;
+					if ( igc.Target != Target ) continue;
+					queue.Enqueue ( igc );
+
+					gs.Dispose ();
+				}
             }
 
-			Stream gs2 = null;
-			if ( File.Exists ( ".\\Globalizations\\Globalization.json" ) )
-				gs2 = new FileStream ( ".\\Globalizations\\Globalization.json", FileMode.Open );
-			else if ( File.Exists ( "Globalization.json" ) )
-				gs2 = new FileStream ( "Globalization.json", FileMode.Open );
-
-			if ( gs2 != null )
+			var globalizationContainerFiles = new string [] {
+				".\\Globalizations\\Globalization.json",
+				$".\\Globalizations\\Globalization.{Target}.json",
+				"Globalization.json",
+				$"Globalization.{Target}.json"
+			};
+			foreach ( var globalizationContainerFile in globalizationContainerFiles )
 			{
-				gs2.Position = 3;
-				var iggc = json2.ReadObject ( gs2 ) as GlobalizationContainer;
-				foreach ( var l in iggc.Languages )
-					if ( !Cultures.ContainsKey ( CultureInfo.GetCultureInfo ( l.Culture ) ) )
-						if ( l.Target != Target ) continue; else Cultures.Add ( CultureInfo.GetCultureInfo ( l.Culture ), l );
+				Stream gs2 = null;
+				if ( File.Exists ( globalizationContainerFile ) )
+					gs2 = new FileStream ( globalizationContainerFile, FileMode.Open );
+
+				if ( gs2 != null )
+				{
+					gs2.Position = 3;
+					var iggc = json2.ReadObject ( gs2 ) as GlobalizationContainer;
+					foreach ( var l in iggc.Languages )
+						if ( !Cultures.ContainsKey ( CultureInfo.GetCultureInfo ( l.Culture ) ) )
+							if ( l.Target != Target ) continue;
+							else queue.Enqueue ( l );
+				}
 			}
 
 			using ( var stream = Assembly.GetExecutingAssembly ().GetManifestResourceStream ( $"{Namespace}.Globalization.json" ) )
@@ -106,7 +120,20 @@ namespace Daramkun.DaramRenamer
 				var ggc = json2.ReadObject ( stream ) as GlobalizationContainer;
 				foreach ( var l in ggc.Languages )
 					if ( !Cultures.ContainsKey ( CultureInfo.GetCultureInfo ( l.Culture ) ) )
-						if ( l.Target != Target ) continue; else Cultures.Add ( CultureInfo.GetCultureInfo ( l.Culture ), l );
+						if ( l.Target != Target ) continue;
+						else queue.Enqueue ( l );
+			}
+
+			while ( queue.Count > 0 )
+			{
+				var g = queue.Dequeue ();
+				var cultureInfo = CultureInfo.GetCultureInfo ( g.Culture );
+				if ( Cultures.ContainsKey ( cultureInfo ) )
+				{
+					if ( new Version ( Cultures [ cultureInfo ].Version ) < new Version ( g.Version ) )
+						Cultures [ cultureInfo ] = g;
+				}
+				else Cultures.Add ( cultureInfo, g );
 			}
 		}
 	}

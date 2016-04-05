@@ -206,7 +206,7 @@
 				"settings": "Settings",
 				"license": "Licenses",
 
-				"tip": "You can use more features when you right-click to filename listbox.",
+				"tip": "When you right-click in the listbox, you can use more features.",
 
 				"ok_button": "OK",
 				"yes_button": "Yes",
@@ -220,13 +220,13 @@
 				"applied": "Applied.",
 				"applied_message": "{0}/{1} Items is applied.",
 
-				"error_raised": "Error raised.",
+				"error_raised": "An error has occurred.",
 				"please_check_log": "Please check the log file.",
 
-				"update_exist": "There is update.",
-				"no_update": "This is Up-to-date.",
-				"current_stable": "This program is latest version.",
-				"current_old": "There is newest version of this program.",
+				"update_exist": "There are updates.",
+				"no_update": "This is the latest version.",
+				"current_stable": "The program is the latest version.",
+				"current_old": "There is a newer version of the program.",
 
 				"original_path": "Original Path",
 				"original_name": "Original Name",
@@ -306,14 +306,14 @@
 				"casecast": "Casecast Method",
 				"extension": "Extension",
 
-				"option_hw_accel_mode": "Hardware Acceleration Screen Rendering if you can.",
+				"option_hw_accel_mode": "Hardware acceleration when available",
 				"option_rename_mode": "Rename mode: ",
 				"option_rename_mode_move": "Move",
 				"option_rename_mode_copy": "Copy",
-				"option_overwrite": "Overwrite if destination file is already exist.",
-				"option_autofilenamefix": "Fix Filename special characters automatically.",
-				"option_autolistcleaning": "Clear Nowhere Filename list automatically.",
-				"option_savemethod": "Save settings to registry.",
+				"option_overwrite": "If the file already exists in the target location, overwrite.",
+				"option_autofilenamefix": "Automatically fix filename's Special characters.",
+				"option_autolistcleaning": "Automatic deletion from the listbox If the file does not exist.",
+				"option_savemethod": "Save settings to the registry.",
 
 				"position_front": "Front",
 				"position_end": "End",

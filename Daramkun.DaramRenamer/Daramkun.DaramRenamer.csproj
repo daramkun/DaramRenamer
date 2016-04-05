@@ -101,6 +101,7 @@
     <Compile Include="FileInfo.cs" />
     <EmbeddedResource Include="Globalization.json" />
     <Compile Include="Globalizer.cs" />
+    <Compile Include="ICondition.cs" />
     <Compile Include="IProcessor.cs" />
     <Compile Include="ExternalLibs\OpenDocumentTag\File.cs" />
     <Compile Include="ExternalLibs\TagLib\Aac\AudioHeader.cs" />
@@ -451,7 +452,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Conditions\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\accept.png" />
     <Resource Include="Resources\application_get.png" />

@@ -17,20 +17,17 @@ namespace Daramkun.DaramRenamer
 		StartPoint,
 		EndPoint,
 	}
-
 	public enum Casecast
 	{
 		AllToUppercase,
 		AllToLowercase,
 		UppercaseFirstLetter,
 	}
-
 	public enum CasecastBW
 	{
 		AllToUppercase,
 		AllToLowercase,
 	}
-
 	public enum DateType
 	{
 		CreationDate,
@@ -38,7 +35,6 @@ namespace Daramkun.DaramRenamer
 		AccessedDate,
 		Now,
 	}
-
 	public enum MediaTag
 	{
 		AudioBitrate,
@@ -73,13 +69,11 @@ namespace Daramkun.DaramRenamer
 		ImageCodec,
 		ImageQuality,
 	}
-
 	public enum DocumentTag
 	{
 		Title,
 		Author,
 	}
-
 	public enum HashType
 	{
 		MD5,

@@ -74,7 +74,11 @@ namespace Daramkun.DaramRenamer
 					$".\\Globalizations\\Globalization.{ci}.json",
 					$".\\Globalizations\\Globalization.{Target}.{ci}.json",
 					$"Globalization.{ci}.json",
-					$"Globalization.{Target}.{ci}.json"
+					$"Globalization.{Target}.{ci}.json",
+					$".\\Localization\\Localization.{ci}.json",
+					$".\\Localization\\Localization.{Target}.{ci}.json",
+					$"Localization.{ci}.json",
+					$"Localization.{Target}.{ci}.json"
 				};
 				foreach ( var globalizationFile in globalizationFiles )
 				{
@@ -95,7 +99,11 @@ namespace Daramkun.DaramRenamer
 				".\\Globalizations\\Globalization.json",
 				$".\\Globalizations\\Globalization.{Target}.json",
 				"Globalization.json",
-				$"Globalization.{Target}.json"
+				$"Globalization.{Target}.json",
+				".\\Localization\\Localization.json",
+				$".\\Localization\\Localization.{Target}.json",
+				"Localization.json",
+				$"Localization.{Target}.json"
 			};
 			foreach ( var globalizationContainerFile in globalizationContainerFiles )
 			{

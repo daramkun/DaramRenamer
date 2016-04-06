@@ -298,7 +298,7 @@
 				"concat_pos": "Position",
 				"start_block": "Block Start",
 				"end_block": "Block End",
-				"delete_all_blocks": "Delete All Blocked.",
+				"delete_all_blocks": "Delete all blocked texts.",
 				"start_index": "Start Index",
 				"substring_length": "Length",
 				"trim_pos": "Position",

@@ -466,7 +466,6 @@
     <Resource Include="Resources\chart_bar.png" />
     <Resource Include="Resources\chart_curve.png" />
     <Resource Include="Resources\chart_line_delete.png" />
-    <Resource Include="Resources\cup_add.png" />
     <Resource Include="Resources\date_add.png" />
     <Resource Include="Resources\delete.png" />
     <Resource Include="Resources\email_go.png" />

@@ -85,7 +85,7 @@
 
 							<Button Content="{StaticResource iconCheckUpdate}" ToolTip="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
 							<Button Content="{StaticResource iconFeedback}" ToolTip="{Binding Path=[feedback]}" Click="Menu_System_Feedback" />
-							<Button Content="{StaticResource iconDonate}" ToolTip="{Binding Path=[donate]}" Click="Menu_System_Donate" />
+							
 							<Separator />
 
 							<Button Content="{StaticResource iconReplaceText}" ToolTip="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />

@@ -9,6 +9,11 @@ namespace Daramkun.DaramRenamer.Processors.Number
 {
 	public class DeleteWithoutNumbersProcessor : IProcessor
 	{
+		private static char [] spliters = new char [] {
+			' ', '[', ']', ',', '.', '(', ')', '{', '}', '<', '>', '　',
+			'\t', ':', ';', '*', '&', '@', '^', '-', '_', '=', '+', '~',
+		};
+
 		public string Name { get { return "process_delete_without_numbers"; } }
 		public bool CannotMultithreadProcess { get { return false; } }
 
@@ -28,9 +33,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 			}
 			else
 			{
-				List<string> split = new List<string> ( Path.GetFileNameWithoutExtension ( file.ChangedFilename ).Split ( new char [] {
-					' ', '[', ']', ',', '.', '(', ')', '{', '}', '<', '>', '　', '\t', ':', ';', '*', '&', '@', '^', '-', '_', '=', '+', '~'
-				} ) );
+				List<string> split = new List<string> ( Path.GetFileNameWithoutExtension ( file.ChangedFilename ).Split ( spliters ) );
 				StringBuilder sb = new StringBuilder ();
 				foreach ( var str in split )
 				{

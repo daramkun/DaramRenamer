@@ -311,11 +311,6 @@ namespace Daramkun.DaramRenamer
 			Process.Start ( "https://github.com/Daramkun/DaramRenamer/issues" );
 		}
 
-		private void Menu_System_Donate ( object sender, RoutedEventArgs e )
-		{
-			Process.Start ( "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K96K9B2GBKJVA&lc=KR&item_name=DARAM%20WORLD&currency_code=USD&bn=PP%2dDonationsBF%3ax%2dclick%2dbut21%2egif%3aNonHosted" );
-		}
-
 		private void ComboBox_SelectionChanged ( object sender, SelectionChangedEventArgs e )
 		{
 			Optionizer.SharedOptionizer.RenameModeInteger = ( sender as ComboBox ).SelectedIndex;

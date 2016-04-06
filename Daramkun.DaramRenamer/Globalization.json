@@ -133,6 +133,7 @@
 				"add_pos": "붙일 위치",
 				"incdec_count": "증감할 숫자",
 				"incdec_pos": "증감할 위치",
+				"delwtnum_wordly": "단어별 처리",
 
 				"path_text": "경로",
 
@@ -327,6 +328,7 @@
 				"add_pos": "Position",
 				"incdec_count": "Count",
 				"incdec_pos": "Position",
+				"delwtnum_wordly": "Wordly Process",
 
 				"path_text": "Path",
 

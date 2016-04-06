@@ -12,6 +12,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name { get { return "process_delete_without_numbers"; } }
 		public bool CannotMultithreadProcess { get { return false; } }
 
+		[Globalized ( "delwtnum_wordly" )]
 		public bool IsWordlyProcessing { get; set; } = false;
 
 		public bool Process ( FileInfo file )
@@ -27,15 +28,19 @@ namespace Daramkun.DaramRenamer.Processors.Number
 			}
 			else
 			{
-				List<string> split = new List<string> ( Path.GetFileNameWithoutExtension ( file.ChangedFilename ).Split ( ' ' ) );
-				for ( int i = 0; i < split.Count; ++i )
-					for ( int j = 0; j < split [ i ].Length; ++j )
-						if ( !( split [ i ] [ j ] >= '0' && split [ i ] [ j ] <= '9' ) )
-						{
-							split.RemoveAt ( i-- );
-							break;
-						}
-				file.ChangedFilename = string.Join ( " ", split.ToArray () ) + Path.GetExtension ( file.ChangedFilename );
+				List<string> split = new List<string> ( Path.GetFileNameWithoutExtension ( file.ChangedFilename ).Split ( new char [] {
+					' ', '[', ']', ',', '.', '(', ')', '{', '}', '<', '>', '　', '\t', ':', ';', '*', '&', '@', '^'
+				} ) );
+				StringBuilder sb = new StringBuilder ();
+				foreach ( var str in split )
+				{
+					foreach ( var ch in str )
+						if ( ch >= '0' && ch <= '9' )
+							sb.Append ( ch );
+					sb.Append ( ' ' );
+				}
+				sb.Remove ( sb.Length - 1, 1 );
+				file.ChangedFilename = $"{sb}{Path.GetExtension ( file.ChangedFilename )}";
 			}
 			return true;
 		}

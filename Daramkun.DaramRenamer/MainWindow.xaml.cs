@@ -351,11 +351,7 @@ namespace Daramkun.DaramRenamer
 		private void ChangeExtension_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ReplaceExtensionProcessor> (); }
 		private void CastcastExtension_Click ( object sender, RoutedEventArgs e ) { ShowPopup<CasecastExtensionProcessor> (); }
 
-		private void DeleteWithoutNumbers_Click ( object sender, RoutedEventArgs e )
-		{
-			undoManager.SaveToUndoStack ( current );
-			Parallel.ForEach<FileInfo> ( current, ( fileInfo ) => new DeleteWithoutNumbersProcessor ().Process ( fileInfo ) );
-		}
+		private void DeleteWithoutNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<DeleteWithoutNumbersProcessor> (); }
 		private void MatchingNumberCount_Click ( object sender, RoutedEventArgs e ) { ShowPopup<NumberCountMatchProcessor> (); }
 		private void AddIndexNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddIndexNumberProcessor> (); }
 		private void IncreaseDecreaseNumbers_Click ( object sender, RoutedEventArgs e ) { ShowPopup<IncreaseDecreaseNumbersProcessor> (); }

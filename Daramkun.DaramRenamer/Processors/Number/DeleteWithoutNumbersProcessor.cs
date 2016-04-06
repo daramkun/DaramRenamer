@@ -24,12 +24,12 @@ namespace Daramkun.DaramRenamer.Processors.Number
 				foreach ( char ch in Path.GetFileNameWithoutExtension ( file.ChangedFilename ) )
 					if ( ch >= '0' && ch <= '9' )
 						sb.Append ( ch );
-				file.ChangedFilename = sb.ToString () + Path.GetExtension ( file.ChangedFilename );
+				file.ChangedFilename = $"{ sb }{ Path.GetExtension ( file.ChangedFilename ) }";
 			}
 			else
 			{
 				List<string> split = new List<string> ( Path.GetFileNameWithoutExtension ( file.ChangedFilename ).Split ( new char [] {
-					' ', '[', ']', ',', '.', '(', ')', '{', '}', '<', '>', '　', '\t', ':', ';', '*', '&', '@', '^'
+					' ', '[', ']', ',', '.', '(', ')', '{', '}', '<', '>', '　', '\t', ':', ';', '*', '&', '@', '^', '-', '_', '=', '+', '~'
 				} ) );
 				StringBuilder sb = new StringBuilder ();
 				foreach ( var str in split )
@@ -40,7 +40,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 					sb.Append ( ' ' );
 				}
 				sb.Remove ( sb.Length - 1, 1 );
-				file.ChangedFilename = $"{sb}{Path.GetExtension ( file.ChangedFilename )}";
+				file.ChangedFilename = $"{ sb }{ Path.GetExtension ( file.ChangedFilename ) }";
 			}
 			return true;
 		}

@@ -191,7 +191,9 @@
 				"hash_sha1": "SHA1",
 				"hash_sha256": "SHA256",
 				"hash_sha384": "SHA384",
-				"hash_sha512": "SHA512"
+				"hash_sha512": "SHA512",
+
+				"os_notice": "다람 리네이머는 Windows 7 또는 그 이상의 버전에서 실행해주세요."
 			}
 		},
 		{
@@ -385,7 +387,9 @@
 				"hash_sha1": "SHA1",
 				"hash_sha256": "SHA256",
 				"hash_sha384": "SHA384",
-				"hash_sha512": "SHA512"
+				"hash_sha512": "SHA512",
+
+				"os_notice": "Please execute Daram Renamer in Windows 7 or Higher version."
 			}
 		}
 	]

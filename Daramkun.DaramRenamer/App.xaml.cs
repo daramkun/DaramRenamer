@@ -19,7 +19,7 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( Environment.OSVersion.Version <= new Version ( 5, 0 ) )
 			{
-				MessageBox.Show ( "Please execute Daram Renamer in Windows 7 or Higher version.", Globalizer.Strings [ "daram_renamer" ],
+				MessageBox.Show ( Globalizer.Strings [ "os_notice" ], Globalizer.Strings [ "daram_renamer" ],
 					MessageBoxButton.OK, MessageBoxImage.Error );
 				Application.Current.Shutdown ( -1 );
 			}
@@ -30,6 +30,8 @@ namespace Daramkun.DaramRenamer
 					TaskDialogInterop.VistaTaskDialogIcon.Error, "OK" );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 				{
+					sw.WriteLine ( $"Error: {DateTime.Now.ToString ( "yyyy-MM-dd hh/mm/ss" )}" );
+					sw.WriteLine ( "----" );
 					sw.WriteLine ( args.ExceptionObject.ToString () );
 					sw.WriteLine ( "==========================================================" );
 				}

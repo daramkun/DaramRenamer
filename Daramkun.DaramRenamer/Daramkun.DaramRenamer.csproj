@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Conditions\ExtensionCondition.cs" />
+    <Compile Include="Conditions\IsTextFileCondition.cs" />
+    <Compile Include="Conditions\RegexpCondition.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\APKDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\BMPDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\CABDetector.cs" />
@@ -452,9 +455,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Conditions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\accept.png" />
     <Resource Include="Resources\application_get.png" />

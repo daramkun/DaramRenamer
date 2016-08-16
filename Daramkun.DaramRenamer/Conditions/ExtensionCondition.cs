@@ -12,7 +12,7 @@ namespace Daramkun.DaramRenamer.Conditions
 		public string Name { get { return "condition_extension"; } }
 
 		[Globalized ( "extension", 0 )]
-		public string Extension { get; set; } = ""
+		public string Extension { get; set; } = "";
 
 		public bool IsValid ( FileInfo file )
 		{

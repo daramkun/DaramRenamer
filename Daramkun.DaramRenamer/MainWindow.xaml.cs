@@ -150,7 +150,7 @@ namespace Daramkun.DaramRenamer
 					if ( end == -1 ) {  version = null; return false; };
 					version = text.Substring ( end - 5, 5 );
 					Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
-					checkUpdate = version != string.Format ( "{0}.{1}{2}0", currentVersion.Major, currentVersion.Minor, currentVersion.Build );
+					checkUpdate = version != $"{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
 
 					if ( messageShow )
 					{

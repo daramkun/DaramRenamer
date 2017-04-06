@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 {
 	public class AddMediaTagProcessor : IProcessor
 	{
-		public string Name { get { return "process_add_media_tag"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_add_media_tag";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "media_tag_type", 0 )]
 		public MediaTag Tag { get; set; }

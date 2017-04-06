@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 {
 	public class DeleteExtensionProcessor : IProcessor
 	{
-		public string Name { get { return "process_delete_extension"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_delete_extension";
+		public bool CannotMultithreadProcess => false;
 
 		public bool Process ( FileInfo file )
 		{

@@ -8,8 +8,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class SubstringProcessor : IProcessor
 	{
-		public string Name { get { return "process_substring_text"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_substring_text";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "start_index", 0 )]
 		public uint StartIndex { get; set; } = 0;

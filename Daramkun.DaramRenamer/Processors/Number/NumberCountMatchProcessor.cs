@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Number
 {
 	public class NumberCountMatchProcessor : IProcessor
 	{
-		public string Name { get { return "process_matching_number_count"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_matching_number_count";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "match_count", 0 )]
 		public uint Count { get; set; } = 2;

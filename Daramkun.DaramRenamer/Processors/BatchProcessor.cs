@@ -1,91 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Daramkun.DaramRenamer.ExternalLibs.Lexer;
 
 namespace Daramkun.DaramRenamer.Processors
 {
 	public class BatchProcessor : IProcessor
 	{
-		public string Name { get { return "process_batch_process"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_batch_process";
+		public bool CannotMultithreadProcess => false;
 
-		public ObservableCollection<IProcessor> Processors { get; } = new ObservableCollection<IProcessor> ();
-
-		enum ScriptState
-		{
-			Blank,
-			Comment,
-			Checker,
-			Statement,
-			EndScript,
-			Call,
-			String,
-			Number,
-			Boolean,
-			Callee,
-			Argument,
-
-		}
-
+		public ObservableCollection<IBatchable> Processors { get; } = new ObservableCollection<IBatchable> ();
+		
 		public BatchProcessor () { }
-		public BatchProcessor ( string batchScript )
+
+        public bool Process ( FileInfo file )
 		{
-			ScriptState scriptState = ScriptState.Blank;
-			int pc = 0;
-			while ( pc != batchScript.Length )
-			{
-				switch ( scriptState )
-				{
-					case ScriptState.Blank:
-						if ( batchScript [ pc ] == ' ' || batchScript [ pc ] == '\t' ||
-							batchScript [ pc ] == '\n' || batchScript [ pc ] == '\r' ||
-							batchScript [ pc ] == '　' )
-							scriptState = ScriptState.Blank;
-						else if ( batchScript [ pc ] == '#' )
-							scriptState = ScriptState.Comment;
-						else if ( batchScript [ pc ] == 'c' || batchScript [ pc ] == 's' || batchScript [ pc ] == 'e' )
-							scriptState = ScriptState.Checker;
-						break;
-					case ScriptState.Comment:
-						if ( batchScript [ pc ] == '\n' )
-							scriptState = ScriptState.Blank;
-						break;
-					case ScriptState.Checker:
-						switch ( batchScript [ pc - 1 ])
-						{
-							case 'c':
-								if ( batchScript [ pc ] == 'a' && batchScript [ pc + 1 ] == 'l' && batchScript [ pc + 2 ] == 'l' )
-									scriptState = ScriptState.Call;
-								break;
-							case 's':
-								if ( batchScript [ pc ] == 't' && batchScript [ pc + 1 ] == 'm' && batchScript [ pc + 2 ] == 't' )
-									scriptState = ScriptState.Statement;
-								break;
-							case 'e':
-								if ( batchScript [ pc ] == 'n' && batchScript [ pc + 1 ] == 'd' && batchScript [ pc + 2 ] == 's' )
-									scriptState = ScriptState.EndScript;
-								break;
-						}
-						break;
-					case ScriptState.Call:
-
-						break;
-					case ScriptState.Statement:
-
-						break;
-				}
-				++pc;
-			}
-		}
-
-		public bool Process ( FileInfo file )
-		{
+			ICondition condition = null;
 			foreach ( var p in Processors )
-				if ( !p.Process ( file ) )
-					return false;
+			{
+				if ( p is ICondition )
+					condition = p as ICondition;
+				else
+				{
+					if ( condition?.IsValid ( file ) == true )
+					{
+						if ( !( p as IProcessor ).Process ( file ) )
+							return false;
+					}
+				}
+			}
 			return true;
 		}
 	}

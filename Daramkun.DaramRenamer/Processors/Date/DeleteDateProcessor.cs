@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Date
 {
 	public class DeleteDateProcessor : IProcessor
 	{
-		public string Name { get { return "process_delete_date"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_delete_date";
+		public bool CannotMultithreadProcess => false;
 
 		public bool Process ( FileInfo file )
 		{

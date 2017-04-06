@@ -14,8 +14,8 @@ namespace Daramkun.DaramRenamer.Processors.Number
 			'\t', ':', ';', '*', '&', '@', '^', '-', '_', '=', '+', '~',
 		};
 
-		public string Name { get { return "process_delete_without_numbers"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_delete_without_numbers";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "delwtnum_wordly" )]
 		public bool IsWordlyProcessing { get; set; } = false;

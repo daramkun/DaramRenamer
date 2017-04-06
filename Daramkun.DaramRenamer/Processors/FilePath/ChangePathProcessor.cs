@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.FilePath
 {
 	public class ChangePathProcessor : IProcessor
 	{
-		public string Name { get { return "process_change_path"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_change_path";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "path_text", 0 )]
 		public DirectoryInfo Path { get; set; } = new DirectoryInfo ( "C:\\" );

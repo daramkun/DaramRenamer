@@ -9,7 +9,7 @@ namespace Daramkun.DaramRenamer.Conditions
 {
 	public class RegexpCondition : ICondition
 	{
-		public string Name { get { return "condition_regexp"; } }
+		public string Name => "condition_regexp";
 
 		[Globalized ( "regexp", 0 )]
 		public Regex RegularExpression { get; set; }

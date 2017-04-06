@@ -68,6 +68,19 @@ namespace Daramkun.DaramRenamer
 				$"{Globalizer.Culture.Author} - {Globalizer.Culture.Culture}";
 
 			listViewFiles.ItemsSource = current;
+
+			var updateCheckerThread = new Thread ( () =>
+			{
+				if ( CheckUpdate ( false ).Result == true )
+				{
+					Dispatcher.BeginInvoke ( new Action ( () =>
+					{
+						Title = $"{Title} - [{Globalizer.Strings [ "available_update" ]}]";
+					} ) );
+				}
+			} );
+			updateCheckerThread.Priority = ThreadPriority.Lowest;
+			updateCheckerThread.Start ();
 		}
 
 		public static TaskDialogResult MessageBox ( string message, string content, VistaTaskDialogIcon icon, params string [] buttons )

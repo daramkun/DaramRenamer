@@ -10,8 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ReplacePlainProcessor : IProcessor
 	{
-		public string Name { get { return "process_replace_plain_text"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_replace_plain_text";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "original_text", 0 )]
 		public string Original { get; set; } = "";

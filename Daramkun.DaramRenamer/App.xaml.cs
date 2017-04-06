@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -24,16 +26,22 @@ namespace Daramkun.DaramRenamer
 				Application.Current.Shutdown ( -1 );
 			}
 
+			TextWriterTraceListener textWriterTraceListner = new TextWriterTraceListener ( Console.Out );
+			Debug.Listeners.Add ( textWriterTraceListner );
+
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
 				Daramkun.DaramRenamer.MainWindow.MessageBox ( Globalizer.Strings [ "error_raised" ], Globalizer.Strings [ "please_check_log" ],
 					TaskDialogInterop.VistaTaskDialogIcon.Error, "OK" );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 				{
-					sw.WriteLine ( $"Error: {DateTime.Now.ToString ( "yyyy-MM-dd hh/mm/ss" )}" );
+					TextWriterTraceListener textWriterTraceListnerForFile = new TextWriterTraceListener ( sw );
+					Debug.Listeners.Add ( textWriterTraceListnerForFile );
+					sw.WriteLine ( $"Error: {DateTime.Now.ToString ( "yyyy-MM-dd hh/mm/ss" )} - from Daram Renamer" );
 					sw.WriteLine ( "----" );
 					sw.WriteLine ( args.ExceptionObject.ToString () );
 					sw.WriteLine ( "==========================================================" );
+					Debug.Listeners.Remove ( textWriterTraceListnerForFile );
 				}
 			};
 		}
@@ -44,7 +52,13 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( e.Args.Length > 0 && e.Args [ 0 ] == "--cmd" )
 			{
-				Console.WriteLine ( "NOTICE: Sorry. Command Line Mode is not implemented in this version." );
+				Debug.WriteLine ( "NOTICE: Sorry. Command Line Mode is not implemented in this version." );
+				Shutdown ( 0 );
+			}
+			else if ( e.Args.Length == 1 && ( e.Args [ 0 ] == "--version" || e.Args [ 0 ] == "-v" ) )
+			{
+				Version version = Assembly.GetExecutingAssembly ().GetName ().Version;
+				Debug.WriteLine ( $"Daram Renamer v{version.Major}.{version.Minor}.{version.Build}.{version.Revision}" );
 				Shutdown ( 0 );
 			}
 			else

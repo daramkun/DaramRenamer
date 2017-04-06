@@ -10,8 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class DeleteBlockProcessor : IProcessor
 	{
-		public string Name { get { return "process_delete_block"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_delete_block";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "start_block", 0 )]
 		public string StartText { get; set; } = "";

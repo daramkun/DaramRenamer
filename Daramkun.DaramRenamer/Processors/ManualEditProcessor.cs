@@ -8,9 +8,9 @@ namespace Daramkun.DaramRenamer.Processors
 {
 	public class ManualEditProcessor : IProcessor
 	{
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_manual_edit";
 
-		public string Name { get { return "process_manual_edit"; } }
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "changed_name", 0 )]
 		public string ChangeName { get; set; }

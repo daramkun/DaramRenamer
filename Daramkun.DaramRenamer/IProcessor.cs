@@ -83,10 +83,19 @@ namespace Daramkun.DaramRenamer
 		SHA512,
 	}
 
-	public interface IProcessor
+	public interface IBatchable
 	{
 		string Name { get; }
-		bool Process ( FileInfo file );
+	}
+
+	public interface ICondition : IBatchable
+	{
+		bool IsValid ( FileInfo file );
+	}
+
+	public interface IProcessor : IBatchable
+	{
 		bool CannotMultithreadProcess { get; }
+		bool Process ( FileInfo file );
 	}
 }

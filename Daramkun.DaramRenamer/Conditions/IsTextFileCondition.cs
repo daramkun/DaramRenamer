@@ -9,7 +9,7 @@ namespace Daramkun.DaramRenamer.Conditions
 {
 	public class IsTextFileCondition : ICondition
 	{
-		public string Name { get { return "condition_is_text_file"; } }
+		public string Name => "condition_is_text_file";
 
 		public bool IsValid ( FileInfo file )
 		{

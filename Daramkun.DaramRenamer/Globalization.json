@@ -1,7 +1,7 @@
 ﻿{
 	"lang": [
 		{
-			"version": "3.1.0.0",
+			"version": "3.2.0.0",
 			"target": "daram_renamer",
 			"culture": "ko-KR",
 			"author": "Daramkun",
@@ -33,6 +33,7 @@
 				"no_update": "업데이트가 없습니다.",
 				"current_stable": "이 프로그램은 현재 최신버전입니다.",
 				"current_old": "이 프로그램의 최신 버전 업데이트가 있습니다.",
+				"available_update": "업데이트 가능",
 
 				"original_path": "원본 경로",
 				"original_name": "원본 이름",
@@ -229,6 +230,7 @@
 				"no_update": "This is the latest version.",
 				"current_stable": "The program is the latest version.",
 				"current_old": "There is a newer version of the program.",
+				"available_update": "Update Available",
 
 				"original_path": "Original Path",
 				"original_name": "Original Name",

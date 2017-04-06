@@ -183,14 +183,14 @@
 			<TabItem Header="{Binding Path=[settings]}">
 				<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
 					<StackPanel Margin="10">
-						<CheckBox Content="{Binding Path=[option_hw_accel_mode]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=HardwareAccelerationMode}" Margin="0,0,0,5" />
-						<CheckBox Content="{Binding Path=[option_overwrite]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=Overwrite}" Margin="0,0,0,5" />
-						<CheckBox Content="{Binding Path=[option_autofilenamefix]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=AutomaticFilenameFix}" Margin="0,0,0,5" />
-						<CheckBox Content="{Binding Path=[option_autolistcleaning]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=AutomaticListCleaning}" Margin="0,0,0,5" />
-						<CheckBox Content="{Binding Path=[option_savemethod]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=OptionSaveToRegistry}" Margin="0,0,0,5" />
-						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="{Binding Path=[option_rename_mode]}" VerticalAlignment="Center" />
-							<ComboBox Name="optionRenameMode" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
+                        <CheckBox Content="{Binding Path=[option_hw_accel_mode]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=HardwareAccelerationMode}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <CheckBox Content="{Binding Path=[option_overwrite]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=Overwrite}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <CheckBox Content="{Binding Path=[option_autofilenamefix]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=AutomaticFilenameFix}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <CheckBox Content="{Binding Path=[option_autolistcleaning]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=AutomaticListCleaning}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <CheckBox Content="{Binding Path=[option_savemethod]}" IsChecked="{Binding Source={x:Static local:Optionizer.SharedOptionizer}, Path=OptionSaveToRegistry}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <StackPanel Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
+							<TextBlock Text="{Binding Path=[option_rename_mode]}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                            <ComboBox Name="optionRenameMode" SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling" SelectionChanged="ComboBox_SelectionChanged">
 								<ComboBoxItem Content="{Binding Path=[option_rename_mode_move]}" Tag="0" />
 								<ComboBoxItem Content="{Binding Path=[option_rename_mode_copy]}" Tag="1" />
 							</ComboBox>
@@ -205,8 +205,8 @@
 						<RowDefinition />
 					</Grid.RowDefinitions>
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<TextBlock Text="Current Translation Author: " />
-						<TextBlock Name="translationAuthor" />
+                        <TextBlock Text="Current Translation Author: " VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <TextBlock Name="translationAuthor" VirtualizingStackPanel.VirtualizationMode="Recycling" />
 					</StackPanel>
 					<TextBox Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" VerticalScrollBarVisibility="Visible" xml:space="preserve" IsReadOnly="True"><![CDATA[------------------------------
 1. Daram Renamer
@@ -283,8 +283,14 @@ TagLib# is free/open source software, released under the LGPL.
 
 Author: Mono Project
 Original Source: https://github.com/mono/taglib-sharp
-Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternalLibs/TagLib]]>
-					</TextBox>
+Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternalLibs/TagLib
+
+------------------------------
+9. Regex based Lexer
+------------------------------
+Author: Paul Hollingsworth
+Modifier: Lennard Fonteijn
+Source: http://stackoverflow.com/a/673657/2876814]]></TextBox>
 				</Grid>
 			</TabItem>
 		</TabControl>

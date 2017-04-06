@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 {
 	public class AddDocumentTagProcessor : IProcessor
 	{
-		public string Name { get { return "process_add_document_tag"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_add_document_tag";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "document_tag_type", 0 )]
 		public DocumentTag Tag { get; set; }

@@ -10,8 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ConcatenateProcessor : IProcessor
 	{
-		public string Name { get { return "process_concatenate_text"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_concatenate_text";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "concat_text", 0 )]
 		public string Text { get; set; } = "";

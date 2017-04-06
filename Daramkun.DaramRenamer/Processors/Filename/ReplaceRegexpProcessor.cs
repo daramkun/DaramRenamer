@@ -11,8 +11,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class ReplaceRegexpProcessor : IProcessor
 	{
-		public string Name { get { return "process_replace_regex_text"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_replace_regex_text";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "original_regex", 0 )]
 		public Regex RegularExpression { get; set; } = new Regex ( "$^" );

@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 {
 	public class CasecastExtensionProcessor : IProcessor
 	{
-		public string Name { get { return "process_casecast_extension"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_casecast_extension";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "casecast" )]
 		public CasecastBW Casecast { get; set; } = CasecastBW.AllToLowercase;

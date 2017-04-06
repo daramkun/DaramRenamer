@@ -9,7 +9,7 @@ namespace Daramkun.DaramRenamer.Conditions
 {
 	public class ExtensionCondition : ICondition
 	{
-		public string Name { get { return "condition_extension"; } }
+		public string Name => "condition_extension";
 
 		[Globalized ( "extension", 0 )]
 		public string Extension { get; set; } = "";

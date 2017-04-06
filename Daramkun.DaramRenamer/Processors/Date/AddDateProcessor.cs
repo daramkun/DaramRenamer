@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Date
 {
 	public class AddDateProcessor : IProcessor
 	{
-		public string Name { get { return "process_add_date"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_add_date";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "add_date_type", 0 )]
 		public DateType Type { get; set; } = DateType.CreationDate;

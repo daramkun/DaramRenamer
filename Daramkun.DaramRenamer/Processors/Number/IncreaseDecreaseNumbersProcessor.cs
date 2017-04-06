@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Number
 {
 	public class IncreaseDecreaseNumbersProcessor : IProcessor
 	{
-		public string Name { get { return "process_increase_decrease_numbers"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_increase_decrease_numbers";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "incdec_count", 0 )]
 		public int Count { get; set; } = 1;

@@ -10,8 +10,8 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 {
 	public class TrimmingProcessor : IProcessor
 	{
-		public string Name { get { return "process_trimming_text"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_trimming_text";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "trim_pos", 0 )]
 		public Position TrimPosition { get; set; } = Position.BothPoint;

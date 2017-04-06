@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 {
 	public class ReplaceExtensionProcessor : IProcessor
 	{
-		public string Name { get { return "process_change_extension"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_change_extension";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "extension" )]
 		public string Extension { get; set; } = "";

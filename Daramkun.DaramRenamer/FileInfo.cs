@@ -37,11 +37,11 @@ namespace Daramkun.DaramRenamer
 				PC ( nameof ( OriginalFilename ) );
 			}
 		}
-		public string OriginalPath { get { return Path.GetDirectoryName ( OriginalFullPath ); } }
-		public string OriginalFilename { get { return Path.GetFileName ( OriginalFullPath ); } }
-		public string ChangedPath { get { return changedPath; } set { changedPath = value; PC ( nameof ( ChangedPath ) ); } }
-		public string ChangedFilename { get { return changedFilename; } set { changedFilename = value; PC ( nameof ( ChangedFilename ) ); } }
-		public string ChangedFullPath { get { return Path.Combine ( ChangedPath, ChangedFilename ); } }
+		public string OriginalPath => Path.GetDirectoryName ( OriginalFullPath );
+		public string OriginalFilename => Path.GetFileName ( OriginalFullPath );
+		public string ChangedPath { get => changedPath; set { changedPath = value; PC ( nameof ( ChangedPath ) ); } }
+		public string ChangedFilename { get => changedFilename; set { changedFilename = value; PC ( nameof ( ChangedFilename ) ); } }
+		public string ChangedFullPath => Path.Combine ( ChangedPath, ChangedFilename );
 
 		public FileInfo ( string fullPath ) { OriginalFullPath = fullPath; ChangedFilename = OriginalFilename; ChangedPath = OriginalPath; }
 		public FileInfo ( FileInfo file )

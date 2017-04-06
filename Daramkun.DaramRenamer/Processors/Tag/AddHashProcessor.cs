@@ -9,8 +9,8 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 {
 	public class AddHashProcessor : IProcessor
 	{
-		public string Name { get { return "process_add_file_hash"; } }
-		public bool CannotMultithreadProcess { get { return false; } }
+		public string Name => "process_add_file_hash";
+		public bool CannotMultithreadProcess => false;
 
 		[Globalized ( "hash_type", 0 )]
 		public HashType HashType { get; set; }

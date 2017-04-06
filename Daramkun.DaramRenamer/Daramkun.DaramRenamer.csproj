@@ -106,6 +106,8 @@
     </ApplicationDefinition>
     <Compile Include="Conditions\ExtensionCondition.cs" />
     <Compile Include="Conditions\IsTextFileCondition.cs" />
+    <Compile Include="Conditions\MultipleCondition.cs" />
+    <Compile Include="Conditions\NoOperationCondition.cs" />
     <Compile Include="Conditions\RegexpCondition.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\APKDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\BMPDetector.cs" />
@@ -139,7 +141,6 @@
     <Compile Include="FileInfo.cs" />
     <EmbeddedResource Include="Globalization.json" />
     <Compile Include="Globalizer.cs" />
-    <Compile Include="ICondition.cs" />
     <Compile Include="IProcessor.cs" />
     <Compile Include="ExternalLibs\OpenDocumentTag\File.cs" />
     <Compile Include="ExternalLibs\TagLib\Aac\AudioHeader.cs" />

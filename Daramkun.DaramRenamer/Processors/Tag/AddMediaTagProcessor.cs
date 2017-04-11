@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Tag
 {
+	[Serializable]
 	public class AddMediaTagProcessor : IProcessor
 	{
 		public string Name => "process_add_media_tag";

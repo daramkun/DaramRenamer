@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Filename
 {
+	[Serializable]
 	public class ReplacePlainProcessor : IProcessor
 	{
 		public string Name => "process_replace_plain_text";

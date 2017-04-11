@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Filename
 {
+	[Serializable]
 	public class SubstringProcessor : IProcessor
 	{
 		public string Name => "process_substring_text";

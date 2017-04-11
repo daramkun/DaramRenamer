@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Filename
 {
+	[Serializable]
 	public class ReplaceRegexpProcessor : IProcessor
 	{
 		public string Name => "process_replace_regex_text";

@@ -48,17 +48,23 @@ namespace Daramkun.DaramRenamer
 		const string Namespace = "Daramkun.DaramRenamer";
 		const string Target = "daram_renamer";
 
+		static CultureInfo [] cultureInfos;
 		static Dictionary<CultureInfo, GlobalCulture> Cultures = new Dictionary<CultureInfo, GlobalCulture> ();
 
-		public static GlobalCulture Culture
+		public static CultureInfo CurrentCulture
 		{
-			get
+			get { return CultureInfo.CurrentCulture; }
+			set
 			{
-				if ( Cultures.ContainsKey ( CultureInfo.CurrentUICulture ) )
-					return Cultures [ CultureInfo.CurrentUICulture ];
-				else return Cultures [ CultureInfo.GetCultureInfo ( "en-US" ) ];
+				if ( Cultures.ContainsKey ( value ) )
+				{
+					CultureInfo.CurrentCulture = value;
+					Culture = Cultures [ value ];
+				}
 			}
 		}
+		public static GlobalCulture Culture { get; private set; }
+		public static CultureInfo [] AvailableCultures { get { return cultureInfos; } }
 		public static Dictionary<string, string> Strings { get { return Culture.Contents; } }
 
 		static Globalizer ()
@@ -67,17 +73,13 @@ namespace Daramkun.DaramRenamer
 			var json2 = new JsonSerializer ( typeof ( GlobalizationContainer ), new JsonSerializerSettings () { UseSimpleDictionaryFormat = true } );
 
 			var queue = new Queue<GlobalCulture> ();
-			
+
 			foreach ( var ci in CultureInfo.GetCultures ( CultureTypes.AllCultures ) )
 			{
 				var globalizationFiles = new string [] {
-					$".\\Globalizations\\Globalization.{ci}.json",
 					$".\\Globalizations\\Globalization.{Target}.{ci}.json",
-					$"Globalization.{ci}.json",
 					$"Globalization.{Target}.{ci}.json",
-					$".\\Localization\\Localization.{ci}.json",
 					$".\\Localization\\Localization.{Target}.{ci}.json",
-					$"Localization.{ci}.json",
 					$"Localization.{Target}.{ci}.json"
 				};
 				foreach ( var globalizationFile in globalizationFiles )
@@ -93,16 +95,12 @@ namespace Daramkun.DaramRenamer
 
 					gs.Dispose ();
 				}
-            }
+			}
 
 			var globalizationContainerFiles = new string [] {
-				".\\Globalizations\\Globalization.json",
 				$".\\Globalizations\\Globalization.{Target}.json",
-				"Globalization.json",
 				$"Globalization.{Target}.json",
-				".\\Localization\\Localization.json",
 				$".\\Localization\\Localization.{Target}.json",
-				"Localization.json",
 				$"Localization.{Target}.json"
 			};
 			foreach ( var globalizationContainerFile in globalizationContainerFiles )
@@ -143,6 +141,14 @@ namespace Daramkun.DaramRenamer
 				}
 				else Cultures.Add ( cultureInfo, g );
 			}
+
+			int i = 0;
+			cultureInfos = new CultureInfo [ Cultures.Count ];
+			foreach ( var key in Cultures.Keys )
+				cultureInfos [ i++ ] = key;
+
+			if ( Cultures.ContainsKey ( CultureInfo.CurrentUICulture ) ) Culture = Cultures [ CultureInfo.CurrentUICulture ];
+			else Culture = Cultures [ CultureInfo.GetCultureInfo ( "en-US" ) ];
 		}
 	}
 }

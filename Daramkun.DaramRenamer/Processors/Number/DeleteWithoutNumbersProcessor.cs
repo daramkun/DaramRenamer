@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Number
 {
+	[Serializable]
 	public class DeleteWithoutNumbersProcessor : IProcessor
 	{
 		private static char [] spliters = new char [] {

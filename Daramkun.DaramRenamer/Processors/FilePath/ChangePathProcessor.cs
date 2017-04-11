@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.FilePath
 {
+	[Serializable]
 	public class ChangePathProcessor : IProcessor
 	{
 		public string Name => "process_change_path";

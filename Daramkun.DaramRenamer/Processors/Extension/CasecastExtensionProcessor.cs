@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Extension
 {
+	[Serializable]
 	public class CasecastExtensionProcessor : IProcessor
 	{
 		public string Name => "process_casecast_extension";

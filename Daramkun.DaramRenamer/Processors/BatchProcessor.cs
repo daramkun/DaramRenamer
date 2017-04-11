@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Daramkun.DaramRenamer.ExternalLibs.Lexer;
 
 namespace Daramkun.DaramRenamer.Processors
 {
+	[Serializable]
 	public class BatchProcessor : IProcessor
 	{
 		public string Name => "process_batch_process";

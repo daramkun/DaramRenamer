@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors
 {
+	[Serializable]
 	public class ManualEditProcessor : IProcessor
 	{
 		public string Name => "process_manual_edit";

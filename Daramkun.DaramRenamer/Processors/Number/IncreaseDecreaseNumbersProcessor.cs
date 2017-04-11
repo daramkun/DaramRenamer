@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Number
 {
+	[Serializable]
 	public class IncreaseDecreaseNumbersProcessor : IProcessor
 	{
 		public string Name => "process_increase_decrease_numbers";

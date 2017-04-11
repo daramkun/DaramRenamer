@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Number
 {
+	[Serializable]
 	public class NumberCountMatchProcessor : IProcessor
 	{
 		public string Name => "process_matching_number_count";

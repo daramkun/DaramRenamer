@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Tag
 {
+	[Serializable]
 	public class AddHashProcessor : IProcessor
 	{
 		public string Name => "process_add_file_hash";

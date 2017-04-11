@@ -137,7 +137,6 @@
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\_3GPDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\_7ZDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\ExtDetector.cs" />
-    <Compile Include="ExternalLibs\Lexer\Lexer.cs" />
     <Compile Include="FileInfo.cs" />
     <EmbeddedResource Include="Globalization.json" />
     <Compile Include="Globalizer.cs" />

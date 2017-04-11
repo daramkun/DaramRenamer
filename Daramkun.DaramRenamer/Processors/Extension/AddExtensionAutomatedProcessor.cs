@@ -9,6 +9,7 @@ using FileExtensionDetector;
 
 namespace Daramkun.DaramRenamer.Processors.Extension
 {
+	[Serializable]
 	public class AddExtensionAutomatedProcessor : IProcessor
 	{
 		public string Name => "process_add_extension_automatically";

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Date
 {
+	[Serializable]
 	public class AddDateProcessor : IProcessor
 	{
 		public string Name => "process_add_date";

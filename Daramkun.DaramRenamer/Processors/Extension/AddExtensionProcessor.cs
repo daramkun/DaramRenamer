@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Extension
 {
+	[Serializable]
 	public class AddExtensionProcessor : IProcessor
 	{
 		public string Name => "process_add_extension";

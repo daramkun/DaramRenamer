@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Filename
 {
+	[Serializable]
 	public class DeleteFilenameProcessor : IProcessor
 	{
 		public string Name => "process_delete_text";

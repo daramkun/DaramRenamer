@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Daramkun.DaramRenamer.Processors.Filename
 {
+	[Serializable]
 	public class ConcatenateProcessor : IProcessor
 	{
 		public string Name => "process_concatenate_text";

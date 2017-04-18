@@ -115,6 +115,7 @@
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\CRTDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\DMGDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\DOCXDetector.cs" />
+    <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\EPUBDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\FLACDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\GIFDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\GZDetector.cs" />
@@ -137,11 +138,6 @@
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\_3GPDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\Detectors\_7ZDetector.cs" />
     <Compile Include="ExternalLibs\FileExtensionDetector\ExtDetector.cs" />
-    <Compile Include="FileInfo.cs" />
-    <EmbeddedResource Include="Globalization.json" />
-    <Compile Include="Globalizer.cs" />
-    <Compile Include="IProcessor.cs" />
-    <Compile Include="ExternalLibs\OpenDocumentTag\File.cs" />
     <Compile Include="ExternalLibs\TagLib\Aac\AudioHeader.cs" />
     <Compile Include="ExternalLibs\TagLib\Aac\BitStream.cs" />
     <Compile Include="ExternalLibs\TagLib\Aac\File.cs" />
@@ -174,6 +170,8 @@
     <Compile Include="ExternalLibs\TagLib\CombinedTag.cs" />
     <Compile Include="ExternalLibs\TagLib\CorruptFileException.cs" />
     <Compile Include="ExternalLibs\TagLib\Debugger.cs" />
+    <Compile Include="ExternalLibs\TagLib\Dsf\File.cs" />
+    <Compile Include="ExternalLibs\TagLib\Dsf\StreamHeader.cs" />
     <Compile Include="ExternalLibs\TagLib\File.cs" />
     <Compile Include="ExternalLibs\TagLib\FileTypes.cs" />
     <Compile Include="ExternalLibs\TagLib\Flac\Block.cs" />
@@ -207,6 +205,7 @@
     <Compile Include="ExternalLibs\TagLib\Id3v2\Frames\UniqueFileIdentifierFrame.cs" />
     <Compile Include="ExternalLibs\TagLib\Id3v2\Frames\UnknownFrame.cs" />
     <Compile Include="ExternalLibs\TagLib\Id3v2\Frames\UnsynchronisedLyricsFrame.cs" />
+    <Compile Include="ExternalLibs\TagLib\Id3v2\Frames\UrlLinkFrame.cs" />
     <Compile Include="ExternalLibs\TagLib\Id3v2\FrameTypes.cs" />
     <Compile Include="ExternalLibs\TagLib\Id3v2\Header.cs" />
     <Compile Include="ExternalLibs\TagLib\Id3v2\SynchData.cs" />
@@ -329,6 +328,7 @@
     <Compile Include="ExternalLibs\TagLib\NonContainer\Tag.cs" />
     <Compile Include="ExternalLibs\TagLib\Ogg\Bitstream.cs" />
     <Compile Include="ExternalLibs\TagLib\Ogg\Codec.cs" />
+    <Compile Include="ExternalLibs\TagLib\Ogg\Codecs\Opus.cs" />
     <Compile Include="ExternalLibs\TagLib\Ogg\Codecs\Theora.cs" />
     <Compile Include="ExternalLibs\TagLib\Ogg\Codecs\Vorbis.cs" />
     <Compile Include="ExternalLibs\TagLib\Ogg\File.cs" />
@@ -375,6 +375,11 @@
     <Compile Include="ExternalLibs\TagLib\Xmp\XmpNodeType.cs" />
     <Compile Include="ExternalLibs\TagLib\Xmp\XmpNodeVisitor.cs" />
     <Compile Include="ExternalLibs\TagLib\Xmp\XmpTag.cs" />
+    <Compile Include="FileInfo.cs" />
+    <EmbeddedResource Include="Globalization.json" />
+    <Compile Include="Globalizer.cs" />
+    <Compile Include="IProcessor.cs" />
+    <Compile Include="ExternalLibs\OpenDocumentTag\File.cs" />
     <Compile Include="ExternalLibs\TaskDialog\CommandLink.xaml.cs">
       <DependentUpon>CommandLink.xaml</DependentUpon>
     </Compile>

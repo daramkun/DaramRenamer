@@ -376,7 +376,7 @@ namespace TagLib.IFD
 					return new ShortIFDEntry (tag, offset_data.Mid (0, 2).ToUShort (is_bigendian));
 
 				if (type == (ushort) IFDEntryType.SShort)
-					return new SShortIFDEntry (tag, (short) offset_data.Mid (0, 2).ToUShort (is_bigendian));
+					return new SShortIFDEntry (tag, (ushort) offset_data.Mid (0, 2).ToUShort (is_bigendian));
 
 				if (type == (ushort) IFDEntryType.Long)
 					return new LongIFDEntry (tag, offset_data.ToUInt (is_bigendian));
@@ -540,7 +540,7 @@ namespace TagLib.IFD
 		/// </returns>
 		private short ReadShort ()
 		{
-			return (short) file.ReadBlock (2).ToUShort (is_bigendian);
+			return file.ReadBlock (2).ToShort (is_bigendian);
 		}
 
 		/// <summary>

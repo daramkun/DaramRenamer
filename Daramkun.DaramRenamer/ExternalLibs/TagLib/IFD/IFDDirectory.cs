@@ -21,7 +21,6 @@
 // USA
 //
 
-using System;
 using System.Collections.Generic;
 
 namespace TagLib.IFD

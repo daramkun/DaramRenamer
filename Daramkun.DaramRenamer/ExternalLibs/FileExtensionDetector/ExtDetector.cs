@@ -25,7 +25,7 @@ namespace FileExtensionDetector
 				new _3GPDetector (), new TIFFDetector (), new JPEGDetector (), new APKDetector (), new CRTDetector (),
 				new DOCXDetector (), new PPTXDetector (), new XLSXDetector (), new MP3Detector (), new FLACDetector (),
 				new _7ZDetector (), new ICODetector (), new OGGDetector (), new TARDetector (), new XARDetector (), new GZDetector (),
-				new PDFDetector (), new MIDIDetector (), new DMGDetector (), new CABDetector (), 
+				new PDFDetector (), new MIDIDetector (), new DMGDetector (), new CABDetector (), new EPUBDetector ()
 			};
 			foreach ( var detector in detectors )
 				AddDetector ( detector );

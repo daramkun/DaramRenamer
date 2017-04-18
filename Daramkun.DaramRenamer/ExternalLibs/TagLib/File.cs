@@ -266,9 +266,7 @@ namespace TagLib {
 			
 			file_abstraction = abstraction;
 		}
-
-		~File () { Dispose ( false ); }
-
+		
 		#endregion
 		
 		
@@ -507,12 +505,6 @@ namespace TagLib {
 		///    mode to closed
 		/// </summary>
 		public void Dispose ()
-		{
-			Dispose ( true );
-			GC.SuppressFinalize ( this );
-		}
-
-		protected virtual void Dispose ( bool isDisposing )
 		{
 			Mode = AccessMode.Closed;
 		}

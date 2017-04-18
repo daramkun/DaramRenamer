@@ -194,6 +194,35 @@ namespace TagLib.Id3v2 {
 #region Public Methods
 		
 		/// <summary>
+		///    Gets the text value from a specified Text Information
+		///    Frame.
+		/// </summary>
+		/// <param name="ident">
+		///    A <see cref="ByteVector" /> object containing the frame
+		///    identifier of the Text Information Frame to get the value
+		///    from.
+		/// </param>
+		/// <returns>
+		///    A <see cref="string" /> object containing the text of the
+		///    specified frame, or <see langword="null" /> if no value
+		///    was found.
+		/// </returns>
+		public string GetTextAsString (ByteVector ident)
+		{
+			Frame frame;
+			// Handle URL LInk frames differently
+			if (ident[0] == 'W')
+				frame = UrlLinkFrame.Get(
+					this, ident, false);
+			else
+				frame = TextInformationFrame.Get (
+					this, ident, false);
+			
+			string result = frame == null ? null : frame.ToString ();
+			return string.IsNullOrEmpty (result) ? null : result;
+		}
+		
+		/// <summary>
 		///    Gets all frames contained in the current instance.
 		/// </summary>
 		/// <returns>
@@ -441,6 +470,17 @@ namespace TagLib.Id3v2 {
 				return;
 			}
 			
+			// Handle URL LInk frames differently
+			if (ident[0] == 'W')
+			{
+				UrlLinkFrame urlFrame = 
+					UrlLinkFrame.Get(this, ident, true);
+
+				urlFrame.Text = text;
+				urlFrame.TextEncoding = DefaultEncoding;
+				return;
+			}
+
 			TextInformationFrame frame =
 				TextInformationFrame.Get (this, ident, true);
 			
@@ -964,31 +1004,6 @@ namespace TagLib.Id3v2 {
 		
 		
 #region Private Methods
-		
-		// TODO: These should become public some day.
-		
-		/// <summary>
-		///    Gets the text value from a specified Text Information
-		///    Frame.
-		/// </summary>
-		/// <param name="ident">
-		///    A <see cref="ByteVector" /> object containing the frame
-		///    identifier of the Text Information Frame to get the value
-		///    from.
-		/// </param>
-		/// <returns>
-		///    A <see cref="string" /> object containing the text of the
-		///    specified frame, or <see langword="null" /> if no value
-		///    was found.
-		/// </returns>
-		private string GetTextAsString (ByteVector ident)
-		{
-			TextInformationFrame frame = TextInformationFrame.Get (
-				this, ident, false);
-			
-			string result = frame == null ? null : frame.ToString ();
-			return string.IsNullOrEmpty (result) ? null : result;
-		}
 		
 		/// <summary>
 		///    Gets the text values from a specified Text Information
@@ -2059,7 +2074,7 @@ namespace TagLib.Id3v2 {
 				}
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.

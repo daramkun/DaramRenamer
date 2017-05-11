@@ -4,8 +4,7 @@ Filename batch change application.
 
 "다람 리네이머" and "Daram Renamer" is official conventions.
 
-License Details:
-http://daram.pe.kr/mit-license
+License: MIT License
 
 Open source Libraries:
 [TagLib#](https://github.com/mono/taglib-sharp), [WPF Task Dialog](https://github.com/yadyn/WPF-Task-Dialog), [WPF Native Folder Browser](https://wpffolderbrowser.codeplex.com)

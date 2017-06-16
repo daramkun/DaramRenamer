@@ -55,10 +55,14 @@ namespace Daramkun.DaramRenamer
 		ObservableCollection<FileInfo> current = new ObservableCollection<FileInfo> ();
 		UndoManager<ObservableCollection<FileInfo>> undoManager = new UndoManager<ObservableCollection<FileInfo>> ();
 
+		UpdateChecker updateChecker;
+
 		public ObservableCollection<FileInfo> Files { get { return current; } }
 
 		public MainWindow ()
 		{
+			updateChecker = new UpdateChecker ( "{0}.{1}{2}{3}" );
+
 			InitializeComponent ();
 
 			optionRenameMode.SelectedIndex = Optionizer.SharedOptionizer.RenameModeInteger;
@@ -70,19 +74,14 @@ namespace Daramkun.DaramRenamer
 				$"{Localizer.SharedLocalizer.Culture.Author} - {Localizer.SharedLocalizer.Culture.Culture}";
 
 			listViewFiles.ItemsSource = current;
+		}
 
-			var updateCheckerThread = new Thread ( () =>
+		private async void Window_Loaded ( object sender, RoutedEventArgs e )
+		{
+			if ( await updateChecker.CheckUpdate () == true )
 			{
-				if ( CheckUpdate ( false ).Result == true )
-				{
-					Dispatcher.BeginInvoke ( new Action ( () =>
-					{
-						Title = $"{Title} - [{Localizer.SharedStrings [ "available_update" ]}]";
-					} ) );
-				}
-			} );
-			updateCheckerThread.Priority = ThreadPriority.Lowest;
-			updateCheckerThread.Start ();
+				Title = $"{Title} - [{Localizer.SharedStrings [ "available_update" ]}]";
+			}
 		}
 
 		public static TaskDialogResult MessageBox ( string message, string content, VistaTaskDialogIcon icon, params string [] buttons )
@@ -143,51 +142,6 @@ namespace Daramkun.DaramRenamer
 				}
 			}
 			overlayWindowContainer.Children.Clear ();
-		}
-
-		public async Task<bool?> CheckUpdate ( bool messageShow = false )
-		{
-			HttpWebRequest req = WebRequest.CreateHttp ( "https://github.com/Daramkun/DaramRenamer/releases" );
-			HttpWebResponse res = await req.GetResponseAsync () as HttpWebResponse;
-			Stream stream = null;
-			string version = null;
-			bool checkUpdate = false;
-			try
-			{
-				stream = res.GetResponseStream ();
-				using ( StreamReader reader = new StreamReader ( stream ) )
-				{
-					stream = null;
-					string text = reader.ReadToEnd ();
-					int begin = text.IndexOf ( "<span class=\"css-truncate-target\">" );
-					if ( begin == -1 ) {  version = null; return false; };
-					int end = text.IndexOf ( "</span>", begin );
-					if ( end == -1 ) {  version = null; return false; };
-					version = text.Substring ( end - 5, 5 );
-					Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
-					checkUpdate = version != $"{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
-
-					if ( messageShow )
-					{
-						if ( checkUpdate == true )
-						{
-							if ( MessageBox ( Localizer.SharedStrings [ "update_exist" ], Localizer.SharedStrings [ "current_old" ],
-								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ], Localizer.SharedStrings [ "download_button" ] ).
-								CustomButtonResult == 1 )
-								Process.Start ( "https://github.com/Daramkun/DaramRenamer/releases" );
-						}
-						else
-						{
-							MessageBox ( Localizer.SharedStrings [ "no_update" ], Localizer.SharedStrings [ "current_stable" ],
-								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ] );
-						}
-					}
-				}
-			}
-			catch { version = null; return null; }
-			finally { if ( stream != null ) stream.Dispose (); }
-
-			return checkUpdate;
 		}
 
 		private void Item_DoubleClick ( object sender, RoutedEventArgs e )
@@ -319,7 +273,21 @@ namespace Daramkun.DaramRenamer
 			FileInfo.Sort ( current );
 		}
 
-		private async void Menu_System_CheckUpdate ( object sender, RoutedEventArgs e ) { await CheckUpdate ( true ); }
+		private async void Menu_System_CheckUpdate ( object sender, RoutedEventArgs e )
+		{
+			if ( await updateChecker.CheckUpdate () == true )
+			{
+				if ( MessageBox ( Localizer.SharedStrings [ "update_exist" ], Localizer.SharedStrings [ "current_old" ],
+								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ], Localizer.SharedStrings [ "download_button" ] ).
+								CustomButtonResult == 1 )
+					updateChecker.ShowDownloadPage ();
+			}
+			else
+			{
+				MessageBox ( Localizer.SharedStrings [ "no_update" ], Localizer.SharedStrings [ "current_stable" ],
+								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ] );
+			}
+		}
 
 		private void Menu_System_Feedback ( object sender, RoutedEventArgs e )
 		{

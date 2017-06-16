@@ -7,7 +7,7 @@
         xmlns:dcl="clr-namespace:Daramee.DaramCommonLib;assembly=Daramee.DaramCommonLib"
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="720" Height="480"
-		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="720" MinHeight="480">
+		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="720" MinHeight="480" Loaded="Window_Loaded">
 	<Window.Resources>
 		<ContextMenu x:Key="listViewContextMenu">
 			<MenuItem Header="{Binding Path=[undo]}" Click="Menu_System_Undo" />

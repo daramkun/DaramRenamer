@@ -15,6 +15,22 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>Publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>true</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>3.1.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,7 +65,7 @@
     <AssemblyOriginatorKeyFile>DaramRenamer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2AE111A4B113D4B15F02593EE7EBFA41736E454F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>67DC838F9D543CE0C39FEB7DD20A260B1C4AAD54</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Daramkun.DaramRenamer_TemporaryKey.pfx</ManifestKeyFile>
@@ -63,11 +79,13 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -363,10 +381,9 @@
     <Compile Include="ExternalLibs\TagLib\Xmp\XmpNodeVisitor.cs" />
     <Compile Include="ExternalLibs\TagLib\Xmp\XmpTag.cs" />
     <Compile Include="FileInfo.cs" />
-    <EmbeddedResource Include="Localization.json" />
-    <Compile Include="LocalizedAttribute.cs" />
     <Compile Include="IProcessor.cs" />
     <Compile Include="ExternalLibs\OpenDocumentTag\File.cs" />
+    <Compile Include="LocalizedAttribute.cs" />
     <Compile Include="Optionizer.cs" />
     <Compile Include="Processors\BatchProcessor.cs" />
     <Compile Include="Processors\Date\AddDateProcessor.cs" />
@@ -443,6 +460,7 @@
     <None Include="Daramkun.DaramRenamer_TemporaryKey.pfx" />
     <None Include="DaramRenamer.manifest" />
     <None Include="DaramRenamer.pfx" />
+    <EmbeddedResource Include="Localization.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

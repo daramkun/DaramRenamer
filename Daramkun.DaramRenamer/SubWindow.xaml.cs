@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
+using Daramee.DaramCommonLib;
 
 namespace Daramkun.DaramRenamer
 {
@@ -28,16 +29,16 @@ namespace Daramkun.DaramRenamer
 
 			Processor = processor;
 
-			overlayWindowTitle.Text = Globalizer.Strings [ processor.Name ];
+			overlayWindowTitle.Text = Localizer.SharedStrings [ processor.Name ];
 
 			Type type = processor.GetType ();
 			var props = type.GetProperties ();
 			Dictionary<uint, PropertyInfo> propDict = new Dictionary<uint, PropertyInfo> ();
 			foreach ( var prop in props )
 			{
-				object [] attrs = prop.GetCustomAttributes ( typeof ( GlobalizedAttribute ), true );
+				object [] attrs = prop.GetCustomAttributes ( typeof ( LocalizedAttribute ), true );
 				if ( attrs.Length > 0)
-					propDict.Add ( ( attrs [ 0 ] as GlobalizedAttribute ).Order, prop );
+					propDict.Add ( ( attrs [ 0 ] as LocalizedAttribute ).Order, prop );
 			}
 
 			for ( int i = 0; i < propDict.Count; ++i )
@@ -47,8 +48,8 @@ namespace Daramkun.DaramRenamer
 			foreach ( var propPair in from p in propDict orderby p.Key select p )
 			{
 				var prop = propPair.Value;
-				object [] attrs = prop.GetCustomAttributes ( typeof ( GlobalizedAttribute ), true );
-				TextBlock textBlock = new TextBlock () { Text = Globalizer.Strings [ ( attrs [ 0 ] as GlobalizedAttribute ).Field ] };
+				object [] attrs = prop.GetCustomAttributes ( typeof ( LocalizedAttribute ), true );
+				TextBlock textBlock = new TextBlock () { Text = Localizer.SharedStrings [ ( attrs [ 0 ] as LocalizedAttribute ).Field ] };
 				textBlock.VerticalAlignment = VerticalAlignment.Center;
 				Grid.SetRow ( textBlock, ( int ) propPair.Key );
 				Grid.SetColumn ( textBlock, 0 );
@@ -58,26 +59,36 @@ namespace Daramkun.DaramRenamer
 
 				if ( prop.PropertyType == typeof ( string ) || prop.PropertyType == typeof ( Regex ) )
 				{
-					control = new TextBox ();
-					control.VerticalAlignment = VerticalAlignment.Center;
-					var binding = new Binding ();
-					binding.Source = Processor;
-					binding.Path = new PropertyPath ( prop.Name );
+					control = new TextBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
+					var binding = new Binding ()
+					{
+						Source = Processor,
+						Path = new PropertyPath ( prop.Name )
+					};
 					control.SetBinding ( TextBox.TextProperty, binding );
 				}
 				if ( prop.PropertyType == typeof ( bool ) )
 				{
-					control = new CheckBox ();
-					control.VerticalAlignment = VerticalAlignment.Center;
-					var binding = new Binding ();
-					binding.Source = Processor;
-					binding.Path = new PropertyPath ( prop.Name );
+					control = new CheckBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
+					var binding = new Binding ()
+					{
+						Source = Processor,
+						Path = new PropertyPath ( prop.Name )
+					};
 					control.SetBinding ( CheckBox.IsCheckedProperty, binding );
 				}
 				if ( prop.PropertyType == typeof ( bool? ) )
 				{
-					control = new CheckBox ();
-					control.VerticalAlignment = VerticalAlignment.Center;
+					control = new CheckBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					( control as CheckBox ).IsThreeState = true;
 					( control as CheckBox ).Checked += ( sender, e ) =>
 					{
@@ -92,19 +103,25 @@ namespace Daramkun.DaramRenamer
 				}
 				if ( prop.PropertyType == typeof ( uint ) || prop.PropertyType == typeof ( uint? ) )
 				{
-					var container = new Grid ();
-					container.VerticalAlignment = VerticalAlignment.Center;
+					var container = new Grid ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
 					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () { Width = new GridLength ( 24 ) } );
-					var text = new TextBox ();
-					text.VerticalAlignment = VerticalAlignment.Center;
+					var text = new TextBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					text.PreviewTextInput += ( sender, e ) => { e.Handled = Regex.IsMatch ( e.Text, "[^0-9]" ); };
 					text.TextChanged += ( sender, e ) => { if ( text.Text.Trim () == "" ) text.Text = "0"; };
-					var textBinding = new Binding ();
-					textBinding.Source = Processor;
-					textBinding.Path = new PropertyPath ( prop.Name );
+					var textBinding = new Binding ()
+					{
+						Source = Processor,
+						Path = new PropertyPath ( prop.Name )
+					};
 					text.SetBinding ( TextBox.TextProperty, textBinding );
 					Grid.SetRowSpan ( text, 2 );
 					container.Children.Add ( text );
@@ -155,9 +172,11 @@ namespace Daramkun.DaramRenamer
 					Grid.SetRowSpan ( check, 2 );
 					( control as Grid ).Children.Add ( check );
 
-					var binding = new Binding ();
-					binding.Source = check;
-					binding.Path = new PropertyPath ( "IsChecked" );
+					var binding = new Binding ()
+					{
+						Source = check,
+						Path = new PropertyPath ( "IsChecked" )
+					};
 					( ( control as Grid ).Children [ 0 ] as TextBox ).SetBinding ( TextBox.IsEnabledProperty, binding );
 					( ( control as Grid ).Children [ 1 ] as Button ).SetBinding ( Button.IsEnabledProperty, binding );
 					( ( control as Grid ).Children [ 2 ] as Button ).SetBinding ( Button.IsEnabledProperty, binding );
@@ -168,19 +187,25 @@ namespace Daramkun.DaramRenamer
 
 				if ( prop.PropertyType == typeof ( int ) )
 				{
-					var container = new Grid ();
-					container.VerticalAlignment = VerticalAlignment.Center;
+					var container = new Grid ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
 					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () { Width = new GridLength ( 24 ) } );
-					var text = new TextBox ();
-					text.VerticalAlignment = VerticalAlignment.Center;
+					var text = new TextBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					text.PreviewTextInput += ( sender, e ) => { e.Handled = !Regex.IsMatch ( e.Text, "[\\-0-9][0-9]*" ); };
 					text.TextChanged += ( sender, e ) => { if ( text.Text.Trim () == "" ) text.Text = "0"; };
-					var textBinding = new Binding ();
-					textBinding.Source = Processor;
-					textBinding.Path = new PropertyPath ( prop.Name );
+					var textBinding = new Binding ()
+					{
+						Source = Processor,
+						Path = new PropertyPath ( prop.Name )
+					};
 					text.SetBinding ( TextBox.TextProperty, textBinding );
 					Grid.SetRowSpan ( text, 2 );
 					container.Children.Add ( text );
@@ -222,27 +247,33 @@ namespace Daramkun.DaramRenamer
 				{
 					control = new StackPanel () { Orientation = Orientation.Horizontal };
 					control.VerticalAlignment = VerticalAlignment.Center;
-					var radioPre = new RadioButton ();
-					radioPre.Content = Globalizer.Strings [ "position_front" ];
-					radioPre.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioPre.GroupName = prop.Name;
+					var radioPre = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "position_front" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioPre.Checked += ( sender, e ) => { prop.SetValue ( Processor, OnePointPosition.StartPoint ); };
 					radioPre.IsChecked = ( ( OnePointPosition ) prop.GetValue ( Processor ) ) == OnePointPosition.StartPoint;
 					( control as StackPanel ).Children.Add ( radioPre );
-					var radioPost = new RadioButton ();
-					radioPost.Content = Globalizer.Strings [ "position_end" ];
-					radioPost.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioPost.GroupName = prop.Name;
+					var radioPost = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "position_end" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioPost.Checked += ( sender, e ) => { prop.SetValue ( Processor, OnePointPosition.EndPoint ); };
 					radioPost.IsChecked = ( ( OnePointPosition ) prop.GetValue ( Processor ) ) == OnePointPosition.EndPoint;
 					( control as StackPanel ).Children.Add ( radioPost );
 				}
 				if ( prop.PropertyType == typeof ( Position ) )
 				{
-					var radioBoth = new RadioButton ();
-					radioBoth.Content = Globalizer.Strings [ "position_both" ];
-					radioBoth.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioBoth.GroupName = prop.Name;
+					var radioBoth = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "position_both" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioBoth.Checked += ( sender, e ) => { prop.SetValue ( Processor, Position.BothPoint ); };
 					radioBoth.IsChecked = ( ( Position ) prop.GetValue ( Processor ) ) == Position.BothPoint;
 					( control as StackPanel ).Children.Add ( radioBoth );
@@ -252,27 +283,33 @@ namespace Daramkun.DaramRenamer
 				{
 					control = new StackPanel () { Orientation = Orientation.Horizontal };
 					control.VerticalAlignment = VerticalAlignment.Center;
-					var radioLower = new RadioButton ();
-					radioLower.Content = Globalizer.Strings [ "casecast_lower" ];
-					radioLower.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioLower.GroupName = prop.Name;
+					var radioLower = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "casecast_lower" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioLower.Checked += ( sender, e ) => { prop.SetValue ( Processor, CasecastBW.AllToLowercase ); };
 					radioLower.IsChecked = ( ( CasecastBW ) prop.GetValue ( Processor ) ) == CasecastBW.AllToLowercase;
 					( control as StackPanel ).Children.Add ( radioLower );
-					var radioUpper = new RadioButton ();
-					radioUpper.Content = Globalizer.Strings [ "casecast_upper" ];
-					radioUpper.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioUpper.GroupName = prop.Name;
+					var radioUpper = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "casecast_upper" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioUpper.Checked += ( sender, e ) => { prop.SetValue ( Processor, CasecastBW.AllToUppercase ); };
 					radioUpper.IsChecked = ( ( CasecastBW ) prop.GetValue ( Processor ) ) == CasecastBW.AllToUppercase;
 					( control as StackPanel ).Children.Add ( radioUpper );
 				}
 				if ( prop.PropertyType == typeof ( Casecast ) )
 				{
-					var radioUpperFirstLetter = new RadioButton ();
-					radioUpperFirstLetter.Content = Globalizer.Strings [ "casecast_upper_first_letter" ];
-					radioUpperFirstLetter.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioUpperFirstLetter.GroupName = prop.Name;
+					var radioUpperFirstLetter = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "casecast_upper_first_letter" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioUpperFirstLetter.Checked += ( sender, e ) => { prop.SetValue ( Processor, Casecast.UppercaseFirstLetter ); };
 					radioUpperFirstLetter.IsChecked = ( ( Casecast ) prop.GetValue ( Processor ) ) == Casecast.UppercaseFirstLetter;
 					( control as StackPanel ).Children.Add ( radioUpperFirstLetter );
@@ -283,19 +320,26 @@ namespace Daramkun.DaramRenamer
 					var grid = new Grid ();
 					grid.ColumnDefinitions.Add ( new ColumnDefinition () );
 					grid.ColumnDefinitions.Add ( new ColumnDefinition () { Width = new GridLength ( 32 ) } );
-					var textBox = new TextBox ();
-					textBox.IsReadOnly = true;
-					textBox.Text = ( prop.GetValue ( Processor ) as DirectoryInfo ).FullName;
-					textBox.VerticalAlignment = VerticalAlignment.Center;
-					textBox.Margin = new Thickness ( 0, 0, 5, 0 );
+					var textBox = new TextBox ()
+					{
+						IsReadOnly = true,
+						Text = ( prop.GetValue ( Processor ) as DirectoryInfo ).FullName,
+						VerticalAlignment = VerticalAlignment.Center,
+						Margin = new Thickness ( 0, 0, 5, 0 )
+					};
 					grid.Children.Add ( textBox );
-					var button = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
-					button.Content = "...";
-					button.VerticalAlignment = VerticalAlignment.Center;
+					var button = new Button ()
+					{
+						Style = this.Resources [ "ButtonStyle" ] as Style,
+						Content = "...",
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					button.Click += ( sender, e ) =>
 					{
-						WPFFolderBrowser.WPFFolderBrowserDialog fbd = new WPFFolderBrowser.WPFFolderBrowserDialog ();
-						fbd.InitialDirectory = textBox.Text;
+						WPFFolderBrowser.WPFFolderBrowserDialog fbd = new WPFFolderBrowser.WPFFolderBrowserDialog ()
+						{
+							InitialDirectory = textBox.Text
+						};
 						if ( fbd.ShowDialog () == true )
 						{
 							textBox.Text = fbd.FileName;
@@ -311,31 +355,39 @@ namespace Daramkun.DaramRenamer
 				{
 					control = new StackPanel () { Orientation = Orientation.Horizontal };
 					control.VerticalAlignment = VerticalAlignment.Center;
-					var radioCreated = new RadioButton ();
-					radioCreated.Content = Globalizer.Strings [ "add_date_created" ];
-					radioCreated.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioCreated.GroupName = prop.Name;
+					var radioCreated = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "add_date_created" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioCreated.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.CreationDate ); };
 					radioCreated.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.CreationDate;
 					( control as StackPanel ).Children.Add ( radioCreated );
-					var radioModified = new RadioButton ();
-					radioModified.Content = Globalizer.Strings [ "add_date_modified" ];
-					radioModified.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioModified.GroupName = prop.Name;
+					var radioModified = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "add_date_modified" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioModified.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.ModifiedDate ); };
 					radioModified.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.ModifiedDate;
 					( control as StackPanel ).Children.Add ( radioModified );
-					var radioAccessed = new RadioButton ();
-					radioAccessed.Content = Globalizer.Strings [ "add_date_accessed" ];
-					radioAccessed.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioAccessed.GroupName = prop.Name;
+					var radioAccessed = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "add_date_accessed" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioAccessed.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.AccessedDate ); };
 					radioAccessed.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.AccessedDate;
 					( control as StackPanel ).Children.Add ( radioAccessed );
-					var radioNow = new RadioButton ();
-					radioNow.Content = Globalizer.Strings [ "add_date_now" ];
-					radioNow.Margin = new Thickness ( 0, 0, 5, 0 );
-					radioNow.GroupName = prop.Name;
+					var radioNow = new RadioButton ()
+					{
+						Content = Localizer.SharedStrings [ "add_date_now" ],
+						Margin = new Thickness ( 0, 0, 5, 0 ),
+						GroupName = prop.Name
+					};
 					radioNow.Checked += ( sender, e ) => { prop.SetValue ( Processor, DateType.Now ); };
 					radioNow.IsChecked = ( ( DateType ) prop.GetValue ( Processor ) ) == DateType.Now;
 					( control as StackPanel ).Children.Add ( radioNow );
@@ -343,8 +395,10 @@ namespace Daramkun.DaramRenamer
 
 				if ( prop.PropertyType == typeof ( MediaTag ) )
 				{
-					var comboBox = new ComboBox ();
-					comboBox.VerticalAlignment = VerticalAlignment.Center;
+					var comboBox = new ComboBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					foreach ( var item in new [] { "media_tag_audio_album", "media_tag_audio_album_artists", "media_tag_audio_composers",
 						"media_tag_audio_copyright", "media_tag_audio_disc", "media_tag_audio_disc_count", "media_tag_audio_genres",
 						"media_tag_audio_performers", "media_tag_audio_title", "media_tag_audio_track", "media_tag_audio_track_count",
@@ -353,7 +407,7 @@ namespace Daramkun.DaramRenamer
 						"media_tag_image_height", "media_tag_image_quality", "media_tag_image_codec", "media_tag_video_genres",
 						"media_tag_video_title", "media_tag_video_year", "media_tag_video_duration", "media_tag_video_width",
 						"media_tag_video_height", "media_tag_video_codec" } )
-						comboBox.Items.Add ( Globalizer.Strings [ item ] );
+						comboBox.Items.Add ( Localizer.SharedStrings [ item ] );
 					comboBox.SelectedIndex = ( int ) ( MediaTag ) prop.GetValue ( Processor );
 					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( MediaTag ) comboBox.SelectedIndex ); };
 
@@ -362,10 +416,12 @@ namespace Daramkun.DaramRenamer
 
 				if ( prop.PropertyType == typeof ( DocumentTag ) )
 				{
-					var comboBox = new ComboBox ();
-					comboBox.VerticalAlignment = VerticalAlignment.Center;
+					var comboBox = new ComboBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					foreach ( var item in new [] { "document_tag_title", "document_tag_author" } )
-						comboBox.Items.Add ( Globalizer.Strings [ item ] );
+						comboBox.Items.Add ( Localizer.SharedStrings [ item ] );
 					comboBox.SelectedIndex = ( int ) ( DocumentTag ) prop.GetValue ( Processor );
 					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( DocumentTag ) comboBox.SelectedIndex ); };
 
@@ -374,10 +430,12 @@ namespace Daramkun.DaramRenamer
 
 				if ( prop.PropertyType == typeof ( HashType ) )
 				{
-					var comboBox = new ComboBox ();
-					comboBox.VerticalAlignment = VerticalAlignment.Center;
+					var comboBox = new ComboBox ()
+					{
+						VerticalAlignment = VerticalAlignment.Center
+					};
 					foreach ( var item in new [] { "hash_md5", "hash_sha1", "hash_sha256", "hash_sha384", "hash_sha512" } )
-						comboBox.Items.Add ( Globalizer.Strings [ item ] );
+						comboBox.Items.Add ( Localizer.SharedStrings [ item ] );
 					comboBox.SelectedIndex = ( int ) ( HashType ) prop.GetValue ( Processor );
 					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( HashType ) comboBox.SelectedIndex ); };
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using Daramee.DaramCommonLib;
 
 namespace Daramkun.DaramRenamer
 {
@@ -17,11 +18,16 @@ namespace Daramkun.DaramRenamer
 	/// </summary>
 	public partial class App : Application
 	{
+		Localizer ownLocalizer;
+
 		public App ()
 		{
+			ProgramHelper.Initialize ( Assembly.GetExecutingAssembly (), "daramkun", "DaramRenamer" );
+			ownLocalizer = new Localizer ();
+
 			if ( Environment.OSVersion.Version <= new Version ( 5, 0 ) )
 			{
-				MessageBox.Show ( Globalizer.Strings [ "os_notice" ], Globalizer.Strings [ "daram_renamer" ],
+				MessageBox.Show ( Localizer.SharedStrings [ "os_notice" ], Localizer.SharedStrings [ "daram_renamer" ],
 					MessageBoxButton.OK, MessageBoxImage.Error );
 				Application.Current.Shutdown ( -1 );
 			}
@@ -31,7 +37,7 @@ namespace Daramkun.DaramRenamer
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
-				Daramkun.DaramRenamer.MainWindow.MessageBox ( Globalizer.Strings [ "error_raised" ], Globalizer.Strings [ "please_check_log" ],
+				Daramkun.DaramRenamer.MainWindow.MessageBox ( Localizer.SharedStrings [ "error_raised" ], Localizer.SharedStrings [ "please_check_log" ],
 					TaskDialogInterop.VistaTaskDialogIcon.Error, "OK" );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 				{

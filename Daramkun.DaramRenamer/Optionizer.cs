@@ -94,9 +94,9 @@ namespace Daramkun.DaramRenamer
 				var userKey = Registry.CurrentUser;
 				var swKey = userKey.OpenSubKey ( "SOFTWARE", true );
 				var daramworldKey = swKey.OpenSubKey ( "DARAM WORLD", true );
-				if ( daramworldKey == null ) daramworldKey = swKey.CreateSubKey ( "DARAM WORLD", true );
+				if ( daramworldKey == null ) daramworldKey = swKey.CreateSubKey ( "DARAM WORLD", RegistryKeyPermissionCheck.ReadWriteSubTree );
 				var renamerKey = daramworldKey.OpenSubKey ( Key, true );
-				if ( renamerKey == null ) renamerKey = daramworldKey.CreateSubKey ( Key, true );
+				if ( renamerKey == null ) renamerKey = daramworldKey.CreateSubKey ( Key, RegistryKeyPermissionCheck.ReadWriteSubTree );
 
 				renamerKey.SetValue ( "rename_mode", ( int ) RenameMode, RegistryValueKind.DWord );
 				renamerKey.SetValue ( "hw_accel_mode", HardwareAccelerationMode ? 1 : 0, RegistryValueKind.DWord );

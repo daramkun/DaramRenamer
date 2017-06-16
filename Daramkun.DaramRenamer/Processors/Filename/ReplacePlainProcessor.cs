@@ -14,11 +14,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_replace_plain_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "original_text", 0 )]
+		[Localized ( "original_text", 0 )]
 		public string Original { get; set; } = "";
-		[Globalized ( "replace_text", 1 )]
+		[Localized ( "replace_text", 1 )]
 		public string Replace { get; set; } = "";
-		[Globalized ( "include_extension", 2 )]
+		[Localized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

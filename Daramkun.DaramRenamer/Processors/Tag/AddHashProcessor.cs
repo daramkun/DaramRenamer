@@ -13,9 +13,9 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 		public string Name => "process_add_file_hash";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "hash_type", 0 )]
+		[Localized ( "hash_type", 0 )]
 		public HashType HashType { get; set; }
-		[Globalized ( "hash_pos", 1 )]
+		[Localized ( "hash_pos", 1 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

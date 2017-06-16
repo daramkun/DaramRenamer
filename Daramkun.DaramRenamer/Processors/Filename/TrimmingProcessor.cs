@@ -14,7 +14,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_trimming_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "trim_pos", 0 )]
+		[Localized ( "trim_pos", 0 )]
 		public Position TrimPosition { get; set; } = Position.BothPoint;
 
 		public bool Process ( FileInfo file )

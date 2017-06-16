@@ -13,9 +13,9 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 		public string Name => "process_add_document_tag";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "document_tag_type", 0 )]
+		[Localized ( "document_tag_type", 0 )]
 		public DocumentTag Tag { get; set; }
-		[Globalized ( "document_tag_pos", 1 )]
+		[Localized ( "document_tag_pos", 1 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

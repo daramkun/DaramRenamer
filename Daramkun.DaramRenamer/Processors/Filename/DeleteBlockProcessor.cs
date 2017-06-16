@@ -14,13 +14,13 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_delete_block";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "start_block", 0 )]
+		[Localized ( "start_block", 0 )]
 		public string StartText { get; set; } = "";
-		[Globalized ( "end_block", 1 )]
+		[Localized ( "end_block", 1 )]
 		public string EndText { get; set; } = "";
-		[Globalized ( "delete_all_blocks", 2 )]
+		[Localized ( "delete_all_blocks", 2 )]
 		public bool DeleteAllBlocks { get; set; } = false;
-		[Globalized ( "include_extension", 3 )]
+		[Localized ( "include_extension", 3 )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

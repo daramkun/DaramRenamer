@@ -11,7 +11,7 @@ namespace Daramkun.DaramRenamer.Conditions
 	{
 		public string Name => "condition_regexp";
 
-		[Globalized ( "regexp", 0 )]
+		[Localized ( "regexp", 0 )]
 		public Regex RegularExpression { get; set; }
 
 		public bool IsValid ( FileInfo file )

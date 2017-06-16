@@ -13,11 +13,11 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 		public string Name => "process_add_media_tag";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "media_tag_type", 0 )]
+		[Localized ( "media_tag_type", 0 )]
 		public MediaTag Tag { get; set; }
-		[Globalized ( "media_tag_args", 1 )]
+		[Localized ( "media_tag_args", 1 )]
 		public int Arguments { get; set; } = -1;
-		[Globalized ( "media_tag_pos", 2 )]
+		[Localized ( "media_tag_pos", 2 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

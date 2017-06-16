@@ -18,7 +18,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_delete_without_numbers";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "delwtnum_wordly" )]
+		[Localized ( "delwtnum_wordly" )]
 		public bool IsWordlyProcessing { get; set; } = false;
 
 		public bool Process ( FileInfo file )

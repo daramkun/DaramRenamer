@@ -13,9 +13,9 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_increase_decrease_numbers";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "incdec_count", 0 )]
+		[Localized ( "incdec_count", 0 )]
 		public int Count { get; set; } = 1;
-		[Globalized ( "incdec_pos", 1 )]
+		[Localized ( "incdec_pos", 1 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

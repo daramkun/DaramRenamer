@@ -13,9 +13,9 @@ namespace Daramkun.DaramRenamer.Processors
 
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "changed_name", 0 )]
+		[Localized ( "changed_name", 0 )]
 		public string ChangeName { get; set; }
-		[Globalized ( "changed_path", 1 )]
+		[Localized ( "changed_path", 1 )]
 		public string ChangePath { get; set; }
 
 		public FileInfo ProcessingFileInfo { get; set; }

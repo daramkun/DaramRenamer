@@ -14,11 +14,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_concatenate_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "concat_text", 0 )]
+		[Localized ( "concat_text", 0 )]
 		public string Text { get; set; } = "";
-		[Globalized ( "concat_pos", 1 )]
+		[Localized ( "concat_pos", 1 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.StartPoint;
-		[Globalized ( "include_extension", 2 )]
+		[Localized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

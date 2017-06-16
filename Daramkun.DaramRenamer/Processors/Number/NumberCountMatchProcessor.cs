@@ -13,9 +13,9 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_matching_number_count";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "match_count", 0 )]
+		[Localized ( "match_count", 0 )]
 		public uint Count { get; set; } = 2;
-		[Globalized ( "match_pos", 1 )]
+		[Localized ( "match_pos", 1 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

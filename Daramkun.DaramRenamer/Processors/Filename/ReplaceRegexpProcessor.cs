@@ -15,11 +15,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_replace_regex_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "original_regex", 0 )]
+		[Localized ( "original_regex", 0 )]
 		public Regex RegularExpression { get; set; } = new Regex ( "$^" );
-		[Globalized ( "replace_format", 1 )]
+		[Localized ( "replace_format", 1 )]
 		public string FormatString { get; set; } = "";
-		[Globalized ( "include_extension", 2 )]
+		[Localized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

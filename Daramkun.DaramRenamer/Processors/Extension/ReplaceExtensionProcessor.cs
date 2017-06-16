@@ -13,7 +13,7 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 		public string Name => "process_change_extension";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "extension" )]
+		[Localized ( "extension" )]
 		public string Extension { get; set; } = "";
 
 		public ReplaceExtensionProcessor () { Extension = ""; }

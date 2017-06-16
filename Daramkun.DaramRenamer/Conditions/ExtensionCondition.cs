@@ -11,7 +11,7 @@ namespace Daramkun.DaramRenamer.Conditions
 	{
 		public string Name => "condition_extension";
 
-		[Globalized ( "extension", 0 )]
+		[Localized ( "extension", 0 )]
 		public string Extension { get; set; } = "";
 
 		public bool IsValid ( FileInfo file )

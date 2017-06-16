@@ -13,7 +13,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_casecast_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "casecast" )]
+		[Localized ( "casecast" )]
 		public Casecast Casecast { get; set; } = Casecast.AllToLowercase;
 
 		public bool Process ( FileInfo file )

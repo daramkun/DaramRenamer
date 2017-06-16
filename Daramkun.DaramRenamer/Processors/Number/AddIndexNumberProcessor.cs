@@ -13,7 +13,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_add_index_numbers";
 		public bool CannotMultithreadProcess => true;
 
-		[Globalized ( "add_pos", 0 )]
+		[Localized ( "add_pos", 0 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

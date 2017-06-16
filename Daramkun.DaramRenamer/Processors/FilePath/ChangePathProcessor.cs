@@ -13,7 +13,7 @@ namespace Daramkun.DaramRenamer.Processors.FilePath
 		public string Name => "process_change_path";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "path_text", 0 )]
+		[Localized ( "path_text", 0 )]
 		public DirectoryInfo Path { get; set; } = new DirectoryInfo ( "C:\\" );
 
 		public bool Process ( FileInfo file )

@@ -21,6 +21,7 @@ using System.Threading;
 using System.Windows.Media;
 using Daramkun.DaramRenamer.Processors;
 using System.Windows.Threading;
+using Daramee.DaramCommonLib;
 
 namespace Daramkun.DaramRenamer
 {
@@ -63,9 +64,10 @@ namespace Daramkun.DaramRenamer
 			optionRenameMode.SelectedIndex = Optionizer.SharedOptionizer.RenameModeInteger;
 			
 			Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
-			Title = $"{Globalizer.Strings [ "daram_renamer" ]} - v{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
-			translationAuthor.Text = Globalizer.Culture.Contact != null ? $"{Globalizer.Culture.Author}<{Globalizer.Culture.Contact}> - {Globalizer.Culture.Culture}" :
-				$"{Globalizer.Culture.Author} - {Globalizer.Culture.Culture}";
+			Title = $"{Localizer.SharedStrings [ "daram_renamer" ]} - v{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
+			translationAuthor.Text = Localizer.SharedLocalizer.Culture.Contact != null ?
+				$"{Localizer.SharedLocalizer.Culture.Author}<{Localizer.SharedLocalizer.Culture.Contact}> - {Localizer.SharedLocalizer.Culture.Culture}" :
+				$"{Localizer.SharedLocalizer.Culture.Author} - {Localizer.SharedLocalizer.Culture.Culture}";
 
 			listViewFiles.ItemsSource = current;
 
@@ -75,7 +77,7 @@ namespace Daramkun.DaramRenamer
 				{
 					Dispatcher.BeginInvoke ( new Action ( () =>
 					{
-						Title = $"{Title} - [{Globalizer.Strings [ "available_update" ]}]";
+						Title = $"{Title} - [{Localizer.SharedStrings [ "available_update" ]}]";
 					} ) );
 				}
 			} );
@@ -87,7 +89,7 @@ namespace Daramkun.DaramRenamer
 		{
 			TaskDialogOptions config = new TaskDialogOptions ();
 			config.Owner = null;
-			config.Title = Globalizer.Strings [ "daram_renamer" ];
+			config.Title = Localizer.SharedStrings [ "daram_renamer" ];
 			config.MainInstruction = message;
 			config.Content = content;
 			config.MainIcon = icon;
@@ -169,15 +171,15 @@ namespace Daramkun.DaramRenamer
 					{
 						if ( checkUpdate == true )
 						{
-							if ( MessageBox ( Globalizer.Strings [ "update_exist" ], Globalizer.Strings [ "current_old" ],
-								VistaTaskDialogIcon.Information, Globalizer.Strings [ "ok_button" ], Globalizer.Strings [ "download_button" ] ).
+							if ( MessageBox ( Localizer.SharedStrings [ "update_exist" ], Localizer.SharedStrings [ "current_old" ],
+								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ], Localizer.SharedStrings [ "download_button" ] ).
 								CustomButtonResult == 1 )
 								Process.Start ( "https://github.com/Daramkun/DaramRenamer/releases" );
 						}
 						else
 						{
-							MessageBox ( Globalizer.Strings [ "no_update" ], Globalizer.Strings [ "current_stable" ],
-								VistaTaskDialogIcon.Information, Globalizer.Strings [ "ok_button" ] );
+							MessageBox ( Localizer.SharedStrings [ "no_update" ], Localizer.SharedStrings [ "current_stable" ],
+								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ] );
 						}
 					}
 				}
@@ -227,8 +229,8 @@ namespace Daramkun.DaramRenamer
 		private void Menu_System_Open ( object sender, RoutedEventArgs e )
 		{
 			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog ();
-			openFileDialog.Title = Globalizer.Strings [ "open_files" ];
-			openFileDialog.Filter = Globalizer.Strings [ "all_files" ];
+			openFileDialog.Title = Localizer.SharedStrings [ "open_files" ];
+			openFileDialog.Filter = Localizer.SharedStrings [ "all_files" ];
 			openFileDialog.Multiselect = true;
 			if ( openFileDialog.ShowDialog () == false ) return;
 
@@ -264,9 +266,9 @@ namespace Daramkun.DaramRenamer
 			if ( failed != 0 )
 				progressBar.Foreground = Brushes.Red;
 			Application.Current.Dispatcher.Invoke ( DispatcherPriority.Background, new ThreadStart ( delegate { } ) );
-			MessageBox ( Globalizer.Strings [ "applied" ], string.Format ( Globalizer.Strings [ "applied_message" ],
+			MessageBox ( Localizer.SharedStrings [ "applied" ], string.Format ( Localizer.SharedStrings [ "applied_message" ],
 				progressBar.Value, progressBar.Maximum ),
-				VistaTaskDialogIcon.Information, Globalizer.Strings [ "ok_button" ] );
+				VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ] );
 		}
 
 		private void Menu_System_Undo ( object sender, RoutedEventArgs e )

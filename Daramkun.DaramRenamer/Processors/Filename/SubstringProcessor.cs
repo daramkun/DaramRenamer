@@ -12,11 +12,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_substring_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "start_index", 0 )]
+		[Localized ( "start_index", 0 )]
 		public uint StartIndex { get; set; } = 0;
-		[Globalized ( "substring_length", 1 )]
+		[Localized ( "substring_length", 1 )]
 		public uint? Length { get; set; } = null;
-		[Globalized ( "include_extension", 2 )]
+		[Localized ( "include_extension", 2 )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

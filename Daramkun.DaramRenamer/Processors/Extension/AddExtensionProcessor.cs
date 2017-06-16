@@ -12,7 +12,7 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 		public string Name => "process_add_extension";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "extension" )]
+		[Localized ( "extension" )]
 		public string Extension { get; set; } = "";
 
 		public bool Process ( FileInfo file )

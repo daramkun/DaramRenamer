@@ -2,10 +2,10 @@
 	"lang": [
 		{
 			"version": "3.2.0.0",
-			"target": "daram_renamer",
+			"target": "DaramRenamer",
 			"culture": "ko-KR",
-			"author": "Daramkun",
-			"contact": "daramkun@daram.pe.kr",
+			"author": "Daramee",
+			"contact": "daramkun@live.com",
 			"contents": {
 				"daram_renamer": "다람 리네이머",
 				"renamer": "리네이머",
@@ -200,10 +200,10 @@
 		},
 		{
 			"version": "3.1.0.0",
-			"target": "daram_renamer",
+			"target": "DaramRenamer",
 			"culture": "en-US",
-			"author": "Daramkun",
-			"contact": "daramkun@daram.pe.kr",
+			"author": "Daramee",
+			"contact": "daramkun@live.com",
 			"contents": {
 				"daram_renamer": "Daram Renamer",
 				"renamer": "Renamer",

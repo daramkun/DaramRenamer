@@ -13,7 +13,7 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 		public string Name => "process_casecast_extension";
 		public bool CannotMultithreadProcess => false;
 
-		[Globalized ( "casecast" )]
+		[Localized ( "casecast" )]
 		public CasecastBW Casecast { get; set; } = CasecastBW.AllToLowercase;
 
 		public bool Process ( FileInfo file )

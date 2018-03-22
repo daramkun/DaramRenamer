@@ -30,10 +30,10 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 			catch { return false; }
 
 			string tag = "";
-			switch ( Tag)
+			switch ( Tag )
 			{
 				case MediaTag.AudioAlbum: tag = f.Tag.Album; break;
-				case MediaTag.AudioAlbumArtists: tag = ( Arguments != -1 ) ? f.Tag.AlbumArtists [ Arguments] : string.Join ( ",", f.Tag.AlbumArtists ); break;
+				case MediaTag.AudioAlbumArtists: tag = ( Arguments != -1 ) ? f.Tag.AlbumArtists [ Arguments ] : string.Join ( ",", f.Tag.AlbumArtists ); break;
 				case MediaTag.AudioComposers: tag = ( Arguments != -1 ) ? f.Tag.Composers [ Arguments ] : string.Join ( ",", f.Tag.Composers ); break;
 				case MediaTag.AudioCopyright:
 				case MediaTag.VideoCopyright: tag = f.Tag.Copyright; break;
@@ -68,7 +68,7 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 						if ( codec.MediaTypes == TagLib.MediaTypes.Audio )
 							tag = codec.Description;
 					break;
-					
+
 				case MediaTag.VideoWidth: tag = f.Properties.VideoWidth.ToString (); break;
 				case MediaTag.VideoHeight: tag = f.Properties.VideoHeight.ToString (); break;
 				case MediaTag.VideoCodec:

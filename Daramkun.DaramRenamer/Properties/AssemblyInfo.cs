@@ -19,7 +19,7 @@ using System.Windows;
 // ComVisible을 false로 설정하면 이 어셈블리의 형식이 COM 구성 요소에 
 // 표시되지 않습니다.  COM에서 이 어셈블리의 형식에 액세스하려면 
 // 해당 형식에 대해 ComVisible 특성을 true로 설정하십시오.
-[assembly: ComVisible ( true )]
+[assembly: ComVisible ( false )]
 
 //지역화 가능 응용 프로그램 빌드를 시작하려면 
 //.csproj 파일에서 <PropertyGroup> 내에 <UICulture>CultureYouAreCodingWith</UICulture>를

@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FileExtensionDetector;
+using Daramee.FileTypeDetector;
 
 namespace Daramkun.DaramRenamer.Processors.Extension
 {
@@ -21,7 +21,7 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 
 			using ( Stream stream = File.OpenRead ( file.OriginalFullPath ) )
 			{
-				var detector = ExtDetector.DetectDetector ( stream );
+				var detector = DetectorService.DetectDetector ( stream );
 				if ( detector == null )
 					return false;
 				file.ChangedFilename = $"{file.ChangedFilename}.{detector.Extension}";

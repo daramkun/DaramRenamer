@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Daramee.DaramCommonLib;
+using Daramee.FileTypeDetector;
 
 namespace Daramkun.DaramRenamer
 {
@@ -34,6 +35,8 @@ namespace Daramkun.DaramRenamer
 
 			TextWriterTraceListener textWriterTraceListner = new TextWriterTraceListener ( Console.Out );
 			Debug.Listeners.Add ( textWriterTraceListner );
+
+			DetectorService.AddDetectors ();
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
@@ -69,9 +72,6 @@ namespace Daramkun.DaramRenamer
 			}
 			else
 			{
-				if ( !Optionizer.SharedOptionizer.HardwareAccelerationMode )
-					RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-
 				args = e.Args;
 
 				base.OnStartup ( e );
@@ -91,7 +91,7 @@ namespace Daramkun.DaramRenamer
 
 		protected override void OnExit ( ExitEventArgs e )
 		{
-			Optionizer.SharedOptionizer.Save ();
+			Optionizer<SaveData>.SharedOptionizer.Save ();
 			base.OnExit ( e );
 		}
 	}

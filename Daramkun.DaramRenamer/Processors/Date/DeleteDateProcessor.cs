@@ -29,7 +29,7 @@ namespace Daramkun.DaramRenamer.Processors.Date
 			foreach ( var regex in dateRegex )
 			{
 				var proceed = Regex.Replace ( file.ChangedFilename, regex, "" );
-				if ( proceed != file.ChangedFilename)
+				if ( proceed != file.ChangedFilename )
 				{
 					file.ChangedFilename = proceed;
 					break;

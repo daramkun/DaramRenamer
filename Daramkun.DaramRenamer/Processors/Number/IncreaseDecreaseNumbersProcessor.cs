@@ -20,6 +20,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 
 		public bool Process ( FileInfo file )
 		{
+			if ( Count == 0 ) return true;
 			if ( file.ChangedFilename.Length == 0 ) return false;
 			string fn = Path.GetFileNameWithoutExtension ( file.ChangedFilename );
 
@@ -55,12 +56,6 @@ namespace Daramkun.DaramRenamer.Processors.Number
 
 			StringBuilder sb = new StringBuilder ();
 			sb.Append ( number );
-			int nsize = origin.Length - origin.Length;
-			while ( nsize > 0 )
-			{
-				sb.Insert ( offset, '0' );
-				--nsize;
-			}
 			fn = fn.Remove ( offset, size ).Insert ( offset, sb.ToString () );
 
 			file.ChangedFilename = fn + Path.GetExtension ( file.ChangedFilename );

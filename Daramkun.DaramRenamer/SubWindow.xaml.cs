@@ -219,7 +219,9 @@ namespace Daramkun.DaramRenamer
 						if ( text.Text == "" ) text.Text = "0";
 						var num = int.Parse ( text.Text ) + 1;
 						if ( num == int.MinValue ) num = int.MaxValue;
-						text.Text = num.ToString ();
+						//text.Text = num.ToString ();
+						prop.SetValue ( Processor, num );
+						text.GetBindingExpression ( TextBox.TextProperty ).UpdateTarget ();
 					};
 					Grid.SetRow ( upButton, 0 );
 					Grid.SetColumn ( upButton, 1 );
@@ -234,7 +236,9 @@ namespace Daramkun.DaramRenamer
 						if ( text.Text == "" ) text.Text = "0";
 						var num = int.Parse ( text.Text ) - 1;
 						if ( num == int.MaxValue ) num = int.MinValue;
-						text.Text = num.ToString ();
+						//text.Text = num.ToString ();
+						prop.SetValue ( Processor, num );
+						text.GetBindingExpression ( TextBox.TextProperty ).UpdateTarget ();
 					};
 					Grid.SetRow ( downButton, 1 );
 					Grid.SetColumn ( downButton, 1 );

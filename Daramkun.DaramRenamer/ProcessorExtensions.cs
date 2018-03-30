@@ -12,9 +12,15 @@ namespace Daramkun.DaramRenamer
 	{
 		public static Type GetMethodType ( this IProcessor processor )
 		{
-			Type type = processor.GetType ();
-
-			List<Type> paramTypes = new List<Type> ( 8 )
+			return GenerateGenericDelegate ( processor.GetType () );
+		}
+		public static Type GetMethodType ( this ICondition condition )
+		{
+			return GenerateGenericDelegate ( condition.GetType () );
+		}
+		private static Type GenerateGenericDelegate ( Type type )
+		{
+			List<Type> paramTypes = new List<Type> ( 4 )
 			{
 				typeof ( FileInfo )
 			};
@@ -48,7 +54,14 @@ namespace Daramkun.DaramRenamer
 
 		public static MethodInfo CreateMethod ( this IProcessor processor )
 		{
-			Type type = processor.GetType ();
+			return GenerateDynamicMethod ( processor.GetType (), processor.Name, "Process" );
+		}
+		public static MethodInfo CreateMethod ( this ICondition condition )
+		{
+			return GenerateDynamicMethod ( condition.GetType (), condition.Name, "IsValid" );
+		}
+		private static MethodInfo GenerateDynamicMethod ( Type type, string methodName, string callMethod )
+		{
 
 			List<PropertyInfo> propInfos = new List<PropertyInfo> ();
 			List<Type> paramTypes = new List<Type> ( 8 )
@@ -68,32 +81,13 @@ namespace Daramkun.DaramRenamer
 				propInfos [ ( int ) localized.Order ] = prop;
 			}
 
-			DynamicMethod method = new DynamicMethod ( processor.Name,
+			DynamicMethod method = new DynamicMethod ( methodName,
 				MethodAttributes.Static | MethodAttributes.Public,
 				CallingConventions.Standard,
 				typeof ( bool ), paramTypes.ToArray (), typeof ( ProcessorExtensions ), false );
 
-			/*using ( GroboIL il = new GroboIL ( method ) )
-			{
-				var processorVar = il.DeclareLocal ( type );
-				il.Newobj ( type.GetConstructor ( new Type [] { } ) );
-				il.Stloc ( processorVar );
-
-				int index = 1;
-				foreach ( PropertyInfo propInfo in propInfos )
-				{
-					il.Ldloc ( processorVar );
-					il.Ldarg ( index++ );
-					il.Call ( propInfo.GetSetMethod () );
-				}
-
-				il.Ldloc ( processorVar );
-				il.Ldarg ( 0 );
-				il.Call ( type.GetMethod ( "Process" ) );
-
-				il.Ret ();
-			}*/
 			ILGenerator gen = method.GetILGenerator ();
+
 			var processorVar = gen.DeclareLocal ( type );
 			gen.Emit ( OpCodes.Newobj, type.GetConstructor ( new Type [] { } ) );
 			gen.Emit ( OpCodes.Stloc, processorVar );
@@ -108,7 +102,7 @@ namespace Daramkun.DaramRenamer
 
 			gen.Emit ( OpCodes.Ldloc, processorVar );
 			gen.Emit ( OpCodes.Ldarg, 0 );
-			gen.Emit ( OpCodes.Callvirt, type.GetMethod ( "Process" ) );
+			gen.Emit ( OpCodes.Callvirt, type.GetMethod ( callMethod ) );
 
 			gen.Emit ( OpCodes.Ret );
 
@@ -127,6 +121,13 @@ namespace Daramkun.DaramRenamer
 					IProcessor processor = Activator.CreateInstance ( type ) as IProcessor;
 					MethodInfo methodInfo = processor.CreateMethod ();
 					Type methodType = processor.GetMethodType ();
+					delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
+				}
+				else if ( type.GetInterface ( typeof ( ICondition ).FullName ) != null )
+				{
+					ICondition condition = Activator.CreateInstance ( type ) as ICondition;
+					MethodInfo methodInfo = condition.CreateMethod ();
+					Type methodType = condition.GetMethodType ();
 					delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
 				}
 			}

@@ -1,6 +1,8 @@
-﻿using Daramkun.DaramRenamer.Processors;
+﻿using Daramee.DaramCommonLib;
+using Daramkun.DaramRenamer.Processors;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,8 @@ namespace Daramkun.DaramRenamer
 		{
 			InitializeComponent ();
 			Processor = new BatchProcessor ();
+
+			textEditor?.Focus ();
 		}
 
 		private void OK_Button ( object sender, RoutedEventArgs e )
@@ -44,6 +48,28 @@ namespace Daramkun.DaramRenamer
 		{
 			btnCancelButton?.Focus ();
 			CancelButtonClicked?.Invoke ( this, e );
+		}
+
+		private void LoadScript_Click ( object sender, RoutedEventArgs e )
+		{
+			Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog ()
+			{
+				Filter = Localizer.SharedStrings [ "batch_filters" ] + "(*.drjs)|*.drjs",
+			};
+			if ( ofd.ShowDialog () == false )
+				return;
+			textEditor.Text = File.ReadAllText ( ofd.FileName, Encoding.UTF8 );
+		}
+
+		private void SaveScript_Click ( object sender, RoutedEventArgs e )
+		{
+			Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog ()
+			{
+				Filter = Localizer.SharedStrings [ "batch_filters" ] + "(*.drjs)|*.drjs",
+			};
+			if ( sfd.ShowDialog () == false )
+				return;
+			File.WriteAllText ( sfd.FileName, textEditor.Text, Encoding.UTF8 );
 		}
 	}
 }

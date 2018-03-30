@@ -198,7 +198,8 @@
         "os_notice": "다람 리네이머는 Windows 7 또는 그 이상의 버전에서 실행해주세요.",
 
         "batch_load": "열기",
-        "batch_save": "저장"
+        "batch_save": "저장",
+        "batch_filters": ""
       }
 		},
 		{
@@ -399,7 +400,8 @@
         "os_notice": "Please execute Daram Renamer in Windows 7 or Higher version.",
 
         "batch_load": "Load",
-        "batch_save": "Save"
+        "batch_save": "Save",
+        "batch_filters": "Daram Renamer Javascript File"
       }
 		}
 	]

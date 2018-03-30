@@ -16,7 +16,7 @@ namespace Daramkun.DaramRenamer
 	/// <summary>
 	/// SubWindow.xaml에 대한 상호 작용 논리
 	/// </summary>
-	public partial class SubWindow : UserControl
+	public partial class SubWindow : UserControl, ISubWindow
 	{
 		public event RoutedEventHandler OKButtonClicked;
 		public event RoutedEventHandler CancelButtonClicked;
@@ -135,7 +135,9 @@ namespace Daramkun.DaramRenamer
 						if ( text.Text == "" ) text.Text = "0";
 						var num = uint.Parse ( text.Text ) + 1;
 						if ( num == uint.MinValue ) num = uint.MaxValue;
-						text.Text = num.ToString ();
+						//text.Text = num.ToString ();
+						prop.SetValue ( Processor, num );
+						text.GetBindingExpression ( TextBox.TextProperty ).UpdateTarget ();
 					};
 					Grid.SetRow ( upButton, 0 );
 					Grid.SetColumn ( upButton, 1 );
@@ -150,7 +152,9 @@ namespace Daramkun.DaramRenamer
 						if ( text.Text == "" ) text.Text = "0";
 						var num = uint.Parse ( text.Text ) - 1;
 						if ( num == uint.MaxValue ) num = uint.MinValue;
-						text.Text = num.ToString ();
+						//text.Text = num.ToString ();
+						prop.SetValue ( Processor, num );
+						text.GetBindingExpression ( TextBox.TextProperty ).UpdateTarget ();
 					};
 					Grid.SetRow ( downButton, 1 );
 					Grid.SetColumn ( downButton, 1 );

@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Daramkun.DaramRenamer.SubWindow_Batch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Daramkun.DaramRenamer"
+             xmlns:dcl="clr-namespace:Daramee.DaramCommonLib;assembly=Daramee.DaramCommonLib"
+             xmlns:ae="http://icsharpcode.net/sharpdevelop/avalonedit"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+			 DataContext="{x:Static dcl:Localizer.SharedStrings}">
+    <Border BorderBrush="DeepSkyBlue" BorderThickness="1" Width="480" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Orientation="Vertical" Background="White">
+            <!-- Title bar -->
+            <Grid Background="LightSkyBlue" Height="24" HorizontalAlignment="Stretch">
+                <Grid Background="SkyBlue" Height="13" VerticalAlignment="Bottom" />
+                <TextBlock Name="overlayWindowTitle" Text="{Binding Path=[batch_process]}" Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="5,0,0,0" />
+
+                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Content="X" Margin="5" FontSize="8" Width="14" Height="14" Style="{StaticResource ButtonStyle}" Background="LightPink" Foreground="White" Click="Cancel_Button" />
+            </Grid>
+
+            <!-- Contents -->
+            <StackPanel Orientation="Vertical" Margin="15">
+                <Grid Name="contentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+                        <Button Content="{Binding Path=[batch_load]}" Style="{StaticResource ButtonStyle}" Width="48" Height="18" Margin="0,0,5,0" />
+                        <Button Content="{Binding Path=[batch_save]}" Style="{StaticResource ButtonStyle}" Width="48" Height="18" />
+                    </StackPanel>
+
+                    <ae:TextEditor Grid.Row="1" Height="240"
+                                   FontFamily="Consolas" FontSize="12"
+                                   ShowLineNumbers="True" SyntaxHighlighting="JavaScript"
+                                   HorizontalScrollBarVisibility="Auto">
+                        
+                    </ae:TextEditor>
+                </Grid>
+            </StackPanel>
+
+            <!-- Buttons -->
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,15">
+                <Button Style="{StaticResource ButtonStyle}" Name="btnOKButton" Content="{Binding Path=[ok_button]}" Width="64" Height="22" Margin="0,0,5,0" IsDefault="True" Click="OK_Button" />
+                <Button Style="{StaticResource ButtonStyle}" Name="btnCancelButton" Content="{Binding Path=[cancel_button]}" Width="64" Height="22" Click="Cancel_Button" IsCancel="True" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

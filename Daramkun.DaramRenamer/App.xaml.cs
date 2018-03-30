@@ -11,6 +11,8 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using Daramee.DaramCommonLib;
 using Daramee.FileTypeDetector;
+using Daramkun.DaramRenamer.Processors;
+using Daramkun.DaramRenamer.Processors.Filename;
 
 namespace Daramkun.DaramRenamer
 {
@@ -53,6 +55,8 @@ namespace Daramkun.DaramRenamer
 					Debug.Listeners.Remove ( textWriterTraceListnerForFile );
 				}
 			};
+
+			ProcessorExtensions.CollectDelegates ();
 		}
 
 		string [] args;

@@ -128,12 +128,15 @@ namespace Daramkun.DaramRenamer
 				( processor as ManualEditProcessor ).ChangePath = ( args [ 0 ] as FileInfo ).ChangedPath;
 				( processor as ManualEditProcessor ).ProcessingFileInfo = args [ 0 ] as FileInfo;
 			}
-			var window = new SubWindow ( processor );
+			ISubWindow window = ( processor is BatchProcessor )
+				? new SubWindow_Batch () as ISubWindow
+				: new SubWindow ( processor );
+			UserControl windowControl = window as UserControl;
 			window.OKButtonClicked += SubWindow_OKButtonClicked;
 			window.CancelButtonClicked += SubWindow_CancelButtonClicked;
-			window.VerticalAlignment = VerticalAlignment.Center;
-			window.HorizontalAlignment = HorizontalAlignment.Center;
-			overlayWindowContainer.Children.Add ( window );
+			windowControl.VerticalAlignment = VerticalAlignment.Center;
+			windowControl.HorizontalAlignment = HorizontalAlignment.Center;
+			overlayWindowContainer.Children.Add ( windowControl );
 			overlayWindowGrid.Visibility = Visibility.Visible;
 		}
 
@@ -364,5 +367,10 @@ namespace Daramkun.DaramRenamer
 		private void AddMediaTag_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddMediaTagProcessor> (); }
 		private void AddDocumentTag_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddDocumentTagProcessor> (); }
 		private void AddFileHash_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddHashProcessor> (); }
+
+		private void BatchProcess_Click ( object sender, RoutedEventArgs e )
+		{
+			ShowPopup<BatchProcessor> ();
+		}
 	}
 }

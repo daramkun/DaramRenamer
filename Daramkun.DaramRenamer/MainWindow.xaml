@@ -45,12 +45,14 @@
 				<MenuItem Header="{Binding Path=[process_change_path]}" Click="ChangePath_Click" />
 				<MenuItem Header="{Binding Path=[process_move_path_relative]}" Click="MovePathRelative_Click" IsEnabled="False" />
 			</MenuItem>
-			<MenuItem Header="{Binding Path=[properties_processes]}">
-				<MenuItem Header="{Binding Path=[process_add_media_tag]}" Click="AddMediaTag_Click" />
-				<MenuItem Header="{Binding Path=[process_add_document_tag]}" Click="AddDocumentTag_Click" />
-				<MenuItem Header="{Binding Path=[process_add_file_hash]}" Click="AddFileHash_Click" />
-			</MenuItem>
-			<Separator />
+            <MenuItem Header="{Binding Path=[properties_processes]}">
+                <MenuItem Header="{Binding Path=[process_add_media_tag]}" Click="AddMediaTag_Click" />
+                <MenuItem Header="{Binding Path=[process_add_document_tag]}" Click="AddDocumentTag_Click" />
+                <MenuItem Header="{Binding Path=[process_add_file_hash]}" Click="AddFileHash_Click" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{Binding Path=[batch_process]}" Click="BatchProcess_Click" />
+            <Separator />
 			<MenuItem Header="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
 		</ContextMenu>
 	</Window.Resources>
@@ -237,15 +239,7 @@ Creative Commons License (CCL) 3.0 - BY
 Free
 
 ------------------------------
-5. WPF TaskDialog
-------------------------------
-This work is licensed under the The Code Project Open License (CPOL) 1.02. To view a copy of this license, visit http://www.codeproject.com/info/cpol10.aspx.
-
-Author: Sean A. Hanley
-Source: https://github.com/yadyn/WPF-Task-Dialog
-
-------------------------------
-6. WPF Native Folder Browser
+5. WPF Native Folder Browser
 ------------------------------
 Microsoft Public License (Ms-PL)
 
@@ -271,19 +265,10 @@ A "contributor" is any person that distributes its contribution under this licen
 Source: https://wpffolderbrowser.codeplex.com
 
 ------------------------------
-7. Button style
+6. Button style
 ------------------------------
 Author: 斯克迪亚
-Source: http://www.cnblogs.com/SkyD/archive/2008/07/15/1243043.html
-
-------------------------------
-8. TagLib#
-------------------------------
-TagLib# is free/open source software, released under the LGPL.
-
-Author: Mono Project
-Original Source: https://github.com/mono/taglib-sharp
-Modified Source: https://github.com/Daramkun/DaramRenamer/tree/master/Daramkun.DaramRenamer/ExternalLibs/TagLib]]>
+Source: http://www.cnblogs.com/SkyD/archive/2008/07/15/1243043.html]]>
 					</TextBox>
 				</Grid>
 			</TabItem>

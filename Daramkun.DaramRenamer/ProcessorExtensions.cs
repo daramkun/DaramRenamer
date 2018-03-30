@@ -1,5 +1,4 @@
-﻿using GrEmit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -73,8 +72,8 @@ namespace Daramkun.DaramRenamer
 				MethodAttributes.Static | MethodAttributes.Public,
 				CallingConventions.Standard,
 				typeof ( bool ), paramTypes.ToArray (), typeof ( ProcessorExtensions ), false );
-			
-			using ( GroboIL il = new GroboIL ( method ) )
+
+			/*using ( GroboIL il = new GroboIL ( method ) )
 			{
 				var processorVar = il.DeclareLocal ( type );
 				il.Newobj ( type.GetConstructor ( new Type [] { } ) );
@@ -93,7 +92,25 @@ namespace Daramkun.DaramRenamer
 				il.Call ( type.GetMethod ( "Process" ) );
 
 				il.Ret ();
+			}*/
+			ILGenerator gen = method.GetILGenerator ();
+			var processorVar = gen.DeclareLocal ( type );
+			gen.Emit ( OpCodes.Newobj, type.GetConstructor ( new Type [] { } ) );
+			gen.Emit ( OpCodes.Stloc, processorVar );
+
+			int index = 1;
+			foreach ( PropertyInfo propInfo in propInfos )
+			{
+				gen.Emit ( OpCodes.Ldloc, processorVar );
+				gen.Emit ( OpCodes.Ldarg, index++ );
+				gen.Emit ( OpCodes.Callvirt, propInfo.GetSetMethod () );
 			}
+
+			gen.Emit ( OpCodes.Ldloc, processorVar );
+			gen.Emit ( OpCodes.Ldarg, 0 );
+			gen.Emit ( OpCodes.Callvirt, type.GetMethod ( "Process" ) );
+
+			gen.Emit ( OpCodes.Ret );
 
 			return method;
 		}

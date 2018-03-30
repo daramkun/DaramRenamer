@@ -274,10 +274,6 @@
       <Project>{9d610c25-94ee-4d2a-bb36-3afb988b243e}</Project>
       <Name>Daramee.FileTypeDetector</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\gremit\GrEmit\GrEmit.csproj">
-      <Project>{2fdd66f5-a188-4d6e-8a8a-b9327b78f014}</Project>
-      <Name>GrEmit</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\taglib-sharp\src\taglib-sharp.csproj">
       <Project>{194ec2b7-c208-46e6-a45b-b0b4f41234b7}</Project>
       <Name>taglib-sharp</Name>

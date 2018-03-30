@@ -11,5 +11,7 @@ namespace Daramkun.DaramRenamer
 	{
 		event RoutedEventHandler OKButtonClicked;
 		event RoutedEventHandler CancelButtonClicked;
+
+		IProcessor Processor { get; }
 	}
 }

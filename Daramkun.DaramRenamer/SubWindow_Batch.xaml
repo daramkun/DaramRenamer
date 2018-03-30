@@ -32,7 +32,7 @@
                         <Button Content="{Binding Path=[batch_save]}" Style="{StaticResource ButtonStyle}" Width="48" Height="18" />
                     </StackPanel>
 
-                    <ae:TextEditor Grid.Row="1" Height="240"
+                    <ae:TextEditor x:Name="textEditor" Grid.Row="1" Height="240"
                                    FontFamily="Consolas" FontSize="12"
                                    ShowLineNumbers="True" SyntaxHighlighting="JavaScript"
                                    HorizontalScrollBarVisibility="Auto">

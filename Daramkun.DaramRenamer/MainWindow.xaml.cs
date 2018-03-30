@@ -146,7 +146,7 @@ namespace Daramkun.DaramRenamer
 			if ( apply )
 			{
 				undoManager.SaveToUndoStack ( Files );
-				var processor = ( overlayWindowContainer.Children [ 0 ] as SubWindow ).Processor;
+				var processor = ( overlayWindowContainer.Children [ 0 ] as ISubWindow ).Processor;
 				if ( processor is ManualEditProcessor )
 				{
 					processor.Process ( ( processor as ManualEditProcessor ).ProcessingFileInfo );

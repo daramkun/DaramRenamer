@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramkun.DaramRenamer.Processors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,13 +24,18 @@ namespace Daramkun.DaramRenamer
 		public event RoutedEventHandler OKButtonClicked;
 		public event RoutedEventHandler CancelButtonClicked;
 		
+		public IProcessor Processor { get; private set; }
+
 		public SubWindow_Batch ()
 		{
 			InitializeComponent ();
+			Processor = new BatchProcessor ();
 		}
 
 		private void OK_Button ( object sender, RoutedEventArgs e )
 		{
+			( Processor as BatchProcessor ).Script = textEditor.Text;
+
 			btnOKButton?.Focus ();
 			OKButtonClicked?.Invoke ( this, e );
 		}

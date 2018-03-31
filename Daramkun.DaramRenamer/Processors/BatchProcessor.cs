@@ -22,14 +22,18 @@ namespace Daramkun.DaramRenamer.Processors
 
         public bool Process ( FileInfo file )
 		{
-			Jint.Engine engine = new Jint.Engine ();
+			Jint.Engine engine = new Jint.Engine ( cfg => cfg.AllowClr ( Assembly.GetAssembly ( typeof ( TagLib.File ) ) ) );
 			engine.SetValue ( "file", file );
 
 			foreach ( Delegate dele in ProcessorExtensions.Delegates )
 				engine.SetValue ( dele.Method.Name, dele );
 
-			engine.Execute ( Script );
-			return true;
+			try
+			{
+				Jint.Engine proceed = engine.Execute ( Script );
+				return proceed.GetCompletionValue ().AsBoolean ();
+			}
+			catch { return false; }
 		}
 	}
 }

@@ -36,7 +36,8 @@
                                    FontFamily="Consolas" FontSize="12"
                                    ShowLineNumbers="True" SyntaxHighlighting="JavaScript"
                                    HorizontalScrollBarVisibility="Auto">
-                        
+                        <![CDATA[
+                        true;]]>
                     </ae:TextEditor>
                 </Grid>
             </StackPanel>

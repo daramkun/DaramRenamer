@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -131,6 +132,18 @@ namespace Daramkun.DaramRenamer
 					delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
 				}
 			}
+			delegates.Add ( new Func<string> ( get_renamer_version ) );
+			delegates.Add ( new Func<string, string> ( get_file_content ) );
+		}
+
+		private static string get_renamer_version ()
+		{
+			Version version = Assembly.GetExecutingAssembly ().GetName ().Version;
+			return $"{version.Major}.{version.Minor}.{version.Build}";
+		}
+		private static string get_file_content ( string filename )
+		{
+			try { return File.ReadAllText ( filename, Encoding.UTF8 ); } catch { return null; }
 		}
 	}
 }

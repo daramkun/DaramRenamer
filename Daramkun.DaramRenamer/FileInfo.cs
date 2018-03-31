@@ -86,13 +86,13 @@ namespace Daramkun.DaramRenamer
 			}
 		}
 
-		public bool Move ( bool overwrite, out ErrorCode errorMessage )
+		public static bool Move ( FileInfo fileInfo, bool overwrite, out ErrorCode errorMessage )
 		{
 			try
 			{
-				if ( overwrite && File.Exists ( ChangedFullPath ) ) File.Delete ( ChangedFullPath );
-				File.Move ( OriginalFullPath, ChangedFullPath );
-				Changed ();
+				if ( overwrite && File.Exists ( fileInfo.ChangedFullPath ) ) File.Delete ( fileInfo.ChangedFullPath );
+				File.Move ( fileInfo.OriginalFullPath, fileInfo.ChangedFullPath );
+				fileInfo.Changed ();
 				errorMessage = ErrorCode.NoError;
 				return true;
 			}
@@ -104,12 +104,12 @@ namespace Daramkun.DaramRenamer
 			return false;
 		}
 
-		public bool Copy ( bool overwrite, out ErrorCode errorMessage )
+		public static bool Copy ( FileInfo fileInfo, bool overwrite, out ErrorCode errorMessage )
 		{
 			try
 			{
-				File.Copy ( OriginalFullPath, ChangedFullPath, overwrite );
-				Changed ();
+				File.Copy ( fileInfo.OriginalFullPath, fileInfo.ChangedFullPath, overwrite );
+				fileInfo.Changed ();
 				errorMessage = ErrorCode.NoError;
 				return true;
 			}

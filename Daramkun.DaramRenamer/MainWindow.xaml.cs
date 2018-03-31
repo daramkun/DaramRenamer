@@ -229,9 +229,14 @@ namespace Daramkun.DaramRenamer
 			int failed = 0;
 			Parallel.ForEach<FileInfo> ( Files, ( fileInfo ) =>
 			{
+				if ( option.Options.AutomaticFilenameFix )
+				{
+					fileInfo.ReplaceInvalidPathCharacters ();
+					fileInfo.ReplaceInvalidFilenameCharacters ();
+				}
 				ErrorCode errorMessage = ErrorCode.NoError;
-				if ( option.Options.RenameMode == RenameMode.Move ) fileInfo.Move ( option.Options.Overwrite, out errorMessage );
-				else if ( option.Options.RenameMode == RenameMode.Copy ) fileInfo.Copy ( option.Options.Overwrite, out errorMessage );
+				if ( option.Options.RenameMode == RenameMode.Move ) FileInfo.Move ( fileInfo, option.Options.Overwrite, out errorMessage );
+				else if ( option.Options.RenameMode == RenameMode.Copy ) FileInfo.Copy ( fileInfo, option.Options.Overwrite, out errorMessage );
 				Dispatcher.BeginInvoke ( ( Action ) ( () => { ++progressBar.Value; } ) );
 				if ( errorMessage != ErrorCode.NoError )
 					Interlocked.Increment ( ref failed );
@@ -242,6 +247,12 @@ namespace Daramkun.DaramRenamer
 			MessageBox ( Localizer.SharedStrings [ "applied" ], string.Format ( Localizer.SharedStrings [ "applied_message" ],
 				progressBar.Value, progressBar.Maximum ),
 				VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ] );
+
+			if ( failed == 0 && option.Options.AutomaticListCleaning )
+			{
+				undoManager.SaveToUndoStack ( Files );
+				Files.Clear ();
+			}
 		}
 
 		private void Menu_System_Undo ( object sender, RoutedEventArgs e )

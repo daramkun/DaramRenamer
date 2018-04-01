@@ -51,7 +51,7 @@ namespace Daramkun.DaramRenamer
 			ChangedFilename = file.ChangedFilename;
 		}
 
-		private char GetInvalidToValid ( char ch )
+		private static char GetInvalidToValid ( char ch )
 		{
 			switch ( ch )
 			{
@@ -64,6 +64,8 @@ namespace Daramkun.DaramRenamer
 				case '|': return '｜';
 				case ':': return '：';
 				case '"': return '＂';
+				case '%': return '％';
+				case '.': return '．';
 				default: return ch;
 			}
 		}

@@ -40,16 +40,15 @@ namespace Daramkun.DaramRenamer.Processors.Number
 				else
 				{
 					if ( meetTheNumber )
-					{
-						if ( Position == OnePointPosition.EndPoint )
-							offset = fn.Length - ( offset + size );
 						break;
-					}
 				}
 				++count;
 			}
 
 			if ( !meetTheNumber ) return false;
+
+			if ( Position == OnePointPosition.EndPoint )
+				offset = fn.Length - ( offset + size );
 
 			string origin = fn.Substring ( offset, size );
 			int number = int.Parse ( origin ) + Count;

@@ -18,7 +18,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 
 		public bool Process ( FileInfo file )
 		{
-			var index = ( App.Current.MainWindow as MainWindow ).Files.IndexOf ( file ) + 1;
+			var index = FileInfo.Files.IndexOf ( file ) + 1;
 			file.ChangedFilename = string.Format ( Position == OnePointPosition.EndPoint ? "{0}{1}{2}" : "{1}{0}{2}",
 				Path.GetFileNameWithoutExtension ( file.ChangedFilename ), index, Path.GetExtension ( file.ChangedFilename ) );
 			return true;

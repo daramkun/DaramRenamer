@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -42,6 +43,8 @@ namespace Daramkun.DaramRenamer
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
+				Daramkun.DaramRenamer.MainWindow.SharedWindow.UndoManager.Backup ();
+
 				Daramkun.DaramRenamer.MainWindow.MessageBox ( Localizer.SharedStrings [ "error_raised" ], Localizer.SharedStrings [ "please_check_log" ],
 					TaskDialogInterop.VistaTaskDialogIcon.Error, "OK" );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
@@ -65,13 +68,19 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( e.Args.Length > 0 && e.Args [ 0 ] == "--cmd" )
 			{
+				ConsoleManager.Show ();
 				Debug.WriteLine ( "NOTICE: Sorry. Command Line Mode is not implemented in this version." );
+				ConsoleManager.Hide ();
 				Shutdown ( 0 );
 			}
-			else if ( e.Args.Length == 1 && ( e.Args [ 0 ] == "--version" || e.Args [ 0 ] == "-v" ) )
+			else if ( e.Args.Contains ( "--version" ) || e.Args.Contains ( "-v" ) )
 			{
 				Version version = Assembly.GetExecutingAssembly ().GetName ().Version;
-				Debug.WriteLine ( $"Daram Renamer v{version.Major}.{version.Minor}.{version.Build}.{version.Revision}" );
+				var message = $"Daram Renamer v{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+				Debug.WriteLine ( message );
+				ConsoleManager.Show ();
+				Console.WriteLine ( message );
+				ConsoleManager.Hide ();
 				Shutdown ( 0 );
 			}
 			else

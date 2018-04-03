@@ -121,42 +121,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Conditions\ExtensionCondition.cs" />
-    <Compile Include="Conditions\IsTextFileCondition.cs" />
-    <Compile Include="Conditions\NoOperationCondition.cs" />
-    <Compile Include="Conditions\RegexpCondition.cs" />
-    <Compile Include="FileInfo.cs" />
-    <Compile Include="IProcessor.cs" />
-    <Compile Include="ExternalLibs\OpenDocumentTag\File.cs" />
     <Compile Include="ISubWindow.cs" />
-    <Compile Include="LocalizedAttribute.cs" />
-    <Compile Include="ProcessorExtensions.cs" />
     <Compile Include="SaveData.cs" />
-    <Compile Include="Processors\BatchProcessor.cs" />
-    <Compile Include="Processors\Date\AddDateProcessor.cs" />
-    <Compile Include="Processors\Date\DeleteDateProcessor.cs" />
-    <Compile Include="Processors\Extension\AddExtensionAutomatedProcessor.cs" />
-    <Compile Include="Processors\Extension\AddExtensionProcessor.cs" />
-    <Compile Include="Processors\Extension\CasecastExtensionProcessor.cs" />
-    <Compile Include="Processors\Extension\DeleteExtensionProcessor.cs" />
-    <Compile Include="Processors\Extension\ReplaceExtensionProcessor.cs" />
-    <Compile Include="Processors\Filename\CasecastProcessor.cs" />
-    <Compile Include="Processors\Filename\ConcatenateProcessor.cs" />
-    <Compile Include="Processors\Filename\DeleteBlockProcessor.cs" />
-    <Compile Include="Processors\Filename\DeleteFilenameProcessor.cs" />
-    <Compile Include="Processors\Filename\ReplacePlainProcessor.cs" />
-    <Compile Include="Processors\Filename\ReplaceRegexpProcessor.cs" />
-    <Compile Include="Processors\Filename\SubstringProcessor.cs" />
-    <Compile Include="Processors\Filename\TrimmingProcessor.cs" />
-    <Compile Include="Processors\ManualEditProcessor.cs" />
-    <Compile Include="Processors\Number\AddIndexNumberProcessor.cs" />
-    <Compile Include="Processors\Number\DeleteWithoutNumbersProcessor.cs" />
-    <Compile Include="Processors\Number\IncreaseDecreaseNumbersProcessor.cs" />
-    <Compile Include="Processors\Number\NumberCountMatchProcessor.cs" />
-    <Compile Include="Processors\FilePath\ChangePathProcessor.cs" />
-    <Compile Include="Processors\Tag\AddDocumentTagProcessor.cs" />
-    <Compile Include="Processors\Tag\AddHashProcessor.cs" />
-    <Compile Include="Processors\Tag\AddMediaTagProcessor.cs" />
     <Compile Include="SubWindow.xaml.cs">
       <DependentUpon>SubWindow.xaml</DependentUpon>
     </Compile>
@@ -281,6 +247,10 @@
     <ProjectReference Include="..\..\WPF-Task-Dialog\TaskDialog\TaskDialog.csproj">
       <Project>{37fd53f7-8a8f-4427-8ff4-6299e2933a7e}</Project>
       <Name>TaskDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daramkun.DaramRenamer.Engine\Daramkun.DaramRenamer.Engine.csproj">
+      <Project>{387c59a9-953d-4260-ad9a-105834d6876f}</Project>
+      <Name>Daramkun.DaramRenamer.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

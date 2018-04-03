@@ -114,7 +114,7 @@ namespace Daramkun.DaramRenamer
 		public static IReadOnlyList<Delegate> Delegates => delegates;
 		public static void CollectDelegates ()
 		{
-			Assembly assembly = Assembly.GetExecutingAssembly ();
+			Assembly assembly = Assembly.Load ( "Daramkun.DaramRenamer.Engine" );
 			foreach ( Type type in assembly.GetTypes () )
 			{
 				if ( type.GetInterface ( typeof ( IProcessor ).FullName ) != null )

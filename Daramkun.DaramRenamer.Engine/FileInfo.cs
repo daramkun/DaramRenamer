@@ -20,6 +20,8 @@ namespace Daramkun.DaramRenamer
 	[Serializable]
 	public class FileInfo : IComparable<FileInfo>, INotifyPropertyChanged
 	{
+		public static ObservableCollection<FileInfo> Files { get; set; } = new ObservableCollection<FileInfo> ();
+
 		string originalFullPath;
 		string changedPath, changedFilename;
 		

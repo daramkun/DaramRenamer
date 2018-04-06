@@ -390,5 +390,19 @@ namespace Daramkun.DaramRenamer
 		{
 			ShowPopup<BatchProcessor> ();
 		}
+
+		private async void licenseTextBox_Loaded ( object sender, RoutedEventArgs e )
+		{
+			string downloaded = null;
+			if ( File.Exists ( "DaramRenamer.License.txt" ) && ( DateTime.Today - File.GetLastWriteTime ( "DaramRenamer.License.txt" ) ).Days < 7 )
+				downloaded = File.ReadAllText ( "DaramRenamer.License.txt" );
+			else
+			{
+				WebClient client = new WebClient ();
+				downloaded = await client.DownloadStringTaskAsync ( "https://raw.githubusercontent.com/daramkun/DaramRenamer/master/LICENSE" );
+				File.WriteAllText ( "DaramRenamer.License.txt", downloaded );
+			}
+			licenseTextBox.Text = downloaded;
+		}
 	}
 }

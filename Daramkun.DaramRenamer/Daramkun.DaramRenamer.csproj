@@ -203,33 +203,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\accept.png" />
-    <Resource Include="Resources\application_get.png" />
-    <Resource Include="Resources\arrow_down.png" />
-    <Resource Include="Resources\arrow_redo.png" />
-    <Resource Include="Resources\arrow_undo.png" />
-    <Resource Include="Resources\arrow_up.png" />
-    <Resource Include="Resources\brick_delete.png" />
-    <Resource Include="Resources\chart_bar.png" />
-    <Resource Include="Resources\chart_curve.png" />
-    <Resource Include="Resources\chart_line_delete.png" />
-    <Resource Include="Resources\date_add.png" />
-    <Resource Include="Resources\delete.png" />
-    <Resource Include="Resources\email_go.png" />
-    <Resource Include="Resources\folder.png" />
-    <Resource Include="Resources\layout_edit.png" />
-    <Resource Include="Resources\pencil_delete.png" />
-    <Resource Include="Resources\pilcrow.png" />
     <Resource Include="Resources\ProgramIcon.ico" />
-    <Resource Include="Resources\rainbow.png" />
-    <Resource Include="Resources\shape_move_forwards.png" />
-    <Resource Include="Resources\tag_blue_add.png" />
-    <Resource Include="Resources\tag_blue_delete.png" />
-    <Resource Include="Resources\tag_blue_edit.png" />
-    <Resource Include="Resources\textfield_rename.png" />
-    <Resource Include="Resources\text_list_numbers.png" />
-    <Resource Include="Resources\text_lowercase.png" />
-    <Resource Include="Resources\text_uppercase.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DaramCommonLib\Daramee.DaramCommonLib\Daramee.DaramCommonLib.csproj">

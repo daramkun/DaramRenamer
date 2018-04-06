@@ -66,29 +66,8 @@ namespace Daramkun.DaramRenamer
 
 		protected override void OnStartup ( StartupEventArgs e )
 		{
-			if ( e.Args.Length > 0 && e.Args [ 0 ] == "--cmd" )
-			{
-				ConsoleManager.Show ();
-				Debug.WriteLine ( "NOTICE: Sorry. Command Line Mode is not implemented in this version." );
-				ConsoleManager.Hide ();
-				Shutdown ( 0 );
-			}
-			else if ( e.Args.Contains ( "--version" ) || e.Args.Contains ( "-v" ) )
-			{
-				Version version = Assembly.GetExecutingAssembly ().GetName ().Version;
-				var message = $"Daram Renamer v{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
-				Debug.WriteLine ( message );
-				ConsoleManager.Show ();
-				Console.WriteLine ( message );
-				ConsoleManager.Hide ();
-				Shutdown ( 0 );
-			}
-			else
-			{
-				args = e.Args;
-
-				base.OnStartup ( e );
-			}
+			args = e.Args;
+			base.OnStartup ( e );
 		}
 
 		protected override void OnActivated ( EventArgs e )

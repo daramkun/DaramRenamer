@@ -37,37 +37,17 @@ namespace Daramkun.DaramRenamer
 	}
 	public enum MediaTag
 	{
-		AudioBitrate,
-		AudioSamplerate,
-		AudioChannels,
-		AudioBitsPerSample,
-		AudioCodec,
-		AudioAlbum,
-		AudioAlbumArtists,
-		AudioComposers,
-		AudioConductor,
-		AudioCopyright,
-		AudioDisc,
-		AudioDiscCount,
-		AudioGenres,
-		AudioPerformers,
-		AudioTitle,
-		AudioTrack,
-		AudioTrackCount,
-		AudioYear,
-		AudioDuration,
-		VideoWidth,
-		VideoHeight,
-		VideoCodec,
-		VideoCopyright,
-		VideoGenres,
-		VideoTitle,
-		VideoYear,
-		VideoDuration,
-		ImageWidth,
-		ImageHeight,
-		ImageCodec,
-		ImageQuality,
+		AudioBitrate, AudioSamplerate, AudioChannels, AudioBitsPerSample,
+		AudioCodec, AudioAlbum, AudioAlbumArtists, AudioComposers,
+		AudioPerformers, AudioCopyright, AudioDisc, AudioDiscCount,
+		AudioGenres, AudioTitle, AudioTrack, AudioTrackCount,
+
+		AudioConductor, AudioYear, AudioDuration,
+
+		VideoTitle, VideoDuration, VideoWidth, VideoHeight,
+		VideoCodec, VideoGenres, VideoYear, VideoCopyright,
+
+		ImageWidth, ImageHeight, ImageCodec, ImageQuality,
 	}
 	public enum DocumentTag
 	{

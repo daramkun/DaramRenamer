@@ -407,14 +407,30 @@ namespace Daramkun.DaramRenamer
 					{
 						VerticalAlignment = VerticalAlignment.Center
 					};
-					foreach ( var item in new [] { "media_tag_audio_album", "media_tag_audio_album_artists", "media_tag_audio_composers",
-						"media_tag_audio_copyright", "media_tag_audio_disc", "media_tag_audio_disc_count", "media_tag_audio_genres",
-						"media_tag_audio_performers", "media_tag_audio_title", "media_tag_audio_track", "media_tag_audio_track_count",
-						"media_tag_audio_year", "media_tag_audio_duration", "media_tag_audio_codec", "media_tag_audio_samplerate",
-						"media_tag_audio_bitrate", "media_tag_audio_bitspersample", "media_tag_audio_channels", "media_tag_image_width",
-						"media_tag_image_height", "media_tag_image_quality", "media_tag_image_codec", "media_tag_video_genres",
-						"media_tag_video_title", "media_tag_video_year", "media_tag_video_duration", "media_tag_video_width",
-						"media_tag_video_height", "media_tag_video_codec" } )
+					/*
+					AudioBitrate, AudioSamplerate, AudioChannels, AudioBitsPerSample,
+					AudioCodec, AudioAlbum, AudioAlbumArtists, AudioComposers,
+					AudioPerformers, AudioCopyright, AudioDisc, AudioDiscCount,
+					AudioGenres, AudioTitle, AudioTrack, AudioTrackCount,
+
+					AudioConductor, AudioYear, AudioDuration,
+
+					VideoTitle, VideoDuration, VideoWidth, VideoHeight,
+					VideoCodec, VideoGenres, VideoYear, VideoCopyright,
+
+					ImageWidth, ImageHeight, ImageCodec, ImageQuality,*/
+					foreach ( var item in new [] {
+						"media_tag_audio_bitrate", "media_tag_audio_samplerate", "media_tag_audio_channels", "media_tag_audio_bitspersample",
+						"media_tag_audio_codec", "media_tag_audio_album", "media_tag_audio_album_artists", "media_tag_audio_composers",
+						"media_tag_audio_performers", "media_tag_audio_copyright", "media_tag_audio_disc", "media_tag_audio_disc_count",
+						"media_tag_audio_genres", "media_tag_audio_title", "media_tag_audio_track", "media_tag_audio_track_count",
+						"media_tag_audio_conductor", "media_tag_audio_year", "media_tag_audio_duration",
+
+						"media_tag_video_title", "media_tag_video_duration", "media_tag_video_width", "media_tag_video_height",
+						"media_tag_video_codec", "media_tag_video_genres", "media_tag_video_year", "media_tag_video_copyright",
+
+						"media_tag_image_width", "media_tag_image_height", "media_tag_image_codec", "media_tag_image_quality",
+					} )
 						comboBox.Items.Add ( Localizer.SharedStrings [ item ] );
 					comboBox.SelectedIndex = ( int ) ( MediaTag ) prop.GetValue ( Processor );
 					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( MediaTag ) comboBox.SelectedIndex ); };

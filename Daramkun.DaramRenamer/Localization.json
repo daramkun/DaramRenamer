@@ -158,6 +158,7 @@
         "media_tag_audio_disc_count": "음악 총 디스크 수",
         "media_tag_audio_genres": "음악 장르 목록",
         "media_tag_audio_performers": "참여 음악가 목록",
+        "media_tag_audio_conductor": "지휘자",
         "media_tag_audio_title": "음악 제목",
         "media_tag_audio_track": "음악 트랙번호",
         "media_tag_audio_track_count": "음악 총 트랙 수",
@@ -179,6 +180,7 @@
         "media_tag_video_width": "영상 가로 크기",
         "media_tag_video_height": "영상 세로 크기",
         "media_tag_video_codec": "영상 코덱",
+        "media_tag_video_copyright": "영상 저작권",
 
         "document_tag_type": "문서 태그 종류",
         "document_tag_pos": "문서 태그 붙일 위치",
@@ -360,6 +362,7 @@
         "media_tag_audio_disc_count": "Audio Disc Count",
         "media_tag_audio_genres": "Audio Genres",
         "media_tag_audio_performers": "Audio Performers",
+        "media_tag_audio_conductor": "Audio Conductor",
         "media_tag_audio_title": "Audio Title",
         "media_tag_audio_track": "Audio Track",
         "media_tag_audio_track_count": "Audio Track Count",
@@ -381,6 +384,7 @@
         "media_tag_video_width": "Video Width",
         "media_tag_video_height": "Video Height",
         "media_tag_video_codec": "Video Codec",
+        "media_tag_video_copyright": "Video Copyright",
 
         "document_tag_type": "Document Tag Type",
         "document_tag_pos": "Position",

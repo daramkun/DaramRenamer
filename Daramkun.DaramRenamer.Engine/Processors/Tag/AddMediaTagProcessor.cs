@@ -19,15 +19,18 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 		public int Arguments { get; set; } = -1;
 		[Localized ( "media_tag_pos", 2 )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
-
+		
 		public bool Process ( FileInfo file )
 		{
 			TagLib.File f = null;
 			try
 			{
-				f = TagLib.File.Create ( file.OriginalFullPath );
+				f = TagLib.File.Create ( new TagLib.File.LocalFileAbstraction ( file.OriginalFullPath ) );
 			}
-			catch { return false; }
+			catch ( Exception ex )
+			{
+				return false;
+			}
 
 			string tag = "";
 			switch ( Tag )

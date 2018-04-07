@@ -12,6 +12,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using Daramee.DaramCommonLib;
 using Daramee.FileTypeDetector;
+using Daramee.TaskDialogSharp;
 using Daramkun.DaramRenamer.Processors;
 using Daramkun.DaramRenamer.Processors.Filename;
 
@@ -46,7 +47,7 @@ namespace Daramkun.DaramRenamer
 				Daramkun.DaramRenamer.MainWindow.SharedWindow.UndoManager.Backup ();
 
 				Daramkun.DaramRenamer.MainWindow.MessageBox ( Localizer.SharedStrings [ "error_raised" ], Localizer.SharedStrings [ "please_check_log" ],
-					TaskDialogInterop.VistaTaskDialogIcon.Error, "OK" );
+					TaskDialogIcon.Error, TaskDialogCommonButtonFlags.OK );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 				{
 					TextWriterTraceListener textWriterTraceListnerForFile = new TextWriterTraceListener ( sw );

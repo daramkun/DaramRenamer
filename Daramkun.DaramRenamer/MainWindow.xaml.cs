@@ -14,7 +14,6 @@ using Daramkun.DaramRenamer.Processors.Extension;
 using Daramkun.DaramRenamer.Processors.Filename;
 using Daramkun.DaramRenamer.Processors.Number;
 using Daramkun.DaramRenamer.Processors.FilePath;
-using TaskDialogInterop;
 using Daramkun.DaramRenamer.Processors.Date;
 using Daramkun.DaramRenamer.Processors.Tag;
 using System.Threading;
@@ -22,6 +21,7 @@ using System.Windows.Media;
 using Daramkun.DaramRenamer.Processors;
 using System.Windows.Threading;
 using Daramee.DaramCommonLib;
+using Daramee.TaskDialogSharp;
 
 namespace Daramkun.DaramRenamer
 {
@@ -103,18 +103,32 @@ namespace Daramkun.DaramRenamer
 			}
 		}
 
-		public static TaskDialogResult MessageBox ( string message, string content, VistaTaskDialogIcon icon, params string [] buttons )
+		public static TaskDialogResult MessageBox ( string message, string content, TaskDialogIcon icon,
+			TaskDialogCommonButtonFlags commonButtons, params string [] buttons )
 		{
-			TaskDialogOptions config = new TaskDialogOptions
+			List<TaskDialogButton> tdButtons = new List<TaskDialogButton> ( buttons != null ? buttons.Length : 0 );
+			if ( tdButtons != null )
 			{
-				Owner = null,
+				int id = 101;
+				foreach ( var button in buttons )
+				{
+					TaskDialogButton b = new TaskDialogButton ();
+					b.ButtonID = id++;
+					b.ButtonText = button;
+					tdButtons.Add ( b );
+				}
+			}
+
+			TaskDialog taskDialog = new TaskDialog
+			{
 				Title = Localizer.SharedStrings [ "daram_renamer" ],
 				MainInstruction = message,
 				Content = content,
 				MainIcon = icon,
-				CustomButtons = buttons
+				CommonButtons = commonButtons,
+				Buttons = tdButtons.Count > 0 ? tdButtons.ToArray () : null,
 			};
-			return TaskDialog.Show ( config );
+			return taskDialog.Show ();
 		}
 
 		public void AddItem ( string s )
@@ -253,7 +267,7 @@ namespace Daramkun.DaramRenamer
 			Application.Current.Dispatcher.Invoke ( DispatcherPriority.Background, new ThreadStart ( delegate { } ) );
 			MessageBox ( Localizer.SharedStrings [ "applied" ], string.Format ( Localizer.SharedStrings [ "applied_message" ],
 				progressBar.Value, progressBar.Maximum ),
-				VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ] );
+				TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK );
 
 			if ( failed == 0 && option.Options.AutomaticListCleaning )
 			{
@@ -315,14 +329,14 @@ namespace Daramkun.DaramRenamer
 			if ( await updateChecker.CheckUpdate () == true )
 			{
 				if ( MessageBox ( Localizer.SharedStrings [ "update_exist" ], Localizer.SharedStrings [ "current_old" ],
-								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ], Localizer.SharedStrings [ "download_button" ] ).
-								CustomButtonResult == 1 )
+								TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK, Localizer.SharedStrings [ "download_button" ] ).
+								Button == 101 )
 					updateChecker.ShowDownloadPage ();
 			}
 			else
 			{
 				MessageBox ( Localizer.SharedStrings [ "no_update" ], Localizer.SharedStrings [ "current_stable" ],
-								VistaTaskDialogIcon.Information, Localizer.SharedStrings [ "ok_button" ] );
+								TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK );
 			}
 		}
 

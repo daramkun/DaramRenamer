@@ -53,7 +53,14 @@
   <!-- Windows 공용 컨트롤 및 대화 상자의 테마 사용(Windows XP 이상) -->
   <dependency>
     <dependentAssembly>
-      <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*" />
+      <assemblyIdentity
+          type="win32"
+          name="Microsoft.Windows.Common-Controls"
+          version="6.0.0.0"
+          processorArchitecture="*"
+          publicKeyToken="6595b64144ccf1df"
+          language="*"
+        />
     </dependentAssembly>
   </dependency>
 </assembly>

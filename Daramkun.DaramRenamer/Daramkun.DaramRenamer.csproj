@@ -107,6 +107,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TaskDialogSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6672d4e390fea69b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Daramee.TaskDialogSharp.1.0.0\lib\net40\TaskDialogSharp.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -199,10 +202,6 @@
     <ProjectReference Include="..\..\FileTypeDetector\Daramee.FileTypeDetector\Daramee.FileTypeDetector.csproj">
       <Project>{9d610c25-94ee-4d2a-bb36-3afb988b243e}</Project>
       <Name>Daramee.FileTypeDetector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WPF-Task-Dialog\TaskDialog\TaskDialog.csproj">
-      <Project>{37fd53f7-8a8f-4427-8ff4-6299e2933a7e}</Project>
-      <Name>TaskDialog</Name>
     </ProjectReference>
     <ProjectReference Include="..\Daramkun.DaramRenamer.Engine\Daramkun.DaramRenamer.Engine.csproj">
       <Project>{387c59a9-953d-4260-ad9a-105834d6876f}</Project>

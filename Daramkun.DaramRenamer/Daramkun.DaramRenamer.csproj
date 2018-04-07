@@ -199,10 +199,6 @@
       <Project>{b33b6a90-7cd7-4351-b32e-fc0102984180}</Project>
       <Name>Daramee.DaramCommonLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FileTypeDetector\Daramee.FileTypeDetector\Daramee.FileTypeDetector.csproj">
-      <Project>{9d610c25-94ee-4d2a-bb36-3afb988b243e}</Project>
-      <Name>Daramee.FileTypeDetector</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Daramkun.DaramRenamer.Engine\Daramkun.DaramRenamer.Engine.csproj">
       <Project>{387c59a9-953d-4260-ad9a-105834d6876f}</Project>
       <Name>Daramkun.DaramRenamer.Engine</Name>

@@ -12,6 +12,11 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 	[Serializable]
 	public class AddExtensionAutomatedProcessor : IProcessor
 	{
+		static AddExtensionAutomatedProcessor ()
+		{
+			DetectorService.AddDetectors ();
+		}
+
 		public string Name => "process_add_extension_automatically";
 		public bool CannotMultithreadProcess => false;
 

@@ -37,6 +37,9 @@
     <AssemblyOriginatorKeyFile>DaramRenamer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Daramee.FileTypeDetector, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b71a9ce066e39947, processorArchitecture=MSIL">
+      <HintPath>..\packages\Daramee.FileTypeDetector.1.0.1\lib\net46\Daramee.FileTypeDetector.dll</HintPath>
+    </Reference>
     <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
       <HintPath>..\packages\Jint.2.11.58\lib\net451\Jint.dll</HintPath>
     </Reference>
@@ -85,10 +88,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FileTypeDetector\Daramee.FileTypeDetector\Daramee.FileTypeDetector.csproj">
-      <Project>{9d610c25-94ee-4d2a-bb36-3afb988b243e}</Project>
-      <Name>Daramee.FileTypeDetector</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\taglib-sharp\src\taglib-sharp.csproj">
       <Project>{194ec2b7-c208-46e6-a45b-b0b4f41234b7}</Project>
       <Name>taglib-sharp</Name>

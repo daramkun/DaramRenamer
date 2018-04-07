@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using Daramee.DaramCommonLib;
-using Daramee.FileTypeDetector;
 using Daramee.TaskDialogSharp;
-using Daramkun.DaramRenamer.Processors;
-using Daramkun.DaramRenamer.Processors.Filename;
 
 namespace Daramkun.DaramRenamer
 {
@@ -39,8 +29,6 @@ namespace Daramkun.DaramRenamer
 
 			TextWriterTraceListener textWriterTraceListner = new TextWriterTraceListener ( Console.Out );
 			Debug.Listeners.Add ( textWriterTraceListner );
-
-			DetectorService.AddDetectors ();
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{

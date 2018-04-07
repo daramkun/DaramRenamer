@@ -107,8 +107,8 @@ namespace Daramkun.DaramRenamer
 					{
 						VerticalAlignment = VerticalAlignment.Center
 					};
-					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
-					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
+					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 9, GridUnitType.Pixel ) } );
+					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 9, GridUnitType.Pixel ) } );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () { Width = new GridLength ( 24 ) } );
 					var text = new TextBox ()
@@ -129,7 +129,7 @@ namespace Daramkun.DaramRenamer
 					var upButton = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
 					upButton.VerticalAlignment = VerticalAlignment.Bottom;
 					upButton.Content = "▲";
-					upButton.FontSize = 7;
+					upButton.FontSize = 5.5;
 					upButton.Click += ( sender, e ) =>
 					{
 						if ( text.Text == "" ) text.Text = "0";
@@ -146,7 +146,7 @@ namespace Daramkun.DaramRenamer
 					var downButton = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
 					downButton.VerticalAlignment = VerticalAlignment.Top;
 					downButton.Content = "▼";
-					downButton.FontSize = 7;
+					downButton.FontSize = 5.5;
 					downButton.Click += ( sender, e ) =>
 					{
 						if ( text.Text == "" ) text.Text = "0";
@@ -195,8 +195,8 @@ namespace Daramkun.DaramRenamer
 					{
 						VerticalAlignment = VerticalAlignment.Center
 					};
-					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
-					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 0.5, GridUnitType.Star ) } );
+					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 9, GridUnitType.Pixel ) } );
+					container.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 9, GridUnitType.Pixel ) } );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () );
 					container.ColumnDefinitions.Add ( new ColumnDefinition () { Width = new GridLength ( 24 ) } );
 					var text = new TextBox ()
@@ -217,7 +217,7 @@ namespace Daramkun.DaramRenamer
 					var upButton = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
 					upButton.VerticalAlignment = VerticalAlignment.Bottom;
 					upButton.Content = "▲";
-					upButton.FontSize = 7;
+					upButton.FontSize = 5.5;
 					upButton.Click += ( sender, e ) =>
 					{
 						if ( text.Text == "" ) text.Text = "0";
@@ -234,7 +234,7 @@ namespace Daramkun.DaramRenamer
 					var downButton = new Button () { Style = this.Resources [ "ButtonStyle" ] as Style };
 					downButton.VerticalAlignment = VerticalAlignment.Top;
 					downButton.Content = "▼";
-					downButton.FontSize = 7;
+					downButton.FontSize = 5.5;
 					downButton.Click += ( sender, e ) =>
 					{
 						if ( text.Text == "" ) text.Text = "0";
@@ -407,18 +407,6 @@ namespace Daramkun.DaramRenamer
 					{
 						VerticalAlignment = VerticalAlignment.Center
 					};
-					/*
-					AudioBitrate, AudioSamplerate, AudioChannels, AudioBitsPerSample,
-					AudioCodec, AudioAlbum, AudioAlbumArtists, AudioComposers,
-					AudioPerformers, AudioCopyright, AudioDisc, AudioDiscCount,
-					AudioGenres, AudioTitle, AudioTrack, AudioTrackCount,
-
-					AudioConductor, AudioYear, AudioDuration,
-
-					VideoTitle, VideoDuration, VideoWidth, VideoHeight,
-					VideoCodec, VideoGenres, VideoYear, VideoCopyright,
-
-					ImageWidth, ImageHeight, ImageCodec, ImageQuality,*/
 					foreach ( var item in new [] {
 						"media_tag_audio_bitrate", "media_tag_audio_samplerate", "media_tag_audio_channels", "media_tag_audio_bitspersample",
 						"media_tag_audio_codec", "media_tag_audio_album", "media_tag_audio_album_artists", "media_tag_audio_composers",

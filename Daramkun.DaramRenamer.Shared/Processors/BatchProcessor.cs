@@ -23,12 +23,12 @@ namespace Daramkun.DaramRenamer.Processors
         public bool Process ( FileInfo file )
 		{
 			Jint.Engine engine = new Jint.Engine ( cfg => cfg.AllowClr (
-				Assembly.GetAssembly ( typeof ( TagLib.File ) ),
-				Assembly.Load ( "Daramkun.DaramRenamer.Engine" )
+				Assembly.GetAssembly ( typeof ( TagLib.File ) )
 			) );
 			engine.SetValue ( "file", file );
 
-			foreach ( Delegate dele in ProcessorExtensions.Delegates )
+			var delegates = ProcessorExtensions.Delegates;
+			foreach ( Delegate dele in delegates )
 				engine.SetValue ( dele.Method.Name, dele );
 
 			try
@@ -36,7 +36,10 @@ namespace Daramkun.DaramRenamer.Processors
 				Jint.Engine proceed = engine.Execute ( Script );
 				return proceed.GetCompletionValue ().AsBoolean ();
 			}
-			catch { return false; }
+			catch ( Exception ex )
+			{
+				return false;
+			}
 		}
 	}
 }

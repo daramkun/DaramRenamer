@@ -109,37 +109,40 @@ namespace Daramkun.DaramRenamer
 			return method;
 		}
 
-		static List<Delegate> delegates;
+		static List<Delegate> delegates = new List<Delegate> ();
 		public static IReadOnlyList<Delegate> Delegates
 		{
 			get
 			{
-				if ( delegates == null)
+				lock ( delegates )
 				{
-					delegates = new List<Delegate> ();
-
-					Assembly assembly = Assembly.Load ( "DaramRenamer.Engine" );
-					foreach ( Type type in assembly.GetTypes () )
+					if ( /*delegates == null*/delegates.Count == 0 )
 					{
-						if ( type.GetInterface ( typeof ( IProcessor ).FullName ) != null )
+						//delegates = new List<Delegate> ();
+
+						Assembly assembly = Assembly.Load ( "DaramRenamer.Engine" );
+						foreach ( Type type in assembly.GetTypes () )
 						{
-							IProcessor processor = Activator.CreateInstance ( type ) as IProcessor;
-							MethodInfo methodInfo = processor.CreateMethod ();
-							Type methodType = processor.GetMethodType ();
-							delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
+							if ( type.GetInterface ( typeof ( IProcessor ).FullName ) != null )
+							{
+								IProcessor processor = Activator.CreateInstance ( type ) as IProcessor;
+								MethodInfo methodInfo = processor.CreateMethod ();
+								Type methodType = processor.GetMethodType ();
+								delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
+							}
+							else if ( type.GetInterface ( typeof ( ICondition ).FullName ) != null )
+							{
+								ICondition condition = Activator.CreateInstance ( type ) as ICondition;
+								MethodInfo methodInfo = condition.CreateMethod ();
+								Type methodType = condition.GetMethodType ();
+								delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
+							}
 						}
-						else if ( type.GetInterface ( typeof ( ICondition ).FullName ) != null )
-						{
-							ICondition condition = Activator.CreateInstance ( type ) as ICondition;
-							MethodInfo methodInfo = condition.CreateMethod ();
-							Type methodType = condition.GetMethodType ();
-							delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
-						}
+						delegates.Add ( new Func<string> ( get_renamer_version ) );
+						delegates.Add ( new Func<string, string> ( get_file_content ) );
 					}
-					delegates.Add ( new Func<string> ( get_renamer_version ) );
-					delegates.Add ( new Func<string, string> ( get_file_content ) );
+					return delegates;
 				}
-				return delegates;
 			}
 		}
 

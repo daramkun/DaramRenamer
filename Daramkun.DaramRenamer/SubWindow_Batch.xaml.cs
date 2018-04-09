@@ -43,7 +43,7 @@ namespace Daramkun.DaramRenamer
 		{
 			( Processor as BatchProcessor ).Script = textEditor.Text;
 
-			if ( loadedFilename.IndexOf ( Path.GetTempPath () ) >= 0 )
+			if ( loadedFilename != null && loadedFilename.IndexOf ( Path.GetTempPath () ) >= 0 )
 				File.Delete ( loadedFilename );
 
 			btnOKButton?.Focus ();

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>bbb4e072-4668-438c-b930-fc6831319ce7</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Daramkun.DaramRenamer.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Conditions\ExtensionCondition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Conditions\IsTextFileCondition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Conditions\RegexpCondition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FileInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LocalizedAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ProcessorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\BatchProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Date\AddDateProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Date\DeleteDateProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Extension\AddExtensionAutomatedProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Extension\AddExtensionProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Extension\CasecastExtensionProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Extension\DeleteExtensionProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Extension\ReplaceExtensionProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\CasecastProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\ConcatenateProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\DeleteBlockProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\DeleteFilenameProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\ReplacePlainProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\ReplaceRegexpProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\SubstringProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\TrimmingProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\FilePath\ChangePathProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\ManualEditProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Number\AddIndexNumberProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Number\DeleteWithoutNumbersProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Number\IncreaseDecreaseNumbersProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Number\NumberCountMatchProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Tag\AddDocumentTagProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Tag\AddHashProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Tag\AddMediaTagProcessor.cs" />
+  </ItemGroup>
+</Project>

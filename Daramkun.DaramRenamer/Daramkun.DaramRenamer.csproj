@@ -90,16 +90,24 @@
     <ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Daramee.FileTypeDetector, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b71a9ce066e39947, processorArchitecture=MSIL">
+      <HintPath>..\packages\Daramee.FileTypeDetector.1.0.1\lib\net46\Daramee.FileTypeDetector.dll</HintPath>
+    </Reference>
     <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
       <HintPath>..\packages\Jint.2.11.58\lib\net451\Jint.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="TaskDialogSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6672d4e390fea69b, processorArchitecture=MSIL">
       <HintPath>..\packages\Daramee.TaskDialogSharp.1.0.0\lib\net40\TaskDialogSharp.dll</HintPath>
     </Reference>
@@ -182,11 +190,12 @@
       <Project>{b33b6a90-7cd7-4351-b32e-fc0102984180}</Project>
       <Name>Daramee.DaramCommonLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Daramkun.DaramRenamer.Engine\Daramkun.DaramRenamer.Engine.csproj">
-      <Project>{387c59a9-953d-4260-ad9a-105834d6876f}</Project>
-      <Name>Daramkun.DaramRenamer.Engine</Name>
+    <ProjectReference Include="..\..\taglib-sharp\src\taglib-sharp.csproj">
+      <Project>{2f14f0e2-9bf8-44a5-8cba-f4675734fead}</Project>
+      <Name>taglib-sharp</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

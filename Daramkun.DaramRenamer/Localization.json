@@ -201,7 +201,8 @@
 
         "batch_load": "열기",
         "batch_save": "저장",
-        "batch_filters": ""
+        "open_with_vscode": "Visual Studio Code로 열기",
+        "batch_filters": "Javascript 파일(*.js)|*.js"
       }
 		},
 		{
@@ -403,9 +404,10 @@
 
         "os_notice": "Please execute Daram Renamer in Windows 7 or Higher version.",
 
+        "open_with_vscode": "Open with Visual Studio Code",
         "batch_load": "Load",
         "batch_save": "Save",
-        "batch_filters": "Daram Renamer Javascript File"
+        "batch_filters": "Javascript File(*.js)|*.js"
       }
 		}
 	]

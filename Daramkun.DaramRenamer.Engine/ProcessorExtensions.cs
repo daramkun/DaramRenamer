@@ -63,7 +63,6 @@ namespace Daramkun.DaramRenamer
 		}
 		private static MethodInfo GenerateDynamicMethod ( Type type, string methodName, string callMethod )
 		{
-
 			List<PropertyInfo> propInfos = new List<PropertyInfo> ();
 			List<Type> paramTypes = new List<Type> ( 8 )
 			{
@@ -110,30 +109,38 @@ namespace Daramkun.DaramRenamer
 			return method;
 		}
 
-		static List<Delegate> delegates = new List<Delegate> ();
-		public static IReadOnlyList<Delegate> Delegates => delegates;
-		public static void CollectDelegates ()
+		static List<Delegate> delegates;
+		public static IReadOnlyList<Delegate> Delegates
 		{
-			Assembly assembly = Assembly.Load ( "DaramRenamer.Engine" );
-			foreach ( Type type in assembly.GetTypes () )
+			get
 			{
-				if ( type.GetInterface ( typeof ( IProcessor ).FullName ) != null )
+				if ( delegates == null)
 				{
-					IProcessor processor = Activator.CreateInstance ( type ) as IProcessor;
-					MethodInfo methodInfo = processor.CreateMethod ();
-					Type methodType = processor.GetMethodType ();
-					delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
+					delegates = new List<Delegate> ();
+
+					Assembly assembly = Assembly.Load ( "DaramRenamer.Engine" );
+					foreach ( Type type in assembly.GetTypes () )
+					{
+						if ( type.GetInterface ( typeof ( IProcessor ).FullName ) != null )
+						{
+							IProcessor processor = Activator.CreateInstance ( type ) as IProcessor;
+							MethodInfo methodInfo = processor.CreateMethod ();
+							Type methodType = processor.GetMethodType ();
+							delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
+						}
+						else if ( type.GetInterface ( typeof ( ICondition ).FullName ) != null )
+						{
+							ICondition condition = Activator.CreateInstance ( type ) as ICondition;
+							MethodInfo methodInfo = condition.CreateMethod ();
+							Type methodType = condition.GetMethodType ();
+							delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
+						}
+					}
+					delegates.Add ( new Func<string> ( get_renamer_version ) );
+					delegates.Add ( new Func<string, string> ( get_file_content ) );
 				}
-				else if ( type.GetInterface ( typeof ( ICondition ).FullName ) != null )
-				{
-					ICondition condition = Activator.CreateInstance ( type ) as ICondition;
-					MethodInfo methodInfo = condition.CreateMethod ();
-					Type methodType = condition.GetMethodType ();
-					delegates.Add ( methodInfo.CreateDelegate ( methodType ) );
-				}
+				return delegates;
 			}
-			delegates.Add ( new Func<string> ( get_renamer_version ) );
-			delegates.Add ( new Func<string, string> ( get_file_content ) );
 		}
 
 		private static string get_renamer_version ()
@@ -144,6 +151,10 @@ namespace Daramkun.DaramRenamer
 		private static string get_file_content ( string filename )
 		{
 			try { return File.ReadAllText ( filename, Encoding.UTF8 ); } catch { return null; }
+		}
+		private static FileInfo create_file_info ( string filename )
+		{
+			return new FileInfo ( filename );
 		}
 	}
 }

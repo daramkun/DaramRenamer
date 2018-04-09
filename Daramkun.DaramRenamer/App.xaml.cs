@@ -47,8 +47,6 @@ namespace Daramkun.DaramRenamer
 					Debug.Listeners.Remove ( textWriterTraceListnerForFile );
 				}
 			};
-
-			ProcessorExtensions.CollectDelegates ();
 		}
 
 		string [] args;

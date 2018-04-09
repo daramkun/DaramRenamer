@@ -76,13 +76,7 @@ A "contributor" is any person that distributes its contribution under this licen
 Source: https://wpffolderbrowser.codeplex.com
 
 ------------------------------
-4. Button style
-------------------------------
-Author: 斯克迪亚
-Source: http://www.cnblogs.com/SkyD/archive/2008/07/15/1243043.html
-
-------------------------------
-5. File Type Detector
+4. File Type Detector
 ------------------------------
 The MIT License (MIT)
 
@@ -107,7 +101,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 
 ------------------------------
-6. Daram Common Lib
+5. Daram Common Lib
 ------------------------------
 The MIT License (MIT)
 
@@ -132,7 +126,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 
 ------------------------------
-7. TagLib#
+6. TagLib#
 ------------------------------
 		  GNU LESSER GENERAL PUBLIC LICENSE
 		       Version 2.1, February 1999
@@ -647,7 +641,7 @@ necessary.  Here is a sample; alter the names:
 That's all there is to it!
 
 ------------------------------
-8. TaskDialog#
+7. TaskDialog#
 ------------------------------
 The MIT License (MIT)
 

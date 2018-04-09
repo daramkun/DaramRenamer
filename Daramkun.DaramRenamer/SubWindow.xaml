@@ -14,7 +14,7 @@
 				<Grid Background="SkyBlue" Height="13" VerticalAlignment="Bottom" />
 				<TextBlock Name="overlayWindowTitle" Text="asdf" Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="5,0,0,0" />
 
-				<Button VerticalAlignment="Center" HorizontalAlignment="Right" Content="X" Margin="5" FontSize="8" Width="14" Height="14" Style="{StaticResource ButtonStyle}" Background="LightPink" Foreground="White" Click="Cancel_Button" />
+				<Button VerticalAlignment="Center" HorizontalAlignment="Right" Content="X" Margin="5" FontSize="8" Width="14" Height="14" Background="LightPink" Foreground="White" Click="Cancel_Button" />
 			</Grid>
 
 			<!-- Contents -->

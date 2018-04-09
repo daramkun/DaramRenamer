@@ -27,10 +27,7 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 			{
 				f = TagLib.File.Create ( new TagLib.File.LocalFileAbstraction ( file.OriginalFullPath ) );
 			}
-			catch ( Exception ex )
-			{
-				return false;
-			}
+			catch { return false; }
 
 			string tag = "";
 			switch ( Tag )

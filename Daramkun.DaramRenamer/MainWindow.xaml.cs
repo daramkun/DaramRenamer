@@ -340,11 +340,6 @@ namespace Daramkun.DaramRenamer
 			}
 		}
 
-		private void Menu_System_Feedback ( object sender, RoutedEventArgs e )
-		{
-			Process.Start ( "https://github.com/Daramkun/DaramRenamer/issues" );
-		}
-
 		private void ComboBox_SelectionChanged ( object sender, SelectionChangedEventArgs e )
 		{
 			option.Options.RenameModeInteger = ( sender as ComboBox ).SelectedIndex;
@@ -417,6 +412,17 @@ namespace Daramkun.DaramRenamer
 				File.WriteAllText ( "DaramRenamer.License.txt", downloaded );
 			}
 			licenseTextBox.Text = downloaded;
+		}
+
+		private void Window_Activated ( object sender, EventArgs e )
+		{
+			foreach ( var child in overlayWindowContainer.Children )
+			{
+				if ( child is SubWindow_Batch )
+				{
+					( child as SubWindow_Batch ).Activated ();
+				}
+			}
 		}
 	}
 }

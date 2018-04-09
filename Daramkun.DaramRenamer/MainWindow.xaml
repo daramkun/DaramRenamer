@@ -7,57 +7,8 @@
         xmlns:dcl="clr-namespace:Daramee.DaramCommonLib;assembly=Daramee.DaramCommonLib"
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="720" Height="480"
-		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="720" MinHeight="480" Loaded="Window_Loaded">
-	<Window.Resources>
-		<ContextMenu x:Key="listViewContextMenu">
-			<MenuItem Header="{Binding Path=[undo]}" Click="Menu_System_Undo" />
-			<MenuItem Header="{Binding Path=[redo]}" Click="Menu_System_Redo" />
-			<Separator />
-			<MenuItem Header="{Binding Path=[filename_processes]}">
-				<MenuItem Header="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />
-				<MenuItem Header="{Binding Path=[process_replace_regex_text]}" Click="ReplaceRegex_Click" />
-				<MenuItem Header="{Binding Path=[process_concatenate_text]}" Click="ConcatText_Click" />
-				<MenuItem Header="{Binding Path=[process_trimming_text]}" Click="Trimming_Click" />
-				<MenuItem Header="{Binding Path=[process_delete_block]}" Click="DeleteBlock_Click" />
-				<MenuItem Header="{Binding Path=[process_delete_text]}" Click="DeleteText_Click" />
-				<MenuItem Header="{Binding Path=[process_substring_text]}" Click="Substring_Click" />
-				<MenuItem Header="{Binding Path=[process_casecast_text]}" Click="Castcast_Click" />
-			</MenuItem>
-			<MenuItem Header="{Binding Path=[extension_processes]}">
-				<MenuItem Header="{Binding Path=[process_add_extension]}" Click="AddExtension_Click" />
-				<MenuItem Header="{Binding Path=[process_add_extension_automatically]}" Click="AddExtensionAutomatically_Click" />
-				<MenuItem Header="{Binding Path=[process_delete_extension]}" Click="RemoveExtension_Click" />
-				<MenuItem Header="{Binding Path=[process_change_extension]}" Click="ChangeExtension_Click" />
-				<MenuItem Header="{Binding Path=[process_casecast_extension]}" Click="CastcastExtension_Click" />
-			</MenuItem>
-			<MenuItem Header="{Binding Path=[number_processes]}">
-				<MenuItem Header="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
-				<MenuItem Header="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
-				<MenuItem Header="{Binding Path=[process_add_index_numbers]}" Click="AddIndexNumbers_Click" />
-				<MenuItem Header="{Binding Path=[process_increase_decrease_numbers]}" Click="IncreaseDecreaseNumbers_Click" />
-			</MenuItem>
-			<MenuItem Header="{Binding Path=[date_processes]}">
-				<MenuItem Header="{Binding Path=[process_add_date]}" Click="AddDate_Click" />
-				<MenuItem Header="{Binding Path=[process_delete_date]}" Click="DeleteDate_Click" />
-				<MenuItem Header="{Binding Path=[process_increase_decrease_date]}" Click="IncreaseDecreaseDate_Click" IsEnabled="False" />
-			</MenuItem>
-			<MenuItem Header="{Binding Path=[path_processes]}">
-				<MenuItem Header="{Binding Path=[process_change_path]}" Click="ChangePath_Click" />
-				<MenuItem Header="{Binding Path=[process_move_path_relative]}" Click="MovePathRelative_Click" IsEnabled="False" />
-			</MenuItem>
-            <MenuItem Header="{Binding Path=[properties_processes]}">
-                <MenuItem Header="{Binding Path=[process_add_media_tag]}" Click="AddMediaTag_Click" />
-                <MenuItem Header="{Binding Path=[process_add_document_tag]}" Click="AddDocumentTag_Click" />
-                <MenuItem Header="{Binding Path=[process_add_file_hash]}" Click="AddFileHash_Click" />
-            </MenuItem>
-            <Separator />
-            <MenuItem Header="{Binding Path=[batch_process]}" Click="BatchProcess_Click" />
-            <Separator />
-			<MenuItem Header="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
-		</ContextMenu>
-	</Window.Resources>
-
-	<Grid>
+		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="720" MinHeight="480" Loaded="Window_Loaded" Activated="Window_Activated">
+    <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition />
 			<RowDefinition Height="5" />
@@ -83,11 +34,6 @@
                             <Button Content="{StaticResource iconItemUp}" ToolTip="{Binding Path=[item_up]}" Click="Menu_System_ItemUp" />
                             <Button Content="{StaticResource iconItemDown}" ToolTip="{Binding Path=[item_down]}" Click="Menu_System_ItemDown" />
                             <Button Content="{StaticResource iconItemSort}" ToolTip="{Binding Path=[item_sort]}" Click="Menu_System_ItemSort" />
-
-                            <Separator />
-
-                            <Button Content="{StaticResource iconCheckUpdate}" ToolTip="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
-                            <Button Content="{StaticResource iconFeedback}" ToolTip="{Binding Path=[feedback]}" Click="Menu_System_Feedback" />
 
                             <Separator />
 
@@ -120,7 +66,7 @@
                     </ToolBarTray>
 
                     <ListView Grid.Row="1" Name="listViewFiles" AllowDrop="True"
-                              Focusable="True" ContextMenu="{StaticResource listViewContextMenu}"
+                              Focusable="True"
                               ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                               Drop="listViewFiles_Drop" DragEnter="listViewFiles_DragEnter" KeyUp="listViewFiles_KeyUp">
                         <ListView.ItemContainerStyle>
@@ -142,9 +88,7 @@
                                     <GridViewColumnHeader Content="{Binding Path=[original_name]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid HorizontalAlignment="Stretch">
-                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" />
-                                            </Grid>
+                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -152,9 +96,7 @@
                                     <GridViewColumnHeader Content="{Binding Path=[changed_name]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid HorizontalAlignment="Stretch">
-                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedFilename}" Background="Transparent" />
-                                            </Grid>
+                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedFilename}" Background="Transparent" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -162,9 +104,7 @@
                                     <GridViewColumnHeader Content="{Binding Path=[original_path]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid HorizontalAlignment="Stretch">
-                                                <TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding OriginalPath}" />
-                                            </Grid>
+                                            <TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding OriginalPath}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -172,14 +112,61 @@
                                     <GridViewColumnHeader Content="{Binding Path=[changed_path]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid HorizontalAlignment="Stretch">
-                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedPath}" Background="Transparent" />
-                                            </Grid>
+                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedPath}" Background="Transparent" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                             </GridView>
                         </ListView.View>
+
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{Binding Path=[undo]}" Click="Menu_System_Undo" />
+                                <MenuItem Header="{Binding Path=[redo]}" Click="Menu_System_Redo" />
+                                <Separator />
+                                <MenuItem Header="{Binding Path=[filename_processes]}">
+                                    <MenuItem Header="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />
+                                    <MenuItem Header="{Binding Path=[process_replace_regex_text]}" Click="ReplaceRegex_Click" />
+                                    <MenuItem Header="{Binding Path=[process_concatenate_text]}" Click="ConcatText_Click" />
+                                    <MenuItem Header="{Binding Path=[process_trimming_text]}" Click="Trimming_Click" />
+                                    <MenuItem Header="{Binding Path=[process_delete_block]}" Click="DeleteBlock_Click" />
+                                    <MenuItem Header="{Binding Path=[process_delete_text]}" Click="DeleteText_Click" />
+                                    <MenuItem Header="{Binding Path=[process_substring_text]}" Click="Substring_Click" />
+                                    <MenuItem Header="{Binding Path=[process_casecast_text]}" Click="Castcast_Click" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[extension_processes]}">
+                                    <MenuItem Header="{Binding Path=[process_add_extension]}" Click="AddExtension_Click" />
+                                    <MenuItem Header="{Binding Path=[process_add_extension_automatically]}" Click="AddExtensionAutomatically_Click" />
+                                    <MenuItem Header="{Binding Path=[process_delete_extension]}" Click="RemoveExtension_Click" />
+                                    <MenuItem Header="{Binding Path=[process_change_extension]}" Click="ChangeExtension_Click" />
+                                    <MenuItem Header="{Binding Path=[process_casecast_extension]}" Click="CastcastExtension_Click" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[number_processes]}">
+                                    <MenuItem Header="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
+                                    <MenuItem Header="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
+                                    <MenuItem Header="{Binding Path=[process_add_index_numbers]}" Click="AddIndexNumbers_Click" />
+                                    <MenuItem Header="{Binding Path=[process_increase_decrease_numbers]}" Click="IncreaseDecreaseNumbers_Click" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[date_processes]}">
+                                    <MenuItem Header="{Binding Path=[process_add_date]}" Click="AddDate_Click" />
+                                    <MenuItem Header="{Binding Path=[process_delete_date]}" Click="DeleteDate_Click" />
+                                    <MenuItem Header="{Binding Path=[process_increase_decrease_date]}" Click="IncreaseDecreaseDate_Click" IsEnabled="False" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[path_processes]}">
+                                    <MenuItem Header="{Binding Path=[process_change_path]}" Click="ChangePath_Click" />
+                                    <MenuItem Header="{Binding Path=[process_move_path_relative]}" Click="MovePathRelative_Click" IsEnabled="False" />
+                                </MenuItem>
+                                <MenuItem Header="{Binding Path=[properties_processes]}">
+                                    <MenuItem Header="{Binding Path=[process_add_media_tag]}" Click="AddMediaTag_Click" />
+                                    <MenuItem Header="{Binding Path=[process_add_document_tag]}" Click="AddDocumentTag_Click" />
+                                    <MenuItem Header="{Binding Path=[process_add_file_hash]}" Click="AddFileHash_Click" />
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="{Binding Path=[batch_process]}" Click="BatchProcess_Click" />
+                                <Separator />
+                                <MenuItem Header="{Binding Path=[check_update]}" Click="Menu_System_CheckUpdate" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </TabItem>
@@ -211,7 +198,7 @@
                         <TextBlock Name="translationAuthor" VirtualizingStackPanel.VirtualizationMode="Recycling" />
 					</StackPanel>
                     <TextBox x:Name="licenseTextBox" Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" Text="Loading..."
-                             VerticalScrollBarVisibility="Visible" xml:space="preserve" IsReadOnly="True" Loaded="licenseTextBox_Loaded" />
+                             VerticalScrollBarVisibility="Visible" IsReadOnly="True" Loaded="licenseTextBox_Loaded" />
 				</Grid>
 			</TabItem>
 		</TabControl>

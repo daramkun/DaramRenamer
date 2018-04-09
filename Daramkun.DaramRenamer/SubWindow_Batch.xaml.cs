@@ -1,7 +1,9 @@
 ﻿using Daramee.DaramCommonLib;
+using Daramee.TaskDialogSharp;
 using Daramkun.DaramRenamer.Processors;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,7 +16,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Daramkun.DaramRenamer
 {
@@ -28,6 +29,8 @@ namespace Daramkun.DaramRenamer
 		
 		public IProcessor Processor { get; private set; }
 
+		string loadedFilename;
+
 		public SubWindow_Batch ()
 		{
 			InitializeComponent ();
@@ -40,12 +43,18 @@ namespace Daramkun.DaramRenamer
 		{
 			( Processor as BatchProcessor ).Script = textEditor.Text;
 
+			if ( loadedFilename.IndexOf ( Path.GetTempPath () ) >= 0 )
+				File.Delete ( loadedFilename );
+
 			btnOKButton?.Focus ();
 			OKButtonClicked?.Invoke ( this, e );
 		}
 
 		private void Cancel_Button ( object sender, RoutedEventArgs e )
 		{
+			if ( loadedFilename.IndexOf ( Path.GetTempPath () ) >= 0 )
+				File.Delete ( loadedFilename );
+
 			btnCancelButton?.Focus ();
 			CancelButtonClicked?.Invoke ( this, e );
 		}
@@ -54,22 +63,70 @@ namespace Daramkun.DaramRenamer
 		{
 			Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog ()
 			{
-				Filter = Localizer.SharedStrings [ "batch_filters" ] + "(*.drjs)|*.drjs",
+				Filter = Localizer.SharedStrings [ "batch_filters" ],
 			};
 			if ( ofd.ShowDialog () == false )
 				return;
 			textEditor.Text = File.ReadAllText ( ofd.FileName, Encoding.UTF8 );
+			loadedFilename = ofd.FileName;
 		}
 
 		private void SaveScript_Click ( object sender, RoutedEventArgs e )
 		{
 			Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog ()
 			{
-				Filter = Localizer.SharedStrings [ "batch_filters" ] + "(*.drjs)|*.drjs",
+				Filter = Localizer.SharedStrings [ "batch_filters" ],
 			};
 			if ( sfd.ShowDialog () == false )
 				return;
 			File.WriteAllText ( sfd.FileName, textEditor.Text, Encoding.UTF8 );
+			loadedFilename = sfd.FileName;
+		}
+
+		internal void Activated ()
+		{
+			if ( loadedFilename != null )
+			{
+				string newContent = File.ReadAllText ( loadedFilename );
+				if ( loadedFilename != newContent )
+				{
+					int selectionStart = textEditor.SelectionStart;
+					textEditor.Text = newContent;
+					textEditor.SelectionStart = selectionStart;
+				}
+			}
+		}
+
+		private void VSCode_Click ( object sender, RoutedEventArgs e )
+		{
+			if ( loadedFilename != null )
+			{
+				File.WriteAllText ( loadedFilename, textEditor.Text );
+			}
+			else
+			{
+				if ( !Directory.Exists ( Path.Combine ( Path.GetTempPath (), "DaramRenamer" ) ) )
+					Directory.CreateDirectory ( Path.Combine ( Path.GetTempPath (), "DaramRenamer" ) );
+				File.WriteAllText (
+					loadedFilename = Path.Combine ( Path.GetTempPath (), "DaramRenamer", $"{Guid.NewGuid ()}.js" ),
+					textEditor.Text );
+			}
+
+			try
+			{
+				Process process = new Process ()
+				{
+					StartInfo = new ProcessStartInfo ( "vscode://file/" + loadedFilename.Replace ( '\\', '/' ) )
+					{
+
+					}
+				};
+				process.Start ();
+			}
+			catch
+			{
+
+			}
 		}
 	}
 }

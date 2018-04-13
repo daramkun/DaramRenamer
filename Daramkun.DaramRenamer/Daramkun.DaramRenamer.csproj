@@ -116,7 +116,7 @@
     <Compile Include="SubWindow.xaml.cs">
       <DependentUpon>SubWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExternalLibs\WPFFolderBrowser\library\WPFFolderBrowserDialog.cs" />
+    <Compile Include="ExternalLibs\WPFFolderBrowser\WPFFolderBrowserDialog.cs" />
     <Compile Include="SubWindow_Batch.xaml.cs">
       <DependentUpon>SubWindow_Batch.xaml</DependentUpon>
     </Compile>

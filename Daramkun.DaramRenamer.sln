@@ -18,10 +18,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "taglib-sharp", "..\taglib-s
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramkun.DaramRenamer.Shared", "Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.shproj", "{BBB4E072-4668-438C-B930-FC6831319CE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daramkun.DaramRenamer.CommandLine", "Daramkun.DaramRenamer.CommandLine\Daramkun.DaramRenamer.CommandLine.csproj", "{F0935667-F483-4BEE-BC96-2112A40FBDC3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TaskDialogSharp.Shared", "..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.shproj", "{23D58846-FEF0-468A-80DE-0D37A129A27C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.FileTypeDetector.Shared", "..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.shproj", "{5E1C88AE-6CCA-430C-8ADB-DE4DE4CE2174}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.projitems*{23d58846-fef0-468a-80de-0d37a129a27c}*SharedItemsImports = 13
+		..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems*{5e1c88ae-6cca-430c-8adb-de4de4ce2174}*SharedItemsImports = 13
+		..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.projitems*{b33b6a90-7cd7-4351-b32e-fc0102984180}*SharedItemsImports = 4
 		Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems*{bbb4e072-4668-438c-b930-fc6831319ce7}*SharedItemsImports = 13
 		Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems*{e18bb4a0-ac41-48f2-8940-427b5f7f93ac}*SharedItemsImports = 4
+		..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems*{e18bb4a0-ac41-48f2-8940-427b5f7f93ac}*SharedItemsImports = 4
+		Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems*{f0935667-f483-4bee-bc96-2112a40fbdc3}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +51,10 @@ Global
 		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0935667-F483-4BEE-BC96-2112A40FBDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0935667-F483-4BEE-BC96-2112A40FBDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0935667-F483-4BEE-BC96-2112A40FBDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0935667-F483-4BEE-BC96-2112A40FBDC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +64,9 @@ Global
 		{B33B6A90-7CD7-4351-B32E-FC0102984180} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 		{BBB4E072-4668-438C-B930-FC6831319CE7} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
+		{F0935667-F483-4BEE-BC96-2112A40FBDC3} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
+		{23D58846-FEF0-468A-80DE-0D37A129A27C} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
+		{5E1C88AE-6CCA-430C-8ADB-DE4DE4CE2174} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DEAD2016-E3EF-438C-84F0-C0C8ED314DA9}

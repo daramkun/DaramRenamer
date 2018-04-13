@@ -38,6 +38,7 @@ namespace Daramkun.DaramRenamer.Processors
 			}
 			catch ( Exception ex )
 			{
+				System.Diagnostics.Debug.WriteLine ( ex.StackTrace );
 				return false;
 			}
 		}

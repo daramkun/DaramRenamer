@@ -127,6 +127,7 @@
                                 <MenuItem Header="{Binding Path=[filename_processes]}">
                                     <MenuItem Header="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />
                                     <MenuItem Header="{Binding Path=[process_replace_regex_text]}" Click="ReplaceRegex_Click" />
+                                    <MenuItem Header="{Binding Path=[process_rearrange_regex_text]}" Click="RearrangeRegex_Click" />
                                     <MenuItem Header="{Binding Path=[process_concatenate_text]}" Click="ConcatText_Click" />
                                     <MenuItem Header="{Binding Path=[process_trimming_text]}" Click="Trimming_Click" />
                                     <MenuItem Header="{Binding Path=[process_delete_block]}" Click="DeleteBlock_Click" />

@@ -6,7 +6,7 @@
     <SharedGUID>bbb4e072-4668-438c-b930-fc6831319ce7</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Daramkun.DaramRenamer.Shared</Import_RootNamespace>
+    <Import_RootNamespace>Daramkun.DaramRenamer</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Conditions\ExtensionCondition.cs" />
@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\DeleteBlockProcessor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\DeleteFilenameProcessor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\ReplacePlainProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\RearrangeRegexpProcessor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\ReplaceRegexpProcessor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\SubstringProcessor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\Filename\TrimmingProcessor.cs" />

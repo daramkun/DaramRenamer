@@ -67,6 +67,7 @@
 
         "process_replace_plain_text": "평문 파일명 치환",
         "process_replace_regex_text": "정규표현식 파일명 치환",
+        "process_rearrange_regex_text": "정규표현식 파일명 재구성",
         "process_concatenate_text": "문자열 추가",
         "process_trimming_text": "파일명 트림",
         "process_delete_block": "묶인 파일명 제거",
@@ -102,6 +103,7 @@
         "replace_text": "바꿀 텍스트",
         "original_regex": "정규표현식",
         "replace_format": "구성 형식문자열",
+        "rearrange_format": "재구성 형식문자열",
         "concat_text": "붙일 문자열",
         "concat_pos": "붙일 위치",
         "start_block": "묶인 문자열 시작",
@@ -272,6 +274,7 @@
 
         "process_replace_plain_text": "Replace Plain Text",
         "process_replace_regex_text": "Replace Regular Expression",
+        "process_rearrange_regex_text": "Rearrange Regular Expression",
         "process_concatenate_text": "Concatenate Text",
         "process_trimming_text": "Trimming Filename",
         "process_delete_block": "Delete Blocked Text",
@@ -307,6 +310,7 @@
         "replace_text": "Replace Text",
         "original_regex": "Regular Expression",
         "replace_format": "Replace Format",
+        "rearrange_format": "Rearrange Format",
         "concat_text": "Concat Text",
         "concat_pos": "Position",
         "start_block": "Block Start",

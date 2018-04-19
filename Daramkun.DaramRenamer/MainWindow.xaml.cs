@@ -339,6 +339,7 @@ namespace Daramkun.DaramRenamer
 
 		private void ReplacePlainText_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ReplacePlainProcessor> (); }
 		private void ReplaceRegex_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ReplaceRegexpProcessor> (); }
+		private void RearrangeRegex_Click ( object sender, RoutedEventArgs e ) { ShowPopup<RearrangeRegexpProcessor> (); }
 		private void ConcatText_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ConcatenateProcessor> (); }
 		private void Trimming_Click ( object sender, RoutedEventArgs e ) { ShowPopup<TrimmingProcessor> (); }
 		private void DeleteBlock_Click ( object sender, RoutedEventArgs e ) { ShowPopup<DeleteBlockProcessor> (); }

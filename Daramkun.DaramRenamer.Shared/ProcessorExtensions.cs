@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,13 +28,9 @@ namespace Daramkun.DaramRenamer
 			};
 			foreach ( PropertyInfo prop in type.GetProperties () )
 			{
-				var localized = prop.GetCustomAttribute<LocalizedAttribute> ();
+				var localized = prop.GetCustomAttribute<ArgumentAttribute> ();
 				if ( localized == null ) continue;
-				if ( paramTypes.Count <= localized.Order + 1 )
-				{
-					paramTypes.Add ( null );
-				}
-				paramTypes [ ( int ) localized.Order + 1 ] = prop.PropertyType;
+				paramTypes.Add ( prop.PropertyType );
 			}
 
 			Type funcType;
@@ -70,15 +67,10 @@ namespace Daramkun.DaramRenamer
 			};
 			foreach ( PropertyInfo prop in type.GetProperties () )
 			{
-				var localized = prop.GetCustomAttribute<LocalizedAttribute> ();
+				var localized = prop.GetCustomAttribute<ArgumentAttribute> ();
 				if ( localized == null ) continue;
-				while ( paramTypes.Count <= localized.Order + 1 )
-				{
-					paramTypes.Add ( null );
-					propInfos.Add ( null );
-				}
-				paramTypes [ ( int ) localized.Order + 1 ] = prop.PropertyType;
-				propInfos [ ( int ) localized.Order ] = prop;
+				paramTypes.Add ( prop.PropertyType );
+				propInfos.Add ( prop );
 			}
 
 			DynamicMethod method = new DynamicMethod ( methodName,

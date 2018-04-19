@@ -40,7 +40,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -51,7 +51,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;WPF</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -111,6 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="ISubWindow.cs" />
     <Compile Include="SaveData.cs" />
     <Compile Include="SubWindow.xaml.cs">
@@ -145,7 +146,9 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="DaramRenamer.manifest" />
+    <None Include="DaramRenamer.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DaramRenamer.pfx" />
     <EmbeddedResource Include="Localization.json" />
     <None Include="packages.config" />
@@ -153,18 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6%28x86 및 x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ProgramIcon.ico" />

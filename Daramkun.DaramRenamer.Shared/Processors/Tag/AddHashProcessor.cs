@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 		public string Name => "process_add_file_hash";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "hash_type", 0 )]
+		[Argument ( Name = "hash_type" )]
 		public HashType HashType { get; set; }
-		[Localized ( "hash_pos", 1 )]
+		[Argument ( Name = "hash_pos" )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

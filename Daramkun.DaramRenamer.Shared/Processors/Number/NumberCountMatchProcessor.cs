@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_matching_number_count";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "match_count", 0 )]
+		[Argument ( Name = "match_count" )]
 		public uint Count { get; set; } = 2;
-		[Localized ( "match_pos", 1 )]
+		[Argument ( Name = "match_pos" )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

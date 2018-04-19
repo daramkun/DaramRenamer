@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -15,7 +16,7 @@ namespace Daramkun.DaramRenamer.Processors
 		public string Name => "process_batch_process";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "script", 0 )]
+		[Argument ( Name = "script" )]
 		public string Script { get; set; }
 
 		public BatchProcessor () { }

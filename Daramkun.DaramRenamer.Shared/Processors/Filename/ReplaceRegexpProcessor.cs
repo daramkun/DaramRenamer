@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -15,11 +16,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_replace_regex_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "original_regex", 0 )]
+		[Argument ( Name = "original_regex" )]
 		public Regex RegularExpression { get; set; } = new Regex ( "$^" );
-		[Localized ( "replace_format", 1 )]
+		[Argument ( Name = "replace_format" )]
 		public string FormatString { get; set; } = "";
-		[Localized ( "include_extension", 2 )]
+		[Argument ( Name = "include_extension" )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -14,7 +15,7 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_trimming_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "trim_pos", 0 )]
+		[Argument ( Name = "trim_pos" )]
 		public Position TrimPosition { get; set; } = Position.BothPoint;
 
 		public bool Process ( FileInfo file )

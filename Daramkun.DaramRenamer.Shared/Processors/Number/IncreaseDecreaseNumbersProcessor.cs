@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_increase_decrease_numbers";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "incdec_count", 0 )]
+		[Argument ( Name = "incdec_count" )]
 		public int Count { get; set; } = 1;
-		[Localized ( "incdec_pos", 1 )]
+		[Argument ( Name = "incdec_pos" )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

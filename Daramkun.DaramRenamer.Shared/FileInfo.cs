@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.DaramCommonLib;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -51,43 +52,6 @@ namespace Daramkun.DaramRenamer
 			OriginalFullPath = file.OriginalFullPath;
 			ChangedPath = file.ChangedPath;
 			ChangedFilename = file.ChangedFilename;
-		}
-
-		private static char GetInvalidToValid ( char ch )
-		{
-			switch ( ch )
-			{
-				case '?': return '？';
-				case '\\': return '＼';
-				case '/': return '／';
-				case '<': return '〈';
-				case '>': return '〉';
-				case '*': return '＊';
-				case '|': return '｜';
-				case ':': return '：';
-				case '"': return '＂';
-				case '%': return '％';
-				case '.': return '．';
-				default: return ch;
-			}
-		}
-
-		public void ReplaceInvalidPathCharacters ()
-		{
-			foreach ( var ch in Path.GetInvalidPathChars () )
-			{
-				if ( ChangedPath.IndexOf ( ch ) < 0 )
-					ChangedPath = ChangedPath.Replace ( ch, GetInvalidToValid ( ch ) );
-			}
-		}
-
-		public void ReplaceInvalidFilenameCharacters ()
-		{
-			foreach ( var ch in Path.GetInvalidFileNameChars () )
-			{
-				if ( ChangedFilename.IndexOf ( ch ) < 0 )
-					ChangedFilename = ChangedFilename.Replace ( ch, GetInvalidToValid ( ch ) );
-			}
 		}
 
 		public static bool Move ( FileInfo fileInfo, bool overwrite, out ErrorCode errorMessage )

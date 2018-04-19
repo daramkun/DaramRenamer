@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 	{
 		public string Name => "process_casecast_extension";
 		public bool CannotMultithreadProcess => false;
-
-		[Localized ( "casecast" )]
+		
+		[Argument ( Name = "casecast" )]
 		public CasecastBW Casecast { get; set; } = CasecastBW.AllToLowercase;
 
 		public bool Process ( FileInfo file )

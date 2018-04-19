@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_delete_without_numbers";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "delwtnum_wordly" )]
+		[Argument ( Name = "delwtnum_wordly" )]
 		public bool IsWordlyProcessing { get; set; } = false;
 
 		public bool Process ( FileInfo file )

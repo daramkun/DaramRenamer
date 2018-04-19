@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Daramkun.DaramRenamer.Conditions
 	{
 		public string Name => "condition_extension";
 
-		[Localized ( "extension", 0 )]
+		[Argument ( Name = "extension" )]
 		public string Extension { get; set; } = "";
 
 		public bool IsValid ( FileInfo file )

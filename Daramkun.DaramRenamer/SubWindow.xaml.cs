@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
 using Daramee.DaramCommonLib;
+using Daramee.Nargs;
 
 namespace Daramkun.DaramRenamer
 {
@@ -33,25 +34,25 @@ namespace Daramkun.DaramRenamer
 
 			Type type = processor.GetType ();
 			var props = type.GetProperties ();
-			Dictionary<uint, PropertyInfo> propDict = new Dictionary<uint, PropertyInfo> ();
+			List<PropertyInfo> propDict = new List<PropertyInfo> ();
 			foreach ( var prop in props )
 			{
-				object [] attrs = prop.GetCustomAttributes ( typeof ( LocalizedAttribute ), true );
+				object [] attrs = prop.GetCustomAttributes ( typeof ( ArgumentAttribute ), true );
 				if ( attrs.Length > 0)
-					propDict.Add ( ( attrs [ 0 ] as LocalizedAttribute ).Order, prop );
+					propDict.Add ( prop );
 			}
 
 			for ( int i = 0; i < propDict.Count; ++i )
 				contentGrid.RowDefinitions.Add ( new RowDefinition () { Height = new GridLength ( 24 ) } );
 
 			FrameworkElement firstControl = null;
-			foreach ( var propPair in from p in propDict orderby p.Key select p )
+			foreach ( var propPair in propDict )
 			{
-				var prop = propPair.Value;
-				object [] attrs = prop.GetCustomAttributes ( typeof ( LocalizedAttribute ), true );
-				TextBlock textBlock = new TextBlock () { Text = Localizer.SharedStrings [ ( attrs [ 0 ] as LocalizedAttribute ).Field ] };
+				var prop = propPair;
+				object [] attrs = prop.GetCustomAttributes ( typeof ( ArgumentAttribute ), true );
+				TextBlock textBlock = new TextBlock () { Text = Localizer.SharedStrings [ ( attrs [ 0 ] as ArgumentAttribute ).Name ] };
 				textBlock.VerticalAlignment = VerticalAlignment.Center;
-				Grid.SetRow ( textBlock, ( int ) propPair.Key );
+				Grid.SetRow ( textBlock, propDict.IndexOf ( propPair ) );
 				Grid.SetColumn ( textBlock, 0 );
 				contentGrid.Children.Add ( textBlock );
 
@@ -456,7 +457,7 @@ namespace Daramkun.DaramRenamer
 
 				if ( control != null )
 				{
-					Grid.SetRow ( control, ( int ) propPair.Key );
+					Grid.SetRow ( control, propDict.IndexOf ( propPair ) );
 					Grid.SetColumn ( control, 1 );
 
 					contentGrid.Children.Add ( control );

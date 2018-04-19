@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,9 @@ namespace Daramkun.DaramRenamer.Processors
 
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "changed_name", 0 )]
+		[Argument ( Name = "changed_name" )]
 		public string ChangeName { get; set; }
-		[Localized ( "changed_path", 1 )]
+		[Argument ( Name = "changed_path" )]
 		public string ChangePath { get; set; }
 
 		public FileInfo ProcessingFileInfo { get; set; }

@@ -106,19 +106,8 @@ namespace Daramkun.DaramRenamer
 		public static TaskDialogResult MessageBox ( string message, string content, TaskDialogIcon icon,
 			TaskDialogCommonButtonFlags commonButtons, params string [] buttons )
 		{
-			List<TaskDialogButton> tdButtons = new List<TaskDialogButton> ( buttons != null ? buttons.Length : 0 );
-			if ( tdButtons != null )
-			{
-				int id = 101;
-				foreach ( var button in buttons )
-				{
-					TaskDialogButton b = new TaskDialogButton ();
-					b.ButtonID = id++;
-					b.ButtonText = button;
-					tdButtons.Add ( b );
-				}
-			}
-
+			TaskDialogButton [] tdButtons = buttons != null ? TaskDialogButton.Cast ( buttons ) : null;
+			
 			TaskDialog taskDialog = new TaskDialog
 			{
 				Title = Localizer.SharedStrings [ "daram_renamer" ],
@@ -126,7 +115,7 @@ namespace Daramkun.DaramRenamer
 				Content = content,
 				MainIcon = icon,
 				CommonButtons = commonButtons,
-				Buttons = tdButtons.Count > 0 ? tdButtons.ToArray () : null,
+				Buttons = tdButtons,
 			};
 			return taskDialog.Show ();
 		}
@@ -252,8 +241,8 @@ namespace Daramkun.DaramRenamer
 			{
 				if ( option.Options.AutomaticFilenameFix )
 				{
-					fileInfo.ReplaceInvalidPathCharacters ();
-					fileInfo.ReplaceInvalidFilenameCharacters ();
+					fileInfo.ChangedPath = FilesHelper.ReplaceInvalidPathCharacters ( fileInfo.ChangedPath );
+					fileInfo.ChangedFilename = FilesHelper.ReplaceInvalidFilenameCharacters ( fileInfo.ChangedFilename );
 				}
 				ErrorCode errorMessage = ErrorCode.NoError;
 				if ( option.Options.RenameMode == RenameMode.Move ) FileInfo.Move ( fileInfo, option.Options.Overwrite, out errorMessage );

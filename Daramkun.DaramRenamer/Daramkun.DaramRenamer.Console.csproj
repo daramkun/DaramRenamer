@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1AE0E370-C5A3-442F-9BA1-C36DFDCC5E4E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Daramkun.DaramRenamer</RootNamespace>
+    <AssemblyName>renamer</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CONSOLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;CONSOLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>DaramRenamer.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jint.2.11.58\lib\net451\Jint.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DaramRenamer.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ProgramIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DaramCommonLib\Daramee.DaramCommonLib\Daramee.DaramCommonLib.csproj">
+      <Project>{b33b6a90-7cd7-4351-b32e-fc0102984180}</Project>
+      <Name>Daramee.DaramCommonLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\taglib-sharp\src\taglib-sharp.csproj">
+      <Project>{2f14f0e2-9bf8-44a5-8cba-f4675734fead}</Project>
+      <Name>taglib-sharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="..\..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />
+  <Import Project="..\Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

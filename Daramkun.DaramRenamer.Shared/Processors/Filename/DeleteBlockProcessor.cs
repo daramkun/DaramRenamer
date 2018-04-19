@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -13,14 +14,14 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	{
 		public string Name => "process_delete_block";
 		public bool CannotMultithreadProcess => false;
-
-		[Localized ( "start_block", 0 )]
+		
+		[Argument ( Name = "start_block" )]
 		public string StartText { get; set; } = "";
-		[Localized ( "end_block", 1 )]
+		[Argument ( Name = "end_block" )]
 		public string EndText { get; set; } = "";
-		[Localized ( "delete_all_blocks", 2 )]
+		[Argument ( Name = "delete_all_blocks" )]
 		public bool DeleteAllBlocks { get; set; } = false;
-		[Localized ( "include_extension", 3 )]
+		[Argument ( Name = "include_extension" )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

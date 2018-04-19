@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -13,12 +14,12 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	{
 		public string Name => "process_concatenate_text";
 		public bool CannotMultithreadProcess => false;
-
-		[Localized ( "concat_text", 0 )]
+		
+		[Argument ( Name = "concat_text" )]
 		public string Text { get; set; } = "";
-		[Localized ( "concat_pos", 1 )]
+		[Argument ( Name = "concat_pos" )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.StartPoint;
-		[Localized ( "include_extension", 2 )]
+		[Argument ( Name = "include_extension" )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

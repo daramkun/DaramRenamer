@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,11 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 		public string Name => "process_substring_text";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "start_index", 0 )]
+		[Argument ( Name = "start_index" )]
 		public uint StartIndex { get; set; } = 0;
-		[Localized ( "substring_length", 1 )]
+		[Argument ( Name = "substring_length" )]
 		public uint? Length { get; set; } = null;
-		[Localized ( "include_extension", 2 )]
+		[Argument ( Name = "include_extension" )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

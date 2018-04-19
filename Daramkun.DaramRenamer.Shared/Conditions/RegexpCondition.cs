@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Daramkun.DaramRenamer.Conditions
 	{
 		public string Name => "condition_regexp";
 
-		[Localized ( "regexp", 0 )]
+		[Argument ( Name = "regexp" )]
 		public Regex RegularExpression { get; set; }
 
 		public bool IsValid ( FileInfo file )

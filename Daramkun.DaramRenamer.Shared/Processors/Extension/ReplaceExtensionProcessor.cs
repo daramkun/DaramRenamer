@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 	{
 		public string Name => "process_change_extension";
 		public bool CannotMultithreadProcess => false;
-
-		[Localized ( "extension" )]
+		
+		[Argument ( Name = "extension" )]
 		public string Extension { get; set; } = "";
 
 		public ReplaceExtensionProcessor () { Extension = ""; }

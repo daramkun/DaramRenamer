@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 		public string Name => "process_add_index_numbers";
 		public bool CannotMultithreadProcess => true;
 
-		[Localized ( "add_pos", 0 )]
+		[Argument ( Name = "add_pos" )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

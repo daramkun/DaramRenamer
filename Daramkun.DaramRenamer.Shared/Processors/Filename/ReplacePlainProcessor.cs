@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -13,12 +14,12 @@ namespace Daramkun.DaramRenamer.Processors.Filename
 	{
 		public string Name => "process_replace_plain_text";
 		public bool CannotMultithreadProcess => false;
-
-		[Localized ( "original_text", 0 )]
+		
+		[Argument ( Name = "original_text" )]
 		public string Original { get; set; } = "";
-		[Localized ( "replace_text", 1 )]
+		[Argument ( Name = "replace_text" )]
 		public string Replace { get; set; } = "";
-		[Localized ( "include_extension", 2 )]
+		[Argument ( Name = "include_extension" )]
 		public bool IncludeExtensions { get; set; } = false;
 
 		public bool Process ( FileInfo file )

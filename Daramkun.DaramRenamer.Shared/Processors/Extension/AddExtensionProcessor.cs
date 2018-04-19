@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,8 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 	{
 		public string Name => "process_add_extension";
 		public bool CannotMultithreadProcess => false;
-
-		[Localized ( "extension" )]
+		
+		[Argument ( Name = "extension" )]
 		public string Extension { get; set; } = "";
 
 		public bool Process ( FileInfo file )

@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Conditions\RegexpCondition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IProcessor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LocalizedAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ProcessorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\BatchProcessor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\Date\AddDateProcessor.cs" />

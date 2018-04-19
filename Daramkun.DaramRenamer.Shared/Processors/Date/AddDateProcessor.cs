@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,12 +13,12 @@ namespace Daramkun.DaramRenamer.Processors.Date
 	{
 		public string Name => "process_add_date";
 		public bool CannotMultithreadProcess => false;
-
-		[Localized ( "add_date_type", 0 )]
+		
+		[Argument ( Name = "add_date_type" )]
 		public DateType Type { get; set; } = DateType.CreationDate;
-		[Localized ( "add_date_format", 1 )]
+		[Argument ( Name = "add_date_format" )]
 		public string Format { get; set; } = "yyMMdd";
-		[Localized ( "add_date_pos", 2 )]
+		[Argument ( Name = "add_date_pos" )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 
 		public bool Process ( FileInfo file )

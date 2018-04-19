@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Daramkun.DaramRenamer.Processors.FilePath
 		public string Name => "process_change_path";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "path_text", 0 )]
+		[Argument ( Name = "path_text" )]
 		public DirectoryInfo Path { get; set; } = new DirectoryInfo ( "C:\\" );
 
 		public bool Process ( FileInfo file )

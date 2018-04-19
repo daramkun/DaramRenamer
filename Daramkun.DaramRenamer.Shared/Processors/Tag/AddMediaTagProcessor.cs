@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daramee.Nargs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace Daramkun.DaramRenamer.Processors.Tag
 		public string Name => "process_add_media_tag";
 		public bool CannotMultithreadProcess => false;
 
-		[Localized ( "media_tag_type", 0 )]
+		[Argument ( Name = "media_tag_type" )]
 		public MediaTag Tag { get; set; }
-		[Localized ( "media_tag_args", 1 )]
+		[Argument ( Name = "media_tag_args" )]
 		public int Arguments { get; set; } = -1;
-		[Localized ( "media_tag_pos", 2 )]
+		[Argument ( Name = "media_tag_pos" )]
 		public OnePointPosition Position { get; set; } = OnePointPosition.EndPoint;
 		
 		public bool Process ( FileInfo file )

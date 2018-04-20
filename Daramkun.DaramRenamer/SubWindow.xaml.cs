@@ -24,9 +24,12 @@ namespace Daramkun.DaramRenamer
 
 		public IProcessor Processor { get; private set; }
 
-		public SubWindow ( IProcessor processor )
+		public SubWindow ( IProcessor processor, bool titleBarVisible = true )
 		{
 			InitializeComponent ();
+
+			titleBar.Visibility = titleBarVisible ? Visibility.Visible : Visibility.Hidden;
+			titleBar.Height = 0;
 
 			Processor = processor;
 

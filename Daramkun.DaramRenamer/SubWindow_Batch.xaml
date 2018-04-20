@@ -12,7 +12,7 @@
     <Border BorderBrush="DeepSkyBlue" BorderThickness="1" Width="480" VerticalAlignment="Center" HorizontalAlignment="Center">
         <StackPanel Orientation="Vertical" Background="White">
             <!-- Title bar -->
-            <Grid Background="LightSkyBlue" Height="24" HorizontalAlignment="Stretch">
+            <Grid Name="titleBar" Background="LightSkyBlue" Height="24" HorizontalAlignment="Stretch">
                 <Grid Background="SkyBlue" Height="13" VerticalAlignment="Bottom" />
                 <TextBlock Name="overlayWindowTitle" Text="{Binding Path=[batch_process]}" Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="5,0,0,0" />
 

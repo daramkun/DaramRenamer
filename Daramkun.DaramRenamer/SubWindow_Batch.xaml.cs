@@ -31,9 +31,13 @@ namespace Daramkun.DaramRenamer
 
 		string loadedFilename;
 
-		public SubWindow_Batch ()
+		public SubWindow_Batch ( bool titleBarVisible = true )
 		{
 			InitializeComponent ();
+
+			titleBar.Visibility = titleBarVisible ? Visibility.Visible : Visibility.Hidden;
+			titleBar.Height = 0;
+
 			Processor = new BatchProcessor ();
 
 			textEditor?.Focus ();
@@ -52,7 +56,7 @@ namespace Daramkun.DaramRenamer
 
 		private void Cancel_Button ( object sender, RoutedEventArgs e )
 		{
-			if ( loadedFilename.IndexOf ( Path.GetTempPath () ) >= 0 )
+			if ( loadedFilename != null && loadedFilename.IndexOf ( Path.GetTempPath () ) >= 0 )
 				File.Delete ( loadedFilename );
 
 			btnCancelButton?.Focus ();

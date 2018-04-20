@@ -35,8 +35,11 @@ namespace Daramkun.DaramRenamer
 		{
 			InitializeComponent ();
 
-			titleBar.Visibility = titleBarVisible ? Visibility.Visible : Visibility.Hidden;
-			titleBar.Height = 0;
+			if ( !titleBarVisible )
+			{
+				titleBar.Visibility = Visibility.Hidden;
+				titleBar.Height = 0;
+			}
 
 			Processor = new BatchProcessor ();
 

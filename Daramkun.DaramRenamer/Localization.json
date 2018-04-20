@@ -1,7 +1,7 @@
 ﻿{
 	"lang": [
 		{
-			"version": "3.2.0.0",
+			"version": "3.4.0.0",
 			"target": "DaramRenamer",
 			"culture": "ko-KR",
 			"author": "Daramee",
@@ -208,7 +208,7 @@
       }
 		},
 		{
-			"version": "3.1.0.0",
+			"version": "3.4.0.0",
 			"target": "DaramRenamer",
 			"culture": "en-US",
 			"author": "Daramee",

@@ -92,6 +92,7 @@ namespace Daramkun.DaramRenamer
 							if ( File.Exists ( ( p as BatchProcessor ).Script ) )
 								( p as BatchProcessor ).Script = File.ReadAllText ( ( p as BatchProcessor ).Script );
 
+						FileInfo.BeginFileOperation ();
 						Parallel.ForEach ( FileInfo.Files, ( fileInfo ) =>
 						{
 							if ( p.Process ( fileInfo ) )
@@ -108,6 +109,7 @@ namespace Daramkun.DaramRenamer
 								Console.WriteLine ( $"({( succeed ? "O" : "X" )}) {fileInfo.OriginalFilename} => {fileInfo.ChangedFilename}" );
 							}
 						} );
+						FileInfo.EndFileOperation ();
 					}
 				}
 			}

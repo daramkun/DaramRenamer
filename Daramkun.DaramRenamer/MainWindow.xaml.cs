@@ -237,6 +237,7 @@ namespace Daramkun.DaramRenamer
 			progressBar.Maximum = FileInfo.Files.Count;
 			progressBar.Value = 0;
 			int failed = 0;
+			FileInfo.BeginFileOperation ();
 			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) =>
 			{
 				if ( option.Options.AutomaticFilenameFix )
@@ -251,9 +252,13 @@ namespace Daramkun.DaramRenamer
 				if ( errorMessage != ErrorCode.NoError )
 					Interlocked.Increment ( ref failed );
 			} );
+			FileInfo.EndFileOperation ();
+
 			if ( failed != 0 )
 				progressBar.Foreground = Brushes.Red;
+
 			Application.Current.Dispatcher.Invoke ( DispatcherPriority.Background, new ThreadStart ( delegate { } ) );
+
 			MessageBox ( Localizer.SharedStrings [ "applied" ], string.Format ( Localizer.SharedStrings [ "applied_message" ],
 				progressBar.Value, progressBar.Maximum ),
 				TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK );

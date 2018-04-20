@@ -156,12 +156,14 @@ namespace Daramkun.DaramRenamer
 						Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) => processor.Process ( fileInfo ) );
 					else foreach ( var fileInfo in FileInfo.Files ) processor.Process ( fileInfo );
 
+					FileInfo.BeginFileOperation ();
 					Parallel.ForEach ( FileInfo.Files, ( fileInfo ) => {
 						if ( !FileInfo.Move ( fileInfo, false, out ErrorCode errorCode ) )
 						{
 
 						}
 					} );
+					FileInfo.EndFileOperation ();
 				}
 				window.Close ();
 				window.Dispose ();

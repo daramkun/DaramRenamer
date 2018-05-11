@@ -70,7 +70,6 @@ namespace Daramkun.DaramRenamer
 
 		protected override void OnExit ( ExitEventArgs e )
 		{
-			Optionizer<SaveData>.SharedOptionizer.Save ();
 			base.OnExit ( e );
 		}
 	}

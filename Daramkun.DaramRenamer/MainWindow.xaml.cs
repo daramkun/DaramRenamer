@@ -73,8 +73,13 @@ namespace Daramkun.DaramRenamer
 			updateChecker = new UpdateChecker ( "{0}.{1}{2}{3}" );
 			
 			option = new Optionizer<SaveData> ( "DARAM WORLD", "DaramRenamer" );
+			double width = option.Options.Width,
+				height = option.Options.Height;
 
 			InitializeComponent ();
+
+			Width = width;
+			Height = height;
 
 			optionRenameMode.SelectedIndex = option.Options.RenameModeInteger;
 			
@@ -418,6 +423,11 @@ namespace Daramkun.DaramRenamer
 					( child as SubWindow_Batch ).Activated ();
 				}
 			}
+		}
+
+		private void Window_Closing ( object sender, System.ComponentModel.CancelEventArgs e )
+		{
+			Optionizer<SaveData>.SharedOptionizer.Save ();
 		}
 	}
 }

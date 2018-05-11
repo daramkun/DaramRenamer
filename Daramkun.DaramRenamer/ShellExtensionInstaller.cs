@@ -26,6 +26,10 @@ namespace Daramkun.DaramRenamer.ShellExtension.Installer
 
 				RestartQuestion ( args, "--install" );
 			}
+			else if ( args.Length == 1 && args [ 0 ] == "--isinstalled" )
+			{
+				Console.WriteLine ( RenamerContextMenu.IsInstalled () ? "Installed" : "Not Installed." );
+			}
 			else throw new ArgumentException ();
 		}
 
@@ -78,8 +82,8 @@ namespace Daramkun.DaramRenamer.ShellExtension.Installer
 				}
 				catch ( Exception ex )
 				{
-					//Debug.WriteLine ( ex );
-					//return;
+					Debug.WriteLine ( ex );
+					return;
 				}
 			}
 			Process.Start ( "explorer.exe" );

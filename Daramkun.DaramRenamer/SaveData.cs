@@ -40,5 +40,36 @@ namespace Daramkun.DaramRenamer
 		public bool AutomaticListCleaning { get; set; } = false;
 		[DataMember ( IsRequired = false, Name = "overwrite" )]
 		public bool Overwrite { get; set; } = false;
+
+		[DataMember ( IsRequired = false, Name = "left" )]
+		public double Left
+		{
+			get { return App.Current.MainWindow.Left; }
+			set { App.Current.MainWindow.Left = value; }
+		}
+		[DataMember ( IsRequired = false, Name = "top" )]
+		public double Top
+		{
+			get { return App.Current.MainWindow.Top; }
+			set { App.Current.MainWindow.Top = value; }
+		}
+		[DataMember ( IsRequired = false, Name = "width" )]
+		public double Width
+		{
+			get { return App.Current.MainWindow.Width; }
+			set { App.Current.MainWindow.Width = value; }
+		}
+		[DataMember ( IsRequired = false, Name = "height" )]
+		public double Height
+		{
+			get { return App.Current.MainWindow.Height; }
+			set { App.Current.MainWindow.Height = value; }
+		}
+		[DataMember ( IsRequired = false, Name = "window_state" )]
+		public System.Windows.WindowState WindowState
+		{
+			get { return App.Current.MainWindow.WindowState; }
+			set { App.Current.MainWindow.WindowState = value; }
+		}
 	}
 }

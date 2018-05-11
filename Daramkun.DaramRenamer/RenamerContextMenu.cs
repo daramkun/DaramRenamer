@@ -128,7 +128,10 @@ namespace Daramkun.DaramRenamer
 
 				window = new Form ()
 				{
-					ClientSize = new System.Drawing.Size ( ( int ) windowControl.DesiredSize.Width, ( int ) windowControl.DesiredSize.Height )
+					ClientSize = new System.Drawing.Size ( ( int ) windowControl.DesiredSize.Width, ( int ) windowControl.DesiredSize.Height ),
+					StartPosition = FormStartPosition.CenterParent,
+					SizeGripStyle = SizeGripStyle.Hide,
+					FormBorderStyle = FormBorderStyle.FixedSingle,
 				};
 				ElementHost host = new ElementHost () { Child = subWindow as UIElement };
 				host.Dock = DockStyle.Fill;
@@ -203,6 +206,19 @@ namespace Daramkun.DaramRenamer
 			var registrationType = Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit;
 			ServerRegistrationManager.UnregisterServer ( server, registrationType );
 			ServerRegistrationManager.UninstallServer ( server, registrationType );
+		}
+
+		public static bool IsInstalled ()
+		{
+			try
+			{
+				var server = new RenamerContextMenu ();
+				var registrationType = Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit;
+				var info = ServerRegistrationManager.GetServerRegistrationInfo ( server, registrationType );
+				if ( info == null ) return false;
+			}
+			catch { return false; }
+			return true;
 		}
 	}
 }

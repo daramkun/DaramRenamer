@@ -10,7 +10,7 @@
         "daram_renamer": "다람 리네이머",
         "renamer": "리네이머",
         "settings": "설정",
-        "license": "라이센스",
+        "about": "정보",
 
         "tip": "파일명 리스트를 오른쪽 클릭하면 더 많은 기능을 사용할 수 있습니다.",
 
@@ -217,7 +217,7 @@
         "daram_renamer": "Daram Renamer",
         "renamer": "Renamer",
         "settings": "Settings",
-        "license": "Licenses",
+        "about": "About",
 
         "tip": "When you right-click in the listbox, you can use more features.",
 

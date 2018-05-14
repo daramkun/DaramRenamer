@@ -188,17 +188,37 @@
 					</StackPanel>
 				</ScrollViewer>
 			</TabItem>
-			<TabItem Header="{Binding Path=[license]}">
-				<Grid>
+			<TabItem Header="{Binding Path=[about]}">
+				<Grid Margin="6">
 					<Grid.RowDefinitions>
-						<RowDefinition Height="22" />
-						<RowDefinition />
-					</Grid.RowDefinitions>
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="Current Translation Author: " VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                        <TextBlock Name="translationAuthor" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					</StackPanel>
-                    <TextBox x:Name="licenseTextBox" Grid.Row="1" TextWrapping="Wrap" FontFamily="Consolas" Text="Loading..."
+                        <RowDefinition Height="22" />
+                        <RowDefinition Height="22" />
+                        <RowDefinition Height="22" />
+                        <RowDefinition Height="22" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Project Repository: " Grid.Row="0" Grid.Column="0" />
+                    <TextBlock Text="Download Page: " Grid.Row="1" Grid.Column="0" />
+                    <TextBlock Text="Issues Page: " Grid.Row="2" Grid.Column="0" />
+                    <TextBlock Text="Current Translation Author: " Grid.Row="3" Grid.Column="0" />
+
+                    <TextBlock Grid.Row="0" Grid.Column="1">
+                        <Hyperlink NavigateUri="https://github.com/daramkun/DaramRenamer" RequestNavigate="Hyperlink_RequestNavigate">Daram Renamer</Hyperlink>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1">
+                        <Hyperlink NavigateUri="https://github.com/daramkun/DaramRenamer/releases" RequestNavigate="Hyperlink_RequestNavigate">Daram Renamer releases</Hyperlink>
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1">
+                        <Hyperlink NavigateUri="https://github.com/daramkun/DaramRenamer/issues" RequestNavigate="Hyperlink_RequestNavigate">Issues(Feedback)</Hyperlink>
+                    </TextBlock>
+                    <TextBlock Name="translationAuthor" Grid.Row="3" Grid.Column="1" />
+                    
+                    <TextBox x:Name="licenseTextBox" Grid.Row="4" Grid.ColumnSpan="2" TextWrapping="Wrap" FontFamily="Consolas" Text="Loading..."
                              VerticalScrollBarVisibility="Visible" IsReadOnly="True" Loaded="licenseTextBox_Loaded" />
 				</Grid>
 			</TabItem>

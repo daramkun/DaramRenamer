@@ -32,7 +32,7 @@ namespace Daramkun.DaramRenamer
 
 			AppDomain.CurrentDomain.UnhandledException += ( sender, args ) =>
 			{
-				Daramkun.DaramRenamer.MainWindow.SharedWindow.UndoManager.Backup ();
+				//Daramkun.DaramRenamer.MainWindow.SharedWindow.UndoManager.Backup ();
 
 				Daramkun.DaramRenamer.MainWindow.MessageBox ( Localizer.SharedStrings [ "error_raised" ], Localizer.SharedStrings [ "please_check_log" ],
 					TaskDialogIcon.Error, TaskDialogCommonButtonFlags.OK );

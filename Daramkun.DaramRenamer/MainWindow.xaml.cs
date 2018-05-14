@@ -22,10 +22,11 @@ using Daramkun.DaramRenamer.Processors;
 using System.Windows.Threading;
 using Daramee.DaramCommonLib;
 using Daramee.TaskDialogSharp;
+using System.ComponentModel;
 
 namespace Daramkun.DaramRenamer
 {
-	public partial class MainWindow : Window
+	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
 		#region Commands
 		public static RoutedCommand CommandOpenFiles = new RoutedCommand ();
@@ -45,7 +46,7 @@ namespace Daramkun.DaramRenamer
 		private void commandRedoWorks_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Redo ( sender, e ); }
 
 		private void commandApplyCanc_Executed ( object sender, ExecutedRoutedEventArgs e )
-		{ while ( !undoManager.IsUndoStackEmpty ) Menu_System_Undo ( sender, e ); }
+		{ while ( !UndoManager.IsUndoStackEmpty ) Menu_System_Undo ( sender, e ); }
 
 		private void commandUpperItem_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemUp ( sender, e ); }
 		private void commandLowerItem_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemDown ( sender, e ); }
@@ -54,11 +55,12 @@ namespace Daramkun.DaramRenamer
 
 		public static MainWindow SharedWindow { get; private set; }
 
-		UndoManager<ObservableCollection<FileInfo>> undoManager = new UndoManager<ObservableCollection<FileInfo>> ();
 		Optionizer<SaveData> option;
 		UpdateChecker updateChecker;
-		
-		public UndoManager<ObservableCollection<FileInfo>> UndoManager => undoManager;
+
+		public UndoManager<ObservableCollection<FileInfo>> UndoManager { get; } = new UndoManager<ObservableCollection<FileInfo>> ();
+		public bool UndoManagerHasUndoStackItem => !UndoManager.IsUndoStackEmpty;
+		public bool UndoManagerHasRedoStackItem => !UndoManager.IsRedoStackEmpty;
 
 		public RenameMode RenameMode { get { return option.Options.RenameMode; } set { option.Options.RenameMode = value; } }
 		public bool HardwareAccelerationMode { get { return option.Options.HardwareAccelerationMode; } set { option.Options.HardwareAccelerationMode = value; } }
@@ -90,12 +92,14 @@ namespace Daramkun.DaramRenamer
 				$"{Localizer.SharedLocalizer.Culture.Author}<{Localizer.SharedLocalizer.Culture.Contact}> - {Localizer.SharedLocalizer.Culture.Culture}" :
 				$"{Localizer.SharedLocalizer.Culture.Author} - {Localizer.SharedLocalizer.Culture.Culture}";
 
-			UndoManager<ObservableCollection<FileInfo>> restored = UndoManager<ObservableCollection<FileInfo>>.Restore ();
+			/*UndoManager<ObservableCollection<FileInfo>> restored = UndoManager<ObservableCollection<FileInfo>>.Restore ();
 			if ( restored != null )
 			{
 				undoManager = restored;
 				Menu_System_Undo ( this, null );
-			}
+			}*/
+			UndoManager.UpdateUndo += ( sender, e ) => { PC ( nameof ( UndoManagerHasUndoStackItem ) ); PC ( nameof ( UndoManagerHasRedoStackItem ) ); };
+			UndoManager.UpdateRedo += ( sender, e ) => { PC ( nameof ( UndoManagerHasUndoStackItem ) ); PC ( nameof ( UndoManagerHasRedoStackItem ) ); };
 
 			listViewFiles.ItemsSource = FileInfo.Files;
 		}
@@ -160,7 +164,7 @@ namespace Daramkun.DaramRenamer
 			overlayWindowGrid.Visibility = Visibility.Hidden;
 			if ( apply )
 			{
-				undoManager.SaveToUndoStack ( FileInfo.Files );
+				UndoManager.SaveToUndoStack ( FileInfo.Files );
 				var processor = ( overlayWindowContainer.Children [ 0 ] as ISubWindow ).Processor;
 				if ( processor is ManualEditProcessor )
 				{
@@ -190,10 +194,9 @@ namespace Daramkun.DaramRenamer
 
 		private void listViewFiles_Drop ( object sender, DragEventArgs e )
 		{
-			undoManager.SaveToUndoStack ( FileInfo.Files );
 			if ( e.Data.GetDataPresent ( DataFormats.FileDrop ) )
 			{
-				undoManager.SaveToUndoStack ( FileInfo.Files );
+				UndoManager.SaveToUndoStack ( FileInfo.Files );
 
 				var temp = e.Data.GetData ( DataFormats.FileDrop ) as string [];
 				foreach ( string s in from b in temp orderby b select b ) AddItem ( s );
@@ -202,13 +205,14 @@ namespace Daramkun.DaramRenamer
 
 		private void listViewFiles_KeyUp ( object sender, KeyEventArgs e )
 		{
-			undoManager.SaveToUndoStack ( FileInfo.Files );
 			if ( e.Key == Key.Delete )
 			{
+				UndoManager.SaveToUndoStack ( FileInfo.Files );
+
 				List<FileInfo> tempFileInfos = new List<FileInfo> ();
 				foreach ( FileInfo fileInfo in listViewFiles.SelectedItems ) tempFileInfos.Add ( fileInfo );
 				foreach ( FileInfo fileInfo in tempFileInfos ) FileInfo.Files.Remove ( fileInfo );
-				if ( FileInfo.Files.Count == 0 ) { undoManager.ClearAll (); }
+				if ( FileInfo.Files.Count == 0 ) { UndoManager.ClearAll (); }
 			}
 		}
 
@@ -222,7 +226,7 @@ namespace Daramkun.DaramRenamer
 			};
 			if ( openFileDialog.ShowDialog () == false ) return;
 
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 
 			foreach ( string s in from s in openFileDialog.FileNames orderby s select s )
 				AddItem ( s );
@@ -230,13 +234,13 @@ namespace Daramkun.DaramRenamer
 
 		private void Menu_System_Clear ( object sender, RoutedEventArgs e )
 		{
-			undoManager.ClearAll ();
+			UndoManager.ClearAll ();
 			FileInfo.Files.Clear ();
 		}
 
 		private void Menu_System_Apply ( object sender, RoutedEventArgs e )
 		{
-			undoManager.ClearUndoStack ();
+			UndoManager.ClearUndoStack ();
 
 			progressBar.Foreground = Brushes.Green;
 			progressBar.Maximum = FileInfo.Files.Count;
@@ -270,33 +274,37 @@ namespace Daramkun.DaramRenamer
 
 			if ( failed == 0 && option.Options.AutomaticListCleaning )
 			{
-				undoManager.SaveToUndoStack ( FileInfo.Files );
+				UndoManager.SaveToUndoStack ( FileInfo.Files );
 				FileInfo.Files.Clear ();
 			}
 		}
 
 		private void Menu_System_Undo ( object sender, RoutedEventArgs e )
 		{
-			if ( undoManager.IsUndoStackEmpty )
+			if ( UndoManager.IsUndoStackEmpty )
 				return;
 
-			undoManager.SaveToRedoStack ( FileInfo.Files );
-			listViewFiles.ItemsSource = FileInfo.Files = undoManager.LoadFromUndoStack ();
+			UndoManager.SaveToRedoStack ( FileInfo.Files );
+
+			var data = UndoManager.LoadFromUndoStack () ?? throw new Exception ();
+			listViewFiles.ItemsSource = FileInfo.Files = data;
 		}
 
 		private void Menu_System_Redo ( object sender, RoutedEventArgs e )
 		{
-			if ( undoManager.IsRedoStackEmpty )
+			if ( UndoManager.IsRedoStackEmpty )
 				return;
 
-			undoManager.SaveToUndoStack ( FileInfo.Files );
-			listViewFiles.ItemsSource = FileInfo.Files = undoManager.LoadFromRedoStack ();
+			UndoManager.SaveToUndoStack ( FileInfo.Files, false );
+
+			var data = UndoManager.LoadFromRedoStack () ?? throw new Exception ();
+			listViewFiles.ItemsSource = FileInfo.Files = data;
 		}
 
 		private void Menu_System_ItemUp ( object sender, RoutedEventArgs e )
 		{
 			if ( listViewFiles.SelectedItems.Count == 0 ) return;
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 			foreach ( FileInfo fileInfo in listViewFiles.SelectedItems )
 			{
 				int lastIndex = FileInfo.Files.IndexOf ( fileInfo );
@@ -308,7 +316,7 @@ namespace Daramkun.DaramRenamer
 		private void Menu_System_ItemDown ( object sender, RoutedEventArgs e )
 		{
 			if ( listViewFiles.SelectedItems.Count == 0 ) return;
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 			foreach ( FileInfo fileInfo in listViewFiles.SelectedItems )
 			{
 				int lastIndex = FileInfo.Files.IndexOf ( fileInfo );
@@ -319,7 +327,7 @@ namespace Daramkun.DaramRenamer
 
 		private void Menu_System_ItemSort ( object sender, RoutedEventArgs e )
 		{
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 			FileInfo.Sort ( FileInfo.Files );
 		}
 
@@ -355,7 +363,7 @@ namespace Daramkun.DaramRenamer
 		private void DeleteBlock_Click ( object sender, RoutedEventArgs e ) { ShowPopup<DeleteBlockProcessor> (); }
 		private void DeleteText_Click ( object sender, RoutedEventArgs e )
 		{
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) => new DeleteFilenameProcessor ().Process ( fileInfo ) );
 		}
 		private void Substring_Click ( object sender, RoutedEventArgs e ) { ShowPopup<SubstringProcessor> (); }
@@ -364,12 +372,12 @@ namespace Daramkun.DaramRenamer
 		private void AddExtension_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddExtensionProcessor> (); }
 		private void AddExtensionAutomatically_Click ( object sender, RoutedEventArgs e )
 		{
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) => new AddExtensionAutomatedProcessor ().Process ( fileInfo ) );
 		}
 		private void RemoveExtension_Click ( object sender, RoutedEventArgs e )
 		{
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) => new DeleteExtensionProcessor ().Process ( fileInfo ) );
 		}
 		private void ChangeExtension_Click ( object sender, RoutedEventArgs e ) { ShowPopup<ReplaceExtensionProcessor> (); }
@@ -383,7 +391,7 @@ namespace Daramkun.DaramRenamer
 		private void AddDate_Click ( object sender, RoutedEventArgs e ) { ShowPopup<AddDateProcessor> (); }
 		private void DeleteDate_Click ( object sender, RoutedEventArgs e )
 		{
-			undoManager.SaveToUndoStack ( FileInfo.Files );
+			UndoManager.SaveToUndoStack ( FileInfo.Files );
 			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) => new DeleteDateProcessor ().Process ( fileInfo ) );
 		}
 		private void IncreaseDecreaseDate_Click ( object sender, RoutedEventArgs e ) { /* TODO */ }
@@ -435,5 +443,8 @@ namespace Daramkun.DaramRenamer
 			Process.Start ( new ProcessStartInfo ( e.Uri.AbsoluteUri ) );
 			e.Handled = true;
 		}
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void PC ( string name ) { PropertyChanged?.Invoke ( this, new PropertyChangedEventArgs ( name ) ); }
 	}
 }

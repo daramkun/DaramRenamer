@@ -185,7 +185,7 @@ namespace Daramkun.DaramRenamer
 		public static void Sort ( ObservableCollection<FileInfo> source )
 		{
 			if ( source == null ) return;
-			ParallelSort.QuicksortParallel<FileInfo> ( source );
+			ParallelSort.Quicksort<FileInfo> ( source );
 		}
 
 		public int CompareTo ( FileInfo other ) => ChangedFilename.CompareTo ( other.ChangedFilename );
@@ -306,6 +306,17 @@ namespace Daramkun.DaramRenamer
 
 	static class ParallelSort
 	{
+		public static void Quicksort<T> ( ObservableCollection<T> arr ) where T : IComparable<T> { Quicksort<T> ( arr, 0, arr.Count - 1 ); }
+		private static void Quicksort<T> ( ObservableCollection<T> arr, int left, int right ) where T : IComparable<T>
+		{
+			if ( right > left )
+			{
+				int pivot = Partition ( arr, left, right );
+				Quicksort ( arr, left, pivot - 1 );
+				Quicksort ( arr, pivot + 1, right );
+			}
+		}
+
 		public static void QuicksortParallel<T> ( ObservableCollection<T> arr ) where T : IComparable<T> { QuicksortParallel ( arr, 0, arr.Count - 1 ); }
 		private static void QuicksortParallel<T> ( ObservableCollection<T> arr, int left, int right ) where T : IComparable<T>
 		{
@@ -315,6 +326,7 @@ namespace Daramkun.DaramRenamer
 				Parallel.Invoke ( new Action [] { () => QuicksortParallel ( arr, left, pivot - 1 ), () => QuicksortParallel ( arr, pivot + 1, right ) } );
 			}
 		}
+
 		private static void Swap<T> ( ObservableCollection<T> a, int i, int j ) { T t = a [ i ]; a [ i ] = a [ j ]; a [ j ] = t; }
 		private static int Partition<T> ( ObservableCollection<T> arr, int low, int high ) where T : IComparable<T>
 		{

@@ -8,8 +8,8 @@
         xmlns:dcl="clr-namespace:Daramee.DaramCommonLib;assembly=Daramee.DaramCommonLib"
         xmlns:ext="clr-namespace:Daramkun.DaramRenamer.Extension"
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
-        Title="{Binding Path=[daram_renamer]}" Width="740" Height="480"
-		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="740" MinHeight="480" Loaded="Window_Loaded" Activated="Window_Activated" Closing="Window_Closing">
+        Title="{Binding Path=[daram_renamer]}" Width="750" Height="492"
+		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="750" MinHeight="492" Loaded="Window_Loaded" Activated="Window_Activated" Closing="Window_Closing">
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition />

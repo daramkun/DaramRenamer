@@ -23,6 +23,7 @@ using System.Windows.Threading;
 using Daramee.DaramCommonLib;
 using Daramee.TaskDialogSharp;
 using System.ComponentModel;
+using Daramkun.DaramRenamer.Extension;
 
 namespace Daramkun.DaramRenamer
 {
@@ -57,6 +58,7 @@ namespace Daramkun.DaramRenamer
 
 		Optionizer<SaveData> option;
 		UpdateChecker updateChecker;
+		ToolBarIconExtension toolBarIcon;
 
 		public UndoManager<ObservableCollection<FileInfo>> UndoManager { get; } = new UndoManager<ObservableCollection<FileInfo>> ();
 		public bool UndoManagerHasUndoStackItem => !UndoManager.IsUndoStackEmpty;
@@ -76,6 +78,7 @@ namespace Daramkun.DaramRenamer
 			updateChecker = new UpdateChecker ( "{0}.{1}{2}{3}" );
 			
 			option = new Optionizer<SaveData> ( "DARAM WORLD", "DaramRenamer" );
+			toolBarIcon = new ToolBarIconExtension ( option.Options.ToolBarIconPack );
 			
 			InitializeComponent ();
 

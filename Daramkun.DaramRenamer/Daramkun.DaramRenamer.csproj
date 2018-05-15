@@ -112,6 +112,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArgumentAttribute.cs" />
+    <Compile Include="Extension\ToolBarIconExtension.cs" />
     <Compile Include="ISubWindow.cs" />
     <Compile Include="SaveData.cs" />
     <Compile Include="SubWindow.xaml.cs">

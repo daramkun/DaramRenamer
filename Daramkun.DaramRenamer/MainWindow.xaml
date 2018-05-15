@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Daramkun.DaramRenamer"
         xmlns:dcl="clr-namespace:Daramee.DaramCommonLib;assembly=Daramee.DaramCommonLib"
+        xmlns:ext="clr-namespace:Daramkun.DaramRenamer.Extension"
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="740" Height="480"
 		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="740" MinHeight="480" Loaded="Window_Loaded" Activated="Window_Activated" Closing="Window_Closing">
@@ -40,44 +41,44 @@
                                 </Style>
                             </ToolBar.Resources>
                             
-                            <Button Content="{StaticResource iconOpenButton}" ToolTip="{Binding Path=[open]}" Click="Menu_System_Open" />
-                            <Button Content="{StaticResource iconDeleteButton}" ToolTip="{Binding Path=[clear]}" Click="Menu_System_Clear" />
-                            <Button Content="{StaticResource iconApplyButton}" ToolTip="{Binding Path=[apply]}" Click="Menu_System_Apply" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=OpenIcon}" ToolTip="{Binding Path=[open]}" Click="Menu_System_Open" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=DeleteIcon}" ToolTip="{Binding Path=[clear]}" Click="Menu_System_Clear" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=ApplyIcon}" ToolTip="{Binding Path=[apply]}" Click="Menu_System_Apply" />
                             <Separator />
-                            <Button Content="{StaticResource iconUndoButton}" ToolTip="{Binding Path=[undo]}" Click="Menu_System_Undo" IsEnabled="{Binding ElementName=mainWindow, Path=UndoManagerHasUndoStackItem}" />
-                            <Button Content="{StaticResource iconRedoButton}" ToolTip="{Binding Path=[redo]}" Click="Menu_System_Redo" IsEnabled="{Binding ElementName=mainWindow, Path=UndoManagerHasRedoStackItem}" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=UndoIcon}" ToolTip="{Binding Path=[undo]}" Click="Menu_System_Undo" IsEnabled="{Binding ElementName=mainWindow, Path=UndoManagerHasUndoStackItem}" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=RedoIcon}" ToolTip="{Binding Path=[redo]}" Click="Menu_System_Redo" IsEnabled="{Binding ElementName=mainWindow, Path=UndoManagerHasRedoStackItem}" />
                             <Separator />
-                            <Button Content="{StaticResource iconItemUp}" ToolTip="{Binding Path=[item_up]}" Click="Menu_System_ItemUp" />
-                            <Button Content="{StaticResource iconItemDown}" ToolTip="{Binding Path=[item_down]}" Click="Menu_System_ItemDown" />
-                            <Button Content="{StaticResource iconItemSort}" ToolTip="{Binding Path=[item_sort]}" Click="Menu_System_ItemSort" />
-
-                            <Separator />
-
-                            <Button Content="{StaticResource iconReplaceText}" ToolTip="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />
-                            <Button Content="{StaticResource iconConcatText}" ToolTip="{Binding Path=[process_concatenate_text]}" Click="ConcatText_Click" />
-                            <Button Content="{StaticResource iconTrimText}" ToolTip="{Binding Path=[process_trimming_text]}" Click="Trimming_Click" />
-                            <Button Content="{StaticResource iconDeleteBlock}" ToolTip="{Binding Path=[process_delete_block]}" Click="DeleteBlock_Click" />
-                            <Button Content="{StaticResource iconDeleteText}" ToolTip="{Binding Path=[process_delete_text]}" Click="DeleteText_Click" />
-                            <Button Content="{StaticResource iconSubstringText}" ToolTip="{Binding Path=[process_substring_text]}" Click="Substring_Click" />
-                            <Button Content="{StaticResource iconCasecastText}" ToolTip="{Binding Path=[process_casecast_text]}" Click="Castcast_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=ItemUpIcon}" ToolTip="{Binding Path=[item_up]}" Click="Menu_System_ItemUp" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=ItemDownIcon}" ToolTip="{Binding Path=[item_down]}" Click="Menu_System_ItemDown" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=ItemSortIcon}" ToolTip="{Binding Path=[item_sort]}" Click="Menu_System_ItemSort" />
 
                             <Separator />
 
-                            <Button Content="{StaticResource iconAddExtension}" ToolTip="{Binding Path=[process_add_extension]}" Click="AddExtension_Click" />
-                            <Button Content="{StaticResource iconDeleteExtension}" ToolTip="{Binding Path=[process_delete_extension]}" Click="RemoveExtension_Click" />
-                            <Button Content="{StaticResource iconReplaceExtension}" ToolTip="{Binding Path=[process_change_extension]}" Click="ChangeExtension_Click" />
-                            <Button Content="{StaticResource iconCasecastExtension}" ToolTip="{Binding Path=[process_casecast_extension]}" Click="CastcastExtension_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=ReplaceTextIcon}" ToolTip="{Binding Path=[process_replace_plain_text]}" Click="ReplacePlainText_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=ConcatTextIcon}" ToolTip="{Binding Path=[process_concatenate_text]}" Click="ConcatText_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=TrimTextIcon}" ToolTip="{Binding Path=[process_trimming_text]}" Click="Trimming_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=DeleteBlockIcon}" ToolTip="{Binding Path=[process_delete_block]}" Click="DeleteBlock_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=DeleteTextIcon}" ToolTip="{Binding Path=[process_delete_text]}" Click="DeleteText_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=SubstringIcon}" ToolTip="{Binding Path=[process_substring_text]}" Click="Substring_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=CasecastTextIcon}" ToolTip="{Binding Path=[process_casecast_text]}" Click="Castcast_Click" />
 
                             <Separator />
 
-                            <Button Content="{StaticResource iconDeleteWithoutNumber}" ToolTip="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
-                            <Button Content="{StaticResource iconMatchNumberCount}" ToolTip="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
-                            <Button Content="{StaticResource iconAddIndex}" ToolTip="{Binding Path=[process_add_index_numbers]}" Click="AddIndexNumbers_Click" />
-                            <Button Content="{StaticResource iconIncreaseDecreaseNumber}" ToolTip="{Binding Path=[process_increase_decrease_numbers]}" Click="IncreaseDecreaseNumbers_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=AddExtensionIcon}" ToolTip="{Binding Path=[process_add_extension]}" Click="AddExtension_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=DeleteExtensionIcon}" ToolTip="{Binding Path=[process_delete_extension]}" Click="RemoveExtension_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=ReplaceExtensionIcon}" ToolTip="{Binding Path=[process_change_extension]}" Click="ChangeExtension_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=CasecastExtensionIcon}" ToolTip="{Binding Path=[process_casecast_extension]}" Click="CastcastExtension_Click" />
 
                             <Separator />
 
-                            <Button Content="{StaticResource iconAddDate}" ToolTip="{Binding Path=[process_add_date]}" Click="AddDate_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=DeleteWithoutNumbersIcon}" ToolTip="{Binding Path=[process_delete_without_numbers]}" Click="DeleteWithoutNumbers_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=MatchNumberCountIcon}" ToolTip="{Binding Path=[process_matching_number_count]}" Click="MatchingNumberCount_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=AddIndexIcon}" ToolTip="{Binding Path=[process_add_index_numbers]}" Click="AddIndexNumbers_Click" />
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=IncrementDecrementNumberIcon}" ToolTip="{Binding Path=[process_increase_decrease_numbers]}" Click="IncreaseDecreaseNumbers_Click" />
+
+                            <Separator />
+
+                            <Button Content="{Binding Source={x:Static ext:ToolBarIconExtension.SharedExtension}, Path=AddDateIcon}" ToolTip="{Binding Path=[process_add_date]}" Click="AddDate_Click" />
                         </ToolBar>
                     </ToolBarTray>
 

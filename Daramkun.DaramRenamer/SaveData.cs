@@ -54,5 +54,8 @@ namespace Daramkun.DaramRenamer
 		public double Height { get; set; }
 		[DataMember ( IsRequired = false, Name = "window_state" )]
 		public System.Windows.WindowState WindowState { get; set; }
+
+		[DataMember ( IsRequired = false, Name = "toolbar_icon_pack" )]
+		public string ToolBarIconPack { get; set; } = null;
 	}
 }

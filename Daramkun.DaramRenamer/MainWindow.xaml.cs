@@ -67,6 +67,7 @@ namespace Daramkun.DaramRenamer
 		public bool AutomaticFilenameFix { get { return option.Options.AutomaticFilenameFix; } set { option.Options.AutomaticFilenameFix = value; } }
 		public bool AutomaticListCleaning { get { return option.Options.AutomaticListCleaning; } set { option.Options.AutomaticListCleaning = value; } }
 		public bool Overwrite { get { return option.Options.Overwrite; } set { option.Options.Overwrite = value; } }
+		public bool SaveWindowState { get { return option.Options.SaveWindowState; } set { option.Options.SaveWindowState = value; } }
 
 		public MainWindow ()
 		{
@@ -75,13 +76,17 @@ namespace Daramkun.DaramRenamer
 			updateChecker = new UpdateChecker ( "{0}.{1}{2}{3}" );
 			
 			option = new Optionizer<SaveData> ( "DARAM WORLD", "DaramRenamer" );
-			double width = option.Options.Width,
-				height = option.Options.Height;
-
+			
 			InitializeComponent ();
 
-			Width = width;
-			Height = height;
+			if ( option.Options.SaveWindowState )
+			{
+				Left = option.Options.Left;
+				Top = option.Options.Top;
+				Width = option.Options.Width;
+				Height = option.Options.Height;
+				WindowState = option.Options.WindowState;
+			}
 
 			optionRenameMode.SelectedIndex = option.Options.RenameModeInteger;
 			
@@ -435,6 +440,14 @@ namespace Daramkun.DaramRenamer
 
 		private void Window_Closing ( object sender, System.ComponentModel.CancelEventArgs e )
 		{
+			if ( option.Options.SaveWindowState )
+			{
+				option.Options.Left = Left;
+				option.Options.Top = Top;
+				option.Options.Width = Width;
+				option.Options.Height = Height;
+				option.Options.WindowState = WindowState;
+			}
 			Optionizer<SaveData>.SharedOptionizer.Save ();
 		}
 

@@ -194,14 +194,15 @@
                         <CheckBox Content="{Binding Path=[option_overwrite]}" IsChecked="{Binding Source={x:Static local:MainWindow.SharedWindow}, Path=Overwrite}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
                         <CheckBox Content="{Binding Path=[option_autofilenamefix]}" IsChecked="{Binding Source={x:Static local:MainWindow.SharedWindow}, Path=AutomaticFilenameFix}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
                         <CheckBox Content="{Binding Path=[option_autolistcleaning]}" IsChecked="{Binding Source={x:Static local:MainWindow.SharedWindow}, Path=AutomaticListCleaning}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                        <StackPanel Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                        <StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
 							<TextBlock Text="{Binding Path=[option_rename_mode]}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
                             <ComboBox Name="optionRenameMode" SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling" SelectionChanged="ComboBox_SelectionChanged">
 								<ComboBoxItem Content="{Binding Path=[option_rename_mode_move]}" Tag="0" />
 								<ComboBoxItem Content="{Binding Path=[option_rename_mode_copy]}" Tag="1" />
 							</ComboBox>
 						</StackPanel>
-					</StackPanel>
+                        <CheckBox Content="{Binding Path=[option_savewindowstate]}" IsChecked="{Binding Source={x:Static local:MainWindow.SharedWindow}, Path=SaveWindowState}" Margin="0,0,0,5" />
+                    </StackPanel>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="{Binding Path=[about]}">

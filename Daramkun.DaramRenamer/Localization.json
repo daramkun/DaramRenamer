@@ -123,6 +123,7 @@
         "option_autofilenamefix": "자동으로 파일명 특수문자 수정하기",
         "option_autolistcleaning": "자동으로 존재하지 않는 파일 정리",
         "option_savemethod": "설정을 레지스트리에 저장하기",
+        "option_savewindowstate": "창 상태를 저장하고 불러오기",
 
         "position_front": "처음",
         "position_end": "마지막",
@@ -330,6 +331,7 @@
         "option_autofilenamefix": "Automatically fix filename's Special characters.",
         "option_autolistcleaning": "Automatic deletion from the listbox If the file does not exist.",
         "option_savemethod": "Save settings to the registry.",
+        "option_savewindowstate": "Save and Load the Window State.",
 
         "position_front": "Front",
         "position_end": "End",

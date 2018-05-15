@@ -47,43 +47,8 @@ namespace Daramkun.DaramRenamer.Extension
 
 		public ToolBarIconExtension ( string name = null )
 		{
-			if ( name == null )
+			if ( name != null && File.Exists ( $"{name}.zip" )
 			{
-				OpenIcon = App.Current.Resources [ "iconOpenButton" ];
-				DeleteIcon = App.Current.Resources [ "iconDeleteButton" ];
-				ApplyIcon = App.Current.Resources [ "iconApplyButton" ];
-
-				UndoIcon = App.Current.Resources [ "iconUndoButton" ];
-				RedoIcon = App.Current.Resources [ "iconRedoButton" ];
-
-				ItemUpIcon = App.Current.Resources [ "iconItemUp" ];
-				ItemDownIcon = App.Current.Resources [ "iconItemDown" ];
-				ItemSortIcon = App.Current.Resources [ "iconItemSort" ];
-
-				ReplaceTextIcon = App.Current.Resources [ "iconReplaceText" ];
-				ConcatTextIcon = App.Current.Resources [ "iconConcatText" ];
-				TrimTextIcon = App.Current.Resources [ "iconTrimText" ];
-				DeleteBlockIcon = App.Current.Resources [ "iconDeleteBlock" ];
-				DeleteTextIcon = App.Current.Resources [ "iconDeleteText" ];
-				SubstringIcon = App.Current.Resources [ "iconSubstringText" ];
-				CasecastTextIcon = App.Current.Resources [ "iconCasecastText" ];
-
-				AddExtensionIcon = App.Current.Resources [ "iconAddExtension" ];
-				DeleteExtensionIcon = App.Current.Resources [ "iconDeleteExtension" ];
-				ReplaceExtensionIcon = App.Current.Resources [ "iconReplaceExtension" ];
-				CasecastExtensionIcon = App.Current.Resources [ "iconCasecastExtension" ];
-
-				DeleteWithoutNumbersIcon = App.Current.Resources [ "iconDeleteWithoutNumber" ];
-				MatchNumberCountIcon = App.Current.Resources [ "iconMatchNumberCount" ];
-				AddIndexIcon = App.Current.Resources [ "iconAddIndex" ];
-				IncrementDecrementNumberIcon = App.Current.Resources [ "iconIncreaseDecreaseNumber" ];
-
-				AddDateIcon = App.Current.Resources [ "iconAddDate" ];
-			}
-			else
-			{
-				if ( !File.Exists ( $"{name}.zip" ) )
-					throw new ArgumentException ();
 				using ( Stream fs = new FileStream ( $"{name}.zip", FileMode.Open ) )
 				{
 					using ( ZipArchive archive = new ZipArchive ( fs, ZipArchiveMode.Read, true ) )
@@ -92,7 +57,7 @@ namespace Daramkun.DaramRenamer.Extension
 						{
 							string entryName = Path.GetFileNameWithoutExtension ( entry.Name );
 
-							if ( Path.GetFileNameWithoutExtension ( entryName ) == "README" )
+							if ( entryName == "README" || entryName == "VERSION" || entryName == "LICENSE" )
 								continue;
 
 							object icon = DecodeEntry ( entry );
@@ -132,6 +97,39 @@ namespace Daramkun.DaramRenamer.Extension
 						}
 					}
 				}
+			}
+			else
+			{
+				OpenIcon = App.Current.Resources [ "iconOpenButton" ];
+				DeleteIcon = App.Current.Resources [ "iconDeleteButton" ];
+				ApplyIcon = App.Current.Resources [ "iconApplyButton" ];
+
+				UndoIcon = App.Current.Resources [ "iconUndoButton" ];
+				RedoIcon = App.Current.Resources [ "iconRedoButton" ];
+
+				ItemUpIcon = App.Current.Resources [ "iconItemUp" ];
+				ItemDownIcon = App.Current.Resources [ "iconItemDown" ];
+				ItemSortIcon = App.Current.Resources [ "iconItemSort" ];
+
+				ReplaceTextIcon = App.Current.Resources [ "iconReplaceText" ];
+				ConcatTextIcon = App.Current.Resources [ "iconConcatText" ];
+				TrimTextIcon = App.Current.Resources [ "iconTrimText" ];
+				DeleteBlockIcon = App.Current.Resources [ "iconDeleteBlock" ];
+				DeleteTextIcon = App.Current.Resources [ "iconDeleteText" ];
+				SubstringIcon = App.Current.Resources [ "iconSubstringText" ];
+				CasecastTextIcon = App.Current.Resources [ "iconCasecastText" ];
+
+				AddExtensionIcon = App.Current.Resources [ "iconAddExtension" ];
+				DeleteExtensionIcon = App.Current.Resources [ "iconDeleteExtension" ];
+				ReplaceExtensionIcon = App.Current.Resources [ "iconReplaceExtension" ];
+				CasecastExtensionIcon = App.Current.Resources [ "iconCasecastExtension" ];
+
+				DeleteWithoutNumbersIcon = App.Current.Resources [ "iconDeleteWithoutNumber" ];
+				MatchNumberCountIcon = App.Current.Resources [ "iconMatchNumberCount" ];
+				AddIndexIcon = App.Current.Resources [ "iconAddIndex" ];
+				IncrementDecrementNumberIcon = App.Current.Resources [ "iconIncreaseDecreaseNumber" ];
+
+				AddDateIcon = App.Current.Resources [ "iconAddDate" ];
 			}
 
 			SharedExtension = this;

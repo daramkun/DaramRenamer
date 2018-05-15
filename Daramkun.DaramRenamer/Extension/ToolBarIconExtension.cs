@@ -91,6 +91,10 @@ namespace Daramkun.DaramRenamer.Extension
 						foreach ( var entry in archive.Entries )
 						{
 							string entryName = Path.GetFileNameWithoutExtension ( entry.Name );
+
+							if ( Path.GetFileNameWithoutExtension ( entryName ) == "README" )
+								continue;
+
 							object icon = DecodeEntry ( entry );
 							switch ( entryName )
 							{
@@ -158,7 +162,7 @@ namespace Daramkun.DaramRenamer.Extension
 			{
 				using ( Stream stream = entry.Open () )
 				{
-					using ( StreamReader reader = new StreamReader ( stream, Encoding.ASCII, false, 0, true ) )
+					using ( StreamReader reader = new StreamReader ( stream, Encoding.ASCII, false, 256, true ) )
 					{
 						return System.Windows.Media.Geometry.Parse ( reader.ReadToEnd () );
 					}

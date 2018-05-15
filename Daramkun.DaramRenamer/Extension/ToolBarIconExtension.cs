@@ -47,7 +47,7 @@ namespace Daramkun.DaramRenamer.Extension
 
 		public ToolBarIconExtension ( string name = null )
 		{
-			if ( name != null && File.Exists ( $"{name}.zip" )
+			if ( name != null && File.Exists ( $"{name}.zip" ) )
 			{
 				using ( Stream fs = new FileStream ( $"{name}.zip", FileMode.Open ) )
 				{

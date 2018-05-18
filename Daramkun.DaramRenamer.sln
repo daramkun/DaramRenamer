@@ -20,8 +20,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramkun.DaramRenamer.Share
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. External Libraries", "2. External Libraries", "{D1B29789-6386-4C11-8E17-1B4246972CD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daramee.DaramCommonLib", "..\DaramCommonLib\Daramee.DaramCommonLib\Daramee.DaramCommonLib.csproj", "{B33B6A90-7CD7-4351-B32E-FC0102984180}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "taglib-sharp", "..\taglib-sharp\src\taglib-sharp.csproj", "{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TaskDialogSharp.Shared", "..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.shproj", "{23D58846-FEF0-468A-80DE-0D37A129A27C}"
@@ -30,18 +28,23 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.FileTypeDetector.Sh
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.Nargs.Shared", "..\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.shproj", "{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.DaramCommonLib.Shared", "..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.shproj", "{7C78E361-8D16-47C6-A81A-D1F883707EE5}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.projitems*{1ae0e370-c5a3-442f-9ba1-c36dfdcc5e4e}*SharedItemsImports = 4
 		Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems*{1ae0e370-c5a3-442f-9ba1-c36dfdcc5e4e}*SharedItemsImports = 4
 		..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems*{1ae0e370-c5a3-442f-9ba1-c36dfdcc5e4e}*SharedItemsImports = 4
 		..\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.projitems*{1ae0e370-c5a3-442f-9ba1-c36dfdcc5e4e}*SharedItemsImports = 4
 		..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.projitems*{23d58846-fef0-468a-80de-0d37a129a27c}*SharedItemsImports = 13
 		..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems*{5e1c88ae-6cca-430c-8adb-de4de4ce2174}*SharedItemsImports = 13
-		..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.projitems*{b33b6a90-7cd7-4351-b32e-fc0102984180}*SharedItemsImports = 4
+		..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.projitems*{7c78e361-8d16-47c6-a81a-d1f883707ee5}*SharedItemsImports = 13
 		Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems*{bbb4e072-4668-438c-b930-fc6831319ce7}*SharedItemsImports = 13
 		..\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.projitems*{e13faa4a-99bd-4a4d-8a1c-c1d3260278cd}*SharedItemsImports = 13
+		..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.projitems*{e18bb4a0-ac41-48f2-8940-427b5f7f93ac}*SharedItemsImports = 4
 		Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems*{e18bb4a0-ac41-48f2-8940-427b5f7f93ac}*SharedItemsImports = 4
 		..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems*{e18bb4a0-ac41-48f2-8940-427b5f7f93ac}*SharedItemsImports = 4
+		..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.projitems*{e18bb4a0-ac41-48f2-8940-427b5f7f93ac}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,18 +63,14 @@ Global
 		{1347BED8-4A3D-4E30-A218-A1603A8CD86E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1347BED8-4A3D-4E30-A218-A1603A8CD86E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1347BED8-4A3D-4E30-A218-A1603A8CD86E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B33B6A90-7CD7-4351-B32E-FC0102984180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B33B6A90-7CD7-4351-B32E-FC0102984180}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B33B6A90-7CD7-4351-B32E-FC0102984180}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B33B6A90-7CD7-4351-B32E-FC0102984180}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DEF73CC3-0636-48A9-AEC6-9465062C0042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DEF73CC3-0636-48A9-AEC6-9465062C0042}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEF73CC3-0636-48A9-AEC6-9465062C0042}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEF73CC3-0636-48A9-AEC6-9465062C0042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,13 +79,13 @@ Global
 		{E18BB4A0-AC41-48F2-8940-427B5F7F93AC} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
 		{1AE0E370-C5A3-442F-9BA1-C36DFDCC5E4E} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
 		{1347BED8-4A3D-4E30-A218-A1603A8CD86E} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
+		{DEF73CC3-0636-48A9-AEC6-9465062C0042} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
 		{BBB4E072-4668-438C-B930-FC6831319CE7} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
-		{B33B6A90-7CD7-4351-B32E-FC0102984180} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 		{2F14F0E2-9BF8-44A5-8CBA-F4675734FEAD} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 		{23D58846-FEF0-468A-80DE-0D37A129A27C} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 		{5E1C88AE-6CCA-430C-8ADB-DE4DE4CE2174} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 		{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
-		{DEF73CC3-0636-48A9-AEC6-9465062C0042} = {7CA1A390-CF80-4277-8A2B-80C8FC069517}
+		{7C78E361-8D16-47C6-A81A-D1F883707EE5} = {D1B29789-6386-4C11-8E17-1B4246972CD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DEAD2016-E3EF-438C-84F0-C0C8ED314DA9}

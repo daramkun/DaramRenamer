@@ -137,8 +137,6 @@ namespace Daramkun.DaramRenamer
 				host.Dock = DockStyle.Fill;
 				window.Dock = DockStyle.Fill;
 				window.Controls.Add ( host );
-
-				window.ShowDialog ();
 			}
 			catch ( Exception ex )
 			{

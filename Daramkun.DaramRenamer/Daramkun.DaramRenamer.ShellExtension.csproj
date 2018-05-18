@@ -71,10 +71,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DaramCommonLib\Daramee.DaramCommonLib\Daramee.DaramCommonLib.csproj">
-      <Project>{b33b6a90-7cd7-4351-b32e-fc0102984180}</Project>
-      <Name>Daramee.DaramCommonLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Daramkun.DaramRenamer\Daramkun.DaramRenamer.csproj">
       <Project>{e18bb4a0-ac41-48f2-8940-427b5f7f93ac}</Project>
       <Name>Daramkun.DaramRenamer</Name>

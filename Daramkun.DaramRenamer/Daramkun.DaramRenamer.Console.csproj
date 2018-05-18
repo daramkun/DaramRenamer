@@ -46,10 +46,17 @@
     <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
       <HintPath>..\packages\Jint.2.11.58\lib\net451\Jint.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -63,10 +70,6 @@
     <Content Include="Resources\ProgramIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DaramCommonLib\Daramee.DaramCommonLib\Daramee.DaramCommonLib.csproj">
-      <Project>{b33b6a90-7cd7-4351-b32e-fc0102984180}</Project>
-      <Name>Daramee.DaramCommonLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\taglib-sharp\src\taglib-sharp.csproj">
       <Project>{2f14f0e2-9bf8-44a5-8cba-f4675734fead}</Project>
       <Name>taglib-sharp</Name>
@@ -75,5 +78,6 @@
   <Import Project="..\..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />
   <Import Project="..\Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems" Label="Shared" />
   <Import Project="..\..\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -95,9 +95,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -162,10 +164,6 @@
     <Resource Include="Resources\ProgramIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DaramCommonLib\Daramee.DaramCommonLib\Daramee.DaramCommonLib.csproj">
-      <Project>{b33b6a90-7cd7-4351-b32e-fc0102984180}</Project>
-      <Name>Daramee.DaramCommonLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\taglib-sharp\src\taglib-sharp.csproj">
       <Project>{2f14f0e2-9bf8-44a5-8cba-f4675734fead}</Project>
       <Name>taglib-sharp</Name>
@@ -173,6 +171,8 @@
   </ItemGroup>
   <Import Project="..\Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems" Label="Shared" />
   <Import Project="..\..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

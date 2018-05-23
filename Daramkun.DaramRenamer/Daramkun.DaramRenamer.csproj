@@ -154,7 +154,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="DaramRenamer.pfx" />
-    <EmbeddedResource Include="Localization.json" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
     <EmbeddedResource Include="Strings.json" />

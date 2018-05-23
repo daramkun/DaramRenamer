@@ -8,7 +8,7 @@
              xmlns:ae="http://icsharpcode.net/sharpdevelop/avalonedit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-			 DataContext="{x:Static dcl:Localizer.SharedStrings}">
+			 DataContext="{x:Static dcl:StringTable.SharedStrings}">
     <Border BorderBrush="DeepSkyBlue" BorderThickness="1" Width="480" VerticalAlignment="Center" HorizontalAlignment="Center">
         <StackPanel Orientation="Vertical" Background="White">
             <!-- Title bar -->

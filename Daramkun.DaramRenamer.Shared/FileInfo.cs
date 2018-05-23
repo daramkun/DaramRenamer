@@ -47,13 +47,19 @@ namespace Daramkun.DaramRenamer
 		public string ChangedPath { get => changedPath; set { changedPath = value; PC ( nameof ( ChangedPath ) ); } }
 		public string ChangedFilename { get => changedFilename; set { changedFilename = value; PC ( nameof ( ChangedFilename ) ); } }
 		public string ChangedFullPath => Path.Combine ( ChangedPath, ChangedFilename );
+		public bool IsDirectory { get; set; }
 
-		public FileInfo ( string fullPath ) { OriginalFullPath = fullPath; ChangedFilename = OriginalFilename; ChangedPath = OriginalPath; }
+		public FileInfo ( string fullPath )
+		{
+			OriginalFullPath = fullPath; ChangedFilename = OriginalFilename; ChangedPath = OriginalPath;
+			IsDirectory = File.GetAttributes ( fullPath ).HasFlag ( FileAttributes.Directory );
+		}
 		public FileInfo ( FileInfo file )
 		{
 			OriginalFullPath = file.OriginalFullPath;
 			ChangedPath = file.ChangedPath;
 			ChangedFilename = file.ChangedFilename;
+			IsDirectory = file.IsDirectory;
 		}
 
 		IShellItem OriginalPathShellItem

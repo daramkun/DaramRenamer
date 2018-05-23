@@ -70,7 +70,7 @@ namespace Daramkun.DaramRenamer
 		{
 			Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog ()
 			{
-				Filter = Localizer.SharedStrings [ "batch_filters" ],
+				Filter = StringTable.SharedStrings [ "batch_filters" ],
 			};
 			if ( ofd.ShowDialog () == false )
 				return;
@@ -82,7 +82,7 @@ namespace Daramkun.DaramRenamer
 		{
 			Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog ()
 			{
-				Filter = Localizer.SharedStrings [ "batch_filters" ],
+				Filter = StringTable.SharedStrings [ "batch_filters" ],
 			};
 			if ( sfd.ShowDialog () == false )
 				return;

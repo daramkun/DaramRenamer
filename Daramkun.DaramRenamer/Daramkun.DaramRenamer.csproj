@@ -114,6 +114,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArgumentAttribute.cs" />
+    <Compile Include="Converters\PathToIconConverter.cs" />
     <Compile Include="Extension\ToolBarIconExtension.cs" />
     <Compile Include="ISubWindow.cs" />
     <Compile Include="SaveData.cs" />
@@ -156,6 +157,7 @@
     <EmbeddedResource Include="Localization.json" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="Strings.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -5,11 +5,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Daramkun.DaramRenamer"
+        xmlns:drconv="clr-namespace:Daramkun.DaramRenamer.Converters"
         xmlns:dcl="clr-namespace:Daramee.DaramCommonLib"
         xmlns:ext="clr-namespace:Daramkun.DaramRenamer.Extension"
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="750" Height="492"
-		DataContext="{x:Static dcl:Localizer.SharedStrings}" MinWidth="750" MinHeight="492" Loaded="Window_Loaded" Activated="Window_Activated" Closing="Window_Closing">
+		DataContext="{x:Static dcl:StringTable.SharedStrings}" MinWidth="750" MinHeight="492" Loaded="Window_Loaded" Activated="Window_Activated" Closing="Window_Closing">
+    <Window.Resources>
+        <drconv:PathToIconConverter x:Key="pathToIconConverter" />
+    </Window.Resources>
+    
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition />
@@ -105,7 +110,10 @@
                                     <GridViewColumnHeader Content="{Binding Path=[original_name]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding OriginalFullPath, Converter={StaticResource pathToIconConverter}}" Height="16" Margin="0,0,4,0" />
+                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" />
+                                            </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

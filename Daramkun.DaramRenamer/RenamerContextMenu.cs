@@ -37,7 +37,7 @@ namespace Daramkun.DaramRenamer
 		{
 			ProgramHelper.Initialize ( Assembly.GetAssembly ( typeof ( MainWindow ) ),
 				"daramkun", "DaramRenamer" );
-			var localizer = new Localizer ();
+			var localizer = new StringTable ();
 
 			var menu = new ContextMenuStrip ();
 			var renamerMenuItem = menu.Items.Add ( localizer.Strings [ "daram_renamer" ] ) as ToolStripMenuItem;

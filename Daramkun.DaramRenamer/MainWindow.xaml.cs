@@ -94,11 +94,11 @@ namespace Daramkun.DaramRenamer
 			optionRenameMode.SelectedIndex = option.Options.RenameModeInteger;
 			
 			Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
-			Title = $"{Localizer.SharedStrings [ "daram_renamer" ]} - v{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
+			Title = $"{StringTable.SharedStrings [ "daram_renamer" ]} - v{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
 			
-			translationAuthor.Text = Localizer.SharedLocalizer.Culture.Contact != null ?
-				$"{Localizer.SharedLocalizer.Culture.Author}<{Localizer.SharedLocalizer.Culture.Contact}> - {Localizer.SharedLocalizer.Culture.Culture}" :
-				$"{Localizer.SharedLocalizer.Culture.Author} - {Localizer.SharedLocalizer.Culture.Culture}";
+			translationAuthor.Text = StringTable.SharedTable.Contact != null ?
+				$"{StringTable.SharedTable.Author}<{StringTable.SharedTable.Contact}> - {StringTable.SharedTable.CurrentCulture}" :
+				$"{StringTable.SharedTable.Author} - {StringTable.SharedTable.CurrentCulture}";
 
 			/*UndoManager<ObservableCollection<FileInfo>> restored = UndoManager<ObservableCollection<FileInfo>>.Restore ();
 			if ( restored != null )
@@ -116,7 +116,7 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( await updateChecker.CheckUpdate () == true )
 			{
-				Title = $"{Title} - [{Localizer.SharedStrings [ "available_update" ]}]";
+				Title = $"{Title} - [{StringTable.SharedStrings [ "available_update" ]}]";
 			}
 		}
 
@@ -127,7 +127,7 @@ namespace Daramkun.DaramRenamer
 			
 			TaskDialog taskDialog = new TaskDialog
 			{
-				Title = Localizer.SharedStrings [ "daram_renamer" ],
+				Title = StringTable.SharedStrings [ "daram_renamer" ],
 				MainInstruction = message,
 				Content = content,
 				MainIcon = icon,
@@ -228,8 +228,8 @@ namespace Daramkun.DaramRenamer
 		{
 			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
 			{
-				Title = Localizer.SharedStrings [ "open_files" ],
-				Filter = Localizer.SharedStrings [ "all_files" ],
+				Title = StringTable.SharedStrings [ "open_files" ],
+				Filter = StringTable.SharedStrings [ "all_files" ],
 				Multiselect = true
 			};
 			if ( openFileDialog.ShowDialog () == false ) return;
@@ -276,7 +276,7 @@ namespace Daramkun.DaramRenamer
 
 			Application.Current.Dispatcher.Invoke ( DispatcherPriority.Background, new ThreadStart ( delegate { } ) );
 
-			MessageBox ( Localizer.SharedStrings [ "applied" ], string.Format ( Localizer.SharedStrings [ "applied_message" ],
+			MessageBox ( StringTable.SharedStrings [ "applied" ], string.Format ( StringTable.SharedStrings [ "applied_message" ],
 				progressBar.Value, progressBar.Maximum ),
 				TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK );
 
@@ -343,14 +343,14 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( await updateChecker.CheckUpdate () == true )
 			{
-				if ( MessageBox ( Localizer.SharedStrings [ "update_exist" ], Localizer.SharedStrings [ "current_old" ],
-								TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK, Localizer.SharedStrings [ "download_button" ] ).
+				if ( MessageBox ( StringTable.SharedStrings [ "update_exist" ], StringTable.SharedStrings [ "current_old" ],
+								TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK, StringTable.SharedStrings [ "download_button" ] ).
 								Button == 101 )
 					updateChecker.ShowDownloadPage ();
 			}
 			else
 			{
-				MessageBox ( Localizer.SharedStrings [ "no_update" ], Localizer.SharedStrings [ "current_stable" ],
+				MessageBox ( StringTable.SharedStrings [ "no_update" ], StringTable.SharedStrings [ "current_stable" ],
 								TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK );
 			}
 		}

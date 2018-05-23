@@ -13,16 +13,16 @@ namespace Daramkun.DaramRenamer
 	/// </summary>
 	public partial class App : Application
 	{
-		Localizer ownLocalizer;
+		StringTable ownLocalizer;
 
 		public App ()
 		{
 			ProgramHelper.Initialize ( Assembly.GetExecutingAssembly (), "daramkun", "DaramRenamer" );
-			ownLocalizer = new Localizer ();
+			ownLocalizer = new StringTable ();
 
 			if ( Environment.OSVersion.Version <= new Version ( 5, 0 ) )
 			{
-				MessageBox.Show ( Localizer.SharedStrings [ "os_notice" ], Localizer.SharedStrings [ "daram_renamer" ],
+				MessageBox.Show ( StringTable.SharedStrings [ "os_notice" ], StringTable.SharedStrings [ "daram_renamer" ],
 					MessageBoxButton.OK, MessageBoxImage.Error );
 				Application.Current.Shutdown ( -1 );
 			}
@@ -34,7 +34,7 @@ namespace Daramkun.DaramRenamer
 			{
 				//Daramkun.DaramRenamer.MainWindow.SharedWindow.UndoManager.Backup ();
 
-				Daramkun.DaramRenamer.MainWindow.MessageBox ( Localizer.SharedStrings [ "error_raised" ], Localizer.SharedStrings [ "please_check_log" ],
+				Daramkun.DaramRenamer.MainWindow.MessageBox ( StringTable.SharedStrings [ "error_raised" ], StringTable.SharedStrings [ "please_check_log" ],
 					TaskDialogIcon.Error, TaskDialogCommonButtonFlags.OK );
 				using ( StreamWriter sw = File.AppendText ( "error.log" ) )
 				{

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Daramkun.DaramRenamer"
              xmlns:dcl="clr-namespace:Daramee.DaramCommonLib"
              mc:Ignorable="d" d:DesignWidth="480"
-			 DataContext="{x:Static dcl:Localizer.SharedStrings}">
+			 DataContext="{x:Static dcl:StringTable.SharedStrings}">
 	<Border BorderBrush="DeepSkyBlue" BorderThickness="1" Width="480" VerticalAlignment="Center" HorizontalAlignment="Center">
 		<StackPanel Orientation="Vertical" Background="White">
 			<!-- Title bar -->

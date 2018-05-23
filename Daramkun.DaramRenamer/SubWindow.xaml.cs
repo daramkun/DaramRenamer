@@ -36,7 +36,7 @@ namespace Daramkun.DaramRenamer
 
 			Processor = processor;
 
-			overlayWindowTitle.Text = Localizer.SharedStrings [ processor.Name ];
+			overlayWindowTitle.Text = StringTable.SharedStrings [ processor.Name ];
 
 			Type type = processor.GetType ();
 			var props = type.GetProperties ();
@@ -56,7 +56,7 @@ namespace Daramkun.DaramRenamer
 			{
 				var prop = propPair;
 				object [] attrs = prop.GetCustomAttributes ( typeof ( ArgumentAttribute ), true );
-				TextBlock textBlock = new TextBlock () { Text = Localizer.SharedStrings [ ( attrs [ 0 ] as ArgumentAttribute ).Name ] };
+				TextBlock textBlock = new TextBlock () { Text = StringTable.SharedStrings [ ( attrs [ 0 ] as ArgumentAttribute ).Name ] };
 				textBlock.VerticalAlignment = VerticalAlignment.Center;
 				Grid.SetRow ( textBlock, propDict.IndexOf ( propPair ) );
 				Grid.SetColumn ( textBlock, 0 );
@@ -264,7 +264,7 @@ namespace Daramkun.DaramRenamer
 					control.VerticalAlignment = VerticalAlignment.Center;
 					var radioPre = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "position_front" ],
+						Content = StringTable.SharedStrings [ "position_front" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -273,7 +273,7 @@ namespace Daramkun.DaramRenamer
 					( control as StackPanel ).Children.Add ( radioPre );
 					var radioPost = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "position_end" ],
+						Content = StringTable.SharedStrings [ "position_end" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -285,7 +285,7 @@ namespace Daramkun.DaramRenamer
 				{
 					var radioBoth = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "position_both" ],
+						Content = StringTable.SharedStrings [ "position_both" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -300,7 +300,7 @@ namespace Daramkun.DaramRenamer
 					control.VerticalAlignment = VerticalAlignment.Center;
 					var radioLower = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "casecast_lower" ],
+						Content = StringTable.SharedStrings [ "casecast_lower" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -309,7 +309,7 @@ namespace Daramkun.DaramRenamer
 					( control as StackPanel ).Children.Add ( radioLower );
 					var radioUpper = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "casecast_upper" ],
+						Content = StringTable.SharedStrings [ "casecast_upper" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -321,7 +321,7 @@ namespace Daramkun.DaramRenamer
 				{
 					var radioUpperFirstLetter = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "casecast_upper_first_letter" ],
+						Content = StringTable.SharedStrings [ "casecast_upper_first_letter" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -372,7 +372,7 @@ namespace Daramkun.DaramRenamer
 					control.VerticalAlignment = VerticalAlignment.Center;
 					var radioCreated = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "add_date_created" ],
+						Content = StringTable.SharedStrings [ "add_date_created" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -381,7 +381,7 @@ namespace Daramkun.DaramRenamer
 					( control as StackPanel ).Children.Add ( radioCreated );
 					var radioModified = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "add_date_modified" ],
+						Content = StringTable.SharedStrings [ "add_date_modified" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -390,7 +390,7 @@ namespace Daramkun.DaramRenamer
 					( control as StackPanel ).Children.Add ( radioModified );
 					var radioAccessed = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "add_date_accessed" ],
+						Content = StringTable.SharedStrings [ "add_date_accessed" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -399,7 +399,7 @@ namespace Daramkun.DaramRenamer
 					( control as StackPanel ).Children.Add ( radioAccessed );
 					var radioNow = new RadioButton ()
 					{
-						Content = Localizer.SharedStrings [ "add_date_now" ],
+						Content = StringTable.SharedStrings [ "add_date_now" ],
 						Margin = new Thickness ( 0, 0, 5, 0 ),
 						GroupName = prop.Name
 					};
@@ -426,7 +426,7 @@ namespace Daramkun.DaramRenamer
 
 						"media_tag_image_width", "media_tag_image_height", "media_tag_image_codec", "media_tag_image_quality",
 					} )
-						comboBox.Items.Add ( Localizer.SharedStrings [ item ] );
+						comboBox.Items.Add ( StringTable.SharedStrings [ item ] );
 					comboBox.SelectedIndex = ( int ) ( MediaTag ) prop.GetValue ( Processor );
 					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( MediaTag ) comboBox.SelectedIndex ); };
 
@@ -440,7 +440,7 @@ namespace Daramkun.DaramRenamer
 						VerticalAlignment = VerticalAlignment.Center
 					};
 					foreach ( var item in new [] { "document_tag_title", "document_tag_author" } )
-						comboBox.Items.Add ( Localizer.SharedStrings [ item ] );
+						comboBox.Items.Add ( StringTable.SharedStrings [ item ] );
 					comboBox.SelectedIndex = ( int ) ( DocumentTag ) prop.GetValue ( Processor );
 					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( DocumentTag ) comboBox.SelectedIndex ); };
 
@@ -454,7 +454,7 @@ namespace Daramkun.DaramRenamer
 						VerticalAlignment = VerticalAlignment.Center
 					};
 					foreach ( var item in new [] { "hash_md5", "hash_sha1", "hash_sha256", "hash_sha384", "hash_sha512" } )
-						comboBox.Items.Add ( Localizer.SharedStrings [ item ] );
+						comboBox.Items.Add ( StringTable.SharedStrings [ item ] );
 					comboBox.SelectedIndex = ( int ) ( HashType ) prop.GetValue ( Processor );
 					comboBox.SelectionChanged += ( sender, e ) => { prop.SetValue ( Processor, ( HashType ) comboBox.SelectedIndex ); };
 

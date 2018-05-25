@@ -230,10 +230,10 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Project Repository: " Grid.Row="0" Grid.Column="0" />
-                    <TextBlock Text="Download Page: " Grid.Row="1" Grid.Column="0" />
-                    <TextBlock Text="Issues Page: " Grid.Row="2" Grid.Column="0" />
-                    <TextBlock Text="Current Translation Author: " Grid.Row="3" Grid.Column="0" />
+                    <TextBlock Text="{Binding Path=[about_project_repository]}" Grid.Row="0" Grid.Column="0" />
+                    <TextBlock Text="{Binding Path=[about_download_page]}" Grid.Row="1" Grid.Column="0" />
+                    <TextBlock Text="{Binding Path=[about_issue_page]}" Grid.Row="2" Grid.Column="0" />
+                    <TextBlock Text="{Binding Path=[about_translate_author]}" Grid.Row="3" Grid.Column="0" />
 
                     <TextBlock Grid.Row="0" Grid.Column="1">
                         <Hyperlink NavigateUri="https://github.com/daramkun/DaramRenamer" RequestNavigate="Hyperlink_RequestNavigate">Daram Renamer</Hyperlink>

@@ -24,6 +24,7 @@ using Daramee.DaramCommonLib;
 using Daramee.Winston.Dialogs;
 using System.ComponentModel;
 using Daramkun.DaramRenamer.Extension;
+using Daramee.Winston.File;
 
 namespace Daramkun.DaramRenamer
 {
@@ -146,8 +147,16 @@ namespace Daramkun.DaramRenamer
 					FileInfo.Files.Add ( fileInfo );
 			}
 			else
-				foreach ( string ss in System.IO.Directory.GetFiles ( s, "*.*", SearchOption.AllDirectories ) )
+			{
+				string [] files = null;
+				//try { files = System.IO.Directory.GetFiles ( s, "*.*", SearchOption.AllDirectories ); }
+				//catch ( UnauthorizedAccessException ex ) {  }
+				//if ( files != null )
+				//	foreach ( string ss in files )
+				//		AddItem ( ss, directoryMode );
+				foreach ( string ss in FilesEnumerator.EnumerateFiles ( s, "*.*", false ) )
 					AddItem ( ss, directoryMode );
+			}
 		}
 
 		public void ShowPopup<T> ( params object [] args ) where T : IProcessor
@@ -212,14 +221,16 @@ namespace Daramkun.DaramRenamer
 				bool hasDirectory = false;
 				foreach ( string filename in temp )
 				{
-					if ( File.GetAttributes ( filename ).HasFlag ( FileAttributes.Directory ) )
+					if ( File.GetAttributes ( filename ).HasFlag ( FileAttributes.Directory ) && filename.Length > 3 )
 						hasDirectory = true;
 				}
 
 				bool directoryMode = false;
 				if ( hasDirectory )
 				{
-					var result = MessageBox ( "D&D files has directory.", "Add to Directory mode? or iterate files?", TaskDialogNativeIcon.Warning, TaskDialogCommonButtonFlags.Cancel, "Add Directory", "Iterate Files" );
+					var result = MessageBox ( StringTable.SharedStrings["dnd_directory_question"], StringTable.SharedStrings [ "dnd_directory_question_more" ],
+						TaskDialogNativeIcon.Warning, TaskDialogCommonButtonFlags.Cancel,
+						StringTable.SharedStrings [ "dnd_button_add_directory" ], StringTable.SharedStrings [ "dnd_button_iterate_files" ] );
 					if ( result.Button == TaskDialogResult.Cancel )
 						return;
 					directoryMode = result.Button == 101;
@@ -227,7 +238,10 @@ namespace Daramkun.DaramRenamer
 
 				UndoManager.SaveToUndoStack ( FileInfo.Files );
 
-				foreach ( string s in from b in temp orderby b select b ) AddItem ( s, directoryMode );
+				foreach ( string s in from b in temp orderby b select b )
+				{
+					AddItem ( s, ( s.Length <= 3 || !System.IO.File.GetAttributes ( s ).HasFlag ( FileAttributes.Directory ) ) ? false : directoryMode );
+				}
 			}
 		}
 

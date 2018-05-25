@@ -92,7 +92,7 @@
                     <ListView Grid.Row="1" Name="listViewFiles" AllowDrop="True"
                               Focusable="True"
                               ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                              Drop="listViewFiles_Drop" DragEnter="listViewFiles_DragEnter" KeyUp="listViewFiles_KeyUp">
+                              Drop="ListViewFiles_Drop" DragEnter="ListViewFiles_DragEnter" KeyUp="ListViewFiles_KeyUp">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -247,7 +247,7 @@
                     <TextBlock Name="translationAuthor" Grid.Row="3" Grid.Column="1" />
                     
                     <TextBox x:Name="licenseTextBox" Grid.Row="4" Grid.ColumnSpan="2" TextWrapping="Wrap" FontFamily="Consolas" Text="Loading..."
-                             VerticalScrollBarVisibility="Visible" IsReadOnly="True" Loaded="licenseTextBox_Loaded" />
+                             VerticalScrollBarVisibility="Visible" IsReadOnly="True" Loaded="LicenseTextBox_Loaded" />
 				</Grid>
 			</TabItem>
 		</TabControl>
@@ -265,13 +265,13 @@
 
 	<Window.CommandBindings>
 		<CommandBinding Command="{x:Static local:MainWindow.CommandOpenFiles}" Executed="commandOpenFiles_Executed" />
-		<CommandBinding Command="{x:Static local:MainWindow.CommandClearList}" Executed="commandClearList_Executed" />
-		<CommandBinding Command="{x:Static local:MainWindow.CommandApplyFile}" Executed="commandApplyFile_Executed" />
-		<CommandBinding Command="{x:Static local:MainWindow.CommandUndoWorks}" Executed="commandUndoWorks_Executed" />
-		<CommandBinding Command="{x:Static local:MainWindow.CommandRedoWorks}" Executed="commandRedoWorks_Executed" />
-		<CommandBinding Command="{x:Static local:MainWindow.CommandUpperItem}" Executed="commandUpperItem_Executed" />
-		<CommandBinding Command="{x:Static local:MainWindow.CommandLowerItem}" Executed="commandLowerItem_Executed" />
-		<CommandBinding Command="{x:Static local:MainWindow.CommandItemsSort}" Executed="commandItemsSort_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandClearList}" Executed="CommandClearList_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandApplyFile}" Executed="CommandApplyFile_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandUndoWorks}" Executed="CommandUndoWorks_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandRedoWorks}" Executed="CommandRedoWorks_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandUpperItem}" Executed="CommandUpperItem_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandLowerItem}" Executed="CommandLowerItem_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandItemsSort}" Executed="CommandItemsSort_Executed" />
 	</Window.CommandBindings>
 	<Window.InputBindings>
 		<KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.CommandOpenFiles}" />

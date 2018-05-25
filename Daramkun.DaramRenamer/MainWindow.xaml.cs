@@ -41,18 +41,18 @@ namespace Daramkun.DaramRenamer
 		public static RoutedCommand CommandItemsSort = new RoutedCommand ();
 
 		private void commandOpenFiles_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Open ( sender, e ); }
-		private void commandClearList_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Clear ( sender, e ); }
-		private void commandApplyFile_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Apply ( sender, e ); }
+		private void CommandClearList_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Clear ( sender, e ); }
+		private void CommandApplyFile_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Apply ( sender, e ); }
 
-		private void commandUndoWorks_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Undo ( sender, e ); }
-		private void commandRedoWorks_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Redo ( sender, e ); }
+		private void CommandUndoWorks_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Undo ( sender, e ); }
+		private void CommandRedoWorks_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Redo ( sender, e ); }
 
-		private void commandApplyCanc_Executed ( object sender, ExecutedRoutedEventArgs e )
+		private void CommandApplyCanc_Executed ( object sender, ExecutedRoutedEventArgs e )
 		{ while ( !UndoManager.IsUndoStackEmpty ) Menu_System_Undo ( sender, e ); }
 
-		private void commandUpperItem_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemUp ( sender, e ); }
-		private void commandLowerItem_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemDown ( sender, e ); }
-		private void commandItemsSort_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemSort ( sender, e ); }
+		private void CommandUpperItem_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemUp ( sender, e ); }
+		private void CommandLowerItem_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemDown ( sender, e ); }
+		private void CommandItemsSort_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_ItemSort ( sender, e ); }
 		#endregion
 
 		public static MainWindow SharedWindow { get; private set; }
@@ -148,7 +148,7 @@ namespace Daramkun.DaramRenamer
 			}
 			else
 			{
-				string [] files = null;
+				//string [] files = null;
 				//try { files = System.IO.Directory.GetFiles ( s, "*.*", SearchOption.AllDirectories ); }
 				//catch ( UnauthorizedAccessException ex ) {  }
 				//if ( files != null )
@@ -208,12 +208,12 @@ namespace Daramkun.DaramRenamer
 			ShowPopup<ManualEditProcessor> ( info );
 		}
 
-		private void listViewFiles_DragEnter ( object sender, DragEventArgs e )
+		private void ListViewFiles_DragEnter ( object sender, DragEventArgs e )
 		{
 			if ( e.Data.GetDataPresent ( DataFormats.FileDrop ) ) e.Effects = DragDropEffects.None;
 		}
 
-		private void listViewFiles_Drop ( object sender, DragEventArgs e )
+		private void ListViewFiles_Drop ( object sender, DragEventArgs e )
 		{
 			if ( e.Data.GetDataPresent ( DataFormats.FileDrop ) )
 			{
@@ -245,7 +245,7 @@ namespace Daramkun.DaramRenamer
 			}
 		}
 
-		private void listViewFiles_KeyUp ( object sender, KeyEventArgs e )
+		private void ListViewFiles_KeyUp ( object sender, KeyEventArgs e )
 		{
 			if ( e.Key == Key.Delete )
 			{
@@ -450,7 +450,7 @@ namespace Daramkun.DaramRenamer
 			ShowPopup<BatchProcessor> ();
 		}
 
-		private async void licenseTextBox_Loaded ( object sender, RoutedEventArgs e )
+		private async void LicenseTextBox_Loaded ( object sender, RoutedEventArgs e )
 		{
 			string downloaded = null;
 			if ( File.Exists ( "DaramRenamer.License.txt" ) && ( DateTime.Today - File.GetLastWriteTime ( "DaramRenamer.License.txt" ) ).Days < 7 )

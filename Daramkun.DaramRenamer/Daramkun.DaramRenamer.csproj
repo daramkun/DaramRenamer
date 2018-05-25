@@ -121,7 +121,6 @@
     <Compile Include="SubWindow.xaml.cs">
       <DependentUpon>SubWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExternalLibs\WPFFolderBrowser\WPFFolderBrowserDialog.cs" />
     <Compile Include="SubWindow_Batch.xaml.cs">
       <DependentUpon>SubWindow_Batch.xaml</DependentUpon>
     </Compile>
@@ -173,7 +172,7 @@
   <Import Project="..\Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems" Label="Shared" />
   <Import Project="..\..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />
   <Import Project="..\..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\TaskDialogSharp\TaskDialogSharp.Shared\TaskDialogSharp.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

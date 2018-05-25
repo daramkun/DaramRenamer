@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;CONSOLE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NOTASKDIALOG;CONSOLE;NET46</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -28,7 +28,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;CONSOLE</DefineConstants>
+    <DefineConstants>TRACE;NOTASKDIALOG;CONSOLE;NET46</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -79,5 +79,6 @@
   <Import Project="..\Daramkun.DaramRenamer.Shared\Daramkun.DaramRenamer.Shared.projitems" Label="Shared" />
   <Import Project="..\..\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.projitems" Label="Shared" />
   <Import Project="..\..\DaramCommonLib\Daramee.DaramCommonLib.Shared\Daramee.DaramCommonLib.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

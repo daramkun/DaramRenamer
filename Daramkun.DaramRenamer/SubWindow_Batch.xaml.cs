@@ -1,5 +1,5 @@
 ﻿using Daramee.DaramCommonLib;
-using Daramee.TaskDialogSharp;
+using Daramee.Winston.Dialogs;
 using Daramkun.DaramRenamer.Processors;
 using System;
 using System.Collections.Generic;

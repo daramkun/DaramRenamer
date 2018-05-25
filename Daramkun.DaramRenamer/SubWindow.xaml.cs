@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using Daramee.DaramCommonLib;
 using Daramee.Nargs;
+using Daramee.Winston.Dialogs;
 
 namespace Daramkun.DaramRenamer
 {
@@ -351,7 +352,7 @@ namespace Daramkun.DaramRenamer
 					};
 					button.Click += ( sender, e ) =>
 					{
-						WPFFolderBrowser.WPFFolderBrowserDialog fbd = new WPFFolderBrowser.WPFFolderBrowserDialog ()
+						FileDialog fbd = new OpenFolderDialog ()
 						{
 							InitialDirectory = textBox.Text
 						};

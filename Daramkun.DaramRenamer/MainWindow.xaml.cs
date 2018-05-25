@@ -21,7 +21,7 @@ using System.Windows.Media;
 using Daramkun.DaramRenamer.Processors;
 using System.Windows.Threading;
 using Daramee.DaramCommonLib;
-using Daramee.TaskDialogSharp;
+using Daramee.Winston.Dialogs;
 using System.ComponentModel;
 using Daramkun.DaramRenamer.Extension;
 
@@ -254,7 +254,7 @@ namespace Daramkun.DaramRenamer
 			progressBar.Maximum = FileInfo.Files.Count;
 			progressBar.Value = 0;
 			int failed = 0;
-			FileInfo.BeginFileOperation ();
+			Daramee.Winston.File.Operation.Begin ( true );
 			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) =>
 			{
 				if ( option.Options.AutomaticFilenameFix )
@@ -269,7 +269,7 @@ namespace Daramkun.DaramRenamer
 				if ( errorMessage != ErrorCode.NoError )
 					Interlocked.Increment ( ref failed );
 			} );
-			FileInfo.EndFileOperation ();
+			Daramee.Winston.File.Operation.End ();
 
 			if ( failed != 0 )
 				progressBar.Foreground = Brushes.Red;

@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using Daramee.DaramCommonLib;
-using Daramee.TaskDialogSharp;
+using Daramee.Winston.Dialogs;
 
 namespace Daramkun.DaramRenamer
 {

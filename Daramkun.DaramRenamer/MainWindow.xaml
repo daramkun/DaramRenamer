@@ -10,7 +10,9 @@
         xmlns:ext="clr-namespace:Daramkun.DaramRenamer.Extension"
         mc:Ignorable="d" Icon="Resources/ProgramIcon.ico"
         Title="{Binding Path=[daram_renamer]}" Width="750" Height="492"
-		DataContext="{x:Static dcl:StringTable.SharedStrings}" MinWidth="750" MinHeight="492" Loaded="Window_Loaded" Activated="Window_Activated" Closing="Window_Closing">
+		DataContext="{x:Static dcl:StringTable.SharedStrings}"
+        MinWidth="750" MinHeight="492" Loaded="Window_Loaded"
+        Activated="Window_Activated" Closing="Window_Closing">
     <Window.Resources>
         <drconv:PathToIconConverter x:Key="pathToIconConverter" />
     </Window.Resources>
@@ -112,7 +114,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <Image Source="{Binding OriginalFullPath, Converter={StaticResource pathToIconConverter}}" Height="16" Margin="0,0,4,0" />
-                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" />
+                                                <TextBlock Foreground="DarkSlateBlue" Text="{Binding OriginalFilename}" ToolTip="{Binding OriginalFilename}" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -121,7 +123,7 @@
                                     <GridViewColumnHeader Content="{Binding Path=[changed_name]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedFilename}" Background="Transparent" />
+                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedFilename}" ToolTip="{Binding ChangedFilename}" Background="Transparent" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -129,7 +131,7 @@
                                     <GridViewColumnHeader Content="{Binding Path=[original_path]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding OriginalPath}" />
+                                            <TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding OriginalPath}" ToolTip="{Binding OriginalPath}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -137,7 +139,7 @@
                                     <GridViewColumnHeader Content="{Binding Path=[changed_path]}" />
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedPath}" Background="Transparent" />
+                                            <TextBlock Foreground="DarkSlateBlue" Text="{Binding ChangedPath}" ToolTip="{Binding ChangedPath}" Background="Transparent" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

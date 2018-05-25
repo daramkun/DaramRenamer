@@ -86,7 +86,9 @@ namespace Daramkun.DaramRenamer.ShellExtension.Installer
 					return;
 				}
 			}
-			Process.Start ( "explorer.exe" );
+
+			if ( Environment.Version < new Version ( 6, 2 ) )
+				Process.Start ( "explorer.exe" );
 		}
 	}
 }

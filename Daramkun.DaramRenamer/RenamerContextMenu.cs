@@ -132,11 +132,17 @@ namespace Daramkun.DaramRenamer
 					StartPosition = FormStartPosition.CenterParent,
 					SizeGripStyle = SizeGripStyle.Hide,
 					FormBorderStyle = FormBorderStyle.FixedSingle,
+					Font = System.Drawing.SystemFonts.DefaultFont,
+					MaximizeBox = false,
+					MinimizeBox = false,
+					ShowIcon = false,
 				};
 				ElementHost host = new ElementHost () { Child = subWindow as UIElement };
 				host.Dock = DockStyle.Fill;
 				window.Dock = DockStyle.Fill;
 				window.Controls.Add ( host );
+
+				window.Show ();
 			}
 			catch ( Exception ex )
 			{

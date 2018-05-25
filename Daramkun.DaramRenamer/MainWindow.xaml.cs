@@ -137,13 +137,17 @@ namespace Daramkun.DaramRenamer
 			return taskDialog.Show ();
 		}
 
-		public void AddItem ( string s )
+		public void AddItem ( string s, bool directoryMode = false )
 		{
-			if ( System.IO.File.Exists ( s ) )
-				FileInfo.Files.Add ( new FileInfo ( s ) );
+			if ( System.IO.File.Exists ( s ) || directoryMode )
+			{
+				var fileInfo = new FileInfo ( s );
+				if ( !FileInfo.Files.Contains ( fileInfo ) )
+					FileInfo.Files.Add ( fileInfo );
+			}
 			else
 				foreach ( string ss in System.IO.Directory.GetFiles ( s, "*.*", SearchOption.AllDirectories ) )
-					AddItem ( ss );
+					AddItem ( ss, directoryMode );
 		}
 
 		public void ShowPopup<T> ( params object [] args ) where T : IProcessor
@@ -204,10 +208,26 @@ namespace Daramkun.DaramRenamer
 		{
 			if ( e.Data.GetDataPresent ( DataFormats.FileDrop ) )
 			{
+				var temp = e.Data.GetData ( DataFormats.FileDrop ) as string [];
+				bool hasDirectory = false;
+				foreach ( string filename in temp )
+				{
+					if ( File.GetAttributes ( filename ).HasFlag ( FileAttributes.Directory ) )
+						hasDirectory = true;
+				}
+
+				bool directoryMode = false;
+				if ( hasDirectory )
+				{
+					var result = MessageBox ( "D&D files has directory.", "Add to Directory mode? or iterate files?", TaskDialogNativeIcon.Warning, TaskDialogCommonButtonFlags.Cancel, "Add Directory", "Iterate Files" );
+					if ( result.Button == TaskDialogResult.Cancel )
+						return;
+					directoryMode = result.Button == 101;
+				}
+
 				UndoManager.SaveToUndoStack ( FileInfo.Files );
 
-				var temp = e.Data.GetData ( DataFormats.FileDrop ) as string [];
-				foreach ( string s in from b in temp orderby b select b ) AddItem ( s );
+				foreach ( string s in from b in temp orderby b select b ) AddItem ( s, directoryMode );
 			}
 		}
 

@@ -20,9 +20,29 @@ namespace Daramkun.DaramRenamer.Converters
 		public object Convert ( object value, Type targetType, object parameter, CultureInfo culture )
 		{
 			var filename = value as string;
-			var ext = Path.GetExtension ( filename );
-			if ( cached.ContainsKey ( ext ) )
-				return cached [ ext ];
+			string key = null;
+			bool doNotCache = false;
+			if ( File.GetAttributes ( filename ).HasFlag ( FileAttributes.Directory ) )
+			{
+				if ( cached.ContainsKey ( "?" ) )
+					return cached [ "?" ];
+				key = "?";
+			}
+			else
+			{
+				var ext = Path.GetExtension ( filename );
+
+				if ( ext == ".exe" || ext == ".ico" )
+				{
+					doNotCache = true;
+				}
+				else
+				{
+					if ( cached.ContainsKey ( ext ) )
+						return cached [ ext ];
+					key = ext;
+				}
+			}
 			IntPtr hIcon = File.GetAttributes ( filename ).HasFlag ( FileAttributes.Directory )
 				? GetFolderIcon ( filename )
 				: GetFileIcon ( filename );
@@ -30,6 +50,10 @@ namespace Daramkun.DaramRenamer.Converters
 			DestroyIcon ( hIcon );
 			if ( icon.CanFreeze )
 				icon.Freeze ();
+
+			if ( !doNotCache )
+				cached.Add ( key, icon );
+
 			return icon;
 		}
 

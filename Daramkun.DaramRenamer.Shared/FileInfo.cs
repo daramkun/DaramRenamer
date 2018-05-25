@@ -114,6 +114,9 @@ namespace Daramkun.DaramRenamer
 
 		public int CompareTo ( FileInfo other ) => ChangedFilename.CompareTo ( other.ChangedFilename );
 
+		public override bool Equals ( object obj ) => obj is FileInfo ? OriginalFullPath == ( obj as FileInfo ).OriginalFullPath : false;
+		public override int GetHashCode () => OriginalFullPath.GetHashCode ();
+
 		private void PC ( string name ) { PropertyChanged?.Invoke ( this, new PropertyChangedEventArgs ( name ) ); }
 	}
 }

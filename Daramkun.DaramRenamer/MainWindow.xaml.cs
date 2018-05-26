@@ -40,7 +40,7 @@ namespace Daramkun.DaramRenamer
 		public static RoutedCommand CommandLowerItem = new RoutedCommand ();
 		public static RoutedCommand CommandItemsSort = new RoutedCommand ();
 
-		private void commandOpenFiles_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Open ( sender, e ); }
+		private void CommandOpenFiles_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Open ( sender, e ); }
 		private void CommandClearList_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Clear ( sender, e ); }
 		private void CommandApplyFile_Executed ( object sender, ExecutedRoutedEventArgs e ) { Menu_System_Apply ( sender, e ); }
 

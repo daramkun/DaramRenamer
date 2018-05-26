@@ -8,11 +8,11 @@ using System.Windows;
 // 어셈블리와 관련된 정보를 수정하려면
 // 이 특성 값을 변경하십시오.
 [assembly: AssemblyTitle ( "Daram Renamer" )]
-[assembly: AssemblyDescription ( "Filename Changer" )]
+[assembly: AssemblyDescription ( "File and Directory Renaming Software" )]
 [assembly: AssemblyConfiguration ( "" )]
 [assembly: AssemblyCompany ( "DARAM WORLD" )]
 [assembly: AssemblyProduct ( "Daram Renamer" )]
-[assembly: AssemblyCopyright ( "Copyright © 2013-2018 Daramee" )]
+[assembly: AssemblyCopyright ( "Copyright © 2013-2018 Jin Jae-yeon" )]
 [assembly: AssemblyTrademark ( "DaramTools®" )]
 [assembly: AssemblyCulture ( "" )]
 
@@ -51,7 +51,7 @@ using System.Windows;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 버전이 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion ( "3.5.0.0" )]
-[assembly: AssemblyFileVersion ( "3.5.0.0" )]
+[assembly: AssemblyVersion ( "3.6.0.0" )]
+[assembly: AssemblyFileVersion ( "3.6.0.0" )]
 [assembly: GuidAttribute ( "3FC6CD68-276B-4D9F-94A5-79A7E85B71A5" )]
 [assembly: NeutralResourcesLanguageAttribute ( "ko-KR" )]

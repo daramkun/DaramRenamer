@@ -264,7 +264,7 @@
 	</Grid>
 
 	<Window.CommandBindings>
-		<CommandBinding Command="{x:Static local:MainWindow.CommandOpenFiles}" Executed="commandOpenFiles_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandOpenFiles}" Executed="CommandOpenFiles_Executed" />
 		<CommandBinding Command="{x:Static local:MainWindow.CommandClearList}" Executed="CommandClearList_Executed" />
 		<CommandBinding Command="{x:Static local:MainWindow.CommandApplyFile}" Executed="CommandApplyFile_Executed" />
 		<CommandBinding Command="{x:Static local:MainWindow.CommandUndoWorks}" Executed="CommandUndoWorks_Executed" />

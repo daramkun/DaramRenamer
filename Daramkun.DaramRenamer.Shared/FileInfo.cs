@@ -67,7 +67,6 @@ namespace Daramkun.DaramRenamer
 			try
 			{
 				Daramee.Winston.File.Operation.Move ( fileInfo.ChangedFullPath, fileInfo.OriginalFullPath, overwrite );
-				fileInfo.Changed ();
 				errorMessage = ErrorCode.NoError;
 				return true;
 			}
@@ -88,8 +87,7 @@ namespace Daramkun.DaramRenamer
 
 				//File.Copy ( fileInfo.OriginalFullPath, fileInfo.ChangedFullPath, overwrite );
 				Daramee.Winston.File.Operation.Copy ( fileInfo.ChangedFullPath, fileInfo.OriginalFullPath, overwrite );
-
-				fileInfo.Changed ();
+				
 				errorMessage = ErrorCode.NoError;
 				return true;
 			}
@@ -101,7 +99,7 @@ namespace Daramkun.DaramRenamer
 			return false;
 		}
 
-		private void Changed ()
+		public void Changed ()
 		{
 			OriginalFullPath = ChangedFullPath;
 		}

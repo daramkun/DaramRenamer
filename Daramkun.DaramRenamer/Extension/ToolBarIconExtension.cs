@@ -12,7 +12,12 @@ namespace Daramkun.DaramRenamer.Extension
 {
 	public class ToolBarIconExtension
 	{
-		public static ToolBarIconExtension SharedExtension { get; private set; }
+		static ToolBarIconExtension sharedExtension;
+		public static ToolBarIconExtension SharedExtension
+		{
+			get => sharedExtension ?? new ToolBarIconExtension ();
+			set => sharedExtension = value;
+		}
 
 		public object OpenIcon { get; private set; }
 		public object DeleteIcon { get; private set; }

@@ -305,6 +305,8 @@ namespace Daramkun.DaramRenamer
 			} );
 			Daramee.Winston.File.Operation.End ();
 
+			Parallel.ForEach ( FileInfo.Files, ( fileInfo ) => fileInfo.Changed () );
+
 			if ( failed != 0 )
 				progressBar.Foreground = Brushes.Red;
 
@@ -378,7 +380,7 @@ namespace Daramkun.DaramRenamer
 			if ( await updateChecker.CheckUpdate () == true )
 			{
 				if ( MessageBox ( StringTable.SharedStrings [ "update_exist" ], StringTable.SharedStrings [ "current_old" ],
-								TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK, StringTable.SharedStrings [ "download_button" ] ).
+								TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK, StringTable.SharedStrings [ "button_download" ] ).
 								Button == 101 )
 					updateChecker.ShowDownloadPage ();
 			}

@@ -34,8 +34,8 @@
             <Border BorderThickness="0, 1, 0, 0" BorderBrush="{x:Static SystemColors.ControlLightBrush}"
                     Background="{DynamicResource {x:Static SystemColors.ControlBrush}}">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,9,20,6">
-                    <Button Name="btnOKButton" Content="{Binding Path=[ok_button]}" Width="72" Height="22" Margin="0,0,5,0" IsDefault="True" Click="OK_Button" />
-                    <Button Name="btnCancelButton" Content="{Binding Path=[cancel_button]}" Width="72" Height="22" Click="Cancel_Button" IsCancel="True" />
+                    <Button Name="btnOKButton" Content="{Binding Path=[button_ok]}" Width="72" Height="22" Margin="0,0,5,0" IsDefault="True" Click="OK_Button" />
+                    <Button Name="btnCancelButton" Content="{Binding Path=[button_cancel]}" Width="72" Height="22" Click="Cancel_Button" IsCancel="True" />
                 </StackPanel>
             </Border>
         </StackPanel>

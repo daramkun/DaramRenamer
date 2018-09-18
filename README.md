@@ -1,4 +1,4 @@
-﻿# Daram Renamer [![version badge](https://img.shields.io/badge/version-3.60-brightgreen.svg)](https://shields.io)
+﻿# Daram Renamer [![version badge](https://img.shields.io/badge/version-3.70-brightgreen.svg)](https://shields.io)
 
 Files and Directories Renaming application.
 
@@ -7,7 +7,7 @@ Files and Directories Renaming application.
 ![Main Application Screenshot](DocumentResources/Main.png)
 
 ## Requirements
-* .NET Framework 4.6+
+* .NET Framework 4.7.2+
 * Windows 7+*
 * Direct3D 9 Compatible GPU**
 

@@ -25,6 +25,7 @@ using Daramee.Winston.Dialogs;
 using System.ComponentModel;
 using Daramkun.DaramRenamer.Extension;
 using Daramee.Winston.File;
+using System.Collections.Concurrent;
 
 namespace Daramkun.DaramRenamer
 {
@@ -289,6 +290,7 @@ namespace Daramkun.DaramRenamer
 			progressBar.Value = 0;
 			int failed = 0;
 			Daramee.Winston.File.Operation.Begin ( true );
+			ConcurrentQueue<FileInfo> succeededItems = new ConcurrentQueue<FileInfo> ();
 			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) =>
 			{
 				if ( option.Options.AutomaticFilenameFix )
@@ -302,10 +304,11 @@ namespace Daramkun.DaramRenamer
 				Dispatcher.BeginInvoke ( ( Action ) ( () => { ++progressBar.Value; } ) );
 				if ( errorMessage != ErrorCode.NoError )
 					Interlocked.Increment ( ref failed );
+				else succeededItems.Enqueue ( fileInfo );
 			} );
 			Daramee.Winston.File.Operation.End ();
 
-			Parallel.ForEach ( FileInfo.Files, ( fileInfo ) => fileInfo.Changed () );
+			Parallel.ForEach ( succeededItems, ( fileInfo ) => fileInfo.Changed () );
 
 			if ( failed != 0 )
 				progressBar.Foreground = Brushes.Red;

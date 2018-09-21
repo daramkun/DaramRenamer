@@ -1,4 +1,4 @@
-﻿# Daram Renamer [![version badge](https://img.shields.io/badge/version-3.70-brightgreen.svg)](https://shields.io)
+﻿# Daram Renamer [![version badge](https://img.shields.io/badge/version-3.72-brightgreen.svg)](https://shields.io)
 
 Files and Directories Renaming application.
 

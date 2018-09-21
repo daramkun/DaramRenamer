@@ -156,6 +156,9 @@
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
     <EmbeddedResource Include="Strings.json" />
+    <EmbeddedResource Include="..\LICENSE">
+      <Link>Resources\LICENSE</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -26,6 +26,7 @@ using System.ComponentModel;
 using Daramkun.DaramRenamer.Extension;
 using Daramee.Winston.File;
 using System.Collections.Concurrent;
+using System.Text;
 
 namespace Daramkun.DaramRenamer
 {
@@ -149,12 +150,6 @@ namespace Daramkun.DaramRenamer
 			}
 			else
 			{
-				//string [] files = null;
-				//try { files = System.IO.Directory.GetFiles ( s, "*.*", SearchOption.AllDirectories ); }
-				//catch ( UnauthorizedAccessException ex ) {  }
-				//if ( files != null )
-				//	foreach ( string ss in files )
-				//		AddItem ( ss, directoryMode );
 				foreach ( string ss in FilesEnumerator.EnumerateFiles ( s, "*.*", false ) )
 					AddItem ( ss, directoryMode );
 			}
@@ -442,18 +437,15 @@ namespace Daramkun.DaramRenamer
 			ShowPopup<BatchProcessor> ();
 		}
 
-		private async void LicenseTextBox_Loaded ( object sender, RoutedEventArgs e )
+		private void LicenseTextBox_Loaded ( object sender, RoutedEventArgs e )
 		{
-			string downloaded = null;
-			if ( File.Exists ( "DaramRenamer.License.txt" ) && ( DateTime.Today - File.GetLastWriteTime ( "DaramRenamer.License.txt" ) ).Days < 7 )
-				downloaded = File.ReadAllText ( "DaramRenamer.License.txt" );
-			else
+			using ( Stream license = Assembly.GetEntryAssembly ().GetManifestResourceStream ( "Daramkun.DaramRenamer.Resources.LICENSE" ) )
 			{
-				WebClient client = new WebClient ();
-				downloaded = await client.DownloadStringTaskAsync ( "https://raw.githubusercontent.com/daramkun/DaramRenamer/master/LICENSE" );
-				File.WriteAllText ( "DaramRenamer.License.txt", downloaded );
+				using ( StreamReader reader = new StreamReader ( license, Encoding.UTF8, true, 1024, true ) )
+				{
+					licenseTextBox.Text = reader.ReadToEnd ();
+				}
 			}
-			licenseTextBox.Text = downloaded;
 		}
 
 		private void Window_Activated ( object sender, EventArgs e )

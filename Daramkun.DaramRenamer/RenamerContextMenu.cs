@@ -165,7 +165,7 @@ namespace Daramkun.DaramRenamer
 
 					Daramee.Winston.File.Operation.Begin ( true );
 					Parallel.ForEach ( FileInfo.Files, ( fileInfo ) => {
-						if ( !FileInfo.Move ( fileInfo, false, out ErrorCode errorCode ) )
+						if ( !fileInfo.Move ( false, out ErrorCode errorCode ) )
 						{
 
 						}

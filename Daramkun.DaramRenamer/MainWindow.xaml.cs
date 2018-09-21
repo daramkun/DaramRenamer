@@ -285,93 +285,19 @@ namespace Daramkun.DaramRenamer
 		{
 			UndoManager.ClearUndoStack ();
 
-			bool parallelApply = true;
-			Parallel.ForEach ( FileInfo.Files, ( fileInfo, parallelLoopState ) =>
-			{
-				if ( File.Exists ( fileInfo.OriginalFullPath ) )
-				{
-					parallelApply = false;
-					parallelLoopState.Break ();
-				}
-			} );
-
-			int failed = 0;
-			ConcurrentQueue<FileInfo> succeededItems = new ConcurrentQueue<FileInfo> ();
-			Action<FileInfo> itemChanger = ( fileInfo ) =>
-			{
-				if ( option.Options.AutomaticFilenameFix )
-				{
-					fileInfo.ChangedPath = FilesHelper.ReplaceInvalidPathCharacters ( fileInfo.ChangedPath );
-					fileInfo.ChangedFilename = FilesHelper.ReplaceInvalidFilenameCharacters ( fileInfo.ChangedFilename );
-				}
-				ErrorCode errorMessage = ErrorCode.NoError;
-				if ( option.Options.RenameMode == RenameMode.Move ) FileInfo.Move ( fileInfo, option.Options.Overwrite, out errorMessage );
-				else if ( option.Options.RenameMode == RenameMode.Copy ) FileInfo.Copy ( fileInfo, option.Options.Overwrite, out errorMessage );
-				Dispatcher.BeginInvoke ( ( Action ) ( () => { ++progressBar.Value; } ) );
-				if ( errorMessage != ErrorCode.NoError )
-					Interlocked.Increment ( ref failed );
-				else succeededItems.Enqueue ( fileInfo );
-			};
-
 			progressBar.Foreground = Brushes.Green;
 			progressBar.Maximum = FileInfo.Files.Count;
 			progressBar.Value = 0;
 
-			if ( parallelApply )
+			bool failed = false;
+			FileInfo.Apply ( AutomaticFilenameFix, option.Options.RenameMode, Overwrite, ( fileInfo, errorCode ) =>
 			{
-				Daramee.Winston.File.Operation.Begin ( true );
-				Parallel.ForEach<FileInfo> ( FileInfo.Files, itemChanger );
-				Daramee.Winston.File.Operation.End ();
-			}
-			else
-			{
-				Daramee.Winston.File.Operation.Begin ( true );
-				Parallel.ForEach<FileInfo> ( from f in FileInfo.Files where !File.Exists ( f.ChangedFullPath ) select f, itemChanger );
-				Daramee.Winston.File.Operation.End ();
+				Dispatcher.BeginInvoke ( ( Action ) ( () => { ++progressBar.Value; } ) );
+				if ( errorCode != ErrorCode.NoError )
+					failed = true;
+			} );
 
-				List<FileInfo> sortingFileInfo = new List<FileInfo> ( from f in FileInfo.Files where !succeededItems.Contains ( f ) && f.OriginalFullPath != f.ChangedFullPath select f );
-				List<FileInfo> temp = new List<FileInfo> ();
-				bool changed = false;
-				do
-				{
-					changed = false;
-					Daramee.Winston.File.Operation.Begin ( true );
-					foreach ( var fileInfo in sortingFileInfo )
-					{
-						if ( !File.Exists ( fileInfo.ChangedFullPath ) )
-						{
-							itemChanger ( fileInfo );
-							changed = true;
-							temp.Add ( fileInfo );
-						}
-						else
-						{
-							foreach ( var succeededFileInfo in Enumerable.Concat ( succeededItems, temp ) )
-							{
-								if ( succeededFileInfo.ChangedFullPath != fileInfo.ChangedFullPath &&
-									succeededFileInfo.OriginalFullPath == fileInfo.ChangedFullPath )
-								{
-									itemChanger ( fileInfo );
-									changed = true;
-									temp.Add ( fileInfo );
-									break;
-								}
-							}
-						}
-					}
-					Daramee.Winston.File.Operation.End ();
-					foreach ( var proceed in temp )
-						sortingFileInfo.Remove ( proceed );
-					temp.Clear ();
-				} while ( changed );
-
-				failed += sortingFileInfo.Count;
-				progressBar.Value += sortingFileInfo.Count;
-			}
-
-			Parallel.ForEach ( succeededItems, ( fileInfo ) => fileInfo.Changed () );
-
-			if ( failed != 0 )
+			if ( failed )
 				progressBar.Foreground = Brushes.Red;
 
 			Application.Current.Dispatcher.Invoke ( DispatcherPriority.Background, new ThreadStart ( delegate { } ) );
@@ -380,7 +306,7 @@ namespace Daramkun.DaramRenamer
 				progressBar.Value, progressBar.Maximum ),
 				TaskDialogIcon.Information, TaskDialogCommonButtonFlags.OK );
 
-			if ( failed == 0 && option.Options.AutomaticListCleaning )
+			if ( !failed && option.Options.AutomaticListCleaning )
 			{
 				UndoManager.SaveToUndoStack ( FileInfo.Files );
 				FileInfo.Files.Clear ();

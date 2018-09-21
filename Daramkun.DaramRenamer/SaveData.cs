@@ -12,8 +12,6 @@ using Microsoft.Win32;
 
 namespace Daramkun.DaramRenamer
 {
-	public enum RenameMode : byte { Move, Copy }
-
 	[DataContract]
 	class SaveData
 	{

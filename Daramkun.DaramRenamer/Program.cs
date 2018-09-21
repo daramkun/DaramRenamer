@@ -49,11 +49,12 @@ namespace Daramkun.DaramRenamer
 		{
 			Argument arg = ArgumentParser.Parse<Argument> ( args, ArgumentStyle.UNIXStyle );
 
-			Assembly assembly = Assembly.GetExecutingAssembly ();
+			Assembly assembly = Assembly.GetEntryAssembly ();
 			if ( arg.PrintVersion )
 			{
 				var version = assembly.GetName ().Version;
-				Console.WriteLine ( $"DaramRenamer v{0}.{1}{2}{3}", version.Major, version.Minor, version.Build, version.Revision );
+				Console.WriteLine ( "DaramRenamer Console v{0}.{1}{2}{3}",
+					version.Major, version.Minor, version.Build, version.Revision );
 			}
 
 			if ( arg.Files == null || arg.Files.Length == 0 )
@@ -92,23 +93,14 @@ namespace Daramkun.DaramRenamer
 							if ( File.Exists ( ( p as BatchProcessor ).Script ) )
 								( p as BatchProcessor ).Script = File.ReadAllText ( ( p as BatchProcessor ).Script );
 
-						Daramee.Winston.File.Operation.Begin ( true );
-						Parallel.ForEach ( FileInfo.Files, ( fileInfo ) =>
-						{
-							if ( p.Process ( fileInfo ) )
-							{
-								bool succeed = false;
-								ErrorCode errorMessage;
-								if ( arg.IsCopyMode )
-									succeed = FileInfo.Copy ( fileInfo, arg.IsOverwriteMode,
-										out errorMessage );
-								else
-									succeed = FileInfo.Move ( fileInfo, arg.IsOverwriteMode,
-										out errorMessage );
+						Parallel.ForEach ( FileInfo.Files, ( fileInfo ) => p.Process ( fileInfo ) );
 
-								Console.WriteLine ( $"({( succeed ? "O" : "X" )}) {fileInfo.OriginalFilename} => {fileInfo.ChangedFilename}" );
+						Daramee.Winston.File.Operation.Begin ( true );
+						FileInfo.Apply ( true, arg.IsCopyMode ? RenameMode.Copy : RenameMode.Move, arg.IsOverwriteMode,
+							( fi, errorCode ) => {
+								Console.WriteLine ( $"({( errorCode == ErrorCode.NoError ? "O" : "X" )}) {fi.OriginalFilename} => {fi.ChangedFilename}" );
 							}
-						} );
+						);
 						Daramee.Winston.File.Operation.End ();
 					}
 				}

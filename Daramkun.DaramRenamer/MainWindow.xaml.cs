@@ -285,13 +285,19 @@ namespace Daramkun.DaramRenamer
 		{
 			UndoManager.ClearUndoStack ();
 
-			progressBar.Foreground = Brushes.Green;
-			progressBar.Maximum = FileInfo.Files.Count;
-			progressBar.Value = 0;
+			bool parallelApply = true;
+			Parallel.ForEach ( FileInfo.Files, ( fileInfo, parallelLoopState ) =>
+			{
+				if ( File.Exists ( fileInfo.OriginalFullPath ) )
+				{
+					parallelApply = false;
+					parallelLoopState.Break ();
+				}
+			} );
+
 			int failed = 0;
-			Daramee.Winston.File.Operation.Begin ( true );
 			ConcurrentQueue<FileInfo> succeededItems = new ConcurrentQueue<FileInfo> ();
-			Parallel.ForEach<FileInfo> ( FileInfo.Files, ( fileInfo ) =>
+			Action<FileInfo> itemChanger = ( fileInfo ) =>
 			{
 				if ( option.Options.AutomaticFilenameFix )
 				{
@@ -305,8 +311,63 @@ namespace Daramkun.DaramRenamer
 				if ( errorMessage != ErrorCode.NoError )
 					Interlocked.Increment ( ref failed );
 				else succeededItems.Enqueue ( fileInfo );
-			} );
-			Daramee.Winston.File.Operation.End ();
+			};
+
+			progressBar.Foreground = Brushes.Green;
+			progressBar.Maximum = FileInfo.Files.Count;
+			progressBar.Value = 0;
+
+			if ( parallelApply )
+			{
+				Daramee.Winston.File.Operation.Begin ( true );
+				Parallel.ForEach<FileInfo> ( FileInfo.Files, itemChanger );
+				Daramee.Winston.File.Operation.End ();
+			}
+			else
+			{
+				Daramee.Winston.File.Operation.Begin ( true );
+				Parallel.ForEach<FileInfo> ( from f in FileInfo.Files where !File.Exists ( f.ChangedFullPath ) select f, itemChanger );
+				Daramee.Winston.File.Operation.End ();
+
+				List<FileInfo> sortingFileInfo = new List<FileInfo> ( from f in FileInfo.Files where !succeededItems.Contains ( f ) && f.OriginalFullPath != f.ChangedFullPath select f );
+				List<FileInfo> temp = new List<FileInfo> ();
+				bool changed = false;
+				do
+				{
+					changed = false;
+					Daramee.Winston.File.Operation.Begin ( true );
+					foreach ( var fileInfo in sortingFileInfo )
+					{
+						if ( !File.Exists ( fileInfo.ChangedFullPath ) )
+						{
+							itemChanger ( fileInfo );
+							changed = true;
+							temp.Add ( fileInfo );
+						}
+						else
+						{
+							foreach ( var succeededFileInfo in Enumerable.Concat ( succeededItems, temp ) )
+							{
+								if ( succeededFileInfo.ChangedFullPath != fileInfo.ChangedFullPath &&
+									succeededFileInfo.OriginalFullPath == fileInfo.ChangedFullPath )
+								{
+									itemChanger ( fileInfo );
+									changed = true;
+									temp.Add ( fileInfo );
+									break;
+								}
+							}
+						}
+					}
+					Daramee.Winston.File.Operation.End ();
+					foreach ( var proceed in temp )
+						sortingFileInfo.Remove ( proceed );
+					temp.Clear ();
+				} while ( changed );
+
+				failed += sortingFileInfo.Count;
+				progressBar.Value += sortingFileInfo.Count;
+			}
 
 			Parallel.ForEach ( succeededItems, ( fileInfo ) => fileInfo.Changed () );
 

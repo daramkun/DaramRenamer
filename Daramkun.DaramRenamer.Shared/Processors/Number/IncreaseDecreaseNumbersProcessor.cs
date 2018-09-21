@@ -55,7 +55,7 @@ namespace Daramkun.DaramRenamer.Processors.Number
 			int number = int.Parse ( origin ) + Count;
 
 			StringBuilder sb = new StringBuilder ();
-			sb.Append ( number );
+			sb.Append ( number.ToString ().PadLeft ( size, '0' ) );
 			fn = fn.Remove ( offset, size ).Insert ( offset, sb.ToString () );
 
 			file.ChangedFilename = fn + Path.GetExtension ( file.ChangedFilename );

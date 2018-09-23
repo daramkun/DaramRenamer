@@ -42,7 +42,7 @@ namespace Daramkun.DaramRenamer
 			Action<FileInfo, ErrorCode> progressIncrement )
 		{
 			bool parallelApply = true;
-			Parallel.ForEach ( FileInfo.Files, ( fileInfo, parallelLoopState ) =>
+			Parallel.ForEach ( Files, ( fileInfo, parallelLoopState ) =>
 			{
 				if ( File.Exists ( fileInfo.OriginalFullPath ) )
 				{
@@ -76,13 +76,13 @@ namespace Daramkun.DaramRenamer
 			if ( parallelApply )
 			{
 				Daramee.Winston.File.Operation.Begin ( true );
-				Parallel.ForEach<FileInfo> ( FileInfo.Files, itemChanger );
+				Parallel.ForEach ( Files, itemChanger );
 				Daramee.Winston.File.Operation.End ();
 			}
 			else
 			{
 				Daramee.Winston.File.Operation.Begin ( true );
-				Parallel.ForEach<FileInfo> ( from f in Files where !File.Exists ( f.ChangedFullPath ) select f, itemChanger );
+				Parallel.ForEach ( from f in Files where !File.Exists ( f.ChangedFullPath ) select f, itemChanger );
 				Daramee.Winston.File.Operation.End ();
 
 				List<FileInfo> sortingFileInfo = new List<FileInfo> ( from f in Files where !succeededItems.Contains ( f ) && f.OriginalFullPath != f.ChangedFullPath select f );
@@ -121,9 +121,19 @@ namespace Daramkun.DaramRenamer
 					temp.Clear ();
 				} while ( changed );
 
-				failed += sortingFileInfo.Count;
-				foreach ( var fileInfo in sortingFileInfo )
-					progressIncrement ( fileInfo, ErrorCode.IOError );
+				if ( overwrite )
+				{
+					Parallel.ForEach ( sortingFileInfo, ( fileInfo ) =>
+					{
+						itemChanger ( fileInfo );
+					} );
+				}
+				else
+				{
+					failed += sortingFileInfo.Count;
+					foreach ( var fileInfo in sortingFileInfo )
+						progressIncrement ( fileInfo, ErrorCode.IOError );
+				}
 			}
 
 			Parallel.ForEach ( succeededItems, ( fileInfo ) => fileInfo.Changed () );

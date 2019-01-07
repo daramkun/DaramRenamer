@@ -1,4 +1,4 @@
-﻿# Daram Renamer [![version badge](https://img.shields.io/badge/version-3.74-brightgreen.svg)](https://shields.io)
+﻿# Daram Renamer [![version badge](https://img.shields.io/badge/version-3.75-brightgreen.svg)](https://shields.io)
 
 Files and Directories Renaming application.
 
@@ -17,7 +17,7 @@ Daram Renamer currently support Korean(Republic of Korea) and English. but I wan
 You can support translation if you follow this process.
 
 1. Fork this repository.
-2. Edit ```Daramkun.DaramRenamer/Strings.json```. Use [String Table Editor](https://github.com/daramkun/StringTableEditor) for easier.
+2. Edit ```Daramkun.DaramRenamer/Strings.json```. ~~Use [String Table Editor](https://github.com/daramkun/StringTableEditor) for easier.~~ Please edit JSON Editor for now. String table format is changed.
 3. Pull request to this main repository(https://github.com/daramkun/DaramRenamer).
 4. I confirm request.
 
@@ -32,5 +32,5 @@ You can support translation if you follow this process.
 * User Custom Rename Plugin support.
 
 ---
-* ＊ I recommend Windows 10 because My Development environment is Windows 10 April 2018 Update now.
+* ＊ I recommend Windows 10 because My Development environment is Windows 10 October 2018 Update now.
 * ＊＊ Windows Presentation Foundation(WPF) need Direct3D 9 compatible device.

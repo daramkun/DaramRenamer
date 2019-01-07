@@ -67,10 +67,10 @@
     <AssemblyOriginatorKeyFile>DaramRenamer.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2AE111A4B113D4B15F02593EE7EBFA41736E454F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>44BADC8DDF43F7F18980224693A16F62C5E85E2E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Daramkun.DaramRenamer_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>DaramRenamer.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>

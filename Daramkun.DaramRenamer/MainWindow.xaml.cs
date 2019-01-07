@@ -137,7 +137,7 @@ namespace Daramkun.DaramRenamer
 				CommonButtons = commonButtons,
 				Buttons = tdButtons,
 			};
-			return taskDialog.Show ();
+			return taskDialog.Show ( MainWindow.SharedWindow );
 		}
 
 		public void AddItem ( string s, bool directoryMode = false )

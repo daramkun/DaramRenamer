@@ -99,9 +99,9 @@ namespace Daramkun.DaramRenamer
 			Version currentVersion = Assembly.GetEntryAssembly ().GetName ().Version;
 			Title = $"{StringTable.SharedStrings [ "daram_renamer" ]} - v{currentVersion.Major}.{currentVersion.Minor}{currentVersion.Build}0";
 			
-			translationAuthor.Text = StringTable.SharedTable.Contact != null ?
-				$"{StringTable.SharedTable.Author}<{StringTable.SharedTable.Contact}> - {StringTable.SharedTable.CurrentCulture}" :
-				$"{StringTable.SharedTable.Author} - {StringTable.SharedTable.CurrentCulture}";
+			translationAuthor.Text = StringTable.SharedTable.Author.Contact != null ?
+				$"{StringTable.SharedTable.Author.Author}<{StringTable.SharedTable.Author.Contact}> - {StringTable.SharedTable.CurrentCulture}" :
+				$"{StringTable.SharedTable.Author.Author} - {StringTable.SharedTable.CurrentCulture}";
 
 			/*UndoManager<ObservableCollection<FileInfo>> restored = UndoManager<ObservableCollection<FileInfo>>.Restore ();
 			if ( restored != null )

@@ -1,12 +1,12 @@
 ﻿{
 	"target": "DaramRenamer",
-	"version": "3.7.4.0",
-	"author": "Daramee",
-	"copyright": "Copyright ⓒ 2013-2019 Daramee",
-	"contact": "daramkun@live.com",
+	"version": "3.7.5.0",
 	"languages": [
 		{
 			"language": "",
+			"author": "Daramee, Stephan-P",
+			"copyright": "Copyright ⓒ 2013-2019 Daram Renamer Contributors",
+			"contact": "https://github.com/daramkun/DaramRenamer",
 			"table": {
 				"daram_renamer": "Daram Renamer",
 				"tab_renamer": "Renamer",
@@ -69,7 +69,7 @@
 				"process_increase_decrease_numbers": "Increasing/decreasing Numbers",
 				"process_add_date": "Add Date",
 				"process_delete_date": "Delete Date",
-				"process_increase_decrease_date": Increasing/decreasing Dates",
+				"process_increase_decrease_date": "Increasing/decreasing Dates",
 				"process_change_path": "Change Path",
 				"process_move_path_relative": "Move Path relative",
 				"process_add_media_tag": "Add Meta Tag",
@@ -182,6 +182,9 @@
 		},
 		{
 			"language": "ko-KR",
+			"author": "Daramee",
+			"copyright": "Copyright ⓒ 2013-2019 Daramee",
+			"contact": "daramkun@live.com",
 			"table": {
 				"daram_renamer": "다람 리네이머",
 				"tab_renamer": "리네이머",
@@ -357,6 +360,9 @@
 		},
 		{
 			"language": "nl-NL",
+			"author": "Stephan-P",
+			"copyright": "",
+			"contact": "",
 			"table": {
 				"daram_renamer": "Daram Renamer",
 				"tab_renamer": "Renamer",

@@ -12,6 +12,7 @@ using System.Windows.Threading;
 using Daramee.DaramCommonLib;
 using Daramee.Nargs;
 using Daramee.Winston.Dialogs;
+using Daramkun.DaramRenamer.Converters;
 
 namespace Daramkun.DaramRenamer
 {
@@ -74,7 +75,8 @@ namespace Daramkun.DaramRenamer
 					var binding = new Binding ()
 					{
 						Source = Processor,
-						Path = new PropertyPath ( prop.Name )
+						Path = new PropertyPath ( prop.Name ),
+						Converter = prop.PropertyType == typeof ( Regex ) ? new RegexConverter () : null,
 					};
 					control.SetBinding ( TextBox.TextProperty, binding );
 				}

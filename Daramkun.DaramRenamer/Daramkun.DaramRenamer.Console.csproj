@@ -71,9 +71,9 @@
     <Content Include="Resources\ProgramIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\taglib-sharp\src\taglib-sharp.csproj">
-      <Project>{2f14f0e2-9bf8-44a5-8cba-f4675734fead}</Project>
-      <Name>taglib-sharp</Name>
+    <ProjectReference Include="..\..\taglib-sharp\src\TaglibSharp\TaglibSharp.csproj">
+      <Project>{817060fd-f768-4023-af5a-30791f07077e}</Project>
+      <Name>TaglibSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />

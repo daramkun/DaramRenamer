@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Daramee.FileTypeDetector;
@@ -14,7 +15,7 @@ namespace Daramkun.DaramRenamer.Processors.Extension
 	{
 		static AddExtensionAutomatedProcessor ()
 		{
-			DetectorService.AddDetectors ();
+			DetectorService.AddDetectors ( Assembly.GetAssembly ( typeof ( Daramkun.DaramRenamer.IProcessor ) ) );
 		}
 
 		public string Name => "process_add_extension_automatically";

@@ -112,11 +112,13 @@ namespace Daramkun.DaramRenamer
 					{
 						//delegates = new List<Delegate> ();
 
-						Assembly assembly = Assembly.Load ( "DaramRenamer.Engine" );
+						Assembly assembly = Assembly.Load ( "DaramRenamer" );
 						foreach ( Type type in assembly.GetTypes () )
 						{
 							if ( type.GetInterface ( typeof ( IProcessor ).FullName ) != null )
 							{
+								if ( type.IsAbstract )
+									continue;
 								IProcessor processor = Activator.CreateInstance ( type ) as IProcessor;
 								MethodInfo methodInfo = processor.CreateMethod ();
 								Type methodType = processor.GetMethodType ();

@@ -24,7 +24,9 @@ namespace Daramkun.DaramRenamer.Processors
         public bool Process ( FileInfo file )
 		{
 			Jint.Engine engine = new Jint.Engine ( cfg => cfg.AllowClr (
-				Assembly.GetAssembly ( typeof ( TagLib.File ) )
+				Assembly.GetAssembly ( typeof ( TagLib.File ) ),
+				Assembly.GetAssembly ( typeof ( Daramee.FileTypeDetector.IDetector ) ),
+				Assembly.GetAssembly ( typeof ( Daramkun.DaramRenamer.IProcessor ) )
 			) );
 			engine.SetValue ( "file", file );
 

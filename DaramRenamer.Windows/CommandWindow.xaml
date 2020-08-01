@@ -1,0 +1,34 @@
+﻿<Window x:Class="DaramRenamer.CommandWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DaramRenamer"
+        mc:Ignorable="d" d:DesignHeight="120"
+        Title="CommandWindow" Width="480" ShowInTaskbar="False"
+        VerticalAlignment="Center" HorizontalAlignment="Center" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+	<StackPanel Orientation="Vertical">
+		<!-- Contents -->
+		<StackPanel Orientation="Vertical" Margin="15">
+			<Grid Name="contentGrid">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="120" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+
+				</Grid.RowDefinitions>
+			</Grid>
+		</StackPanel>
+
+		<!-- Buttons -->
+		<Border BorderThickness="0, 1, 0, 0" BorderBrush="{x:Static SystemColors.ControlLightBrush}"
+		        Background="{DynamicResource {x:Static SystemColors.ControlBrush}}">
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,9,20,6">
+				<Button Content="{Binding Path=[ButtonOK], Source={x:Static local:Strings.Instance}}" Width="72" Height="22" Margin="0,0,5,0" IsDefault="True" Click="ButtonOK_Click" />
+				<Button Content="{Binding Path=[ButtonCancel], Source={x:Static local:Strings.Instance}}" Width="72" Height="22" IsCancel="True" Click="ButtonCancel_Click" />
+			</StackPanel>
+		</Border>
+	</StackPanel>
+</Window>

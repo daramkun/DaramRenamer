@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.Windows", "DaramRenamer.Windows\DaramRenamer.Windows.csproj", "{C207833C-A7C7-4264-9FF5-18E0744F9727}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.Commands", "DaramRenamer.Commands\DaramRenamer.Commands.csproj", "{9129A4F6-59F4-41EC-A03F-D41251CF2795}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DaramRenamer.Shared", "DaramRenamer.Shared\DaramRenamer.Shared.shproj", "{4A7521DD-9DA1-4E38-BC17-2DC48BF75923}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DaramRenamer", "DaramRenamer", "{FEC19557-4029-4031-A6A4-F4B8353263C3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.FileTypeDetector.Shared", "Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.shproj", "{5E1C88AE-6CCA-430C-8ADB-DE4DE4CE2174}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.Winston.Shared", "Modules\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.shproj", "{07D3172F-FF1F-4E6F-AEBE-3E725904B2A7}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.Nargs.Shared", "Modules\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.shproj", "{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Blockar.Shared", "Modules\Blockar\Blockar.Shared\Blockar.Shared.shproj", "{24EDA730-617F-409E-BA4A-336B44151438}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaglibSharp", "Modules\TagLibSharp\src\TaglibSharp\TaglibSharp.csproj", "{68A17907-D062-4F97-B1C5-4F3E0E444B34}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Modules\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems*{07d3172f-ff1f-4e6f-aebe-3e725904b2a7}*SharedItemsImports = 13
+		Modules\Blockar\Blockar.Shared\Blockar.Shared.projitems*{24eda730-617f-409e-ba4a-336b44151438}*SharedItemsImports = 13
+		DaramRenamer.Shared\DaramRenamer.Shared.projitems*{4a7521dd-9da1-4e38-bc17-2dc48bf75923}*SharedItemsImports = 13
+		Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems*{5e1c88ae-6cca-430c-8adb-de4de4ce2174}*SharedItemsImports = 13
+		Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems*{9129a4f6-59f4-41ec-a03f-d41251cf2795}*SharedItemsImports = 5
+		DaramRenamer.Shared\DaramRenamer.Shared.projitems*{c207833c-a7c7-4264-9ff5-18e0744f9727}*SharedItemsImports = 5
+		Modules\Blockar\Blockar.Shared\Blockar.Shared.projitems*{c207833c-a7c7-4264-9ff5-18e0744f9727}*SharedItemsImports = 5
+		Modules\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems*{c207833c-a7c7-4264-9ff5-18e0744f9727}*SharedItemsImports = 5
+		Modules\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.projitems*{e13faa4a-99bd-4a4d-8a1c-c1d3260278cd}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C207833C-A7C7-4264-9FF5-18E0744F9727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C207833C-A7C7-4264-9FF5-18E0744F9727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C207833C-A7C7-4264-9FF5-18E0744F9727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C207833C-A7C7-4264-9FF5-18E0744F9727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C207833C-A7C7-4264-9FF5-18E0744F9727} = {FEC19557-4029-4031-A6A4-F4B8353263C3}
+		{9129A4F6-59F4-41EC-A03F-D41251CF2795} = {FEC19557-4029-4031-A6A4-F4B8353263C3}
+		{4A7521DD-9DA1-4E38-BC17-2DC48BF75923} = {FEC19557-4029-4031-A6A4-F4B8353263C3}
+		{5E1C88AE-6CCA-430C-8ADB-DE4DE4CE2174} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
+		{07D3172F-FF1F-4E6F-AEBE-3E725904B2A7} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
+		{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
+		{24EDA730-617F-409E-BA4A-336B44151438} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
+		{68A17907-D062-4F97-B1C5-4F3E0E444B34} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B986277B-4442-49A5-BDBE-5598D87D628C}
+	EndGlobalSection
+EndGlobal

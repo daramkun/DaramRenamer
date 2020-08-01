@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>4a7521dd-9da1-4e38-bc17-2dc48bf75923</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DaramRenamer</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)PluginManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Preferences.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Strings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UndoManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.default.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.ko_kr.json" />
+  </ItemGroup>
+</Project>

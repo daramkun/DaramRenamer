@@ -1,0 +1,208 @@
+﻿<Window x:Class="DaramRenamer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DaramRenamer"
+		xmlns:conv="clr-namespace:DaramRenamer.Converters"
+        mc:Ignorable="d"
+        Title="다람리네이머" Height="480" Width="720"
+        Loaded="Window_Loaded" Closing="Window_Closing" Unloaded="Window_Unloaded">
+	<Window.Resources>
+		<conv:LocalizationConverter x:Key="LocalizationConverter" />
+		<conv:PathToIconConverter x:Key="PathToIconConverter" />
+		<DataTemplate x:Key="CommandMenuItemDataTemplate">
+			<TextBlock Text="{Binding Converter={StaticResource LocalizationConverter}}" />
+		</DataTemplate>
+		<Style x:Key="CommandMenuItemItemContainerTemplate" TargetType="MenuItem">
+			<EventSetter Event="Click" Handler="CommandMenuItem_Click" />
+		</Style>
+
+		<Image x:Key="ToolBarIconOpen" Source="./Resources/ToolBarIcons/open.png" />
+		<Image x:Key="ToolBarIconClear" Source="./Resources/ToolBarIcons/clear.png" />
+		<Image x:Key="ToolBarIconApply" Source="./Resources/ToolBarIcons/apply.png" />
+
+		<Image x:Key="ToolBarIconUndo" Source="./Resources/ToolBarIcons/undo.png" />
+		<Image x:Key="ToolBarIconRedo" Source="./Resources/ToolBarIcons/redo.png" />
+
+		<Image x:Key="ToolBarIconItemUp" Source="./Resources/ToolBarIcons/item_up.png" />
+		<Image x:Key="ToolBarIconItemDown" Source="./Resources/ToolBarIcons/item_down.png" />
+		<Image x:Key="ToolBarIconItemSort" Source="./Resources/ToolBarIcons/item_sort.png" />
+
+		<Image x:Key="ToolBarIconReplaceText" Source="./Resources/ToolBarIcons/replace_text.png" />
+		<Image x:Key="ToolBarIconConcatText" Source="./Resources/ToolBarIcons/concat_text.png" />
+		<Image x:Key="ToolBarIconTrimText" Source="./Resources/ToolBarIcons/trim_text.png" />
+		<Image x:Key="ToolBarIconDeleteBlock" Source="./Resources/ToolBarIcons/delete_block.png" />
+		<Image x:Key="ToolBarIconDeleteText" Source="./Resources/ToolBarIcons/delete_text.png" />
+		<Image x:Key="ToolBarIconSubstring" Source="./Resources/ToolBarIcons/substring.png" />
+		<Image x:Key="ToolBarIconCasecastText" Source="./Resources/ToolBarIcons/casecast_text.png" />
+
+		<Image x:Key="ToolBarIconAddExtension" Source="./Resources/ToolBarIcons/add_ext.png" />
+		<Image x:Key="ToolBarIconDeleteExtension" Source="./Resources/ToolBarIcons/delete_ext.png" />
+		<Image x:Key="ToolBarIconReplaceExtension" Source="./Resources/ToolBarIcons/replace_ext.png" />
+		<Image x:Key="ToolBarIconCasecastExtension" Source="./Resources/ToolBarIcons/casecast_ext.png" />
+
+		<Image x:Key="ToolBarIconDeleteWithoutNumbers" Source="./Resources/ToolBarIcons/del_without_num.png" />
+		<Image x:Key="ToolBarIconMatchNumberCount" Source="./Resources/ToolBarIcons/match_num_count.png" />
+		<Image x:Key="ToolBarIconAddIndex" Source="./Resources/ToolBarIcons/add_index.png" />
+		<Image x:Key="ToolBarIconIncrementNumber" Source="./Resources/ToolBarIcons/inc_dec_num.png" />
+		<Image x:Key="ToolBarIconAddDate" Source="./Resources/ToolBarIcons/add_date.png" />
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="20" />
+			<RowDefinition Height="28" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Menu Grid.Row="0">
+			<MenuItem Header="{Binding Path=[Menu_File_File], Source={x:Static local:Strings.Instance}}">
+				<MenuItem Header="{Binding Path=[Menu_File_Open], Source={x:Static local:Strings.Instance}}" Click="MenuFileOpen_Click" />
+				<Separator />
+				<MenuItem Header="{Binding Path=[Menu_File_Clear], Source={x:Static local:Strings.Instance}}" Click="MenuFileClear_Click" />
+				<MenuItem Header="{Binding Path=[Menu_File_Apply], Source={x:Static local:Strings.Instance}}" Click="MenuFileApply_Click" />
+				<Separator />
+				<MenuItem Header="{Binding Path=[Menu_File_Exit], Source={x:Static local:Strings.Instance}}" Click="MenuFileExit_Click" />
+			</MenuItem>
+			<MenuItem Header="{Binding Path=[Menu_Edit_Edit], Source={x:Static local:Strings.Instance}}">
+				<MenuItem Header="{Binding Path=[Menu_Edit_Undo], Source={x:Static local:Strings.Instance}}" Click="MenuEditUndo_Click" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_Redo], Source={x:Static local:Strings.Instance}}" Click="MenuEditRedo_Click" />
+				<Separator />
+				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToUp], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToUp_Click" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToDown], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToDown_Click" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_Sort], Source={x:Static local:Strings.Instance}}" Click="MenuEditSort_Click" />
+			</MenuItem>
+			<MenuItem x:Name="CommandsMenu" Header="{Binding Path=[Menu_Command_Command], Source={x:Static local:Strings.Instance}}">
+				<MenuItem x:Name="MenuItemFilename" Header="{Binding Path=[Menu_Command_Filename], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				<MenuItem x:Name="MenuItemExtension" Header="{Binding Path=[Menu_Command_Extension], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				<MenuItem x:Name="MenuItemPath" Header="{Binding Path=[Menu_Command_Path], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				<MenuItem x:Name="MenuItemNumber" Header="{Binding Path=[Menu_Command_Number], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				<MenuItem x:Name="MenuItemDate" Header="{Binding Path=[Menu_Command_Date], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				<MenuItem x:Name="MenuItemTag" Header="{Binding Path=[Menu_Command_Tag], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				<MenuItem x:Name="MenuItemEtc" Header="{Binding Path=[Menu_Command_Etc], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+			</MenuItem>
+			<MenuItem Header="{Binding Path=[Menu_Tools_Tools], Source={x:Static local:Strings.Instance}}">
+				<MenuItem Header="{Binding Path=[Menu_Tools_Preferences], Source={x:Static local:Strings.Instance}}" Click="PreferencesMenuItem_Click" />
+			</MenuItem>
+			<MenuItem Header="{Binding Path=[Menu_Help_Help], Source={x:Static local:Strings.Instance}}">
+				<MenuItem Header="{Binding Path=[Menu_Help_License], Source={x:Static local:Strings.Instance}}" Click="MenuHelpLicenses_Click" />
+				<MenuItem Header="{Binding Path=[Menu_Help_About], Source={x:Static local:Strings.Instance}}" Click="MenuHelpAbout_Click" />
+			</MenuItem>
+		</Menu>
+
+		<ToolBarTray Grid.Row="1">
+			<ToolBar ToolBarTray.IsLocked="True">
+				<Button Content="{StaticResource ToolBarIconOpen}" Click="MenuFileOpen_Click" />
+				<Button Content="{StaticResource ToolBarIconClear}" Click="MenuFileClear_Click" />
+				<Button Content="{StaticResource ToolBarIconApply}" Click="MenuFileApply_Click" />
+
+				<Separator />
+
+				<Button Content="{StaticResource ToolBarIconUndo}" Click="MenuEditUndo_Click" />
+				<Button Content="{StaticResource ToolBarIconRedo}" Click="MenuEditRedo_Click" />
+
+				<Separator />
+
+				<Button Content="{StaticResource ToolBarIconItemUp}" Click="MenuEditItemToUp_Click" />
+				<Button Content="{StaticResource ToolBarIconItemDown}" Click="MenuEditItemToDown_Click" />
+				<Button Content="{StaticResource ToolBarIconItemSort}" Click="MenuEditSort_Click" />
+
+				<Separator />
+
+				<Button Content="{StaticResource ToolBarIconReplaceText}" Click="CommandMenuItem_Click" Tag="Command_Name_ReplacePlain" />
+				<Button Content="{StaticResource ToolBarIconConcatText}" Click="CommandMenuItem_Click" Tag="Command_Name_Concatenate" />
+				<Button Content="{StaticResource ToolBarIconTrimText}" Click="CommandMenuItem_Click" Tag="Command_Name_Trim" />
+				<Button Content="{StaticResource ToolBarIconDeleteBlock}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteBlock" />
+				<Button Content="{StaticResource ToolBarIconDeleteText}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteFilename" />
+				<Button Content="{StaticResource ToolBarIconSubstring}" Click="CommandMenuItem_Click" Tag="Command_Name_Substring" />
+				<Button Content="{StaticResource ToolBarIconCasecastText}" Click="CommandMenuItem_Click" Tag="Command_Name_Casecast" />
+
+				<Separator />
+
+				<Button Content="{StaticResource ToolBarIconAddExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_AddExtension" />
+				<Button Content="{StaticResource ToolBarIconDeleteExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteExtension" />
+				<Button Content="{StaticResource ToolBarIconReplaceExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_ReplaceExtension" />
+				<Button Content="{StaticResource ToolBarIconCasecastExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_CasecastExtension" />
+
+				<Separator />
+
+				<Button Content="{StaticResource ToolBarIconDeleteWithoutNumbers}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteNoNumber" />
+				<Button Content="{StaticResource ToolBarIconMatchNumberCount}" Click="CommandMenuItem_Click" Tag="Command_Name_SameNumberCount" />
+				<Button Content="{StaticResource ToolBarIconAddIndex}" Click="CommandMenuItem_Click" Tag="Command_Name_AddIndex" />
+				<Button Content="{StaticResource ToolBarIconIncrementNumber}" Click="CommandMenuItem_Click" Tag="Command_Name_Increase" />
+
+				<Separator />
+
+				<Button Content="{StaticResource ToolBarIconAddDate}" Click="CommandMenuItem_Click" Tag="Command_Name_AddDate" />
+			</ToolBar>
+		</ToolBarTray>
+
+		<ListView Grid.Row="2" Name="ListViewFiles" AllowDrop="True" Focusable="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" DragEnter="ListViewFiles_DragEnter" Drop="ListViewFiles_Drop" KeyUp="ListViewFiles_KeyUp">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+					<EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick" />
+				</Style>
+			</ListView.ItemContainerStyle>
+
+			<ListView.View>
+				<GridView>
+					<GridView.ColumnHeaderTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding}" Margin="0,4,0,4" />
+						</DataTemplate>
+					</GridView.ColumnHeaderTemplate>
+
+					<GridViewColumn Width="225">
+						<GridViewColumnHeader Content="{Binding Path=[OriginalName], Source={x:Static local:Strings.Instance}}" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<Image Source="{Binding Path=OriginalFullPath, Converter={StaticResource PathToIconConverter}}" Height="16" Margin="0,0,4,0" />
+									<TextBlock Foreground="DarkSlateBlue" Text="{Binding Path=OriginalFilename}" ToolTip="{Binding Path=OriginalFilename}" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="230">
+						<GridViewColumnHeader Content="{Binding Path=[ChangedName], Source={x:Static local:Strings.Instance}}" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Foreground="DarkSlateBlue" Text="{Binding Path=ChangedFilename}" ToolTip="{Binding Path=ChangedFilename}" Background="Transparent" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="105">
+						<GridViewColumnHeader Content="{Binding Path=[OriginalPath], Source={x:Static local:Strings.Instance}}" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding Path=OriginalPath}" ToolTip="{Binding Path=OriginalPath}" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="110">
+						<GridViewColumnHeader Content="{Binding Path=[ChangedPath], Source={x:Static local:Strings.Instance}}" />
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Foreground="DarkSlateBlue" Text="{Binding Path=ChangedPath}" ToolTip="{Binding Path=ChangedPath}" Background="Transparent" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+				</GridView>
+			</ListView.View>
+
+			<ListView.ContextMenu>
+				<ContextMenu x:Name="ListViewContextMenu">
+					<MenuItem Header="{Binding Path=[Menu_Command_Filename], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+					<MenuItem Header="{Binding Path=[Menu_Command_Extension], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+					<MenuItem Header="{Binding Path=[Menu_Command_Path], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+					<MenuItem Header="{Binding Path=[Menu_Command_Number], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+					<MenuItem Header="{Binding Path=[Menu_Command_Date], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+					<MenuItem Header="{Binding Path=[Menu_Command_Tag], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+					<MenuItem Header="{Binding Path=[Menu_Command_Etc], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				</ContextMenu>
+			</ListView.ContextMenu>
+		</ListView>
+	</Grid>
+</Window>

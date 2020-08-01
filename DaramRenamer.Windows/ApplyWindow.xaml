@@ -1,0 +1,30 @@
+﻿<Window x:Class="DaramRenamer.ApplyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DaramRenamer"
+        mc:Ignorable="d"
+        Title="{Binding Path=[ApplyWindowTitle], Source={x:Static local:Strings.Instance}}" Width="320" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" SizeToContent="Height">
+	<Grid Margin="8">
+		<StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding Path=[ApplyWindowLabelProcessing], Source={x:Static local:Strings.Instance}}" />
+				<TextBlock x:Name="ProcessingTextBlock" Text="" />
+			</StackPanel>
+			<Grid Height="16" Margin="0,4,0,0">
+				<ProgressBar x:Name="ApplyProgressBar" />
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+					<TextBlock x:Name="ProceedTextBlock" Text="0" />
+					<TextBlock Text="/" />
+					<TextBlock x:Name="TotalTextBlock" Text="0" />
+				</StackPanel>
+			</Grid>
+			<ListBox x:Name="ListBoxFailure" Margin="0,8,0,0" MaxHeight="120">
+
+			</ListBox>
+			<Button x:Name="ApplyClose" Content="{Binding Path=[ButtonClose], Source={x:Static local:Strings.Instance}}"
+			        IsEnabled="False" IsDefault="True" HorizontalAlignment="Center" Width="64" Margin="0,8,0,0" Click="ApplyClose_Click" />
+		</StackPanel>
+	</Grid>
+</Window>

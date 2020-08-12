@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DaramRenamer"
 		xmlns:conv="clr-namespace:DaramRenamer.Converters"
-        mc:Ignorable="d"
+		xmlns:daramRenamer="clr-namespace:DaramRenamer;assembly=DaramRenamer.Commands"
+		mc:Ignorable="d"
         Title="다람리네이머" Height="480" Width="720"
         Loaded="Window_Loaded" Closing="Window_Closing" Unloaded="Window_Unloaded">
 	<Window.Resources>
@@ -16,6 +17,13 @@
 		</DataTemplate>
 		<Style x:Key="CommandMenuItemItemContainerTemplate" TargetType="MenuItem">
 			<EventSetter Event="Click" Handler="CommandMenuItem_Click" />
+		</Style>
+		<DataTemplate x:Key="ConditionMenuItemDataTemplate">
+			<TextBlock Text="{Binding Converter={StaticResource LocalizationConverter}}" />
+		</DataTemplate>
+		<Style x:Key="ConditionMenuItemItemContainerTemplate" TargetType="MenuItem">
+			<Setter Property="IsCheckable" Value="True" />
+			<EventSetter Event="Click" Handler="ConditionMenuItem_Click" />
 		</Style>
 
 		<Image x:Key="ToolBarIconOpen" Source="./Resources/ToolBarIcons/open.png" />
@@ -58,20 +66,20 @@
 
 		<Menu Grid.Row="0">
 			<MenuItem Header="{Binding Path=[Menu_File_File], Source={x:Static local:Strings.Instance}}">
-				<MenuItem Header="{Binding Path=[Menu_File_Open], Source={x:Static local:Strings.Instance}}" Click="MenuFileOpen_Click" />
+				<MenuItem Header="{Binding Path=[Menu_File_Open], Source={x:Static local:Strings.Instance}}" Click="MenuFileOpen_Click" InputGestureText="Ctrl+O" />
 				<Separator />
-				<MenuItem Header="{Binding Path=[Menu_File_Clear], Source={x:Static local:Strings.Instance}}" Click="MenuFileClear_Click" />
-				<MenuItem Header="{Binding Path=[Menu_File_Apply], Source={x:Static local:Strings.Instance}}" Click="MenuFileApply_Click" />
+				<MenuItem Header="{Binding Path=[Menu_File_Clear], Source={x:Static local:Strings.Instance}}" Click="MenuFileClear_Click" InputGestureText="Ctrl+Del" />
+				<MenuItem Header="{Binding Path=[Menu_File_Apply], Source={x:Static local:Strings.Instance}}" Click="MenuFileApply_Click" InputGestureText="Ctrl+S" />
 				<Separator />
-				<MenuItem Header="{Binding Path=[Menu_File_Exit], Source={x:Static local:Strings.Instance}}" Click="MenuFileExit_Click" />
+				<MenuItem Header="{Binding Path=[Menu_File_Exit], Source={x:Static local:Strings.Instance}}" Click="MenuFileExit_Click" InputGestureText="Alt+F4" />
 			</MenuItem>
 			<MenuItem Header="{Binding Path=[Menu_Edit_Edit], Source={x:Static local:Strings.Instance}}">
-				<MenuItem Header="{Binding Path=[Menu_Edit_Undo], Source={x:Static local:Strings.Instance}}" Click="MenuEditUndo_Click" />
-				<MenuItem Header="{Binding Path=[Menu_Edit_Redo], Source={x:Static local:Strings.Instance}}" Click="MenuEditRedo_Click" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_Undo], Source={x:Static local:Strings.Instance}}" Click="MenuEditUndo_Click" InputGestureText="Ctrl+Z" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_Redo], Source={x:Static local:Strings.Instance}}" Click="MenuEditRedo_Click" InputGestureText="Ctrl+Y" />
 				<Separator />
-				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToUp], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToUp_Click" />
-				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToDown], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToDown_Click" />
-				<MenuItem Header="{Binding Path=[Menu_Edit_Sort], Source={x:Static local:Strings.Instance}}" Click="MenuEditSort_Click" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToUp], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToUp_Click" InputGestureText="Ctrl+Up" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToDown], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToDown_Click" InputGestureText="Ctrl+Down" />
+				<MenuItem Header="{Binding Path=[Menu_Edit_Sort], Source={x:Static local:Strings.Instance}}" Click="MenuEditSort_Click" InputGestureText="Ctrl+Shift+S" />
 			</MenuItem>
 			<MenuItem x:Name="CommandsMenu" Header="{Binding Path=[Menu_Command_Command], Source={x:Static local:Strings.Instance}}">
 				<MenuItem x:Name="MenuItemFilename" Header="{Binding Path=[Menu_Command_Filename], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
@@ -82,8 +90,13 @@
 				<MenuItem x:Name="MenuItemTag" Header="{Binding Path=[Menu_Command_Tag], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
 				<MenuItem x:Name="MenuItemEtc" Header="{Binding Path=[Menu_Command_Etc], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
 			</MenuItem>
+			<MenuItem x:Name="ConditionsMenu" Header="{Binding Path=[Menu_Condition_Condition], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource ConditionMenuItemDataTemplate}" ItemContainerStyle="{StaticResource ConditionMenuItemItemContainerTemplate}">
+
+			</MenuItem>
 			<MenuItem Header="{Binding Path=[Menu_Tools_Tools], Source={x:Static local:Strings.Instance}}">
-				<MenuItem Header="{Binding Path=[Menu_Tools_Preferences], Source={x:Static local:Strings.Instance}}" Click="PreferencesMenuItem_Click" />
+				<MenuItem Header="{Binding Path=[Menu_Tools_Preferences], Source={x:Static local:Strings.Instance}}" Click="MenuItemPreferences_Click" />
+				<Separator />
+				<MenuItem Header="{Binding Path=[Menu_Tools_CheckUpdate], Source={x:Static local:Strings.Instance}}" Click="MenuToolsCheckUpdate_Click" />
 			</MenuItem>
 			<MenuItem Header="{Binding Path=[Menu_Help_Help], Source={x:Static local:Strings.Instance}}">
 				<MenuItem Header="{Binding Path=[Menu_Help_License], Source={x:Static local:Strings.Instance}}" Click="MenuHelpLicenses_Click" />
@@ -157,7 +170,7 @@
 					<GridViewColumn Width="225">
 						<GridViewColumnHeader Content="{Binding Path=[OriginalName], Source={x:Static local:Strings.Instance}}" />
 						<GridViewColumn.CellTemplate>
-							<DataTemplate>
+							<DataTemplate DataType="daramRenamer:FileInfo">
 								<StackPanel Orientation="Horizontal">
 									<Image Source="{Binding Path=OriginalFullPath, Converter={StaticResource PathToIconConverter}}" Height="16" Margin="0,0,4,0" />
 									<TextBlock Foreground="DarkSlateBlue" Text="{Binding Path=OriginalFilename}" ToolTip="{Binding Path=OriginalFilename}" />
@@ -168,7 +181,7 @@
 					<GridViewColumn Width="230">
 						<GridViewColumnHeader Content="{Binding Path=[ChangedName], Source={x:Static local:Strings.Instance}}" />
 						<GridViewColumn.CellTemplate>
-							<DataTemplate>
+							<DataTemplate DataType="daramRenamer:FileInfo">
 								<TextBlock Foreground="DarkSlateBlue" Text="{Binding Path=ChangedFilename}" ToolTip="{Binding Path=ChangedFilename}" Background="Transparent" />
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
@@ -176,7 +189,7 @@
 					<GridViewColumn Width="105">
 						<GridViewColumnHeader Content="{Binding Path=[OriginalPath], Source={x:Static local:Strings.Instance}}" />
 						<GridViewColumn.CellTemplate>
-							<DataTemplate>
+							<DataTemplate DataType="daramRenamer:FileInfo">
 								<TextBlock Cursor="Arrow" Foreground="DarkSlateBlue" Text="{Binding Path=OriginalPath}" ToolTip="{Binding Path=OriginalPath}" />
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
@@ -184,7 +197,7 @@
 					<GridViewColumn Width="110">
 						<GridViewColumnHeader Content="{Binding Path=[ChangedPath], Source={x:Static local:Strings.Instance}}" />
 						<GridViewColumn.CellTemplate>
-							<DataTemplate>
+							<DataTemplate DataType="daramRenamer:FileInfo">
 								<TextBlock Foreground="DarkSlateBlue" Text="{Binding Path=ChangedPath}" ToolTip="{Binding Path=ChangedPath}" Background="Transparent" />
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
@@ -205,4 +218,25 @@
 			</ListView.ContextMenu>
 		</ListView>
 	</Grid>
+
+	<Window.CommandBindings>
+		<CommandBinding Command="{x:Static local:MainWindow.CommandOpenFiles}" Executed="CommandOpenFiles_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandClearList}" Executed="CommandClearList_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandApplyFile}" Executed="CommandApplyFile_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandUndoWorks}" Executed="CommandUndoWorks_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandRedoWorks}" Executed="CommandRedoWorks_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandUpperItem}" Executed="CommandUpperItem_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandLowerItem}" Executed="CommandLowerItem_Executed" />
+		<CommandBinding Command="{x:Static local:MainWindow.CommandItemsSort}" Executed="CommandItemsSort_Executed" />
+	</Window.CommandBindings>
+	<Window.InputBindings>
+		<KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.CommandOpenFiles}" />
+		<KeyBinding Key="Delete" Modifiers="Control" Command="{x:Static local:MainWindow.CommandClearList}" />
+		<KeyBinding Key="S" Modifiers="Control" Command="{x:Static local:MainWindow.CommandApplyFile}" />
+		<KeyBinding Key="Z" Modifiers="Control" Command="{x:Static local:MainWindow.CommandUndoWorks}" />
+		<KeyBinding Key="Y" Modifiers="Control" Command="{x:Static local:MainWindow.CommandRedoWorks}" />
+		<KeyBinding Key="Up" Modifiers="Control" Command="{x:Static local:MainWindow.CommandUpperItem}" />
+		<KeyBinding Key="Down" Modifiers="Control" Command="{x:Static local:MainWindow.CommandLowerItem}" />
+		<KeyBinding Key="S" Modifiers="Shift+Control" Command="{x:Static local:MainWindow.CommandItemsSort}" />
+	</Window.InputBindings>
 </Window>

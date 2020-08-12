@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DaramRenamer"
         mc:Ignorable="d"
         Title="{Binding Path=[Preferences], Source={x:Static local:Strings.Instance}}"
-        Height="240" Width="360" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" Closing="Window_Closing">
+        Height="240" Width="360" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" Closing="Window_Closing">
 	<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
 		<StackPanel Margin="16">
 			<CheckBox Content="{Binding Path=[PreferencesHardwareAcceleration], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=HaredwareAccelerated, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
@@ -22,6 +22,12 @@
 			</StackPanel>
 			<CheckBox Content="{Binding Path=[PreferencesSaveWindowState], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=SaveWindowState, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
 			<CheckBox Content="{Binding Path=[PreferencesUseCustomPlugins], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=UseCustomPlugins, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
+			<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
+				<TextBlock Text="{Binding Path=[PreferencesCurrentLanguage], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+				<ComboBox ItemsSource="{Binding Path=AvailableLanguages, Source={x:Static local:Strings.Instance}}" VirtualizingStackPanel.VirtualizationMode="Recycling" Text="{Binding Path=CurrentLanguage, Source={x:Static local:Preferences.Instance}}" SelectionChanged="ComboBox_SelectionChanged">
+					
+				</ComboBox>
+			</StackPanel>
 		</StackPanel>
 	</ScrollViewer>
 </Window>

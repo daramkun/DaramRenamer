@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -74,6 +75,17 @@ namespace DaramRenamer
 
 		[FieldOption (Name = "use_custom_plugins", IsRequired = false)]
 		public bool UseCustomPlugins { get; set; } = false;
+
+		[FieldOption(Name = "language", IsRequired = false)]
+		public string CurrentLanguage
+		{
+			get => CultureInfo.CurrentUICulture.ToString();
+			set
+			{
+				CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(value);
+				Strings.Instance.Load();
+			}
+		}
 
 		public void Save()
 		{

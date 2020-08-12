@@ -10,6 +10,7 @@
 	"ButtonNo": "아니오",
 	"ButtonCancel": "취소",
 	"ButtonClose": "닫기",
+	"ButtonUpdate": "업데이트",
 
 	"FileDialogTitleOpenFiles": "파일 열기",
 	"FileDialogFilterAllFiles": "모든 파일(*.*)|*.*",
@@ -19,6 +20,13 @@
 
 	"LicenseWindowTitle": "라이센스",
 	"AboutWindowTitle": "이 프로그램에 대하여",
+
+	"NewLatestVersionAvailable": "새 버전 확인",
+	"UpdateCheckError": "버전 확인 오류",
+
+	"NewLatestVersionAvailableText": "새로운 업데이트가 있습니다.",
+	"UpdateCheckErrorText": "버전 확인에 문제가 발생했습니다.",
+	"ThisIsLatestVersionText": "현재 버전이 최신 버전입니다.",
 
 	"Menu_File_File": "파일(_F)",
 	"Menu_File_Open": "열기(_O)",
@@ -44,6 +52,7 @@
 
 	"Menu_Tools_Tools": "도구(_T)",
 	"Menu_Tools_Preferences": "설정(_P)",
+	"Menu_Tools_CheckUpdate": "업데이트 확인(_U)",
 
 	"Menu_Help_Help": "도움말(_H)",
 	"Menu_Help_License": "라이센스(_L)",
@@ -61,6 +70,7 @@
 	"PreferencesRenameMode": "파일명 변경 방법: ",
 	"PreferencesSaveWindowState": "창 상태 저장",
 	"PreferencesUseCustomPlugins": "사용자 정의 플러그인 사용",
+	"PreferencesCurrentLanguage": "언어: ",
 
 	"Move": "이동",
 	"Copy": "복사",
@@ -127,20 +137,38 @@
 	"Command_Name_RelativeGoTo": "상대 경로 변경",
 	"Command_Argument_RelativeGoTo_Path": "경로",
 
+	"Command_Name_AddMediaTag": "미디어 태그 추가",
+	"Command_Argument_AddMediaTag_Tag": "미디어 태그",
+	"Command_Argument_AddMediaTag_Arguments": "태그 추가 인자",
+	"Command_Argument_AddMediaTag_Position": "추가할 위치",
+
+	"Command_Name_AddDocumentTag": "문서 태그 추가",
+	"Command_Argument_AddDocumentTag_Tag": "문서 태그",
+	"Command_Argument_AddDocumentTag_Position": "추가할 위치",
+
+	"Command_Name_AddHash": "해시 추가",
+	"Command_Argument_AddHash_HashType": "해시 종류",
+	"Command_Argument_AddHash_Position": "추가할 위치",
+
+	"Command_Name_AddGitInfo": "Git 정보 추가",
+	"Command_Argument_AddGitInfo_GitInfo": "정보",
+	"Command_Argument_AddGitInfo_Position": "추가할 위치",
+
 	"Command_Name_ManualEdit": "직접 편집",
 	"Command_Argument_ManualEdit_ChangeName": "변경 이름",
 	"Command_Argument_ManualEdit_ChangePath": "변경 경로",
+
+	"Menu_Condition_Condition": "조건(_O)",
+
+	"Condition_Name_TextFile": "텍스트 파일",
+	
+	"Condition_Name_Extension": "확장자",
+	"Condition_Argument_Extension_Extension": "확장자",
 
 	"Creation": "생성한 날짜",
 	"LastAccess": "마지막 접근 날짜",
 	"LastModify": "마지막 수정 날짜",
 	"Now": "현재",
-
-	"MD5": "MD5",
-	"SHA1": "SHA1",
-	"SHA256": "SHA256",
-	"SHA384": "SHA384",
-	"SHA512": "SHA512",
 
 	"StartPoint": "처음",
 	"EndPoint": "끝",
@@ -149,9 +177,6 @@
 	"UppercaseAll": "대문자로",
 	"LowercaseAll": "소문자로",
 	"UppercaseFirstLetter": "첫 글자만 대문자로",
-
-	"Title": "문서 제목",
-	"Author": "문서 작성자",
 
 	"AudioBitrate" : "오디오 비트레이트",
 	"AudioSamplerate" : "오디오 샘플레이트",
@@ -184,6 +209,20 @@
 	"ImageHeight" : "이미지 세로 크기",
 	"ImageCodec" : "이미지 코덱",
 	"ImageQuality" : "이미지 품질",
+
+	"Title": "문서 제목",
+	"Author": "문서 작성자",
+
+	"MD5": "MD5",
+	"SHA1": "SHA1",
+	"SHA256": "SHA256",
+	"SHA384": "SHA384",
+	"SHA512": "SHA512",
+
+	"CommitId": "커밋 ID",
+	"ShortCommitId": "짧은 커밋 ID",
+	"BranchName": "현재 브랜치",
+	"CommitCount": "현재 브랜치 커밋 수",
 
 	"DragAndDrop_DirectoryQuestion": "드래그 앤 드롭 한 파일 중에 폴더가 있습니다.",
 	"DragAndDrop_DirectoryQuestionDescription": "해당 폴더를 디렉토리 모드로 추가하시겠습니까? 또는 폴더 내 파일을 추가하시겠습니까?\n디렉토리 모드로 추가된 폴더는 폴더명을 편집할 수 있습니다.",

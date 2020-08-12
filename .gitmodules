@@ -10,6 +10,6 @@
 [submodule "Modules/Nargs"]
 	path = Modules/Nargs
 	url = https://github.com/daramkun/Nargs.git
-[submodule "Modules/TagLibSharp"]
-	path = Modules/TagLibSharp
-	url = https://github.com/mono/taglib-sharp.git
+[submodule "Modules/StrongNameKey"]
+	path = Modules/StrongNameKey
+	url = https://github.com/daramkun/StrongNameKey.git

@@ -14,6 +14,9 @@
     <ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>DaramRenamer</AssemblyName>
     <Copyright>Copyright ⓒ 2013-2020 Jin Jae-yeon</Copyright>
+    <Version>2020.8.1</Version>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

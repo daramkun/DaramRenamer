@@ -4,17 +4,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>DaramRenamer</RootNamespace>
     <LangVersion>latest</LangVersion>
+    <Version>2020.8.1</Version>
+    <Authors>Jin Jae-yeon</Authors>
+    <Company>DARAM WORLD</Company>
+    <Product>DaramRenamer Command</Product>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\Tags\" />
-    <Folder Include="Conditions\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Modules\TagLibSharp\src\TaglibSharp\TaglibSharp.csproj" />
-  </ItemGroup>
-
   <Import Project="..\Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="TagLibSharp" Version="2.2.0" />
+  </ItemGroup>
 
 </Project>

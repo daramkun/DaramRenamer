@@ -12,7 +12,7 @@ namespace DaramRenamer.Converters
 			var localizationKey = value?.GetType().GetCustomAttributes(typeof(LocalizationKeyAttribute), true)
 				.FirstOrDefault();
 			return localizationKey == null
-				? value.GetType().Name
+				? value?.GetType().Name
 				: Strings.Instance[(localizationKey as LocalizationKeyAttribute)?.LocalizationKey];
 		}
 

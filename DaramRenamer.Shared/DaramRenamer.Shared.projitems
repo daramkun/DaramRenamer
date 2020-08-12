@@ -9,10 +9,12 @@
     <Import_RootNamespace>DaramRenamer</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PluginManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Preferences.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UndoManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UpdateInformationBank.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.default.json" />

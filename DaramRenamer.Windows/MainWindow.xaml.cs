@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -26,6 +27,31 @@ namespace DaramRenamer
 
 		private PreferencesWindow preferencesWindow;
 
+		#region Commands
+		public static RoutedCommand CommandOpenFiles = new RoutedCommand ();
+		public static RoutedCommand CommandClearList = new RoutedCommand ();
+		public static RoutedCommand CommandApplyFile = new RoutedCommand ();
+		public static RoutedCommand CommandUndoWorks = new RoutedCommand ();
+		public static RoutedCommand CommandRedoWorks = new RoutedCommand ();
+		public static RoutedCommand CommandUpperItem = new RoutedCommand ();
+		public static RoutedCommand CommandLowerItem = new RoutedCommand ();
+		public static RoutedCommand CommandItemsSort = new RoutedCommand ();
+
+		private void CommandOpenFiles_Executed (object sender, ExecutedRoutedEventArgs e) { MenuFileOpen_Click (sender, e); }
+		private void CommandClearList_Executed (object sender, ExecutedRoutedEventArgs e) { MenuFileClear_Click (sender, e); }
+		private void CommandApplyFile_Executed (object sender, ExecutedRoutedEventArgs e) { MenuFileApply_Click (sender, e); }
+
+		private void CommandUndoWorks_Executed (object sender, ExecutedRoutedEventArgs e) { MenuEditUndo_Click (sender, e); }
+		private void CommandRedoWorks_Executed (object sender, ExecutedRoutedEventArgs e) { MenuEditRedo_Click (sender, e); }
+
+		private void CommandApplyCanc_Executed (object sender, ExecutedRoutedEventArgs e)
+		{ while (!undoManager.IsUndoStackEmpty) MenuEditUndo_Click (sender, e); }
+
+		private void CommandUpperItem_Executed (object sender, ExecutedRoutedEventArgs e) { MenuEditItemToUp_Click (sender, e); }
+		private void CommandLowerItem_Executed (object sender, ExecutedRoutedEventArgs e) { MenuEditItemToDown_Click (sender, e); }
+		private void CommandItemsSort_Executed (object sender, ExecutedRoutedEventArgs e) { MenuEditSort_Click (sender, e); }
+		#endregion
+
 		private static async Task<bool> IsAdministrator()
 		{
 			return await Task.Run(() => new WindowsPrincipal(WindowsIdentity.GetCurrent())
@@ -49,8 +75,10 @@ namespace DaramRenamer
 			if (Preferences.Instance.UseCustomPlugins)
 				PluginManager.Instance.LoadPlugins();
 
-			PluginToMenu.Initialize(CommandsMenu.Items);
-			PluginToMenu.Initialize(ListViewContextMenu.Items);
+			PluginToMenu.InitializeCommands(CommandsMenu.Items);
+			PluginToMenu.InitializeCommands(ListViewContextMenu.Items);
+
+			PluginToMenu.InitializeConditions(ConditionsMenu);
 
 			undoManager.UpdateUndo += (sender, e) =>
 			{
@@ -72,6 +100,45 @@ namespace DaramRenamer
 				Title += " - [32-Bit]";
 			if (await IsAdministrator())
 				Title = $"{Title} - [{Strings.Instance["Administrator"]}]";
+
+			var updateInfo = await CheckUpdate();
+
+			Title = updateInfo switch
+			{
+				true => $"{Title} - [{Strings.Instance["NewLatestVersionAvailable"]}]",
+				null => $"{Title} - [{Strings.Instance["UpdateCheckError"]}]",
+				_ => Title
+			};
+		}
+
+		public async void RefreshTitle()
+		{
+			Title = $"{Strings.Instance ["DaramRenamer"]} - {Strings.Instance ["Version"]} {GetVersionString ()}";
+
+			if (!Environment.Is64BitProcess)
+				Title += " - [32-Bit]";
+			if (await IsAdministrator ())
+				Title = $"{Title} - [{Strings.Instance ["Administrator"]}]";
+
+			var updateInfo = await CheckUpdate ();
+
+			Title = updateInfo switch
+			{
+				true => $"{Title} - [{Strings.Instance ["NewLatestVersionAvailable"]}]",
+				null => $"{Title} - [{Strings.Instance ["UpdateCheckError"]}]",
+				_ => Title
+			};
+		}
+
+		internal static async Task<bool?> CheckUpdate()
+		{
+			return await Task.Run<bool?>(() =>
+			{
+				var updateInformation = UpdateInformationBank.GetUpdateInformation(TargetPlatform.Windows);
+				if (updateInformation != null)
+					return updateInformation.Value.StableLatestVersion != GetVersionString();
+				return null;
+			});
 		}
 
 		private void Window_Closing(object sender, CancelEventArgs e)
@@ -96,9 +163,9 @@ namespace DaramRenamer
 		public static TaskDialogResult MessageBox(string message, string content, TaskDialogIcon icon,
 			TaskDialogCommonButtonFlags commonButtons, params string[] buttons)
 		{
-			TaskDialogButton[] tdButtons = buttons != null ? TaskDialogButton.Cast(buttons) : null;
+			var tdButtons = buttons != null ? TaskDialogButton.Cast(buttons) : null;
 
-			TaskDialog taskDialog = new TaskDialog
+			var taskDialog = new TaskDialog
 			{
 				Title = Strings.Instance["DaramRenamer"],
 				MainInstruction = message,
@@ -177,14 +244,12 @@ namespace DaramRenamer
 				FileInfo.Files.Remove(fileInfo);
 		}
 
-		private void PreferencesMenuItem_Click(object sender, RoutedEventArgs e)
+		private void ListViewItem_MouseDoubleClick (object sender, MouseButtonEventArgs e)
 		{
-			preferencesWindow ??= new PreferencesWindow();
-			if (preferencesWindow.IsActive)
-				return;
+			if ((sender as ListViewItem)?.Content == null) return;
+			var info = ((ListViewItem) sender).Content as FileInfo;
 
-			preferencesWindow.Owner = this;
-			preferencesWindow.Show();
+			CommandMenuItem_Click (ManualEditCommand, new DesignatedFilesRoutedEventArgs (info));
 		}
 
 		private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
@@ -271,6 +336,16 @@ namespace DaramRenamer
 			FileInfo.Sort (FileInfo.Files);
 		}
 
+		private IEnumerable<ICondition> GetActivedConditions()
+		{
+			foreach (ICondition condition in ConditionsMenu.ItemsSource)
+			{
+				if (ConditionsMenu.ItemContainerGenerator.ContainerFromItem (condition) is MenuItem menuItem && !menuItem.IsChecked)
+					continue;
+				yield return condition;
+			}
+		}
+
 		private void CommandMenuItem_Click(object sender, RoutedEventArgs e)
 		{
 			ICommand command;
@@ -300,8 +375,8 @@ namespace DaramRenamer
 				}
 			}
 
-			var properties = command.GetType().GetProperties();
-			if (properties.Length > (command is IOrderBy ? 3 : 2))
+			var properties = command?.GetType().GetProperties();
+			if (properties?.Length > (command is IOrderBy ? 3 : 2))
 			{
 				var commandWindow = new CommandWindow(command) {Owner = this};
 				if (commandWindow.ShowDialog() != true)
@@ -309,6 +384,8 @@ namespace DaramRenamer
 			}
 
 			undoManager.SaveToUndoStack(FileInfo.Files);
+
+			var conditions = GetActivedConditions().ToArray();
 
 			{
 				var targets =
@@ -320,10 +397,30 @@ namespace DaramRenamer
 					targetContains.SetTargets(targets);
 
 				if (command.ParallelProcessable)
-					Parallel.ForEach(targets, file => command.DoCommand(file));
+					Parallel.ForEach(targets, file =>
+					{
+						if (conditions.All(condition => condition.IsSatisfyThisCondition(file)))
+							command.DoCommand(file);
+					});
 				else
 					foreach (var file in targets)
-						command.DoCommand(file);
+						if (conditions.All (condition => condition.IsSatisfyThisCondition (file)))
+							command.DoCommand(file);
+			}
+		}
+
+		private void ConditionMenuItem_Click(object sender, RoutedEventArgs e)
+		{
+			if (((MenuItem) sender).IsChecked)
+			{
+				var condition = ((MenuItem) sender).Header as ICondition;
+				var properties = condition.GetType().GetProperties();
+				if (properties.Length > (condition is IOrderBy ? 1 : 0))
+				{
+					var commandWindow = new CommandWindow(condition) {Owner = this};
+					if (commandWindow.ShowDialog() != true)
+						((MenuItem) sender).IsChecked = false;
+				}
 			}
 		}
 
@@ -339,12 +436,59 @@ namespace DaramRenamer
 			}
 		}
 
-		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		private void MenuItemPreferences_Click (object sender, RoutedEventArgs e)
 		{
-			if ((sender as ListViewItem)?.Content == null) return;
-			var info = ((ListViewItem) sender).Content as FileInfo;
+			preferencesWindow ??= new PreferencesWindow ();
+			if (preferencesWindow.IsActive)
+				return;
 
-			CommandMenuItem_Click(ManualEditCommand, new DesignatedFilesRoutedEventArgs(info));
+			preferencesWindow.Owner = this;
+			preferencesWindow.Show ();
+		}
+
+		private async void MenuToolsCheckUpdate_Click (object sender, RoutedEventArgs e)
+		{
+			var update = await CheckUpdate();
+			if (update == true)
+			{
+				var result = MessageBox(Strings.Instance["NewLatestVersionAvailableText"], "", TaskDialogIcon.Information,
+					TaskDialogCommonButtonFlags.OK, Strings.Instance["ButtonUpdate"]);
+				
+				if (result.Button == 101)
+				{
+					var updateInfo = UpdateInformationBank.GetUpdateInformation(TargetPlatform.Windows);
+					if (updateInfo != null)
+					{
+						try
+						{
+							var psInfo = new ProcessStartInfo ("cmd")
+							{
+								Arguments = $"/C start DaramRenamer.UpdateAgent.exe {updateInfo.Value.StableLatestVersion} {updateInfo.Value.StableLatestUrl}",
+								UseShellExecute = true,
+							};
+							Process.Start (psInfo);
+							Application.Current.Shutdown ();
+						}
+						catch
+						{
+							var psInfo = new ProcessStartInfo ("https://github.com/daramkun/DaramRenamer/releases")
+							{
+								UseShellExecute = true,
+							};
+							Process.Start (psInfo);
+						}
+					}
+					else
+					{
+
+					}
+				}
+			}
+			else
+			{
+				MessageBox(Strings.Instance[update == false ? "ThisIsLatestVersionText" : "UpdateCheckErrorText"], "",
+					update == null ? TaskDialogIcon.Error : null, TaskDialogCommonButtonFlags.OK);
+			}
 		}
 
 		private void MenuHelpLicenses_Click(object sender, RoutedEventArgs e)

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.Windows", "DaramRenamer.Windows\DaramRenamer.Windows.csproj", "{C207833C-A7C7-4264-9FF5-18E0744F9727}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB24F8EE-20E5-4A09-9092-891F88B763D7} = {BB24F8EE-20E5-4A09-9092-891F88B763D7}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.Commands", "DaramRenamer.Commands\DaramRenamer.Commands.csproj", "{9129A4F6-59F4-41EC-A03F-D41251CF2795}"
 EndProject
@@ -21,7 +24,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.Nargs.Shared", "Mod
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Blockar.Shared", "Modules\Blockar\Blockar.Shared\Blockar.Shared.shproj", "{24EDA730-617F-409E-BA4A-336B44151438}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaglibSharp", "Modules\TagLibSharp\src\TaglibSharp\TaglibSharp.csproj", "{68A17907-D062-4F97-B1C5-4F3E0E444B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.UpdateAgent", "DaramRenamer.UpdateAgent\DaramRenamer.UpdateAgent.csproj", "{BB24F8EE-20E5-4A09-9092-891F88B763D7}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -48,10 +51,10 @@ Global
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68A17907-D062-4F97-B1C5-4F3E0E444B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,7 +67,7 @@ Global
 		{07D3172F-FF1F-4E6F-AEBE-3E725904B2A7} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
 		{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
 		{24EDA730-617F-409E-BA4A-336B44151438} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
-		{68A17907-D062-4F97-B1C5-4F3E0E444B34} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
+		{BB24F8EE-20E5-4A09-9092-891F88B763D7} = {FEC19557-4029-4031-A6A4-F4B8353263C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B986277B-4442-49A5-BDBE-5598D87D628C}

@@ -29,7 +29,7 @@ namespace DaramRenamer
 			});
 
 		private static readonly Regex StringTableFilename =
-			new Regex(".*DaramRenamer\\.Strings\\.([a-zA-Z0-9\\-_])\\.json");
+			new Regex(".*DaramRenamer\\.Strings\\.([a-zA-Z0-9\\-_]*)\\.json");
 
 		private readonly ObservableDictionary<string, string> stringTable = new ObservableDictionary<string, string>();
 
@@ -39,12 +39,16 @@ namespace DaramRenamer
 		/// <summary>Event raised when a property on the collection changes.</summary>
 		public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
 
+		private readonly List<CultureInfo> availableCustomLanguages = new List<CultureInfo>();
+
 		public IEnumerable<CultureInfo> AvailableLanguages
 		{
 			get
 			{
 				yield return CultureInfo.GetCultureInfo ("ko-kr");
 				yield return CultureInfo.GetCultureInfo ("en");
+				foreach (var lang in availableCustomLanguages)
+					yield return lang;
 			}
 		}
 
@@ -58,7 +62,21 @@ namespace DaramRenamer
 
 		public Strings()
 		{
+			GetAdditionalAvailableLanguages();
 			Load ();
+		}
+
+		private void GetAdditionalAvailableLanguages()
+		{
+			foreach (var name in FileInfo.FileOperator.GetFiles(Environment.CurrentDirectory, false))
+			{
+				var match = StringTableFilename.Match(name);
+				if (!match.Success)
+					continue;
+
+				var code = match.Groups[1].Value;
+				availableCustomLanguages.Add(CultureInfo.GetCultureInfo(code.Replace('_', '-')));
+			}
 		}
 
 		public void Load()
@@ -87,7 +105,8 @@ namespace DaramRenamer
 				if (!match.Success)
 					continue;
 
-				if (name.IndexOf(CultureInfo.CurrentUICulture.Name, StringComparison.Ordinal) >= 0)
+				var filename = Path.GetFileName(name).Replace('_', '-');
+				if (filename.IndexOf($".{CultureInfo.CurrentUICulture.Name}.", StringComparison.OrdinalIgnoreCase) < 0)
 					continue;
 
 				using var stream = new FileStream(name, FileMode.Open, FileAccess.Read, FileShare.Read);

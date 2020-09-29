@@ -268,6 +268,21 @@ namespace DaramRenamer
 				AddItem(s);
 		}
 
+		private void MenuFileFolderOpen_Click (object sender, RoutedEventArgs e)
+		{
+			OpenFolderDialog openFolderDialog = new OpenFolderDialog
+			{
+				Title = Strings.Instance ["FileDialogTitleOpenFiles"],
+				AllowMultiSelection = true
+			};
+			if (openFolderDialog.ShowDialog () == false) return;
+
+			undoManager.SaveToUndoStack (FileInfo.Files);
+
+			foreach (var s in from s in openFolderDialog.FileNames orderby s select s)
+				AddItem (s, true);
+		}
+
 		private void MenuFileClear_Click(object sender, RoutedEventArgs e)
 		{
 			undoManager.ClearAll();

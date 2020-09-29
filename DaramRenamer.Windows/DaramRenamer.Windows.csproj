@@ -9,12 +9,12 @@
     <Authors>Jin Jae-yeon</Authors>
     <Company>DARAM WORLD</Company>
     <Product>DaramRenamer for Windows</Product>
-    <AssemblyVersion>2020.8.1.0</AssemblyVersion>
-    <FileVersion>2020.8.1.0</FileVersion>
+    <AssemblyVersion>2020.10.1.0</AssemblyVersion>
+    <FileVersion>2020.10.1.0</FileVersion>
     <ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>DaramRenamer</AssemblyName>
     <Copyright>Copyright ⓒ 2013-2020 Jin Jae-yeon</Copyright>
-    <Version>2020.8.1</Version>
+    <Version>2020.10.1</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

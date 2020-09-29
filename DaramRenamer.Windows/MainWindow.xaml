@@ -67,6 +67,7 @@
 		<Menu Grid.Row="0">
 			<MenuItem Header="{Binding Path=[Menu_File_File], Source={x:Static local:Strings.Instance}}">
 				<MenuItem Header="{Binding Path=[Menu_File_Open], Source={x:Static local:Strings.Instance}}" Click="MenuFileOpen_Click" InputGestureText="Ctrl+O" />
+				<MenuItem Header="{Binding Path=[Menu_File_FolderOpen], Source={x:Static local:Strings.Instance}}" Click="MenuFileFolderOpen_Click" InputGestureText="Ctrl+P" />
 				<Separator />
 				<MenuItem Header="{Binding Path=[Menu_File_Clear], Source={x:Static local:Strings.Instance}}" Click="MenuFileClear_Click" InputGestureText="Ctrl+Del" />
 				<MenuItem Header="{Binding Path=[Menu_File_Apply], Source={x:Static local:Strings.Instance}}" Click="MenuFileApply_Click" InputGestureText="Ctrl+S" />

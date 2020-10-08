@@ -50,6 +50,7 @@
 	"Menu_Command_Date": "_Date",
 	"Menu_Command_Tag": "_Tag",
 	"Menu_Command_Etc": "_Etc",
+	"Menu_Command_Batch": "_Batch Command Processor (Alpha)",
 
 	"Menu_Tools_Tools": "_Tools",
 	"Menu_Tools_Preferences": "_Preferences",
@@ -130,7 +131,7 @@
 	"Command_Name_SameNumberCount": "Numbers to same count",
 	"Command_Argument_SameNumberCount_Count": "Count",
 	"Command_Argument_SameNumberCount_Position": "Position",
-	"Command_Name_DeleteNoNumber": "Delete without numbers",
+	"Command_Name_DeleteNoNumber": "Delete no numbers",
 	"Command_Argument_DeleteNoNumber_Wordly": "Do wordly",
 
 	"Command_Name_AbsoluteGoTo": "Go to Absolute Path",
@@ -228,5 +229,14 @@
 	"DragAndDrop_DirectoryQuestion": "The file paths contain one or more directory(s).",
 	"DragAndDrop_DirectoryQuestionDescription": "Add to Directory mode or iterate files? Directory mode can edit directory name.",
 	"DragAndDrop_ButtonAddDirectory": "Add folder",
-	"DragAndDrop_ButtonIterateFiles": "Add files from folder"
+	"DragAndDrop_ButtonIterateFiles": "Add files from folder",
+
+	"BatchWindow_Title": "Batch Commands Processor",
+	"BatchWindow_Remove": "_Remove",
+	"BatchWindow_Close": "_Close",
+	"BatchWindow_LoadFile": "Load from",
+	"BatchWindow_SaveFile": "Save to",
+	"BatchWindow_DoBatch": "Do Batch",
+	"BatchWindow_Command": "Command",
+	"BatchWindow_Condition": "Condition"
 }

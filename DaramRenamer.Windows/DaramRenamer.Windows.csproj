@@ -17,6 +17,12 @@
     <Version>2020.10.1</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
+    <ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>
+    <PackageIcon>Icon.jpg</PackageIcon>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/daramkun/DaramRenamer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/daramkun/DaramRenamer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -55,6 +61,14 @@
     <None Remove="Resources\ToolBarIcons\substring.png" />
     <None Remove="Resources\ToolBarIcons\trim_text.png" />
     <None Remove="Resources\ToolBarIcons\undo.png" />
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="Resources\Icon.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

@@ -22,6 +22,8 @@ namespace DaramRenamer
 		private readonly UndoManager<ObservableCollection<FileInfo>> undoManager =
 			new UndoManager<ObservableCollection<FileInfo>>();
 
+		private BatchWindow currentBatchWindow = null;
+
 		public bool UndoManagerHasUndoStackItem => !undoManager.IsUndoStackEmpty;
 		public bool UndoManagerHasRedoStackItem => !undoManager.IsRedoStackEmpty;
 
@@ -514,6 +516,14 @@ namespace DaramRenamer
 		private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
 		{
 			new AboutWindow() {Owner = this}.ShowDialog();
+		}
+
+		private void MenuItemBatch_Click(object sender, RoutedEventArgs e)
+		{
+			if (currentBatchWindow == null || (currentBatchWindow != null && !currentBatchWindow.IsVisible))
+				currentBatchWindow = new BatchWindow(this);
+
+			currentBatchWindow.Show();
 		}
 	}
 }

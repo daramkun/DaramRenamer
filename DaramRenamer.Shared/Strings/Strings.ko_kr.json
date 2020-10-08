@@ -50,6 +50,7 @@
 	"Menu_Command_Date": "날짜(_D)",
 	"Menu_Command_Tag": "태그(_T)",
 	"Menu_Command_Etc": "기타(_E)",
+	"Menu_Command_Batch": "일괄 처리기(알파)(_B)",
 
 	"Menu_Tools_Tools": "도구(_T)",
 	"Menu_Tools_Preferences": "설정(_P)",
@@ -228,5 +229,14 @@
 	"DragAndDrop_DirectoryQuestion": "드래그 앤 드롭 한 파일 중에 폴더가 있습니다.",
 	"DragAndDrop_DirectoryQuestionDescription": "해당 폴더를 디렉토리 모드로 추가하시겠습니까? 또는 폴더 내 파일을 추가하시겠습니까?\n디렉토리 모드로 추가된 폴더는 폴더명을 편집할 수 있습니다.",
 	"DragAndDrop_ButtonAddDirectory": "폴더 추가",
-	"DragAndDrop_ButtonIterateFiles": "폴더 내 파일 추가"
+	"DragAndDrop_ButtonIterateFiles": "폴더 내 파일 추가",
+
+	"BatchWindow_Title": "명령 일괄처리기",
+	"BatchWindow_Remove": "제거(_R)",
+	"BatchWindow_Close": "닫기(_C)",
+	"BatchWindow_LoadFile": "불러오기",
+	"BatchWindow_SaveFile": "저장하기",
+	"BatchWindow_DoBatch": "일괄처리",
+	"BatchWindow_Command": "명령",
+	"BatchWindow_Condition": "조건"
 }

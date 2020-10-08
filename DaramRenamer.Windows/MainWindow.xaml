@@ -90,6 +90,7 @@
 				<MenuItem x:Name="MenuItemDate" Header="{Binding Path=[Menu_Command_Date], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
 				<MenuItem x:Name="MenuItemTag" Header="{Binding Path=[Menu_Command_Tag], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
 				<MenuItem x:Name="MenuItemEtc" Header="{Binding Path=[Menu_Command_Etc], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+				<MenuItem x:Name="MenuItemBatch" Header="{Binding Path=[Menu_Command_Batch], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" Click="MenuItemBatch_Click" />
 			</MenuItem>
 			<MenuItem x:Name="ConditionsMenu" Header="{Binding Path=[Menu_Condition_Condition], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource ConditionMenuItemDataTemplate}" ItemContainerStyle="{StaticResource ConditionMenuItemItemContainerTemplate}">
 

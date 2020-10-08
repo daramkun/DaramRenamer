@@ -11,7 +11,7 @@ namespace DaramRenamer
 		private static List<ObservableCollection<ICommand>> initializedCommandLists = new List<ObservableCollection<ICommand>> ();
 		private static ObservableCollection<ICondition> initializedConditionList = new ObservableCollection<ICondition>();
 
-		public static void InitializeCommands(ItemCollection commandsMenuItems)
+		public static void InitializeCommands(ItemCollection commandsMenuItems, bool initializeMain = true)
 		{
 			var menuItems = new Dictionary<CommandCategory, MenuItem>
 			{
@@ -28,13 +28,15 @@ namespace DaramRenamer
 			{
 				var initializedCommandList = new ObservableCollection<ICommand>(PluginManager.Instance.GetCategoriedCommands (category));
 				menuItem.ItemsSource = initializedCommandList;
-				initializedCommandLists.Add(initializedCommandList);
+				if(initializeMain)
+					initializedCommandLists.Add(initializedCommandList);
 			}
 		}
 
-		public static void InitializeConditions(MenuItem conditionsMenu)
+		public static void InitializeConditions(MenuItem conditionsMenu, bool initializeMain = true)
 		{
-			initializedConditionList = new ObservableCollection<ICondition>(PluginManager.Instance.Conditions);
+			if(initializeMain)
+				initializedConditionList = new ObservableCollection<ICondition>(PluginManager.Instance.Conditions);
 			conditionsMenu.ItemsSource = initializedConditionList;
 		}
 

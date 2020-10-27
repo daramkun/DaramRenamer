@@ -53,8 +53,8 @@
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-				<Button Content="{Binding Path=[BatchWindow_LoadFile], Source={x:Static local:Strings.Instance}}" Width="64" />
-				<Button Content="{Binding Path=[BatchWindow_SaveFile], Source={x:Static local:Strings.Instance}}" Width="64" Margin="8,0,0,0" />
+				<Button Content="{Binding Path=[BatchWindow_LoadFile], Source={x:Static local:Strings.Instance}}" Width="64" Click="BatchLoad_Click" />
+				<Button Content="{Binding Path=[BatchWindow_SaveFile], Source={x:Static local:Strings.Instance}}" Width="64" Click="BatchSave_Click" Margin="8,0,0,0" />
 			</StackPanel>
 		</Grid>
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using Daramee.Winston.Dialogs;
 
 namespace DaramRenamer
 {
@@ -134,6 +138,36 @@ namespace DaramRenamer
 		private void ButtonClose_Click (object sender, RoutedEventArgs e)
 		{
 			Close();
+		}
+
+		private void BatchLoad_Click (object sender, RoutedEventArgs e)
+		{
+			var ofd = new OpenFileDialog()
+			{
+				Filter = Strings.Instance["BatchWindow_File_Filter"],
+			};
+			if (ofd.ShowDialog(this) == false)
+				return;
+
+			using Stream stream = new FileStream(ofd.FileName, FileMode.Open);
+			using TextReader reader = new StreamReader(stream, Encoding.UTF8, false, -1, true);
+
+			rootNode.Deserializer(reader);
+		}
+
+		private void BatchSave_Click (object sender, RoutedEventArgs e)
+		{
+			var sfd = new SaveFileDialog()
+			{
+				Filter = Strings.Instance["BatchWindow_File_Filter"],
+			};
+			if (sfd.ShowDialog(this) == false)
+				return;
+
+			using Stream stream = new FileStream(sfd.FileName, FileMode.Create);
+			using TextWriter writer = new StreamWriter(stream, Encoding.UTF8, -1, true);
+			rootNode.Serialize(writer);
+			writer.Flush();
 		}
 	}
 }

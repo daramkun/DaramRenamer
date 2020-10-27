@@ -238,5 +238,6 @@
 	"BatchWindow_SaveFile": "Save to",
 	"BatchWindow_DoBatch": "Do Batch",
 	"BatchWindow_Command": "Command",
-	"BatchWindow_Condition": "Condition"
+	"BatchWindow_Condition": "Condition",
+	"BatchWindow_File_Filter": "DaramRenamer Batch File(*.drb)|*.drb"
 }

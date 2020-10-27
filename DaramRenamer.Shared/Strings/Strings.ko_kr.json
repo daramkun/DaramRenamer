@@ -238,5 +238,6 @@
 	"BatchWindow_SaveFile": "저장하기",
 	"BatchWindow_DoBatch": "일괄처리",
 	"BatchWindow_Command": "명령",
-	"BatchWindow_Condition": "조건"
+	"BatchWindow_Condition": "조건",
+	"BatchWindow_File_Filter": "다람리네이머 일괄처리 파일(*.drb)|*.drb"
 }

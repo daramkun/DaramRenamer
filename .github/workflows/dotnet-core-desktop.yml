@@ -2,9 +2,9 @@ name: .NET Core Desktop
 
 on:
   push:
-    branches: [ new-daram-renamer ]
+    branches: [ main ]
   pull_request:
-    branches: [ new-daram-renamer ]
+    branches: [ main ]
 
 jobs:
 

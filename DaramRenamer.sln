@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.Windows", "DaramRenamer.Windows\DaramRenamer.Windows.csproj", "{C207833C-A7C7-4264-9FF5-18E0744F9727}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BB24F8EE-20E5-4A09-9092-891F88B763D7} = {BB24F8EE-20E5-4A09-9092-891F88B763D7}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.Commands", "DaramRenamer.Commands\DaramRenamer.Commands.csproj", "{9129A4F6-59F4-41EC-A03F-D41251CF2795}"
 EndProject
@@ -25,6 +22,9 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Blockar.Shared", "Modules\Blockar\Blockar.Shared\Blockar.Shared.shproj", "{24EDA730-617F-409E-BA4A-336B44151438}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.UpdateAgent", "DaramRenamer.UpdateAgent\DaramRenamer.UpdateAgent.csproj", "{BB24F8EE-20E5-4A09-9092-891F88B763D7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C207833C-A7C7-4264-9FF5-18E0744F9727} = {C207833C-A7C7-4264-9FF5-18E0744F9727}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

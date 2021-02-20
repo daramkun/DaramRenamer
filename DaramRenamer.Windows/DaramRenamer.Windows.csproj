@@ -2,19 +2,19 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>DaramRenamer</RootNamespace>
     <PackageId>DaramRenamer</PackageId>
     <Authors>Jin Jae-yeon</Authors>
     <Company>DARAM WORLD</Company>
     <Product>DaramRenamer for Windows</Product>
-    <AssemblyVersion>2020.10.1.0</AssemblyVersion>
-    <FileVersion>2020.10.1.0</FileVersion>
+    <AssemblyVersion>2021.2.1.0</AssemblyVersion>
+    <FileVersion>2021.2.1.0</FileVersion>
     <ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>DaramRenamer</AssemblyName>
-    <Copyright>Copyright ⓒ 2013-2020 Jin Jae-yeon</Copyright>
-    <Version>2020.10.1</Version>
+    <Copyright>Copyright ⓒ 2013-2021 Jin Jae-yeon</Copyright>
+    <Version>2021.2.1</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
     <ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>

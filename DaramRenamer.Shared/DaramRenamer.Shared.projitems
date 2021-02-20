@@ -9,6 +9,7 @@
     <Import_RootNamespace>DaramRenamer</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)KeyBindingInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PluginManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Preferences.cs" />

@@ -230,6 +230,17 @@
 		<CommandBinding Command="{x:Static local:MainWindow.CommandUpperItem}" Executed="CommandUpperItem_Executed" />
 		<CommandBinding Command="{x:Static local:MainWindow.CommandLowerItem}" Executed="CommandLowerItem_Executed" />
 		<CommandBinding Command="{x:Static local:MainWindow.CommandItemsSort}" Executed="CommandItemsSort_Executed" />
+
+		<CommandBinding x:Name="commandBindingCustom0" Command="{x:Static local:MainWindow.CommandCustom0}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom1" Command="{x:Static local:MainWindow.CommandCustom1}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom2" Command="{x:Static local:MainWindow.CommandCustom2}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom3" Command="{x:Static local:MainWindow.CommandCustom3}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom4" Command="{x:Static local:MainWindow.CommandCustom4}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom5" Command="{x:Static local:MainWindow.CommandCustom5}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom6" Command="{x:Static local:MainWindow.CommandCustom6}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom7" Command="{x:Static local:MainWindow.CommandCustom7}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom8" Command="{x:Static local:MainWindow.CommandCustom8}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="commandBindingCustom9" Command="{x:Static local:MainWindow.CommandCustom9}" Executed="CommandCustom_Executed" />
 	</Window.CommandBindings>
 	<Window.InputBindings>
 		<KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.CommandOpenFiles}" />
@@ -240,5 +251,16 @@
 		<KeyBinding Key="Up" Modifiers="Control" Command="{x:Static local:MainWindow.CommandUpperItem}" />
 		<KeyBinding Key="Down" Modifiers="Control" Command="{x:Static local:MainWindow.CommandLowerItem}" />
 		<KeyBinding Key="S" Modifiers="Shift+Control" Command="{x:Static local:MainWindow.CommandItemsSort}" />
+
+		<KeyBinding x:Name="KeyBinding0" Command="{x:Static local:MainWindow.CommandCustom0}" />
+		<KeyBinding x:Name="KeyBinding1" Command="{x:Static local:MainWindow.CommandCustom1}" />
+		<KeyBinding x:Name="KeyBinding2" Command="{x:Static local:MainWindow.CommandCustom2}" />
+		<KeyBinding x:Name="KeyBinding3" Command="{x:Static local:MainWindow.CommandCustom3}" />
+		<KeyBinding x:Name="KeyBinding4" Command="{x:Static local:MainWindow.CommandCustom4}" />
+		<KeyBinding x:Name="KeyBinding5" Command="{x:Static local:MainWindow.CommandCustom5}" />
+		<KeyBinding x:Name="KeyBinding6" Command="{x:Static local:MainWindow.CommandCustom6}" />
+		<KeyBinding x:Name="KeyBinding7" Command="{x:Static local:MainWindow.CommandCustom7}" />
+		<KeyBinding x:Name="KeyBinding8" Command="{x:Static local:MainWindow.CommandCustom8}" />
+		<KeyBinding x:Name="KeyBinding9" Command="{x:Static local:MainWindow.CommandCustom9}" />
 	</Window.InputBindings>
 </Window>

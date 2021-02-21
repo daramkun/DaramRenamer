@@ -38,11 +38,18 @@ namespace DaramRenamer
 			}
 		}
 
+		[NonSerialized]
+		private bool hardwareAccelerated = RenderOptions.ProcessRenderMode == RenderMode.Default;
+
 		[FieldOption(Name = "hw_accel_mode", IsRequired = false)]
 		public bool HaredwareAccelerated
 		{
-			get => RenderOptions.ProcessRenderMode == RenderMode.Default;
-			set => RenderOptions.ProcessRenderMode = value ? RenderMode.Default : RenderMode.SoftwareOnly;
+			get => hardwareAccelerated;
+			set
+			{
+				hardwareAccelerated = value;
+				RenderOptions.ProcessRenderMode = value ? RenderMode.Default : RenderMode.SoftwareOnly;
+			}
 		}
 
 		[FieldOption(Name = "rename_mode", IsRequired = false)]

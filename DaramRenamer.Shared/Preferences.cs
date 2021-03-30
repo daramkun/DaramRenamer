@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Daramee.Blockar;
 
 namespace DaramRenamer
 {
@@ -26,7 +26,35 @@ namespace DaramRenamer
 							using Stream stream =
 								File.Open($"{AppDomain.CurrentDomain.BaseDirectory}\\DaramRenamer.config.json",
 									FileMode.Open);
-							_instance = BlockarObject.DeserializeFromJson(stream).ToObject<Preferences>();
+							using TextReader reader = new StreamReader(stream, Encoding.UTF8, true, -1, true);
+							var jsonString = reader.ReadToEnd();
+
+							// Conversion from Legacy Settings file
+							if (jsonString.Contains("\"hw_accel_mode\"") || jsonString.Contains("\"rename_mode\"") ||
+							    jsonString.Contains("\"auto_name_fix\"") || jsonString.Contains("\"auto_list_clean\"") ||
+							    jsonString.Contains("\"overwrite\"") || jsonString.Contains("\"save_window_state\"") ||
+							    jsonString.Contains("\"left\"") || jsonString.Contains("\"top\"") ||
+							    jsonString.Contains("\"width\"") || jsonString.Contains("\"height\"") ||
+							    jsonString.Contains("\"window_state\"") || jsonString.Contains("\"use_custom_plugins\"") ||
+							    jsonString.Contains("\"language\""))
+							{
+								jsonString = jsonString.Replace("\"hw_accel_mode\"", "\"HardwareAccelerated\"");
+								jsonString = jsonString.Replace("\"rename_mode\"", "\"RenameMode\"");
+								jsonString = jsonString.Replace("\"auto_name_fix\"", "\"AutomaticFixingFilename\"");
+								jsonString = jsonString.Replace("\"auto_list_clean\"", "\"AutomaticListCleaning\"");
+								jsonString = jsonString.Replace("\"overwrite\"", "\"Overwrite\"");
+								jsonString = jsonString.Replace("\"save_window_state\"", "\"SaveWindowState\"");
+								jsonString = jsonString.Replace("\"left\"", "\"Left\"");
+								jsonString = jsonString.Replace("\"top\"", "\"Top\"");
+								jsonString = jsonString.Replace("\"width\"", "\"Width\"");
+								jsonString = jsonString.Replace("\"height\"", "\"Height\"");
+								jsonString = jsonString.Replace("\"window_state\"", "\"WindowState\"");
+								jsonString = jsonString.Replace("\"use_custom_plugins\"", "\"UseCustomPlugins\"");
+								jsonString = jsonString.Replace("\"language\"", "\"Language\"");
+							}
+							
+							var jsonBytes = Encoding.UTF8.GetBytes(jsonString);
+							_instance = JsonSerializer.Deserialize<Preferences>(jsonBytes);
 							break;
 						}
 					case null:
@@ -40,8 +68,7 @@ namespace DaramRenamer
 
 		[NonSerialized]
 		private bool hardwareAccelerated = RenderOptions.ProcessRenderMode == RenderMode.Default;
-
-		[FieldOption(Name = "hw_accel_mode", IsRequired = false)]
+		
 		public bool HaredwareAccelerated
 		{
 			get => hardwareAccelerated;
@@ -51,40 +78,28 @@ namespace DaramRenamer
 				RenderOptions.ProcessRenderMode = value ? RenderMode.Default : RenderMode.SoftwareOnly;
 			}
 		}
-
-		[FieldOption(Name = "rename_mode", IsRequired = false)]
+		
 		public RenameMode RenameMode { get; set; } = RenameMode.Move;
 		internal int RenameModeInteger
 		{
 			get => (int)RenameMode;
 			set => RenameMode = (RenameMode)value;
 		}
-
-		[FieldOption(Name = "auto_name_fix", IsRequired = false)]
+		
 		public bool AutomaticFixingFilename { get; set; } = true;
-		[FieldOption(Name = "auto_list_clean", IsRequired = false)]
 		public bool AutomaticListCleaning { get; set; } = false;
-		[FieldOption(Name = "overwrite", IsRequired = false)]
 		public bool Overwrite { get; set; } = false;
-
-		[FieldOption(Name = "save_window_state", IsRequired = false)]
+		
 		public bool SaveWindowState { get; set; } = false;
-
-		[FieldOption(Name = "left", IsRequired = false)]
+		
 		public double Left { get; set; }
-		[FieldOption(Name = "top", IsRequired = false)]
 		public double Top { get; set; }
-		[FieldOption(Name = "width", IsRequired = false)]
 		public double Width { get; set; }
-		[FieldOption(Name = "height", IsRequired = false)]
 		public double Height { get; set; }
-		[FieldOption(Name = "window_state", IsRequired = false)]
 		public WindowState WindowState { get; set; }
-
-		[FieldOption(Name = "use_custom_plugins", IsRequired = false)]
+		
 		public bool UseCustomPlugins { get; set; } = false;
-
-		[FieldOption(Name = "language", IsRequired = false)]
+		
 		public string CurrentLanguage
 		{
 			get => CultureInfo.CurrentUICulture.ToString();
@@ -122,8 +137,7 @@ namespace DaramRenamer
 
 			return new KeyGesture(key, modifierKeys);
 		}
-
-		[FieldOption(Name = "shortcut0", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut0
 		{
 			get => _shortcuts[0];
@@ -136,8 +150,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 0].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut1", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut1
 		{
 			get => _shortcuts[1];
@@ -150,8 +163,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 1].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut2", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut2
 		{
 			get => _shortcuts[2];
@@ -164,8 +176,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 2].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut3", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut3
 		{
 			get => _shortcuts[3];
@@ -178,8 +189,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 3].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut4", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut4
 		{
 			get => _shortcuts[4];
@@ -192,8 +202,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 4].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut5", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut5
 		{
 			get => _shortcuts[5];
@@ -206,8 +215,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 5].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut6", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut6
 		{
 			get => _shortcuts[6];
@@ -221,7 +229,6 @@ namespace DaramRenamer
 			}
 		}
 
-		[FieldOption(Name = "shortcut7", IsRequired = false)]
 		public KeyBindingInfo Shortcut7
 		{
 			get => _shortcuts[7];
@@ -234,8 +241,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 7].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut8", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut8
 		{
 			get => _shortcuts[8];
@@ -248,8 +254,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 8].Gesture = gesture;
 			}
 		}
-
-		[FieldOption(Name = "shortcut9", IsRequired = false)]
+		
 		public KeyBindingInfo Shortcut9
 		{
 			get => _shortcuts[9];
@@ -280,7 +285,11 @@ namespace DaramRenamer
 		public void Save()
 		{
 			using Stream stream = File.Open($"{AppDomain.CurrentDomain.BaseDirectory}\\DaramRenamer.config.json", FileMode.Create);
-			BlockarObject.SerializeToJson(stream, BlockarObject.FromObject(this));
+			var jsonBytes = JsonSerializer.SerializeToUtf8Bytes(this, typeof(Preferences), new JsonSerializerOptions()
+			{
+				WriteIndented = false, AllowTrailingCommas = false,
+			});
+			stream.Write(jsonBytes, 0, jsonBytes.Length);
 		}
 	}
 }

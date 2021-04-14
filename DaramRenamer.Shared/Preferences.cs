@@ -67,14 +67,14 @@ namespace DaramRenamer
 		}
 
 		[NonSerialized]
-		private bool hardwareAccelerated = RenderOptions.ProcessRenderMode == RenderMode.Default;
+		private bool _hardwareAccelerated = RenderOptions.ProcessRenderMode == RenderMode.Default;
 		
 		public bool HaredwareAccelerated
 		{
-			get => hardwareAccelerated;
+			get => _hardwareAccelerated;
 			set
 			{
-				hardwareAccelerated = value;
+				_hardwareAccelerated = value;
 				RenderOptions.ProcessRenderMode = value ? RenderMode.Default : RenderMode.SoftwareOnly;
 			}
 		}
@@ -267,6 +267,9 @@ namespace DaramRenamer
 					window.InputBindings[8 + 9].Gesture = gesture;
 			}
 		}
+
+		public bool VisualCommand { get; set; } = false;
+		public bool ForceSingleCoreRunning { get; set; } = false;
 
 		public void ShortcutRebinding()
 		{

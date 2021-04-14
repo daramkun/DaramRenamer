@@ -16,6 +16,8 @@ namespace DaramRenamer
 		public ICommand Command { get; }
 		public ICondition Condition { get; }
 
+		public event EventHandler ValueChanged;
+
 		public CommandWindow(ICommand command)
 		{
 			InitializeComponent();
@@ -70,13 +72,22 @@ namespace DaramRenamer
 					{
 						VerticalAlignment = VerticalAlignment.Center
 					};
-					var binding = new Binding()
+					(control as TextBox).Text = prop.GetValue(obj) as string;
+					(control as TextBox).TextChanged += (sender, e) =>
 					{
-						Source = obj,
-						Path = new PropertyPath(prop.Name),
-						Converter = prop.PropertyType == typeof(Regex) ? new RegexConverter() : null,
+						var text = (sender as TextBox)?.Text;
+						try
+						{
+							prop.SetValue(obj,
+								prop.PropertyType == typeof(Regex) ? new Regex(text ?? string.Empty) : text);
+						}
+						catch
+						{
+							// ignored
+						}
+
+						OnValueChanged(sender, e);
 					};
-					control.SetBinding(TextBox.TextProperty, binding);
 				}
 				else if (prop.PropertyType == typeof(bool))
 				{
@@ -84,12 +95,17 @@ namespace DaramRenamer
 					{
 						VerticalAlignment = VerticalAlignment.Center
 					};
-					var binding = new Binding()
+					((CheckBox) control).IsChecked = (bool?) prop.GetValue(obj) == true;
+					((CheckBox) control).Checked += (sender, e) =>
 					{
-						Source = obj,
-						Path = new PropertyPath(prop.Name)
+						prop.SetValue(obj, true);
+						OnValueChanged(sender, e);
 					};
-					control.SetBinding(ToggleButton.IsCheckedProperty, binding);
+					((CheckBox) control).Unchecked += (sender, e) =>
+					{
+						prop.SetValue(obj, false);
+						OnValueChanged(sender, e);
+					};
 				}
 				else if (prop.PropertyType == typeof(bool?))
 				{
@@ -97,8 +113,9 @@ namespace DaramRenamer
 					{
 						VerticalAlignment = VerticalAlignment.Center
 					};
-					var checkBox = control as CheckBox;
+					var checkBox = (CheckBox) control;
 					checkBox.IsThreeState = true;
+					((CheckBox)control).IsChecked = (bool?)prop.GetValue(obj);
 					checkBox.Checked += (sender, e) =>
 					{
 						checkBox.IsChecked = checkBox.IsChecked switch
@@ -108,6 +125,7 @@ namespace DaramRenamer
 							false => null
 						};
 						e.Handled = true;
+						OnValueChanged(sender, e);
 					};
 				}
 				else if (prop.PropertyType == typeof(uint) || prop.PropertyType == typeof(uint?))
@@ -120,21 +138,27 @@ namespace DaramRenamer
 					container.RowDefinitions.Add(new RowDefinition() {Height = new GridLength(9, GridUnitType.Pixel)});
 					container.ColumnDefinitions.Add(new ColumnDefinition());
 					container.ColumnDefinitions.Add(new ColumnDefinition() {Width = new GridLength(24)});
-					var text = new TextBox()
+					var text = new TextBox
 					{
-						VerticalAlignment = VerticalAlignment.Center
+						VerticalAlignment = VerticalAlignment.Center,
+						Text = prop.GetValue(obj)?.ToString()
 					};
 					text.PreviewTextInput += (sender, e) => { e.Handled = Regex.IsMatch(e.Text, "[^0-9]"); };
 					text.TextChanged += (sender, e) =>
 					{
-						if (text.Text.Trim() == "") text.Text = "0";
+						if (text.Text.Trim() == string.Empty)
+							text.Text = prop.PropertyType == typeof(uint) ? "0" : string.Empty;
+						if (text.Text != string.Empty)
+						{
+							if (uint.TryParse(text.Text, out var parsed))
+								prop.SetValue(obj, parsed);
+							OnValueChanged(sender, e);
+						}
+						else
+						{
+							prop.SetValue(obj, null);
+						}
 					};
-					var textBinding = new Binding()
-					{
-						Source = obj,
-						Path = new PropertyPath(prop.Name)
-					};
-					text.SetBinding(TextBox.TextProperty, textBinding);
 					Grid.SetRowSpan(text, 2);
 					container.Children.Add(text);
 
@@ -147,11 +171,12 @@ namespace DaramRenamer
 					};
 					upButton.Click += (sender, e) =>
 					{
-						if (text.Text == "") text.Text = "0";
+						if (text.Text.Trim() == string.Empty)
+							text.Text = "0";
 						var num = uint.Parse(text.Text) + 1;
 						if (num == uint.MinValue) num = uint.MaxValue;
 						prop.SetValue(obj, num);
-						text.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+						text.Text = num.ToString();
 					};
 					Grid.SetRow(upButton, 0);
 					Grid.SetColumn(upButton, 1);
@@ -166,12 +191,20 @@ namespace DaramRenamer
 					};
 					downButton.Click += (sender, e) =>
 					{
-						if (text.Text == "") text.Text = "0";
-						var num = uint.Parse(text.Text) - 1;
-						if (num == uint.MaxValue) num = uint.MinValue;
-						//text.Text = num.ToString ();
-						prop.SetValue(obj, num);
-						text.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+						if (text.Text.Trim() == "")
+							text.Text = prop.PropertyType == typeof(uint) ? "0" : string.Empty;
+						if (text.Text != string.Empty || (text.Text == "0" && prop.PropertyType != typeof(uint?)))
+						{
+							var num = uint.Parse(text.Text) - 1;
+							if (num == uint.MaxValue)
+								num = uint.MinValue;
+							prop.SetValue(obj, num);
+							text.Text = num.ToString();
+						}
+						else
+						{
+							prop.SetValue(obj, null);
+						}
 					};
 					Grid.SetRow(downButton, 1);
 					Grid.SetColumn(downButton, 1);
@@ -191,19 +224,18 @@ namespace DaramRenamer
 					container.ColumnDefinitions.Add(new ColumnDefinition() {Width = new GridLength(24)});
 					var text = new TextBox()
 					{
-						VerticalAlignment = VerticalAlignment.Center
+						VerticalAlignment = VerticalAlignment.Center,
+						Text = prop.GetValue(obj)?.ToString()
 					};
 					text.PreviewTextInput += (sender, e) => { e.Handled = !Regex.IsMatch(e.Text, "[\\-0-9][0-9]*"); };
 					text.TextChanged += (sender, e) =>
 					{
-						if (text.Text.Trim() == "") text.Text = "0";
+						if (text.Text.Trim() == string.Empty)
+							text.Text = prop.PropertyType == typeof(int) ? "0" : string.Empty;
+						if (int.TryParse(text.Text, out var parsed))
+							prop.SetValue(obj, parsed);
+						OnValueChanged(sender, e);
 					};
-					var textBinding = new Binding()
-					{
-						Source = obj,
-						Path = new PropertyPath(prop.Name)
-					};
-					text.SetBinding(TextBox.TextProperty, textBinding);
 					Grid.SetRowSpan(text, 2);
 					container.Children.Add(text);
 
@@ -216,12 +248,13 @@ namespace DaramRenamer
 					};
 					upButton.Click += (sender, e) =>
 					{
-						if (text.Text == "") text.Text = "0";
+						if (text.Text.Trim() == string.Empty)
+							text.Text = "0";
 						var num = int.Parse(text.Text) + 1;
 						if (num == int.MinValue) num = int.MaxValue;
-						//text.Text = num.ToString ();
+						text.Text = num.ToString();
 						prop.SetValue(obj, num);
-						text.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+						text.Text = num.ToString();
 					};
 					Grid.SetRow(upButton, 0);
 					Grid.SetColumn(upButton, 1);
@@ -236,11 +269,20 @@ namespace DaramRenamer
 					};
 					downButton.Click += (sender, e) =>
 					{
-						if (text.Text == "") text.Text = "0";
-						var num = int.Parse(text.Text) - 1;
-						if (num == int.MaxValue) num = int.MinValue;
-						prop.SetValue(obj, num);
-						text.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+						if (text.Text.Trim() == string.Empty)
+							text.Text = prop.PropertyType == typeof(int) ? "0" : string.Empty;
+						if (text.Text != string.Empty)
+						{
+							var num = int.Parse(text.Text) - 1;
+							if (num == int.MaxValue) num = int.MinValue;
+							text.Text = num.ToString();
+							prop.SetValue(obj, num);
+							text.Text = num.ToString();
+						}
+						else
+						{
+							prop.SetValue(obj, null);
+						}
 					};
 					Grid.SetRow(downButton, 1);
 					Grid.SetColumn(downButton, 1);
@@ -261,18 +303,26 @@ namespace DaramRenamer
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioPre.Checked += (sender, e) => { prop.SetValue(obj, Position1.StartPoint); };
+					radioPre.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, Position1.StartPoint);
+						OnValueChanged(sender, e);
+					};
 					radioPre.IsChecked = ((Position1) (int) prop?.GetValue(obj)) == Position1.StartPoint;
-					(control as StackPanel).Children.Add(radioPre);
+					((StackPanel) control).Children.Add(radioPre);
 					var radioPost = new RadioButton()
 					{
 						Content = Strings.Instance[Position2.EndPoint.ToString()],
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioPost.Checked += (sender, e) => { prop.SetValue(obj, Position1.EndPoint); };
+					radioPost.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, Position1.EndPoint);
+						OnValueChanged(sender, e);
+					};
 					radioPost.IsChecked = ((Position1) (int) prop?.GetValue(obj)) == Position1.EndPoint;
-					(control as StackPanel).Children.Add(radioPost);
+					((StackPanel) control).Children.Add(radioPost);
 				}
 				else if (prop.PropertyType == typeof(Position2))
 				{
@@ -282,7 +332,7 @@ namespace DaramRenamer
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioBoth.Checked += (sender, e) => { prop.SetValue(obj, Position2.BothPoint); };
+					radioBoth.Checked += (sender, e) => { prop.SetValue(obj, Position2.BothPoint); OnValueChanged(sender, e); };
 					radioBoth.IsChecked = ((Position2) prop?.GetValue(obj)) == Position2.BothPoint;
 					(control as StackPanel).Children.Add(radioBoth);
 				}
@@ -299,18 +349,26 @@ namespace DaramRenamer
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioLower.Checked += (sender, e) => { prop.SetValue(obj, Casecast1.LowercaseAll); };
+					radioLower.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, Casecast1.LowercaseAll);
+						OnValueChanged(sender, e);
+					};
 					radioLower.IsChecked = ((Casecast1) prop?.GetValue(obj)) == Casecast1.LowercaseAll;
-					(control as StackPanel).Children.Add(radioLower);
+					((StackPanel) control).Children.Add(radioLower);
 					var radioUpper = new RadioButton()
 					{
 						Content = Strings.Instance[Casecast2.UppercaseAll.ToString()],
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioUpper.Checked += (sender, e) => { prop.SetValue(obj, Casecast1.UppercaseAll); };
+					radioUpper.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, Casecast1.UppercaseAll);
+						OnValueChanged(sender, e);
+					};
 					radioUpper.IsChecked = ((Casecast1) prop?.GetValue(obj)) == Casecast1.UppercaseAll;
-					(control as StackPanel).Children.Add(radioUpper);
+					((StackPanel) control).Children.Add(radioUpper);
 				}
 				else if (prop.PropertyType == typeof(Casecast2))
 				{
@@ -323,10 +381,11 @@ namespace DaramRenamer
 					radioUpperFirstLetter.Checked += (sender, e) =>
 					{
 						prop.SetValue(obj, Casecast2.UppercaseFirstLetter);
+						OnValueChanged(sender, e);
 					};
 					radioUpperFirstLetter.IsChecked =
 						((Casecast2) prop?.GetValue(obj)) == Casecast2.UppercaseFirstLetter;
-					(control as StackPanel).Children.Add(radioUpperFirstLetter);
+					(control as StackPanel)?.Children.Add(radioUpperFirstLetter);
 				}
 				else if (prop.PropertyType == typeof(DirectoryInfo))
 				{
@@ -339,6 +398,11 @@ namespace DaramRenamer
 						Text = (prop.GetValue(obj) as DirectoryInfo).FullName,
 						VerticalAlignment = VerticalAlignment.Center,
 						Margin = new Thickness(0, 0, 5, 0)
+					};
+					textBox.TextChanged += (sender, e) =>
+					{
+						prop.SetValue(obj, new DirectoryInfo(textBox.Text));
+						OnValueChanged(sender, e);
 					};
 					grid.Children.Add(textBox);
 					var button = new Button()
@@ -376,36 +440,52 @@ namespace DaramRenamer
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioCreated.Checked += (sender, e) => { prop.SetValue(obj, FileDateKind.Creation); };
+					radioCreated.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, FileDateKind.Creation);
+						OnValueChanged(sender, e);
+					};
 					radioCreated.IsChecked = ((FileDateKind) prop?.GetValue(obj)) == FileDateKind.Creation;
-					(control as StackPanel).Children.Add(radioCreated);
+					((StackPanel) control).Children.Add(radioCreated);
 					var radioModified = new RadioButton()
 					{
 						Content = Strings.Instance[FileDateKind.LastModify.ToString()],
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioModified.Checked += (sender, e) => { prop.SetValue(obj, FileDateKind.LastModify); };
+					radioModified.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, FileDateKind.LastModify);
+						OnValueChanged(sender, e);
+					};
 					radioModified.IsChecked = ((FileDateKind) prop?.GetValue(obj)) == FileDateKind.LastModify;
-					(control as StackPanel).Children.Add(radioModified);
+					((StackPanel) control).Children.Add(radioModified);
 					var radioAccessed = new RadioButton()
 					{
 						Content = Strings.Instance[FileDateKind.LastAccess.ToString()],
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioAccessed.Checked += (sender, e) => { prop.SetValue(obj, FileDateKind.LastAccess); };
+					radioAccessed.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, FileDateKind.LastAccess);
+						OnValueChanged(sender, e);
+					};
 					radioAccessed.IsChecked = ((FileDateKind) prop?.GetValue(obj)) == FileDateKind.LastAccess;
-					(control as StackPanel).Children.Add(radioAccessed);
+					((StackPanel) control).Children.Add(radioAccessed);
 					var radioNow = new RadioButton()
 					{
 						Content = Strings.Instance[FileDateKind.Now.ToString()],
 						Margin = new Thickness(0, 0, 5, 0),
 						GroupName = prop.Name
 					};
-					radioNow.Checked += (sender, e) => { prop.SetValue(obj, FileDateKind.Now); };
+					radioNow.Checked += (sender, e) =>
+					{
+						prop.SetValue(obj, FileDateKind.Now);
+						OnValueChanged(sender, e);
+					};
 					radioNow.IsChecked = ((FileDateKind) prop?.GetValue(obj)) == FileDateKind.Now;
-					(control as StackPanel).Children.Add(radioNow);
+					((StackPanel) control).Children.Add(radioNow);
 				}
 				else if (prop.PropertyType.IsEnum)
 				{
@@ -419,6 +499,7 @@ namespace DaramRenamer
 					comboBox.SelectionChanged += (sender, e) =>
 					{
 						prop.SetValue(obj, Enum.ToObject(prop.PropertyType, comboBox.SelectedIndex));
+						OnValueChanged(sender, e);
 					};
 
 					control = comboBox;
@@ -442,6 +523,11 @@ namespace DaramRenamer
 		private void ButtonCancel_Click (object sender, RoutedEventArgs e)
 		{
 			DialogResult = false;
+		}
+
+		private void OnValueChanged(object sender, RoutedEventArgs e)
+		{
+			ValueChanged?.Invoke(sender, e);
 		}
 	}
 }

@@ -451,8 +451,8 @@ namespace DaramRenamer
 		{
 			foreach (ICondition condition in ConditionsMenu.ItemsSource)
 			{
-				if (ConditionsMenu.ItemContainerGenerator.ContainerFromItem(condition) is MenuItem menuItem &&
-				    !menuItem.IsChecked)
+				var item = ConditionsMenu.ItemContainerGenerator.ContainerFromItem(condition);
+				if (item == null || (item is MenuItem menuItem && menuItem.IsChecked != true))
 					continue;
 				yield return condition;
 			}
@@ -487,16 +487,42 @@ namespace DaramRenamer
 				}
 			}
 
+			var currentChanges = undoManager.SaveTemporary(FileInfo.Files);
+
 			var properties = command?.GetType().GetProperties();
 			if (properties?.Length > (command is IOrderBy ? 3 : 2))
 			{
 				var commandWindow = new CommandWindow(command) {Owner = this};
-				if (commandWindow.ShowDialog() != true)
-					return;
+				commandWindow.ValueChanged += (sender1, e1) =>
+				{
+					if (Preferences.Instance.VisualCommand)
+					{
+						FileInfo.Files = undoManager.LoadTemporary(currentChanges);
+						DoApplyCommand(command, e);
+						ListViewFiles.ItemsSource = FileInfo.Files;
+					}
+				};
+
+				try
+				{
+					if (commandWindow.ShowDialog() != true)
+						return;
+				}
+				finally
+				{
+					ListViewFiles.ItemsSource = FileInfo.Files = undoManager.LoadTemporary(currentChanges);
+				}
 			}
 
 			undoManager.SaveToUndoStack(FileInfo.Files);
 
+			DoApplyCommand(command, e);
+
+			ListViewFiles.ItemsSource = FileInfo.Files;
+		}
+
+		private void DoApplyCommand(ICommand command, RoutedEventArgs e)
+		{
 			var conditions = GetActivedConditions().ToArray();
 
 			{
@@ -508,7 +534,7 @@ namespace DaramRenamer
 				if (command is ITargetContains targetContains)
 					targetContains.SetTargets(targets);
 
-				if (command.ParallelProcessable)
+				if (command.ParallelProcessable && !Preferences.Instance.ForceSingleCoreRunning)
 					Parallel.ForEach(targets, file =>
 					{
 						if (conditions.All(condition => condition.IsSatisfyThisCondition(file)))
@@ -518,6 +544,11 @@ namespace DaramRenamer
 					foreach (var file in targets)
 						if (conditions.All(condition => condition.IsSatisfyThisCondition(file)))
 							command.DoCommand(file);
+						else
+							Debug.WriteLine($"FAILED: {file}");
+
+				foreach (var file in targets)
+					Debug.WriteLine(file);
 			}
 		}
 

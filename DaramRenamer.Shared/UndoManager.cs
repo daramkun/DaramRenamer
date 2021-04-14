@@ -43,6 +43,15 @@ namespace DaramRenamer
 			UpdateRedo?.Invoke(this, EventArgs.Empty);
 		}
 
+		public byte[] SaveTemporary(T fileInfoCollection)
+		{
+			using (var memStream = new MemoryStream())
+			{
+				bf.Serialize(memStream, fileInfoCollection ?? throw new ArgumentNullException());
+				return memStream.ToArray();
+			}
+		}
+
 		public T LoadFromUndoStack()
 		{
 			if (IsUndoStackEmpty) return null;
@@ -59,6 +68,12 @@ namespace DaramRenamer
 			var ret = bf.Deserialize(memStream) as T ?? throw new InvalidCastException();
 			UpdateRedo?.Invoke(this, EventArgs.Empty);
 			return ret;
+		}
+
+		public T LoadTemporary(byte[] temporary)
+		{
+			using var memStream = new MemoryStream(temporary);
+			return bf.Deserialize(memStream) as T ?? throw new InvalidCastException();
 		}
 
 		public void ClearUndoStack()

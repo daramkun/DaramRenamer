@@ -73,6 +73,8 @@
 	"PreferencesSaveWindowState": "Save Window state",
 	"PreferencesUseCustomPlugins": "Use User-defined Plugin.",
 	"PreferencesCurrentLanguage": "Language: ",
+	"PreferencesVisualCommand": "Preview changes.",
+	"PreferencesForceSingleCoreRunning": "Force Single-Core Running",
 
 	"Move": "Move",
 	"Copy": "Copy",

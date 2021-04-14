@@ -144,7 +144,17 @@ namespace DaramRenamer
 		public string OriginalPath => Path.GetDirectoryName (OriginalFullPath);
 		public string OriginalFilename => Path.GetFileName (OriginalFullPath);
 		public string ChangedPath { get => _changedPath; set { _changedPath = value; DoPropertyChanged (nameof (ChangedPath)); } }
-		public string ChangedFilename { get => _changedFilename; set { _changedFilename = value; DoPropertyChanged (nameof (ChangedFilename)); } }
+
+		public string ChangedFilename
+		{
+			get => _changedFilename;
+			set
+			{
+				_changedFilename = value;
+				DoPropertyChanged(nameof(ChangedFilename));
+			}
+		}
+
 		public string ChangedFullPath => Path.Combine (ChangedPath, ChangedFilename);
 		public bool IsDirectory { get; set; }
 
@@ -204,6 +214,9 @@ namespace DaramRenamer
 		public override bool Equals (object obj) => obj is FileInfo info
 		                                            && OriginalFullPath == info.OriginalFullPath;
 		public override int GetHashCode () => OriginalFullPath.GetHashCode ();
+
+		public override string ToString() =>
+			$"{{ChangedFilename: {ChangedFilename}, ChangedPath: {ChangedPath}, OriginalFullPath: {OriginalFullPath}}}";
 
 		[field: NonSerialized]
 		public event PropertyChangedEventHandler PropertyChanged;

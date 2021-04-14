@@ -22,8 +22,7 @@ namespace DaramRenamer.Commands.Filename
 		{
 			if (string.IsNullOrEmpty(Find))
 				return false;
-			if (Replace == null)
-				Replace = "";
+			Replace ??= "";
 
 			file.ChangedFilename =
 				IncludeExtension

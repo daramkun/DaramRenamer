@@ -73,6 +73,8 @@
 	"PreferencesSaveWindowState": "창 상태 저장",
 	"PreferencesUseCustomPlugins": "사용자 정의 플러그인 사용",
 	"PreferencesCurrentLanguage": "언어: ",
+	"PreferencesVisualCommand": "변경사항 미리보기",
+	"PreferencesForceSingleCoreRunning": "강제 1코어 동작",
 
 	"Move": "이동",
 	"Copy": "복사",

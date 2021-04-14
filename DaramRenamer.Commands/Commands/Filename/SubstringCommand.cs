@@ -14,9 +14,9 @@ namespace DaramRenamer.Commands.Filename
 		public CommandCategory Category => CommandCategory.Filename;
 
 		[LocalizationKey ("Command_Argument_Substring_StartIndex")]
-		public int StartIndex { get; set; } = 0;
+		public uint StartIndex { get; set; } = 0;
 		[LocalizationKey ("Command_Argument_Substring_Length")]
-		public int? Length { get; set; } = null;
+		public uint? Length { get; set; } = null;
 		[LocalizationKey ("Command_Argument_Substring_IncludeExtension")]
 		public bool IncludeExtension { get; set; } = false;
 
@@ -25,11 +25,11 @@ namespace DaramRenamer.Commands.Filename
 			file.ChangedFilename =
 				Length == null
 					? IncludeExtension
-						? file.ChangedFilename.Substring(StartIndex)
-						: $"{Path.GetFileNameWithoutExtension(file.ChangedFilename).Substring(StartIndex)}{Path.GetExtension(file.ChangedFilename)}"
+						? file.ChangedFilename.Substring((int)StartIndex)
+						: $"{Path.GetFileNameWithoutExtension(file.ChangedFilename).Substring((int)StartIndex)}{Path.GetExtension(file.ChangedFilename)}"
 					: IncludeExtension
-						? file.ChangedFilename.Substring(StartIndex, Length.Value)
-						: $"{Path.GetFileNameWithoutExtension(file.ChangedFilename).Substring(StartIndex, Length.Value)}{Path.GetExtension(file.ChangedFilename)}";
+						? file.ChangedFilename.Substring((int)StartIndex, (int) Length.Value)
+						: $"{Path.GetFileNameWithoutExtension(file.ChangedFilename).Substring((int)StartIndex, (int) Length.Value)}{Path.GetExtension(file.ChangedFilename)}";
 			return true;
 		}
 	}

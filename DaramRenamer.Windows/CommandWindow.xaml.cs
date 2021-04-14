@@ -179,36 +179,7 @@ namespace DaramRenamer
 
 					control = container;
 				}
-				else if (prop.PropertyType == typeof(uint?))
-				{
-					(control as Grid).ColumnDefinitions.Insert(0, new ColumnDefinition() {Width = new GridLength(20)});
-
-					var check = new CheckBox
-					{
-						IsChecked = (prop.GetValue(obj) as uint?).HasValue,
-						VerticalAlignment = VerticalAlignment.Center
-					};
-					check.Checked += (sender, e) =>
-					{
-						if (check.IsChecked != null && check.IsChecked.Value) prop.SetValue(obj, (uint?) 0);
-						else prop.SetValue(obj, null);
-					};
-					Grid.SetRowSpan(check, 2);
-					(control as Grid).Children.Add(check);
-
-					var binding = new Binding()
-					{
-						Source = check,
-						Path = new PropertyPath("IsChecked")
-					};
-					((control as Grid).Children[0] as TextBox).SetBinding(TextBox.IsEnabledProperty, binding);
-					((control as Grid).Children[1] as Button).SetBinding(Button.IsEnabledProperty, binding);
-					((control as Grid).Children[2] as Button).SetBinding(Button.IsEnabledProperty, binding);
-					Grid.SetColumn(((control as Grid).Children[0] as TextBox), 1);
-					Grid.SetColumn(((control as Grid).Children[1] as Button), 2);
-					Grid.SetColumn(((control as Grid).Children[2] as Button), 2);
-				}
-				else if (prop.PropertyType == typeof(int))
+				else if (prop.PropertyType == typeof(int) || prop.PropertyType == typeof(int?))
 				{
 					var container = new Grid()
 					{

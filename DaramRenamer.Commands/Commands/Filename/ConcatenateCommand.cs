@@ -14,7 +14,7 @@ namespace DaramRenamer.Commands.Filename
 		[LocalizationKey ("Command_Argument_Concatenate_Text")]
 		public string Text { get; set; } = string.Empty;
 		[LocalizationKey ("Command_Argument_Concatenate_Position")]
-		public Position1 Position { get; set; } = Position1.EndPoint;
+		public Position1 Position { get; set; } = Position1.StartPoint;
 		[LocalizationKey ("Command_Argument_Concatenate_IncludeExtension")]
 		public bool IncludeExtension { get; set; } = false;
 

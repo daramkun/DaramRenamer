@@ -60,6 +60,17 @@
 	"Menu_Help_License": "라이센스(_L)",
 	"Menu_Help_About": "이 프로그램에 대해서(_A)",
 
+	"ToolTip_Open": "열기",
+	"ToolTip_Clear": "정리",
+	"ToolTip_Apply": "적용",
+
+	"ToolTip_Undo": "실행 취소",
+	"ToolTip_Redo": "되돌리기",
+
+	"ToolTip_ItemUp": "항목 위로",
+	"ToolTip_ItemDown": "항목 아래로",
+	"ToolTip_ItemSort": "리스트 정렬",
+
 	"OriginalName": "원본 이름",
 	"OriginalPath": "원본 경로",
 	"ChangedName": "변경 이름",

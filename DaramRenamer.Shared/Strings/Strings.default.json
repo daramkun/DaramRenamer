@@ -60,6 +60,17 @@
 	"Menu_Help_License": "_Licenses",
 	"Menu_Help_About": "_About...",
 
+	"ToolTip_Open": "Open",
+	"ToolTip_Clear": "Clear",
+	"ToolTip_Apply": "Apply",
+
+	"ToolTip_Undo": "Undo",
+	"ToolTip_Redo": "Redo",
+
+	"ToolTip_ItemUp": "Item to Up",
+	"ToolTip_ItemDown": "Item to Down",
+	"ToolTip_ItemSort": "List Sort",
+
 	"OriginalName": "Original Name",
 	"OriginalPath": "Original Path",
 	"ChangedName": "Changed Name",

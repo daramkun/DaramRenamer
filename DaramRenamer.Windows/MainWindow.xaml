@@ -108,48 +108,48 @@
 
 		<ToolBarTray Grid.Row="1">
 			<ToolBar ToolBarTray.IsLocked="True">
-				<Button Content="{StaticResource ToolBarIconOpen}" Click="MenuFileOpen_Click" />
-				<Button Content="{StaticResource ToolBarIconClear}" Click="MenuFileClear_Click" />
-				<Button Content="{StaticResource ToolBarIconApply}" Click="MenuFileApply_Click" />
+				<Button Content="{StaticResource ToolBarIconOpen}" Click="MenuFileOpen_Click" ToolTip="{Binding Path=[ToolTip_Open], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconClear}" Click="MenuFileClear_Click" ToolTip="{Binding Path=[ToolTip_Clear], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconApply}" Click="MenuFileApply_Click" ToolTip="{Binding Path=[ToolTip_Apply], Source={x:Static local:Strings.Instance}}" />
 
 				<Separator />
 
-				<Button Content="{StaticResource ToolBarIconUndo}" Click="MenuEditUndo_Click" />
-				<Button Content="{StaticResource ToolBarIconRedo}" Click="MenuEditRedo_Click" />
+				<Button Content="{StaticResource ToolBarIconUndo}" Click="MenuEditUndo_Click" ToolTip="{Binding Path=[ToolTip_Undo], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconRedo}" Click="MenuEditRedo_Click" ToolTip="{Binding Path=[ToolTip_Redo], Source={x:Static local:Strings.Instance}}" />
 
 				<Separator />
 
-				<Button Content="{StaticResource ToolBarIconItemUp}" Click="MenuEditItemToUp_Click" />
-				<Button Content="{StaticResource ToolBarIconItemDown}" Click="MenuEditItemToDown_Click" />
-				<Button Content="{StaticResource ToolBarIconItemSort}" Click="MenuEditSort_Click" />
+				<Button Content="{StaticResource ToolBarIconItemUp}" Click="MenuEditItemToUp_Click" ToolTip="{Binding Path=[ToolTip_ItemUp], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconItemDown}" Click="MenuEditItemToDown_Click" ToolTip="{Binding Path=[ToolTip_ItemDown], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconItemSort}" Click="MenuEditSort_Click" ToolTip="{Binding Path=[ToolTip_ItemSort], Source={x:Static local:Strings.Instance}}" />
 
 				<Separator />
 
-				<Button Content="{StaticResource ToolBarIconReplaceText}" Click="CommandMenuItem_Click" Tag="Command_Name_ReplacePlain" />
-				<Button Content="{StaticResource ToolBarIconConcatText}" Click="CommandMenuItem_Click" Tag="Command_Name_Concatenate" />
-				<Button Content="{StaticResource ToolBarIconTrimText}" Click="CommandMenuItem_Click" Tag="Command_Name_Trim" />
-				<Button Content="{StaticResource ToolBarIconDeleteBlock}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteBlock" />
-				<Button Content="{StaticResource ToolBarIconDeleteText}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteFilename" />
-				<Button Content="{StaticResource ToolBarIconSubstring}" Click="CommandMenuItem_Click" Tag="Command_Name_Substring" />
-				<Button Content="{StaticResource ToolBarIconCasecastText}" Click="CommandMenuItem_Click" Tag="Command_Name_Casecast" />
+				<Button Content="{StaticResource ToolBarIconReplaceText}" Click="CommandMenuItem_Click" Tag="Command_Name_ReplacePlain" ToolTip="{Binding Path=[Command_Name_ReplacePlain], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconConcatText}" Click="CommandMenuItem_Click" Tag="Command_Name_Concatenate" ToolTip="{Binding Path=[Command_Name_Concatenate], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconTrimText}" Click="CommandMenuItem_Click" Tag="Command_Name_Trim" ToolTip="{Binding Path=[Command_Name_Trim], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconDeleteBlock}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteBlock" ToolTip="{Binding Path=[Command_Name_DeleteBlock], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconDeleteText}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteFilename" ToolTip="{Binding Path=[Command_Name_DeleteFilename], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconSubstring}" Click="CommandMenuItem_Click" Tag="Command_Name_Substring" ToolTip="{Binding Path=[Command_Name_Substring], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconCasecastText}" Click="CommandMenuItem_Click" Tag="Command_Name_Casecast" ToolTip="{Binding Path=[Command_Name_Casecast], Source={x:Static local:Strings.Instance}}" />
 
 				<Separator />
 
-				<Button Content="{StaticResource ToolBarIconAddExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_AddExtension" />
-				<Button Content="{StaticResource ToolBarIconDeleteExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteExtension" />
-				<Button Content="{StaticResource ToolBarIconReplaceExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_ReplaceExtension" />
-				<Button Content="{StaticResource ToolBarIconCasecastExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_CasecastExtension" />
+				<Button Content="{StaticResource ToolBarIconAddExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_AddExtension" ToolTip="{Binding Path=[Command_Name_AddExtension], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconDeleteExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteExtension" ToolTip="{Binding Path=[Command_Name_DeleteExtension], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconReplaceExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_ReplaceExtension" ToolTip="{Binding Path=[Command_Name_ReplaceExtension], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconCasecastExtension}" Click="CommandMenuItem_Click" Tag="Command_Name_CasecastExtension" ToolTip="{Binding Path=[Command_Name_CasecastExtension], Source={x:Static local:Strings.Instance}}" />
 
 				<Separator />
 
-				<Button Content="{StaticResource ToolBarIconDeleteWithoutNumbers}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteNoNumber" />
-				<Button Content="{StaticResource ToolBarIconMatchNumberCount}" Click="CommandMenuItem_Click" Tag="Command_Name_SameNumberCount" />
-				<Button Content="{StaticResource ToolBarIconAddIndex}" Click="CommandMenuItem_Click" Tag="Command_Name_AddIndex" />
-				<Button Content="{StaticResource ToolBarIconIncrementNumber}" Click="CommandMenuItem_Click" Tag="Command_Name_Increase" />
+				<Button Content="{StaticResource ToolBarIconDeleteWithoutNumbers}" Click="CommandMenuItem_Click" Tag="Command_Name_DeleteNoNumber" ToolTip="{Binding Path=[Command_Name_DeleteNoNumber], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconMatchNumberCount}" Click="CommandMenuItem_Click" Tag="Command_Name_SameNumberCount" ToolTip="{Binding Path=[Command_Name_SameNumberCount], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconAddIndex}" Click="CommandMenuItem_Click" Tag="Command_Name_AddIndex" ToolTip="{Binding Path=[Command_Name_AddIndex], Source={x:Static local:Strings.Instance}}" />
+				<Button Content="{StaticResource ToolBarIconIncrementNumber}" Click="CommandMenuItem_Click" Tag="Command_Name_Increase" ToolTip="{Binding Path=[Command_Name_Increase], Source={x:Static local:Strings.Instance}}" />
 
 				<Separator />
 
-				<Button Content="{StaticResource ToolBarIconAddDate}" Click="CommandMenuItem_Click" Tag="Command_Name_AddDate" />
+				<Button Content="{StaticResource ToolBarIconAddDate}" Click="CommandMenuItem_Click" Tag="Command_Name_AddDate" ToolTip="{Binding Path=[Command_Name_AddDate], Source={x:Static local:Strings.Instance}}" />
 			</ToolBar>
 		</ToolBarTray>
 

@@ -4,7 +4,7 @@
 ```
 The MIT License (MIT)
 
-Copyright (c) 2013-2020 진재연(Jin Jae-yeon)
+Copyright (c) 2013-2021 진재연(Jin Jae-yeon)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -12,6 +12,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DaramRenamer", "DaramRenamer", "{FEC19557-4029-4031-A6A4-F4B8353263C3}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.FileTypeDetector.Shared", "Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.shproj", "{5E1C88AE-6CCA-430C-8ADB-DE4DE4CE2174}"
 EndProject

@@ -15,9 +15,9 @@
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,8,0,0">
 				<TextBlock Text="{Binding Path=[Version], Source={x:Static local:Strings.Instance}}" />
 				<TextBlock Text=": " />
-                <TextBlock x:Name="VersionTextBlock" Text="2020.8.1" />
+                <TextBlock x:Name="VersionTextBlock" Text="2021.4.2" />
 			</StackPanel>
-			<TextBlock Text="Copyright (C) 2013-2020 Jin Jae-yeon" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
+			<TextBlock Text="Copyright (C) 2013-2021 Jin Jae-yeon" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="8" />
 			<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,8,0,0">
                 <Hyperlink Click="Hyperlink_Click">
                     <TextBlock Text="{Binding Path=[GitHub Repository], Source={x:Static local:Strings.Instance}}" />

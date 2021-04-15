@@ -342,10 +342,21 @@ namespace DaramRenamer
 
 		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			if ((sender as ListViewItem)?.Content == null) return;
-			var info = ((ListViewItem) sender).Content as FileInfo;
+			if ((sender as ListViewItem)?.Content is not FileInfo info)
+				return;
 
-			CommandMenuItem_Click(ManualEditCommand, new DesignatedFilesRoutedEventArgs(info));
+			var command = new ManualEditCommand
+			{
+				ChangeName = info.ChangedFilename,
+				ChangePath = info.ChangedPath
+			};
+			
+			var commandWindow = new CommandWindow(command) { Owner = this };
+			
+			if (commandWindow.ShowDialog() != true)
+				return;
+
+			DoApplyCommand(command, new DesignatedFilesRoutedEventArgs(info));
 		}
 
 		private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
@@ -475,18 +486,6 @@ namespace DaramRenamer
 
 			command = Activator.CreateInstance(command.GetType()) as ICommand;
 
-			if (command is ManualEditCommand manualEditCommand)
-			{
-				if (e is DesignatedFilesRoutedEventArgs designatedFilesRoutedEventArgs)
-				{
-					if (designatedFilesRoutedEventArgs.DesignatedFiles?.Length != 1)
-						return;
-
-					manualEditCommand.ChangeName = designatedFilesRoutedEventArgs.DesignatedFiles[0].ChangedFilename;
-					manualEditCommand.ChangePath = designatedFilesRoutedEventArgs.DesignatedFiles[0].ChangedPath;
-				}
-			}
-
 			var currentChanges = undoManager.SaveTemporary(FileInfo.Files);
 
 			var properties = command?.GetType().GetProperties();
@@ -544,11 +543,6 @@ namespace DaramRenamer
 					foreach (var file in targets)
 						if (conditions.All(condition => condition.IsSatisfyThisCondition(file)))
 							command.DoCommand(file);
-						else
-							Debug.WriteLine($"FAILED: {file}");
-
-				foreach (var file in targets)
-					Debug.WriteLine(file);
 			}
 		}
 

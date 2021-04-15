@@ -51,6 +51,8 @@ namespace DaramRenamer
 			for (var i = 0; i < propDict.Count; ++i)
 				contentGrid.RowDefinitions.Add(new RowDefinition() {Height = new GridLength(24)});
 
+			TextBox firstTextBox = null;
+
 			foreach (var propPair in propDict)
 			{
 				var prop = propPair;
@@ -88,6 +90,8 @@ namespace DaramRenamer
 
 						OnValueChanged(sender, e);
 					};
+
+					firstTextBox ??= control as TextBox;
 				}
 				else if (prop.PropertyType == typeof(bool))
 				{
@@ -159,6 +163,7 @@ namespace DaramRenamer
 							prop.SetValue(obj, null);
 						}
 					};
+					firstTextBox ??= text;
 					Grid.SetRowSpan(text, 2);
 					container.Children.Add(text);
 
@@ -236,6 +241,7 @@ namespace DaramRenamer
 							prop.SetValue(obj, parsed);
 						OnValueChanged(sender, e);
 					};
+					firstTextBox ??= text;
 					Grid.SetRowSpan(text, 2);
 					container.Children.Add(text);
 
@@ -404,6 +410,7 @@ namespace DaramRenamer
 						prop.SetValue(obj, new DirectoryInfo(textBox.Text));
 						OnValueChanged(sender, e);
 					};
+					firstTextBox ??= textBox;
 					grid.Children.Add(textBox);
 					var button = new Button()
 					{
@@ -513,6 +520,8 @@ namespace DaramRenamer
 
 				contentGrid.Children.Add(control);
 			}
+
+			firstTextBox?.Focus();
 		}
 
 		private void ButtonOK_Click (object sender, RoutedEventArgs e)

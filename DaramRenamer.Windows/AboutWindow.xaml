@@ -10,7 +10,7 @@
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
     <Grid>
 		<StackPanel VerticalAlignment="Center" Orientation="Vertical">
-			<Image Source="./Resources/Icon.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Width="96" Height="96" Margin="0,0,0,8" />
+			<Image Source="./Resources/Icon.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Width="96" Height="96" Margin="0,0,0,8" RenderOptions.BitmapScalingMode="NearestNeighbor" />
 			<TextBlock Text="{Binding Path=[DaramRenamer], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontWeight="ExtraBold" />
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,8,0,0">
 				<TextBlock Text="{Binding Path=[Version], Source={x:Static local:Strings.Instance}}" />

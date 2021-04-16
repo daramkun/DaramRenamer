@@ -26,35 +26,36 @@
 			<EventSetter Event="Click" Handler="ConditionMenuItem_Click" />
 		</Style>
 
-		<Image x:Key="ToolBarIconOpen" Source="./Resources/ToolBarIcons/open.png" />
-		<Image x:Key="ToolBarIconClear" Source="./Resources/ToolBarIcons/clear.png" />
-		<Image x:Key="ToolBarIconApply" Source="./Resources/ToolBarIcons/apply.png" />
+		<Image x:Key="ToolBarIconOpen" Source="./Resources/ToolBarIcons/open.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconClear" Source="./Resources/ToolBarIcons/clear.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconApply" Source="./Resources/ToolBarIcons/apply.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
 
-		<Image x:Key="ToolBarIconUndo" Source="./Resources/ToolBarIcons/undo.png" />
-		<Image x:Key="ToolBarIconRedo" Source="./Resources/ToolBarIcons/redo.png" />
+		<Image x:Key="ToolBarIconUndo" Source="./Resources/ToolBarIcons/undo.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconRedo" Source="./Resources/ToolBarIcons/redo.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
 
-		<Image x:Key="ToolBarIconItemUp" Source="./Resources/ToolBarIcons/item_up.png" />
-		<Image x:Key="ToolBarIconItemDown" Source="./Resources/ToolBarIcons/item_down.png" />
-		<Image x:Key="ToolBarIconItemSort" Source="./Resources/ToolBarIcons/item_sort.png" />
+		<Image x:Key="ToolBarIconItemUp" Source="./Resources/ToolBarIcons/item_up.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconItemDown" Source="./Resources/ToolBarIcons/item_down.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconItemSort" Source="./Resources/ToolBarIcons/item_sort.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
 
-		<Image x:Key="ToolBarIconReplaceText" Source="./Resources/ToolBarIcons/replace_text.png" />
-		<Image x:Key="ToolBarIconConcatText" Source="./Resources/ToolBarIcons/concat_text.png" />
-		<Image x:Key="ToolBarIconTrimText" Source="./Resources/ToolBarIcons/trim_text.png" />
-		<Image x:Key="ToolBarIconDeleteBlock" Source="./Resources/ToolBarIcons/delete_block.png" />
-		<Image x:Key="ToolBarIconDeleteText" Source="./Resources/ToolBarIcons/delete_text.png" />
-		<Image x:Key="ToolBarIconSubstring" Source="./Resources/ToolBarIcons/substring.png" />
-		<Image x:Key="ToolBarIconCasecastText" Source="./Resources/ToolBarIcons/casecast_text.png" />
+		<Image x:Key="ToolBarIconReplaceText" Source="./Resources/ToolBarIcons/replace_text.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconConcatText" Source="./Resources/ToolBarIcons/concat_text.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconTrimText" Source="./Resources/ToolBarIcons/trim_text.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconDeleteBlock" Source="./Resources/ToolBarIcons/delete_block.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconDeleteText" Source="./Resources/ToolBarIcons/delete_text.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconSubstring" Source="./Resources/ToolBarIcons/substring.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconCasecastText" Source="./Resources/ToolBarIcons/casecast_text.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
 
-		<Image x:Key="ToolBarIconAddExtension" Source="./Resources/ToolBarIcons/add_ext.png" />
-		<Image x:Key="ToolBarIconDeleteExtension" Source="./Resources/ToolBarIcons/delete_ext.png" />
-		<Image x:Key="ToolBarIconReplaceExtension" Source="./Resources/ToolBarIcons/replace_ext.png" />
-		<Image x:Key="ToolBarIconCasecastExtension" Source="./Resources/ToolBarIcons/casecast_ext.png" />
+		<Image x:Key="ToolBarIconAddExtension" Source="./Resources/ToolBarIcons/add_ext.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconDeleteExtension" Source="./Resources/ToolBarIcons/delete_ext.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconReplaceExtension" Source="./Resources/ToolBarIcons/replace_ext.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconCasecastExtension" Source="./Resources/ToolBarIcons/casecast_ext.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
 
-		<Image x:Key="ToolBarIconDeleteWithoutNumbers" Source="./Resources/ToolBarIcons/del_without_num.png" />
-		<Image x:Key="ToolBarIconMatchNumberCount" Source="./Resources/ToolBarIcons/match_num_count.png" />
-		<Image x:Key="ToolBarIconAddIndex" Source="./Resources/ToolBarIcons/add_index.png" />
-		<Image x:Key="ToolBarIconIncrementNumber" Source="./Resources/ToolBarIcons/inc_dec_num.png" />
-		<Image x:Key="ToolBarIconAddDate" Source="./Resources/ToolBarIcons/add_date.png" />
+		<Image x:Key="ToolBarIconDeleteWithoutNumbers" Source="./Resources/ToolBarIcons/del_without_num.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconMatchNumberCount" Source="./Resources/ToolBarIcons/match_num_count.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconAddIndex" Source="./Resources/ToolBarIcons/add_index.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		<Image x:Key="ToolBarIconIncrementNumber" Source="./Resources/ToolBarIcons/inc_dec_num.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+		
+		<Image x:Key="ToolBarIconAddDate" Source="./Resources/ToolBarIcons/add_date.png" RenderOptions.BitmapScalingMode="NearestNeighbor" />
 	</Window.Resources>
 
 	<Grid>

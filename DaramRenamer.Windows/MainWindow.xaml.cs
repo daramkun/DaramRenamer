@@ -187,6 +187,15 @@ namespace DaramRenamer
 
 			ListViewFiles.ItemsSource = FileInfo.Files;
 
+			if (Preferences.Instance.SaveWindowState)
+			{
+				Left = Preferences.Instance.Left;
+				Top = Preferences.Instance.Top;
+				Width = Preferences.Instance.Width;
+				Height = Preferences.Instance.Height;
+				WindowState = Preferences.Instance.WindowState;
+			}
+
 			Preferences.Instance.ShortcutRebinding();
 		}
 
@@ -239,7 +248,15 @@ namespace DaramRenamer
 
 		private void Window_Closing(object sender, CancelEventArgs e)
 		{
-
+			if (Preferences.Instance.SaveWindowState)
+			{
+				Preferences.Instance.Left = Left;
+				Preferences.Instance.Top = Top;
+				Preferences.Instance.Width = Width;
+				Preferences.Instance.Height = Height;
+				Preferences.Instance.WindowState = WindowState;
+			}
+			Preferences.Instance.Save();
 		}
 
 		private void Window_Unloaded(object sender, RoutedEventArgs e)

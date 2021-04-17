@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace DaramRenamer
 {
@@ -36,6 +37,7 @@ namespace DaramRenamer
 
 		private async void OnShown(EventArgs e)
 		{
+			var failed = false;
 			try
 			{
 				undoManager.ClearUndoStack();
@@ -47,13 +49,12 @@ namespace DaramRenamer
 				ProceedTextBlock.Text = "0";
 				TotalTextBlock.Text = FileInfo.Files.Count.ToString();
 
-				var failed = false;
 				await Task.Run(() =>
 				{
 					FileInfo.Apply(Preferences.Instance.AutomaticFixingFilename, Preferences.Instance.RenameMode,
-						Preferences.Instance.Overwrite, (fileInfo, errorCode) =>
+						Preferences.Instance.Overwrite, async (fileInfo, errorCode) =>
 						{
-							Dispatcher.BeginInvoke((Action) (() =>
+							await Dispatcher.BeginInvoke((Action) (() =>
 							{
 								++ApplyProgressBar.Value;
 
@@ -70,23 +71,33 @@ namespace DaramRenamer
 						});
 				});
 
-				if (failed)
-					ApplyProgressBar.Foreground = Brushes.Red;
+				switch (failed)
+				{
+					case true:
+					{
+						ApplyProgressBar.Foreground = Brushes.Red;
+						break;
+					}
 
-				if (failed || !Preferences.Instance.AutomaticListCleaning)
-					return;
-
-				undoManager.SaveToUndoStack(FileInfo.Files);
-				FileInfo.Files.Clear();
+					case false when Preferences.Instance.AutomaticListCleaning:
+					{
+						undoManager.SaveToUndoStack(FileInfo.Files);
+						FileInfo.Files.Clear();
+						break;
+					}
+				}
 			}
 			catch
 			{
-				MessageBox.Show("An Error occured.");
+				await Dispatcher.BeginInvoke(new Action(() => MessageBox.Show("An Error occured.")));
 			}
 			finally
 			{
 				isComplete = true;
 				ApplyClose.IsEnabled = true;
+
+				if (!failed && Preferences.Instance.CloseApplyWindowWhenSuccessfullyDone)
+					await Dispatcher.BeginInvoke(new Action(Close));
 			}
 		}
 

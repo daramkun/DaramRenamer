@@ -111,7 +111,7 @@ namespace DaramRenamer
 		}
 
 		[NonSerialized]
-		private KeyBindingInfo[] _shortcuts = new KeyBindingInfo[10];
+		private readonly KeyBindingInfo[] _shortcuts = new KeyBindingInfo[10];
 
 		private static InputGesture StringToKeyGesture(string k)
 		{
@@ -270,6 +270,7 @@ namespace DaramRenamer
 
 		public bool VisualCommand { get; set; } = false;
 		public bool ForceSingleCoreRunning { get; set; } = false;
+		public bool CloseApplyWindowWhenSuccessfullyDone { get; set; } = true;
 
 		public void ShortcutRebinding()
 		{

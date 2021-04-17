@@ -86,6 +86,7 @@
 	"PreferencesCurrentLanguage": "언어: ",
 	"PreferencesVisualCommand": "변경사항 미리보기",
 	"PreferencesForceSingleCoreRunning": "강제 1코어 동작",
+	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "성공적으로 적용하면 적용 창 닫기",
 
 	"Move": "이동",
 	"Copy": "복사",

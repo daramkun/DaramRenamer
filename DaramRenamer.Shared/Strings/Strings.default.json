@@ -86,6 +86,7 @@
 	"PreferencesCurrentLanguage": "Language: ",
 	"PreferencesVisualCommand": "Preview changes.",
 	"PreferencesForceSingleCoreRunning": "Force Single-Core Running",
+	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Close Apply Window when Successfully Done",
 
 	"Move": "Move",
 	"Copy": "Copy",

@@ -30,6 +30,7 @@
 			</StackPanel>
 			<CheckBox Content="{Binding Path=[PreferencesVisualCommand], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=VisualCommand, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
 			<CheckBox Content="{Binding Path=[PreferencesForceSingleCoreRunning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=ForceSingleCoreRunning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+			<CheckBox Content="{Binding Path=[PreferencesCloseApplyWindowWhenSuccessfullyDone], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=CloseApplyWindowWhenSuccessfullyDone, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
 		</StackPanel>
 	</ScrollViewer>
 </Window>

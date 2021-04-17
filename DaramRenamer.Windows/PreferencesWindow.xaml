@@ -6,31 +6,35 @@
         xmlns:local="clr-namespace:DaramRenamer"
         mc:Ignorable="d"
         Title="{Binding Path=[Preferences], Source={x:Static local:Strings.Instance}}"
-        Height="240" Width="360" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" Closing="Window_Closing">
-	<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-		<StackPanel Margin="16">
-			<CheckBox Content="{Binding Path=[PreferencesHardwareAcceleration], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=HaredwareAccelerated, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-			<CheckBox Content="{Binding Path=[PreferencesOverwrite], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=Overwrite, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-			<CheckBox Content="{Binding Path=[PreferencesAutoFixFilename], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=AutomaticFixingFilename, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-			<CheckBox Content="{Binding Path=[PreferencesAutoListCleaning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=AutomaticListCleaning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-			<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
-				<TextBlock Text="{Binding Path=[PreferencesRenameMode], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-				<ComboBox SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling" SelectionChanged="ComboBox_SelectionChanged">
-					<ComboBoxItem Content="{Binding Path=[Move], Source={x:Static local:Strings.Instance}}" Tag="0" />
-					<ComboBoxItem Content="{Binding Path=[Copy], Source={x:Static local:Strings.Instance}}" Tag="1" />
-				</ComboBox>
-			</StackPanel>
-			<CheckBox Content="{Binding Path=[PreferencesSaveWindowState], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=SaveWindowState, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
-			<CheckBox Content="{Binding Path=[PreferencesUseCustomPlugins], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=UseCustomPlugins, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
-			<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
-				<TextBlock Text="{Binding Path=[PreferencesCurrentLanguage], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-				<ComboBox ItemsSource="{Binding Path=AvailableLanguages, Source={x:Static local:Strings.Instance}}" VirtualizingStackPanel.VirtualizationMode="Recycling" Text="{Binding Path=CurrentLanguage, Source={x:Static local:Preferences.Instance}}" SelectionChanged="ComboBox_SelectionChanged">
-					
-				</ComboBox>
-			</StackPanel>
-			<CheckBox Content="{Binding Path=[PreferencesVisualCommand], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=VisualCommand, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-			<CheckBox Content="{Binding Path=[PreferencesForceSingleCoreRunning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=ForceSingleCoreRunning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-			<CheckBox Content="{Binding Path=[PreferencesCloseApplyWindowWhenSuccessfullyDone], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=CloseApplyWindowWhenSuccessfullyDone, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-		</StackPanel>
-	</ScrollViewer>
+        Height="340" Width="420" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" Closing="Window_Closing">
+	<TabControl Margin="8">
+		<TabItem Header="{Binding Path=[PreferencesTabGeneral], Source={x:Static local:Strings.Instance}}">
+			<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+				<StackPanel Margin="8">
+					<CheckBox Content="{Binding Path=[PreferencesHardwareAcceleration], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=HaredwareAccelerated, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+					<CheckBox Content="{Binding Path=[PreferencesOverwrite], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=Overwrite, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+					<CheckBox Content="{Binding Path=[PreferencesAutoFixFilename], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=AutomaticFixingFilename, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+					<CheckBox Content="{Binding Path=[PreferencesAutoListCleaning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=AutomaticListCleaning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+					<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
+						<TextBlock Text="{Binding Path=[PreferencesRenameMode], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+						<ComboBox SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling" SelectionChanged="ComboBox_SelectionChanged">
+							<ComboBoxItem Content="{Binding Path=[Move], Source={x:Static local:Strings.Instance}}" Tag="0" />
+							<ComboBoxItem Content="{Binding Path=[Copy], Source={x:Static local:Strings.Instance}}" Tag="1" />
+						</ComboBox>
+					</StackPanel>
+					<CheckBox Content="{Binding Path=[PreferencesSaveWindowState], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=SaveWindowState, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
+					<CheckBox Content="{Binding Path=[PreferencesUseCustomPlugins], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=UseCustomPlugins, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
+					<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
+						<TextBlock Text="{Binding Path=[PreferencesCurrentLanguage], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+						<ComboBox ItemsSource="{Binding Path=AvailableLanguages, Source={x:Static local:Strings.Instance}}" VirtualizingStackPanel.VirtualizationMode="Recycling" Text="{Binding Path=CurrentLanguage, Source={x:Static local:Preferences.Instance}}" SelectionChanged="ComboBox_SelectionChanged">
+
+						</ComboBox>
+					</StackPanel>
+					<CheckBox Content="{Binding Path=[PreferencesVisualCommand], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=VisualCommand, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+					<CheckBox Content="{Binding Path=[PreferencesForceSingleCoreRunning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=ForceSingleCoreRunning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+					<CheckBox Content="{Binding Path=[PreferencesCloseApplyWindowWhenSuccessfullyDone], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=CloseApplyWindowWhenSuccessfullyDone, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+				</StackPanel>
+			</ScrollViewer>
+		</TabItem>
+	</TabControl>
 </Window>

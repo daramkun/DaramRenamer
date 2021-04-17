@@ -76,6 +76,8 @@
 	"ChangedName": "Changed Name",
 	"ChangedPath": "Changed Path",
 
+	"PreferencesTabGeneral": "General",
+
 	"PreferencesHardwareAcceleration": "Hardware Accelerated Rendering",
 	"PreferencesOverwrite": "Overwrite",
 	"PreferencesAutoFixFilename": "Fix invalid characters for filename automatically.",

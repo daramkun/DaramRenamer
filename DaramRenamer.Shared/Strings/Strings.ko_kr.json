@@ -76,6 +76,8 @@
 	"ChangedName": "변경 이름",
 	"ChangedPath": "변경 경로",
 
+	"PreferencesTabGeneral": "일반",
+
 	"PreferencesHardwareAcceleration": "하드웨어 가속 렌더링",
 	"PreferencesOverwrite": "덮어쓰기",
 	"PreferencesAutoFixFilename": "자동으로 파일명에 쓸 수 없는 문자 수정",

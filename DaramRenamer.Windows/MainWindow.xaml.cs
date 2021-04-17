@@ -19,37 +19,37 @@ namespace DaramRenamer
 {
 	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
-		private readonly UndoManager<ObservableCollection<FileInfo>> undoManager =
-			new UndoManager<ObservableCollection<FileInfo>>();
+		private readonly UndoManager<ObservableCollection<FileInfo>> _undoManager = new();
+		private readonly ManualEditCommand _manualEditCommand = new();
 
-		private BatchWindow currentBatchWindow = null;
+		private BatchWindow _currentBatchWindow;
 
-		public bool UndoManagerHasUndoStackItem => !undoManager.IsUndoStackEmpty;
-		public bool UndoManagerHasRedoStackItem => !undoManager.IsRedoStackEmpty;
+		public bool UndoManagerHasUndoStackItem => !_undoManager.IsUndoStackEmpty;
+		public bool UndoManagerHasRedoStackItem => !_undoManager.IsRedoStackEmpty;
 
-		private PreferencesWindow preferencesWindow;
+		private PreferencesWindow _preferencesWindow;
 
 		#region Commands
 
-		public static RoutedCommand CommandOpenFiles = new RoutedCommand();
-		public static RoutedCommand CommandClearList = new RoutedCommand();
-		public static RoutedCommand CommandApplyFile = new RoutedCommand();
-		public static RoutedCommand CommandUndoWorks = new RoutedCommand();
-		public static RoutedCommand CommandRedoWorks = new RoutedCommand();
-		public static RoutedCommand CommandUpperItem = new RoutedCommand();
-		public static RoutedCommand CommandLowerItem = new RoutedCommand();
-		public static RoutedCommand CommandItemsSort = new RoutedCommand();
+		public static RoutedCommand CommandOpenFiles = new();
+		public static RoutedCommand CommandClearList = new();
+		public static RoutedCommand CommandApplyFile = new();
+		public static RoutedCommand CommandUndoWorks = new();
+		public static RoutedCommand CommandRedoWorks = new();
+		public static RoutedCommand CommandUpperItem = new();
+		public static RoutedCommand CommandLowerItem = new();
+		public static RoutedCommand CommandItemsSort = new();
 
-		public static RoutedCommand CommandCustom0 = new RoutedCommand();
-		public static RoutedCommand CommandCustom1 = new RoutedCommand();
-		public static RoutedCommand CommandCustom2 = new RoutedCommand();
-		public static RoutedCommand CommandCustom3 = new RoutedCommand();
-		public static RoutedCommand CommandCustom4 = new RoutedCommand();
-		public static RoutedCommand CommandCustom5 = new RoutedCommand();
-		public static RoutedCommand CommandCustom6 = new RoutedCommand();
-		public static RoutedCommand CommandCustom7 = new RoutedCommand();
-		public static RoutedCommand CommandCustom8 = new RoutedCommand();
-		public static RoutedCommand CommandCustom9 = new RoutedCommand();
+		public static RoutedCommand CommandCustom0 = new();
+		public static RoutedCommand CommandCustom1 = new();
+		public static RoutedCommand CommandCustom2 = new();
+		public static RoutedCommand CommandCustom3 = new();
+		public static RoutedCommand CommandCustom4 = new();
+		public static RoutedCommand CommandCustom5 = new();
+		public static RoutedCommand CommandCustom6 = new();
+		public static RoutedCommand CommandCustom7 = new();
+		public static RoutedCommand CommandCustom8 = new();
+		public static RoutedCommand CommandCustom9 = new();
 
 		private void CommandOpenFiles_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
@@ -76,11 +76,6 @@ namespace DaramRenamer
 			MenuEditRedo_Click(sender, e);
 		}
 
-		private void CommandApplyCanc_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			while (!undoManager.IsUndoStackEmpty) MenuEditUndo_Click(sender, e);
-		}
-
 		private void CommandUpperItem_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			MenuEditItemToUp_Click(sender, e);
@@ -96,7 +91,7 @@ namespace DaramRenamer
 			MenuEditSort_Click(sender, e);
 		}
 
-		private void CommandCustom_Executed (object sender, ExecutedRoutedEventArgs e)
+		private void CommandCustom_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			string command = null;
 			if (sender == commandBindingCustom0)
@@ -136,9 +131,10 @@ namespace DaramRenamer
 					break;
 			}
 
-			var commandObj = Activator.CreateInstance(commandType);
-			if (commandObj == null)
+			if (commandType == null)
 				return;
+
+			var commandObj = Activator.CreateInstance(commandType);
 
 			if (commandObj is ICommand)
 				CommandMenuItem_Click(commandObj, null);
@@ -174,12 +170,12 @@ namespace DaramRenamer
 
 			PluginToMenu.InitializeConditions(ConditionsMenu);
 
-			undoManager.UpdateUndo += (sender, e) =>
+			_undoManager.UpdateUndo += (_, _) =>
 			{
 				OnPropertyChanged(nameof(UndoManagerHasUndoStackItem));
 				OnPropertyChanged(nameof(UndoManagerHasRedoStackItem));
 			};
-			undoManager.UpdateRedo += (sender, e) =>
+			_undoManager.UpdateRedo += (_, _) =>
 			{
 				OnPropertyChanged(nameof(UndoManagerHasUndoStackItem));
 				OnPropertyChanged(nameof(UndoManagerHasRedoStackItem));
@@ -261,8 +257,8 @@ namespace DaramRenamer
 
 		private void Window_Unloaded(object sender, RoutedEventArgs e)
 		{
-			preferencesWindow.Close();
-			preferencesWindow = null;
+			_preferencesWindow.Close();
+			_preferencesWindow = null;
 		}
 
 		internal static string GetVersionString()
@@ -339,7 +335,7 @@ namespace DaramRenamer
 				directoryMode = result.Button == 101;
 			}
 
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 
 			foreach (var s in from b in temp orderby b select b)
 				AddItem(s,
@@ -351,7 +347,7 @@ namespace DaramRenamer
 			if (e.Key != Key.Delete)
 				return;
 
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 
 			foreach (var fileInfo in ListViewFiles.SelectedItems.Cast<FileInfo>().ToList())
 				FileInfo.Files.Remove(fileInfo);
@@ -362,23 +358,20 @@ namespace DaramRenamer
 			if ((sender as ListViewItem)?.Content is not FileInfo info)
 				return;
 
-			var command = new ManualEditCommand
-			{
-				ChangeName = info.ChangedFilename,
-				ChangePath = info.ChangedPath
-			};
-			
-			var commandWindow = new CommandWindow(command) { Owner = this };
-			
+			_manualEditCommand.ChangeName = info.ChangedFilename;
+			_manualEditCommand.ChangePath = info.ChangedPath;
+
+			var commandWindow = new CommandWindow(_manualEditCommand) { Owner = this };
+
 			if (commandWindow.ShowDialog() != true)
 				return;
 
-			DoApplyCommand(command, new DesignatedFilesRoutedEventArgs(info));
+			DoApplyCommand(_manualEditCommand, new DesignatedFilesRoutedEventArgs(info));
 		}
 
 		private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
 		{
-			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+			var openFileDialog = new Microsoft.Win32.OpenFileDialog
 			{
 				Title = Strings.Instance["FileDialogTitleOpenFiles"],
 				Filter = Strings.Instance["FileDialogFilterAllFiles"],
@@ -386,7 +379,7 @@ namespace DaramRenamer
 			};
 			if (openFileDialog.ShowDialog() == false) return;
 
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 
 			foreach (var s in from s in openFileDialog.FileNames orderby s select s)
 				AddItem(s);
@@ -394,14 +387,14 @@ namespace DaramRenamer
 
 		private void MenuFileFolderOpen_Click(object sender, RoutedEventArgs e)
 		{
-			OpenFolderDialog openFolderDialog = new OpenFolderDialog
+			var openFolderDialog = new OpenFolderDialog
 			{
 				Title = Strings.Instance["FileDialogTitleOpenFiles"],
 				AllowMultiSelection = true
 			};
 			if (openFolderDialog.ShowDialog() == false) return;
 
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 
 			foreach (var s in from s in openFolderDialog.FileNames orderby s select s)
 				AddItem(s, true);
@@ -409,13 +402,13 @@ namespace DaramRenamer
 
 		private void MenuFileClear_Click(object sender, RoutedEventArgs e)
 		{
-			undoManager.ClearAll();
+			_undoManager.ClearAll();
 			FileInfo.Files.Clear();
 		}
 
 		private void MenuFileApply_Click(object sender, RoutedEventArgs e)
 		{
-			new ApplyWindow(undoManager) {Owner = this}.ShowDialog();
+			new ApplyWindow(_undoManager) { Owner = this }.ShowDialog();
 		}
 
 		private void MenuFileExit_Click(object sender, RoutedEventArgs e)
@@ -425,30 +418,30 @@ namespace DaramRenamer
 
 		private void MenuEditUndo_Click(object sender, RoutedEventArgs e)
 		{
-			if (undoManager.IsUndoStackEmpty)
+			if (_undoManager.IsUndoStackEmpty)
 				return;
 
-			undoManager.SaveToRedoStack(FileInfo.Files);
+			_undoManager.SaveToRedoStack(FileInfo.Files);
 
-			var data = undoManager.LoadFromUndoStack() ?? throw new Exception();
+			var data = _undoManager.LoadFromUndoStack() ?? throw new Exception();
 			ListViewFiles.ItemsSource = FileInfo.Files = data;
 		}
 
 		private void MenuEditRedo_Click(object sender, RoutedEventArgs e)
 		{
-			if (undoManager.IsRedoStackEmpty)
+			if (_undoManager.IsRedoStackEmpty)
 				return;
 
-			undoManager.SaveToUndoStack(FileInfo.Files, false);
+			_undoManager.SaveToUndoStack(FileInfo.Files, false);
 
-			var data = undoManager.LoadFromRedoStack() ?? throw new Exception();
+			var data = _undoManager.LoadFromRedoStack() ?? throw new Exception();
 			ListViewFiles.ItemsSource = FileInfo.Files = data;
 		}
 
 		private void MenuEditItemToUp_Click(object sender, RoutedEventArgs e)
 		{
 			if (ListViewFiles.SelectedItems.Count == 0) return;
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 			foreach (FileInfo fileInfo in ListViewFiles.SelectedItems)
 			{
 				var lastIndex = FileInfo.Files.IndexOf(fileInfo);
@@ -460,7 +453,7 @@ namespace DaramRenamer
 		private void MenuEditItemToDown_Click(object sender, RoutedEventArgs e)
 		{
 			if (ListViewFiles.SelectedItems.Count == 0) return;
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 			foreach (FileInfo fileInfo in ListViewFiles.SelectedItems)
 			{
 				var lastIndex = FileInfo.Files.IndexOf(fileInfo);
@@ -471,7 +464,7 @@ namespace DaramRenamer
 
 		private void MenuEditSort_Click(object sender, RoutedEventArgs e)
 		{
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 			FileInfo.Sort(FileInfo.Files);
 		}
 
@@ -503,17 +496,17 @@ namespace DaramRenamer
 
 			command = Activator.CreateInstance(command.GetType()) as ICommand;
 
-			var currentChanges = undoManager.SaveTemporary(FileInfo.Files);
+			var currentChanges = _undoManager.SaveTemporary(FileInfo.Files);
 
 			var properties = command?.GetType().GetProperties();
 			if (properties?.Length > (command is IOrderBy ? 3 : 2))
 			{
-				var commandWindow = new CommandWindow(command) {Owner = this};
-				commandWindow.ValueChanged += (sender1, e1) =>
+				var commandWindow = new CommandWindow(command) { Owner = this };
+				commandWindow.ValueChanged += (_, _) =>
 				{
 					if (Preferences.Instance.VisualCommand)
 					{
-						FileInfo.Files = undoManager.LoadTemporary(currentChanges);
+						FileInfo.Files = _undoManager.LoadTemporary(currentChanges);
 						DoApplyCommand(command, e);
 						ListViewFiles.ItemsSource = FileInfo.Files;
 					}
@@ -526,11 +519,11 @@ namespace DaramRenamer
 				}
 				finally
 				{
-					ListViewFiles.ItemsSource = FileInfo.Files = undoManager.LoadTemporary(currentChanges);
+					ListViewFiles.ItemsSource = FileInfo.Files = _undoManager.LoadTemporary(currentChanges);
 				}
 			}
 
-			undoManager.SaveToUndoStack(FileInfo.Files);
+			_undoManager.SaveToUndoStack(FileInfo.Files);
 
 			DoApplyCommand(command, e);
 
@@ -543,9 +536,9 @@ namespace DaramRenamer
 
 			{
 				var targets =
-					e is DesignatedFilesRoutedEventArgs designatedFilesRoutedEventArgs
+					(e is DesignatedFilesRoutedEventArgs designatedFilesRoutedEventArgs
 						? designatedFilesRoutedEventArgs.DesignatedFiles
-						: FileInfo.Files as IEnumerable<FileInfo>;
+						: FileInfo.Files as IEnumerable<FileInfo>).ToArray();
 
 				if (command is ITargetContains targetContains)
 					targetContains.SetTargets(targets);
@@ -565,20 +558,20 @@ namespace DaramRenamer
 
 		private void ConditionMenuItem_Click(object sender, RoutedEventArgs e)
 		{
-			if (((MenuItem) sender).IsChecked)
-			{
-				var condition = ((MenuItem) sender).Header as ICondition;
-				var properties = condition.GetType().GetProperties();
-				if (properties.Length > (condition is IOrderBy ? 1 : 0))
-				{
-					var commandWindow = new CommandWindow(condition) {Owner = this};
-					if (commandWindow.ShowDialog() != true)
-						((MenuItem) sender).IsChecked = false;
-				}
-			}
-		}
+			if (!((MenuItem)sender).IsChecked)
+				return;
 
-		private readonly ManualEditCommand ManualEditCommand = new ManualEditCommand();
+			if (((MenuItem)sender).Header is not ICondition condition)
+				return;
+
+			var properties = condition.GetType().GetProperties();
+			if (properties.Length <= (condition is IOrderBy ? 1 : 0))
+				return;
+
+			var commandWindow = new CommandWindow(condition) { Owner = this };
+			if (commandWindow.ShowDialog() != true)
+				((MenuItem)sender).IsChecked = false;
+		}
 
 		private class DesignatedFilesRoutedEventArgs : RoutedEventArgs
 		{
@@ -592,12 +585,12 @@ namespace DaramRenamer
 
 		private void MenuItemPreferences_Click(object sender, RoutedEventArgs e)
 		{
-			preferencesWindow ??= new PreferencesWindow();
-			if (preferencesWindow.IsActive)
+			_preferencesWindow ??= new PreferencesWindow();
+			if (_preferencesWindow.IsActive)
 				return;
 
-			preferencesWindow.Owner = this;
-			preferencesWindow.Show();
+			_preferencesWindow.Owner = this;
+			_preferencesWindow.Show();
 		}
 
 		private async void MenuToolsCheckUpdate_Click(object sender, RoutedEventArgs e)
@@ -649,20 +642,20 @@ namespace DaramRenamer
 
 		private void MenuHelpLicenses_Click(object sender, RoutedEventArgs e)
 		{
-			new LicenseWindow() {Owner = this}.ShowDialog();
+			new LicenseWindow() { Owner = this }.ShowDialog();
 		}
 
 		private void MenuHelpAbout_Click(object sender, RoutedEventArgs e)
 		{
-			new AboutWindow() {Owner = this}.ShowDialog();
+			new AboutWindow() { Owner = this }.ShowDialog();
 		}
 
 		private void MenuItemBatch_Click(object sender, RoutedEventArgs e)
 		{
-			if (currentBatchWindow == null || (currentBatchWindow != null && !currentBatchWindow.IsVisible))
-				currentBatchWindow = new BatchWindow(this);
+			if (_currentBatchWindow is null or {IsVisible: false})
+				_currentBatchWindow = new BatchWindow(this);
 
-			currentBatchWindow.Show();
+			_currentBatchWindow.Show();
 		}
 	}
 }

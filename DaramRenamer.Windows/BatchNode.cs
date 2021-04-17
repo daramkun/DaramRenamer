@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,21 +11,24 @@ namespace DaramRenamer
 	[Serializable]
 	public class BatchNode
 	{
-		private static readonly Regex BatchNodeTitle = new Regex("\\[((BatchNode)|(RootBatchNode))\\]");
-		private static readonly Regex CommandInfo = new Regex("-Command:(.*)");
-		private static readonly Regex ConditionInfo = new Regex("-Condition:(.*)");
+		private static readonly Regex BatchNodeTitle = new("\\[((BatchNode)|(RootBatchNode))\\]");
+		private static readonly Regex CommandInfo = new("-Command:(.*)");
+		private static readonly Regex ConditionInfo = new("-Condition:(.*)");
 
 		public ICommand Command { get; set; }
 		public ICondition Condition { get; set; }
 
-		public ObservableCollection<BatchNode> Children { get; } = new ObservableCollection<BatchNode>();
+		public ObservableCollection<BatchNode> Children { get; } = new();
 
 		public override string ToString()
 		{
 			var kind = (Condition == null ? "BatchWindow_Command" : "BatchWindow_Condition");
-			var target = ((object) Command ?? (object) Condition);
+			var target = ((object)Command ?? (object)Condition);
 			var type = target?.GetType();
 			var localizationKey = type?.GetCustomAttribute<LocalizationKeyAttribute>()?.LocalizationKey;
+
+			if (target == null || type == null)
+				return "Null";
 
 			var args = new StringBuilder("(");
 			foreach (var propInfo in type.GetProperties())
@@ -51,7 +52,7 @@ namespace DaramRenamer
 		public void Execute(FileInfo fileInfo)
 		{
 			Command?.DoCommand(fileInfo);
-			if(Condition != null && !Condition.IsSatisfyThisCondition (fileInfo))
+			if (Condition != null && !Condition.IsSatisfyThisCondition(fileInfo))
 				return;
 
 			foreach (var node in Children)
@@ -146,7 +147,7 @@ namespace DaramRenamer
 
 		private object DeserializeObject(string str)
 		{
-			var builder = new StringBuilder ();
+			var builder = new StringBuilder();
 
 			if (str == "null")
 				return null;
@@ -163,7 +164,7 @@ namespace DaramRenamer
 				if (ch == '"')
 					break;
 
-				builder.Append((char) ch);
+				builder.Append((char)ch);
 			} while (true);
 
 			var name = builder.ToString();
@@ -194,7 +195,7 @@ namespace DaramRenamer
 						throw new Exception("Invalid syntax");
 					isStart = false;
 				}
-				else if (isKey && !isStart)
+				else if (isKey)
 				{
 					if (ch == '"')
 					{
@@ -204,19 +205,19 @@ namespace DaramRenamer
 						builder.Clear();
 
 						ch = reader.Read();
-						if (ch == -1 || ch != ':')
+						if (ch is -1 or not ':')
 							throw new Exception("Invalid syntax");
 					}
 					else
-						builder.Append((char) ch);
+						builder.Append((char)ch);
 				}
-				else if (!isKey && isStart)
+				else if (isStart)
 				{
 					if (ch != '"')
 						throw new Exception("Invalid syntax");
 					isStart = false;
 				}
-				else if (!isKey && !isStart)
+				else
 				{
 					if (ch == '"')
 					{
@@ -277,7 +278,7 @@ namespace DaramRenamer
 						else throw new Exception("Invalid syntax");
 					}
 					else
-						builder.Append((char) ch);
+						builder.Append((char)ch);
 				}
 			}
 
@@ -286,7 +287,7 @@ namespace DaramRenamer
 
 		private Type FindType(string name)
 		{
-			foreach(var command in PluginManager.Instance.Commands)
+			foreach (var command in PluginManager.Instance.Commands)
 				if (command.GetType().FullName == name)
 					return command.GetType();
 			return (from condition in PluginManager.Instance.Conditions where condition.GetType().FullName == name select condition.GetType()).FirstOrDefault();

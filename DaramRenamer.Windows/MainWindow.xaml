@@ -232,16 +232,16 @@
 		<CommandBinding Command="{x:Static local:MainWindow.CommandLowerItem}" Executed="CommandLowerItem_Executed" />
 		<CommandBinding Command="{x:Static local:MainWindow.CommandItemsSort}" Executed="CommandItemsSort_Executed" />
 
-		<CommandBinding x:Name="commandBindingCustom0" Command="{x:Static local:MainWindow.CommandCustom0}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom1" Command="{x:Static local:MainWindow.CommandCustom1}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom2" Command="{x:Static local:MainWindow.CommandCustom2}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom3" Command="{x:Static local:MainWindow.CommandCustom3}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom4" Command="{x:Static local:MainWindow.CommandCustom4}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom5" Command="{x:Static local:MainWindow.CommandCustom5}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom6" Command="{x:Static local:MainWindow.CommandCustom6}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom7" Command="{x:Static local:MainWindow.CommandCustom7}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom8" Command="{x:Static local:MainWindow.CommandCustom8}" Executed="CommandCustom_Executed" />
-		<CommandBinding x:Name="commandBindingCustom9" Command="{x:Static local:MainWindow.CommandCustom9}" Executed="CommandCustom_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom0" Command="{x:Static local:MainWindow.CommandCustom0}" Executed="CommandCustom0_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom1" Command="{x:Static local:MainWindow.CommandCustom1}" Executed="CommandCustom1_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom2" Command="{x:Static local:MainWindow.CommandCustom2}" Executed="CommandCustom2_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom3" Command="{x:Static local:MainWindow.CommandCustom3}" Executed="CommandCustom3_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom4" Command="{x:Static local:MainWindow.CommandCustom4}" Executed="CommandCustom4_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom5" Command="{x:Static local:MainWindow.CommandCustom5}" Executed="CommandCustom5_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom6" Command="{x:Static local:MainWindow.CommandCustom6}" Executed="CommandCustom6_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom7" Command="{x:Static local:MainWindow.CommandCustom7}" Executed="CommandCustom7_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom8" Command="{x:Static local:MainWindow.CommandCustom8}" Executed="CommandCustom8_Executed" />
+		<CommandBinding x:Name="CommandBindingCustom9" Command="{x:Static local:MainWindow.CommandCustom9}" Executed="CommandCustom9_Executed" />
 	</Window.CommandBindings>
 	<Window.InputBindings>
 		<KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.CommandOpenFiles}" />

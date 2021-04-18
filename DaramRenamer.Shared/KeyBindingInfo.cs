@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
 using DaramRenamer.Annotations;
 
 namespace DaramRenamer
@@ -18,6 +19,40 @@ namespace DaramRenamer
 			{
 				_keyBinding = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(KeyBindingKey));
+				OnPropertyChanged(nameof(KeyBindingModifierKeys));
+			}
+		}
+
+		public Key KeyBindingKey
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_keyBinding) || string.IsNullOrWhiteSpace(_keyBinding))
+					return (Key) 0;
+				var keyText = _keyBinding.Replace("Ctrl+", "").Replace("Alt+", "").Replace("Shift+", "");
+				if (Enum.TryParse<Key>(keyText, out var result))
+					return result;
+				return (Key) 0;
+			}
+		}
+
+		public ModifierKeys KeyBindingModifierKeys
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_keyBinding) || string.IsNullOrWhiteSpace(_keyBinding))
+					return ModifierKeys.None;
+
+				var modifierKeys = ModifierKeys.None;
+				if (_keyBinding.Contains("Ctrl+"))
+					modifierKeys |= ModifierKeys.Control;
+				if (_keyBinding.Contains("Alt+"))
+					modifierKeys |= ModifierKeys.Alt;
+				if (_keyBinding.Contains("Shift+"))
+					modifierKeys |= ModifierKeys.Shift;
+
+				return modifierKeys;
 			}
 		}
 

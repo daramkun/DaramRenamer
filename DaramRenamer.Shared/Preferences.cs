@@ -274,20 +274,6 @@ namespace DaramRenamer
 		public bool ForceSingleCoreRunning { get; set; } = false;
 		public bool CloseApplyWindowWhenSuccessfullyDone { get; set; } = true;
 
-		public void ShortcutRebinding()
-		{
-			Shortcut0 = Shortcut0;
-			Shortcut1 = Shortcut1;
-			Shortcut2 = Shortcut2;
-			Shortcut3 = Shortcut3;
-			Shortcut4 = Shortcut4;
-			Shortcut5 = Shortcut5;
-			Shortcut6 = Shortcut6;
-			Shortcut7 = Shortcut7;
-			Shortcut8 = Shortcut8;
-			Shortcut9 = Shortcut9;
-		}
-
 		public void Save()
 		{
 			using Stream stream = File.Open($"{AppDomain.CurrentDomain.BaseDirectory}\\DaramRenamer.config.json", FileMode.Create);

@@ -64,7 +64,7 @@ namespace DaramRenamer
 
 		private void CommandMenuItem_Click(object sender, RoutedEventArgs e)
 		{
-			if (!((sender as MenuItem)?.DataContext is ICommand command))
+			if ((sender as MenuItem)?.DataContext is not ICommand command)
 				return;
 
 			if (ItemsControl.ItemsControlFromItemContainer((MenuItem) sender) is MenuItem menuItem && 

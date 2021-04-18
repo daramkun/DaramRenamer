@@ -51,6 +51,42 @@ namespace DaramRenamer
 		public static RoutedCommand CommandCustom8 = new();
 		public static RoutedCommand CommandCustom9 = new();
 
+		private void OnShortcutChanged0(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding0, Preferences.Instance.Shortcut0);
+
+		private void OnShortcutChanged1(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding1, Preferences.Instance.Shortcut1);
+
+		private void OnShortcutChanged2(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding2, Preferences.Instance.Shortcut2);
+
+		private void OnShortcutChanged3(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding3, Preferences.Instance.Shortcut3);
+
+		private void OnShortcutChanged4(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding4, Preferences.Instance.Shortcut4);
+
+		private void OnShortcutChanged5(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding5, Preferences.Instance.Shortcut5);
+
+		private void OnShortcutChanged6(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding6, Preferences.Instance.Shortcut6);
+
+		private void OnShortcutChanged7(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding7, Preferences.Instance.Shortcut7);
+
+		private void OnShortcutChanged8(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding8, Preferences.Instance.Shortcut8);
+
+		private void OnShortcutChanged9(object sender, PropertyChangedEventArgs e) =>
+			OnShortcutChanged(KeyBinding9, Preferences.Instance.Shortcut9);
+
+		private void OnShortcutChanged(KeyBinding keyBinding, KeyBindingInfo info)
+		{
+			keyBinding.Key = info.KeyBindingKey;
+			keyBinding.Modifiers = info.KeyBindingModifierKeys;
+		}
+
 		private void CommandOpenFiles_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			MenuFileOpen_Click(sender, e);
@@ -91,33 +127,26 @@ namespace DaramRenamer
 			MenuEditSort_Click(sender, e);
 		}
 
-		private void CommandCustom_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			object command = null;
-			if (sender == commandBindingCustom0)
-				command = Preferences.Instance.Shortcut0.CommandObject;
-			else if (sender == commandBindingCustom1)
-				command = Preferences.Instance.Shortcut1.CommandObject;
-			else if (sender == commandBindingCustom2)
-				command = Preferences.Instance.Shortcut2.CommandObject;
-			else if (sender == commandBindingCustom3)
-				command = Preferences.Instance.Shortcut3.CommandObject;
-			else if (sender == commandBindingCustom4)
-				command = Preferences.Instance.Shortcut4.CommandObject;
-			else if (sender == commandBindingCustom5)
-				command = Preferences.Instance.Shortcut5.CommandObject;
-			else if (sender == commandBindingCustom6)
-				command = Preferences.Instance.Shortcut6.CommandObject;
-			else if (sender == commandBindingCustom7)
-				command = Preferences.Instance.Shortcut7.CommandObject;
-			else if (sender == commandBindingCustom8)
-				command = Preferences.Instance.Shortcut8.CommandObject;
-			else if (sender == commandBindingCustom9)
-				command = Preferences.Instance.Shortcut9.CommandObject;
-			
-			if (command is ICommand)
-				CommandMenuItem_Click(command, null);
-		}
+		private void CommandCustom0_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut0.CommandObject, null);
+		private void CommandCustom1_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut1.CommandObject, null);
+		private void CommandCustom2_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut2.CommandObject, null);
+		private void CommandCustom3_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut3.CommandObject, null);
+		private void CommandCustom4_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut4.CommandObject, null);
+		private void CommandCustom5_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut5.CommandObject, null);
+		private void CommandCustom6_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut6.CommandObject, null);
+		private void CommandCustom7_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut7.CommandObject, null);
+		private void CommandCustom8_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut8.CommandObject, null);
+		private void CommandCustom9_Executed(object sender, ExecutedRoutedEventArgs e) =>
+			CommandMenuItem_Click(Preferences.Instance.Shortcut9.CommandObject, null);
 
 		#endregion
 
@@ -171,7 +200,27 @@ namespace DaramRenamer
 				WindowState = Preferences.Instance.WindowState;
 			}
 
-			Preferences.Instance.ShortcutRebinding();
+			Preferences.Instance.Shortcut0.PropertyChanged += OnShortcutChanged0;
+			Preferences.Instance.Shortcut1.PropertyChanged += OnShortcutChanged1;
+			Preferences.Instance.Shortcut2.PropertyChanged += OnShortcutChanged2;
+			Preferences.Instance.Shortcut3.PropertyChanged += OnShortcutChanged3;
+			Preferences.Instance.Shortcut4.PropertyChanged += OnShortcutChanged4;
+			Preferences.Instance.Shortcut5.PropertyChanged += OnShortcutChanged5;
+			Preferences.Instance.Shortcut6.PropertyChanged += OnShortcutChanged6;
+			Preferences.Instance.Shortcut7.PropertyChanged += OnShortcutChanged7;
+			Preferences.Instance.Shortcut8.PropertyChanged += OnShortcutChanged8;
+			Preferences.Instance.Shortcut9.PropertyChanged += OnShortcutChanged9;
+
+			OnShortcutChanged0(null, null);
+			OnShortcutChanged1(null, null);
+			OnShortcutChanged2(null, null);
+			OnShortcutChanged3(null, null);
+			OnShortcutChanged4(null, null);
+			OnShortcutChanged5(null, null);
+			OnShortcutChanged6(null, null);
+			OnShortcutChanged7(null, null);
+			OnShortcutChanged8(null, null);
+			OnShortcutChanged9(null, null);
 		}
 
 		private async void Window_Loaded(object sender, RoutedEventArgs e)

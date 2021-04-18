@@ -113,6 +113,8 @@ namespace DaramRenamer
 		[NonSerialized]
 		private readonly KeyBindingInfo[] _shortcuts = new KeyBindingInfo[10];
 
+		public KeyBindingInfo[] Shortcuts => _shortcuts;
+
 		private static InputGesture StringToKeyGesture(string k)
 		{
 			if (k == null)

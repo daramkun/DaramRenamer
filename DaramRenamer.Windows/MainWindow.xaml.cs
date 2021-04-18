@@ -93,51 +93,30 @@ namespace DaramRenamer
 
 		private void CommandCustom_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			string command = null;
+			object command = null;
 			if (sender == commandBindingCustom0)
-				command = Preferences.Instance.Shortcut0.Command;
+				command = Preferences.Instance.Shortcut0.CommandObject;
 			else if (sender == commandBindingCustom1)
-				command = Preferences.Instance.Shortcut1.Command;
+				command = Preferences.Instance.Shortcut1.CommandObject;
 			else if (sender == commandBindingCustom2)
-				command = Preferences.Instance.Shortcut2.Command;
+				command = Preferences.Instance.Shortcut2.CommandObject;
 			else if (sender == commandBindingCustom3)
-				command = Preferences.Instance.Shortcut3.Command;
+				command = Preferences.Instance.Shortcut3.CommandObject;
 			else if (sender == commandBindingCustom4)
-				command = Preferences.Instance.Shortcut4.Command;
+				command = Preferences.Instance.Shortcut4.CommandObject;
 			else if (sender == commandBindingCustom5)
-				command = Preferences.Instance.Shortcut5.Command;
+				command = Preferences.Instance.Shortcut5.CommandObject;
 			else if (sender == commandBindingCustom6)
-				command = Preferences.Instance.Shortcut6.Command;
+				command = Preferences.Instance.Shortcut6.CommandObject;
 			else if (sender == commandBindingCustom7)
-				command = Preferences.Instance.Shortcut7.Command;
+				command = Preferences.Instance.Shortcut7.CommandObject;
 			else if (sender == commandBindingCustom8)
-				command = Preferences.Instance.Shortcut8.Command;
+				command = Preferences.Instance.Shortcut8.CommandObject;
 			else if (sender == commandBindingCustom9)
-				command = Preferences.Instance.Shortcut9.Command;
-
-			Type commandType = null;
-			foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-			{
-				foreach (var type in assembly.GetTypes())
-				{
-					if (type.FullName == command)
-					{
-						commandType = type;
-						break;
-					}
-				}
-
-				if (commandType != null)
-					break;
-			}
-
-			if (commandType == null)
-				return;
-
-			var commandObj = Activator.CreateInstance(commandType);
-
-			if (commandObj is ICommand)
-				CommandMenuItem_Click(commandObj, null);
+				command = Preferences.Instance.Shortcut9.CommandObject;
+			
+			if (command is ICommand)
+				CommandMenuItem_Click(command, null);
 		}
 
 		#endregion

@@ -77,6 +77,7 @@
 	"ChangedPath": "Changed Path",
 
 	"PreferencesTabGeneral": "General",
+	"PreferencesTabShortcut": "Shortcut",
 
 	"PreferencesHardwareAcceleration": "Hardware Accelerated Rendering",
 	"PreferencesOverwrite": "Overwrite",
@@ -89,6 +90,8 @@
 	"PreferencesVisualCommand": "Preview changes.",
 	"PreferencesForceSingleCoreRunning": "Force Single-Core Running",
 	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Close Apply Window when Successfully Done",
+
+	"PreferencesTabShortcutShortcutText": "Shortcut: ",
 
 	"Move": "Move",
 	"Copy": "Copy",

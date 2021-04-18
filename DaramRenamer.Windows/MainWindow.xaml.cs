@@ -269,6 +269,12 @@ namespace DaramRenamer
 				: "UNKNOWN VERSION";
 		}
 
+		internal static string GetCopyrightString()
+		{
+			var copyrights = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), true);
+			return copyrights is {Length: > 0} ? (copyrights[0] as AssemblyCopyrightAttribute)?.Copyright ?? string.Empty : string.Empty;
+		}
+
 		public static TaskDialogResult MessageBox(string message, string content, TaskDialogIcon icon,
 			TaskDialogCommonButtonFlags commonButtons, params string[] buttons)
 		{

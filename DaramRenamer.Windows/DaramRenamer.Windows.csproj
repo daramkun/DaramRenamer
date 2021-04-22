@@ -23,6 +23,7 @@
     <PackageProjectUrl>https://github.com/daramkun/DaramRenamer</PackageProjectUrl>
     <RepositoryUrl>https://github.com/daramkun/DaramRenamer</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

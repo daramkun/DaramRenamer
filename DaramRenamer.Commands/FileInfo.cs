@@ -15,84 +15,84 @@ namespace DaramRenamer
 	[Serializable]
 	public class FileInfo : IComparable<FileInfo>, INotifyPropertyChanged
 	{
-		public static void Sort (ObservableCollection<FileInfo> files)
+		public static void Sort(ObservableCollection<FileInfo> files)
 		{
 			if (files == null) return;
-			DaramRenamer.Sort.Quicksort<FileInfo> (files);
+			DaramRenamer.Sort.Quicksort<FileInfo>(files);
 		}
 
-		public static ObservableCollection<FileInfo> Files { get; set; } = new ObservableCollection<FileInfo> ();
-		public static IFileOperator FileOperator { get; set; } = new DefaultFileOperator ();
+		public static ObservableCollection<FileInfo> Files { get; set; } = new ObservableCollection<FileInfo>();
+		public static IFileOperator FileOperator { get; set; } = new DefaultFileOperator();
 
-		public static void Apply (bool autoFix, RenameMode renameMode, bool overwrite,
+		public static void Apply(bool autoFix, RenameMode renameMode, bool overwrite,
 			Action<FileInfo, ErrorCode> progressIncrement)
 		{
 			var parallelApply = true;
-			Parallel.ForEach (Files, (fileInfo, parallelLoopState) =>
-			{
-				if (!File.Exists(fileInfo.OriginalFullPath)
-				    || fileInfo.OriginalFullPath == fileInfo.ChangedFullPath) return;
-				parallelApply = false;
-				parallelLoopState.Break ();
-			});
+			Parallel.ForEach(Files, (fileInfo, parallelLoopState) =>
+		   {
+			   if (!File.Exists(fileInfo.OriginalFullPath)
+				   || fileInfo.OriginalFullPath == fileInfo.ChangedFullPath) return;
+			   parallelApply = false;
+			   parallelLoopState.Break();
+		   });
 
 			var failed = 0;
-			var succeededItems = new ConcurrentQueue<FileInfo> ();
+			var succeededItems = new ConcurrentQueue<FileInfo>();
 
-			void ItemChanger (FileInfo fileInfo)
+			void ItemChanger(FileInfo fileInfo)
 			{
 				if (autoFix)
 				{
-					fileInfo.ChangedPath = ReplaceInvalidPathCharacters (fileInfo.ChangedPath);
-					fileInfo.ChangedFilename = ReplaceInvalidFilenameCharacters (fileInfo.ChangedFilename);
+					fileInfo.ChangedPath = ReplaceInvalidPathCharacters(fileInfo.ChangedPath);
+					fileInfo.ChangedFilename = ReplaceInvalidFilenameCharacters(fileInfo.ChangedFilename);
 				}
 
 				ErrorCode errorMessage;
 				switch (renameMode)
 				{
 					case RenameMode.Move:
-						fileInfo.Move (overwrite, out errorMessage);
+						fileInfo.Move(overwrite, out errorMessage);
 						break;
 					case RenameMode.Copy:
-						fileInfo.Copy (overwrite, out errorMessage);
+						fileInfo.Copy(overwrite, out errorMessage);
 						break;
 					default:
 						throw new ArgumentOutOfRangeException(nameof(renameMode), renameMode, null);
 				}
 
-				progressIncrement?.Invoke (fileInfo, errorMessage);
+				progressIncrement?.Invoke(fileInfo, errorMessage);
 
 				if (errorMessage != ErrorCode.NoError)
-					Interlocked.Increment (ref failed);
-				else succeededItems.Enqueue (fileInfo);
+					Interlocked.Increment(ref failed);
+				else succeededItems.Enqueue(fileInfo);
 			}
 
 			if (parallelApply)
 			{
 				FileOperator.BeginBatch();
-				Parallel.ForEach (Files, ItemChanger);
+				Parallel.ForEach(Files, ItemChanger);
 				FileOperator.EndBatch();
 			}
 			else
 			{
-				FileOperator.BeginBatch ();
-				Parallel.ForEach (from f in Files where !File.Exists (f.ChangedFullPath) select f, ItemChanger);
-				FileOperator.EndBatch ();
+				FileOperator.BeginBatch();
+				Parallel.ForEach(from f in Files where !File.Exists(f.ChangedFullPath) select f, ItemChanger);
+				FileOperator.EndBatch();
 
-				var sortingFileInfo = new List<FileInfo> (from f in Files where !succeededItems.Contains (f) && f.OriginalFullPath != f.ChangedFullPath select f);
-				var temp = new List<FileInfo> ();
+				var sortingFileInfo = new List<FileInfo>(from f in Files where !succeededItems.Contains(f) && f.OriginalFullPath != f.ChangedFullPath select f);
+				var temp = new List<FileInfo>();
 				bool changed;
 				do
 				{
 					changed = false;
-					FileOperator.BeginBatch ();
+					FileOperator.BeginBatch();
 					foreach (var fileInfo in sortingFileInfo)
 					{
-						if (!File.Exists (fileInfo.ChangedFullPath))
+						if (!File.Exists(fileInfo.ChangedFullPath))
 						{
-							ItemChanger (fileInfo);
+							ItemChanger(fileInfo);
 							changed = true;
-							temp.Add (fileInfo);
+							temp.Add(fileInfo);
 						}
 						else
 						{
@@ -100,31 +100,31 @@ namespace DaramRenamer
 								succeededFileInfo.ChangedFullPath != fileInfo.ChangedFullPath &&
 								succeededFileInfo.OriginalFullPath == fileInfo.ChangedFullPath))
 								continue;
-							ItemChanger (fileInfo);
+							ItemChanger(fileInfo);
 							changed = true;
-							temp.Add (fileInfo);
+							temp.Add(fileInfo);
 						}
 					}
-					FileOperator.EndBatch ();
+					FileOperator.EndBatch();
 
 					foreach (var proceed in temp)
-						sortingFileInfo.Remove (proceed);
-					temp.Clear ();
+						sortingFileInfo.Remove(proceed);
+					temp.Clear();
 				} while (changed);
 
 				if (overwrite)
 				{
-					Parallel.ForEach (sortingFileInfo, ItemChanger);
+					Parallel.ForEach(sortingFileInfo, ItemChanger);
 				}
 				else
 				{
 					failed += sortingFileInfo.Count;
 					foreach (var fileInfo in sortingFileInfo)
-						progressIncrement (fileInfo, ErrorCode.IOError);
+						progressIncrement(fileInfo, ErrorCode.IOError);
 				}
 			}
 
-			Parallel.ForEach (succeededItems, (fileInfo) => fileInfo.Changed ());
+			Parallel.ForEach(succeededItems, (fileInfo) => fileInfo.Changed());
 		}
 
 		private string _originalFullPath;
@@ -136,14 +136,14 @@ namespace DaramRenamer
 			private set
 			{
 				_originalFullPath = value;
-				DoPropertyChanged (nameof (OriginalFullPath));
-				DoPropertyChanged (nameof (OriginalPath));
-				DoPropertyChanged (nameof (OriginalFilename));
+				DoPropertyChanged(nameof(OriginalFullPath));
+				DoPropertyChanged(nameof(OriginalPath));
+				DoPropertyChanged(nameof(OriginalFilename));
 			}
 		}
-		public string OriginalPath => Path.GetDirectoryName (OriginalFullPath);
-		public string OriginalFilename => Path.GetFileName (OriginalFullPath);
-		public string ChangedPath { get => _changedPath; set { _changedPath = value; DoPropertyChanged (nameof (ChangedPath)); } }
+		public string OriginalPath => Path.GetDirectoryName(OriginalFullPath);
+		public string OriginalFilename => Path.GetFileName(OriginalFullPath);
+		public string ChangedPath { get => _changedPath; set { _changedPath = value; DoPropertyChanged(nameof(ChangedPath)); } }
 
 		public string ChangedFilename
 		{
@@ -155,15 +155,17 @@ namespace DaramRenamer
 			}
 		}
 
-		public string ChangedFullPath => Path.Combine (ChangedPath, ChangedFilename);
+		public string ChangedFullPath => Path.Combine(ChangedPath, ChangedFilename);
 		public bool IsDirectory { get; set; }
 
-		public FileInfo (string fullPath)
+		public FileInfo(string fullPath)
 		{
-			OriginalFullPath = fullPath; ChangedFilename = OriginalFilename; ChangedPath = OriginalPath;
-			IsDirectory = File.GetAttributes (fullPath).HasFlag (FileAttributes.Directory);
+			OriginalFullPath = fullPath;
+			ChangedFilename = OriginalFilename;
+			ChangedPath = OriginalPath;
+			IsDirectory = File.GetAttributes(fullPath).HasFlag(FileAttributes.Directory);
 		}
-		public FileInfo (FileInfo file)
+		public FileInfo(FileInfo file)
 		{
 			OriginalFullPath = file.OriginalFullPath;
 			ChangedPath = file.ChangedPath;
@@ -171,11 +173,19 @@ namespace DaramRenamer
 			IsDirectory = file.IsDirectory;
 		}
 
-		public bool Move (bool overwrite, out ErrorCode errorMessage)
+		public FileInfo(string originalFullPath, string changedFilename, string changedPath = null)
+		{
+			OriginalFullPath = originalFullPath;
+			ChangedFilename = changedFilename;
+			ChangedPath = changedPath ?? OriginalPath;
+			IsDirectory = File.GetAttributes(originalFullPath).HasFlag(FileAttributes.Directory);
+		}
+
+		public bool Move(bool overwrite, out ErrorCode errorMessage)
 		{
 			try
 			{
-				FileOperator.Move (ChangedFullPath, OriginalFullPath, overwrite);
+				FileOperator.Move(ChangedFullPath, OriginalFullPath, overwrite);
 				errorMessage = ErrorCode.NoError;
 				return true;
 			}
@@ -188,11 +198,11 @@ namespace DaramRenamer
 			return false;
 		}
 
-		public bool Copy (bool overwrite, out ErrorCode errorMessage)
+		public bool Copy(bool overwrite, out ErrorCode errorMessage)
 		{
 			try
 			{
-				FileOperator.Copy (ChangedFullPath, OriginalFullPath, overwrite);
+				FileOperator.Copy(ChangedFullPath, OriginalFullPath, overwrite);
 				errorMessage = ErrorCode.NoError;
 				return true;
 			}
@@ -205,15 +215,15 @@ namespace DaramRenamer
 			return false;
 		}
 
-		public void Changed ()
+		public void Changed()
 		{
 			OriginalFullPath = ChangedFullPath;
 		}
 
-		public int CompareTo (FileInfo other) => string.Compare (ChangedFilename, other.ChangedFilename, StringComparison.Ordinal);
-		public override bool Equals (object obj) => obj is FileInfo info
-		                                            && OriginalFullPath == info.OriginalFullPath;
-		public override int GetHashCode () => OriginalFullPath.GetHashCode ();
+		public int CompareTo(FileInfo other) => string.Compare(ChangedFilename, other.ChangedFilename, StringComparison.Ordinal);
+		public override bool Equals(object obj) => obj is FileInfo info
+													&& OriginalFullPath == info.OriginalFullPath;
+		public override int GetHashCode() => OriginalFullPath.GetHashCode();
 
 		public override string ToString() =>
 			$"{{ChangedFilename: {ChangedFilename}, ChangedPath: {ChangedPath}, OriginalFullPath: {OriginalFullPath}}}";
@@ -225,7 +235,7 @@ namespace DaramRenamer
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
 		#region Filename Helpers
-		public static char GetInvalidToValid (char ch)
+		public static char GetInvalidToValid(char ch)
 		{
 			switch (ch)
 			{
@@ -277,16 +287,15 @@ namespace DaramRenamer
 			}
 		}
 
-		public static string ReplaceInvalidPathCharacters (string path)
+		public static string ReplaceInvalidPathCharacters(string path)
 		{
 			StringBuilder builder = null;
-			foreach (var ch in Path.GetInvalidPathChars ())
+			foreach (var ch in Path.GetInvalidPathChars())
 			{
 				if (path.IndexOf(ch) < 0)
 					continue;
 
-				if(builder == null)
-					builder = new StringBuilder(path);
+				builder ??= new StringBuilder(path);
 
 				builder.Replace(ch, GetInvalidToValid(ch));
 			}
@@ -294,16 +303,15 @@ namespace DaramRenamer
 			return builder?.ToString() ?? path;
 		}
 
-		public static string ReplaceInvalidFilenameCharacters (string filename)
+		public static string ReplaceInvalidFilenameCharacters(string filename)
 		{
 			StringBuilder builder = null;
-			foreach (var ch in Path.GetInvalidFileNameChars ())
+			foreach (var ch in Path.GetInvalidFileNameChars())
 			{
 				if (filename.IndexOf(ch) < 0)
 					continue;
 
-				if (builder == null)
-					builder = new StringBuilder(filename);
+				builder ??= new StringBuilder(filename);
 
 				builder.Replace(ch, GetInvalidToValid(ch));
 			}

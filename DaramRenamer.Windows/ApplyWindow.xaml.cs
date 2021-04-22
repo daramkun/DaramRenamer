@@ -13,10 +13,10 @@ namespace DaramRenamer
 	/// </summary>
 	public partial class ApplyWindow : Window
 	{
-		private readonly UndoManager<ObservableCollection<FileInfo>> undoManager;
+		private readonly UndoManager undoManager;
 		private bool isComplete;
 
-		public ApplyWindow(UndoManager<ObservableCollection<FileInfo>> undoManager)
+		public ApplyWindow(UndoManager undoManager)
 		{
 			InitializeComponent();
 

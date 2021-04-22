@@ -19,7 +19,7 @@ namespace DaramRenamer
 {
 	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
-		private readonly UndoManager<ObservableCollection<FileInfo>> _undoManager = new();
+		private readonly UndoManager _undoManager = new();
 		private readonly ManualEditCommand _manualEditCommand = new();
 
 		private BatchWindow _currentBatchWindow;

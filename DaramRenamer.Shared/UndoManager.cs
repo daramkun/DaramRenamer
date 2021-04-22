@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DaramRenamer
 {
 	[Serializable]
-	public class UndoManager<T> where T : class
+	public class UndoManager
 	{
-		[NonSerialized]
-		private BinaryFormatter bf = new BinaryFormatter();
-		private Stack<byte[]> undoStack = new Stack<byte[]>();
-		private Stack<byte[]> redoStack = new Stack<byte[]>();
+		private Stack<byte[]> undoStack = new();
+		private Stack<byte[]> redoStack = new();
 
 		public event EventHandler UpdateUndo, UpdateRedo;
 
 		public bool IsUndoStackEmpty => undoStack.Count == 0;
 		public bool IsRedoStackEmpty => redoStack.Count == 0;
 
-		public void SaveToUndoStack(T fileInfoCollection, bool clearRedoStack = true)
+		public void SaveToUndoStack(ObservableCollection<FileInfo> fileInfoCollection, bool clearRedoStack = true)
 		{
-			using (var memStream = new MemoryStream())
-			{
-				bf.Serialize(memStream, fileInfoCollection ?? throw new ArgumentNullException());
-				undoStack.Push(memStream.ToArray());
-			}
+			undoStack.Push(FileInfoSerializer.SerializeCollection(fileInfoCollection));
 
 			if (clearRedoStack)
 				ClearRedoStack();
@@ -32,48 +27,37 @@ namespace DaramRenamer
 			UpdateUndo?.Invoke(this, EventArgs.Empty);
 		}
 
-		public void SaveToRedoStack(T fileInfoCollection)
+		public void SaveToRedoStack(ObservableCollection<FileInfo> fileInfoCollection)
 		{
-			using (var memStream = new MemoryStream())
-			{
-				bf.Serialize(memStream, fileInfoCollection ?? throw new ArgumentNullException());
-				redoStack.Push(memStream.ToArray());
-			}
+			redoStack.Push(FileInfoSerializer.SerializeCollection(fileInfoCollection));
 
 			UpdateRedo?.Invoke(this, EventArgs.Empty);
 		}
 
-		public byte[] SaveTemporary(T fileInfoCollection)
+		public byte[] SaveTemporary(ObservableCollection<FileInfo> fileInfoCollection)
 		{
-			using (var memStream = new MemoryStream())
-			{
-				bf.Serialize(memStream, fileInfoCollection ?? throw new ArgumentNullException());
-				return memStream.ToArray();
-			}
+			return FileInfoSerializer.SerializeCollection(fileInfoCollection);
 		}
 
-		public T LoadFromUndoStack()
+		public ObservableCollection<FileInfo> LoadFromUndoStack()
 		{
 			if (IsUndoStackEmpty) return null;
-			using var memStream = new MemoryStream(undoStack.Pop());
-			var ret = bf.Deserialize(memStream) as T ?? throw new InvalidCastException();
+			var ret = FileInfoSerializer.DeserializeCollection(undoStack.Pop());
 			UpdateUndo?.Invoke(this, EventArgs.Empty);
 			return ret;
 		}
 
-		public T LoadFromRedoStack()
+		public ObservableCollection<FileInfo> LoadFromRedoStack()
 		{
 			if (IsRedoStackEmpty) return null;
-			using var memStream = new MemoryStream(redoStack.Pop());
-			var ret = bf.Deserialize(memStream) as T ?? throw new InvalidCastException();
+			var ret = FileInfoSerializer.DeserializeCollection(redoStack.Pop());
 			UpdateRedo?.Invoke(this, EventArgs.Empty);
 			return ret;
 		}
 
-		public T LoadTemporary(byte[] temporary)
+		public ObservableCollection<FileInfo> LoadTemporary(byte[] temporary)
 		{
-			using var memStream = new MemoryStream(temporary);
-			return bf.Deserialize(memStream) as T ?? throw new InvalidCastException();
+			return FileInfoSerializer.DeserializeCollection(temporary);
 		}
 
 		public void ClearUndoStack()

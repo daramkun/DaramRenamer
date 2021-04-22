@@ -646,7 +646,7 @@ namespace DaramRenamer
 							var psInfo = new ProcessStartInfo("cmd")
 							{
 								Arguments =
-									$"/C start DaramRenamer.UpdateAgent.exe {updateInfo.Value.StableLatestVersion} {updateInfo.Value.StableLatestUrl}",
+									$"/C start DaramRenamer.UpdateAgent.exe {updateInfo.Value.StableLatestVersion} {updateInfo.Value.StableLatestUrl} {Process.GetCurrentProcess().Id}",
 								UseShellExecute = true,
 							};
 							Process.Start(psInfo);

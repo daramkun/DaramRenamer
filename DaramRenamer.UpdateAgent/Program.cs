@@ -11,8 +11,15 @@ namespace DaramRenamer
 	{
 		private static int Main(string[] args)
 		{
+
 			var version = args[0];
 			var url = args[1];
+
+			if (args.Length > 2)
+			{
+				var parentProcess = args[2];
+				Process.GetProcessById(int.Parse(parentProcess)).WaitForExit();
+			}
 
 			var filename = $"{version}-update-file";
 

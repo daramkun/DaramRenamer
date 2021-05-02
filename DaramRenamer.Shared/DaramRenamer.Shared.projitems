@@ -22,4 +22,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.default.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.ko_kr.json" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.nl_nl.json" />
+  </ItemGroup>
 </Project>

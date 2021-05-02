@@ -47,6 +47,7 @@ namespace DaramRenamer
 			{
 				yield return CultureInfo.GetCultureInfo ("ko-kr");
 				yield return CultureInfo.GetCultureInfo ("en");
+				yield return CultureInfo.GetCultureInfo ("nl-nl");
 				foreach (var lang in availableCustomLanguages)
 					yield return lang;
 			}

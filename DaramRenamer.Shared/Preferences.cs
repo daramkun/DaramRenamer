@@ -111,7 +111,19 @@ namespace DaramRenamer
 		}
 
 		[NonSerialized]
-		private readonly KeyBindingInfo[] _shortcuts = new KeyBindingInfo[10];
+		private readonly KeyBindingInfo[] _shortcuts = new KeyBindingInfo[10]
+		{
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+			new KeyBindingInfo(),
+		};
 
 		public KeyBindingInfo[] Shortcuts => _shortcuts;
 

@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
@@ -300,7 +302,7 @@ namespace DaramRenamer
 		internal static string GetCopyrightString()
 		{
 			var copyrights = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), true);
-			return copyrights is {Length: > 0} ? (copyrights[0] as AssemblyCopyrightAttribute)?.Copyright ?? string.Empty : string.Empty;
+			return copyrights is { Length: > 0 } ? (copyrights[0] as AssemblyCopyrightAttribute)?.Copyright ?? string.Empty : string.Empty;
 		}
 
 		public static TaskDialogResult MessageBox(string message, string content, TaskDialogIcon icon,
@@ -641,24 +643,89 @@ namespace DaramRenamer
 					var updateInfo = UpdateInformationBank.GetUpdateInformation(TargetPlatform.Windows);
 					if (updateInfo != null)
 					{
+						ProgressBarUpdate.Visibility = Visibility.Visible;
+
 						try
 						{
+							var url = new Uri(updateInfo.Value.StableLatestUrl);
+							var webClient = new WebClient();
+							var filename = $"DaramRenamer-{updateInfo.Value.StableLatestVersion}.zip";
+
+							await Task.Run(() => webClient.DownloadFile(url, filename));
+
+							if (!Directory.Exists("DaramRenamer-Update"))
+								Directory.CreateDirectory("DaramRenamer-Update");
+
+							await using (var fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+							{
+								using var archive = new ZipArchive(fileStream, ZipArchiveMode.Read, true);
+								foreach (var entry in archive.Entries)
+								{
+									if (entry.Length == 0)
+										continue;
+
+									Debug.WriteLine($"Uncompressing {entry.FullName}");
+
+									var fullname = Path.Combine("DaramRenamer-Update", entry.FullName);
+									var dirname = Path.GetDirectoryName(fullname);
+
+									if (!Directory.Exists(dirname))
+										Directory.CreateDirectory(dirname ?? throw new InvalidOperationException());
+
+									await using var entryStream = entry.Open();
+									await using var destinationFileStream =
+										new FileStream(fullname,
+											FileMode.Create, FileAccess.Write, FileShare.None);
+									await entryStream.CopyToAsync(destinationFileStream);
+								}
+							}
+
+							File.Delete(filename);
+
+							var updateBatchFileContent = @"
+@ECHO OFF
+
+ECHO DaramRenamer is Updating...
+
+TASKKILL DaramRenamer.exe
+
+:LOOP
+tasklist | find /i DaramRenamer.exe >nul 2>&1
+IF ERRORLEVEL 1 (
+	GOTO CONTINUE
+) ELSE (
+	ECHO DaramRenamer is still running
+	Timeout /T 5 /NOBREAK
+	GOTO LOOP
+)
+
+:CONTINUE
+
+XCOPY DaramRenamer-Update\* .\  /Y
+
+START DaramRenamer.exe
+
+EXIT";
+
+							await File.WriteAllTextAsync("DaramRenamer-Update.bat", updateBatchFileContent);
+
 							var psInfo = new ProcessStartInfo("cmd")
 							{
 								Arguments =
-									$"/C start DaramRenamer.UpdateAgent.exe {updateInfo.Value.StableLatestVersion} {updateInfo.Value.StableLatestUrl} {Process.GetCurrentProcess().Id}",
+									$"/C start DaramRenamer-Update.bat {updateInfo.Value.StableLatestVersion} {Process.GetCurrentProcess().Id}",
 								UseShellExecute = true,
 							};
 							Process.Start(psInfo);
 							Application.Current.Shutdown();
 						}
-						catch
+						catch (Exception ex)
 						{
-							var psInfo = new ProcessStartInfo("https://github.com/daramkun/DaramRenamer/releases")
+							Console.WriteLine(ex);
+							/*var psInfo = new ProcessStartInfo("https://github.com/daramkun/DaramRenamer/releases")
 							{
 								UseShellExecute = true,
 							};
-							Process.Start(psInfo);
+							Process.Start(psInfo);*/
 						}
 					}
 					else
@@ -686,7 +753,7 @@ namespace DaramRenamer
 
 		private void MenuItemBatch_Click(object sender, RoutedEventArgs e)
 		{
-			if (_currentBatchWindow is null or {IsVisible: false})
+			if (_currentBatchWindow is null or { IsVisible: false })
 				_currentBatchWindow = new BatchWindow(this);
 
 			_currentBatchWindow.Show();

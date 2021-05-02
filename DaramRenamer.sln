@@ -23,11 +23,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.Winston.Shared", "M
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.Nargs.Shared", "Modules\Nargs\Daramee.Nargs.Shared\Daramee.Nargs.Shared.shproj", "{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaramRenamer.UpdateAgent", "DaramRenamer.UpdateAgent\DaramRenamer.UpdateAgent.csproj", "{BB24F8EE-20E5-4A09-9092-891F88B763D7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C207833C-A7C7-4264-9FF5-18E0744F9727} = {C207833C-A7C7-4264-9FF5-18E0744F9727}
-	EndProjectSection
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Blockar.Shared", "Modules\Blockar\Blockar.Shared\Blockar.Shared.shproj", "{24EDA730-617F-409E-BA4A-336B44151438}"
 EndProject
 Global
@@ -55,10 +50,6 @@ Global
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB24F8EE-20E5-4A09-9092-891F88B763D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,7 +61,6 @@ Global
 		{5E1C88AE-6CCA-430C-8ADB-DE4DE4CE2174} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
 		{07D3172F-FF1F-4E6F-AEBE-3E725904B2A7} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
 		{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
-		{BB24F8EE-20E5-4A09-9092-891F88B763D7} = {FEC19557-4029-4031-A6A4-F4B8353263C3}
 		{24EDA730-617F-409E-BA4A-336B44151438} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

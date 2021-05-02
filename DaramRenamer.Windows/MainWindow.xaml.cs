@@ -720,12 +720,12 @@ EXIT";
 						}
 						catch (Exception ex)
 						{
-							Console.WriteLine(ex);
-							/*var psInfo = new ProcessStartInfo("https://github.com/daramkun/DaramRenamer/releases")
+							Debug.WriteLine(ex);
+							var psInfo = new ProcessStartInfo("https://github.com/daramkun/DaramRenamer/releases")
 							{
 								UseShellExecute = true,
 							};
-							Process.Start(psInfo);*/
+							Process.Start(psInfo);
 						}
 					}
 					else

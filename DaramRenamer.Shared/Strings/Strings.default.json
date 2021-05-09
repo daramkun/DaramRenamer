@@ -29,7 +29,7 @@
 	"ThisIsLatestVersionText": "This version is latest.",
 
 	"RestoreSelectedErrorMessage": "No Item selected.",
-	"RestoreSelectedErrorMessageDetail": "Please select items from List box for restore to original filename and path.", 
+	"RestoreSelectedErrorMessageDetail": "Please select items from List box for restore to original filename and path.",
 
 	"Menu_File_File": "_File",
 	"Menu_File_Open": "_Open file...",
@@ -44,7 +44,7 @@
 	"Menu_Edit_Sort": "_Sort file items",
 	"Menu_Edit_ItemToUp": "File item to U_p",
 	"Menu_Edit_ItemToDown": "File item to _Down",
-	"Menu_Edit_RestoreSelected": "Restore selected items to _original", 
+	"Menu_Edit_RestoreSelected": "Restore selected items to _original",
 
 	"Menu_Command_Command": "_Commands",
 	"Menu_Command_Filename": "File_name",
@@ -133,12 +133,16 @@
 
 	"Command_Name_AddExtension": "Add Extension",
 	"Command_Argument_AddExtension_Extension": "Extension",
+	"Commamd_Argument_AddExtension_ApplyToDirectory": "Also Apply to directory",
 	"Command_Name_AddExtensionAuto": "Add Extension automatically",
 	"Command_Name_ReplaceExtension": "Change Extension",
 	"Command_Argument_ReplaceExtension_Extension": "Extension",
+	"Commamd_Argument_ReplaceExtension_ApplyToDirectory": "Also Apply to directory",
 	"Command_Name_DeleteExtension": "Delete Extension",
+	"Commamd_Argument_DeleteExtension_ApplyToDirectory": "Also Apply to directory",
 	"Command_Name_CasecastExtension": "Extension Case-cast",
 	"Command_Argument_CasecastExtension_Casecast": "Method",
+	"Commamd_Argument_CasecastExtension_ApplyToDirectory": "Also Apply to directory",
 
 	"Command_Name_AddDate": "Add Date",
 	"Command_Argument_AddDate_Kind": "Date type",

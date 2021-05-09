@@ -133,12 +133,16 @@
 
 	"Command_Name_AddExtension": "확장자 추가",
 	"Command_Argument_AddExtension_Extension": "추가할 확장자",
+	"Commamd_Argument_AddExtension_ApplyToDirectory": "디렉토리에도 적용",
 	"Command_Name_AddExtensionAuto": "자동으로 확장자 추가",
 	"Command_Name_ReplaceExtension": "확장자 치환",
 	"Command_Argument_ReplaceExtension_Extension": "치환할 확장자",
+	"Commamd_Argument_ReplaceExtension_ApplyToDirectory": "디렉토리에도 적용",
 	"Command_Name_DeleteExtension": "확장자 제거",
 	"Command_Name_CasecastExtension": "확장자 대소문자 변경",
+	"Commamd_Argument_DeleteExtension_ApplyToDirectory": "디렉토리에도 적용",
 	"Command_Argument_CasecastExtension_Casecast": "대소문자 변경 방법",
+	"Commamd_Argument_CasecastExtension_ApplyToDirectory": "디렉토리에도 적용",
 
 	"Command_Name_AddDate": "날짜 추가",
 	"Command_Argument_AddDate_Kind": "추가할 날짜 종류",

@@ -133,12 +133,16 @@
 
 	"Command_Name_AddExtension": "Extensie toevoegen",
 	"Command_Argument_AddExtension_Extension": "Extensie",
+	"Commamd_Argument_AddExtension_ApplyToDirectory": "Ook toepassen op directory",
 	"Command_Name_AddExtensionAuto": "Extensie automatisch toevoegen",
 	"Command_Name_ReplaceExtension": "Extensie wijzigen",
 	"Command_Argument_ReplaceExtension_Extension": "Extensie",
+	"Commamd_Argument_ReplaceExtension_ApplyToDirectory": "Ook toepassen op directory",
 	"Command_Name_DeleteExtension": "Extensie wissen",
+	"Commamd_Argument_DeleteExtension_ApplyToDirectory": "Ook toepassen op directory",
 	"Command_Name_CasecastExtension": "Extensie in ProperCase",
 	"Command_Argument_CasecastExtension_Casecast": "Methode",
+	"Commamd_Argument_CasecastExtension_ApplyToDirectory": "Ook toepassen op directory",
 
 	"Command_Name_AddDate": "Datum toevoegen",
 	"Command_Argument_AddDate_Kind": "Datumtype",

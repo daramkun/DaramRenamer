@@ -13,8 +13,14 @@ namespace DaramRenamer.Commands.Extension
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Extension;
 
+		[LocalizationKey("Commamd_Argument_DeleteExtension_ApplyToDirectory")]
+		public bool ApplyToDirectory { get; set; } = false;
+
 		public bool DoCommand(FileInfo file)
 		{
+			if (!ApplyToDirectory && file.IsDirectory)
+				return true;
+
 			file.ChangedFilename = Path.GetFileNameWithoutExtension(file.ChangedFilename);
 			return true;
 		}

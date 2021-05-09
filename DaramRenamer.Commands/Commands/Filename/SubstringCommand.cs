@@ -8,7 +8,7 @@ namespace DaramRenamer.Commands.Filename
 	[Serializable, LocalizationKey("Command_Name_Substring")]
 	public class SubstringCommand : ICommand, IOrderBy
 	{
-		public int Order => int.MinValue + 7;
+		public int Order => int.MinValue + 8;
 
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Filename;

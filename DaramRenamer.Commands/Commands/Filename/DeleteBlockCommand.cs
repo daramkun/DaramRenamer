@@ -6,7 +6,7 @@ namespace DaramRenamer.Commands.Filename
 	[Serializable, LocalizationKey("Command_Name_DeleteBlock")]
 	public class DeleteBlockCommand : ICommand, IOrderBy
 	{
-		public int Order => int.MinValue + 5;
+		public int Order => int.MinValue + 6;
 
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Filename;

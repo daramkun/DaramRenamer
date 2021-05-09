@@ -9,7 +9,7 @@ namespace DaramRenamer.Commands.Filename
 	[Serializable, LocalizationKey("Command_Name_Casecast")]
 	public class CasecastCommand : ICommand, IOrderBy
 	{
-		public int Order => int.MinValue + 8;
+		public int Order => int.MinValue + 9;
 
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Filename;

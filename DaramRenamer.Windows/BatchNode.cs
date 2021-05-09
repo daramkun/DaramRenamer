@@ -23,7 +23,7 @@ namespace DaramRenamer
 		public override string ToString()
 		{
 			var kind = (Condition == null ? "BatchWindow_Command" : "BatchWindow_Condition");
-			var target = ((object)Command ?? (object)Condition);
+			var target = (Command as object ?? Condition);
 			var type = target?.GetType();
 			var localizationKey = type?.GetCustomAttribute<LocalizationKeyAttribute>()?.LocalizationKey;
 
@@ -46,7 +46,7 @@ namespace DaramRenamer
 			}
 			else args.Clear();
 
-			return $"{Strings.Instance[kind]}: {Strings.Instance[localizationKey]}{args.ToString()}";
+			return $"{Strings.Instance[kind]}: {Strings.Instance[localizationKey]}{args}";
 		}
 
 		public void Execute(FileInfo fileInfo)
@@ -73,7 +73,7 @@ namespace DaramRenamer
 		public virtual void Deserializer(TextReader reader, string line = null)
 		{
 			var name = line ?? reader.ReadLine();
-			var nameMatch = BatchNodeTitle.Match(name);
+			var nameMatch = BatchNodeTitle.Match(name ?? string.Empty);
 			if (!nameMatch.Success)
 				throw new Exception("File is not valid.");
 
@@ -81,14 +81,14 @@ namespace DaramRenamer
 				throw new Exception("BatchNode error.");
 
 			var command = reader.ReadLine();
-			var commandMatch = CommandInfo.Match(command);
+			var commandMatch = CommandInfo.Match(command ?? string.Empty);
 			if (!commandMatch.Success)
 				throw new Exception("File is not valid.");
 
 			Command = DeserializeObject(commandMatch.Groups[1].Value) as ICommand;
 
 			var condition = reader.ReadLine();
-			var conditionMatch = ConditionInfo.Match(condition);
+			var conditionMatch = ConditionInfo.Match(condition ?? string.Empty);
 			if (!conditionMatch.Success)
 				throw new Exception("File is not valid.");
 
@@ -127,8 +127,10 @@ namespace DaramRenamer
 					continue;
 
 				builder.AppendFormat("\"{0}\":", member.Name);
-				var value = member.GetValue(obj)?.ToString()?.Replace("\"", "\\\"")?.Replace("\n", "\\\n")
-					?.Replace("\r", "");
+				var value = member.GetValue(obj)?.ToString()?
+					.Replace("\"", "\\\"")
+					.Replace("\n", "\\\n")
+					.Replace("\r", "");
 				if (value != null)
 					builder.AppendFormat("\"{0}\"", value);
 				else
@@ -230,7 +232,7 @@ namespace DaramRenamer
 						if (member == null)
 							throw new Exception("Invalid field");
 
-						object trueValue = null;
+						object trueValue;
 						if (string.IsNullOrEmpty(value))
 							trueValue = null;
 						else if (member.PropertyType == typeof(string))
@@ -271,11 +273,11 @@ namespace DaramRenamer
 						ch = reader.Read();
 						if (ch == -1)
 							throw new Exception("Invalid syntax");
-						else if (ch == ',')
+						if (ch == ',')
 							continue;
-						else if (ch == '}')
+						if (ch == '}')
 							break;
-						else throw new Exception("Invalid syntax");
+						throw new Exception("Invalid syntax");
 					}
 					else
 						builder.Append((char)ch);

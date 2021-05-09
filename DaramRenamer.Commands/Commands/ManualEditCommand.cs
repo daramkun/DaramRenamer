@@ -10,7 +10,7 @@ namespace DaramRenamer.Commands
 
 		[LocalizationKey("Command_Argument_ManualEdit_ChangeName")]
 		public string ChangeName { get; set; }
-		[LocalizationKey ("Command_Argument_ManualEdit_ChangePath")]
+		[LocalizationKey("Command_Argument_ManualEdit_ChangePath")]
 		public string ChangePath { get; set; }
 
 		public bool DoCommand(FileInfo file)

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DaramRenamer.Commands.Filename
 {
-	[Serializable, LocalizationKey ("Command_Name_Trim")]
+	[Serializable, LocalizationKey("Command_Name_Trim")]
 	public class TrimCommand : ICommand, IOrderBy
 	{
 		public int Order => int.MinValue + 4;
@@ -11,7 +11,7 @@ namespace DaramRenamer.Commands.Filename
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Filename;
 
-		[LocalizationKey ("Command_Argument_Trim_Position")]
+		[LocalizationKey("Command_Argument_Trim_Position")]
 		public Position2 Position { get; set; } = Position2.BothPoint;
 
 		public bool DoCommand(FileInfo file)

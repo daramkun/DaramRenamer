@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DaramRenamer.Commands.Extension
 {
-	[Serializable, LocalizationKey ("Command_Name_DeleteExtension")]
+	[Serializable, LocalizationKey("Command_Name_DeleteExtension")]
 	public class DeleteExtensionCommand : ICommand
 	{
 		public int Order => int.MinValue + 2;

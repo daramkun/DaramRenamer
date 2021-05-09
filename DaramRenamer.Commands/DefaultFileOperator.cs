@@ -39,7 +39,7 @@ namespace DaramRenamer
 			File.Copy(source, destination, overwrite);
 		}
 
-		private readonly string[] EmptyList = new string[] { };
+		private static readonly string[] EmptyList = { };
 
 		public IEnumerable<string> GetFiles(string directory, bool topDirectoryOnly)
 		{
@@ -49,14 +49,14 @@ namespace DaramRenamer
 				topDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
 		}
 
-		public bool FileExists (string path)
+		public bool FileExists(string path)
 		{
-			return File.Exists (path) && File.GetAttributes (path) != FileAttributes.Directory;
+			return File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory;
 		}
 
-		public bool DirectoryExists (string path)
+		public bool DirectoryExists(string path)
 		{
-			return Directory.Exists (path) && File.GetAttributes (path) == FileAttributes.Directory;
+			return Directory.Exists(path) && File.GetAttributes(path) == FileAttributes.Directory;
 		}
 	}
 }

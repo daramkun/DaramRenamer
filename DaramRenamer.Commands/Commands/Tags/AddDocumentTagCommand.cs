@@ -4,15 +4,15 @@ using System.Xml;
 
 namespace DaramRenamer.Commands.Tags
 {
-	[Serializable, LocalizationKey ("Command_Name_AddDocumentTag")]
+	[Serializable, LocalizationKey("Command_Name_AddDocumentTag")]
 	public class AddDocumentTagCommand : ICommand
 	{
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Tag;
 
-		[LocalizationKey ("Command_Argument_AddDocumentTag_Tag")]
+		[LocalizationKey("Command_Argument_AddDocumentTag_Tag")]
 		public DocumentTag Tag { get; set; }
-		[LocalizationKey ("Command_Argument_AddDocumentTag_Position")]
+		[LocalizationKey("Command_Argument_AddDocumentTag_Position")]
 		public Position1 Position { get; set; } = Position1.EndPoint;
 
 		public bool DoCommand(FileInfo file)
@@ -20,7 +20,7 @@ namespace DaramRenamer.Commands.Tags
 			File f;
 			try
 			{
-				f = new File (file.OriginalFullPath);
+				f = new File(file.OriginalFullPath);
 			}
 			catch { return false; }
 
@@ -31,8 +31,8 @@ namespace DaramRenamer.Commands.Tags
 				_ => ""
 			};
 
-			var fn = Path.GetFileNameWithoutExtension (file.ChangedFilename);
-			var ext = Path.GetExtension (file.ChangedFilename);
+			var fn = Path.GetFileNameWithoutExtension(file.ChangedFilename);
+			var ext = Path.GetExtension(file.ChangedFilename);
 			file.ChangedFilename = Position switch
 			{
 				Position1.StartPoint => $"{tag}{fn}{ext}",
@@ -48,18 +48,18 @@ namespace DaramRenamer.Commands.Tags
 			public string Title { get; }
 			public string Author { get; }
 
-			public File (string path)
+			public File(string path)
 			{
-				using var stream = new FileStream (path, FileMode.Open);
-				var archive = new System.IO.Compression.ZipArchive (stream);
+				using var stream = new FileStream(path, FileMode.Open);
+				var archive = new System.IO.Compression.ZipArchive(stream);
 				foreach (var entry in archive.Entries)
 				{
 					switch (entry.FullName)
 					{
 						case "docProps/core.xml":
 							{
-								var xml = new XmlDocument ();
-								xml.LoadXml (new StreamReader (entry.Open ()).ReadToEnd ());
+								var xml = new XmlDocument();
+								xml.LoadXml(new StreamReader(entry.Open()).ReadToEnd());
 
 								if (xml.DocumentElement == null)
 									continue;
@@ -69,10 +69,10 @@ namespace DaramRenamer.Commands.Tags
 										switch ((element as XmlElement)?.LocalName)
 										{
 											case "title":
-												Title = ((XmlElement) element).InnerText;
+												Title = ((XmlElement)element).InnerText;
 												break;
 											case "creator":
-												Author = ((XmlElement) element).InnerText;
+												Author = ((XmlElement)element).InnerText;
 												break;
 										}
 								}
@@ -81,8 +81,8 @@ namespace DaramRenamer.Commands.Tags
 							}
 						case "meta.xml":
 							{
-								var xml = new XmlDocument ();
-								xml.LoadXml (new StreamReader (entry.Open ()).ReadToEnd ());
+								var xml = new XmlDocument();
+								xml.LoadXml(new StreamReader(entry.Open()).ReadToEnd());
 
 								if (xml.DocumentElement == null)
 									continue;

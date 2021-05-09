@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DaramRenamer.Commands.Date
 {
-	[Serializable, LocalizationKey ("Command_Name_AddDate")]
+	[Serializable, LocalizationKey("Command_Name_AddDate")]
 	public class AddDateCommand : ICommand, IOrderBy
 	{
 		public int Order => int.MinValue;
@@ -15,9 +15,9 @@ namespace DaramRenamer.Commands.Date
 
 		[LocalizationKey("Command_Argument_AddDate_Kind")]
 		public FileDateKind Kind { get; set; } = FileDateKind.Creation;
-		[LocalizationKey ("Command_Argument_AddDate_Format")]
+		[LocalizationKey("Command_Argument_AddDate_Format")]
 		public string Format { get; set; } = "yyMMdd";
-		[LocalizationKey ("Command_Argument_AddDate_Position")]
+		[LocalizationKey("Command_Argument_AddDate_Position")]
 		public Position1 Position { get; set; } = Position1.EndPoint;
 
 		public bool DoCommand(FileInfo file)

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DaramRenamer.Commands.Filename
 {
-	[Serializable, LocalizationKey ("Command_Name_DeleteBlock")]
+	[Serializable, LocalizationKey("Command_Name_DeleteBlock")]
 	public class DeleteBlockCommand : ICommand, IOrderBy
 	{
 		public int Order => int.MinValue + 5;
@@ -11,13 +11,13 @@ namespace DaramRenamer.Commands.Filename
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Filename;
 
-		[LocalizationKey ("Command_Argument_DeleteBlock_StartBlock")]
+		[LocalizationKey("Command_Argument_DeleteBlock_StartBlock")]
 		public string StartBlock { get; set; } = string.Empty;
-		[LocalizationKey ("Command_Argument_DeleteBlock_EndBlock")]
+		[LocalizationKey("Command_Argument_DeleteBlock_EndBlock")]
 		public string EndBlock { get; set; } = string.Empty;
-		[LocalizationKey ("Command_Argument_DeleteBlock_DeleteAllBlocks")]
+		[LocalizationKey("Command_Argument_DeleteBlock_DeleteAllBlocks")]
 		public bool DeleteAllBlocks { get; set; } = false;
-		[LocalizationKey ("Command_Argument_DeleteBlock_IncludeExtension")]
+		[LocalizationKey("Command_Argument_DeleteBlock_IncludeExtension")]
 		public bool IncludeExtension { get; set; } = false;
 
 		public bool DoCommand(FileInfo file)

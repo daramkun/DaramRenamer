@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DaramRenamer.Commands.Filename
 {
-	[Serializable, LocalizationKey ("Command_Name_Casecast")]
+	[Serializable, LocalizationKey("Command_Name_Casecast")]
 	public class CasecastCommand : ICommand, IOrderBy
 	{
 		public int Order => int.MinValue + 8;
@@ -14,7 +14,7 @@ namespace DaramRenamer.Commands.Filename
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Filename;
 
-		[LocalizationKey ("Command_Argument_Casecast_Casecast")]
+		[LocalizationKey("Command_Argument_Casecast_Casecast")]
 		public Casecast2 Casecast { get; set; } = Casecast2.LowercaseAll;
 
 		public bool DoCommand(FileInfo file)

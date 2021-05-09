@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -31,12 +30,12 @@ namespace DaramRenamer
 
 							// Conversion from Legacy Settings file
 							if (jsonString.Contains("\"hw_accel_mode\"") || jsonString.Contains("\"rename_mode\"") ||
-							    jsonString.Contains("\"auto_name_fix\"") || jsonString.Contains("\"auto_list_clean\"") ||
-							    jsonString.Contains("\"overwrite\"") || jsonString.Contains("\"save_window_state\"") ||
-							    jsonString.Contains("\"left\"") || jsonString.Contains("\"top\"") ||
-							    jsonString.Contains("\"width\"") || jsonString.Contains("\"height\"") ||
-							    jsonString.Contains("\"window_state\"") || jsonString.Contains("\"use_custom_plugins\"") ||
-							    jsonString.Contains("\"language\""))
+								jsonString.Contains("\"auto_name_fix\"") || jsonString.Contains("\"auto_list_clean\"") ||
+								jsonString.Contains("\"overwrite\"") || jsonString.Contains("\"save_window_state\"") ||
+								jsonString.Contains("\"left\"") || jsonString.Contains("\"top\"") ||
+								jsonString.Contains("\"width\"") || jsonString.Contains("\"height\"") ||
+								jsonString.Contains("\"window_state\"") || jsonString.Contains("\"use_custom_plugins\"") ||
+								jsonString.Contains("\"language\""))
 							{
 								jsonString = jsonString.Replace("\"hw_accel_mode\"", "\"HardwareAccelerated\"");
 								jsonString = jsonString.Replace("\"rename_mode\"", "\"RenameMode\"");
@@ -52,7 +51,7 @@ namespace DaramRenamer
 								jsonString = jsonString.Replace("\"use_custom_plugins\"", "\"UseCustomPlugins\"");
 								jsonString = jsonString.Replace("\"language\"", "\"Language\"");
 							}
-							
+
 							var jsonBytes = Encoding.UTF8.GetBytes(jsonString);
 							_instance = JsonSerializer.Deserialize<Preferences>(jsonBytes);
 							break;
@@ -68,7 +67,7 @@ namespace DaramRenamer
 
 		[NonSerialized]
 		private bool _hardwareAccelerated = RenderOptions.ProcessRenderMode == RenderMode.Default;
-		
+
 		public bool HaredwareAccelerated
 		{
 			get => _hardwareAccelerated;
@@ -78,28 +77,28 @@ namespace DaramRenamer
 				RenderOptions.ProcessRenderMode = value ? RenderMode.Default : RenderMode.SoftwareOnly;
 			}
 		}
-		
+
 		public RenameMode RenameMode { get; set; } = RenameMode.Move;
 		internal int RenameModeInteger
 		{
 			get => (int)RenameMode;
 			set => RenameMode = (RenameMode)value;
 		}
-		
+
 		public bool AutomaticFixingFilename { get; set; } = true;
 		public bool AutomaticListCleaning { get; set; } = false;
 		public bool Overwrite { get; set; } = false;
-		
+
 		public bool SaveWindowState { get; set; } = false;
-		
+
 		public double Left { get; set; }
 		public double Top { get; set; }
 		public double Width { get; set; }
 		public double Height { get; set; }
 		public WindowState WindowState { get; set; }
-		
+
 		public bool UseCustomPlugins { get; set; } = false;
-		
+
 		public string CurrentLanguage
 		{
 			get => CultureInfo.CurrentUICulture.ToString();
@@ -111,18 +110,17 @@ namespace DaramRenamer
 		}
 
 		[NonSerialized]
-		private readonly KeyBindingInfo[] _shortcuts = new KeyBindingInfo[10]
-		{
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
-			new KeyBindingInfo(),
+		private readonly KeyBindingInfo[] _shortcuts = {
+			new(),
+			new(),
+			new(),
+			new(),
+			new(),
+			new(),
+			new(),
+			new(),
+			new(),
+			new(),
 		};
 
 		public KeyBindingInfo[] Shortcuts => _shortcuts;
@@ -151,7 +149,7 @@ namespace DaramRenamer
 
 			return new KeyGesture(key, modifierKeys);
 		}
-		
+
 		public KeyBindingInfo Shortcut0
 		{
 			get => _shortcuts[0];
@@ -164,7 +162,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 0].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut1
 		{
 			get => _shortcuts[1];
@@ -177,7 +175,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 1].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut2
 		{
 			get => _shortcuts[2];
@@ -190,7 +188,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 2].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut3
 		{
 			get => _shortcuts[3];
@@ -203,7 +201,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 3].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut4
 		{
 			get => _shortcuts[4];
@@ -216,7 +214,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 4].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut5
 		{
 			get => _shortcuts[5];
@@ -229,7 +227,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 5].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut6
 		{
 			get => _shortcuts[6];
@@ -255,7 +253,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 7].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut8
 		{
 			get => _shortcuts[8];
@@ -268,7 +266,7 @@ namespace DaramRenamer
 					window.InputBindings[8 + 8].Gesture = gesture;
 			}
 		}
-		
+
 		public KeyBindingInfo Shortcut9
 		{
 			get => _shortcuts[9];
@@ -291,7 +289,8 @@ namespace DaramRenamer
 			using Stream stream = File.Open($"{AppDomain.CurrentDomain.BaseDirectory}\\DaramRenamer.config.json", FileMode.Create);
 			var jsonBytes = JsonSerializer.SerializeToUtf8Bytes(this, typeof(Preferences), new JsonSerializerOptions()
 			{
-				WriteIndented = false, AllowTrailingCommas = false,
+				WriteIndented = false,
+				AllowTrailingCommas = false,
 			});
 			stream.Write(jsonBytes, 0, jsonBytes.Length);
 		}

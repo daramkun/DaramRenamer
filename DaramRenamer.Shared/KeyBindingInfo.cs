@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
 using DaramRenamer.Annotations;
 
@@ -29,11 +27,11 @@ namespace DaramRenamer
 			get
 			{
 				if (string.IsNullOrEmpty(_keyBinding) || string.IsNullOrWhiteSpace(_keyBinding))
-					return (Key) 0;
+					return 0;
 				var keyText = _keyBinding.Replace("Ctrl+", "").Replace("Alt+", "").Replace("Shift+", "");
-				if (Enum.TryParse<Key>(keyText, out var result))
-					return result;
-				return (Key) 0;
+				return Enum.TryParse<Key>(keyText, out var result)
+					? result
+					: 0;
 			}
 		}
 

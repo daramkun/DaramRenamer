@@ -16,7 +16,7 @@ namespace DaramRenamer.Commands.Tags
 		[LocalizationKey ("Command_Argument_AddGitInfo_Position")]
 		public Position1 Position { get; set; } = Position1.EndPoint;
 
-		private readonly string[] Arguments = 
+		private static readonly string[] Arguments = 
 		{
 			"rev-parse HEAD",
 			"rev-parse --short HEAD",

@@ -18,10 +18,10 @@ namespace DaramRenamer
 		public static void Sort(ObservableCollection<FileInfo> files)
 		{
 			if (files == null) return;
-			DaramRenamer.Sort.Quicksort<FileInfo>(files);
+			DaramRenamer.Sort.Quicksort(files);
 		}
 
-		public static ObservableCollection<FileInfo> Files { get; set; } = new ObservableCollection<FileInfo>();
+		public static ObservableCollection<FileInfo> Files { get; set; } = new();
 		public static IFileOperator FileOperator { get; set; } = new DefaultFileOperator();
 
 		public static void Apply(bool autoFix, RenameMode renameMode, bool overwrite,

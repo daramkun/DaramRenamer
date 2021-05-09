@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DaramRenamer.Conditions
 {
-	[Serializable, LocalizationKey ("Condition_Name_Extension")]
+	[Serializable, LocalizationKey("Condition_Name_Extension")]
 	public class ExtensionCondition : ICondition
 	{
 		[LocalizationKey("Condition_Argument_Extension_Extension")]

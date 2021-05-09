@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Controls;
 
 namespace DaramRenamer
 {
 	public static class PluginToMenu
 	{
-		private static List<ObservableCollection<ICommand>> initializedCommandLists = new List<ObservableCollection<ICommand>> ();
-		private static ObservableCollection<ICondition> initializedConditionList = new ObservableCollection<ICondition>();
+		private static readonly List<ObservableCollection<ICommand>> InitializedCommandLists = new();
+		private static ObservableCollection<ICondition> _initializedConditionList = new();
 
 		public static void InitializeCommands(ItemCollection commandsMenuItems, bool initializeMain = true)
 		{
@@ -26,23 +24,23 @@ namespace DaramRenamer
 
 			foreach (var (category, menuItem) in menuItems)
 			{
-				var initializedCommandList = new ObservableCollection<ICommand>(PluginManager.Instance.GetCategoriedCommands (category));
+				var initializedCommandList = new ObservableCollection<ICommand>(PluginManager.Instance.GetCategoriedCommands(category));
 				menuItem.ItemsSource = initializedCommandList;
-				if(initializeMain)
-					initializedCommandLists.Add(initializedCommandList);
+				if (initializeMain)
+					InitializedCommandLists.Add(initializedCommandList);
 			}
 		}
 
 		public static void InitializeConditions(MenuItem conditionsMenu, bool initializeMain = true)
 		{
-			if(initializeMain)
-				initializedConditionList = new ObservableCollection<ICondition>(PluginManager.Instance.Conditions);
-			conditionsMenu.ItemsSource = initializedConditionList;
+			if (initializeMain)
+				_initializedConditionList = new ObservableCollection<ICondition>(PluginManager.Instance.Conditions);
+			conditionsMenu.ItemsSource = _initializedConditionList;
 		}
 
 		public static void RefreshBinding()
 		{
-			foreach (var list in initializedCommandLists)
+			foreach (var list in InitializedCommandLists)
 			{
 				for (var i = 0; i < list.Count; ++i)
 				{
@@ -53,11 +51,11 @@ namespace DaramRenamer
 			}
 
 
-			for (var i = 0; i < initializedConditionList.Count; ++i)
+			for (var i = 0; i < _initializedConditionList.Count; ++i)
 			{
-				var temp = initializedConditionList [i];
-				initializedConditionList [i] = null;
-				initializedConditionList [i] = temp;
+				var temp = _initializedConditionList[i];
+				_initializedConditionList[i] = null;
+				_initializedConditionList[i] = temp;
 			}
 		}
 	}

@@ -12,44 +12,44 @@ namespace DaramRenamer.Converters
 {
 	internal class PathToIconConverter : IValueConverter
 	{
-		static readonly Dictionary<string, BitmapSource> cached = new Dictionary<string, BitmapSource> ();
+		static readonly Dictionary<string, BitmapSource> cached = new Dictionary<string, BitmapSource>();
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var filename = value as string;
 			string key = null;
 			var doNotCache = false;
-			if (File.GetAttributes (filename).HasFlag (FileAttributes.Directory))
+			if (File.GetAttributes(filename).HasFlag(FileAttributes.Directory))
 			{
-				if (cached.ContainsKey ("?"))
-					return cached ["?"];
+				if (cached.ContainsKey("?"))
+					return cached["?"];
 				key = "?";
 			}
 			else
 			{
-				var ext = Path.GetExtension (filename);
+				var ext = Path.GetExtension(filename);
 
-				if (ext == ".exe" || ext == ".ico")
+				if (ext is ".exe" or ".ico")
 				{
 					doNotCache = true;
 				}
 				else
 				{
-					if (cached.ContainsKey (ext))
-						return cached [ext];
+					if (cached.ContainsKey(ext))
+						return cached[ext];
 					key = ext;
 				}
 			}
-			var hIcon = File.GetAttributes (filename).HasFlag (FileAttributes.Directory)
-				? GetFolderIcon (filename)
-				: GetFileIcon (filename);
-			var icon = Imaging.CreateBitmapSourceFromHIcon (hIcon, Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight (16, 16));
-			DestroyIcon (hIcon);
+			var hIcon = File.GetAttributes(filename).HasFlag(FileAttributes.Directory)
+				? GetFolderIcon(filename)
+				: GetFileIcon(filename);
+			var icon = Imaging.CreateBitmapSourceFromHIcon(hIcon, Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(16, 16));
+			DestroyIcon(hIcon);
 			if (icon.CanFreeze)
-				icon.Freeze ();
+				icon.Freeze();
 
 			if (!doNotCache)
-				cached.Add (key, icon);
+				cached.Add(key, icon);
 
 			return icon;
 		}
@@ -59,21 +59,21 @@ namespace DaramRenamer.Converters
 			throw new NotImplementedException();
 		}
 
-		[StructLayout (LayoutKind.Sequential)]
+		[StructLayout(LayoutKind.Sequential)]
 		struct SHFILEINFO
 		{
 			public const int NAMESIZE = 80;
 			public IntPtr hIcon;
 			public int iIcon;
 			public uint dwAttributes;
-			[MarshalAs (UnmanagedType.ByValTStr, SizeConst = 260)]
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
 			public string szDisplayName;
-			[MarshalAs (UnmanagedType.ByValTStr, SizeConst = 80)]
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
 			public string szTypeName;
 		};
 
-		[DllImport ("Shell32.dll")]
-		static extern IntPtr SHGetFileInfo (string pszPath, uint dwFileAttributes, out SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
+		[DllImport("Shell32.dll")]
+		static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, out SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
 
 		const uint SHGFI_ICON = 0x000000100;
 		const uint SHGFI_SMALLICON = 0x000000001;
@@ -83,22 +83,22 @@ namespace DaramRenamer.Converters
 		const uint FILE_ATTRIBUTE_DIRECTORY = 0x00000010;
 		const uint FILE_ATTRIBUTE_NORMAL = 0x00000080;
 
-		[DllImport ("User32.dll")]
-		static extern int DestroyIcon (IntPtr hIcon);
+		[DllImport("User32.dll")]
+		static extern int DestroyIcon(IntPtr hIcon);
 
-		static IntPtr GetFileIcon (string name)
+		static IntPtr GetFileIcon(string name)
 		{
-			SHGetFileInfo (name, FILE_ATTRIBUTE_NORMAL, out SHFILEINFO shfi,
-				(uint) Marshal.SizeOf (typeof (SHFILEINFO)),
+			SHGetFileInfo(name, FILE_ATTRIBUTE_NORMAL, out SHFILEINFO shfi,
+				(uint)Marshal.SizeOf(typeof(SHFILEINFO)),
 				SHGFI_ICON | SHGFI_USEFILEATTRIBUTES | SHGFI_SMALLICON);
 
 			return shfi.hIcon;
 		}
 
-		static IntPtr GetFolderIcon (string name)
+		static IntPtr GetFolderIcon(string name)
 		{
-			SHGetFileInfo (name, FILE_ATTRIBUTE_DIRECTORY, out SHFILEINFO shfi,
-				(uint) Marshal.SizeOf (typeof (SHFILEINFO)),
+			SHGetFileInfo(name, FILE_ATTRIBUTE_DIRECTORY, out SHFILEINFO shfi,
+				(uint)Marshal.SizeOf(typeof(SHFILEINFO)),
 				SHGFI_ICON | SHGFI_USEFILEATTRIBUTES | SHGFI_OPENICON | SHGFI_SMALLICON);
 
 			return shfi.hIcon;

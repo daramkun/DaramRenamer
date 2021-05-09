@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DaramRenamer
 {
 	[Serializable]
 	public class UndoManager
 	{
-		private Stack<byte[]> undoStack = new();
-		private Stack<byte[]> redoStack = new();
+		private Stack<byte[]> _undoStack = new();
+		private Stack<byte[]> _redoStack = new();
 
 		public event EventHandler UpdateUndo, UpdateRedo;
 
-		public bool IsUndoStackEmpty => undoStack.Count == 0;
-		public bool IsRedoStackEmpty => redoStack.Count == 0;
+		public bool IsUndoStackEmpty => _undoStack.Count == 0;
+		public bool IsRedoStackEmpty => _redoStack.Count == 0;
 
 		public void SaveToUndoStack(ObservableCollection<FileInfo> fileInfoCollection, bool clearRedoStack = true)
 		{
-			undoStack.Push(FileInfoSerializer.SerializeCollection(fileInfoCollection));
+			_undoStack.Push(FileInfoSerializer.SerializeCollection(fileInfoCollection));
 
 			if (clearRedoStack)
 				ClearRedoStack();
@@ -29,7 +27,7 @@ namespace DaramRenamer
 
 		public void SaveToRedoStack(ObservableCollection<FileInfo> fileInfoCollection)
 		{
-			redoStack.Push(FileInfoSerializer.SerializeCollection(fileInfoCollection));
+			_redoStack.Push(FileInfoSerializer.SerializeCollection(fileInfoCollection));
 
 			UpdateRedo?.Invoke(this, EventArgs.Empty);
 		}
@@ -42,7 +40,7 @@ namespace DaramRenamer
 		public ObservableCollection<FileInfo> LoadFromUndoStack()
 		{
 			if (IsUndoStackEmpty) return null;
-			var ret = FileInfoSerializer.DeserializeCollection(undoStack.Pop());
+			var ret = FileInfoSerializer.DeserializeCollection(_undoStack.Pop());
 			UpdateUndo?.Invoke(this, EventArgs.Empty);
 			return ret;
 		}
@@ -50,7 +48,7 @@ namespace DaramRenamer
 		public ObservableCollection<FileInfo> LoadFromRedoStack()
 		{
 			if (IsRedoStackEmpty) return null;
-			var ret = FileInfoSerializer.DeserializeCollection(redoStack.Pop());
+			var ret = FileInfoSerializer.DeserializeCollection(_redoStack.Pop());
 			UpdateRedo?.Invoke(this, EventArgs.Empty);
 			return ret;
 		}
@@ -62,12 +60,12 @@ namespace DaramRenamer
 
 		public void ClearUndoStack()
 		{
-			undoStack.Clear();
+			_undoStack.Clear();
 		}
 
 		public void ClearRedoStack()
 		{
-			redoStack.Clear();
+			_redoStack.Clear();
 		}
 
 		public void ClearAll()

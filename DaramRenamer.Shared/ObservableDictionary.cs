@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 
 namespace DaramRenamer
 {
-	[DebuggerDisplay ("Count={Count}")]
-	public class ObservableDictionary<TKey, TValue> :
-		ICollection<KeyValuePair<TKey, TValue>>, IDictionary<TKey, TValue>,
+	[DebuggerDisplay("Count={Count}")]
+	public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
 		INotifyCollectionChanged, INotifyPropertyChanged
 	{
-		private readonly IDictionary<TKey, TValue> dictionary;
+		private readonly IDictionary<TKey, TValue> _dictionary;
 
 		/// <summary>Event raised when the collection changes.</summary>
-		public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, args) => { };
+		public event NotifyCollectionChangedEventHandler CollectionChanged = (_, _) => { };
 
 		/// <summary>Event raised when a property on the collection changes.</summary>
-		public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
+		public event PropertyChangedEventHandler PropertyChanged = (_, _) => { };
 
 		/// <summary>
 		/// Initializes an instance of the class.
 		/// </summary>
-		public ObservableDictionary ()
-			: this (new Dictionary<TKey, TValue> ())
+		public ObservableDictionary()
+			: this(new Dictionary<TKey, TValue>())
 		{
 		}
 
@@ -34,65 +30,57 @@ namespace DaramRenamer
 		/// Initializes an instance of the class using another dictionary as 
 		/// the key/value store.
 		/// </summary>
-		public ObservableDictionary (IDictionary<TKey, TValue> dictionary)
+		public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
 		{
-			this.dictionary = dictionary;
+			this._dictionary = dictionary;
 		}
 
-		private void AddWithNotification (KeyValuePair<TKey, TValue> item)
+		private void AddWithNotification(KeyValuePair<TKey, TValue> item)
 		{
-			AddWithNotification (item.Key, item.Value);
+			AddWithNotification(item.Key, item.Value);
 		}
 
-		private void AddWithNotification (TKey key, TValue value)
+		private void AddWithNotification(TKey key, TValue value)
 		{
-			dictionary.Add (key, value);
+			_dictionary.Add(key, value);
 
-			CollectionChanged (this, new NotifyCollectionChangedEventArgs (NotifyCollectionChangedAction.Add,
-				new KeyValuePair<TKey, TValue> (key, value)));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Count"));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Keys"));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Values"));
+			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+				new KeyValuePair<TKey, TValue>(key, value)));
+			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
+			PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
+			PropertyChanged(this, new PropertyChangedEventArgs("Values"));
 		}
 
-		private bool RemoveWithNotification (TKey key)
+		private bool RemoveWithNotification(TKey key)
 		{
-			if (!dictionary.TryGetValue(key, out var value) || !dictionary.Remove(key))
+			if (!_dictionary.TryGetValue(key, out var value) || !_dictionary.Remove(key))
 				return false;
 
-			CollectionChanged (this, new NotifyCollectionChangedEventArgs (NotifyCollectionChangedAction.Remove,
-				new KeyValuePair<TKey, TValue> (key, value)));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Count"));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Keys"));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Values"));
+			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+				new KeyValuePair<TKey, TValue>(key, value)));
+			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
+			PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
+			PropertyChanged(this, new PropertyChangedEventArgs("Values"));
 
 			return true;
 
 		}
 
-		private void UpdateWithNotification (TKey key, TValue value)
+		private void UpdateWithNotification(TKey key, TValue value)
 		{
-			if (dictionary.TryGetValue (key, out var existing))
+			if (_dictionary.TryGetValue(key, out var existing))
 			{
-				dictionary [key] = value;
+				_dictionary[key] = value;
 
-				CollectionChanged (this, new NotifyCollectionChangedEventArgs (NotifyCollectionChangedAction.Replace,
-					new KeyValuePair<TKey, TValue> (key, value),
-					new KeyValuePair<TKey, TValue> (key, existing)));
-				PropertyChanged (this, new PropertyChangedEventArgs ("Values"));
+				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,
+					new KeyValuePair<TKey, TValue>(key, value),
+					new KeyValuePair<TKey, TValue>(key, existing)));
+				PropertyChanged(this, new PropertyChangedEventArgs("Values"));
 			}
 			else
 			{
-				AddWithNotification (key, value);
+				AddWithNotification(key, value);
 			}
-		}
-
-		/// <summary>
-		/// Allows derived classes to raise custom property changed events.
-		/// </summary>
-		protected void RaisePropertyChanged (PropertyChangedEventArgs args)
-		{
-			PropertyChanged (this, args);
 		}
 
 		#region IDictionary<TKey,TValue> Members
@@ -102,9 +90,9 @@ namespace DaramRenamer
 		/// </summary>
 		/// <param name="key">The object to use as the key of the element to add.</param>
 		/// <param name="value">The object to use as the value of the element to add.</param>
-		public void Add (TKey key, TValue value)
+		public void Add(TKey key, TValue value)
 		{
-			AddWithNotification (key, value);
+			AddWithNotification(key, value);
 		}
 
 		/// <summary>
@@ -114,16 +102,16 @@ namespace DaramRenamer
 		/// <returns>
 		/// true if the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the key; otherwise, false.
 		/// </returns>
-		public bool ContainsKey (TKey key)
+		public bool ContainsKey(TKey key)
 		{
-			return dictionary.ContainsKey (key);
+			return _dictionary.ContainsKey(key);
 		}
 
 		/// <summary>
 		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="T:System.Collections.Generic.IDictionary`2" />.
 		/// </summary>
 		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
-		public ICollection<TKey> Keys => dictionary.Keys;
+		public ICollection<TKey> Keys => _dictionary.Keys;
 
 		/// <summary>
 		/// Removes the element with the specified key from the <see cref="T:System.Collections.Generic.IDictionary`2" />.
@@ -132,9 +120,9 @@ namespace DaramRenamer
 		/// <returns>
 		/// true if the element is successfully removed; otherwise, false.  This method also returns false if <paramref name="key" /> was not found in the original <see cref="T:System.Collections.Generic.IDictionary`2" />.
 		/// </returns>
-		public bool Remove (TKey key)
+		public bool Remove(TKey key)
 		{
-			return RemoveWithNotification (key);
+			return RemoveWithNotification(key);
 		}
 
 		/// <summary>
@@ -145,78 +133,78 @@ namespace DaramRenamer
 		/// <returns>
 		/// true if the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key; otherwise, false.
 		/// </returns>
-		public bool TryGetValue (TKey key, out TValue value)
+		public bool TryGetValue(TKey key, out TValue value)
 		{
-			return dictionary.TryGetValue (key, out value);
+			return _dictionary.TryGetValue(key, out value);
 		}
 
 		/// <summary>
 		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="T:System.Collections.Generic.IDictionary`2" />.
 		/// </summary>
 		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
-		public ICollection<TValue> Values => dictionary.Values;
+		public ICollection<TValue> Values => _dictionary.Values;
 
 		/// <summary>
 		/// Gets or sets the element with the specified key.
 		/// </summary>
 		/// <param name="key">The key.</param>
 		/// <returns></returns>
-		public TValue this [TKey key]
+		public TValue this[TKey key]
 		{
-			get => dictionary [key];
-			set => UpdateWithNotification (key, value);
+			get => _dictionary[key];
+			set => UpdateWithNotification(key, value);
 		}
 
 		#endregion
 
 		#region ICollection<KeyValuePair<TKey,TValue>> Members
 
-		void ICollection<KeyValuePair<TKey, TValue>>.Add (KeyValuePair<TKey, TValue> item)
+		void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
 		{
-			AddWithNotification (item);
+			AddWithNotification(item);
 		}
 
-		void ICollection<KeyValuePair<TKey, TValue>>.Clear ()
+		void ICollection<KeyValuePair<TKey, TValue>>.Clear()
 		{
-			dictionary.Clear ();
+			_dictionary.Clear();
 
-			CollectionChanged (this, new NotifyCollectionChangedEventArgs (NotifyCollectionChangedAction.Reset));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Count"));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Keys"));
-			PropertyChanged (this, new PropertyChangedEventArgs ("Values"));
+			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
+			PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
+			PropertyChanged(this, new PropertyChangedEventArgs("Values"));
 		}
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.Contains (KeyValuePair<TKey, TValue> item)
+		bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
 		{
-			return dictionary.Contains (item);
+			return _dictionary.Contains(item);
 		}
 
-		void ICollection<KeyValuePair<TKey, TValue>>.CopyTo (KeyValuePair<TKey, TValue> [] array, int arrayIndex)
+		void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
 		{
-			dictionary.CopyTo (array, arrayIndex);
+			_dictionary.CopyTo(array, arrayIndex);
 		}
 
-		int ICollection<KeyValuePair<TKey, TValue>>.Count => dictionary.Count;
+		int ICollection<KeyValuePair<TKey, TValue>>.Count => _dictionary.Count;
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => dictionary.IsReadOnly;
+		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => _dictionary.IsReadOnly;
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.Remove (KeyValuePair<TKey, TValue> item)
+		bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
 		{
-			return RemoveWithNotification (item.Key);
+			return RemoveWithNotification(item.Key);
 		}
 
 		#endregion
 
 		#region IEnumerable<KeyValuePair<TKey,TValue>> Members
 
-		public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator ()
+		public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
 		{
-			return dictionary.GetEnumerator ();
+			return _dictionary.GetEnumerator();
 		}
 
-		IEnumerator IEnumerable.GetEnumerator ()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return dictionary.GetEnumerator ();
+			return _dictionary.GetEnumerator();
 		}
 
 		#endregion

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DaramRenamer.Commands.Filename
 {
-	[Serializable, LocalizationKey ("Command_Name_DeleteFilename")]
+	[Serializable, LocalizationKey("Command_Name_DeleteFilename")]
 	public class DeleteFilenameCommand : ICommand, IOrderBy
 	{
 		public int Order => int.MinValue + 6;

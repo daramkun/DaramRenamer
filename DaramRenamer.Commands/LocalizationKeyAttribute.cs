@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DaramRenamer
 {
 	public class LocalizationKeyAttribute : Attribute
 	{
-		public string LocalizationKey { get; private set; }
+		public string LocalizationKey { get; }
 
 		public LocalizationKeyAttribute(string key)
 		{

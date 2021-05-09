@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace DaramRenamer.Commands.Filename
 {
-	[Serializable, LocalizationKey ("Command_Name_ReplaceRegexp")]
+	[Serializable, LocalizationKey("Command_Name_ReplaceRegexp")]
 	public class ReplaceRegexpCommand : ICommand, IOrderBy
 	{
 		public int Order => int.MinValue + 1;
@@ -14,9 +14,9 @@ namespace DaramRenamer.Commands.Filename
 
 		[LocalizationKey("Command_Argument_ReplaceRegexp_Find")]
 		public Regex Find { get; set; } = new Regex("$^");
-		[LocalizationKey ("Command_Argument_ReplaceRegexp_Replace")]
+		[LocalizationKey("Command_Argument_ReplaceRegexp_Replace")]
 		public string Replace { get; set; } = string.Empty;
-		[LocalizationKey ("Command_Argument_ReplaceRegexp_IncludeExtension")]
+		[LocalizationKey("Command_Argument_ReplaceRegexp_IncludeExtension")]
 		public bool IncludeExtension { get; set; } = false;
 
 		public bool DoCommand(FileInfo file)

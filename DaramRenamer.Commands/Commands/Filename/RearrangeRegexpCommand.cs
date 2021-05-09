@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace DaramRenamer.Commands.Filename
 {
-	[Serializable, LocalizationKey ("Command_Name_RearrangeRegexp")]
+	[Serializable, LocalizationKey("Command_Name_RearrangeRegexp")]
 	public class RearrangeRegexpCommand : ICommand, IOrderBy
 	{
 		public int Order => int.MinValue + 2;
@@ -12,11 +12,11 @@ namespace DaramRenamer.Commands.Filename
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Filename;
 
-		[LocalizationKey ("Command_Argument_RearrangeRegexp_Find")]
-		public Regex Regexp { get; set; } = new Regex ("$^");
-		[LocalizationKey ("Command_Argument_RearrangeRegexp_Replace")]
+		[LocalizationKey("Command_Argument_RearrangeRegexp_Find")]
+		public Regex Regexp { get; set; } = new Regex("$^");
+		[LocalizationKey("Command_Argument_RearrangeRegexp_Replace")]
 		public string FormatString { get; set; } = string.Empty;
-		[LocalizationKey ("Command_Argument_RearrangeRegexp_IncludeExtension")]
+		[LocalizationKey("Command_Argument_RearrangeRegexp_IncludeExtension")]
 		public bool IncludeExtension { get; set; } = false;
 
 		public bool DoCommand(FileInfo file)
@@ -29,7 +29,7 @@ namespace DaramRenamer.Commands.Filename
 			{
 				var ext = !IncludeExtension ? Path.GetExtension(file.ChangedFilename) : "";
 				var group = match.Groups;
-				var groupArr = new object [group.Count];
+				var groupArr = new object[group.Count];
 				for (var i = 0; i < groupArr.Length; i++)
 					groupArr[i] = group[i].Value.Trim();
 				file.ChangedFilename = $"{string.Format(FormatString, groupArr)}{ext}";

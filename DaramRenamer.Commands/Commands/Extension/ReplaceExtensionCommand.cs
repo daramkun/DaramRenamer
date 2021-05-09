@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DaramRenamer.Commands.Extension
 {
-	[Serializable, LocalizationKey ("Command_Name_ReplaceExtension")]
+	[Serializable, LocalizationKey("Command_Name_ReplaceExtension")]
 	public class ReplaceExtensionCommand : ICommand
 	{
 		public int Order => int.MinValue + 3;
@@ -13,7 +13,7 @@ namespace DaramRenamer.Commands.Extension
 		public bool ParallelProcessable => true;
 		public CommandCategory Category => CommandCategory.Extension;
 
-		[LocalizationKey ("Command_Argument_ReplaceExtension_Extension")]
+		[LocalizationKey("Command_Argument_ReplaceExtension_Extension")]
 		public string Extension { get; set; } = string.Empty;
 		[LocalizationKey("Commamd_Argument_ReplaceExtension_ApplyToDirectory")]
 		public bool ApplyToDirectory { get; set; } = false;
@@ -26,7 +26,7 @@ namespace DaramRenamer.Commands.Extension
 			if (!ApplyToDirectory && file.IsDirectory)
 				return true;
 
-			file.ChangedFilename = $"{Path.GetFileNameWithoutExtension(file.ChangedFilename)}{(Extension [0] != '.' ? "." : "")}{Extension}";
+			file.ChangedFilename = $"{Path.GetFileNameWithoutExtension(file.ChangedFilename)}{(Extension[0] != '.' ? "." : "")}{Extension}";
 			return true;
 		}
 	}

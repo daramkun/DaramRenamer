@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 using Daramee.Blockar;
 
 namespace DaramRenamer
@@ -27,10 +24,10 @@ namespace DaramRenamer
 			try
 			{
 				var webRequest =
-					WebRequest.CreateHttp ("https://raw.githubusercontent.com/daramkun/UpdateBank/master/DaramRenamer.ini");
-				var webResponse = webRequest.GetResponse ();
-				using var stream = webResponse.GetResponseStream ();
-				return BlockarObject.DeserializeFromIni (stream, targetPlatform.ToString ()).ToObject<UpdateInformation> ();
+					WebRequest.CreateHttp("https://raw.githubusercontent.com/daramkun/UpdateBank/master/DaramRenamer.ini");
+				var webResponse = webRequest.GetResponse();
+				using var stream = webResponse.GetResponseStream();
+				return BlockarObject.DeserializeFromIni(stream, targetPlatform.ToString()).ToObject<UpdateInformation>();
 			}
 			catch
 			{

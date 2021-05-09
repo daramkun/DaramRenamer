@@ -5,10 +5,10 @@ using System.Text.RegularExpressions;
 
 namespace DaramRenamer.Commands.Date
 {
-	[Serializable, LocalizationKey ("Command_Name_DeleteDate")]
+	[Serializable, LocalizationKey("Command_Name_DeleteDate")]
 	public class DeleteDateDateCommand : ICommand, IOrderBy
 	{
-		private static readonly Regex [] DateRegexps = new []
+		private static readonly Regex[] DateRegexps = new[]
 		{
 			new Regex ( "[0-9][0-9][0-9][0-9][0-1][0-9][0-3][0-9]" ),
 			new Regex ( "[0-9][0-9][0-9][0-9][0-3][0-9][0-1][0-9]" ),

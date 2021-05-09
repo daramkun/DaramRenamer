@@ -11,28 +11,28 @@ namespace DaramRenamer
 		private static PluginManager _instance;
 		public static PluginManager Instance => _instance ??= new PluginManager();
 
-		private readonly List<IPluginInitializer> pluginInitializers = new List<IPluginInitializer>();
-		private readonly List<ICommand> commands = new List<ICommand>();
-		private readonly List<ICondition> conditions = new List<ICondition>();
+		private readonly List<IPluginInitializer> _pluginInitializers = new();
+		private readonly List<ICommand> _commands = new();
+		private readonly List<ICondition> _conditions = new();
 
-		public IEnumerable<ICommand> Commands => commands;
-		public IEnumerable<ICondition> Conditions => conditions;
+		public IEnumerable<ICommand> Commands => _commands;
+		public IEnumerable<ICondition> Conditions => _conditions;
 
 		public IEnumerable<ICommand> GetCategoriedCommands(CommandCategory category)
 			=> from command in Commands
-				where command.Category == category
-				orderby (command as IOrderBy)?.Order ?? 0
-				select command;
+			   where command.Category == category
+			   orderby (command as IOrderBy)?.Order ?? 0
+			   select command;
 
 		public PluginManager()
 		{
-			var defaultCommands = Assembly.Load (new AssemblyName ("DaramRenamer.Commands"));
-			LoadPlugin (defaultCommands);
+			var defaultCommands = Assembly.Load(new AssemblyName("DaramRenamer.Commands"));
+			LoadPlugin(defaultCommands);
 		}
 
 		public void Dispose()
 		{
-			foreach (var pluginInitializer in pluginInitializers)
+			foreach (var pluginInitializer in _pluginInitializers)
 				pluginInitializer.Uninitialize();
 		}
 
@@ -66,16 +66,16 @@ namespace DaramRenamer
 			{
 				var pluginInitializer = Activator.CreateInstance(pluginInitializerType) as IPluginInitializer;
 				pluginInitializer?.Initialize();
-				pluginInitializers.Add(pluginInitializer);
+				_pluginInitializers.Add(pluginInitializer);
 			}
 
 			foreach (var command in commandsTypes.Select(commandsType =>
 				Activator.CreateInstance(commandsType) as ICommand))
-				commands.Add(command);
+				_commands.Add(command);
 
 			foreach (var condition in conditionsTypes.Select(conditionsType =>
 				Activator.CreateInstance(conditionsType) as ICondition))
-				conditions.Add(condition);
+				_conditions.Add(condition);
 
 			if (pluginInitializerType == null && commandsTypes.Count == 0 && conditionsTypes.Count == 0)
 				AssemblyLoadContext.GetLoadContext(assembly)?.Unload();

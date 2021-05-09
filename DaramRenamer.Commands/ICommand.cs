@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DaramRenamer
+﻿namespace DaramRenamer
 {
 	public interface ICommand
 	{

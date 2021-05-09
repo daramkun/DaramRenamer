@@ -82,6 +82,8 @@
 				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToUp], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToUp_Click" InputGestureText="Ctrl+Up" />
 				<MenuItem Header="{Binding Path=[Menu_Edit_ItemToDown], Source={x:Static local:Strings.Instance}}" Click="MenuEditItemToDown_Click" InputGestureText="Ctrl+Down" />
 				<MenuItem Header="{Binding Path=[Menu_Edit_Sort], Source={x:Static local:Strings.Instance}}" Click="MenuEditSort_Click" InputGestureText="Ctrl+Shift+S" />
+				<Separator />
+				<MenuItem Header="{Binding Path=[Menu_Edit_RestoreSelected], Source={x:Static local:Strings.Instance}}" Click="MenuEditRestoreSelected_Click" />
 			</MenuItem>
 			<MenuItem x:Name="CommandsMenu" Header="{Binding Path=[Menu_Command_Command], Source={x:Static local:Strings.Instance}}">
 				<MenuItem x:Name="MenuItemFilename" Header="{Binding Path=[Menu_Command_Filename], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />

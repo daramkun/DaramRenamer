@@ -28,6 +28,9 @@
 	"UpdateCheckErrorText": "Program has problem about checking version.",
 	"ThisIsLatestVersionText": "This version is latest.",
 
+	"RestoreSelectedErrorMessage": "No Item selected.",
+	"RestoreSelectedErrorMessageDetail": "Please select items from List box for restore to original filename and path.", 
+
 	"Menu_File_File": "_File",
 	"Menu_File_Open": "_Open file...",
 	"Menu_File_FolderOpen": "O_pen folder...",
@@ -41,6 +44,7 @@
 	"Menu_Edit_Sort": "_Sort file items",
 	"Menu_Edit_ItemToUp": "File item to U_p",
 	"Menu_Edit_ItemToDown": "File item to _Down",
+	"Menu_Edit_RestoreSelected": "Restore selected items to _original", 
 
 	"Menu_Command_Command": "_Commands",
 	"Menu_Command_Filename": "File_name",

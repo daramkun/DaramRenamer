@@ -504,6 +504,23 @@ namespace DaramRenamer
 			FileInfo.Sort(FileInfo.Files);
 		}
 
+		private void MenuEditRestoreSelected_Click(object sender, RoutedEventArgs e)
+		{
+			if (ListViewFiles.SelectedItems.Count == 0)
+			{
+				MessageBox(Strings.Instance["RestoreSelectedErrorMessage"],
+					Strings.Instance["RestoreSelectedErrorMessageDetail"], TaskDialogIcon.Error, TaskDialogCommonButtonFlags.OK);
+				return;
+			}
+
+			_undoManager.SaveToUndoStack(FileInfo.Files);
+			foreach (FileInfo fileInfo in ListViewFiles.SelectedItems)
+			{
+				fileInfo.ChangedFilename = fileInfo.OriginalFilename;
+				fileInfo.ChangedPath = fileInfo.OriginalPath;
+			}
+		}
+
 		private IEnumerable<ICondition> GetActivedConditions()
 		{
 			foreach (ICondition condition in ConditionsMenu.ItemsSource)

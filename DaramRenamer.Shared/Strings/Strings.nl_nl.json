@@ -28,6 +28,9 @@
 	"UpdateCheckErrorText": "Er is een fout opgetreden bij het controleren op nieuwe versies.",
 	"ThisIsLatestVersionText": "Deze versie is de meest recente.",
 
+	"RestoreSelectedErrorMessage": "Geen item geselecteerd.",
+	"RestoreSelectedErrorMessageDetail": "Selecteer items uit de lijst om de oorspronkelijke bestandsnaam en pad te herstellen.",
+
 	"Menu_File_File": "_Bestand",
 	"Menu_File_Open": "Bestand _openen...",
 	"Menu_File_FolderOpen": "_Map openen...",
@@ -41,6 +44,7 @@
 	"Menu_Edit_Sort": "Items _Sorteren",
 	"Menu_Edit_ItemToUp": "Item om_hoog verplaatsen",
 	"Menu_Edit_ItemToDown": "Item om_laag verplaatsen",
+	"Menu_Edit_RestoreSelected": "Herstel geselecteerde items naar _origineel",
 
 	"Menu_Command_Command": "_Opdrachten",
 	"Menu_Command_Filename": "Bestandsnaam",

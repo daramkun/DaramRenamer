@@ -283,6 +283,7 @@ namespace DaramRenamer
 		public bool VisualCommand { get; set; } = false;
 		public bool ForceSingleCoreRunning { get; set; } = false;
 		public bool CloseApplyWindowWhenSuccessfullyDone { get; set; } = true;
+		public bool DisableCheckUpdate { get; set; } = false;
 
 		public void Save()
 		{

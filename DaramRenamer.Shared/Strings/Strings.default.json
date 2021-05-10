@@ -92,8 +92,9 @@
 	"PreferencesUseCustomPlugins": "Use User-defined Plugin.",
 	"PreferencesCurrentLanguage": "Language: ",
 	"PreferencesVisualCommand": "Preview changes.",
-	"PreferencesForceSingleCoreRunning": "Force Single-Core Running",
-	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Close Apply Window when Successfully Done",
+	"PreferencesForceSingleCoreRunning": "Force Single-Core Running.",
+	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Close Apply Window when Successfully Done.",
+	"PreferencesDisableCheckUpdate": "Disable Checking Update.",
 
 	"PreferencesTabShortcutShortcutText": "Shortcut: ",
 

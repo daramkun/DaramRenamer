@@ -94,6 +94,7 @@
 	"PreferencesVisualCommand": "변경사항 미리보기",
 	"PreferencesForceSingleCoreRunning": "강제 1코어 동작",
 	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "성공적으로 적용하면 적용 창 닫기",
+	"PreferencesDisableCheckUpdate": "업데이트 확인 끄기",
 
 	"PreferencesTabShortcutShortcutText": "단축키: ",
 

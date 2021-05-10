@@ -232,7 +232,9 @@ namespace DaramRenamer
 			if (await IsAdministrator())
 				Title = $"{Title} - [{Strings.Instance["Administrator"]}]";
 
-			var updateInfo = await CheckUpdate();
+			bool? updateInfo = false;
+			if (!Preferences.Instance.DisableCheckUpdate)
+				updateInfo = await CheckUpdate();
 
 			Title = updateInfo switch
 			{

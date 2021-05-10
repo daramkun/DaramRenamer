@@ -92,8 +92,9 @@
 	"PreferencesUseCustomPlugins": "User-defined Plugin gebruiken.",
 	"PreferencesCurrentLanguage": "Taal: ",
 	"PreferencesVisualCommand": "Voorvertoning geven.",
-	"PreferencesForceSingleCoreRunning": "Uitvoering in single-core forceren",
-	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Dialoogvenster sluiten bij voltooiing",
+	"PreferencesForceSingleCoreRunning": "Uitvoering in single-core forceren.",
+	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Dialoogvenster sluiten bij voltooiing.",
+	"PreferencesDisableCheckUpdate": "Schakel Checking Update uit.",
 
 	"PreferencesTabShortcutShortcutText": "Sneltoets: ",
 

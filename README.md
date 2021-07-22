@@ -13,3 +13,8 @@
 - `.NET5` or newer
 - `Windows 7` or newer
   - Recommended `Windows 10 20H2`
+
+
+----
+## 스크린샷 (Screenshots)
+![Version 2021.7.1](DocumentResources/Main-2021.7.1.png)

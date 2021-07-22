@@ -16,29 +16,29 @@ namespace DaramRenamer.Commands.Tags
 		[LocalizationKey("Command_Argument_AddHash_Position")]
 		public Position1 Position { get; set; } = Position1.EndPoint;
 
-		public bool DoCommand(FileInfo file)
+		public static string ComputeHash(HashType hashType, string path)
 		{
 			byte[] returnValue = null;
-			switch (HashType)
+			switch (hashType)
 			{
 				case HashType.MD5:
-					using (Stream stream = File.Open(file.ChangedFullPath, FileMode.Open))
+					using (Stream stream = File.Open(path, FileMode.Open))
 						returnValue = System.Security.Cryptography.MD5.Create().ComputeHash(stream);
 					break;
 				case HashType.SHA1:
-					using (Stream stream = File.Open(file.ChangedFullPath, FileMode.Open))
+					using (Stream stream = File.Open(path, FileMode.Open))
 						returnValue = System.Security.Cryptography.SHA1.Create().ComputeHash(stream);
 					break;
 				case HashType.SHA256:
-					using (Stream stream = File.Open(file.ChangedFullPath, FileMode.Open))
+					using (Stream stream = File.Open(path, FileMode.Open))
 						returnValue = System.Security.Cryptography.SHA256.Create().ComputeHash(stream);
 					break;
 				case HashType.SHA384:
-					using (Stream stream = File.Open(file.ChangedFullPath, FileMode.Open))
+					using (Stream stream = File.Open(path, FileMode.Open))
 						returnValue = System.Security.Cryptography.SHA384.Create().ComputeHash(stream);
 					break;
 				case HashType.SHA512:
-					using (Stream stream = File.Open(file.ChangedFullPath, FileMode.Open))
+					using (Stream stream = File.Open(path, FileMode.Open))
 						returnValue = System.Security.Cryptography.SHA512.Create().ComputeHash(stream);
 					break;
 			}
@@ -48,7 +48,12 @@ namespace DaramRenamer.Commands.Tags
 				foreach (var t in returnValue)
 					sBuilder.Append(t.ToString("x2"));
 
-			var hash = sBuilder.ToString();
+			return sBuilder.ToString();
+		}
+
+		public bool DoCommand(FileInfo file)
+		{
+			var hash = ComputeHash(HashType, file.OriginalFullPath);
 
 			var fn = Path.GetFileNameWithoutExtension(file.ChangedFilename);
 			var ext = Path.GetExtension(file.ChangedFilename);

@@ -192,6 +192,10 @@
 	"Command_Argument_ManualEdit_ChangeName": "변경 이름",
 	"Command_Argument_ManualEdit_ChangePath": "변경 경로",
 
+	"Command_Name_AdvancedFormat": "고급 형식 문자열",
+	"Command_Argument_AdvancedFormat_FileNameFormatString": "이름",
+	"Command_Argument_AdvancedFormat_PathFormatString": "경로",
+
 	"Menu_Condition_Condition": "조건(_O)",
 
 	"Condition_Name_TextFile": "텍스트 파일",

@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>DaramRenamer</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <Version>2021.5.2</Version>
+    <Version>2021.7.1</Version>
     <Authors>Jin Jae-yeon</Authors>
     <Company>DARAM WORLD</Company>
     <Product>DaramRenamer Command</Product>

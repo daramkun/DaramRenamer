@@ -99,7 +99,7 @@ namespace DaramRenamer.Commands.Tags
 		}
 
 		// Code idea from https://github.com/mildblue/DaramRenamer/commit/d3a2b71c081bacfc30a3b195280f0d10eff08944
-		private string ConvertUnicodeText(string text)
+		public static string ConvertUnicodeText(string text)
 		{
 			var latinStr =
 				Encoding.Default.GetString(Encoding.GetEncoding("ISO-8859-1").GetBytes(text.Replace("?", "")));

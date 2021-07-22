@@ -43,7 +43,7 @@ namespace DaramRenamer.Commands.Tags
 			return true;
 		}
 
-		private class File
+		public class File
 		{
 			public string Title { get; }
 			public string Author { get; }

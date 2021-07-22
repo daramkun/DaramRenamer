@@ -16,7 +16,7 @@ namespace DaramRenamer.Commands.Tags
 		[LocalizationKey ("Command_Argument_AddGitInfo_Position")]
 		public Position1 Position { get; set; } = Position1.EndPoint;
 
-		private static readonly string[] Arguments = 
+		private static readonly string[] Arguments =
 		{
 			"rev-parse HEAD",
 			"rev-parse --short HEAD",
@@ -24,12 +24,12 @@ namespace DaramRenamer.Commands.Tags
 			"rev-list --count --all",
 		};
 
-		public bool DoCommand(FileInfo file)
+		public static string GetGitValue(GitInfo gitInfo, string path)
 		{
-			var psInfo = new ProcessStartInfo("git", Arguments[(int)GitInfo])
+			var psInfo = new ProcessStartInfo("git", Arguments[(int)gitInfo])
 			{
 				UseShellExecute = false,
-				WorkingDirectory = file.OriginalPath,
+				WorkingDirectory = path,
 				RedirectStandardOutput = true,
 				StandardOutputEncoding = Encoding.UTF8,
 				WindowStyle = ProcessWindowStyle.Hidden,
@@ -42,15 +42,15 @@ namespace DaramRenamer.Commands.Tags
 				process = Process.Start (psInfo);
 				process?.WaitForExit();
 				if (process?.ExitCode != 0)
-					return false;
+					return null;
 			}
 			catch
 			{
-				return false;
+				return null;
 			}
 
 			var value = process.StandardOutput.ReadToEnd().Trim();
-			if (GitInfo == GitInfo.BranchName)
+			if (gitInfo == GitInfo.BranchName)
 			{
 				var list = value.Split('\n');
 				foreach (var item in list)
@@ -61,6 +61,15 @@ namespace DaramRenamer.Commands.Tags
 					break;
 				}
 			}
+
+			return value;
+		}
+
+		public bool DoCommand(FileInfo file)
+		{
+			var value = GetGitValue(GitInfo, file.OriginalFullPath);
+			if (value == null)
+				return false;
 
 			var fn = Path.GetFileNameWithoutExtension (file.ChangedFilename);
 			var ext = Path.GetExtension (file.ChangedFilename);

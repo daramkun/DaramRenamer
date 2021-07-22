@@ -192,6 +192,10 @@
 	"Command_Argument_ManualEdit_ChangeName": "Name",
 	"Command_Argument_ManualEdit_ChangePath": "Path",
 
+  	"Command_Name_AdvancedFormat": "Advanced Format String",
+  	"Command_Argument_AdvancedFormat_FileNameFormatString": "Name",
+  	"Command_Argument_AdvancedFormat_PathFormatString": "Path",
+
 	"Menu_Condition_Condition": "C_onditions",
 
 	"Condition_Name_TextFile": "Text File",

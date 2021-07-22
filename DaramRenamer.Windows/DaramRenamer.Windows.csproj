@@ -1,112 +1,108 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<PublishTrimmed>true</PublishTrimmed>
+		<TrimMode>Link</TrimMode>
+		<UseWPF>true</UseWPF>
+		<RootNamespace>DaramRenamer</RootNamespace>
+		<PackageId>DaramRenamer</PackageId>
+		<Authors>Jin Jae-yeon</Authors>
+		<Company>DARAM WORLD</Company>
+		<Product>DaramRenamer for Windows</Product>
+		<ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
+		<AssemblyName>DaramRenamer</AssemblyName>
+		<Copyright>Copyright ⓒ 2013-2021 Jin Jae-yeon</Copyright>
+		<Version>2021.7.1</Version>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
+		<ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>
+		<PackageIcon>Icon.jpg</PackageIcon>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/daramkun/DaramRenamer</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/daramkun/DaramRenamer</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<DelaySign>false</DelaySign>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <RootNamespace>DaramRenamer</RootNamespace>
-    <PackageId>DaramRenamer</PackageId>
-    <Authors>Jin Jae-yeon</Authors>
-    <Company>DARAM WORLD</Company>
-    <Product>DaramRenamer for Windows</Product>
-    <ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
-    <AssemblyName>DaramRenamer</AssemblyName>
-    <Copyright>Copyright ⓒ 2013-2021 Jin Jae-yeon</Copyright>
-    <Version>2021.5.2</Version>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
-    <ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>
-    <PackageIcon>Icon.jpg</PackageIcon>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/daramkun/DaramRenamer</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/daramkun/DaramRenamer</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <DelaySign>false</DelaySign>
-  </PropertyGroup>
+	<PropertyGroup>
+		<DefineConstants>TRACE;WPF</DefineConstants>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;WPF</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+	<ItemGroup>
+		<None Remove="Resources\Icon.jpg" />
+		<None Remove="Resources\ToolBarIcons\add_date.png" />
+		<None Remove="Resources\ToolBarIcons\add_ext.png" />
+		<None Remove="Resources\ToolBarIcons\add_index.png" />
+		<None Remove="Resources\ToolBarIcons\apply.png" />
+		<None Remove="Resources\ToolBarIcons\casecast_ext.png" />
+		<None Remove="Resources\ToolBarIcons\casecast_text.png" />
+		<None Remove="Resources\ToolBarIcons\clear.png" />
+		<None Remove="Resources\ToolBarIcons\concat_text.png" />
+		<None Remove="Resources\ToolBarIcons\delete_block.png" />
+		<None Remove="Resources\ToolBarIcons\delete_ext.png" />
+		<None Remove="Resources\ToolBarIcons\delete_text.png" />
+		<None Remove="Resources\ToolBarIcons\del_without_num.png" />
+		<None Remove="Resources\ToolBarIcons\inc_dec_num.png" />
+		<None Remove="Resources\ToolBarIcons\item_down.png" />
+		<None Remove="Resources\ToolBarIcons\item_sort.png" />
+		<None Remove="Resources\ToolBarIcons\item_up.png" />
+		<None Remove="Resources\ToolBarIcons\match_num_count.png" />
+		<None Remove="Resources\ToolBarIcons\open.png" />
+		<None Remove="Resources\ToolBarIcons\redo.png" />
+		<None Remove="Resources\ToolBarIcons\replace_ext.png" />
+		<None Remove="Resources\ToolBarIcons\replace_text.png" />
+		<None Remove="Resources\ToolBarIcons\substring.png" />
+		<None Remove="Resources\ToolBarIcons\trim_text.png" />
+		<None Remove="Resources\ToolBarIcons\undo.png" />
+		<None Include="..\LICENSE.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="Resources\Icon.jpg">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>TRACE;WPF</DefineConstants>
-  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DaramRenamer.Commands\DaramRenamer.Commands.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Icon.jpg" />
-    <None Remove="Resources\ToolBarIcons\add_date.png" />
-    <None Remove="Resources\ToolBarIcons\add_ext.png" />
-    <None Remove="Resources\ToolBarIcons\add_index.png" />
-    <None Remove="Resources\ToolBarIcons\apply.png" />
-    <None Remove="Resources\ToolBarIcons\casecast_ext.png" />
-    <None Remove="Resources\ToolBarIcons\casecast_text.png" />
-    <None Remove="Resources\ToolBarIcons\clear.png" />
-    <None Remove="Resources\ToolBarIcons\concat_text.png" />
-    <None Remove="Resources\ToolBarIcons\delete_block.png" />
-    <None Remove="Resources\ToolBarIcons\delete_ext.png" />
-    <None Remove="Resources\ToolBarIcons\delete_text.png" />
-    <None Remove="Resources\ToolBarIcons\del_without_num.png" />
-    <None Remove="Resources\ToolBarIcons\inc_dec_num.png" />
-    <None Remove="Resources\ToolBarIcons\item_down.png" />
-    <None Remove="Resources\ToolBarIcons\item_sort.png" />
-    <None Remove="Resources\ToolBarIcons\item_up.png" />
-    <None Remove="Resources\ToolBarIcons\match_num_count.png" />
-    <None Remove="Resources\ToolBarIcons\open.png" />
-    <None Remove="Resources\ToolBarIcons\redo.png" />
-    <None Remove="Resources\ToolBarIcons\replace_ext.png" />
-    <None Remove="Resources\ToolBarIcons\replace_text.png" />
-    <None Remove="Resources\ToolBarIcons\substring.png" />
-    <None Remove="Resources\ToolBarIcons\trim_text.png" />
-    <None Remove="Resources\ToolBarIcons\undo.png" />
-    <None Include="..\LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="Resources\Icon.jpg">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="..\LICENSE.md" Link="Resources\LICENSE.md" />
+		<Resource Include="Resources\Icon.jpg" />
+		<Resource Include="Resources\ToolBarIcons\add_date.png" />
+		<Resource Include="Resources\ToolBarIcons\add_ext.png" />
+		<Resource Include="Resources\ToolBarIcons\add_index.png" />
+		<Resource Include="Resources\ToolBarIcons\apply.png" />
+		<Resource Include="Resources\ToolBarIcons\casecast_ext.png" />
+		<Resource Include="Resources\ToolBarIcons\casecast_text.png" />
+		<Resource Include="Resources\ToolBarIcons\clear.png" />
+		<Resource Include="Resources\ToolBarIcons\concat_text.png" />
+		<Resource Include="Resources\ToolBarIcons\delete_block.png" />
+		<Resource Include="Resources\ToolBarIcons\delete_ext.png" />
+		<Resource Include="Resources\ToolBarIcons\delete_text.png" />
+		<Resource Include="Resources\ToolBarIcons\del_without_num.png" />
+		<Resource Include="Resources\ToolBarIcons\inc_dec_num.png" />
+		<Resource Include="Resources\ToolBarIcons\item_down.png" />
+		<Resource Include="Resources\ToolBarIcons\item_sort.png" />
+		<Resource Include="Resources\ToolBarIcons\item_up.png" />
+		<Resource Include="Resources\ToolBarIcons\match_num_count.png" />
+		<Resource Include="Resources\ToolBarIcons\open.png" />
+		<Resource Include="Resources\ToolBarIcons\redo.png" />
+		<Resource Include="Resources\ToolBarIcons\replace_ext.png" />
+		<Resource Include="Resources\ToolBarIcons\replace_text.png" />
+		<Resource Include="Resources\ToolBarIcons\substring.png" />
+		<Resource Include="Resources\ToolBarIcons\trim_text.png" />
+		<Resource Include="Resources\ToolBarIcons\undo.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DaramRenamer.Commands\DaramRenamer.Commands.csproj" />
-  </ItemGroup>
+	<Import Project="..\DaramRenamer.Shared\DaramRenamer.Shared.projitems" Label="Shared" />
 
-  <ItemGroup>
-    <EmbeddedResource Include="..\LICENSE.md" Link="Resources\LICENSE.md" />
-    <Resource Include="Resources\Icon.jpg" />
-    <Resource Include="Resources\ToolBarIcons\add_date.png" />
-    <Resource Include="Resources\ToolBarIcons\add_ext.png" />
-    <Resource Include="Resources\ToolBarIcons\add_index.png" />
-    <Resource Include="Resources\ToolBarIcons\apply.png" />
-    <Resource Include="Resources\ToolBarIcons\casecast_ext.png" />
-    <Resource Include="Resources\ToolBarIcons\casecast_text.png" />
-    <Resource Include="Resources\ToolBarIcons\clear.png" />
-    <Resource Include="Resources\ToolBarIcons\concat_text.png" />
-    <Resource Include="Resources\ToolBarIcons\delete_block.png" />
-    <Resource Include="Resources\ToolBarIcons\delete_ext.png" />
-    <Resource Include="Resources\ToolBarIcons\delete_text.png" />
-    <Resource Include="Resources\ToolBarIcons\del_without_num.png" />
-    <Resource Include="Resources\ToolBarIcons\inc_dec_num.png" />
-    <Resource Include="Resources\ToolBarIcons\item_down.png" />
-    <Resource Include="Resources\ToolBarIcons\item_sort.png" />
-    <Resource Include="Resources\ToolBarIcons\item_up.png" />
-    <Resource Include="Resources\ToolBarIcons\match_num_count.png" />
-    <Resource Include="Resources\ToolBarIcons\open.png" />
-    <Resource Include="Resources\ToolBarIcons\redo.png" />
-    <Resource Include="Resources\ToolBarIcons\replace_ext.png" />
-    <Resource Include="Resources\ToolBarIcons\replace_text.png" />
-    <Resource Include="Resources\ToolBarIcons\substring.png" />
-    <Resource Include="Resources\ToolBarIcons\trim_text.png" />
-    <Resource Include="Resources\ToolBarIcons\undo.png" />
-  </ItemGroup>
+	<Import Project="..\Modules\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems" Label="Shared" />
 
-  <Import Project="..\DaramRenamer.Shared\DaramRenamer.Shared.projitems" Label="Shared" />
-
-  <Import Project="..\Modules\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems" Label="Shared" />
-
-  <Import Project="..\Modules\Blockar\Blockar.Shared\Blockar.Shared.projitems" Label="Shared" />
+	<Import Project="..\Modules\Blockar\Blockar.Shared\Blockar.Shared.projitems" Label="Shared" />
 
 </Project>

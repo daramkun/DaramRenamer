@@ -17,7 +17,7 @@ namespace DaramRenamer
 			InitializeComponent ();
 		}
 
-		private void ComboBox_SelectionChanged (object sender, SelectionChangedEventArgs e)
+		private void ComboBoxRenameMode_SelectionChanged (object sender, SelectionChangedEventArgs e)
 		{
 			Preferences.Instance.RenameModeInteger = ((ComboBox) sender).SelectedIndex;
 		}

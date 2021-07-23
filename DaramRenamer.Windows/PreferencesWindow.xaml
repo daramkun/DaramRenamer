@@ -28,7 +28,7 @@
 					<CheckBox Content="{Binding Path=[PreferencesAutoListCleaning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=AutomaticListCleaning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
 					<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
 						<TextBlock Text="{Binding Path=[PreferencesRenameMode], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-						<ComboBox SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling" SelectionChanged="ComboBox_SelectionChanged">
+						<ComboBox SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling" SelectionChanged="ComboBoxRenameMode_SelectionChanged">
 							<ComboBoxItem Content="{Binding Path=[Move], Source={x:Static local:Strings.Instance}}" Tag="0" />
 							<ComboBoxItem Content="{Binding Path=[Copy], Source={x:Static local:Strings.Instance}}" Tag="1" />
 						</ComboBox>
@@ -37,7 +37,7 @@
 					<CheckBox Content="{Binding Path=[PreferencesUseCustomPlugins], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=UseCustomPlugins, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
 					<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
 						<TextBlock Text="{Binding Path=[PreferencesCurrentLanguage], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-						<ComboBox ItemsSource="{Binding Path=AvailableLanguages, Source={x:Static local:Strings.Instance}}" VirtualizingStackPanel.VirtualizationMode="Recycling" Text="{Binding Path=CurrentLanguage, Source={x:Static local:Preferences.Instance}}" SelectionChanged="ComboBox_SelectionChanged">
+						<ComboBox ItemsSource="{Binding Path=AvailableLanguages, Source={x:Static local:Strings.Instance}}" VirtualizingStackPanel.VirtualizationMode="Recycling" Text="{Binding Path=CurrentLanguage, Source={x:Static local:Preferences.Instance}}">
 
 						</ComboBox>
 					</StackPanel>

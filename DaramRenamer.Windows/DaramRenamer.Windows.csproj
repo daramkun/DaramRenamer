@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows</TargetFramework>
-		<PublishTrimmed>true</PublishTrimmed>
+		<TargetFramework>net6.0-windows</TargetFramework>
 		<TrimMode>Link</TrimMode>
 		<UseWPF>true</UseWPF>
 		<RootNamespace>DaramRenamer</RootNamespace>
@@ -13,7 +12,7 @@
 		<ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
 		<AssemblyName>DaramRenamer</AssemblyName>
 		<Copyright>Copyright ⓒ 2013-2021 Jin Jae-yeon</Copyright>
-		<Version>2021.7.2</Version>
+		<Version>2021.11.1</Version>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
 		<ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>

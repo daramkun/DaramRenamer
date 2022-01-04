@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using Daramee.FileTypeDetector;
 using DaramRenamer.Commands.Tags;
 
 namespace DaramRenamer.Commands
@@ -360,12 +361,13 @@ namespace DaramRenamer.Commands
 			Path,
 			ProceedPath,
 			Index,
+			
+			FoundExtension,
 		}
 
 		[Serializable]
 		class MacroNode : FormatStringNode
 		{
-
 			public readonly MacroTypes MacroType;
 			public readonly int Arguments;
 
@@ -432,6 +434,15 @@ namespace DaramRenamer.Commands
 					case MacroTypes.Index:
 						var i = (FileInfo.Files.IndexOf(fileInfo) + 1).ToString();
 						return Arguments < 0 ? i : i.PadLeft(Arguments, '0');
+
+					case MacroTypes.FoundExtension:
+					{
+						using Stream stream = File.OpenRead(fileInfo.OriginalFullPath);
+						var detector = DetectorService.DetectDetector(stream);
+						return detector == null
+							? string.Empty
+							: detector.Extension;
+					}
 
 					default:
 						throw new ArgumentOutOfRangeException();

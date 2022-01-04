@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Daramee.Blockar;
 
 namespace DaramRenamer
@@ -19,20 +23,31 @@ namespace DaramRenamer
 
 	public static class UpdateInformationBank
 	{
-		public static UpdateInformation? GetUpdateInformation(TargetPlatform targetPlatform)
+		private static readonly HttpClient SharedHttpClient = new HttpClient();
+		
+		public static async Task<UpdateInformation?> GetUpdateInformationAsync(TargetPlatform targetPlatform)
 		{
 			try
 			{
-				var webRequest =
-					WebRequest.CreateHttp("https://raw.githubusercontent.com/daramkun/UpdateBank/master/DaramRenamer.ini");
-				var webResponse = webRequest.GetResponse();
-				using var stream = webResponse.GetResponseStream();
-				return BlockarObject.DeserializeFromIni(stream, targetPlatform.ToString()).ToObject<UpdateInformation>();
+				await using var stream = await SharedHttpClient.GetStreamAsync(
+					"https://raw.githubusercontent.com/daramkun/UpdateBank/master/DaramRenamer.ini");
+				return BlockarObject.DeserializeFromIni(stream, targetPlatform.ToString())
+					.ToObject<UpdateInformation>();
 			}
 			catch
 			{
 				return null;
 			}
+		}
+
+		public static async Task<string> DownloadFile(UpdateInformation updateInfo)
+		{
+			var url = new Uri(updateInfo.StableLatestUrl);
+			var filename = $"DaramRenamer-{updateInfo.StableLatestVersion}.zip";
+			await using var stream = await SharedHttpClient.GetStreamAsync(url);
+			await using var fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write);
+			await stream.CopyToAsync(fileStream);
+			return filename;
 		}
 	}
 }

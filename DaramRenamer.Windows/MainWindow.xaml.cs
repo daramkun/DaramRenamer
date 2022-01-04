@@ -265,13 +265,10 @@ namespace DaramRenamer
 
 		internal static async Task<bool?> CheckUpdate()
 		{
-			return await Task.Run<bool?>(() =>
-			{
-				var updateInformation = UpdateInformationBank.GetUpdateInformation(TargetPlatform.Windows);
-				if (updateInformation != null)
-					return updateInformation.Value.StableLatestVersion != GetVersionString();
-				return null;
-			});
+			var updateInformation = await UpdateInformationBank.GetUpdateInformationAsync(TargetPlatform.Windows);
+			if (updateInformation != null)
+				return updateInformation.Value.StableLatestVersion != GetVersionString();
+			return null;
 		}
 
 		private void Window_Closing(object sender, CancelEventArgs e)
@@ -659,18 +656,14 @@ namespace DaramRenamer
 
 				if (result.Button == 101)
 				{
-					var updateInfo = UpdateInformationBank.GetUpdateInformation(TargetPlatform.Windows);
+					var updateInfo = await UpdateInformationBank.GetUpdateInformationAsync(TargetPlatform.Windows);
 					if (updateInfo != null)
 					{
 						ProgressBarUpdate.Visibility = Visibility.Visible;
 
 						try
 						{
-							var url = new Uri(updateInfo.Value.StableLatestUrl);
-							var webClient = new WebClient();
-							var filename = $"DaramRenamer-{updateInfo.Value.StableLatestVersion}.zip";
-
-							await Task.Run(() => webClient.DownloadFile(url, filename));
+							var filename = await UpdateInformationBank.DownloadFile(updateInfo.Value);
 
 							if (!Directory.Exists("DaramRenamer-Update"))
 								Directory.CreateDirectory("DaramRenamer-Update");

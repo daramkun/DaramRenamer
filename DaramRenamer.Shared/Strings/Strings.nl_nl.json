@@ -89,12 +89,12 @@
 	"PreferencesAutoListCleaning": "Bestandslijst automatisch opschonen.",
 	"PreferencesRenameMode": "Methode van bestandsnaam wijzigen: ",
 	"PreferencesSaveWindowState": "Venstertoestand opslaan",
-	"PreferencesUseCustomPlugins": "User-defined Plugin gebruiken.",
+	"PreferencesUseCustomPlugins": "Aangepaste Plugin gebruiken.",
 	"PreferencesCurrentLanguage": "Taal: ",
 	"PreferencesVisualCommand": "Voorvertoning geven.",
 	"PreferencesForceSingleCoreRunning": "Uitvoering in single-core forceren.",
 	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Dialoogvenster sluiten bij voltooiing.",
-	"PreferencesDisableCheckUpdate": "Schakel Checking Update uit.",
+	"PreferencesDisableCheckUpdate": "Controle op updates uitschakelen.",
 
 	"PreferencesTabShortcutShortcutText": "Sneltoets: ",
 
@@ -110,8 +110,8 @@
 	"Command_Argument_ReplaceRegexp_Replace": "Vervangen",
 	"Command_Argument_ReplaceRegexp_IncludeExtension": "Incl. extensie",
 	"Command_Name_RearrangeRegexp": "Herschikken met Reguliere expressie",
-	"Command_Argument_RearrangeRegexp_Find": "Regexp",
-	"Command_Argument_RearrangeRegexp_Replace": "Format String",
+	"Command_Argument_RearrangeRegexp_Find": "RegExp",
+	"Command_Argument_RearrangeRegexp_Replace": "Vervangen",
 	"Command_Argument_RearrangeRegexp_IncludeExtension": "Incl. extensie",
 	"Command_Name_Trim": "Bestandsnaam inkorten",
 	"Command_Argument_Trim_Position": "Positie",
@@ -168,7 +168,7 @@
 
 	"Command_Name_AbsoluteGoTo": "Ga naar Absoluut pad",
 	"Command_Argument_AbsoluteGoTo_Path": "Pad",
-	"Command_Name_RelativeGoTo": "Ga naar Relatoef pad",
+	"Command_Name_RelativeGoTo": "Ga naar Relatief pad",
 	"Command_Argument_RelativeGoTo_Path": "Pad",
 
 	"Command_Name_AddMediaTag": "Medialabel toevoegen",
@@ -192,7 +192,7 @@
 	"Command_Argument_ManualEdit_ChangeName": "Naam",
 	"Command_Argument_ManualEdit_ChangePath": "PAD",
 
-	"Menu_Condition_Condition": "C_ondities",
+	"Menu_Condition_Condition": "Condities",
 
 	"Condition_Name_TextFile": "Tekstbestand",
 
@@ -208,9 +208,9 @@
 	"EndPoint": "Einde",
 	"BothPoint": "Start en einde",
 
-	"UppercaseAll": "Hoofdletters",
-	"LowercaseAll": "Kleine letters",
-	"UppercaseFirstLetter": "Alleen eerste letter Hoofdletter",
+	"UppercaseAll": "HOOFDLETTERS",
+	"LowercaseAll": "kleine letters",
+	"UppercaseFirstLetter": "Alleen Eerste Letter Hoofdletter",
 
 	"AudioBitrate": "Autom. Bitrate",
 	"AudioSamplerate": "Autom. Samplerate",
@@ -270,6 +270,6 @@
 	"BatchWindow_SaveFile": "Opslaan als",
 	"BatchWindow_DoBatch": "Groepsopdracht uitvoeren",
 	"BatchWindow_Command": "Opdracht",
-	"BatchWindow_Condition": "Conditie",
+	"BatchWindow_Condition": "C_onditie",
 	"BatchWindow_File_Filter": "DaramRenamer Batch-bestand (*.drb)|*.drb"
 }

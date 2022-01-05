@@ -44,11 +44,11 @@
 	"Menu_Edit_Sort": "Items _Sorteren",
 	"Menu_Edit_ItemToUp": "Item om_hoog verplaatsen",
 	"Menu_Edit_ItemToDown": "Item om_laag verplaatsen",
-	"Menu_Edit_RestoreSelected": "Herstel geselecteerde items naar _origineel",
+	"Menu_Edit_RestoreSelected": "Geselecteerde items naar _origineel herstellen",
 
 	"Menu_Command_Command": "_Opdrachten",
-	"Menu_Command_Filename": "Bestandsnaam",
-	"Menu_Command_Extension": "_Extensie",
+	"Menu_Command_Filename": "Bestands_naam",
+	"Menu_Command_Extension": "E_xtensie",
 	"Menu_Command_Path": "_Pad",
 	"Menu_Command_Number": "N_ummer",
 	"Menu_Command_Date": "_Datum",
@@ -83,7 +83,7 @@
 	"PreferencesTabGeneral": "Algemeen",
 	"PreferencesTabShortcut": "Sneltoets",
 
-	"PreferencesHardwareAcceleration": "Hardwareversnelde weergave",
+	"PreferencesHardwareAcceleration": "Hardwareversnelling inschakelen",
 	"PreferencesOverwrite": "Overschrijven",
 	"PreferencesAutoFixFilename": "Ongeldige tekens in bestandsnaam automatisch corrigeren.",
 	"PreferencesAutoListCleaning": "Bestandslijst automatisch opschonen.",
@@ -111,16 +111,16 @@
 	"Command_Argument_ReplaceRegexp_IncludeExtension": "Incl. extensie",
 	"Command_Name_RearrangeRegexp": "Herschikken met Reguliere expressie",
 	"Command_Argument_RearrangeRegexp_Find": "RegExp",
-	"Command_Argument_RearrangeRegexp_Replace": "Vervangen",
+	"Command_Argument_RearrangeRegexp_Replace": "Opmaak",
 	"Command_Argument_RearrangeRegexp_IncludeExtension": "Incl. extensie",
 	"Command_Name_Trim": "Bestandsnaam inkorten",
 	"Command_Argument_Trim_Position": "Positie",
-	"Command_Name_Concatenate": "Aaneenschakelen",
+	"Command_Name_Concatenate": "Samenvoegen",
 	"Command_Argument_Concatenate_Text": "Tekst",
 	"Command_Argument_Concatenate_Position": "Positie",
 	"Command_Argument_Concatenate_IncludeExtension": "Incl. extensie",
-	"Command_Name_ConcatenateDirectoryName": "Aaneenschakelen Directory Naam",
-	"Commamd_Argument_ConcatenateDirectoryName_ApplyToDirectory": "Ook toepassen op directory",
+	"Command_Name_ConcatenateDirectoryName": "Samenvoegen met mapnaam",
+	"Commamd_Argument_ConcatenateDirectoryName_ApplyToDirectory": "Ook toepassen op map",
 	"Command_Argument_ConcatenateDirectoryName_Position": "Positie",
 	"Command_Argument_ConcatenateDirectoryName_IncludeExtension": "Incl. extensie",
 	"Command_Name_DeleteFilename": "Bestandsnaam wissen",
@@ -138,16 +138,16 @@
 
 	"Command_Name_AddExtension": "Extensie toevoegen",
 	"Command_Argument_AddExtension_Extension": "Extensie",
-	"Commamd_Argument_AddExtension_ApplyToDirectory": "Ook toepassen op directory",
+	"Commamd_Argument_AddExtension_ApplyToDirectory": "Ook toepassen op map",
 	"Command_Name_AddExtensionAuto": "Extensie automatisch toevoegen",
 	"Command_Name_ReplaceExtension": "Extensie wijzigen",
 	"Command_Argument_ReplaceExtension_Extension": "Extensie",
-	"Commamd_Argument_ReplaceExtension_ApplyToDirectory": "Ook toepassen op directory",
+	"Commamd_Argument_ReplaceExtension_ApplyToDirectory": "Ook toepassen op map",
 	"Command_Name_DeleteExtension": "Extensie wissen",
-	"Commamd_Argument_DeleteExtension_ApplyToDirectory": "Ook toepassen op directory",
+	"Commamd_Argument_DeleteExtension_ApplyToDirectory": "Ook toepassen op map",
 	"Command_Name_CasecastExtension": "Extensie in ProperCase",
 	"Command_Argument_CasecastExtension_Casecast": "Methode",
-	"Commamd_Argument_CasecastExtension_ApplyToDirectory": "Ook toepassen op directory",
+	"Commamd_Argument_CasecastExtension_ApplyToDirectory": "Ook toepassen op map",
 
 	"Command_Name_AddDate": "Datum toevoegen",
 	"Command_Argument_AddDate_Kind": "Datumtype",
@@ -173,15 +173,15 @@
 
 	"Command_Name_AddMediaTag": "Medialabel toevoegen",
 	"Command_Argument_AddMediaTag_Tag": "Label",
-	"Command_Argument_AddMediaTag_Arguments": "Index van het argument",
+	"Command_Argument_AddMediaTag_Arguments": "Argumentenlijst",
 	"Command_Argument_AddMediaTag_Position": "Positie",
 
 	"Command_Name_AddDocumentTag": "Bestandslabel toevoegen",
 	"Command_Argument_AddDocumentTag_Tag": "Label",
 	"Command_Argument_AddDocumentTag_Position": "Positie",
 
-	"Command_Name_AddHash": "Hash toevoegen",
-	"Command_Argument_AddHash_HashType": "Hash",
+	"Command_Name_AddHash": "Controlegetal toevoegen",
+	"Command_Argument_AddHash_HashType": "Controlegetal",
 	"Command_Argument_AddHash_Position": "Positie",
 
 	"Command_Name_AddGitInfo": "Git Information toevoegen",
@@ -190,9 +190,13 @@
 
 	"Command_Name_ManualEdit": "Bewerken",
 	"Command_Argument_ManualEdit_ChangeName": "Naam",
-	"Command_Argument_ManualEdit_ChangePath": "PAD",
+	"Command_Argument_ManualEdit_ChangePath": "Pad",
 
-	"Menu_Condition_Condition": "Condities",
+  	"Command_Name_AdvancedFormat": "Geavanceerde opmaak",
+  	"Command_Argument_AdvancedFormat_FileNameFormatString": "Naam",
+  	"Command_Argument_AdvancedFormat_PathFormatString": "Pad",
+
+	"Menu_Condition_Condition": "C_ondities",
 
 	"Condition_Name_TextFile": "Tekstbestand",
 
@@ -270,6 +274,6 @@
 	"BatchWindow_SaveFile": "Opslaan als",
 	"BatchWindow_DoBatch": "Groepsopdracht uitvoeren",
 	"BatchWindow_Command": "Opdracht",
-	"BatchWindow_Condition": "C_onditie",
+	"BatchWindow_Condition": "Conditie",
 	"BatchWindow_File_Filter": "DaramRenamer Batch-bestand (*.drb)|*.drb"
 }

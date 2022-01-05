@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
@@ -53,7 +54,8 @@ namespace DaramRenamer
 							}
 
 							var jsonBytes = Encoding.UTF8.GetBytes(jsonString);
-							_instance = JsonSerializer.Deserialize<Preferences>(jsonBytes);
+							_instance = JsonSerializer.Deserialize<Preferences>(jsonBytes) ?? new Preferences();
+							
 							break;
 						}
 					case null:

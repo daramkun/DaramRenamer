@@ -325,7 +325,7 @@ namespace DaramRenamer
 			using Stream stream = File.Open($"{BaseDirectory}\\DaramRenamer.config.json", FileMode.Create);
 			var jsonBytes = JsonSerializer.SerializeToUtf8Bytes(this, typeof(Preferences), new JsonSerializerOptions()
 			{
-				WriteIndented = false,
+				WriteIndented = true,
 				AllowTrailingCommas = false,
 			});
 			stream.Write(jsonBytes, 0, jsonBytes.Length);

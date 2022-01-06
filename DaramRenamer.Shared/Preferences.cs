@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
@@ -15,16 +17,47 @@ namespace DaramRenamer
 	{
 		private static Preferences _instance;
 
+		private static readonly string BaseDirectory = GetBaseDirectory();
+
+		private static string GetBaseDirectory()
+		{
+			var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+			var attr = File.GetAttributes(baseDir);
+			var isReadOnly = attr.HasFlag(FileAttributes.ReadOnly) || attr.HasFlag(FileAttributes.System);
+
+			if (!isReadOnly)
+			{
+				try
+				{
+					using var fs = File.Create(Path.Combine(baseDir, Path.GetRandomFileName()), 1,
+						FileOptions.DeleteOnClose);
+				}
+				catch (UnauthorizedAccessException ex)
+				{
+					isReadOnly = true;
+				}
+			}
+			
+			if (isReadOnly)
+			{
+				var localDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+				baseDir = Path.Combine(localDir, "DaramRenamer", baseDir.Replace(":", ""));
+				if (!Directory.Exists(baseDir))
+					Directory.CreateDirectory(baseDir);
+			}
+			return baseDir;
+		}
+
 		public static Preferences Instance
 		{
 			get
 			{
 				switch (_instance)
 				{
-					case null when File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\DaramRenamer.config.json"):
+					case null when File.Exists($"{BaseDirectory}\\DaramRenamer.config.json"):
 						{
 							using Stream stream =
-								File.Open($"{AppDomain.CurrentDomain.BaseDirectory}\\DaramRenamer.config.json",
+								File.Open($"{BaseDirectory}\\DaramRenamer.config.json",
 									FileMode.Open);
 							using TextReader reader = new StreamReader(stream, Encoding.UTF8, true, -1, true);
 							var jsonString = reader.ReadToEnd();
@@ -289,7 +322,7 @@ namespace DaramRenamer
 
 		public void Save()
 		{
-			using Stream stream = File.Open($"{AppDomain.CurrentDomain.BaseDirectory}\\DaramRenamer.config.json", FileMode.Create);
+			using Stream stream = File.Open($"{BaseDirectory}\\DaramRenamer.config.json", FileMode.Create);
 			var jsonBytes = JsonSerializer.SerializeToUtf8Bytes(this, typeof(Preferences), new JsonSerializerOptions()
 			{
 				WriteIndented = false,

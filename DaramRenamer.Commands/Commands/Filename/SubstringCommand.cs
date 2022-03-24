@@ -22,6 +22,11 @@ namespace DaramRenamer.Commands.Filename
 
 		public bool DoCommand(FileInfo file)
 		{
+			if (file.ChangedFilename.Length <= StartIndex)
+				return false;
+			if (Length != null && file.ChangedFilename.Length <= StartIndex + Length)
+				return false;
+		
 			file.ChangedFilename =
 				Length == null
 					? IncludeExtension

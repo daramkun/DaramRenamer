@@ -19,12 +19,12 @@ public class FileInfo : IComparable<FileInfo>, INotifyPropertyChanged
 
     private string _originalFullPath;
 
-    public FileInfo(string fullPath)
+    public FileInfo(string fullPath, bool directoryCheck = true)
     {
         OriginalFullPath = fullPath;
         ChangedFilename = OriginalFilename;
         ChangedPath = OriginalPath;
-        IsDirectory = File.GetAttributes(fullPath).HasFlag(FileAttributes.Directory);
+        IsDirectory = directoryCheck && File.GetAttributes(fullPath).HasFlag(FileAttributes.Directory);
     }
 
     public FileInfo(FileInfo file)
@@ -271,6 +271,12 @@ public class FileInfo : IComparable<FileInfo>, INotifyPropertyChanged
         }
 
         return false;
+    }
+
+    public void Reset()
+    {
+        ChangedFilename = OriginalFilename;
+        ChangedPath = OriginalPath;
     }
 
     public void Changed()

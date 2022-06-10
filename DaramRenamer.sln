@@ -25,6 +25,10 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Daramee.Nargs.Shared", "Mod
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Blockar.Shared", "Modules\Blockar\Blockar.Shared\Blockar.Shared.shproj", "{24EDA730-617F-409E-BA4A-336B44151438}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{4D30F868-9628-4903-888A-A79D4911E222}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaramRenamer.Test", "DaramRenamer.Test\DaramRenamer.Test.csproj", "{DE09BB4A-C41C-4461-97E2-8BB94B15469D}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Modules\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems*{07d3172f-ff1f-4e6f-aebe-3e725904b2a7}*SharedItemsImports = 13
@@ -50,6 +54,10 @@ Global
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9129A4F6-59F4-41EC-A03F-D41251CF2795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE09BB4A-C41C-4461-97E2-8BB94B15469D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE09BB4A-C41C-4461-97E2-8BB94B15469D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE09BB4A-C41C-4461-97E2-8BB94B15469D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE09BB4A-C41C-4461-97E2-8BB94B15469D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{07D3172F-FF1F-4E6F-AEBE-3E725904B2A7} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
 		{E13FAA4A-99BD-4A4D-8A1C-C1D3260278CD} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
 		{24EDA730-617F-409E-BA4A-336B44151438} = {BF174B15-5C72-4E5C-8AA4-EF11C3DC6EFF}
+		{DE09BB4A-C41C-4461-97E2-8BB94B15469D} = {4D30F868-9628-4903-888A-A79D4911E222}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B986277B-4442-49A5-BDBE-5598D87D628C}

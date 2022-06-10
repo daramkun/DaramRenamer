@@ -21,19 +21,26 @@ public class SubstringCommand : ICommand, IOrderBy
 
     public bool DoCommand(FileInfo file)
     {
-        if (file.ChangedFilename.Length <= StartIndex)
+        var baseFilename = IncludeExtension
+            ? file.ChangedFilename
+            : Path.GetFileNameWithoutExtension(file.ChangedFilename);
+        
+        var startIndex = (int) StartIndex;
+        if (startIndex >= baseFilename.Length)
             return false;
-        if (Length != null && file.ChangedFilename.Length <= StartIndex + Length)
-            return false;
-
+        
+        var length = (int?) Length;
+        if (length != null && startIndex + length >= baseFilename.Length)
+            length = null;
+        
         file.ChangedFilename =
-            Length == null
+            length == null
                 ? IncludeExtension
-                    ? file.ChangedFilename.Substring((int) StartIndex)
-                    : $"{Path.GetFileNameWithoutExtension(file.ChangedFilename).Substring((int) StartIndex)}{Path.GetExtension(file.ChangedFilename)}"
+                    ? baseFilename[startIndex..]
+                    : $"{baseFilename[startIndex..]}{Path.GetExtension(file.ChangedFilename)}"
                 : IncludeExtension
-                    ? file.ChangedFilename.Substring((int) StartIndex, (int) Length.Value)
-                    : $"{Path.GetFileNameWithoutExtension(file.ChangedFilename).Substring((int) StartIndex, (int) Length.Value)}{Path.GetExtension(file.ChangedFilename)}";
+                    ? baseFilename.Substring(startIndex, length.Value)
+                    : $"{baseFilename.Substring(startIndex, length.Value)}{Path.GetExtension(file.ChangedFilename)}";
         return true;
     }
 

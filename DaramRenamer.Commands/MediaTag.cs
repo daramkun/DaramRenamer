@@ -1,17 +1,39 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum MediaTag
 {
-	public enum MediaTag
-	{
-		AudioBitrate, AudioSamplerate, AudioChannels, AudioBitsPerSample,
-		AudioCodec, AudioAlbum, AudioAlbumArtists, AudioComposers,
-		AudioPerformers, AudioCopyright, AudioDisc, AudioDiscCount,
-		AudioGenres, AudioTitle, AudioTrack, AudioTrackCount,
+    AudioBitrate,
+    AudioSamplerate,
+    AudioChannels,
+    AudioBitsPerSample,
+    AudioCodec,
+    AudioAlbum,
+    AudioAlbumArtists,
+    AudioComposers,
+    AudioPerformers,
+    AudioCopyright,
+    AudioDisc,
+    AudioDiscCount,
+    AudioGenres,
+    AudioTitle,
+    AudioTrack,
+    AudioTrackCount,
 
-		AudioConductor, AudioYear, AudioDuration,
+    AudioConductor,
+    AudioYear,
+    AudioDuration,
 
-		VideoTitle, VideoDuration, VideoWidth, VideoHeight,
-		VideoCodec, VideoGenres, VideoYear, VideoCopyright,
+    VideoTitle,
+    VideoDuration,
+    VideoWidth,
+    VideoHeight,
+    VideoCodec,
+    VideoGenres,
+    VideoYear,
+    VideoCopyright,
 
-		ImageWidth, ImageHeight, ImageCodec, ImageQuality,
-	}
+    ImageWidth,
+    ImageHeight,
+    ImageCodec,
+    ImageQuality
 }

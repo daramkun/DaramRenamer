@@ -3,96 +3,95 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace DaramRenamer
+namespace DaramRenamer;
+
+public class KeyBindingInfo : INotifyPropertyChanged
 {
-	public class KeyBindingInfo : INotifyPropertyChanged
-	{
-		private string _keyBinding, _command;
+    private string _keyBinding, _command;
 
-		public string KeyBinding
-		{
-			get => _keyBinding;
-			set
-			{
-				_keyBinding = value;
-				OnPropertyChanged();
-				OnPropertyChanged(nameof(KeyBindingKey));
-				OnPropertyChanged(nameof(KeyBindingModifierKeys));
-			}
-		}
+    public string KeyBinding
+    {
+        get => _keyBinding;
+        set
+        {
+            _keyBinding = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(KeyBindingKey));
+            OnPropertyChanged(nameof(KeyBindingModifierKeys));
+        }
+    }
 
-		public Key KeyBindingKey
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(_keyBinding) || string.IsNullOrWhiteSpace(_keyBinding))
-					return 0;
-				var keyText = _keyBinding.Replace("Ctrl+", "").Replace("Alt+", "").Replace("Shift+", "");
-				return Enum.TryParse<Key>(keyText, out var result)
-					? result
-					: 0;
-			}
-		}
+    public Key KeyBindingKey
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_keyBinding) || string.IsNullOrWhiteSpace(_keyBinding))
+                return 0;
+            var keyText = _keyBinding.Replace("Ctrl+", "").Replace("Alt+", "").Replace("Shift+", "");
+            return Enum.TryParse<Key>(keyText, out var result)
+                ? result
+                : 0;
+        }
+    }
 
-		public ModifierKeys KeyBindingModifierKeys
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(_keyBinding) || string.IsNullOrWhiteSpace(_keyBinding))
-					return ModifierKeys.None;
+    public ModifierKeys KeyBindingModifierKeys
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_keyBinding) || string.IsNullOrWhiteSpace(_keyBinding))
+                return ModifierKeys.None;
 
-				var modifierKeys = ModifierKeys.None;
-				if (_keyBinding.Contains("Ctrl+"))
-					modifierKeys |= ModifierKeys.Control;
-				if (_keyBinding.Contains("Alt+"))
-					modifierKeys |= ModifierKeys.Alt;
-				if (_keyBinding.Contains("Shift+"))
-					modifierKeys |= ModifierKeys.Shift;
+            var modifierKeys = ModifierKeys.None;
+            if (_keyBinding.Contains("Ctrl+"))
+                modifierKeys |= ModifierKeys.Control;
+            if (_keyBinding.Contains("Alt+"))
+                modifierKeys |= ModifierKeys.Alt;
+            if (_keyBinding.Contains("Shift+"))
+                modifierKeys |= ModifierKeys.Shift;
 
-				return modifierKeys;
-			}
-		}
+            return modifierKeys;
+        }
+    }
 
-		public string Command
-		{
-			get => _command;
-			set
-			{
-				_command = value;
-				OnPropertyChanged();
-				OnPropertyChanged(nameof(CommandObject));
-			}
-		}
+    public string Command
+    {
+        get => _command;
+        set
+        {
+            _command = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(CommandObject));
+        }
+    }
 
-		public object CommandObject
-		{
-			get
-			{
-				Type commandType = null;
-				foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-				{
-					foreach (var type in assembly.GetTypes())
-					{
-						if (type.FullName != _command)
-							continue;
+    public object CommandObject
+    {
+        get
+        {
+            Type commandType = null;
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type.FullName != _command)
+                        continue;
 
-						commandType = type;
-						break;
-					}
+                    commandType = type;
+                    break;
+                }
 
-					if (commandType != null)
-						break;
-				}
+                if (commandType != null)
+                    break;
+            }
 
-				return commandType != null ? Activator.CreateInstance(commandType) : null;
-			}
-		}
+            return commandType != null ? Activator.CreateInstance(commandType) : null;
+        }
+    }
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

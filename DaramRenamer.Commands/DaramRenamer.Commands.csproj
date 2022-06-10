@@ -1,22 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>DaramRenamer</RootNamespace>
-    <LangVersion>latest</LangVersion>
-    <Version>2022.1.2</Version>
-    <Authors>Jin Jae-yeon</Authors>
-    <Company>DARAM WORLD</Company>
-    <Product>DaramRenamer Command</Product>
-    <Copyright>Copyright ⓒ 2013-2022 Jin Jae-yeon</Copyright>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <RootNamespace>DaramRenamer</RootNamespace>
+        <LangVersion>latest</LangVersion>
+        <Version>2022.1.2</Version>
+        <Authors>Jin Jae-yeon</Authors>
+        <Company>DARAM WORLD</Company>
+        <Product>DaramRenamer Command</Product>
+        <Copyright>Copyright ⓒ 2013-2022 Jin Jae-yeon</Copyright>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
+        <PackageVersion>2022.6.1</PackageVersion>
+    </PropertyGroup>
 
-  <Import Project="..\Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />
+    <Import Project="..\Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared"/>
 
-  <ItemGroup>
-    <PackageReference Include="TagLibSharp" Version="2.2.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="TagLibSharp" Version="2.2.0"/>
+    </ItemGroup>
 
 </Project>

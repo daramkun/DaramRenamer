@@ -1,10 +1,9 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum FileDateKind
 {
-	public enum FileDateKind
-	{
-		Creation,
-		LastAccess,
-		LastModify,
-		Now,
-	}
+    Creation,
+    LastAccess,
+    LastModify,
+    Now
 }

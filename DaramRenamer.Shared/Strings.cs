@@ -13,154 +13,165 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
 
-namespace DaramRenamer
+namespace DaramRenamer;
+
+public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionChanged, INotifyPropertyChanged
 {
-	public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionChanged, INotifyPropertyChanged
-	{
-		private static Strings _instance;
-		public static Strings Instance => _instance ??= new Strings();
+    private static Strings _instance;
 
-		private static readonly DataContractJsonSerializer TableSerializer = new(
-			typeof(Dictionary<string, string>), new DataContractJsonSerializerSettings
-			{
-				UseSimpleDictionaryFormat = true,
-			});
+    private static readonly DataContractJsonSerializer TableSerializer = new(
+        typeof(Dictionary<string, string>), new DataContractJsonSerializerSettings
+        {
+            UseSimpleDictionaryFormat = true
+        });
 
-		private static readonly Regex StringTableFilename =
-			new(".*DaramRenamer\\.Strings\\.([a-zA-Z0-9\\-_]*)\\.json");
+    private static readonly Regex StringTableFilename =
+        new(".*DaramRenamer\\.Strings\\.([a-zA-Z0-9\\-_]*)\\.json");
 
-		private readonly ObservableDictionary<string, string> _stringTable = new();
+    private readonly List<CultureInfo> _availableCustomLanguages = new();
 
-		/// <summary>Event raised when the collection changes.</summary>
-		public event NotifyCollectionChangedEventHandler CollectionChanged = (_, _) => { };
+    private readonly ObservableDictionary<string, string> _stringTable = new();
 
-		/// <summary>Event raised when a property on the collection changes.</summary>
-		public event PropertyChangedEventHandler PropertyChanged = (_, _) => { };
+    public Strings()
+    {
+        GetAdditionalAvailableLanguages();
+        Load();
+    }
 
-		private readonly List<CultureInfo> _availableCustomLanguages = new();
+    public static Strings Instance => _instance ??= new Strings();
 
-		public IEnumerable<CultureInfo> AvailableLanguages
-		{
-			get
-			{
-				yield return CultureInfo.GetCultureInfo("en");
-				yield return CultureInfo.GetCultureInfo("ko-kr");
-				yield return CultureInfo.GetCultureInfo("nl-nl");
-				foreach (var lang in _availableCustomLanguages)
-					yield return lang;
-			}
-		}
+    public IEnumerable<CultureInfo> AvailableLanguages
+    {
+        get
+        {
+            yield return CultureInfo.GetCultureInfo("en");
+            yield return CultureInfo.GetCultureInfo("ko-kr");
+            yield return CultureInfo.GetCultureInfo("nl-nl");
+            foreach (var lang in _availableCustomLanguages)
+                yield return lang;
+        }
+    }
 
-		public CultureInfo GetDefaultLanguage()
-		{
-			var currentUiCulture = CultureInfo.CurrentUICulture;
-			return AvailableLanguages.Any(lang =>
-				lang.Name.Equals(currentUiCulture.Name, StringComparison.OrdinalIgnoreCase))
-				? currentUiCulture
-				: CultureInfo.GetCultureInfo("en");
-		}
+    /// <summary>Event raised when the collection changes.</summary>
+    public event NotifyCollectionChangedEventHandler CollectionChanged = (_, _) => { };
 
-		public Strings()
-		{
-			GetAdditionalAvailableLanguages();
-			Load();
-		}
+    /// <summary>Event raised when a property on the collection changes.</summary>
+    public event PropertyChangedEventHandler PropertyChanged = (_, _) => { };
 
-		private void GetAdditionalAvailableLanguages()
-		{
-			foreach (var name in FileInfo.FileOperator.GetFiles(Environment.CurrentDirectory, false))
-			{
-				var match = StringTableFilename.Match(name);
-				if (!match.Success)
-					continue;
+    public string this[string key] => _stringTable.ContainsKey(key) ? _stringTable[key] : key;
 
-				var code = match.Groups[1].Value;
-				_availableCustomLanguages.Add(CultureInfo.GetCultureInfo(code.Replace('_', '-')));
-			}
-		}
+    public bool ContainsKey(string key)
+    {
+        return _stringTable.ContainsKey(key);
+    }
 
-		public void Load()
-		{
-			{
-				using var stream = Assembly.GetExecutingAssembly()
-					.GetManifestResourceStream("DaramRenamer.Strings.Strings.default.json");
-				LoadTable(stream);
-			}
+    public bool TryGetValue(string key, out string value)
+    {
+        return _stringTable.TryGetValue(key, out value);
+    }
 
-			{
-				using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-					$"DaramRenamer.Strings.Strings.{CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}.json");
-				LoadTable(stream);
-			}
+    public IEnumerable<string> Keys => _stringTable.Keys;
+    public IEnumerable<string> Values => _stringTable.Values;
+    public int Count => _stringTable.Count();
 
-			{
-				using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-					$"DaramRenamer.Strings.Strings.{CultureInfo.CurrentUICulture.ToString().Replace('-', '_').ToLower()}.json");
-				LoadTable(stream);
-			}
+    public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+    {
+        return _stringTable.GetEnumerator();
+    }
 
-			foreach (var name in FileInfo.FileOperator.GetFiles(Environment.CurrentDirectory, false))
-			{
-				var match = StringTableFilename.Match(name);
-				if (!match.Success)
-					continue;
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 
-				var filename = Path.GetFileName(name).Replace('_', '-');
-				if (filename.IndexOf($".{CultureInfo.CurrentUICulture.Name}.", StringComparison.OrdinalIgnoreCase) < 0)
-					continue;
+    public CultureInfo GetDefaultLanguage()
+    {
+        var currentUiCulture = CultureInfo.CurrentUICulture;
+        return AvailableLanguages.Any(lang =>
+            lang.Name.Equals(currentUiCulture.Name, StringComparison.OrdinalIgnoreCase))
+            ? currentUiCulture
+            : CultureInfo.GetCultureInfo("en");
+    }
 
-				using var stream = new FileStream(name, FileMode.Open, FileAccess.Read, FileShare.Read);
-				LoadTable(stream);
-			}
+    private void GetAdditionalAvailableLanguages()
+    {
+        foreach (var name in FileInfo.FileOperator.GetFiles(Environment.CurrentDirectory, false))
+        {
+            var match = StringTableFilename.Match(name);
+            if (!match.Success)
+                continue;
 
-			PropertyChanged(this, new PropertyChangedEventArgs(Binding.IndexerName));
-			PropertyChanged(this, new PropertyChangedEventArgs("Values"));
+            var code = match.Groups[1].Value;
+            _availableCustomLanguages.Add(CultureInfo.GetCultureInfo(code.Replace('_', '-')));
+        }
+    }
 
-			((MainWindow)Application.Current.MainWindow)?.RefreshTitle();
-			PluginToMenu.RefreshBinding();
-		}
+    public void Load()
+    {
+        {
+            using var stream = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream("DaramRenamer.Strings.Strings.default.json");
+            LoadTable(stream);
+        }
 
-		private void LoadTable(Stream stream)
-		{
-			if (stream == null)
-				return;
+        {
+            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                $"DaramRenamer.Strings.Strings.{CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}.json");
+            LoadTable(stream);
+        }
 
-			using var reader = new StreamReader(stream, Encoding.UTF8, true);
-			using Stream mem = new MemoryStream(Encoding.UTF8.GetBytes(reader.ReadToEnd()));
+        {
+            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                $"DaramRenamer.Strings.Strings.{CultureInfo.CurrentUICulture.ToString().Replace('-', '_').ToLower()}.json");
+            LoadTable(stream);
+        }
 
-			if (TableSerializer.ReadObject(mem) is not Dictionary<string, string> table)
-				return;
+        foreach (var name in FileInfo.FileOperator.GetFiles(Environment.CurrentDirectory, false))
+        {
+            var match = StringTableFilename.Match(name);
+            if (!match.Success)
+                continue;
 
-			foreach (var (key, value) in table)
-			{
-				if (_stringTable.ContainsKey(key))
-				{
-					var existing = _stringTable[key];
-					_stringTable[key] = value;
-					CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,
-						new KeyValuePair<string, string>(key, value),
-						new KeyValuePair<string, string>(key, existing)));
-				}
-				else
-				{
-					_stringTable[key] = value;
-					CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-						new KeyValuePair<string, string>(key, value)));
-				}
-			}
-		}
+            var filename = Path.GetFileName(name).Replace('_', '-');
+            if (filename.IndexOf($".{CultureInfo.CurrentUICulture.Name}.", StringComparison.OrdinalIgnoreCase) < 0)
+                continue;
 
-		public string this[string key] => _stringTable.ContainsKey(key) ? _stringTable[key] : key;
+            using var stream = new FileStream(name, FileMode.Open, FileAccess.Read, FileShare.Read);
+            LoadTable(stream);
+        }
 
-		public bool ContainsKey(string key) => _stringTable.ContainsKey(key);
-		public bool TryGetValue(string key, out string value) => _stringTable.TryGetValue(key, out value);
+        PropertyChanged(this, new PropertyChangedEventArgs(Binding.IndexerName));
+        PropertyChanged(this, new PropertyChangedEventArgs("Values"));
 
-		public IEnumerable<string> Keys => _stringTable.Keys;
-		public IEnumerable<string> Values => _stringTable.Values;
-		public int Count => _stringTable.Count();
+        ((MainWindow) Application.Current.MainWindow)?.RefreshTitle();
+        PluginToMenu.RefreshBinding();
+    }
 
-		public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _stringTable.GetEnumerator();
+    private void LoadTable(Stream stream)
+    {
+        if (stream == null)
+            return;
 
-		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-	}
+        using var reader = new StreamReader(stream, Encoding.UTF8, true);
+        using Stream mem = new MemoryStream(Encoding.UTF8.GetBytes(reader.ReadToEnd()));
+
+        if (TableSerializer.ReadObject(mem) is not Dictionary<string, string> table)
+            return;
+
+        foreach (var (key, value) in table)
+            if (_stringTable.ContainsKey(key))
+            {
+                var existing = _stringTable[key];
+                _stringTable[key] = value;
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,
+                    new KeyValuePair<string, string>(key, value),
+                    new KeyValuePair<string, string>(key, existing)));
+            }
+            else
+            {
+                _stringTable[key] = value;
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                    new KeyValuePair<string, string>(key, value)));
+            }
+    }
 }

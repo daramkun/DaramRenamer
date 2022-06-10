@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:DaramRenamer"
         mc:Ignorable="d"
         Title="{Binding Path=[LicenseWindowTitle], Source={x:Static local:Strings.Instance}}" Height="600" Width="800">
-	<FlowDocumentScrollViewer x:Name="LicenseTextBox" VerticalScrollBarVisibility="Auto">
-
-	</FlowDocumentScrollViewer>
+    <FlowDocumentScrollViewer x:Name="LicenseTextBox" VerticalScrollBarVisibility="Auto" />
 </Window>

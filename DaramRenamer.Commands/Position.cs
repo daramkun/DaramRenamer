@@ -1,15 +1,14 @@
-﻿namespace DaramRenamer
-{
-	public enum Position1
-	{
-		StartPoint,
-		EndPoint,
-	}
+﻿namespace DaramRenamer;
 
-	public enum Position2
-	{
-		StartPoint,
-		EndPoint,
-		BothPoint,
-	}
+public enum Position1
+{
+    StartPoint,
+    EndPoint
+}
+
+public enum Position2
+{
+    StartPoint,
+    EndPoint,
+    BothPoint
 }

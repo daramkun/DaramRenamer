@@ -8,27 +8,26 @@
         Title="CommandWindow" Width="480" ShowInTaskbar="False"
         VerticalAlignment="Center" HorizontalAlignment="Center" SizeToContent="Height"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-	<StackPanel Orientation="Vertical">
-		<!-- Contents -->
-		<StackPanel Orientation="Vertical" Margin="15">
-			<Grid Name="contentGrid">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="120" />
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
+    <StackPanel Orientation="Vertical">
+        <!-- Contents -->
+        <StackPanel Orientation="Vertical" Margin="15">
+            <Grid Name="contentGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </StackPanel>
 
-				</Grid.RowDefinitions>
-			</Grid>
-		</StackPanel>
-
-		<!-- Buttons -->
-		<Border BorderThickness="0, 1, 0, 0" BorderBrush="{x:Static SystemColors.ControlLightBrush}"
-		        Background="{DynamicResource {x:Static SystemColors.ControlBrush}}">
-			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,9,20,6">
-				<Button Content="{Binding Path=[ButtonOK], Source={x:Static local:Strings.Instance}}" Width="72" Height="22" Margin="0,0,5,0" IsDefault="True" Click="ButtonOK_Click" />
-				<Button Content="{Binding Path=[ButtonCancel], Source={x:Static local:Strings.Instance}}" Width="72" Height="22" IsCancel="True" Click="ButtonCancel_Click" />
-			</StackPanel>
-		</Border>
-	</StackPanel>
+        <!-- Buttons -->
+        <Border BorderThickness="0, 1, 0, 0" BorderBrush="{x:Static SystemColors.ControlLightBrush}"
+                Background="{DynamicResource {x:Static SystemColors.ControlBrush}}">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,9,20,6">
+                <Button Content="{Binding Path=[ButtonOK], Source={x:Static local:Strings.Instance}}" Width="72"
+                        Height="22" Margin="0,0,5,0" IsDefault="True" Click="ButtonOK_Click" />
+                <Button Content="{Binding Path=[ButtonCancel], Source={x:Static local:Strings.Instance}}" Width="72"
+                        Height="22" IsCancel="True" Click="ButtonCancel_Click" />
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </Window>

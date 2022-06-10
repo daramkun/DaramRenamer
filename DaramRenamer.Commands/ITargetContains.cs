@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace DaramRenamer
+namespace DaramRenamer;
+
+public interface ITargetContains
 {
-	public interface ITargetContains
-	{
-		void SetTargets(IEnumerable<FileInfo> files);
-	}
+    void SetTargets(IEnumerable<FileInfo> files);
 }

@@ -1,8 +1,7 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum RenameMode
 {
-	public enum RenameMode
-	{
-		Move,
-		Copy,
-	}
+    Move,
+    Copy
 }

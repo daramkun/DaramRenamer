@@ -1,10 +1,9 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum GitInfo
 {
-	public enum GitInfo
-	{
-		CommitId,
-		ShortCommitId,
-		BranchName,
-		CommitCount
-	}
+    CommitId,
+    ShortCommitId,
+    BranchName,
+    CommitCount
 }

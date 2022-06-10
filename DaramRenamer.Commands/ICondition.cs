@@ -1,7 +1,6 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public interface ICondition
 {
-	public interface ICondition
-	{
-		bool IsSatisfyThisCondition(FileInfo file);
-	}
+    bool IsSatisfyThisCondition(FileInfo file);
 }

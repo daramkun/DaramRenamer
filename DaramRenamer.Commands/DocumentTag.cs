@@ -1,8 +1,7 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum DocumentTag
 {
-	public enum DocumentTag
-	{
-		Title,
-		Author,
-	}
+    Title,
+    Author
 }

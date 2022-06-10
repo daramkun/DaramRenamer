@@ -1,9 +1,8 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public interface ICommand
 {
-	public interface ICommand
-	{
-		bool ParallelProcessable { get; }
-		CommandCategory Category { get; }
-		bool DoCommand(FileInfo file);
-	}
+    bool ParallelProcessable { get; }
+    CommandCategory Category { get; }
+    bool DoCommand(FileInfo file);
 }

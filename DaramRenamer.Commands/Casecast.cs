@@ -1,15 +1,14 @@
-﻿namespace DaramRenamer
-{
-	public enum Casecast1
-	{
-		UppercaseAll,
-		LowercaseAll,
-	}
+﻿namespace DaramRenamer;
 
-	public enum Casecast2
-	{
-		UppercaseAll,
-		LowercaseAll,
-		UppercaseFirstLetter,
-	}
+public enum Casecast1
+{
+    UppercaseAll,
+    LowercaseAll
+}
+
+public enum Casecast2
+{
+    UppercaseAll,
+    LowercaseAll,
+    UppercaseFirstLetter
 }

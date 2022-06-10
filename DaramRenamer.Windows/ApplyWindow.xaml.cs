@@ -1,116 +1,114 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Threading;
 
-namespace DaramRenamer
+namespace DaramRenamer;
+
+/// <summary>
+///     ApplyWindow.xaml에 대한 상호 작용 논리
+/// </summary>
+public partial class ApplyWindow : Window
 {
-	/// <summary>
-	/// ApplyWindow.xaml에 대한 상호 작용 논리
-	/// </summary>
-	public partial class ApplyWindow : Window
-	{
-		private readonly UndoManager undoManager;
-		private bool isComplete;
+    private readonly UndoManager undoManager;
+    private bool isComplete;
 
-		public ApplyWindow(UndoManager undoManager)
-		{
-			InitializeComponent();
+    private bool isShown;
 
-			this.undoManager = undoManager;
-		}
+    public ApplyWindow(UndoManager undoManager)
+    {
+        InitializeComponent();
 
-		private bool isShown;
-		protected override void OnContentRendered(EventArgs e)
-		{
-			base.OnContentRendered(e);
+        this.undoManager = undoManager;
+    }
 
-			if (isShown)
-				return;
+    protected override void OnContentRendered(EventArgs e)
+    {
+        base.OnContentRendered(e);
 
-			isShown = true;
-			OnShown (e);
-		}
+        if (isShown)
+            return;
 
-		private async void OnShown(EventArgs e)
-		{
-			var failed = false;
-			try
-			{
-				undoManager.ClearUndoStack();
+        isShown = true;
+        OnShown(e);
+    }
 
-				ApplyProgressBar.Foreground = Brushes.Green;
-				ApplyProgressBar.Value = 0;
-				ApplyProgressBar.Maximum = FileInfo.Files.Count;
+    private async void OnShown(EventArgs e)
+    {
+        var failed = false;
+        try
+        {
+            undoManager.ClearUndoStack();
 
-				ProceedTextBlock.Text = "0";
-				TotalTextBlock.Text = FileInfo.Files.Count.ToString();
+            ApplyProgressBar.Foreground = Brushes.Green;
+            ApplyProgressBar.Value = 0;
+            ApplyProgressBar.Maximum = FileInfo.Files.Count;
 
-				await Task.Run(() =>
-				{
-					FileInfo.Apply(Preferences.Instance.AutomaticFixingFilename, Preferences.Instance.RenameMode,
-						Preferences.Instance.Overwrite, async (fileInfo, errorCode) =>
-						{
-							await Dispatcher.BeginInvoke((Action) (() =>
-							{
-								++ApplyProgressBar.Value;
+            ProceedTextBlock.Text = "0";
+            TotalTextBlock.Text = FileInfo.Files.Count.ToString();
 
-								ProcessingTextBlock.Text = fileInfo.OriginalFullPath;
-								ProceedTextBlock.Text = ((int) ApplyProgressBar.Value).ToString();
+            await Task.Run(() =>
+            {
+                FileInfo.Apply(Preferences.Instance.AutomaticFixingFilename, Preferences.Instance.RenameMode,
+                    Preferences.Instance.Overwrite, async (fileInfo, errorCode) =>
+                    {
+                        await Dispatcher.BeginInvoke((Action) (() =>
+                        {
+                            ++ApplyProgressBar.Value;
 
-								if (errorCode != ErrorCode.NoError)
-									ListBoxFailure.Items.Add(
-										$"{fileInfo.OriginalFilename} -> {fileInfo.ChangedFilename}");
-							}));
+                            ProcessingTextBlock.Text = fileInfo.OriginalFullPath;
+                            ProceedTextBlock.Text = ((int) ApplyProgressBar.Value).ToString();
 
-							if (errorCode != ErrorCode.NoError)
-								failed = true;
-						});
-				});
+                            if (errorCode != ErrorCode.NoError)
+                                ListBoxFailure.Items.Add(
+                                    $"{fileInfo.OriginalFilename} -> {fileInfo.ChangedFilename}");
+                        }));
 
-				switch (failed)
-				{
-					case true:
-					{
-						ApplyProgressBar.Foreground = Brushes.Red;
-						break;
-					}
+                        if (errorCode != ErrorCode.NoError)
+                            failed = true;
+                    });
+            });
 
-					case false when Preferences.Instance.AutomaticListCleaning:
-					{
-						undoManager.SaveToUndoStack(FileInfo.Files);
-						FileInfo.Files.Clear();
-						break;
-					}
-				}
-			}
-			catch
-			{
-				await Dispatcher.BeginInvoke(new Action(() => MessageBox.Show("An Error occured.")));
-			}
-			finally
-			{
-				isComplete = true;
-				ApplyClose.IsEnabled = true;
+            switch (failed)
+            {
+                case true:
+                {
+                    ApplyProgressBar.Foreground = Brushes.Red;
+                    break;
+                }
 
-				if (!failed && Preferences.Instance.CloseApplyWindowWhenSuccessfullyDone)
-					await Dispatcher.BeginInvoke(new Action(Close));
-			}
-		}
+                case false when Preferences.Instance.AutomaticListCleaning:
+                {
+                    undoManager.SaveToUndoStack(FileInfo.Files);
+                    FileInfo.Files.Clear();
+                    break;
+                }
+            }
+        }
+        catch
+        {
+            await Dispatcher.BeginInvoke(new Action(() => MessageBox.Show("An Error occured.")));
+        }
+        finally
+        {
+            isComplete = true;
+            ApplyClose.IsEnabled = true;
 
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			e.Cancel = !isComplete;
-			base.OnClosing(e);
-		}
+            if (!failed && Preferences.Instance.CloseApplyWindowWhenSuccessfullyDone)
+                await Dispatcher.BeginInvoke(new Action(Close));
+        }
+    }
 
-		private void ApplyClose_Click(object sender, RoutedEventArgs e)
-		{
-			if (!isComplete) return;
-			Close();
-		}
-	}
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        e.Cancel = !isComplete;
+        base.OnClosing(e);
+    }
+
+    private void ApplyClose_Click(object sender, RoutedEventArgs e)
+    {
+        if (!isComplete) return;
+        Close();
+    }
 }

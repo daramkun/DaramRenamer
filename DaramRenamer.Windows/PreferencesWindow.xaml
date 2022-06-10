@@ -4,92 +4,159 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DaramRenamer"
-		xmlns:conv="clr-namespace:DaramRenamer.Converters"
+        xmlns:conv="clr-namespace:DaramRenamer.Converters"
         mc:Ignorable="d"
         Title="{Binding Path=[Preferences], Source={x:Static local:Strings.Instance}}"
-        Height="340" Width="420" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" Closing="Window_Closing">
-	<Window.Resources>
-		<conv:LocalizationConverter x:Key="LocalizationConverter" />
-		<DataTemplate x:Key="CommandMenuItemDataTemplate">
-			<TextBlock Text="{Binding Converter={StaticResource LocalizationConverter}}" />
-		</DataTemplate>
-		<Style x:Key="CommandMenuItemItemContainerTemplate" TargetType="MenuItem">
-			<EventSetter Event="Click" Handler="CommandMenuItem_Click" />
-		</Style>
-	</Window.Resources>
+        Height="340" Width="420" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        WindowStyle="SingleBorderWindow" Closing="Window_Closing">
+    <Window.Resources>
+        <conv:LocalizationConverter x:Key="LocalizationConverter" />
+        <DataTemplate x:Key="CommandMenuItemDataTemplate">
+            <TextBlock Text="{Binding Converter={StaticResource LocalizationConverter}}" />
+        </DataTemplate>
+        <Style x:Key="CommandMenuItemItemContainerTemplate" TargetType="MenuItem">
+            <EventSetter Event="Click" Handler="CommandMenuItem_Click" />
+        </Style>
+    </Window.Resources>
 
-	<TabControl Margin="8">
-		<TabItem Header="{Binding Path=[PreferencesTabGeneral], Source={x:Static local:Strings.Instance}}">
-			<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-				<StackPanel Margin="8">
-					<CheckBox Content="{Binding Path=[PreferencesHardwareAcceleration], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=HaredwareAccelerated, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					<CheckBox Content="{Binding Path=[PreferencesOverwrite], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=Overwrite, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					<CheckBox Content="{Binding Path=[PreferencesAutoFixFilename], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=AutomaticFixingFilename, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					<CheckBox Content="{Binding Path=[PreferencesAutoListCleaning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=AutomaticListCleaning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
-						<TextBlock Text="{Binding Path=[PreferencesRenameMode], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-						<ComboBox SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling" SelectionChanged="ComboBoxRenameMode_SelectionChanged">
-							<ComboBoxItem Content="{Binding Path=[Move], Source={x:Static local:Strings.Instance}}" Tag="0" />
-							<ComboBoxItem Content="{Binding Path=[Copy], Source={x:Static local:Strings.Instance}}" Tag="1" />
-						</ComboBox>
-					</StackPanel>
-					<CheckBox Content="{Binding Path=[PreferencesSaveWindowState], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=SaveWindowState, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
-					<CheckBox Content="{Binding Path=[PreferencesUseCustomPlugins], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=UseCustomPlugins, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" />
-					<StackPanel Margin="0,0,0,5" Orientation="Horizontal" VirtualizingStackPanel.VirtualizationMode="Recycling">
-						<TextBlock Text="{Binding Path=[PreferencesCurrentLanguage], Source={x:Static local:Strings.Instance}}" VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-						<ComboBox ItemsSource="{Binding Path=AvailableLanguages, Source={x:Static local:Strings.Instance}}" VirtualizingStackPanel.VirtualizationMode="Recycling" Text="{Binding Path=CurrentLanguage, Source={x:Static local:Preferences.Instance}}">
+    <TabControl Margin="8">
+        <TabItem Header="{Binding Path=[PreferencesTabGeneral], Source={x:Static local:Strings.Instance}}">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="8">
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesHardwareAcceleration], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=HaredwareAccelerated, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <CheckBox Content="{Binding Path=[PreferencesOverwrite], Source={x:Static local:Strings.Instance}}"
+                              IsChecked="{Binding Path=Overwrite, Source={x:Static local:Preferences.Instance}}"
+                              Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesAutoFixFilename], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=AutomaticFixingFilename, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesAutoListCleaning], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=AutomaticListCleaning, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <StackPanel Margin="0,0,0,5" Orientation="Horizontal"
+                                VirtualizingStackPanel.VirtualizationMode="Recycling">
+                        <TextBlock
+                            Text="{Binding Path=[PreferencesRenameMode], Source={x:Static local:Strings.Instance}}"
+                            VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <ComboBox SelectedIndex="0" VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                  SelectionChanged="ComboBoxRenameMode_SelectionChanged">
+                            <ComboBoxItem Content="{Binding Path=[Move], Source={x:Static local:Strings.Instance}}"
+                                          Tag="0" />
+                            <ComboBoxItem Content="{Binding Path=[Copy], Source={x:Static local:Strings.Instance}}"
+                                          Tag="1" />
+                        </ComboBox>
+                    </StackPanel>
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesSaveWindowState], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=SaveWindowState, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" />
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesUseCustomPlugins], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=UseCustomPlugins, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" />
+                    <StackPanel Margin="0,0,0,5" Orientation="Horizontal"
+                                VirtualizingStackPanel.VirtualizationMode="Recycling">
+                        <TextBlock
+                            Text="{Binding Path=[PreferencesCurrentLanguage], Source={x:Static local:Strings.Instance}}"
+                            VerticalAlignment="Center" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        <ComboBox
+                            ItemsSource="{Binding Path=AvailableLanguages, Source={x:Static local:Strings.Instance}}"
+                            VirtualizingStackPanel.VirtualizationMode="Recycling"
+                            Text="{Binding Path=CurrentLanguage, Source={x:Static local:Preferences.Instance}}" />
+                    </StackPanel>
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesVisualCommand], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=VisualCommand, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesForceSingleCoreRunning], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=ForceSingleCoreRunning, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesCloseApplyWindowWhenSuccessfullyDone], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=CloseApplyWindowWhenSuccessfullyDone, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <CheckBox
+                        Content="{Binding Path=[PreferencesDisableCheckUpdate], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=DisableCheckUpdate, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
 
-						</ComboBox>
-					</StackPanel>
-					<CheckBox Content="{Binding Path=[PreferencesVisualCommand], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=VisualCommand, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					<CheckBox Content="{Binding Path=[PreferencesForceSingleCoreRunning], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=ForceSingleCoreRunning, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					<CheckBox Content="{Binding Path=[PreferencesCloseApplyWindowWhenSuccessfullyDone], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=CloseApplyWindowWhenSuccessfullyDone, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-					<CheckBox Content="{Binding Path=[PreferencesDisableCheckUpdate], Source={x:Static local:Strings.Instance}}" IsChecked="{Binding Path=DisableCheckUpdate, Source={x:Static local:Preferences.Instance}}" Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-				</StackPanel>
-			</ScrollViewer>
-		</TabItem>
+        <TabItem Header="{Binding Path=[PreferencesTabShortcut], Source={x:Static local:Strings.Instance}}">
+            <ListBox Margin="8" ItemsSource="{Binding Path=Shortcuts, Source={x:Static local:Preferences.Instance}}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="64" />
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
-		<TabItem Header="{Binding Path=[PreferencesTabShortcut], Source={x:Static local:Strings.Instance}}">
-			<ListBox Margin="8" ItemsSource="{Binding Path=Shortcuts, Source={x:Static local:Preferences.Instance}}">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Grid Margin="2">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="64" />
-								<ColumnDefinition Width="120" />
-								<ColumnDefinition />
-							</Grid.ColumnDefinitions>
+                            <TextBlock
+                                Text="{Binding Path=[PreferencesTabShortcutShortcutText], Source={x:Static local:Strings.Instance}}" />
+                            <TextBox Grid.Column="1" Text="{Binding Path=KeyBinding}" IsReadOnly="True"
+                                     Margin="0,0,8,0" KeyDown="Shortcut_TextBox_KeyDown" />
+                            <Button Grid.Column="2"
+                                    Content="{Binding Path=CommandObject, Converter={StaticResource LocalizationConverter}}"
+                                    Loaded="Shortcut_Button_Loaded" Click="Shortcut_Button_Click"
+                                    MouseRightButtonUp="Shortcut_Button_MouseRightButtonUp">
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem
+                                            Header="{Binding Path=[Menu_Command_Command], Source={x:Static local:Strings.Instance}}">
+                                            <MenuItem
+                                                Header="{Binding Path=[Menu_Command_Filename], Source={x:Static local:Strings.Instance}}"
+                                                ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
+                                                ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+                                            <MenuItem
+                                                Header="{Binding Path=[Menu_Command_Extension], Source={x:Static local:Strings.Instance}}"
+                                                ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
+                                                ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+                                            <MenuItem
+                                                Header="{Binding Path=[Menu_Command_Path], Source={x:Static local:Strings.Instance}}"
+                                                ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
+                                                ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+                                            <MenuItem
+                                                Header="{Binding Path=[Menu_Command_Number], Source={x:Static local:Strings.Instance}}"
+                                                ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
+                                                ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+                                            <MenuItem
+                                                Header="{Binding Path=[Menu_Command_Date], Source={x:Static local:Strings.Instance}}"
+                                                ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
+                                                ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+                                            <MenuItem
+                                                Header="{Binding Path=[Menu_Command_Tag], Source={x:Static local:Strings.Instance}}"
+                                                ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
+                                                ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+                                            <MenuItem
+                                                Header="{Binding Path=[Menu_Command_Etc], Source={x:Static local:Strings.Instance}}"
+                                                ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
+                                                ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
+                                        </MenuItem>
+                                        <MenuItem
+                                            Header="{Binding Path=[Menu_Condition_Condition], Source={x:Static local:Strings.Instance}}"
+                                            IsEnabled="False" />
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
 
-							<TextBlock Text="{Binding Path=[PreferencesTabShortcutShortcutText], Source={x:Static local:Strings.Instance}}" />
-							<TextBox Grid.Column="1" Text="{Binding Path=KeyBinding}" IsReadOnly="True" Margin="0,0,8,0" KeyDown="Shortcut_TextBox_KeyDown" />
-							<Button Grid.Column="2" Content="{Binding Path=CommandObject, Converter={StaticResource LocalizationConverter}}" Loaded="Shortcut_Button_Loaded" Click="Shortcut_Button_Click" MouseRightButtonUp="Shortcut_Button_MouseRightButtonUp">
-								<Button.ContextMenu>
-									<ContextMenu>
-										<MenuItem Header="{Binding Path=[Menu_Command_Command], Source={x:Static local:Strings.Instance}}">
-											<MenuItem Header="{Binding Path=[Menu_Command_Filename], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
-											<MenuItem Header="{Binding Path=[Menu_Command_Extension], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
-											<MenuItem Header="{Binding Path=[Menu_Command_Path], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
-											<MenuItem Header="{Binding Path=[Menu_Command_Number], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
-											<MenuItem Header="{Binding Path=[Menu_Command_Date], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
-											<MenuItem Header="{Binding Path=[Menu_Command_Tag], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
-											<MenuItem Header="{Binding Path=[Menu_Command_Etc], Source={x:Static local:Strings.Instance}}" ItemTemplate="{StaticResource CommandMenuItemDataTemplate}" ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
-										</MenuItem>
-										<MenuItem Header="{Binding Path=[Menu_Condition_Condition], Source={x:Static local:Strings.Instance}}" IsEnabled="False">
-
-										</MenuItem>
-									</ContextMenu>
-								</Button.ContextMenu>
-							</Button>
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-
-				<ListBox.ItemContainerStyle>
-					<Style TargetType="ListBoxItem">
-						<Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-					</Style>
-				</ListBox.ItemContainerStyle>
-			</ListBox>
-		</TabItem>
-	</TabControl>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </TabItem>
+    </TabControl>
 </Window>

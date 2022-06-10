@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace DaramRenamer
-{
-	public class LocalizationKeyAttribute : Attribute
-	{
-		public string LocalizationKey { get; }
+namespace DaramRenamer;
 
-		public LocalizationKeyAttribute(string key)
-		{
-			LocalizationKey = key;
-		}
-	}
+public class LocalizationKeyAttribute : Attribute
+{
+    public LocalizationKeyAttribute(string key)
+    {
+        LocalizationKey = key;
+    }
+
+    public string LocalizationKey { get; }
 }

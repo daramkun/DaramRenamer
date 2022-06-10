@@ -1,7 +1,6 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public interface IOrderBy
 {
-	public interface IOrderBy
-	{
-		int Order { get; }
-	}
+    int Order { get; }
 }

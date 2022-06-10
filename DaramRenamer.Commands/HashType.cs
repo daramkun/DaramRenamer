@@ -1,11 +1,10 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum HashType
 {
-	public enum HashType
-	{
-		MD5,
-		SHA1,
-		SHA256,
-		SHA384,
-		SHA512,
-	}
+    MD5,
+    SHA1,
+    SHA256,
+    SHA384,
+    SHA512
 }

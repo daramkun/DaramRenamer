@@ -1,14 +1,13 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum ErrorCode
 {
-	public enum ErrorCode
-	{
-		NoError,
-		Unknown,
-		UnauthorizedAccess,
-		PathTooLong,
-		DirectoryNotFound,
-		IOError,
-		FailedOverwrite,
-		FileNotFound,
-	}
+    NoError,
+    Unknown,
+    UnauthorizedAccess,
+    PathTooLong,
+    DirectoryNotFound,
+    IOError,
+    FailedOverwrite,
+    FileNotFound
 }

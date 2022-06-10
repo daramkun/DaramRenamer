@@ -1,8 +1,7 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public interface IPluginInitializer
 {
-	public interface IPluginInitializer
-	{
-		void Initialize();
-		void Uninitialize();
-	}
+    void Initialize();
+    void Uninitialize();
 }

@@ -1,14 +1,13 @@
-﻿namespace DaramRenamer
+﻿namespace DaramRenamer;
+
+public enum CommandCategory
 {
-	public enum CommandCategory
-	{
-		Filename,
-		Extension,
-		Path,
-		Number,
-		Date,
-		Tag,
-		Etc,
-		NoCategorized,
-	}
+    Filename,
+    Extension,
+    Path,
+    Number,
+    Date,
+    Tag,
+    Etc,
+    NoCategorized
 }

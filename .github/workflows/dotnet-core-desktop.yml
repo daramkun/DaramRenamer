@@ -7,17 +7,11 @@ on:
     branches: [ main ]
 
 jobs:
-
   build:
-
     strategy:
       matrix:
         configuration: [Debug, Release]
-
     runs-on: windows-latest
-
-    env:
-      Solution_Name: DaramRenamer.sln
 
     steps:
     - name: Checkout
@@ -28,20 +22,20 @@ jobs:
     - name: Checkout submodules
       uses: snickerbockers/submodules-init@v4
 
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v1
+    - name: Install .NET 6.x
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '6.0.x'
 
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1
-
     - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      run: dotnet restore /p:Configuration=$env:Configuration /p:Platform="Any CPU"
       env:
         Configuration: ${{ matrix.configuration }}
 
     - name: Build the application
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
+      run: dotnet build /p:Configuration=$env:Configuration /p:Platform="Any CPU"
       env:
         Configuration: ${{ matrix.configuration }}
+
+    - name: Test the application
+      run: dotnet test

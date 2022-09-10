@@ -47,6 +47,7 @@ public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionCha
             yield return CultureInfo.GetCultureInfo("en");
             yield return CultureInfo.GetCultureInfo("ko-kr");
             yield return CultureInfo.GetCultureInfo("nl-nl");
+            yield return CultureInfo.GetCultureInfo("zh-cn");
             foreach (var lang in _availableCustomLanguages)
                 yield return lang;
         }

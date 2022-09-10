@@ -25,4 +25,7 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.nl_nl.json" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.zh_cn.json" />
+  </ItemGroup>
 </Project>

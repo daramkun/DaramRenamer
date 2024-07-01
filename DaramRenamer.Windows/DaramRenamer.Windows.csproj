@@ -11,9 +11,9 @@
         <Product>DaramRenamer for Windows</Product>
         <ApplicationIcon>Resources\ProgramIcon.ico</ApplicationIcon>
         <AssemblyName>DaramRenamer</AssemblyName>
-        <Copyright>Copyright ⓒ 2013-2022 Jin Jae-yeon</Copyright>
-        <Version>2022.9.1</Version>
-        <PackageVersion>2022.9.1</PackageVersion>
+        <Copyright>Copyright ⓒ 2013-2024 Jin Jae-yeon</Copyright>
+        <Version>2024.7.1</Version>
+        <PackageVersion>2024.7.1</PackageVersion>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>../Modules/StrongNameKey/Daelumgi.snk</AssemblyOriginatorKeyFile>
         <ApplicationManifest>DaramRenamer.manifest</ApplicationManifest>

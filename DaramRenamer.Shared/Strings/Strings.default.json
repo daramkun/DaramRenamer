@@ -267,6 +267,10 @@
 	"DragAndDrop_DirectoryQuestionDescription": "Add to Directory mode or iterate files? Directory mode can edit directory name.",
 	"DragAndDrop_ButtonAddDirectory": "Add folder",
 	"DragAndDrop_ButtonIterateFiles": "Add files from folder",
+	"DragAndDrop_DrbQuestion": "It looks like you're probably adding a DaramRenamer batch file.",
+	"DragAndDrop_DrbQuestionDescription": "Do you want to execute batch file(s)? When execute, DRB files will not be added to the list.",
+	"DragAndDrop_ButtonExecuteDRB": "Execute Batch files",
+	"DragAndDrop_ButtonJustAddDRB": "Just Add Batch files",
 
 	"BatchWindow_Title": "Batch Commands Processor",
 	"BatchWindow_Remove": "_Remove",

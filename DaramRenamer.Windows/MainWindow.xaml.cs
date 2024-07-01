@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -231,10 +232,15 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (!(e.Data.GetData(DataFormats.FileDrop) is string[] temp))
             return;
 
+        var hasDrb = false;
         var hasDirectory = false;
         foreach (var filename in temp)
+        {
             if (File.GetAttributes(filename).HasFlag(FileAttributes.Directory) && filename.Length > 3)
                 hasDirectory = true;
+            if (!File.GetAttributes(filename).HasFlag(FileAttributes.Directory) && filename.EndsWith(".drb"))
+                hasDrb = true;
+        }
 
         var directoryMode = false;
         if (hasDirectory)
@@ -249,11 +255,50 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             directoryMode = result.Button == 101;
         }
 
+        var executeDrb = false;
+        if (hasDrb)
+        {
+            var result = MessageBox(Strings.Instance["DragAndDrop_DrbQuestion"],
+                Strings.Instance["DragAndDrop_DrbQuestionDescription"],
+                TaskDialogIcon.Warning, TaskDialogCommonButtonFlags.Cancel,
+                Strings.Instance["DragAndDrop_ButtonExecuteDRB"],
+                Strings.Instance["DragAndDrop_ButtonJustAddDRB"]);
+            if (result.Button == TaskDialogResult.Cancel)
+                return;
+            executeDrb = result.Button == 101;
+        }
+
         _undoManager.SaveToUndoStack(FileInfo.Files);
 
+        var drbList = new List<BatchNode>();
         foreach (var s in from b in temp orderby b select b)
+        {
+            if (!File.GetAttributes(s).HasFlag(FileAttributes.Directory) &&
+                s.EndsWith(s) && hasDrb && executeDrb)
+            {
+                try
+                {
+                    using Stream stream = new FileStream(s, FileMode.Open);
+                    using TextReader reader = new StreamReader(stream, Encoding.UTF8, false, -1, true);
+
+                    var rootNode = new RootBatchNode();
+                    rootNode.Deserializer(reader);
+
+                    drbList.Add(rootNode);
+                    continue;
+                }
+                catch
+                {
+                    // Ignore and add to list DRB.
+                }
+            }
+            
             AddItem(s,
                 s.Length > 3 && File.GetAttributes(s).HasFlag(FileAttributes.Directory) && directoryMode);
+        }
+
+        foreach (var rootNode in drbList)
+            Parallel.ForEach(FileInfo.Files, fileInfo => rootNode.Execute(fileInfo));
     }
 
     private void ListViewFiles_KeyUp(object sender, KeyEventArgs e)

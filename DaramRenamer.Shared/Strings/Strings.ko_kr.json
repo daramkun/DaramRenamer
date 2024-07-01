@@ -267,6 +267,10 @@
 	"DragAndDrop_DirectoryQuestionDescription": "해당 폴더를 디렉토리 모드로 추가하시겠습니까? 또는 폴더 내 파일을 추가하시겠습니까?\n디렉토리 모드로 추가된 폴더는 폴더명을 편집할 수 있습니다.",
 	"DragAndDrop_ButtonAddDirectory": "폴더 추가",
 	"DragAndDrop_ButtonIterateFiles": "폴더 내 파일 추가",
+	"DragAndDrop_DrbQuestion": "아마도 다람리네이머 배치 파일을 추가하는 것 같습니다.",
+	"DragAndDrop_DrbQuestionDescription": "배치 파일을 실행 하시겠습니까? 실행하면 DRB 파일은 목록에 추가되지 않습니다.",
+	"DragAndDrop_ButtonExecuteDRB": "배치 파일 실행",
+	"DragAndDrop_ButtonJustAddDRB": "그냥 목록에 추가",
 
 	"BatchWindow_Title": "명령 일괄처리기",
 	"BatchWindow_Remove": "제거(_R)",

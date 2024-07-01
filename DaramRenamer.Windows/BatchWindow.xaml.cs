@@ -159,4 +159,25 @@ public partial class BatchWindow : Window
         rootNode.Serialize(writer);
         writer.Flush();
     }
+
+    private void TreeViewCommands_DragEnter(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            e.Effects = DragDropEffects.None;
+    }
+
+    private void TreeViewCommands_Drop(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            return;
+        
+        var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+        if (files == null || files.Length == 0)
+            return;
+        
+        using Stream stream = new FileStream(files[0], FileMode.Open);
+        using TextReader reader = new StreamReader(stream, Encoding.UTF8, false, -1, true);
+
+        rootNode.Deserializer(reader);
+    }
 }

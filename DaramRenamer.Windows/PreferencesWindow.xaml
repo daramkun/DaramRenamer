@@ -82,6 +82,10 @@
                         IsChecked="{Binding Path=CloseApplyWindowWhenSuccessfullyDone, Source={x:Static local:Preferences.Instance}}"
                         Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
                     <CheckBox
+                        Content="{Binding Path=[PreferencesRemoveEmptyDirectory], Source={x:Static local:Strings.Instance}}"
+                        IsChecked="{Binding Path=RemoveEmptyDirectory, Source={x:Static local:Preferences.Instance}}"
+                        Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                    <CheckBox
                         Content="{Binding Path=[PreferencesDisableCheckUpdate], Source={x:Static local:Strings.Instance}}"
                         IsChecked="{Binding Path=DisableCheckUpdate, Source={x:Static local:Preferences.Instance}}"
                         Margin="0,0,0,5" VirtualizingStackPanel.VirtualizationMode="Recycling" />

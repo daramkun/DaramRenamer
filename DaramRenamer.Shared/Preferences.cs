@@ -261,6 +261,7 @@ public class Preferences
     public bool VisualCommand { get; set; }
     public bool ForceSingleCoreRunning { get; set; }
     public bool CloseApplyWindowWhenSuccessfullyDone { get; set; } = true;
+    public bool RemoveEmptyDirectory { get; set; }
     public bool DisableCheckUpdate { get; set; }
 
     private static string GetBaseDirectory()

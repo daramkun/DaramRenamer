@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -67,6 +69,21 @@ public partial class ApplyWindow : Window
 
                         if (errorCode != ErrorCode.NoError)
                             failed = true;
+                        else
+                        {
+                            if (Preferences.Instance.RemoveEmptyDirectory &&
+                                GetTotalFileCount(fileInfo.OriginalPath) == 0)
+                            {
+                                try
+                                {
+                                    Directory.Delete(fileInfo.OriginalPath, recursive: true);
+                                }
+                                catch
+                                {
+                                    // Ignore
+                                }
+                            }
+                        }
                     });
             });
 
@@ -111,4 +128,10 @@ public partial class ApplyWindow : Window
         if (!isComplete) return;
         Close();
     }
+
+    private static int GetTotalFileCount(string path) =>
+        Directory.GetDirectories(path)
+            .Select(GetTotalFileCount)
+            .Sum()
+        + Directory.GetFiles(path).Length;
 }

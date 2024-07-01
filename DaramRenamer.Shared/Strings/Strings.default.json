@@ -95,6 +95,7 @@
 	"PreferencesForceSingleCoreRunning": "Force Single-Core Running.",
 	"PreferencesCloseApplyWindowWhenSuccessfullyDone": "Close Apply Window when Successfully Done.",
 	"PreferencesDisableCheckUpdate": "Disable Checking Update.",
+	"PreferencesRemoveEmptyDirectory": "Remove empty directory after apply.",
 
 	"PreferencesTabShortcutShortcutText": "Shortcut: ",
 

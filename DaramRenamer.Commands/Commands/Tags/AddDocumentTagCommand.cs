@@ -20,6 +20,9 @@ public class AddDocumentTagCommand : ICommand
 
     public bool DoCommand(FileInfo file)
     {
+        if (file.IsDirectory)
+            return true;
+
         File f;
         try
         {

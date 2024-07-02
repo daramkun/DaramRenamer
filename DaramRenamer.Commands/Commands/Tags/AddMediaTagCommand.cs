@@ -26,6 +26,9 @@ public class AddMediaTagCommand : ICommand
 
     public bool DoCommand(FileInfo file)
     {
+        if (file.IsDirectory)
+            return true;
+
         TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF8;
         TagLib.Id3v2.Tag.DefaultVersion = 4;
 

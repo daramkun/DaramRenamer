@@ -20,6 +20,9 @@ public class AddHashCommand : ICommand
 
     public bool DoCommand(FileInfo file)
     {
+        if (file.IsDirectory)
+            return true;
+        
         var hash = ComputeHash(HashType, file.OriginalFullPath);
 
         var fn = Path.GetFileNameWithoutExtension(file.ChangedFilename);

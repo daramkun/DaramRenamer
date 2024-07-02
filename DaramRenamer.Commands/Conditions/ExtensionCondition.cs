@@ -13,6 +13,8 @@ public class ExtensionCondition : ICondition
 
     public bool IsSatisfyThisCondition(FileInfo file)
     {
+        if (file.IsDirectory)
+            return false;
         return Extension.Split(',').Contains(Path.GetExtension(file.ChangedFilename));
     }
 }

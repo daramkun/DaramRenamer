@@ -19,6 +19,9 @@ public sealed class AddExtensionAutoCommand : ICommand, IOrderBy
 
     public bool DoCommand(FileInfo file)
     {
+        if (file.IsDirectory)
+            return true;
+
         if (!File.Exists(file.OriginalFullPath))
             return false;
 

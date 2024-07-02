@@ -7,15 +7,20 @@ using Accessibility;
 
 namespace DaramRenamer;
 
-public class CsvReader(Stream stream) : IDisposable
+public class CsvReader : IDisposable
 {
-    private readonly TextReader _reader = new StreamReader(stream, Encoding.UTF8, leaveOpen: true);
+    private readonly TextReader _reader;
     
     private string[] _header;
     private string[] _currentRow;
 
     public string[] Header => _header;
     public string[] CurrentRow => _currentRow;
+
+    public CsvReader(Stream stream)
+    {
+        _reader = new StreamReader(stream, Encoding.UTF8, leaveOpen: true);
+    }
     
     public void Dispose()
     {
@@ -65,6 +70,7 @@ public class CsvReader(Stream stream) : IDisposable
                 else if (ch == ',')
                 {
                     buffer.Add(string.Empty);
+                    isQuoteStarted = false;
                     continue;
                 }
                 else
@@ -86,6 +92,7 @@ public class CsvReader(Stream stream) : IDisposable
                     buffer.Add(builder.ToString());
                     builder.Clear();
                     state = ParseState.Start;
+                    isQuoteStarted = false;
                 }
                 else
                     builder.Append(ch);
@@ -97,6 +104,7 @@ public class CsvReader(Stream stream) : IDisposable
                     buffer.Add(builder.ToString());
                     builder.Clear();
                     state = ParseState.Start;
+                    isQuoteStarted = false;
                 }
                 else if (ch == '"')
                 {

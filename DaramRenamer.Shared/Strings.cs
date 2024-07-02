@@ -7,8 +7,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
@@ -17,12 +15,6 @@ namespace DaramRenamer;
 public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionChanged, INotifyPropertyChanged
 {
     private static Strings _instance;
-
-    private static readonly DataContractJsonSerializer TableSerializer = new(
-        typeof(Dictionary<string, string>), new DataContractJsonSerializerSettings
-        {
-            UseSimpleDictionaryFormat = true
-        });
 
     private readonly ObservableDictionary<string, string> _stringTable = new();
 
@@ -38,7 +30,9 @@ public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionCha
     public event NotifyCollectionChangedEventHandler CollectionChanged = (_, _) => { };
     public event PropertyChangedEventHandler PropertyChanged = (_, _) => { };
 
-    public string this[string key] => _stringTable.ContainsKey(key) ? _stringTable[key] : key;
+    public string this[string key] => _stringTable.ContainsKey(key)
+        ? _stringTable[key]
+        : key;
 
     public bool ContainsKey(string key)
     {

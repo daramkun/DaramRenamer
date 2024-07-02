@@ -169,6 +169,8 @@ Menu_Condition_Condition,C_onditions,조건(_O),C_ondities,条件(_O)
 Condition_Name_TextFile,Text File,텍스트 파일,Tekstbestand,文本文件
 Condition_Name_Extension,Specific extension,확장자,Specifieke extensie,特定扩展
 Condition_Argument_Extension_Extension,Extension,확장자,Extensie,扩展
+Condition_IsDirectory,Is Directory,디렉토리 여부,,
+Condition_IsFile,Is File,파일 여부,,
 Creation,Creation,생성한 날짜,Aangemaakt,创建
 LastAccess,Last Access,마지막 접근 날짜,Laatst geopend,最后访问
 LastModify,Last Modified,마지막 수정 날짜,Laatst aangepast,最后修改

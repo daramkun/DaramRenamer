@@ -9,7 +9,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
 
@@ -25,38 +24,18 @@ public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionCha
             UseSimpleDictionaryFormat = true
         });
 
-    private static readonly Regex StringTableFilename =
-        new(".*DaramRenamer\\.Strings\\.([a-zA-Z0-9\\-_]*)\\.json");
-
-    private readonly List<CultureInfo> _availableCustomLanguages = new();
-
     private readonly ObservableDictionary<string, string> _stringTable = new();
 
-    public Strings()
+    private Strings()
     {
-        GetAdditionalAvailableLanguages();
         Load();
     }
 
     public static Strings Instance => _instance ??= new Strings();
 
-    public IEnumerable<CultureInfo> AvailableLanguages
-    {
-        get
-        {
-            yield return CultureInfo.GetCultureInfo("en");
-            yield return CultureInfo.GetCultureInfo("ko-kr");
-            yield return CultureInfo.GetCultureInfo("nl-nl");
-            yield return CultureInfo.GetCultureInfo("zh-cn");
-            foreach (var lang in _availableCustomLanguages)
-                yield return lang;
-        }
-    }
+    public IEnumerable<CultureInfo> AvailableLanguages { get; private set; }
 
-    /// <summary>Event raised when the collection changes.</summary>
     public event NotifyCollectionChangedEventHandler CollectionChanged = (_, _) => { };
-
-    /// <summary>Event raised when a property on the collection changes.</summary>
     public event PropertyChangedEventHandler PropertyChanged = (_, _) => { };
 
     public string this[string key] => _stringTable.ContainsKey(key) ? _stringTable[key] : key;
@@ -94,50 +73,11 @@ public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionCha
             : CultureInfo.GetCultureInfo("en");
     }
 
-    private void GetAdditionalAvailableLanguages()
-    {
-        foreach (var name in FileInfo.FileOperator.GetFiles(Environment.CurrentDirectory, false))
-        {
-            var match = StringTableFilename.Match(name);
-            if (!match.Success)
-                continue;
-
-            var code = match.Groups[1].Value;
-            _availableCustomLanguages.Add(CultureInfo.GetCultureInfo(code.Replace('_', '-')));
-        }
-    }
-
     public void Load()
     {
         {
             using var stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("DaramRenamer.Strings.Strings.default.json");
-            LoadTable(stream);
-        }
-
-        {
-            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                $"DaramRenamer.Strings.Strings.{CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}.json");
-            LoadTable(stream);
-        }
-
-        {
-            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                $"DaramRenamer.Strings.Strings.{CultureInfo.CurrentUICulture.ToString().Replace('-', '_').ToLower()}.json");
-            LoadTable(stream);
-        }
-
-        foreach (var name in FileInfo.FileOperator.GetFiles(Environment.CurrentDirectory, false))
-        {
-            var match = StringTableFilename.Match(name);
-            if (!match.Success)
-                continue;
-
-            var filename = Path.GetFileName(name).Replace('_', '-');
-            if (filename.IndexOf($".{CultureInfo.CurrentUICulture.Name}.", StringComparison.OrdinalIgnoreCase) < 0)
-                continue;
-
-            using var stream = new FileStream(name, FileMode.Open, FileAccess.Read, FileShare.Read);
+                .GetManifestResourceStream("DaramRenamer.Strings.Strings.csv");
             LoadTable(stream);
         }
 
@@ -153,14 +93,29 @@ public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionCha
         if (stream == null)
             return;
 
-        using var reader = new StreamReader(stream, Encoding.UTF8, true);
-        using Stream mem = new MemoryStream(Encoding.UTF8.GetBytes(reader.ReadToEnd()));
-
-        if (TableSerializer.ReadObject(mem) is not Dictionary<string, string> table)
+        using var reader = new CsvReader(stream);
+        if (!reader.Read())
             return;
 
-        foreach (var (key, value) in table)
-            if (_stringTable.ContainsKey(key))
+        AvailableLanguages = reader.Header
+            .Skip(1)
+            .Select(column => column == "invariant"
+                ? CultureInfo.GetCultureInfo("en")
+                : CultureInfo.GetCultureInfo(column))
+            .ToArray();
+
+        var readingColumnIndex = IndexOf(AvailableLanguages as CultureInfo[], CultureInfo.CurrentUICulture) + 1;
+
+        while (reader.Read())
+        {
+            var columns = reader.CurrentRow;
+
+            var key = columns[0];
+            var value = columns[readingColumnIndex];
+            if (string.IsNullOrEmpty(value))
+                value = columns[1];
+            
+            if (!_stringTable.TryAdd(key, value))
             {
                 var existing = _stringTable[key];
                 _stringTable[key] = value;
@@ -170,9 +125,17 @@ public class Strings : IReadOnlyDictionary<string, string>, INotifyCollectionCha
             }
             else
             {
-                _stringTable[key] = value;
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
                     new KeyValuePair<string, string>(key, value)));
             }
+        }
+    }
+
+    private static int IndexOf(CultureInfo[] availableLanguages, CultureInfo current)
+    {
+        for (var i = 0; i < availableLanguages.Length; ++i)
+            if (Equals(availableLanguages[i], current))
+                return i;
+        return 0;
     }
 }

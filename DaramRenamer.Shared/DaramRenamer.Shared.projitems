@@ -9,6 +9,7 @@
     <Import_RootNamespace>DaramRenamer</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CsvReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileInfoSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)KeyBindingInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableDictionary.cs" />
@@ -19,13 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)UpdateInformationBank.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.default.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.ko_kr.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.nl_nl.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.zh_cn.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings\Strings.csv" />
   </ItemGroup>
 </Project>

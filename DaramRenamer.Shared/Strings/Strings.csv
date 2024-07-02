@@ -1,0 +1,240 @@
+﻿key,invariant,ko-KR,nl-NL,zh-CN
+DaramRenamer,DaramRenamer,다람리네이머,DaramRenamer,DaramRenamer
+Version,Version,버전,Versie,版本
+Administrator,Administrator,관리자 모드,Beheerder,管理员
+Preferences,Preferences,설정,Voorkeuren,首选项
+GitHub Repository,GitHub Repository,GitHub 저장소,GitHub Repository,GitHub 存储库
+ButtonOK,OK,확인,OK,确定
+ButtonYes,Yes,예,Ja,是
+ButtonNo,No,아니오,Nee,否
+ButtonCancel,Cancel,취소,Annuleren,取消
+ButtonClose,Close,닫기,Sluiten,关闭
+ButtonUpdate,Update,업데이트,Vernieuwen,更新
+FileDialogTitleOpenFiles,Open file,파일 열기,Bestand openen,打开文件
+FileDialogFilterAllFiles,All files(*.*)|*.*,모든 파일(*.*)|*.*,Alle bestanden(*.*)|*.*,所有文件(*.*)|*.*
+ApplyWindowTitle,Apply all changes,변경 사항 적용,Alle wijzigingen toepassen,应用所有更改
+ApplyWindowLabelProcessing,Processing:,처리 중:,Voortgang:,处理:
+LicenseWindowTitle,Licenses,라이센스,Licenties,许可证
+AboutWindowTitle,About DaramRenamer,이 프로그램에 대하여,Over DaramRenamer,关于 DaramRenamer
+NewLatestVersionAvailable,New version available,새 버전 확인,Nieuwe versie beschikbaar,新版本可用
+UpdateCheckError,Version checking error,버전 확인 오류,Fout bij versiecontrole,版本检查错误
+NewLatestVersionAvailableText,New version software is available.,새로운 업데이트가 있습니다.,Een nieuwe softwareversie is beschikbaar.,新版本软件可用。
+UpdateCheckErrorText,Program has problem about checking version.,버전 확인에 문제가 발생했습니다.,Er is een fout opgetreden bij het controleren op nieuwe versies.,程序检查版本有问题。
+ThisIsLatestVersionText,This version is latest.,현재 버전이 최신 버전입니다.,Deze versie is de meest recente.,这个版本是最新的。
+RestoreSelectedErrorMessage,No Item selected.,선택된 항목이 없습니다.,Geen item geselecteerd.,未选择任何项目。
+RestoreSelectedErrorMessageDetail,Please select items from List box for restore to original filename and path.,원본 파일명과 경로로 되돌릴 리스트박스의 항목을 선택하세요.,Selecteer items uit de lijst om de oorspronkelijke bestandsnaam en pad te herstellen.,请从列表框中选择项目以恢复到原始文件名和路径。
+Menu_File_File,_File,파일(_F),_Bestand,文件(_F)
+Menu_File_Open,_Open file...,파일 열기(_O),Bestand _openen...,打开文件(_O)...
+Menu_File_FolderOpen,O_pen folder...,폴더 열기(_P),_Map openen...,打开文件夹(_P)...
+Menu_File_Clear,_Clear,정리(_C),_Wissen,清除(_C)
+Menu_File_Apply,_Apply,적용(_A),_Toepassen,应用(_A)
+Menu_File_Exit,E_xit,종료(_X),Af_sluiten,退出(_X)
+Menu_Edit_Edit,_Edit,편집(_E),B_ewerken,编辑(_E)
+Menu_Edit_Undo,_Undo,실행 취소(_U),_Ongedaan maken,撤消(_U)
+Menu_Edit_Redo,_Redo,되돌리기(_R),O_pnieuw uitvoeren,重做(_R)
+Menu_Edit_Sort,_Sort file items,파일 목록 정렬(_S),Items _Sorteren,排序文件项目(_S)
+Menu_Edit_ItemToUp,File item to U_p,파일 항목 위로(_P),Item om_hoog verplaatsen,文件项目向上(_P)
+Menu_Edit_ItemToDown,File item to _Down,파일 항목 아래로(_D),Item om_laag verplaatsen,文件项目向下(_D)
+Menu_Edit_RestoreSelected,Restore selected items to _original,선택 항목 원본으로 되돌리기(_O),Geselecteerde items naar _origineel herstellen,所选项目恢复为原始项目(_O)
+Menu_Command_Command,_Commands,명령(_C),_Opdrachten,命令(_C)
+Menu_Command_Filename,File_name,파일명(_N),Bestands_naam,文件名(_N)
+Menu_Command_Extension,_Extension,확장자(_E),E_xtensie,扩展(_E)
+Menu_Command_Path,_Path,경로(_P),_Pad,路径(_P)
+Menu_Command_Number,N_umber,숫자(_U),N_ummer,编号(_U)
+Menu_Command_Date,_Date,날짜(_D),_Datum,日期(_D)
+Menu_Command_Tag,_Tag,태그(_T),_Label,标签(_T)
+Menu_Command_Etc,_Etc,기타(_E),_Etc,其他(_E)
+Menu_Command_Batch,_Batch Command Processor (Alpha),일괄 처리기(알파)(_B),_Groepsopdrachtenverwerker (Alpha),批处理命令处理器(Alpha)(_B)
+Menu_Tools_Tools,_Tools,도구(_T),_Hulpmiddelen,工具(_T)
+Menu_Tools_Preferences,_Preferences,설정(_P),_Voorkeuren,首选项(_P)
+Menu_Tools_CheckUpdate,Check _update,업데이트 확인(_U),Versie_controle,检查更新(_U)
+Menu_Help_Help,_Help,도움말(_H),_Help,帮助(_H)
+Menu_Help_License,_Licenses,라이센스(_L),_Licenties,许可证(_L)
+Menu_Help_About,_About...,이 프로그램에 대해서(_A),_Over...,关于(_A)...
+ToolTip_Open,Open,열기,Openen,打开
+ToolTip_Clear,Clear,정리,Wissen,清除
+ToolTip_Apply,Apply,적용,Toepassen,应用
+ToolTip_Undo,Undo,실행 취소,Ongedaan maken,撤销
+ToolTip_Redo,Redo,되돌리기,Opnieuw uitvoeren,重做
+ToolTip_ItemUp,Item to Up,항목 위로,Item omhoog,项目向上
+ToolTip_ItemDown,Item to Down,항목 아래로,Item omlaag,项目向下
+ToolTip_ItemSort,List Sort,리스트 정렬,Lijst sorteren,列表排序
+OriginalName,Original Name,원본 이름,Originele naam,原始名称
+OriginalPath,Original Path,원본 경로,Origineel Pad,原始路径
+ChangedName,Changed Name,변경 이름,Aangepaste naam,已更改名称
+ChangedPath,Changed Path,변경 경로,Aangepast pad,已更改路径
+PreferencesTabGeneral,General,일반,Algemeen,常规
+PreferencesTabShortcut,Shortcut,단축키,Sneltoets,快捷方式
+PreferencesHardwareAcceleration,Hardware Accelerated Rendering,하드웨어 가속 렌더링,Hardwareversnelling inschakelen,硬件加速渲染
+PreferencesOverwrite,Overwrite,덮어쓰기,Overschrijven,覆盖
+PreferencesAutoFixFilename,Fix invalid characters for filename automatically.,자동으로 파일명에 쓸 수 없는 문자 수정,Ongeldige tekens in bestandsnaam automatisch corrigeren.,自动修复文件名的无效字符
+PreferencesAutoListCleaning,File list cleanup automatically.,자동으로 파일 리스트 정리,Bestandslijst automatisch opschonen.,文件列表自动清理。
+PreferencesRenameMode,Filename changing method:,파일명 변경 방법:,Methode van bestandsnaam wijzigen:,文件名更改方法：
+PreferencesSaveWindowState,Save Window state,창 상태 저장,Venstertoestand opslaan,保存窗口状态
+PreferencesUseCustomPlugins,Use User-defined Plugin.,사용자 정의 플러그인 사용,Aangepaste Plugin gebruiken.,使用用户定义的插件
+PreferencesCurrentLanguage,Language:,언어:,Taal:,语言：
+PreferencesVisualCommand,Preview changes.,변경사항 미리보기,Voorvertoning geven.,预览更改
+PreferencesForceSingleCoreRunning,Force Single-Core Running.,강제 1코어 동작,Uitvoering in single-core forceren.,强制单核运行
+PreferencesCloseApplyWindowWhenSuccessfullyDone,Close Apply Window when Successfully Done.,성공적으로 적용하면 적용 창 닫기,Dialoogvenster sluiten bij voltooiing.,成功完成后关闭应用窗口
+PreferencesDisableCheckUpdate,Disable Checking Update.,업데이트 확인 끄기,Controle op updates uitschakelen.,禁用检查更新
+PreferencesRemoveEmptyDirectory,Remove empty directory after apply.,적용 후 빈 디렉토리 삭제,,
+PreferencesTabShortcutShortcutText,Shortcut:,단축키:,Sneltoets:,快捷方式：
+Move,Move,이동,Verplaatsen,移动
+Copy,Copy,복사,Kopiëren,复制
+Command_Name_ReplacePlain,Replace Plain Text,파일명 치환,Tekst vervangen,替换纯文本
+Command_Argument_ReplacePlain_Find,Find,찾을 문자열,Zoeken,查找
+Command_Argument_ReplacePlain_Replace,Replace,바꿀 문자열,Vervangen,替换
+Command_Argument_ReplacePlain_IncludeExtension,Include extension,확장자 포함,Incl. extensie,包含扩展
+Command_Name_ReplaceRegexp,Replace with Regular Expression,정규표현식 치환,Vervangen met Reguliere expressie,替换为正则表达式
+Command_Argument_ReplaceRegexp_Find,Regexp,정규표현식,Regexp,正则表达式
+Command_Argument_ReplaceRegexp_Replace,Replace,바꿀 문자열,Vervangen,替换
+Command_Argument_ReplaceRegexp_IncludeExtension,Include extension,확장자 포함,Incl. extensie,包含扩展
+Command_Name_RearrangeRegexp,Rearrange with Regular Expression,정규표현식 재배열,Herschikken met Reguliere expressie,使用正则表达式重新排列
+Command_Argument_RearrangeRegexp_Find,Regexp,정규표현식,RegExp,正则表达式
+Command_Argument_RearrangeRegexp_Replace,Format String,재배열 문자열,Opmaak,格式化字符串
+Command_Argument_RearrangeRegexp_IncludeExtension,Include extension,확장자 포함,Incl. extensie,包含扩展
+Command_Name_Trim,Filename Trimming,파일명 트리밍,Bestandsnaam inkorten,文件名剪裁
+Command_Argument_Trim_Position,Position,트리밍 위치,Positie,位置
+Command_Name_Concatenate,Concatenate,문자열 병합,Samenvoegen,串联
+Command_Argument_Concatenate_Text,Text,병합할 텍스트,Tekst,文本
+Command_Argument_Concatenate_Position,Position,병합 위치,Positie,位置
+Command_Argument_Concatenate_IncludeExtension,Include extension,확장자 포함,Incl. extensie,包含扩展
+Command_Name_ConcatenateDirectoryName,Concatenate Directory Name,디렉토리 이름을 문자열 병합,Samenvoegen met mapnaam,连接目录名称
+Commamd_Argument_ConcatenateDirectoryName_ApplyToDirectory,Also Apply to directory,디렉토리에도 적용,Ook toepassen op map,同时应用到目录
+Command_Argument_ConcatenateDirectoryName_Position,Position,병합 위치,Positie,位置
+Command_Argument_ConcatenateDirectoryName_IncludeExtension,Include extension,확장자 포함,Incl. extensie,包含扩展
+Command_Name_DeleteFilename,Delete Filename,파일명 제거,Bestandsnaam wissen,删除文件名
+Command_Name_DeleteBlock,Delete Blocked filename,묶인 문자열 제거,Bestandsnaam-blok wissen,删除被阻止的文件名
+Command_Argument_DeleteBlock_StartBlock,Start,시작 문자열,Start,开始
+Command_Argument_DeleteBlock_EndBlock,End,끝 문자열,Einde,结束
+Command_Argument_DeleteBlock_DeleteAllBlocks,Delete blocked all,모든 묶인 문자열 제거,Alles als blok wissen,删除所有已阻止
+Command_Argument_DeleteBlock_IncludeExtension,Include extension,확장자 포함,Incl. extensie,包含扩展
+Command_Name_Substring,Substring,하위문자열 생성,Deeltekst,子字符串
+Command_Argument_Substring_StartIndex,Start Index,시작 위치,Startindex,开始索引
+Command_Argument_Substring_Length,Length,길이,Lengte,长度
+Command_Argument_Substring_IncludeExtension,Include extension,확장자 포함,Incl. extensie,包含扩展
+Command_Name_Casecast,Filename Case-cast,파일명 대소문자 변경,Bestandsnaam in ProperCase,文件名大小写
+Command_Argument_Casecast_Casecast,Method,대소문자 변경 방법,Methode,方法
+Command_Name_AddExtension,Add Extension,확장자 추가,Extensie toevoegen,添加扩展
+Command_Argument_AddExtension_Extension,Extension,추가할 확장자,Extensie,扩展
+Commamd_Argument_AddExtension_ApplyToDirectory,Also Apply to directory,디렉토리에도 적용,Ook toepassen op map,同时应用到目录
+Command_Name_AddExtensionAuto,Add Extension automatically,자동으로 확장자 추가,Extensie automatisch toevoegen,自动添加扩展
+Command_Name_ReplaceExtension,Change Extension,확장자 치환,Extensie wijzigen,更改扩展
+Command_Argument_ReplaceExtension_Extension,Extension,치환할 확장자,Extensie,扩展
+Commamd_Argument_ReplaceExtension_ApplyToDirectory,Also Apply to directory,디렉토리에도 적용,Ook toepassen op map,同时应用到目录
+Command_Name_DeleteExtension,Delete Extension,확장자 제거,Extensie wissen,删除扩展
+Command_Name_CasecastExtension,Also Apply to directory,확장자 대소문자 변경,Ook toepassen op map,同时应用到目录
+Commamd_Argument_DeleteExtension_ApplyToDirectory,Extension Case-cast,디렉토리에도 적용,Extensie in ProperCase,扩展区分大小写
+Command_Argument_CasecastExtension_Casecast,Method,대소문자 변경 방법,Methode,方法
+Commamd_Argument_CasecastExtension_ApplyToDirectory,Also Apply to directory,디렉토리에도 적용,Ook toepassen op map,同时应用到目录
+Command_Name_AddDate,Add Date,날짜 추가,Datum toevoegen,添加日期
+Command_Argument_AddDate_Kind,Date type,추가할 날짜 종류,Datumtype,日期类型
+Command_Argument_AddDate_Format,Date format,날짜 포맷,Datumopmaak,日期格式
+Command_Argument_AddDate_Position,Position,추가할 위치,Positie,位置
+Command_Name_DeleteDate,Delete Date,날짜 제거,Datum wissen,删除日期
+Command_Name_AddIndex,Add Index,색인 추가,Volgnummer toevoegen,添加索引
+Command_Argument_AddIndex_Position,Position,추가할 위치,Positie,位置
+Command_Name_Increase,Increase Number,숫자 증감,Nummering,增加数量
+Command_Argument_Increase_Count,Increase,증감 숫자,Toename,增加
+Command_Argument_Increase_Position,Position,증감할 위치,Positie,位置
+Command_Name_SameNumberCount,Fix amount of digits,자리수 맞추기,Aantal cijfers,修复位数
+Command_Argument_SameNumberCount_Count,Amount,자리수,Aantal,数量
+Command_Argument_SameNumberCount_Position,Position,자리수 맞출 위치,Positie,位置
+Command_Name_DeleteNoNumber,Delete no numbers,숫자만 남기고 제거,Geen nummers wissen,不删除编号
+Command_Argument_DeleteNoNumber_Wordly,Do wordly,단어별 처리,Woordelijk,一致
+Command_Name_AbsoluteGoTo,Go to Absolute Path,절대 경로 변경,Ga naar Absoluut pad,转到绝对路径
+Command_Argument_AbsoluteGoTo_Path,Path,경로,Pad,路径
+Command_Name_RelativeGoTo,Go to Relative Path,상대 경로 변경,Ga naar Relatief pad,转到相对路径
+Command_Argument_RelativeGoTo_Path,Path,경로,Pad,路径
+Command_Name_AddMediaTag,Add Media Tag,미디어 태그 추가,Medialabel toevoegen,添加媒体标签
+Command_Argument_AddMediaTag_Tag,Tag,미디어 태그,Label,标签
+Command_Argument_AddMediaTag_Arguments,Arguments Index,태그 추가 인자,Argumentenlijst,参数索引
+Command_Argument_AddMediaTag_Position,Position,추가할 위치,Positie,位置
+Command_Name_AddDocumentTag,Add Document Tag,문서 태그 추가,Bestandslabel toevoegen,添加文档标签
+Command_Argument_AddDocumentTag_Tag,Tag,문서 태그,Label,标签
+Command_Argument_AddDocumentTag_Position,Position,추가할 위치,Positie,位置
+Command_Name_AddHash,Add Hash,해시 추가,Controlegetal toevoegen,添加哈希
+Command_Argument_AddHash_HashType,Hash,해시 종류,Controlegetal,哈希
+Command_Argument_AddHash_Position,Position,추가할 위치,Positie,位置
+Command_Name_AddGitInfo,Add Git Information,Git 정보 추가,Git Information toevoegen,添加 Git 信息
+Command_Argument_AddGitInfo_GitInfo,Info,정보,Info,信息
+Command_Argument_AddGitInfo_Position,Position,추가할 위치,Positie,位置
+Command_Name_ManualEdit,Manual Edit,직접 편집,Bewerken,手动编辑
+Command_Argument_ManualEdit_ChangeName,Name,변경 이름,Naam,名称
+Command_Argument_ManualEdit_ChangePath,Path,변경 경로,Pad,路径
+Command_Name_AdvancedFormat,Advanced Format String,고급 형식 문자열,Geavanceerde opmaak,高级格式字符串
+Command_Argument_AdvancedFormat_FileNameFormatString,Name,이름,Naam,名称
+Command_Argument_AdvancedFormat_PathFormatString,Path,경로,Pad,路径
+Menu_Condition_Condition,C_onditions,조건(_O),C_ondities,条件(_O)
+Condition_Name_TextFile,Text File,텍스트 파일,Tekstbestand,文本文件
+Condition_Name_Extension,Specific extension,확장자,Specifieke extensie,特定扩展
+Condition_Argument_Extension_Extension,Extension,확장자,Extensie,扩展
+Creation,Creation,생성한 날짜,Aangemaakt,创建
+LastAccess,Last Access,마지막 접근 날짜,Laatst geopend,最后访问
+LastModify,Last Modified,마지막 수정 날짜,Laatst aangepast,最后修改
+Now,Now,현재,Nu,立即
+StartPoint,Start Point,처음,Startpunt,开始点
+EndPoint,End Point,끝,Einde,结束点
+BothPoint,Both Point,양쪽,Start en einde,两点
+UppercaseAll,To Uppercase,대문자로,HOOFDLETTERS,转为大写
+LowercaseAll,To Lowercase,소문자로,kleine letters,转为小写
+UppercaseFirstLetter,To Uppercase first letter only,첫 글자만 대문자로,Alleen Eerste Letter Hoofdletter,仅大写首字母
+AudioBitrate,Auto Bitrate,오디오 비트레이트,Autom. Bitrate,自动比特率
+AudioSamplerate,Auto Samplerate,오디오 샘플레이트,Autom. Samplerate,自动采样率
+AudioChannels,Audio Channels,오디오 채널,Audio Kanalen,音频声道
+AudioBitsPerSample,Audio Bits per sample,오디오 비트 당 샘플 수,Audio Bits per sample,每样本音频比特率
+AudioCodec,Audio Codec,오디오 코덱,Audio Codec,音频编解码器
+AudioAlbum,Audio Album,오디오 앨범,Audio Album,音频专辑
+AudioAlbumArtists,Audio Album Artists,오디오 앨범 아티스트,Audio Album Artiest,音频专辑艺术家
+AudioComposers,Audio Composers,오디오 작곡가,Audio Componist,音频作曲家
+AudioPerformers,Audio Performers,오디오 가수,Audio Uitvoerende,音频表演者
+AudioCopyright,Audio Copyright,오디오 저작권,Audio Auteursrecht,音频版权
+AudioDisc,Audio Disc,오디오 디스크,Audio Schijf,音频光盘
+AudioDiscCount,Audio Disc Count,오디오 디스크 수,Audio Schijf nummer,音频光盘数量
+AudioGenres,Audio Genre,오디오 장르,Audio Genre,音频类型
+AudioTitle,Audio Title,오디오 제목,Audio Titel,音频标题
+AudioTrack,Audio Track,오디오 트랙,Audio Spoor,音频曲目
+AudioTrackCount,Audio Track Count,오디오 트랙 수,Audio Spoor nummer,音频轨道数量
+AudioConductor,Audio Conductor,오디오 지휘자,Audio Dirigent,音频导体
+AudioYear,Audio Year,오디오 연도,Audio Jaar,音频年代
+AudioDuration,Audio Duration,오디오 길이,Audio Duur,音频持续时间
+VideoTitle,Video Title,비디오 제목,Video Titel,视频标题
+VideoDuration,Video Duration,비디오 길이,Video Duur,视频持续时间
+VideoWidth,Video Width,비디오 가로 크기,Video Breedte,视频宽度
+VideoHeight,Video Height,비디오 세로 크기,Video Hoogte,视频高度
+VideoCodec,Video Codec,비디오 코덱,Video Codec,视频编解码器
+VideoGenres,Video Genre,비디오 장르,Video Genre,视频类型
+VideoYear,Video Year,비디오 연도,Video Jaar,视频年代
+VideoCopyright,Video Copyright,비디오 저작권,Video Auteursrecht,视频版权
+ImageWidth,Image Width,이미지 가로 크기,Afbeelding Breedte,图像宽度
+ImageHeight,Image Height,이미지 세로 크기,Afbeelding Hoogte,图像高度
+ImageCodec,Image Codec,이미지 코덱,Afbeelding Codec,图像编解码器
+ImageQuality,Image Quality,이미지 품질,Afbeelding Kwaliteit,图像质量
+Title,Title,문서 제목,Titel,标题
+Author,Author,문서 작성자,Auteur,作者
+MD5,MD5,MD5,MD5,MD5
+SHA1,SHA1,SHA1,SHA1,SHA1
+SHA256,SHA256,SHA256,SHA256,SHA256
+SHA384,SHA384,SHA384,SHA384,SHA384
+SHA512,SHA512,SHA512,SHA512,SHA512
+CommitId,Commit ID,커밋 ID,Commit ID,提交 ID
+ShortCommitId,Short Commit ID,짧은 커밋 ID,Short Commit ID,短提交 ID
+BranchName,Current branch,현재 브랜치,Current branch,当前分支
+CommitCount,Commit count for Current branch,현재 브랜치 커밋 수,Commit count for Current branch,当前分支的提交计数
+DragAndDrop_DirectoryQuestion,The file paths contain one or more directory(s).,드래그 앤 드롭 한 파일 중에 폴더가 있습니다.,De bestandspaden bevatten een of meer map(pen).,文件路径包含一个或多个目录。
+DragAndDrop_DirectoryQuestionDescription,Add to Directory mode or iterate files? Directory mode can edit directory name.,해당 폴더를 디렉토리 모드로 추가하시겠습니까? 또는 폴더 내 파일을 추가하시겠습니까?\n디렉토리 모드로 추가된 폴더는 폴더명을 편집할 수 있습니다.,Bestanden toevoegen als map of apart? De map-modus kan de mapnaam bewerken.,添加到目录模式或迭代文件？ 目录模式可以编辑目录名称。
+DragAndDrop_ButtonAddDirectory,Add folder,폴더 추가,Map toevoegen,添加文件夹
+DragAndDrop_ButtonIterateFiles,Add files from folder,폴더 내 파일 추가,Bestanden van map toevoegen,从文件夹添加文件
+DragAndDrop_DrbQuestion,It looks like you're probably adding a DaramRenamer batch file.,아마도 다람리네이머 배치 파일을 추가하는 것 같습니다.,,
+DragAndDrop_DrbQuestionDescription,"Do you want to execute batch file(s)? When execute, DRB files will not be added to the list.",배치 파일을 실행 하시겠습니까? 실행하면 DRB 파일은 목록에 추가되지 않습니다.,,
+DragAndDrop_ButtonExecuteDRB,Execute Batch files,배치 파일 실행,,
+DragAndDrop_ButtonJustAddDRB,Just Add Batch files,그냥 목록에 추가,,
+BatchWindow_Title,Batch Commands Processor,명령 일괄처리기,Groepsopdrachtenverwerker,批处理命令处理器
+BatchWindow_Remove,_Remove,제거(_R),_Verwijderen,移除(_R)
+BatchWindow_Close,_Close,닫기(_C),_Sluiten,关闭(_C)
+BatchWindow_LoadFile,Load from,불러오기,Laden van,加载从
+BatchWindow_SaveFile,Save to,저장하기,Opslaan als,保存到
+BatchWindow_DoBatch,Do Batch,일괄처리,Groepsopdracht uitvoeren,做批处理
+BatchWindow_Command,Command,명령,Opdracht,命令
+BatchWindow_Condition,Condition,조건,Conditie,状态
+BatchWindow_File_Filter,DaramRenamer Batch File(*.drb)|*.drb,다람리네이머 일괄처리 파일(*.drb)|*.drb,DaramRenamer Batch-bestand (*.drb)|*.drb,DaramRenamer 批处理文件(*.drb)|*.drb

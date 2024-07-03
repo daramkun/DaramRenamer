@@ -77,7 +77,7 @@ PreferencesVisualCommand,Preview changes.,변경사항 미리보기,Voorvertonin
 PreferencesForceSingleCoreRunning,Force Single-Core Running.,강제 1코어 동작,Uitvoering in single-core forceren.,强制单核运行
 PreferencesCloseApplyWindowWhenSuccessfullyDone,Close Apply Window when Successfully Done.,성공적으로 적용하면 적용 창 닫기,Dialoogvenster sluiten bij voltooiing.,成功完成后关闭应用窗口
 PreferencesDisableCheckUpdate,Disable Checking Update.,업데이트 확인 끄기,Controle op updates uitschakelen.,禁用检查更新
-PreferencesRemoveEmptyDirectory,Remove empty directory after apply.,적용 후 빈 디렉토리 삭제,,
+PreferencesRemoveEmptyDirectory,Remove empty directory after apply.,적용 후 빈 디렉토리 삭제,,应用后删除空目录。
 PreferencesTabShortcutShortcutText,Shortcut:,단축키:,Sneltoets:,快捷方式：
 Move,Move,이동,Verplaatsen,移动
 Copy,Copy,복사,Kopiëren,复制
@@ -169,8 +169,8 @@ Menu_Condition_Condition,C_onditions,조건(_O),C_ondities,条件(_O)
 Condition_Name_TextFile,Text File,텍스트 파일,Tekstbestand,文本文件
 Condition_Name_Extension,Specific extension,확장자,Specifieke extensie,特定扩展
 Condition_Argument_Extension_Extension,Extension,확장자,Extensie,扩展
-Condition_IsDirectory,Is Directory,디렉토리 여부,,
-Condition_IsFile,Is File,파일 여부,,
+Condition_IsDirectory,Is Directory,디렉토리 여부,,是目录
+Condition_IsFile,Is File,파일 여부,,是文件
 Creation,Creation,생성한 날짜,Aangemaakt,创建
 LastAccess,Last Access,마지막 접근 날짜,Laatst geopend,最后访问
 LastModify,Last Modified,마지막 수정 날짜,Laatst aangepast,最后修改
@@ -227,10 +227,10 @@ DragAndDrop_DirectoryQuestion,The file paths contain one or more directory(s).,�
 DragAndDrop_DirectoryQuestionDescription,Add to Directory mode or iterate files? Directory mode can edit directory name.,해당 폴더를 디렉토리 모드로 추가하시겠습니까? 또는 폴더 내 파일을 추가하시겠습니까?\n디렉토리 모드로 추가된 폴더는 폴더명을 편집할 수 있습니다.,Bestanden toevoegen als map of apart? De map-modus kan de mapnaam bewerken.,添加到目录模式或迭代文件？ 目录模式可以编辑目录名称。
 DragAndDrop_ButtonAddDirectory,Add folder,폴더 추가,Map toevoegen,添加文件夹
 DragAndDrop_ButtonIterateFiles,Add files from folder,폴더 내 파일 추가,Bestanden van map toevoegen,从文件夹添加文件
-DragAndDrop_DrbQuestion,It looks like you're probably adding a DaramRenamer batch file.,아마도 다람리네이머 배치 파일을 추가하는 것 같습니다.,,
-DragAndDrop_DrbQuestionDescription,"Do you want to execute batch file(s)? When execute, DRB files will not be added to the list.",배치 파일을 실행 하시겠습니까? 실행하면 DRB 파일은 목록에 추가되지 않습니다.,,
-DragAndDrop_ButtonExecuteDRB,Execute Batch files,배치 파일 실행,,
-DragAndDrop_ButtonJustAddDRB,Just Add Batch files,그냥 목록에 추가,,
+DragAndDrop_DrbQuestion,It looks like you're probably adding a DaramRenamer batch file.,아마도 다람리네이머 배치 파일을 추가하는 것 같습니다.,,看起来您可能正在添加 DaramRenamer 批处理文件。
+DragAndDrop_DrbQuestionDescription,"Do you want to execute batch file(s)? When execute, DRB files will not be added to the list.",배치 파일을 실행 하시겠습니까? 실행하면 DRB 파일은 목록에 추가되지 않습니다.,,您是否要执行批处理文件？执行时，DRB 文件将不会添加到列表中。
+DragAndDrop_ButtonExecuteDRB,Execute Batch files,배치 파일 실행,,执行批处理文件
+DragAndDrop_ButtonJustAddDRB,Just Add Batch files,그냥 목록에 추가,,仅添加批处理文件
 BatchWindow_Title,Batch Commands Processor,명령 일괄처리기,Groepsopdrachtenverwerker,批处理命令处理器
 BatchWindow_Remove,_Remove,제거(_R),_Verwijderen,移除(_R)
 BatchWindow_Close,_Close,닫기(_C),_Sluiten,关闭(_C)

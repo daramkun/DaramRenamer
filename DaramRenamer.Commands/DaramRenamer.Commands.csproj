@@ -4,8 +4,8 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>DaramRenamer</RootNamespace>
         <LangVersion>latest</LangVersion>
-        <Version>2024.7.1</Version>
-        <PackageVersion>2024.7.1</PackageVersion>
+        <Version>2024.7.2</Version>
+        <PackageVersion>2024.7.2</PackageVersion>
         <Authors>Jin Jae-yeon</Authors>
         <Company>DARAM WORLD</Company>
         <Product>DaramRenamer Command</Product>

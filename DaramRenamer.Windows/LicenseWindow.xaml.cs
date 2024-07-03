@@ -36,7 +36,12 @@ public partial class LicenseWindow : Window
             }
             else if (line.Length > 0 && line[0] == '#')
             {
-                if (line.Length > 1 && line[1] == '#')
+                if (line.Length > 2 && line[2] == '#')
+                    document.Blocks.Add(new Paragraph(new Run(line.Substring(3).Trim()))
+                    {
+                        FontSize = 14
+                    });
+                else if (line.Length > 1 && line[1] == '#')
                     document.Blocks.Add(new Paragraph(new Run(line.Substring(2).Trim()))
                     {
                         FontSize = 18
@@ -69,6 +74,13 @@ public partial class LicenseWindow : Window
                 }
 
                 codeStore.Clear();
+            }
+            else if (line.StartsWith("- "))
+            {
+                document.Blocks.Add(new Paragraph(new Run("ㆍ " + line.Substring(2).Trim())
+                {
+                    FontSize = 10,
+                }));
             }
 
         LicenseTextBox.Document = document;

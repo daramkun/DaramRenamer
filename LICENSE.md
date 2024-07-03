@@ -605,3 +605,17 @@ necessary.  Here is a sample; alter the names:
 
 That's all there is to it!
 ```
+
+## Application Translations
+### 한국어 (Korean)
+- Jin Jae-yeon (daramkun)
+
+### English
+- Stephan Paternotte (Stephan-P)
+- Jin Jae-yeon (daramkun)
+
+### Nederlands (Dutch)
+- Stephan Paternotte (Stephan-P)
+
+### 中文 (Simplified Chinese)
+- 大眼仔旭 (wcxu21)

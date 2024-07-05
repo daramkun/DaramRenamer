@@ -50,6 +50,8 @@ public partial class ApplyWindow : Window
             ProceedTextBlock.Text = "0";
             TotalTextBlock.Text = FileInfo.Files.Count.ToString();
 
+            var oldPaths = FileInfo.Files.Select(fileInfo => fileInfo.OriginalPath).ToArray();
+            
             await Task.Run(() =>
             {
                 FileInfo.Apply(Preferences.Instance.AutomaticFixingFilename, Preferences.Instance.RenameMode,
@@ -69,23 +71,29 @@ public partial class ApplyWindow : Window
 
                         if (errorCode != ErrorCode.NoError)
                             failed = true;
-                        else
-                        {
-                            if (Preferences.Instance.RemoveEmptyDirectory &&
-                                GetTotalFileCount(fileInfo.OriginalPath) == 0)
-                            {
-                                try
-                                {
-                                    Directory.Delete(fileInfo.OriginalPath, recursive: true);
-                                }
-                                catch
-                                {
-                                    // Ignore
-                                }
-                            }
-                        }
                     });
             });
+            
+            if (Preferences.Instance.RemoveEmptyDirectory)
+            {
+                await Task.Run(() =>
+                {
+                    foreach (var oldPath in oldPaths)
+                    {
+                        if (GetTotalFileCount(oldPath) != 0)
+                            continue;
+                        
+                        try
+                        {
+                            Directory.Delete(oldPath, recursive: true);
+                        }
+                        catch
+                        {
+                            // Ignore
+                        }
+                    }
+                });
+            }
 
             switch (failed)
             {

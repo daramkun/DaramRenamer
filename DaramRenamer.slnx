@@ -3,15 +3,9 @@
     <File Path="LICENSE.md" />
     <File Path="README.md" />
     <Project Path="DaramRenamer.Base/DaramRenamer.Base.csproj" />
-    <Project Path="DaramRenamer.Commands/DaramRenamer.Commands.csproj" />
-    <Project Path="DaramRenamer.Shared/DaramRenamer.Shared.shproj" />
+    <Project Path="DaramRenamer.Generators/DaramRenamer.Generators.csproj" />
+    <Project Path="DaramRenamer.Avalonia/DaramRenamer.Avalonia.csproj" />
     <Project Path="DaramRenamer.Windows/DaramRenamer.Windows.csproj" />
-  </Folder>
-  <Folder Name="/Modules/">
-    <Project Path="Modules/Blockar/Blockar.Shared/Blockar.Shared.shproj" />
-    <Project Path="Modules/FileTypeDetector/Daramee.FileTypeDetector.Shared/Daramee.FileTypeDetector.Shared.shproj" />
-    <Project Path="Modules/Nargs/Daramee.Nargs.Shared/Daramee.Nargs.Shared.shproj" />
-    <Project Path="Modules/Winston/Daramee.Winston.Shared/Daramee.Winston.Shared.shproj" />
   </Folder>
   <Folder Name="/Test/">
     <Project Path="DaramRenamer.Test/DaramRenamer.Test.csproj" />

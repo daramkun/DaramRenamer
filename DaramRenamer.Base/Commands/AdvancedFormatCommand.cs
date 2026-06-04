@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Text;
-using Daramee.FileTypeDetector;
+using DaramRenamer.FileTypes;
 using TagLib;
 using File = TagLib.File;
 
@@ -481,7 +481,7 @@ public class AdvancedFormatCommand : ICommand
                 case MacroTypes.FoundExtension:
                 {
                     using Stream stream = System.IO.File.OpenRead(item.SourceFullPath);
-                    var detector = DetectorService.DetectDetector(stream);
+                    var detector = FileTypeDetector.Detect(stream);
                     return detector == null ? string.Empty : detector.Extension;
                 }
 

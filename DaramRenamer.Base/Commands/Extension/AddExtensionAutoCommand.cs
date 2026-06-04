@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using Daramee.FileTypeDetector;
+using DaramRenamer.FileTypes;
 
 namespace DaramRenamer.Commands;
 
@@ -20,7 +20,7 @@ public class AddExtensionAutoCommand : ICommand
             return;
 
         using Stream stream = File.OpenRead(item.SourceFullPath);
-        var detector = DetectorService.DetectDetector(stream);
+        var detector = FileTypeDetector.Detect(stream);
 
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (detector == null)

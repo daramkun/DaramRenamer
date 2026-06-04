@@ -12,4 +12,10 @@ public interface IFileOperator : IDisposable
     
     bool IsFileExists(string path);
     bool IsDirectoryExists(string path);
+
+    void BeginBatch() => Begin();
+    void EndBatch() => End();
+    IEnumerable<string> GetFiles(string directory, bool topDirectoryOnly) => EnumerateFiles(directory, topDirectoryOnly);
+    bool FileExists(string path) => IsFileExists(path);
+    bool DirectoryExists(string path) => IsDirectoryExists(path);
 }

@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using DaramRenamer.Commands.Filename;
+using DaramRenamer.Commands;
 
 namespace DaramRenamer.Test;
 
@@ -19,7 +19,7 @@ public class FilenameUnitTest
         };
         command1.DoCommand(testFile1);
         
-        Assert.IsTrue(testFile1.ChangedFilename == "PbthA.txt");
+        Assert.AreEqual("PbthA.txt", testFile1.ChangedFilename);
 
         testFile1.Reset();
         
@@ -31,7 +31,7 @@ public class FilenameUnitTest
         };
         command2.DoCommand(testFile1);
         
-        Assert.IsTrue(testFile1.ChangedFilename == "ParhA.rxr");
+        Assert.AreEqual("ParhA.rxr", testFile1.ChangedFilename);
     }
 
     [TestMethod]
@@ -50,9 +50,9 @@ public class FilenameUnitTest
         command1.DoCommand(testFile1, testFile2);
         
         Debug.Write(testFile1.ChangedFilename);
-        Assert.IsTrue(testFile1.ChangedFilename == "th.txt");
+        Assert.AreEqual("th.txt", testFile1.ChangedFilename);
         
         Debug.Write(testFile2.ChangedFilename);
-        Assert.IsTrue(testFile2.ChangedFilename == "nde.txt");
+        Assert.AreEqual("nde.txt", testFile2.ChangedFilename);
     }
 }

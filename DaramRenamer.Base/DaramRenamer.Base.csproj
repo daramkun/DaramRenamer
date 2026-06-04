@@ -19,6 +19,14 @@
       <PackageReference Include="ZString" Version="2.6.0" />
     </ItemGroup>
 
-    <Import Project="..\Modules\FileTypeDetector\Daramee.FileTypeDetector.Shared\Daramee.FileTypeDetector.Shared.projitems" Label="Shared" />
+    <ItemGroup>
+      <EmbeddedResource Include="Strings\Strings.csv" LogicalName="DaramRenamer.Strings.Strings.csv" />
+    </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DaramRenamer.Generators\DaramRenamer.Generators.csproj"
+                        OutputItemType="Analyzer"
+                        ReferenceOutputAssembly="false"
+                        PrivateAssets="all" />
+    </ItemGroup>
 </Project>

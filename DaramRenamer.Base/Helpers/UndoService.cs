@@ -13,6 +13,7 @@ public class UndoService : INotifyPropertyChanged
     public bool IsRedoStackEmpty => _redoStack.Count == 0;
 
     public event EventHandler? UndoUpdated, RedoUpdated;
+    public event EventHandler? UpdateUndo, UpdateRedo;
 
     public void SaveToUndoStack(ObservableCollection<FileItem> collection, bool clearRedoStack = true)
     {
@@ -22,6 +23,7 @@ public class UndoService : INotifyPropertyChanged
             ClearRedoStack();
 
         UndoUpdated?.Invoke(this, EventArgs.Empty);
+        UpdateUndo?.Invoke(this, EventArgs.Empty);
         OnPropertyChanged(nameof(IsUndoStackEmpty));
     }
 
@@ -30,6 +32,7 @@ public class UndoService : INotifyPropertyChanged
         _redoStack.Push(FileItemSerializer.SerializeCollection(collection));
 
         RedoUpdated?.Invoke(this, EventArgs.Empty);
+        UpdateRedo?.Invoke(this, EventArgs.Empty);
         OnPropertyChanged(nameof(IsRedoStackEmpty));
     }
 
@@ -43,6 +46,7 @@ public class UndoService : INotifyPropertyChanged
         if (IsUndoStackEmpty) return [];
         var ret = FileItemSerializer.DeserializeCollection(_undoStack.Pop());
         UndoUpdated?.Invoke(this, EventArgs.Empty);
+        UpdateUndo?.Invoke(this, EventArgs.Empty);
         OnPropertyChanged(nameof(IsUndoStackEmpty));
         return ret;
     }
@@ -52,6 +56,7 @@ public class UndoService : INotifyPropertyChanged
         if (IsRedoStackEmpty) return [];
         var ret = FileItemSerializer.DeserializeCollection(_redoStack.Pop());
         RedoUpdated?.Invoke(this, EventArgs.Empty);
+        UpdateRedo?.Invoke(this, EventArgs.Empty);
         OnPropertyChanged(nameof(IsRedoStackEmpty));
         return ret;
     }

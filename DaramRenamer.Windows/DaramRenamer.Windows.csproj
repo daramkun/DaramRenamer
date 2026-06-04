@@ -66,7 +66,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DaramRenamer.Commands\DaramRenamer.Commands.csproj"/>
+        <ProjectReference Include="..\DaramRenamer.Base\DaramRenamer.Base.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -97,11 +97,5 @@
         <Resource Include="Resources\ToolBarIcons\trim_text.png"/>
         <Resource Include="Resources\ToolBarIcons\undo.png"/>
     </ItemGroup>
-
-    <Import Project="..\DaramRenamer.Shared\DaramRenamer.Shared.projitems" Label="Shared"/>
-
-    <Import Project="..\Modules\Winston\Daramee.Winston.Shared\Daramee.Winston.Shared.projitems" Label="Shared"/>
-
-    <Import Project="..\Modules\Blockar\Blockar.Shared\Blockar.Shared.projitems" Label="Shared"/>
 
 </Project>

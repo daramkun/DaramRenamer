@@ -13,8 +13,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Daramee.Winston.Dialogs;
 using DaramRenamer.Commands;
+using DaramRenamer.Registry;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace DaramRenamer;
@@ -34,9 +34,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         FileInfo.FileOperator = new WindowsNativeFileOperator();
 
         Title = $"{Strings.Instance["DaramRenamer"]} - {Strings.Instance["Version"]} {GetVersionString()}";
-
-        if (Preferences.Instance.UseCustomPlugins)
-            PluginManager.Instance.LoadPlugins();
 
         PluginToMenu.InitializeCommands(CommandsMenu.Items);
         PluginToMenu.InitializeCommands(ListViewContextMenu.Items);
@@ -462,7 +459,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if ((sender as MenuItem)?.Header is ICommand asCommandFromMenuItem)
             command = asCommandFromMenuItem;
         else if (sender is Button button)
-            command = PluginManager.Instance.FindCommand(button.Tag as string);
+            command = DaramRenamerRegistry.FindCommandDescriptor(button.Tag as string)?.Create();
         else if (sender is ICommand asCommand)
             command = asCommand;
         else
@@ -471,12 +468,12 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (command == null)
             return;
 
-        command = Activator.CreateInstance(command.GetType()) as ICommand;
+        command = DaramRenamerRegistry.GetDescriptor(command)?.Clone(command);
 
         var currentChanges = _undoManager.SaveTemporary(FileInfo.Files);
 
-        var properties = command?.GetType().GetProperties();
-        if (properties?.Length > (command is IOrderBy ? 3 : 2))
+        var descriptor = command == null ? null : DaramRenamerRegistry.GetDescriptor(command);
+        if (descriptor?.Options.Count > 0)
         {
             var commandWindow = new CommandWindow(command) {Owner = this};
             commandWindow.ValueChanged += (_, _) =>
@@ -514,8 +511,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             var targets =
                 (e is DesignatedFilesRoutedEventArgs designatedFilesRoutedEventArgs
-                    ? designatedFilesRoutedEventArgs.DesignatedFiles
-                    : FileInfo.Files as IEnumerable<FileInfo>).ToArray();
+                    ? designatedFilesRoutedEventArgs.DesignatedFiles.AsEnumerable()
+                    : FileInfo.Files).ToArray();
 
             if (command is ITargetContains targetContains)
                 targetContains.SetTargets(targets);
@@ -541,8 +538,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (((MenuItem) sender).Header is not ICondition condition)
             return;
 
-        var properties = condition.GetType().GetProperties();
-        if (properties.Length <= (condition is IOrderBy ? 1 : 0))
+        var descriptor = DaramRenamerRegistry.GetDescriptor(condition);
+        if (descriptor?.Options.Count <= 0)
             return;
 
         var commandWindow = new CommandWindow(condition) {Owner = this};
@@ -685,12 +682,12 @@ EXIT";
 
     private class DesignatedFilesRoutedEventArgs : RoutedEventArgs
     {
-        public DesignatedFilesRoutedEventArgs(params FileInfo[] files)
+        public DesignatedFilesRoutedEventArgs(params FileItem[] files)
         {
             DesignatedFiles = files;
         }
 
-        public FileInfo[] DesignatedFiles { get; }
+        public FileItem[] DesignatedFiles { get; }
     }
 
     #region Commands

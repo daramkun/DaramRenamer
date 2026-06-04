@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Controls;
+using DaramRenamer.Registry;
 
 namespace DaramRenamer;
 
@@ -25,7 +27,7 @@ public static class PluginToMenu
         foreach (var (category, menuItem) in menuItems)
         {
             var initializedCommandList =
-                new ObservableCollection<ICommand>(PluginManager.Instance.GetCategoriedCommands(category));
+                new ObservableCollection<ICommand>(DaramRenamerRegistry.GetCommands(category).Select(command => command.Create()));
             menuItem.ItemsSource = initializedCommandList;
             if (initializeMain)
                 InitializedCommandLists.Add(initializedCommandList);
@@ -35,7 +37,8 @@ public static class PluginToMenu
     public static void InitializeConditions(MenuItem conditionsMenu, bool initializeMain = true)
     {
         if (initializeMain)
-            _initializedConditionList = new ObservableCollection<ICondition>(PluginManager.Instance.Conditions);
+            _initializedConditionList = new ObservableCollection<ICondition>(
+                DaramRenamerRegistry.Conditions.OrderBy(condition => condition.Order).Select(condition => condition.Create()));
         conditionsMenu.ItemsSource = _initializedConditionList;
     }
 

@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DaramRenamer.Registry;
 
 namespace DaramRenamer;
 
@@ -72,7 +73,7 @@ public partial class PreferencesWindow : Window
             {
                 Tag: Button {DataContext: KeyBindingInfo keyBindingInfo}
             })
-            keyBindingInfo.Command = command.GetType().FullName;
+            keyBindingInfo.Command = DaramRenamerRegistry.GetDescriptor(command)?.Id ?? string.Empty;
     }
 
     private void Shortcut_Button_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

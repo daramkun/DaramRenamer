@@ -1,43 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Daramee.Winston.File;
+using DaramRenamer.FileOperators;
 
 namespace DaramRenamer;
 
-internal class WindowsNativeFileOperator : IFileOperator
+internal sealed class WindowsNativeFileOperator : DefaultFileOperator
 {
-    public void BeginBatch()
+    public override IEnumerable<string> EnumerateFiles(string path, bool topDirOnly)
     {
-        Operation.Begin();
-    }
+        if (!Directory.Exists(path))
+            return [];
 
-    public void EndBatch()
-    {
-        Operation.End();
-    }
-
-    public void Move(string destination, string source, bool overwrite)
-    {
-        Operation.Move(destination, source, overwrite);
-    }
-
-    public void Copy(string destination, string source, bool overwrite)
-    {
-        Operation.Copy(destination, source, overwrite);
-    }
-
-    public IEnumerable<string> GetFiles(string directory, bool topDirectoryOnly)
-    {
-        return FilesEnumerator.EnumerateFiles(directory, "*.*", topDirectoryOnly);
-    }
-
-    public bool FileExists(string path)
-    {
-        return File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory;
-    }
-
-    public bool DirectoryExists(string path)
-    {
-        return Directory.Exists(path) && File.GetAttributes(path) == FileAttributes.Directory;
+        return Directory.EnumerateFiles(path, "*.*",
+            topDirOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
     }
 }

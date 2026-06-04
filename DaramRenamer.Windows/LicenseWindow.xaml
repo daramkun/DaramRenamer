@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DaramRenamer"
+        xmlns:base="clr-namespace:DaramRenamer;assembly=DaramRenamer.Base"
         mc:Ignorable="d"
-        Title="{Binding Path=[LicenseWindowTitle], Source={x:Static local:Strings.Instance}}" Height="600" Width="800">
+        Title="{Binding Path=[LicenseWindowTitle], Source={x:Static base:Strings.Instance}}" Height="600" Width="800">
     <FlowDocumentScrollViewer x:Name="LicenseTextBox" VerticalScrollBarVisibility="Auto" />
 </Window>

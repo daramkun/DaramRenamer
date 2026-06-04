@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DaramRenamer"
+        xmlns:base="clr-namespace:DaramRenamer;assembly=DaramRenamer.Base"
         mc:Ignorable="d"
-        Title="{Binding Path=[ApplyWindowTitle], Source={x:Static local:Strings.Instance}}" Width="320"
+        Title="{Binding Path=[ApplyWindowTitle], Source={x:Static base:Strings.Instance}}" Width="320"
         ShowInTaskbar="False" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" SizeToContent="Height">
     <Grid Margin="8">
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=[ApplyWindowLabelProcessing], Source={x:Static local:Strings.Instance}}" />
+                <TextBlock Text="{Binding Path=[ApplyWindowLabelProcessing], Source={x:Static base:Strings.Instance}}" />
                 <TextBlock x:Name="ProcessingTextBlock" Text="" />
             </StackPanel>
             <Grid Height="16" Margin="0,4,0,0">
@@ -23,7 +24,7 @@
             </Grid>
             <ListBox x:Name="ListBoxFailure" Margin="0,8,0,0" MaxHeight="120" />
             <Button x:Name="ApplyClose"
-                    Content="{Binding Path=[ButtonClose], Source={x:Static local:Strings.Instance}}"
+                    Content="{Binding Path=[ButtonClose], Source={x:Static base:Strings.Instance}}"
                     IsEnabled="False" IsDefault="True" HorizontalAlignment="Center" Width="64" Margin="0,8,0,0"
                     Click="ApplyClose_Click" />
         </StackPanel>

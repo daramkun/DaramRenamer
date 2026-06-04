@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DaramRenamer"
+        xmlns:base="clr-namespace:DaramRenamer;assembly=DaramRenamer.Base"
         xmlns:conv="clr-namespace:DaramRenamer.Converters"
         mc:Ignorable="d"
-        Title="{Binding Path=[BatchWindow_Title], Source={x:Static local:Strings.Instance}}" Height="450" Width="800">
+        Title="{Binding Path=[BatchWindow_Title], Source={x:Static base:Strings.Instance}}" Height="450" Width="800">
     <Window.Resources>
         <conv:LocalizationConverter x:Key="LocalizationConverter" />
         <DataTemplate x:Key="CommandMenuItemDataTemplate">
@@ -23,44 +24,44 @@
         </Style>
         <ContextMenu x:Key="TreeViewItemContextMenu" Loaded="ContextMenu_Loaded">
             <MenuItem x:Name="CommandsMenu"
-                      Header="{Binding Path=[Menu_Command_Command], Source={x:Static local:Strings.Instance}}">
+                      Header="{Binding Path=[Menu_Command_Command], Source={x:Static base:Strings.Instance}}">
                 <MenuItem x:Name="MenuItemFilename"
-                          Header="{Binding Path=[Menu_Command_Filename], Source={x:Static local:Strings.Instance}}"
+                          Header="{Binding Path=[Menu_Command_Filename], Source={x:Static base:Strings.Instance}}"
                           ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
                           ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
                 <MenuItem x:Name="MenuItemExtension"
-                          Header="{Binding Path=[Menu_Command_Extension], Source={x:Static local:Strings.Instance}}"
+                          Header="{Binding Path=[Menu_Command_Extension], Source={x:Static base:Strings.Instance}}"
                           ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
                           ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
                 <MenuItem x:Name="MenuItemPath"
-                          Header="{Binding Path=[Menu_Command_Path], Source={x:Static local:Strings.Instance}}"
+                          Header="{Binding Path=[Menu_Command_Path], Source={x:Static base:Strings.Instance}}"
                           ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
                           ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
                 <MenuItem x:Name="MenuItemNumber"
-                          Header="{Binding Path=[Menu_Command_Number], Source={x:Static local:Strings.Instance}}"
+                          Header="{Binding Path=[Menu_Command_Number], Source={x:Static base:Strings.Instance}}"
                           ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
                           ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
                 <MenuItem x:Name="MenuItemDate"
-                          Header="{Binding Path=[Menu_Command_Date], Source={x:Static local:Strings.Instance}}"
+                          Header="{Binding Path=[Menu_Command_Date], Source={x:Static base:Strings.Instance}}"
                           ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
                           ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
                 <MenuItem x:Name="MenuItemTag"
-                          Header="{Binding Path=[Menu_Command_Tag], Source={x:Static local:Strings.Instance}}"
+                          Header="{Binding Path=[Menu_Command_Tag], Source={x:Static base:Strings.Instance}}"
                           ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
                           ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
                 <MenuItem x:Name="MenuItemEtc"
-                          Header="{Binding Path=[Menu_Command_Etc], Source={x:Static local:Strings.Instance}}"
+                          Header="{Binding Path=[Menu_Command_Etc], Source={x:Static base:Strings.Instance}}"
                           ItemTemplate="{StaticResource CommandMenuItemDataTemplate}"
                           ItemContainerStyle="{StaticResource CommandMenuItemItemContainerTemplate}" />
             </MenuItem>
             <MenuItem x:Name="ConditionsMenu"
-                      Header="{Binding Path=[Menu_Condition_Condition], Source={x:Static local:Strings.Instance}}"
+                      Header="{Binding Path=[Menu_Condition_Condition], Source={x:Static base:Strings.Instance}}"
                       ItemTemplate="{StaticResource ConditionMenuItemDataTemplate}"
                       ItemContainerStyle="{StaticResource ConditionMenuItemItemContainerTemplate}" />
 
             <Separator />
 
-            <MenuItem Header="{Binding Path=[BatchWindow_Remove], Source={x:Static local:Strings.Instance}}"
+            <MenuItem Header="{Binding Path=[BatchWindow_Remove], Source={x:Static base:Strings.Instance}}"
                       Click="RemoveMenuItem_Click" />
         </ContextMenu>
     </Window.Resources>
@@ -76,9 +77,9 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="{Binding Path=[BatchWindow_LoadFile], Source={x:Static local:Strings.Instance}}"
+                <Button Content="{Binding Path=[BatchWindow_LoadFile], Source={x:Static base:Strings.Instance}}"
                         Width="72" Click="BatchLoad_Click" />
-                <Button Content="{Binding Path=[BatchWindow_SaveFile], Source={x:Static local:Strings.Instance}}"
+                <Button Content="{Binding Path=[BatchWindow_SaveFile], Source={x:Static base:Strings.Instance}}"
                         Width="72" Click="BatchSave_Click" Margin="8,0,0,0" />
             </StackPanel>
         </Grid>
@@ -93,16 +94,16 @@
             </TreeView.ItemContainerStyle>
 
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type local:BatchNode}" ItemsSource="{Binding Path=Children}">
+                <HierarchicalDataTemplate DataType="{x:Type base:BatchNode}" ItemsSource="{Binding Path=Children}">
                     <TextBlock Text="{Binding}" />
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="{Binding Path=[BatchWindow_DoBatch], Source={x:Static local:Strings.Instance}}" Width="96"
+            <Button Content="{Binding Path=[BatchWindow_DoBatch], Source={x:Static base:Strings.Instance}}" Width="96"
                     Click="ButtonBatchProcess_Click" />
-            <Button Content="{Binding Path=[BatchWindow_Close], Source={x:Static local:Strings.Instance}}" Width="96"
+            <Button Content="{Binding Path=[BatchWindow_Close], Source={x:Static base:Strings.Instance}}" Width="96"
                     Margin="8,0,0,0" Click="ButtonClose_Click" />
         </StackPanel>
     </Grid>

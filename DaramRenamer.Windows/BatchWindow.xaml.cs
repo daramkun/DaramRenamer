@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Daramee.Winston.Dialogs;
+using DaramRenamer.Registry;
+using Microsoft.Win32;
 
 namespace DaramRenamer;
 
@@ -38,7 +39,7 @@ public partial class BatchWindow : Window
         if ((sender as MenuItem)?.Header is ICommand asCommandFromMenuItem)
             command = asCommandFromMenuItem;
         else if (sender is Button button)
-            command = PluginManager.Instance.FindCommand(button.Tag as string);
+            command = DaramRenamerRegistry.FindCommandDescriptor(button.Tag as string)?.Create();
         else if (sender is ICommand asCommand)
             command = asCommand;
         else
@@ -47,10 +48,10 @@ public partial class BatchWindow : Window
         if (command == null)
             return;
 
-        command = Activator.CreateInstance(command.GetType()) as ICommand;
+        command = DaramRenamerRegistry.GetDescriptor(command)?.Clone(command);
 
-        var properties = command?.GetType().GetProperties();
-        if (properties?.Length > (command is IOrderBy ? 3 : 2))
+        var descriptor = command == null ? null : DaramRenamerRegistry.GetDescriptor(command);
+        if (descriptor?.Options.Count > 0)
         {
             var commandWindow = new CommandWindow(command) {Owner = this};
             if (commandWindow.ShowDialog() != true)
@@ -71,8 +72,8 @@ public partial class BatchWindow : Window
             return;
 
         var condition = ((MenuItem) sender).Header as ICondition;
-        var properties = condition.GetType().GetProperties();
-        if (properties.Length > (condition is IOrderBy ? 1 : 0))
+        var descriptor = DaramRenamerRegistry.GetDescriptor(condition);
+        if (descriptor?.Options.Count > 0)
         {
             var commandWindow = new CommandWindow(condition) {Owner = this};
             if (commandWindow.ShowDialog() != true)

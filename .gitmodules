@@ -1,15 +1,3 @@
-[submodule "Modules/FileTypeDetector"]
-	path = Modules/FileTypeDetector
-	url = https://github.com/daramkun/FileTypeDetector.git
-[submodule "Modules/Winston"]
-	path = Modules/Winston
-	url = https://github.com/daramkun/Winston.git
-[submodule "Modules/Blockar"]
-	path = Modules/Blockar
-	url = https://github.com/daramkun/Blockar.git
-[submodule "Modules/Nargs"]
-	path = Modules/Nargs
-	url = https://github.com/daramkun/Nargs.git
 [submodule "Modules/StrongNameKey"]
 	path = Modules/StrongNameKey
 	url = https://github.com/daramkun/StrongNameKey.git

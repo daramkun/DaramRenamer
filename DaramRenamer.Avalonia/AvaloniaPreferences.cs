@@ -1,7 +1,9 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Globalization;
 
 namespace DaramRenamer.Avalonia;
 
@@ -27,6 +29,7 @@ internal sealed class AvaloniaPreferences
                 {
                     var json = File.ReadAllText(FilePath, Encoding.UTF8);
                     _instance = JsonSerializer.Deserialize<AvaloniaPreferences>(json) ?? new AvaloniaPreferences();
+                    _instance.Normalize();
                 }
             }
             catch
@@ -34,7 +37,9 @@ internal sealed class AvaloniaPreferences
                 _instance = new AvaloniaPreferences();
             }
 
-            return _instance ??= new AvaloniaPreferences();
+            _instance ??= new AvaloniaPreferences();
+            _instance.Normalize();
+            return _instance;
         }
     }
 
@@ -45,6 +50,14 @@ internal sealed class AvaloniaPreferences
     public bool CloseApplyWindowWhenSuccessfullyDone { get; set; } = true;
     public bool RemoveEmptyDirectory { get; set; }
     public bool DisableCheckUpdate { get; set; }
+    public string CurrentLanguage { get; set; } = CultureInfo.CurrentUICulture.ToString();
+    public bool VisualCommand { get; set; }
+    public bool ForceSingleCoreRunning { get; set; }
+    public AvaloniaShortcutInfo[] Shortcuts { get; set; } =
+    [
+        new(), new(), new(), new(), new(),
+        new(), new(), new(), new(), new()
+    ];
     public bool SaveWindowState { get; set; }
     public double Left { get; set; }
     public double Top { get; set; }
@@ -53,8 +66,27 @@ internal sealed class AvaloniaPreferences
 
     public void Save()
     {
+        Normalize();
+        if (!string.IsNullOrWhiteSpace(CurrentLanguage))
+        {
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(CurrentLanguage);
+            Strings.Instance.Load();
+        }
+
         Directory.CreateDirectory(BaseDirectory);
         var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(FilePath, json, Encoding.UTF8);
+    }
+
+    private void Normalize()
+    {
+        CurrentLanguage = string.IsNullOrWhiteSpace(CurrentLanguage)
+            ? CultureInfo.CurrentUICulture.ToString()
+            : CurrentLanguage;
+
+        var shortcuts = Shortcuts ?? [];
+        if (shortcuts.Length < 10)
+            shortcuts = shortcuts.Concat(Enumerable.Range(0, 10 - shortcuts.Length).Select(_ => new AvaloniaShortcutInfo())).ToArray();
+        Shortcuts = shortcuts.Take(10).Select(shortcut => shortcut ?? new AvaloniaShortcutInfo()).ToArray();
     }
 }

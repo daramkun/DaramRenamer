@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
@@ -52,6 +53,13 @@ internal sealed class BatchWindow : Window
 
         _nodes.Background = look.Surface;
         _nodes.BorderBrush = Brushes.Transparent;
+        _nodes.ItemTemplate = new FuncDataTemplate<BatchNodeItem>((item, _) => new TextBlock
+        {
+            Text = item?.Node.ToString() ?? string.Empty,
+            Margin = new Thickness((item?.Depth ?? 0) * 18 + 8, 5, 8, 5),
+            Foreground = look.Text,
+            TextTrimming = TextTrimming.CharacterEllipsis
+        }, true);
 
         var nodesPanel = new Border
         {
@@ -129,6 +137,10 @@ internal sealed class BatchWindow : Window
         };
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_LoadFile"], async () => await Load()));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_SaveFile"], async () => await Save()));
+        bottom.Children.Add(Button("Up", () => MoveSelected(-1)));
+        bottom.Children.Add(Button("Down", () => MoveSelected(1)));
+        bottom.Children.Add(Button("Indent", IndentSelected));
+        bottom.Children.Add(Button("Outdent", OutdentSelected));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_Remove"], RemoveSelected));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_DoBatch"], Execute));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_Close"], Close));
@@ -184,6 +196,68 @@ internal sealed class BatchWindow : Window
     private static bool DeleteItem(BatchNode from, BatchNode target) =>
         from.Children.Remove(target) || from.Children.Any(child => DeleteItem(child, target));
 
+    private void MoveSelected(int direction)
+    {
+        if (_nodes.SelectedItem is not BatchNodeItem item || item.Parent == null)
+            return;
+
+        var index = item.Parent.Children.IndexOf(item.Node);
+        var newIndex = index + direction;
+        if (index < 0 || newIndex < 0 || newIndex >= item.Parent.Children.Count)
+            return;
+
+        item.Parent.Children.RemoveAt(index);
+        item.Parent.Children.Insert(newIndex, item.Node);
+        RefreshTree(item.Node);
+    }
+
+    private void IndentSelected()
+    {
+        if (_nodes.SelectedItem is not BatchNodeItem item || item.Parent == null)
+            return;
+
+        var index = item.Parent.Children.IndexOf(item.Node);
+        if (index <= 0)
+            return;
+
+        var newParent = item.Parent.Children[index - 1];
+        item.Parent.Children.RemoveAt(index);
+        newParent.Children.Add(item.Node);
+        RefreshTree(item.Node);
+    }
+
+    private void OutdentSelected()
+    {
+        if (_nodes.SelectedItem is not BatchNodeItem item || item.Parent is null or RootBatchNode)
+            return;
+
+        if (!TryFindParent(_rootNode, item.Parent, out var grandParent))
+            return;
+
+        var parentIndex = grandParent.Children.IndexOf(item.Parent);
+        item.Parent.Children.Remove(item.Node);
+        grandParent.Children.Insert(parentIndex + 1, item.Node);
+        RefreshTree(item.Node);
+    }
+
+    private static bool TryFindParent(BatchNode current, BatchNode target, out BatchNode parent)
+    {
+        foreach (var child in current.Children)
+        {
+            if (child == target)
+            {
+                parent = current;
+                return true;
+            }
+
+            if (TryFindParent(child, target, out parent))
+                return true;
+        }
+
+        parent = null!;
+        return false;
+    }
+
     private void Execute()
     {
         var index = 0;
@@ -225,18 +299,26 @@ internal sealed class BatchWindow : Window
     private void RefreshTree()
     {
         _nodes.ItemsSource = null;
-        _nodes.ItemsSource = Flatten(_rootNode, 0).ToArray();
+        _nodes.ItemsSource = Flatten(_rootNode, null, 0).ToArray();
     }
 
-    private static IEnumerable<BatchNodeItem> Flatten(BatchNode node, int depth)
+    private void RefreshTree(BatchNode selected)
     {
-        yield return new BatchNodeItem(node, depth);
+        var items = Flatten(_rootNode, null, 0).ToArray();
+        _nodes.ItemsSource = null;
+        _nodes.ItemsSource = items;
+        _nodes.SelectedItem = items.FirstOrDefault(item => item.Node == selected);
+    }
+
+    private static IEnumerable<BatchNodeItem> Flatten(BatchNode node, BatchNode? parent, int depth)
+    {
+        yield return new BatchNodeItem(node, parent, depth);
         foreach (var child in node.Children)
-        foreach (var item in Flatten(child, depth + 1))
+        foreach (var item in Flatten(child, node, depth + 1))
             yield return item;
     }
 
-    private sealed record BatchNodeItem(BatchNode Node, int Depth)
+    private sealed record BatchNodeItem(BatchNode Node, BatchNode? Parent, int Depth)
     {
         public override string ToString() => $"{new string(' ', Depth * 4)}{Node}";
     }

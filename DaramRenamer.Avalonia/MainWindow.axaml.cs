@@ -51,6 +51,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         _undoManager.UpdateRedo += (_, _) => OnHistoryChanged();
 
         BuildUi();
+        KeyDown += async (_, e) => await HandleShortcut(e);
         Closing += (_, _) => SaveWindowState();
     }
 
@@ -442,13 +443,23 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             var dialog = new OptionDialog(descriptor, command)
             {
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                PreviewChanged = AvaloniaPreferences.Instance.VisualCommand
+                    ? () =>
+                    {
+                        SetItems(_undoManager.LoadTemporary(current));
+                        ApplyCommand(command, FileItem.Files);
+                        RefreshList();
+                    }
+                    : null
             };
             if (await dialog.ShowDialog<bool>(this) != true)
             {
                 SetItems(_undoManager.LoadTemporary(current));
                 return;
             }
+
+            SetItems(_undoManager.LoadTemporary(current));
         }
 
         _undoManager.SaveToUndoStack(FileItem.Files);
@@ -464,6 +475,16 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             targetContains.SetTargets(targetArray);
 
         var index = 0;
+        if (command.ParallelProcessable && !AvaloniaPreferences.Instance.ForceSingleCoreRunning)
+        {
+            Parallel.ForEach(targetArray, file =>
+            {
+                if (conditions.All(condition => condition.IsSatisfyThisCondition(file)))
+                    command.DoCommand(file);
+            });
+            return;
+        }
+
         foreach (var file in targetArray)
         {
             if (conditions.All(condition => condition.IsSatisfyThisCondition(file)))
@@ -543,6 +564,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private async Task ApplyFiles()
     {
         if (FileItem.Files.Count == 0)
+            return;
+        if (!await ConfirmApplyWarnings())
             return;
 
         var dialog = new ApplyDialog(_undoManager)
@@ -708,6 +731,129 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     private static void RefreshStatus()
     {
+    }
+
+    private async Task HandleShortcut(KeyEventArgs e)
+    {
+        if (await HandleDefaultShortcut(e))
+            return;
+
+        foreach (var shortcut in AvaloniaPreferences.Instance.Shortcuts)
+        {
+            if (!shortcut.Matches(e))
+                continue;
+            var command = shortcut.CreateCommand();
+            var descriptor = command == null ? null : DaramRenamerRegistry.GetDescriptor(command);
+            if (descriptor != null)
+            {
+                await RunCommand(descriptor);
+                e.Handled = true;
+            }
+            return;
+        }
+    }
+
+    private async Task<bool> HandleDefaultShortcut(KeyEventArgs e)
+    {
+        if (!e.KeyModifiers.HasFlag(KeyModifiers.Control))
+            return false;
+
+        if (e.Key == Key.O)
+            await OpenFiles();
+        else if (e.Key == Key.P)
+            await OpenFolders();
+        else if (e.Key == Key.Delete)
+            ClearFiles();
+        else if (e.Key == Key.S && e.KeyModifiers == KeyModifiers.Control)
+            await ApplyFiles();
+        else if (e.Key == Key.Z)
+            Undo();
+        else if (e.Key == Key.Y)
+            Redo();
+        else if (e.Key == Key.Up)
+            MoveSelected(-1);
+        else if (e.Key == Key.Down)
+            MoveSelected(1);
+        else if (e.Key == Key.S && e.KeyModifiers.HasFlag(KeyModifiers.Shift))
+            SortFiles();
+        else
+            return false;
+
+        e.Handled = true;
+        return true;
+    }
+
+    private async Task<bool> ConfirmApplyWarnings()
+    {
+        var changed = FileItem.Files
+            .Where(item => item.OriginalFullPath != item.ChangedFullPath)
+            .ToArray();
+        var duplicated = changed
+            .GroupBy(item => item.ChangedFullPath, StringComparer.OrdinalIgnoreCase)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .Take(5)
+            .ToArray();
+        var existing = changed
+            .Where(item => !AvaloniaPreferences.Instance.Overwrite &&
+                           item.OriginalFullPath != item.ChangedFullPath &&
+                           (File.Exists(item.ChangedFullPath) || Directory.Exists(item.ChangedFullPath)))
+            .Select(item => item.ChangedFullPath)
+            .Take(5)
+            .ToArray();
+
+        if (duplicated.Length == 0 && existing.Length == 0)
+            return true;
+
+        var message = new List<string>();
+        if (duplicated.Length > 0)
+        {
+            message.Add("Duplicated target paths:");
+            message.AddRange(duplicated.Select(path => $"  {path}"));
+        }
+        if (existing.Length > 0)
+        {
+            message.Add("Existing target paths:");
+            message.AddRange(existing.Select(path => $"  {path}"));
+        }
+        message.Add("");
+        message.Add("Continue applying?");
+
+        return await ShowConfirmation(Strings.Instance["DaramRenamer"], string.Join(Environment.NewLine, message));
+    }
+
+    private async Task<bool> ShowConfirmation(string title, string message)
+    {
+        var look = NativeTheme.Current;
+        var dialog = new Window
+        {
+            Title = title,
+            Width = 520,
+            SizeToContent = SizeToContent.Height,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Background = look.AppBackground
+        };
+        var yes = new Button { Content = "OK", MinWidth = 76 };
+        yes.Click += (_, _) => dialog.Close(true);
+        var cancel = new Button { Content = "Cancel", MinWidth = 76 };
+        cancel.Click += (_, _) => dialog.Close(false);
+        dialog.Content = new StackPanel
+        {
+            Margin = look.IsMacOS ? new Thickness(18) : new Thickness(16),
+            Spacing = 12,
+            Children =
+            {
+                new TextBlock { Text = message, TextWrapping = TextWrapping.Wrap, Foreground = look.Text },
+                new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Spacing = 6,
+                    Children = { yes, cancel }
+                }
+            }
+        };
+        return await dialog.ShowDialog<bool>(this);
     }
 
     private void OnHistoryChanged()
@@ -923,6 +1069,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
 internal sealed class OptionDialog : Window
 {
+    public Action? PreviewChanged { get; set; }
+
     public OptionDialog(ItemDescriptor descriptor, object target)
     {
         var look = NativeTheme.Current;
@@ -994,6 +1142,7 @@ internal sealed class OptionDialog : Window
                 IsChecked = option.GetValue(target) as bool?
             };
             checkBox.IsCheckedChanged += (_, _) => option.SetValue(target, checkBox.IsChecked);
+            checkBox.IsCheckedChanged += (_, _) => (TopLevel.GetTopLevel(checkBox) as OptionDialog)?.PreviewChanged?.Invoke();
             return checkBox;
         }
 
@@ -1010,6 +1159,7 @@ internal sealed class OptionDialog : Window
             {
                 if (comboBox.SelectedItem is EnumItem item)
                     option.SetValue(target, item.Value);
+                (TopLevel.GetTopLevel(comboBox) as OptionDialog)?.PreviewChanged?.Invoke();
             };
             return comboBox;
         }
@@ -1020,6 +1170,7 @@ internal sealed class OptionDialog : Window
             try
             {
                 option.DeserializeValue(target, textBox.Text ?? string.Empty);
+                (TopLevel.GetTopLevel(textBox) as OptionDialog)?.PreviewChanged?.Invoke();
             }
             catch
             {

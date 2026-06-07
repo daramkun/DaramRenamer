@@ -71,7 +71,32 @@ internal sealed class AvaloniaShortcutInfo
             parts.Add("Alt");
         if (e.KeyModifiers.HasFlag(KeyModifiers.Shift))
             parts.Add("Shift");
-        parts.Add(e.Key.ToString());
+        parts.Add(NormalizeKeyName(e.Key.ToString()));
         return string.Join("+", parts);
     }
+
+    public static string NormalizeGestureText(string text)
+    {
+        var parts = new List<string>();
+        foreach (var part in text.Split('+', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            if (part.Equals("Ctrl", StringComparison.OrdinalIgnoreCase) ||
+                part.Equals("Control", StringComparison.OrdinalIgnoreCase))
+                parts.Add("Control");
+            else if (part.Equals("Alt", StringComparison.OrdinalIgnoreCase))
+                parts.Add("Alt");
+            else if (part.Equals("Shift", StringComparison.OrdinalIgnoreCase))
+                parts.Add("Shift");
+            else
+                parts.Add(NormalizeKeyName(part));
+        }
+
+        return string.Join("+", parts);
+    }
+
+    private static string NormalizeKeyName(string key) =>
+        key.Equals("Del", StringComparison.OrdinalIgnoreCase) ||
+        key.Equals("Delete", StringComparison.OrdinalIgnoreCase)
+            ? "Delete"
+            : key;
 }

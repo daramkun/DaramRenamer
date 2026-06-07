@@ -23,6 +23,7 @@ internal sealed class PreferencesDialog : Window
     private readonly CheckBox _visualCommand = new();
     private readonly CheckBox _forceSingleCore = new();
     private readonly List<ShortcutEditor> _shortcutEditors = [];
+    private string _initialLanguage = string.Empty;
 
     public PreferencesDialog()
     {
@@ -46,13 +47,13 @@ internal sealed class PreferencesDialog : Window
             HorizontalAlignment = HorizontalAlignment.Right,
             Spacing = 6
         };
-        var ok = new Button { Content = "OK", MinWidth = 76 };
+        var ok = new Button { Content = Strings.Instance["ButtonOK"], MinWidth = 76 };
         ok.Click += (_, _) =>
         {
             SaveValues();
             Close(true);
         };
-        var cancel = new Button { Content = "Cancel", MinWidth = 76 };
+        var cancel = new Button { Content = Strings.Instance["ButtonCancel"], MinWidth = 76 };
         cancel.Click += (_, _) => Close(false);
         buttons.Children.Add(ok);
         buttons.Children.Add(cancel);
@@ -118,6 +119,7 @@ internal sealed class PreferencesDialog : Window
         _saveWindowState.Content = Strings.Instance["PreferencesSaveWindowState"];
         _saveWindowState.IsChecked = prefs.SaveWindowState;
         _language.Text = prefs.CurrentLanguage;
+        _initialLanguage = prefs.CurrentLanguage;
         _visualCommand.Content = Strings.Instance["PreferencesVisualCommand"];
         _visualCommand.IsChecked = prefs.VisualCommand;
         _forceSingleCore.Content = Strings.Instance["PreferencesForceSingleCoreRunning"];
@@ -140,7 +142,11 @@ internal sealed class PreferencesDialog : Window
         prefs.ForceSingleCoreRunning = _forceSingleCore.IsChecked == true;
         prefs.Shortcuts = _shortcutEditors.Select(editor => editor.ToShortcut()).ToArray();
         prefs.Save();
+
+        RequiresRestart = !string.Equals(_initialLanguage, prefs.CurrentLanguage, System.StringComparison.OrdinalIgnoreCase);
     }
+
+    public bool RequiresRestart { get; private set; }
 
     private Control BuildShortcutEditors()
     {
@@ -197,21 +203,31 @@ internal sealed class PreferencesDialog : Window
                     _gesture.Text = AvaloniaShortcutInfo.FromKeyEvent(e);
                 e.Handled = true;
             };
+            var clear = new Button
+            {
+                Content = Strings.Instance["ButtonClear"],
+                MinWidth = 72
+            };
+            clear.Click += (_, _) => _gesture.Text = string.Empty;
+
             Control = new Grid
             {
                 ColumnDefinitions =
                 {
                     new ColumnDefinition(GridLength.Auto),
-                    new ColumnDefinition(GridLength.Star)
+                    new ColumnDefinition(GridLength.Star),
+                    new ColumnDefinition(GridLength.Auto)
                 },
                 ColumnSpacing = 8,
                 Children =
                 {
                     _gesture,
-                    _command
+                    _command,
+                    clear
                 }
             };
             Grid.SetColumn(_command, 1);
+            Grid.SetColumn(clear, 2);
         }
 
         public Control Control { get; }

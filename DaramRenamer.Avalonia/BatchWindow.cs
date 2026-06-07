@@ -18,9 +18,11 @@ internal sealed class BatchWindow : Window
 {
     private readonly RootBatchNode _rootNode = new();
     private readonly ListBox _nodes = new();
+    private readonly Action<RootBatchNode> _executeBatch;
 
-    public BatchWindow()
+    public BatchWindow(Action<RootBatchNode> executeBatch)
     {
+        _executeBatch = executeBatch;
         var look = NativeTheme.Current;
         Title = Strings.Instance["BatchWindow_Title"];
         Width = 820;
@@ -137,10 +139,10 @@ internal sealed class BatchWindow : Window
         };
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_LoadFile"], async () => await Load()));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_SaveFile"], async () => await Save()));
-        bottom.Children.Add(Button("Up", () => MoveSelected(-1)));
-        bottom.Children.Add(Button("Down", () => MoveSelected(1)));
-        bottom.Children.Add(Button("Indent", IndentSelected));
-        bottom.Children.Add(Button("Outdent", OutdentSelected));
+        bottom.Children.Add(Button(Strings.Instance["BatchWindow_MoveUp"], () => MoveSelected(-1)));
+        bottom.Children.Add(Button(Strings.Instance["BatchWindow_MoveDown"], () => MoveSelected(1)));
+        bottom.Children.Add(Button(Strings.Instance["BatchWindow_Indent"], IndentSelected));
+        bottom.Children.Add(Button(Strings.Instance["BatchWindow_Outdent"], OutdentSelected));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_Remove"], RemoveSelected));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_DoBatch"], Execute));
         bottom.Children.Add(Button(Strings.Instance["BatchWindow_Close"], Close));
@@ -260,9 +262,7 @@ internal sealed class BatchWindow : Window
 
     private void Execute()
     {
-        var index = 0;
-        foreach (var item in FileItem.Files)
-            _rootNode.Execute(item, index++);
+        _executeBatch(_rootNode);
     }
 
     private async Task Load()

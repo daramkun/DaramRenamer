@@ -62,6 +62,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     private void BuildUi()
     {
+        _conditionItems.Clear();
+        _nativeConditionItems.Clear();
+
         var root = new Grid
         {
             Background = _look.AppBackground,
@@ -441,24 +444,36 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
         if (descriptor.Options.Count > 0)
         {
+            var previewTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(180)
+            };
+            previewTimer.Tick += (_, _) =>
+            {
+                previewTimer.Stop();
+                SetItems(_undoManager.LoadTemporary(current));
+                ApplyCommand(command, FileItem.Files);
+                RefreshList();
+            };
             var dialog = new OptionDialog(descriptor, command)
             {
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 PreviewChanged = AvaloniaPreferences.Instance.VisualCommand
                     ? () =>
                     {
-                        SetItems(_undoManager.LoadTemporary(current));
-                        ApplyCommand(command, FileItem.Files);
-                        RefreshList();
+                        previewTimer.Stop();
+                        previewTimer.Start();
                     }
                     : null
             };
             if (await dialog.ShowDialog<bool>(this) != true)
             {
+                previewTimer.Stop();
                 SetItems(_undoManager.LoadTemporary(current));
                 return;
             }
 
+            previewTimer.Stop();
             SetItems(_undoManager.LoadTemporary(current));
         }
 
@@ -565,8 +580,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         if (FileItem.Files.Count == 0)
             return;
-        if (!await ConfirmApplyWarnings())
-            return;
 
         var dialog = new ApplyDialog(_undoManager)
         {
@@ -668,14 +681,34 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private async Task ShowPreferences()
     {
         var dialog = new PreferencesDialog { WindowStartupLocation = WindowStartupLocation.CenterOwner };
-        await dialog.ShowDialog<bool>(this);
+        if (await dialog.ShowDialog<bool>(this) == true)
+        {
+            BuildUi();
+            if (dialog.RequiresRestart)
+                await ShowMessage(Strings.Instance["DaramRenamer"], Strings.Instance["PreferencesLanguageRestartRequired"]);
+        }
     }
 
     private void ShowBatchWindow()
     {
         if (_batchWindow is null or { IsVisible: false })
-            _batchWindow = new BatchWindow { WindowStartupLocation = WindowStartupLocation.CenterOwner };
+            _batchWindow = new BatchWindow(ExecuteBatch)
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
         _batchWindow.Show(this);
+    }
+
+    private void ExecuteBatch(RootBatchNode rootNode)
+    {
+        if (FileItem.Files.Count == 0)
+            return;
+
+        _undoManager.SaveToUndoStack(FileItem.Files);
+        var index = 0;
+        foreach (var item in FileItem.Files)
+            rootNode.Execute(item, index++);
+        RefreshList();
     }
 
     private async Task ShowLicense()
@@ -758,68 +791,29 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (!e.KeyModifiers.HasFlag(KeyModifiers.Control))
             return false;
 
-        if (e.Key == Key.O)
+        if (e.Key == Key.O && e.KeyModifiers == KeyModifiers.Control)
             await OpenFiles();
-        else if (e.Key == Key.P)
+        else if (e.Key == Key.P && e.KeyModifiers == KeyModifiers.Control)
             await OpenFolders();
-        else if (e.Key == Key.Delete)
+        else if (e.Key == Key.Delete && e.KeyModifiers == KeyModifiers.Control)
             ClearFiles();
         else if (e.Key == Key.S && e.KeyModifiers == KeyModifiers.Control)
             await ApplyFiles();
-        else if (e.Key == Key.Z)
+        else if (e.Key == Key.Z && e.KeyModifiers == KeyModifiers.Control)
             Undo();
-        else if (e.Key == Key.Y)
+        else if (e.Key == Key.Y && e.KeyModifiers == KeyModifiers.Control)
             Redo();
-        else if (e.Key == Key.Up)
+        else if (e.Key == Key.Up && e.KeyModifiers == KeyModifiers.Control)
             MoveSelected(-1);
-        else if (e.Key == Key.Down)
+        else if (e.Key == Key.Down && e.KeyModifiers == KeyModifiers.Control)
             MoveSelected(1);
-        else if (e.Key == Key.S && e.KeyModifiers.HasFlag(KeyModifiers.Shift))
+        else if (e.Key == Key.S && e.KeyModifiers == (KeyModifiers.Control | KeyModifiers.Shift))
             SortFiles();
         else
             return false;
 
         e.Handled = true;
         return true;
-    }
-
-    private async Task<bool> ConfirmApplyWarnings()
-    {
-        var changed = FileItem.Files
-            .Where(item => item.OriginalFullPath != item.ChangedFullPath)
-            .ToArray();
-        var duplicated = changed
-            .GroupBy(item => item.ChangedFullPath, StringComparer.OrdinalIgnoreCase)
-            .Where(group => group.Count() > 1)
-            .Select(group => group.Key)
-            .Take(5)
-            .ToArray();
-        var existing = changed
-            .Where(item => !AvaloniaPreferences.Instance.Overwrite &&
-                           item.OriginalFullPath != item.ChangedFullPath &&
-                           (File.Exists(item.ChangedFullPath) || Directory.Exists(item.ChangedFullPath)))
-            .Select(item => item.ChangedFullPath)
-            .Take(5)
-            .ToArray();
-
-        if (duplicated.Length == 0 && existing.Length == 0)
-            return true;
-
-        var message = new List<string>();
-        if (duplicated.Length > 0)
-        {
-            message.Add("Duplicated target paths:");
-            message.AddRange(duplicated.Select(path => $"  {path}"));
-        }
-        if (existing.Length > 0)
-        {
-            message.Add("Existing target paths:");
-            message.AddRange(existing.Select(path => $"  {path}"));
-        }
-        message.Add("");
-        message.Add("Continue applying?");
-
-        return await ShowConfirmation(Strings.Instance["DaramRenamer"], string.Join(Environment.NewLine, message));
     }
 
     private async Task<bool> ShowConfirmation(string title, string message)
@@ -833,9 +827,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Background = look.AppBackground
         };
-        var yes = new Button { Content = "OK", MinWidth = 76 };
+        var yes = new Button { Content = Strings.Instance["ButtonOK"], MinWidth = 76 };
         yes.Click += (_, _) => dialog.Close(true);
-        var cancel = new Button { Content = "Cancel", MinWidth = 76 };
+        var cancel = new Button { Content = Strings.Instance["ButtonCancel"], MinWidth = 76 };
         cancel.Click += (_, _) => dialog.Close(false);
         dialog.Content = new StackPanel
         {
@@ -905,7 +899,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                     new TextBlock { Text = message, TextWrapping = TextWrapping.Wrap, Foreground = look.Text },
                     new Button
                     {
-                        Content = "OK",
+                        Content = Strings.Instance["ButtonOK"],
                         MinWidth = 76,
                         HorizontalAlignment = HorizontalAlignment.Right
                     }
@@ -946,7 +940,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             try
             {
-                item.Gesture = KeyGesture.Parse(gesture);
+                item.Gesture = KeyGesture.Parse(AvaloniaShortcutInfo.NormalizeGestureText(gesture));
             }
             catch (Exception ex) when (ex is FormatException or ArgumentException)
             {
@@ -1089,11 +1083,11 @@ internal sealed class OptionDialog : Window
         };
         DockPanel.SetDock(buttons, Dock.Bottom);
 
-        var ok = new Button { Content = "OK", MinWidth = 76 };
+        var ok = new Button { Content = Strings.Instance["ButtonOK"], MinWidth = 76 };
         ok.Click += (_, _) => Close(true);
         buttons.Children.Add(ok);
 
-        var cancel = new Button { Content = "Cancel", MinWidth = 76 };
+        var cancel = new Button { Content = Strings.Instance["ButtonCancel"], MinWidth = 76 };
         cancel.Click += (_, _) => Close(false);
         buttons.Children.Add(cancel);
         root.Children.Add(buttons);
@@ -1196,7 +1190,7 @@ internal sealed class ApplyDialog : Window
     private readonly CheckBox _autoFix = new() { IsChecked = AvaloniaPreferences.Instance.AutomaticFixingFilename };
     private readonly CheckBox _overwrite = new();
     private readonly ComboBox _mode = new();
-    private bool _complete;
+    private bool _running;
 
     public ApplyDialog(UndoManager undoManager)
     {
@@ -1213,14 +1207,50 @@ internal sealed class ApplyDialog : Window
         };
         _mode.SelectedIndex = AvaloniaPreferences.Instance.RenameMode == RenameMode.Copy ? 1 : 0;
 
+        var apply = new Button
+        {
+            Content = Strings.Instance["ButtonApply"],
+            MinWidth = 76
+        };
         var close = new Button
         {
             Content = Strings.Instance["ButtonClose"],
-            IsEnabled = false,
             MinWidth = 76,
-            HorizontalAlignment = HorizontalAlignment.Right
         };
         close.Click += (_, _) => Close();
+        apply.Click += async (_, _) =>
+        {
+            apply.IsEnabled = false;
+            close.IsEnabled = false;
+            _mode.IsEnabled = false;
+            _autoFix.IsEnabled = false;
+            _overwrite.IsEnabled = false;
+
+            var mode = _mode.SelectedItem is RenameModeItem item ? item.Value : RenameMode.Move;
+            var autoFix = _autoFix.IsChecked == true;
+            var overwrite = _overwrite.IsChecked == true;
+
+            if (!await ConfirmApplyWarnings(overwrite))
+            {
+                apply.IsEnabled = true;
+                close.IsEnabled = true;
+                _mode.IsEnabled = true;
+                _autoFix.IsEnabled = true;
+                _overwrite.IsEnabled = true;
+                return;
+            }
+
+            await Run(autoFix, mode, overwrite);
+            close.IsEnabled = true;
+        };
+
+        var buttons = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Spacing = 6,
+            Children = { apply, close }
+        };
 
         Content = new StackPanel
         {
@@ -1236,38 +1266,29 @@ internal sealed class ApplyDialog : Window
                 _progress,
                 _count,
                 _failures,
-                close
+                buttons
             }
         };
 
         _overwrite.Content = Strings.Instance["PreferencesOverwrite"];
         _overwrite.IsChecked = AvaloniaPreferences.Instance.Overwrite;
-
-        Opened += async (_, _) =>
-        {
-            await Run();
-            close.IsEnabled = true;
-        };
     }
 
     protected override void OnClosing(WindowClosingEventArgs e)
     {
-        e.Cancel = !_complete;
+        e.Cancel = _running;
         base.OnClosing(e);
     }
 
-    private async Task Run()
+    private async Task Run(bool autoFix, RenameMode mode, bool overwrite)
     {
+        _running = true;
         var failed = false;
         _undoManager.ClearUndoStack();
         _progress.Minimum = 0;
         _progress.Maximum = FileItem.Files.Count;
         _progress.Value = 0;
         _count.Text = $"0/{FileItem.Files.Count}";
-
-        var mode = _mode.SelectedItem is RenameModeItem item ? item.Value : RenameMode.Move;
-        var autoFix = _autoFix.IsChecked == true;
-        var overwrite = _overwrite.IsChecked == true;
 
         await Task.Run(() =>
         {
@@ -1292,9 +1313,81 @@ internal sealed class ApplyDialog : Window
             FileItem.Files.Clear();
         if (AvaloniaPreferences.Instance.RemoveEmptyDirectory)
             RemoveEmptyDirectories();
-        _complete = true;
+        _running = false;
         if (!failed && AvaloniaPreferences.Instance.CloseApplyWindowWhenSuccessfullyDone)
             Dispatcher.UIThread.Post(Close);
+    }
+
+    private async Task<bool> ConfirmApplyWarnings(bool overwrite)
+    {
+        var changed = FileItem.Files
+            .Where(item => item.OriginalFullPath != item.ChangedFullPath)
+            .ToArray();
+        var duplicated = changed
+            .GroupBy(item => item.ChangedFullPath, StringComparer.OrdinalIgnoreCase)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .Take(5)
+            .ToArray();
+        var existing = changed
+            .Where(item => !overwrite &&
+                           (File.Exists(item.ChangedFullPath) || Directory.Exists(item.ChangedFullPath)))
+            .Select(item => item.ChangedFullPath)
+            .Take(5)
+            .ToArray();
+
+        if (duplicated.Length == 0 && existing.Length == 0)
+            return true;
+
+        var message = new List<string>();
+        if (duplicated.Length > 0)
+        {
+            message.Add(Strings.Instance["ApplyWarningDuplicatedTargetPaths"]);
+            message.AddRange(duplicated.Select(path => $"  {path}"));
+        }
+        if (existing.Length > 0)
+        {
+            message.Add(Strings.Instance["ApplyWarningExistingTargetPaths"]);
+            message.AddRange(existing.Select(path => $"  {path}"));
+        }
+        message.Add("");
+        message.Add(Strings.Instance["ApplyWarningContinue"]);
+
+        return await ShowConfirmation(string.Join(Environment.NewLine, message));
+    }
+
+    private async Task<bool> ShowConfirmation(string message)
+    {
+        var look = NativeTheme.Current;
+        var dialog = new Window
+        {
+            Title = Strings.Instance["DaramRenamer"],
+            Width = 520,
+            SizeToContent = SizeToContent.Height,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Background = look.AppBackground
+        };
+        var yes = new Button { Content = Strings.Instance["ButtonOK"], MinWidth = 76 };
+        yes.Click += (_, _) => dialog.Close(true);
+        var cancel = new Button { Content = Strings.Instance["ButtonCancel"], MinWidth = 76 };
+        cancel.Click += (_, _) => dialog.Close(false);
+        dialog.Content = new StackPanel
+        {
+            Margin = look.IsMacOS ? new Thickness(18) : new Thickness(16),
+            Spacing = 12,
+            Children =
+            {
+                new TextBlock { Text = message, TextWrapping = TextWrapping.Wrap, Foreground = look.Text },
+                new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Spacing = 6,
+                    Children = { yes, cancel }
+                }
+            }
+        };
+        return await dialog.ShowDialog<bool>(this);
     }
 
     private static void RemoveEmptyDirectories()

@@ -9,6 +9,8 @@ ButtonYes,Yes,예,Ja,是
 ButtonNo,No,아니오,Nee,否
 ButtonCancel,Cancel,취소,Annuleren,取消
 ButtonClose,Close,닫기,Sluiten,关闭
+ButtonClear,Clear,지우기,,
+ButtonApply,Apply,적용,,
 ButtonUpdate,Update,업데이트,Vernieuwen,更新
 FileDialogTitleOpenFiles,Open file,파일 열기,Bestand openen,打开文件
 FileDialogFilterAllFiles,All files(*.*)|*.*,모든 파일(*.*)|*.*,Alle bestanden(*.*)|*.*,所有文件(*.*)|*.*
@@ -79,6 +81,7 @@ PreferencesCloseApplyWindowWhenSuccessfullyDone,Close Apply Window when Successf
 PreferencesDisableCheckUpdate,Disable Checking Update.,업데이트 확인 끄기,Controle op updates uitschakelen.,禁用检查更新
 PreferencesRemoveEmptyDirectory,Remove empty directory after apply.,적용 후 빈 디렉토리 삭제,,应用后删除空目录。
 PreferencesTabShortcutShortcutText,Shortcut:,단축키:,Sneltoets:,快捷方式：
+PreferencesLanguageRestartRequired,Some language changes may require restarting the app to update every open window.,열려 있는 모든 창의 언어를 갱신하려면 앱을 다시 시작해야 할 수 있습니다.,,
 Move,Move,이동,Verplaatsen,移动
 Copy,Copy,복사,Kopiëren,复制
 Command_Name_ReplacePlain,Replace Plain Text,파일명 치환,Tekst vervangen,替换纯文本
@@ -237,6 +240,13 @@ BatchWindow_Close,_Close,닫기(_C),_Sluiten,关闭(_C)
 BatchWindow_LoadFile,Load from,불러오기,Laden van,加载从
 BatchWindow_SaveFile,Save to,저장하기,Opslaan als,保存到
 BatchWindow_DoBatch,Do Batch,일괄처리,Groepsopdracht uitvoeren,做批处理
+BatchWindow_MoveUp,Up,위로,,
+BatchWindow_MoveDown,Down,아래로,,
+BatchWindow_Indent,Indent,들여쓰기,,
+BatchWindow_Outdent,Outdent,내어쓰기,,
 BatchWindow_Command,Command,명령,Opdracht,命令
 BatchWindow_Condition,Condition,조건,Conditie,状态
 BatchWindow_File_Filter,DaramRenamer Batch File(*.drb)|*.drb,다람리네이머 일괄처리 파일(*.drb)|*.drb,DaramRenamer Batch-bestand (*.drb)|*.drb,DaramRenamer 批处理文件(*.drb)|*.drb
+ApplyWarningDuplicatedTargetPaths,Duplicated target paths:,중복된 대상 경로:,,
+ApplyWarningExistingTargetPaths,Existing target paths:,이미 존재하는 대상 경로:,,
+ApplyWarningContinue,Continue applying?,계속 적용할까요?,,

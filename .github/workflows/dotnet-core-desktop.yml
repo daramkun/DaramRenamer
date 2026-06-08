@@ -15,27 +15,27 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
+        submodules: recursive
 
-    - name: Checkout submodules
-      uses: snickerbockers/submodules-init@v4
-
-    - name: Install .NET 6.x
-      uses: actions/setup-dotnet@v2
+    - name: Install .NET 10.x
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '10.0.x'
 
     - name: Restore the application
-      run: dotnet restore /p:Configuration=$env:Configuration /p:Platform="Any CPU"
+      run: dotnet restore DaramRenamer.slnx /p:Configuration=$env:Configuration /p:Platform="Any CPU"
       env:
         Configuration: ${{ matrix.configuration }}
 
     - name: Build the application
-      run: dotnet build /p:Configuration=$env:Configuration /p:Platform="Any CPU"
+      run: dotnet build DaramRenamer.slnx --no-restore /p:Configuration=$env:Configuration /p:Platform="Any CPU"
       env:
         Configuration: ${{ matrix.configuration }}
 
     - name: Test the application
-      run: dotnet test
+      run: dotnet test DaramRenamer.slnx --no-build /p:Configuration=$env:Configuration /p:Platform="Any CPU"
+      env:
+        Configuration: ${{ matrix.configuration }}

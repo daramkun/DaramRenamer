@@ -18,7 +18,7 @@ internal static class Program
 
         var preferences = MewUIPreferences.Instance;
         var strings = Strings.Instance;
-        MewUITheme.ConfigureDefaults();
+        MewUITheme.ConfigureDefaults(preferences.Theme);
         if (!strings.AvailableLanguages.Any(language =>
                 language.Name.Equals(CultureInfo.CurrentUICulture.Name, StringComparison.OrdinalIgnoreCase)))
         {

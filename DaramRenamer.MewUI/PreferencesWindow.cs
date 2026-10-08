@@ -88,6 +88,19 @@ internal sealed class PreferencesWindow : Window
             this.Content(BuildUi());
         });
 
+        ThemeVariant[] themeVariants = [ThemeVariant.System, ThemeVariant.Light, ThemeVariant.Dark];
+        var themeCombo = new ComboBox()
+            .Items(themeVariants, value => Strings.Instance[ThemeLocalizationKey(value)])
+            .SelectedIndex(Array.IndexOf(themeVariants, _preferences.Theme));
+        themeCombo.OnSelectionChanged(value =>
+        {
+            if (value is not ThemeVariant variant)
+                return;
+
+            _preferences.Theme = variant;
+            MewUITheme.Apply(variant);
+        });
+
         var general = new ScrollViewer()
             .AutoVerticalScroll()
             .NoHorizontalScroll()
@@ -110,6 +123,7 @@ internal sealed class PreferencesWindow : Window
                     Check("PreferencesUseCustomPlugins", () => _preferences.UseCustomPlugins,
                         value => _preferences.UseCustomPlugins = value),
                     Field(Strings.Instance["PreferencesCurrentLanguage"], languageCombo),
+                    Field(Strings.Instance["PreferencesTheme"], themeCombo),
                     Check("PreferencesVisualCommand", () => _preferences.VisualCommand,
                         value => _preferences.VisualCommand = value),
                     Check("PreferencesForceSingleCoreRunning", () => _preferences.ForceSingleCoreRunning,
@@ -233,6 +247,13 @@ internal sealed class PreferencesWindow : Window
         CommandCategory.Date => "Menu_Command_Date",
         CommandCategory.Tag => "Menu_Command_Tag",
         _ => "Menu_Command_Etc"
+    };
+
+    private static string ThemeLocalizationKey(ThemeVariant variant) => variant switch
+    {
+        ThemeVariant.Light => "ThemeLight",
+        ThemeVariant.Dark => "ThemeDark",
+        _ => "ThemeSystem"
     };
 
     private static void CaptureKeyBinding(ShortcutSetting shortcut, TextBox textBox, KeyEventArgs args)

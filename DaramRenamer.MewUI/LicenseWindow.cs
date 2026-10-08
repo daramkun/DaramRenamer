@@ -42,6 +42,11 @@ internal sealed class LicenseWindow : Window
                         .FontSize(14)
                         .Background(new Color(192, 192, 192))
                         .Padding(8)
+                        .WithTheme((theme, label) =>
+                        {
+                            label.Background(theme.IsDark ? new Color(43, 43, 43) : new Color(192, 192, 192));
+                            label.Foreground(theme.IsDark ? new Color(238, 238, 238) : new Color(32, 32, 32));
+                        })
                         .Margin(0, 4));
                     codeLines.Clear();
                 }

@@ -73,6 +73,10 @@ PreferencesRenameMode,Filename changing method:,파일명 변경 방법:,Methode
 PreferencesSaveWindowState,Save Window state,창 상태 저장,Venstertoestand opslaan,保存窗口状态
 PreferencesUseCustomPlugins,Use User-defined Plugin.,사용자 정의 플러그인 사용,Aangepaste Plugin gebruiken.,使用用户定义的插件
 PreferencesCurrentLanguage,Language:,언어:,Taal:,语言：
+PreferencesTheme,Theme:,테마:,Thema:,主题：
+ThemeSystem,System,시스템,Systeem,跟随系统
+ThemeLight,Light,밝음,Licht,浅色
+ThemeDark,Dark,어두움,Donker,深色
 PreferencesVisualCommand,Preview changes.,변경사항 미리보기,Voorvertoning geven.,预览更改
 PreferencesForceSingleCoreRunning,Force Single-Core Running.,강제 1코어 동작,Uitvoering in single-core forceren.,强制单核运行
 PreferencesCloseApplyWindowWhenSuccessfullyDone,Close Apply Window when Successfully Done.,성공적으로 적용하면 적용 창 닫기,Dialoogvenster sluiten bij voltooiing.,成功完成后关闭应用窗口

@@ -45,7 +45,7 @@ internal sealed class AboutWindow : Window
                     .FontSize(8),
                 new Button()
                     .Content(Strings.Instance["GitHub Repository"])
-                    .Foreground(new Color(0, 0, 238))
+                    .WithTheme((theme, button) => button.Foreground(MewUITheme.AccentFor(theme)))
                     .OnClick(OpenRepository)
                     .Margin(0, 8, 0, 0)));
     }

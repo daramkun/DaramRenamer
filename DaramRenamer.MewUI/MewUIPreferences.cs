@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Text;
 using System.Text.Json;
+using Aprillz.MewUI;
 
 namespace DaramRenamer.MewUI;
 
@@ -38,6 +39,8 @@ internal sealed class MewUIPreferences
 
             _instance ??= new MewUIPreferences();
             _instance.NormalizeShortcuts();
+            if (!Enum.IsDefined(_instance.Theme))
+                _instance.Theme = ThemeVariant.System;
             return _instance;
         }
     }
@@ -54,6 +57,7 @@ internal sealed class MewUIPreferences
     public bool SaveWindowState { get; set; }
     public bool UseCustomPlugins { get; set; }
     public bool HaredwareAccelerated { get; set; } = true;
+    public ThemeVariant Theme { get; set; } = ThemeVariant.System;
     public double Left { get; set; }
     public double Top { get; set; }
     public double Width { get; set; }

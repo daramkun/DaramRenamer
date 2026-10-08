@@ -75,6 +75,11 @@ internal sealed class CommandEditorWindow : Window
             .BorderThickness(new Thickness(0, 1, 0, 0))
             .BorderBrush(new Color(227, 227, 227))
             .Background(new Color(240, 240, 240))
+            .WithTheme((theme, border) =>
+            {
+                border.BorderBrush(theme.IsDark ? new Color(64, 64, 64) : new Color(227, 227, 227));
+                border.Background(theme.IsDark ? new Color(40, 40, 40) : new Color(240, 240, 240));
+            })
             .Child(new StackPanel()
                 .Horizontal()
                 .Spacing(5)

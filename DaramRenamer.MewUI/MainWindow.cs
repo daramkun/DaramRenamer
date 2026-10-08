@@ -50,6 +50,7 @@ internal sealed class MainWindow : Window
 
         this.Title(BuildTitle());
         this.Icon(IconSource.FromFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ProgramIcon.ico")));
+        this.Padding(0);
         this.Resizable(
             preferences.SaveWindowState && preferences.Width >= 240 ? preferences.Width : 720,
             preferences.SaveWindowState && preferences.Height >= 180 ? preferences.Height : 480);
@@ -189,7 +190,7 @@ internal sealed class MainWindow : Window
     private Grid BuildUi()
     {
         return new Grid()
-            .Rows("20,28,*")
+            .Rows("20,Auto,*")
             .Children(
                 BuildMenuBar().Row(0),
                 BuildToolBar().Row(1),
@@ -333,51 +334,52 @@ internal sealed class MainWindow : Window
         return menu;
     }
 
-    private StackPanel BuildToolBar()
+    private ToolBar BuildToolBar()
     {
-        var children = new List<Element>
-        {
+        var filenameCommands = new List<Element>();
+        AddToolbarCommand(filenameCommands, "replace_text.png", "Command_Name_ReplacePlain");
+        AddToolbarCommand(filenameCommands, "concat_text.png", "Command_Name_Concatenate");
+        AddToolbarCommand(filenameCommands, "trim_text.png", "Command_Name_Trim");
+        AddToolbarCommand(filenameCommands, "delete_block.png", "Command_Name_DeleteBlock");
+        AddToolbarCommand(filenameCommands, "delete_text.png", "Command_Name_DeleteFilename");
+        AddToolbarCommand(filenameCommands, "substring.png", "Command_Name_Substring");
+        AddToolbarCommand(filenameCommands, "casecast_text.png", "Command_Name_Casecast");
+
+        var extensionCommands = new List<Element>();
+        AddToolbarCommand(extensionCommands, "add_ext.png", "Command_Name_AddExtension");
+        AddToolbarCommand(extensionCommands, "delete_ext.png", "Command_Name_DeleteExtension");
+        AddToolbarCommand(extensionCommands, "replace_ext.png", "Command_Name_ReplaceExtension");
+        AddToolbarCommand(extensionCommands, "casecast_ext.png", "Command_Name_CasecastExtension");
+
+        var numberCommands = new List<Element>();
+        AddToolbarCommand(numberCommands, "del_without_num.png", "Command_Name_DeleteNoNumber");
+        AddToolbarCommand(numberCommands, "match_num_count.png", "Command_Name_SameNumberCount");
+        AddToolbarCommand(numberCommands, "add_index.png", "Command_Name_AddIndex");
+        AddToolbarCommand(numberCommands, "inc_dec_num.png", "Command_Name_Increase");
+
+        var dateCommands = new List<Element>();
+        AddToolbarCommand(dateCommands, "add_date.png", "Command_Name_AddDate");
+
+        var fileGroup = new ToolBarGroup().Items(
             ToolbarButton("open.png", "ToolTip_Open", OpenFiles),
             ToolbarButton("clear.png", "ToolTip_Clear", ClearFiles),
-            ToolbarButton("apply.png", "ToolTip_Apply", ApplyFiles),
-            ToolbarSeparator(),
+            ToolbarButton("apply.png", "ToolTip_Apply", ApplyFiles));
+        var historyGroup = new ToolBarGroup().Items(
             ToolbarButton("undo.png", "ToolTip_Undo", Undo),
-            ToolbarButton("redo.png", "ToolTip_Redo", Redo),
-            ToolbarSeparator(),
+            ToolbarButton("redo.png", "ToolTip_Redo", Redo));
+        var orderGroup = new ToolBarGroup().Items(
             ToolbarButton("item_up.png", "ToolTip_ItemUp", MoveSelectedUp),
             ToolbarButton("item_down.png", "ToolTip_ItemDown", MoveSelectedDown),
-            ToolbarButton("item_sort.png", "ToolTip_ItemSort", SortFiles),
-            ToolbarSeparator()
-        };
+            ToolbarButton("item_sort.png", "ToolTip_ItemSort", SortFiles));
+        var filenameGroup = new ToolBarGroup().Items(filenameCommands.ToArray());
+        var extensionGroup = new ToolBarGroup().Items(extensionCommands.ToArray());
+        var numberGroup = new ToolBarGroup().Items(numberCommands.ToArray());
+        var dateGroup = new ToolBarGroup().Items(dateCommands.ToArray());
 
-        AddToolbarCommand(children, "replace_text.png", "Command_Name_ReplacePlain");
-        AddToolbarCommand(children, "concat_text.png", "Command_Name_Concatenate");
-        AddToolbarCommand(children, "trim_text.png", "Command_Name_Trim");
-        AddToolbarCommand(children, "delete_block.png", "Command_Name_DeleteBlock");
-        AddToolbarCommand(children, "delete_text.png", "Command_Name_DeleteFilename");
-        AddToolbarCommand(children, "substring.png", "Command_Name_Substring");
-        AddToolbarCommand(children, "casecast_text.png", "Command_Name_Casecast");
-        children.Add(ToolbarSeparator());
-
-        AddToolbarCommand(children, "add_ext.png", "Command_Name_AddExtension");
-        AddToolbarCommand(children, "delete_ext.png", "Command_Name_DeleteExtension");
-        AddToolbarCommand(children, "replace_ext.png", "Command_Name_ReplaceExtension");
-        AddToolbarCommand(children, "casecast_ext.png", "Command_Name_CasecastExtension");
-        children.Add(ToolbarSeparator());
-
-        AddToolbarCommand(children, "del_without_num.png", "Command_Name_DeleteNoNumber");
-        AddToolbarCommand(children, "match_num_count.png", "Command_Name_SameNumberCount");
-        AddToolbarCommand(children, "add_index.png", "Command_Name_AddIndex");
-        AddToolbarCommand(children, "inc_dec_num.png", "Command_Name_Increase");
-        children.Add(ToolbarSeparator());
-
-        AddToolbarCommand(children, "add_date.png", "Command_Name_AddDate");
-
-        return new StackPanel()
-            .Horizontal()
-            .Height(28)
-            .Padding(2, 1)
-            .Children(children.ToArray());
+        return new ToolBar()
+            .CanReorderGroups(false)
+            .StretchHorizontal()
+            .Band(fileGroup, historyGroup, orderGroup, filenameGroup, extensionGroup, numberGroup, dateGroup);
     }
 
     private void AddToolbarCommand(List<Element> children, string icon, string commandKey)
@@ -393,20 +395,8 @@ internal sealed class MainWindow : Window
         .Content(new Image()
             .SourceFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ToolBarIcons", icon))
             .Size(16, 16))
-        .Width(24)
-        .Height(24)
-        .Padding(3, 3)
-        .FontFamily("Segoe UI")
-        .FontSize(12)
         .ToolTip(Strings.Instance[tooltipKey])
         .OnClick(action);
-
-    private static Element ToolbarSeparator() => new Label()
-        .Text("│")
-        .Foreground(new Color(160, 160, 160))
-        .FontSize(14)
-        .Padding(3, 0)
-        .CenterVertical();
 
     private static GridViewColumn<FileItem> FileColumn(
         string header,
@@ -423,14 +413,8 @@ internal sealed class MainWindow : Window
                         .Spacing(4)
                         .Children(
                             new Image().Size(16, 16),
-                            new Label()
-                                .Foreground(new Color(72, 61, 139))
-                                .FontFamily("Segoe UI")
-                                .FontSize(12))
-                    : new Label()
-                        .Foreground(new Color(72, 61, 139))
-                        .FontFamily("Segoe UI")
-                        .FontSize(12),
+                            MewUITheme.CellText())
+                    : MewUITheme.CellText(),
                 (element, item, _, _) =>
                 {
                     var text = value(item);

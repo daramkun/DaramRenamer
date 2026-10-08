@@ -35,15 +35,13 @@ internal sealed class LicenseWindow : Window
                 if (inCodeBlock)
                 {
                     var text = string.Join(Environment.NewLine, codeLines) + Environment.NewLine;
-                    blocks.Add(new MultiLineTextBox()
+                    blocks.Add(new Label()
                         .Text(text)
-                        .IsReadOnly(true)
-                        .Wrap(true)
+                        .TextWrapping(TextWrapping.Wrap)
                         .FontFamily("Consolas")
                         .FontSize(14)
                         .Background(new Color(192, 192, 192))
                         .Padding(8)
-                        .Height(Math.Max(36, codeLines.Count * 16))
                         .Margin(0, 4));
                     codeLines.Clear();
                 }
@@ -72,7 +70,7 @@ internal sealed class LicenseWindow : Window
 
         return new ScrollViewer()
             .AutoVerticalScroll()
-            .AutoHorizontalScroll()
+            .NoHorizontalScroll()
             .Content(new StackPanel()
                 .Vertical()
                 .Padding(16)

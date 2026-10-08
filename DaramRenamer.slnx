@@ -4,6 +4,7 @@
     <File Path="README.md" />
     <Project Path="DaramRenamer.Base/DaramRenamer.Base.csproj" />
     <Project Path="DaramRenamer.Generators/DaramRenamer.Generators.csproj" />
+    <Project Path="DaramRenamer.MewUI/DaramRenamer.MewUI.csproj" />
     <Project Path="DaramRenamer.Windows/DaramRenamer.Windows.csproj" />
   </Folder>
   <Folder Name="/Test/">

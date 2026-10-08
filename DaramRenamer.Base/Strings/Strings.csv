@@ -1,4 +1,4 @@
-﻿key,invariant,ko-KR,nl-NL,zh-CN
+key,invariant,ko-KR,nl-NL,zh-CN
 DaramRenamer,DaramRenamer,다람리네이머,DaramRenamer,DaramRenamer
 Version,Version,버전,Versie,版本
 Administrator,Administrator,관리자 모드,Beheerder,管理员
@@ -240,3 +240,28 @@ BatchWindow_DoBatch,Do Batch,일괄처리,Groepsopdracht uitvoeren,做批处理
 BatchWindow_Command,Command,명령,Opdracht,命令
 BatchWindow_Condition,Condition,조건,Conditie,状态
 BatchWindow_File_Filter,DaramRenamer Batch File(*.drb)|*.drb,다람리네이머 일괄처리 파일(*.drb)|*.drb,DaramRenamer Batch-bestand (*.drb)|*.drb,DaramRenamer 批处理文件(*.drb)|*.drb
+BatchWindowMewUI_Description,Compose a reusable rename workflow,반복해서 사용할 이름 변경 작업을 구성하세요,Stel een herbruikbare hernoemworkflow samen,组合可重复使用的重命名流程
+BatchWindowMewUI_InputFiles,Input files,입력 파일,Invoerbestanden,输入文件
+BatchWindowMewUI_AddFile,Add file,파일 추가,Bestand toevoegen,添加文件
+BatchWindowMewUI_ClearFiles,Clear files,파일 비우기,Bestanden wissen,清空文件
+BatchWindowMewUI_WorkflowSteps,Workflow steps,작업 단계,Workflowstappen,工作流步骤
+BatchWindowMewUI_FilePreview,Filename preview,파일 이름 미리보기,Voorbeeld van bestandsnamen,文件名预览
+BatchWindowMewUI_AvailableItems,Available commands and conditions,사용 가능한 명령과 조건,Beschikbare opdrachten en voorwaarden,可用命令和条件
+BatchWindowMewUI_Search,Search commands and conditions,명령과 조건 검색,Opdrachten en voorwaarden zoeken,搜索命令和条件
+BatchWindowMewUI_Options,Options,옵션,Opties,选项
+BatchWindowMewUI_SelectItem,Select a command or condition to configure it.,구성할 명령이나 조건을 선택하세요.,Selecteer een opdracht of voorwaarde om deze in te stellen.,选择要配置的命令或条件。
+BatchWindowMewUI_NoOptions,This item has no configurable options.,이 항목에는 설정할 옵션이 없습니다.,Dit item heeft geen instelbare opties.,此项没有可配置的选项。
+BatchWindowMewUI_AddSelected,Add selected item,선택한 항목 추가,Geselecteerd item toevoegen,添加所选项
+BatchWindowMewUI_FileCount,{0} input files,{0}개 입력 파일,{0} invoerbestanden,{0} 个输入文件
+BatchWindowMewUI_AddInputFirst,Add input files to preview this workflow.,작업을 미리 보려면 입력 파일을 추가하세요.,Voeg invoerbestanden toe om deze workflow te bekijken.,添加输入文件以预览此工作流。
+BatchWindowMewUI_Processed,Applied the workflow to {0} files.,{0}개 파일에 작업을 적용했습니다.,Workflow toegepast op {0} bestanden.,已对 {0} 个文件应用工作流。
+MainWindowMewUI_Description,Preview and refine file names before applying changes.,파일 이름을 미리 보고 적용 전에 다듬으세요.,Bekijk en pas bestandsnamen aan voordat u wijzigingen toepast.,应用更改前预览并调整文件名。
+MainWindowMewUI_FileList,Files,파일 목록,Bestanden,文件
+MainWindowMewUI_Preview,Source → target,원본 → 변경 후,Bron → doel,源 → 目标
+MainWindowMewUI_SelectedFile,Selected file,선택한 파일,Geselecteerd bestand,所选文件
+MainWindowMewUI_Name,Name,이름,Naam,名称
+MainWindowMewUI_Folder,Folder,폴더,Map,文件夹
+MainWindowMewUI_SaveEdit,Save edit,편집 적용,Bewerking opslaan,保存编辑
+MainWindowMewUI_Commands,Commands,명령,Opdrachten,命令
+MainWindowMewUI_AvailableCommands,Available commands,사용 가능한 명령,Beschikbare opdrachten,可用命令
+MainWindowMewUI_SearchCommands,Search commands,명령 검색,Opdrachten zoeken,搜索命令

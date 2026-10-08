@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>DaramRenamer.MewUI</RootNamespace>
+        <AssemblyName>DaramRenamer.MewUI</AssemblyName>
+        <ApplicationIcon>..\DaramRenamer.Windows\Resources\ProgramIcon.ico</ApplicationIcon>
+        <ApplicationManifest>DaramRenamer.MewUI.manifest</ApplicationManifest>
+        <Version>2024.7.3</Version>
+        <Copyright>Copyright ⓒ 2013-2024 Jin Jae-yeon</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aprillz.MewUI.Windows" Version="0.22.1" />
+        <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+        <ProjectReference Include="..\DaramRenamer.Base\DaramRenamer.Base.csproj" />
+        <Content Include="..\DaramRenamer.Windows\Resources\ToolBarIcons\*.png">
+            <Link>Resources\ToolBarIcons\%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\DaramRenamer.Windows\Resources\Icon.jpg">
+            <Link>Resources\Icon.jpg</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\DaramRenamer.Windows\Resources\ProgramIcon.ico">
+            <Link>Resources\ProgramIcon.ico</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <EmbeddedResource Include="..\LICENSE.md">
+            <Link>Resources\LICENSE.md</Link>
+            <LogicalName>DaramRenamer.MewUI.Resources.LICENSE.md</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
+
+</Project>

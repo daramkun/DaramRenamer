@@ -6,18 +6,13 @@ namespace DaramRenamer.MewUI;
 internal static class Program
 {
     [STAThread]
-    private static void Main()
+    private static int Main(string[] args)
     {
+        if (SelfUpdater.TryRunCommand(args, out var exitCode))
+            return exitCode;
+
         AppDomain.CurrentDomain.UnhandledException += (_, args) =>
             File.WriteAllText("UnhandledException.log", args.ExceptionObject?.ToString() ?? string.Empty);
-
-        if (OperatingSystem.IsWindows())
-        {
-            if (Directory.Exists("DaramRenamer-Update"))
-                Directory.Delete("DaramRenamer-Update", recursive: true);
-            if (File.Exists("DaramRenamer-Update.bat"))
-                File.Delete("DaramRenamer-Update.bat");
-        }
 
         var preferences = MewUIPreferences.Instance;
         var strings = Strings.Instance;
@@ -56,5 +51,7 @@ internal static class Program
             // WPF persists preferences from Application.OnExit as a final safeguard.
             preferences.Save();
         }
+
+        return 0;
     }
 }

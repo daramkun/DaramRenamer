@@ -1,4 +1,4 @@
-﻿name: MewUI Release
+﻿name: DaramRenamer Release
 
 on:
   push:
@@ -124,7 +124,7 @@ jobs:
         VERSION: ${{ needs.version.outputs.value }}
         RID: ${{ matrix.rid }}
       run: |
-        $packageName = "DaramRenamer.MewUI-$env:VERSION-$env:RID"
+        $packageName = "DaramRenamer-$env:VERSION-$env:RID"
         New-Item -ItemType Directory -Path $packageName | Out-Null
         Copy-Item -Path "publish\*" -Destination $packageName -Recurse
         Compress-Archive -Path $packageName -DestinationPath "$packageName.zip"
@@ -137,11 +137,11 @@ jobs:
       run: |
         set -euo pipefail
 
-        package_name="DaramRenamer.MewUI-${VERSION}-${RID}"
+        package_name="DaramRenamer-${VERSION}-${RID}"
         mkdir -p "$package_name"
 
         if [[ "$RUNNER_OS" == "macOS" ]]; then
-          app_bundle="$package_name/DaramRenamer.MewUI.app"
+          app_bundle="$package_name/DaramRenamer.app"
           mkdir -p "$app_bundle/Contents/MacOS"
           cp -R publish/. "$app_bundle/Contents/MacOS/"
           cat > "$app_bundle/Contents/Info.plist" <<PLIST
@@ -152,9 +152,9 @@ jobs:
           <key>CFBundleDevelopmentRegion</key>
           <string>en</string>
           <key>CFBundleExecutable</key>
-          <string>DaramRenamer.MewUI</string>
+          <string>DaramRenamer</string>
           <key>CFBundleIdentifier</key>
-          <string>com.daramkun.daramrenamer.mewui</string>
+          <string>com.daramkun.daramrenamer</string>
           <key>CFBundleName</key>
           <string>DaramRenamer</string>
           <key>CFBundleDisplayName</key>
@@ -181,7 +181,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: release-${{ matrix.rid }}
-        path: DaramRenamer.MewUI-${{ needs.version.outputs.value }}-${{ matrix.rid }}.${{ matrix.archive_extension }}
+        path: DaramRenamer-${{ needs.version.outputs.value }}-${{ matrix.rid }}.${{ matrix.archive_extension }}
         if-no-files-found: error
 
   release:

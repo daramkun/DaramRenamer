@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <InternalsVisibleTo Include="DaramRenamer.Test" />
       <EmbeddedResource Include="Strings\Strings.csv" LogicalName="DaramRenamer.Strings.Strings.csv" />
     </ItemGroup>
 
@@ -28,5 +29,9 @@
                         OutputItemType="Analyzer"
                         ReferenceOutputAssembly="false"
                         PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="UpdateInfo.cs" />
     </ItemGroup>
 </Project>

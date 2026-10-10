@@ -1,32 +1,30 @@
-﻿using System.Net.Http;
+﻿using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace DaramRenamer;
 
-public struct UpdateInformation
-{
-    public string StableLatestVersion;
-    public string StableLatestUrl;
-
-    public string UnstableLatestVersion;
-    public string UnstableLatestUrl;
-}
-
-public enum TargetPlatform
-{
-    Windows
-}
+public readonly record struct UpdateInformation(string StableLatestVersion, string StableLatestUrl);
 
 public static class UpdateInformationBank
 {
-    private static readonly HttpClient SharedHttpClient = new();
+    private const string LatestReleaseApiUrl = "https://api.github.com/repos/daramkun/DaramRenamer/releases/latest";
+    private static readonly HttpClient SharedHttpClient = CreateHttpClient();
 
-    public static async Task<UpdateInformation?> GetUpdateInformationAsync(TargetPlatform targetPlatform)
+    public static async Task<UpdateInformation?> GetUpdateInformationAsync(string runtimeIdentifier)
     {
+        if (GetArchiveExtension(runtimeIdentifier) is null)
+            return null;
+
         try
         {
-            var ini = await SharedHttpClient.GetStringAsync(
-                "https://raw.githubusercontent.com/daramkun/UpdateBank/master/DaramRenamer.ini");
-            return Parse(ini, targetPlatform.ToString());
+            using var response = await SharedHttpClient.GetAsync(
+                LatestReleaseApiUrl,
+                HttpCompletionOption.ResponseHeadersRead);
+            response.EnsureSuccessStatusCode();
+
+            await using var responseStream = await response.Content.ReadAsStreamAsync();
+            using var document = await JsonDocument.ParseAsync(responseStream);
+            return ParseRelease(document.RootElement, runtimeIdentifier);
         }
         catch
         {
@@ -34,56 +32,59 @@ public static class UpdateInformationBank
         }
     }
 
-    public static async Task<string> DownloadFile(UpdateInformation updateInfo)
+    internal static UpdateInformation? ParseReleaseJson(string json, string runtimeIdentifier)
     {
-        var url = new Uri(updateInfo.StableLatestUrl);
-        var filename = $"DaramRenamer-{updateInfo.StableLatestVersion}.zip";
-        await using var stream = await SharedHttpClient.GetStreamAsync(url);
-        await using var fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write);
-        await stream.CopyToAsync(fileStream);
-        return filename;
-    }
-
-    private static UpdateInformation? Parse(string ini, string sectionName)
-    {
-        var section = string.Empty;
-        var values = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-        using var reader = new StringReader(ini);
-        while (reader.ReadLine() is { } line)
-        {
-            line = line.Trim();
-            if (line.Length == 0 || line.StartsWith(';') || line.StartsWith('#'))
-                continue;
-
-            if (line.StartsWith('[') && line.EndsWith(']'))
-            {
-                section = line[1..^1].Trim();
-                continue;
-            }
-
-            if (!section.Equals(sectionName, StringComparison.OrdinalIgnoreCase))
-                continue;
-
-            var equals = line.IndexOf('=');
-            if (equals <= 0)
-                continue;
-
-            values[line[..equals].Trim()] = line[(equals + 1)..].Trim();
-        }
-
-        if (values.Count == 0)
+        if (GetArchiveExtension(runtimeIdentifier) is null)
             return null;
 
-        return new UpdateInformation
-        {
-            StableLatestVersion = Get(values, nameof(UpdateInformation.StableLatestVersion)),
-            StableLatestUrl = Get(values, nameof(UpdateInformation.StableLatestUrl)),
-            UnstableLatestVersion = Get(values, nameof(UpdateInformation.UnstableLatestVersion)),
-            UnstableLatestUrl = Get(values, nameof(UpdateInformation.UnstableLatestUrl))
-        };
+        using var document = JsonDocument.Parse(json);
+        return ParseRelease(document.RootElement, runtimeIdentifier);
     }
 
-    private static string Get(IReadOnlyDictionary<string, string> values, string key) =>
-        values.TryGetValue(key, out var value) ? value : string.Empty;
+    private static UpdateInformation? ParseRelease(JsonElement release, string runtimeIdentifier)
+    {
+        var archiveExtension = GetArchiveExtension(runtimeIdentifier);
+        if (archiveExtension is null ||
+            !release.TryGetProperty("tag_name", out var tagElement) ||
+            tagElement.ValueKind != JsonValueKind.String)
+            return null;
+
+        var version = tagElement.GetString();
+        if (string.IsNullOrWhiteSpace(version) ||
+            !release.TryGetProperty("assets", out var assetsElement) ||
+            assetsElement.ValueKind != JsonValueKind.Array)
+            return null;
+
+        var expectedAssetName = $"DaramRenamer-{version}-{runtimeIdentifier}.{archiveExtension}";
+        foreach (var asset in assetsElement.EnumerateArray())
+        {
+            if (!asset.TryGetProperty("name", out var nameElement) ||
+                !string.Equals(nameElement.GetString(), expectedAssetName, StringComparison.Ordinal) ||
+                !asset.TryGetProperty("browser_download_url", out var urlElement))
+                continue;
+
+            var downloadUrl = urlElement.GetString();
+            if (Uri.TryCreate(downloadUrl, UriKind.Absolute, out var uri) &&
+                uri.Scheme == Uri.UriSchemeHttps)
+                return new UpdateInformation(version, uri.AbsoluteUri);
+        }
+
+        return null;
+    }
+
+    private static string? GetArchiveExtension(string runtimeIdentifier) =>
+        runtimeIdentifier switch
+        {
+            "win-x64" or "win-arm64" => "zip",
+            "linux-x64" or "osx-arm64" => "tar.gz",
+            _ => null
+        };
+
+    private static HttpClient CreateHttpClient()
+    {
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("DaramRenamer", "1.0"));
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github+json"));
+        return client;
+    }
 }

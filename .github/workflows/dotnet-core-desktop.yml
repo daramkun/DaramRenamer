@@ -1,4 +1,4 @@
-name: .NET Desktop
+name: .NET CI
 
 on:
   push:

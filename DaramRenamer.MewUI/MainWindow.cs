@@ -117,7 +117,7 @@ internal sealed class MainWindow : Window
     {
         _isAdministrator = await IsAdministrator();
         _updateAvailable = false;
-        if (OperatingSystem.IsWindows() && !MewUIPreferences.Instance.DisableCheckUpdate)
+        if (!MewUIPreferences.Instance.DisableCheckUpdate)
             _updateAvailable = await CheckUpdateAsync();
 
         this.Title(BuildTitle(_updateAvailable, _isAdministrator));
@@ -978,32 +978,27 @@ internal sealed class MainWindow : Window
 
     private async void CheckForUpdates()
     {
-        if (!OperatingSystem.IsWindows())
-            return;
-
-        var update = await CheckUpdateAsync();
-        if (update is null)
-        {
-            ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["UpdateCheckErrorText"], owner: this));
-            return;
-        }
-
-        if (update == false)
-        {
-            ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["ThisIsLatestVersionText"], owner: this));
-            return;
-        }
-
-        var information = await UpdateInformationBank.GetUpdateInformationAsync(TargetPlatform.Windows);
+        var information = await UpdateInformationBank.GetUpdateInformationAsync(
+            System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
         if (information is null)
         {
             ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["UpdateCheckErrorText"], owner: this));
             return;
         }
 
+        var version = Assembly.GetEntryAssembly()?.GetName().Version;
+        var currentVersion = version is null
+            ? "UNKNOWN VERSION"
+            : $"{version.Major}.{version.Minor}.{version.Build}";
+        if (information.Value.StableLatestVersion == currentVersion)
+        {
+            ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["ThisIsLatestVersionText"], owner: this));
+            return;
+        }
+
         var choice = ShowDropChoice(
             Strings.Instance["NewLatestVersionAvailableText"],
-            string.Empty,
+            information.Value.StableLatestVersion,
             [Strings.Instance["ButtonUpdate"]]);
         if (choice != 0)
             return;
@@ -1013,23 +1008,23 @@ internal sealed class MainWindow : Window
             if (string.IsNullOrWhiteSpace(information.Value.StableLatestUrl))
                 throw new InvalidOperationException("The update package URL is empty.");
 
-            Process.Start(new ProcessStartInfo(information.Value.StableLatestUrl)
-            {
-                UseShellExecute = true
-            });
+            await SelfUpdater.DownloadAndStartAsync(
+                information.Value,
+                System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier,
+                Environment.ProcessId);
+            Close();
         }
-        catch
+        catch (Exception ex)
         {
-            Process.Start(new ProcessStartInfo("https://github.com/daramkun/DaramRenamer/releases")
-            {
-                UseShellExecute = true
-            });
+            Debug.WriteLine($"Failed to install update: {ex}");
+            ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["UpdateCheckErrorText"], owner: this));
         }
     }
 
     private static async Task<bool?> CheckUpdateAsync()
     {
-        var information = await UpdateInformationBank.GetUpdateInformationAsync(TargetPlatform.Windows);
+        var information = await UpdateInformationBank.GetUpdateInformationAsync(
+            System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
         if (information is null)
             return null;
 

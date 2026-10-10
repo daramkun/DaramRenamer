@@ -5,7 +5,7 @@ namespace DaramRenamer.Helpers;
 
 public static class ConvensionHelper
 {
-    private static readonly char[] Separators = ['\n', '\t', '_', '.', '-', '#', '?', '!'];
+    private static readonly char[] Separators = [' ', '\n', '\t', '_', '.', '-', '#', '?', '!'];
 
     extension(string? str)
     {

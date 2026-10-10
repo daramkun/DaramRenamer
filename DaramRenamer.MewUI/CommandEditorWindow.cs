@@ -6,9 +6,13 @@ namespace DaramRenamer.MewUI;
 
 internal sealed class CommandEditorWindow : Window
 {
+    private const double OptionRowHeight = 24;
+    private const double RadioButtonSpacing = 2;
+
     private readonly object _target;
     private readonly Action<bool> _completed;
     private readonly Action? _valueChanged;
+    private readonly string _enumRadioGroupId = Guid.NewGuid().ToString("N");
     private TextBox? _firstTextBox;
     private bool _didComplete;
 
@@ -58,7 +62,7 @@ internal sealed class CommandEditorWindow : Window
             var editor = BuildEditor(option);
             return new Grid()
                 .Columns("120,*")
-                .Height(24)
+                .Height(OptionRowHeight)
                 .Children(
                     new Label()
                         .Text(Strings.Instance[option.LocalizationKey])
@@ -121,13 +125,40 @@ internal sealed class CommandEditorWindow : Window
             return checkBox;
         }
 
-        if (option.ValueType.IsEnum)
+        var enumType = Nullable.GetUnderlyingType(option.ValueType) ?? option.ValueType;
+        if (enumType.IsEnum)
         {
-            var values = Enum.GetValues(option.ValueType).Cast<object>().ToArray();
+            var values = Enum.GetValues(enumType).Cast<object>().ToArray();
             var current = option.GetValue(_target);
             var selectedIndex = Array.IndexOf(values, current);
+
+            if (UsesRadioButtons(enumType, values.Length))
+            {
+                var radioButtons = values.Select(value =>
+                {
+                    var radioButton = new RadioButton()
+                        .Content(GetEnumDisplayName(value))
+                        .GroupName($"{_enumRadioGroupId}.{option.Id}")
+                        .IsChecked(Equals(value, current));
+                    radioButton.OnCheckedChanged(isChecked =>
+                    {
+                        if (!isChecked)
+                            return;
+
+                        option.SetValue(_target, value);
+                        _valueChanged?.Invoke();
+                    });
+                    return radioButton;
+                }).ToArray();
+
+                return new StackPanel()
+                    .Horizontal()
+                    .Spacing(RadioButtonSpacing)
+                    .Children(radioButtons);
+            }
+
             var comboBox = new ComboBox()
-                .Items(values, value => Strings.Instance[value.ToString() ?? string.Empty])
+                .Items(values, GetEnumDisplayName)
                 .SelectedIndex(Math.Max(selectedIndex, 0));
             comboBox.OnSelectionChanged(value =>
             {
@@ -136,8 +167,13 @@ internal sealed class CommandEditorWindow : Window
 
                 var index = Array.FindIndex(values, candidate => Equals(candidate, value));
                 if (index < 0)
+                {
+                    var selectedText = value.ToString();
                     index = Array.FindIndex(values, candidate =>
-                        string.Equals(candidate.ToString(), value.ToString(), StringComparison.Ordinal));
+                        string.Equals(GetEnumDisplayName(candidate), selectedText, StringComparison.Ordinal) ||
+                        string.Equals(candidate.ToString(), selectedText, StringComparison.Ordinal));
+                }
+
                 if (index < 0)
                     return;
 
@@ -162,6 +198,15 @@ internal sealed class CommandEditorWindow : Window
             }
         });
         return textBox;
+    }
+
+    private static bool UsesRadioButtons(Type enumType, int valueCount) =>
+        valueCount is > 0 and < 3 || enumType.Name.StartsWith("Position", StringComparison.Ordinal);
+
+    private static string GetEnumDisplayName(object value)
+    {
+        var enumName = Enum.GetName(value.GetType(), value) ?? value.ToString() ?? string.Empty;
+        return Strings.Instance[enumName];
     }
 
     private void Complete(bool accepted)

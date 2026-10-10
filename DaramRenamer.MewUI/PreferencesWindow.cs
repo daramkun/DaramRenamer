@@ -21,6 +21,7 @@ internal sealed class PreferencesWindow : Window
     private readonly MewUIPreferences _preferences = MewUIPreferences.Instance;
     private readonly Dictionary<string, Command> _shortcutCommands = new(StringComparer.Ordinal);
     private readonly Dictionary<int, DropDownButton> _shortcutButtons = [];
+    private readonly string _renameModeRadioGroup = $"Preferences.RenameMode.{Guid.NewGuid():N}";
     private bool _closePermanently;
 
     public PreferencesWindow()
@@ -58,17 +59,12 @@ internal sealed class PreferencesWindow : Window
 
     private Element BuildUi()
     {
-        var renameModes = Enum.GetValues<RenameMode>();
-        var renameMode = new ComboBox()
-            .Items(renameModes, value => Strings.Instance[value.ToString()])
-            .SelectedIndex(Array.IndexOf(renameModes, _preferences.RenameMode));
-        renameMode.OnSelectionChanged(value =>
-        {
-            if (value is RenameMode mode)
-                _preferences.RenameMode = mode;
-            else if (Enum.TryParse(value?.ToString(), out RenameMode parsed))
-                _preferences.RenameMode = parsed;
-        });
+        var renameMode = new StackPanel()
+            .Horizontal()
+            .Spacing(12)
+            .Children(
+                RenameModeRadioButton(RenameMode.Move, "Move"),
+                RenameModeRadioButton(RenameMode.Copy, "Copy"));
 
         var languages = Strings.Instance.AvailableLanguages.ToArray();
         var languageCombo = new ComboBox()
@@ -145,6 +141,20 @@ internal sealed class PreferencesWindow : Window
                 new TabItem()
                     .Header(Strings.Instance["PreferencesTabShortcut"])
                     .Content(shortcuts));
+    }
+
+    private RadioButton RenameModeRadioButton(RenameMode mode, string localizationKey)
+    {
+        var radioButton = new RadioButton()
+            .Content(Strings.Instance[localizationKey])
+            .GroupName(_renameModeRadioGroup)
+            .IsChecked(_preferences.RenameMode == mode);
+        radioButton.OnCheckedChanged(isChecked =>
+        {
+            if (isChecked)
+                _preferences.RenameMode = mode;
+        });
+        return radioButton;
     }
 
     private Element BuildShortcutList()

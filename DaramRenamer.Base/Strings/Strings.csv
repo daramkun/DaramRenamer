@@ -179,12 +179,24 @@ Creation,Creation,생성한 날짜,Aangemaakt,创建
 LastAccess,Last Access,마지막 접근 날짜,Laatst geopend,最后访问
 LastModify,Last Modified,마지막 수정 날짜,Laatst aangepast,最后修改
 Now,Now,현재,Nu,立即
+Begin,Start Point,처음,Startpunt,开始点
+End,End Point,끝,Einde,结束点
+Both,Both Points,양쪽,Start en einde,两点
 StartPoint,Start Point,처음,Startpunt,开始点
 EndPoint,End Point,끝,Einde,结束点
 BothPoint,Both Point,양쪽,Start en einde,两点
+Upper,To Uppercase,대문자로,HOOFDLETTERS,转为大写
+Lower,To Lowercase,소문자로,kleine letters,转为小写
+UpperFirstLetter,To Uppercase first letter only,첫 글자만 대문자로,Alleen Eerste Letter Hoofdletter,仅大写首字母
 UppercaseAll,To Uppercase,대문자로,HOOFDLETTERS,转为大写
 LowercaseAll,To Lowercase,소문자로,kleine letters,转为小写
 UppercaseFirstLetter,To Uppercase first letter only,첫 글자만 대문자로,Alleen Eerste Letter Hoofdletter,仅大写首字母
+SnakeCase,Snake case (snake_case),스네이크 케이스 (snake_case),Snake case (snake_case),蛇形命名法 (snake_case)
+UpperSnakeCase,Upper snake case (UPPER_SNAKE_CASE),대문자 스네이크 케이스 (UPPER_SNAKE_CASE),Upper snake case (UPPER_SNAKE_CASE),大写蛇形命名法 (UPPER_SNAKE_CASE)
+KebabCase,Kebab case (kebab-case),케밥 케이스 (kebab-case),Kebab case (kebab-case),短横线命名法 (kebab-case)
+UpperKebabCase,Upper kebab case (UPPER-KEBAB-CASE),대문자 케밥 케이스 (UPPER-KEBAB-CASE),Upper kebab case (UPPER-KEBAB-CASE),大写短横线命名法 (UPPER-KEBAB-CASE)
+CamelCase,Camel case (camelCase),카멜 케이스 (camelCase),Camel case (camelCase),驼峰命名法 (camelCase)
+PascalCase,Pascal case (PascalCase),파스칼 케이스 (PascalCase),Pascal case (PascalCase),帕斯卡命名法 (PascalCase)
 AudioBitrate,Auto Bitrate,오디오 비트레이트,Autom. Bitrate,自动比特率
 AudioSamplerate,Auto Samplerate,오디오 샘플레이트,Autom. Samplerate,自动采样率
 AudioChannels,Audio Channels,오디오 채널,Audio Kanalen,音频声道
@@ -223,6 +235,8 @@ SHA1,SHA1,SHA1,SHA1,SHA1
 SHA256,SHA256,SHA256,SHA256,SHA256
 SHA384,SHA384,SHA384,SHA384,SHA384
 SHA512,SHA512,SHA512,SHA512,SHA512
+xxHash64,xxHash64,xxHash64 해시,xxHash64-hash,xxHash64 哈希
+xxHash3,xxHash3,xxHash3 해시,xxHash3-hash,xxHash3 哈希
 CommitId,Commit ID,커밋 ID,Commit ID,提交 ID
 ShortCommitId,Short Commit ID,짧은 커밋 ID,Short Commit ID,短提交 ID
 BranchName,Current branch,현재 브랜치,Current branch,当前分支

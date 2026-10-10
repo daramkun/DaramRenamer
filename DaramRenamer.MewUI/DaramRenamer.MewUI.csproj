@@ -9,9 +9,19 @@
         <AssemblyName>DaramRenamer.MewUI</AssemblyName>
         <ApplicationIcon Condition="'$(OS)' == 'Windows_NT'">..\DaramRenamer.Windows\Resources\ProgramIcon.ico</ApplicationIcon>
         <ApplicationManifest Condition="'$(OS)' == 'Windows_NT'">DaramRenamer.MewUI.manifest</ApplicationManifest>
-        <Version>2024.7.3</Version>
+        <Version Condition="'$(Version)' == ''">2024.7.3</Version>
         <Copyright>Copyright ⓒ 2013-2024 Jin Jae-yeon</Copyright>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <PublishAot>true</PublishAot>
+        <DefineConstants>$(DefineConstants);DAR_RENAMER_NATIVE_AOT</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- TagLibSharp resolves media handlers through Type values and Activator.CreateInstance. -->
+        <TrimmerRootAssembly Include="TagLibSharp" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Aprillz.MewUI" Version="0.22.1" />

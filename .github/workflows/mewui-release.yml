@@ -1,0 +1,216 @@
+﻿name: MewUI Release
+
+on:
+  push:
+    branches: [ release ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mewui-release
+  queue: max
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.calculate.outputs.value }}
+    steps:
+    - name: Calculate release version
+      id: calculate
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+
+        month_prefix="$(TZ=Asia/Seoul date +'%Y.%-m')"
+        existing_tags="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
+          --jq '.[] | select(.draft == false and .prerelease == false) | .tag_name')"
+
+        next_number=1
+        while IFS= read -r tag; do
+          case "$tag" in
+            "$month_prefix".*) suffix="${tag#"$month_prefix".}" ;;
+            *) continue ;;
+          esac
+
+          if [[ "$suffix" =~ ^[1-9][0-9]*$ ]]; then
+            number=$((10#$suffix))
+            if (( number >= next_number )); then
+              next_number=$((number + 1))
+            fi
+          fi
+        done <<< "$existing_tags"
+
+        version="${month_prefix}.${next_number}"
+        echo "value=$version" >> "$GITHUB_OUTPUT"
+        echo "Release version: $version"
+
+  test:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: Install .NET 10.x
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Test solution
+      run: dotnet test DaramRenamer.slnx --configuration Release /p:Platform="Any CPU"
+
+  publish:
+    needs: [ version, test ]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner_os: windows
+            runner_arch: x64
+            rid: win-x64
+            archive_extension: zip
+          - runner_os: linux
+            runner_arch: x64
+            rid: linux-x64
+            archive_extension: tar.gz
+          - runner_os: macos
+            runner_arch: arm64
+            rid: osx-arm64
+            archive_extension: tar.gz
+          # The x64 runner needs the Visual Studio C++ ARM64 build tools to cross-compile this RID.
+          - runner_os: windows
+            runner_arch: x64
+            rid: win-arm64
+            archive_extension: zip
+    runs-on:
+      - self-hosted
+      - ${{ matrix.runner_os }}
+      - ${{ matrix.runner_arch }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: Install .NET 10.x
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Publish self-contained Native AOT application
+      env:
+        VERSION: ${{ needs.version.outputs.value }}
+        RID: ${{ matrix.rid }}
+      run: |
+        dotnet publish DaramRenamer.MewUI/DaramRenamer.MewUI.csproj --configuration Release --runtime $env:RID --self-contained true --output publish "-p:Version=$env:VERSION"
+      if: runner.os == 'Windows'
+
+    - name: Publish self-contained Native AOT application
+      env:
+        VERSION: ${{ needs.version.outputs.value }}
+        RID: ${{ matrix.rid }}
+      run: dotnet publish DaramRenamer.MewUI/DaramRenamer.MewUI.csproj --configuration Release --runtime "$RID" --self-contained true --output publish "-p:Version=$VERSION"
+      if: runner.os != 'Windows'
+
+    - name: Package Windows application
+      if: runner.os == 'Windows'
+      env:
+        VERSION: ${{ needs.version.outputs.value }}
+        RID: ${{ matrix.rid }}
+      run: |
+        $packageName = "DaramRenamer.MewUI-$env:VERSION-$env:RID"
+        New-Item -ItemType Directory -Path $packageName | Out-Null
+        Copy-Item -Path "publish\*" -Destination $packageName -Recurse
+        Compress-Archive -Path $packageName -DestinationPath "$packageName.zip"
+
+    - name: Package Linux or macOS application
+      if: runner.os != 'Windows'
+      env:
+        VERSION: ${{ needs.version.outputs.value }}
+        RID: ${{ matrix.rid }}
+      run: |
+        set -euo pipefail
+
+        package_name="DaramRenamer.MewUI-${VERSION}-${RID}"
+        mkdir -p "$package_name"
+
+        if [[ "$RUNNER_OS" == "macOS" ]]; then
+          app_bundle="$package_name/DaramRenamer.MewUI.app"
+          mkdir -p "$app_bundle/Contents/MacOS"
+          cp -R publish/. "$app_bundle/Contents/MacOS/"
+          cat > "$app_bundle/Contents/Info.plist" <<PLIST
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+          <key>CFBundleDevelopmentRegion</key>
+          <string>en</string>
+          <key>CFBundleExecutable</key>
+          <string>DaramRenamer.MewUI</string>
+          <key>CFBundleIdentifier</key>
+          <string>com.daramkun.daramrenamer.mewui</string>
+          <key>CFBundleName</key>
+          <string>DaramRenamer</string>
+          <key>CFBundleDisplayName</key>
+          <string>DaramRenamer</string>
+          <key>CFBundlePackageType</key>
+          <string>APPL</string>
+          <key>CFBundleShortVersionString</key>
+          <string>${VERSION}</string>
+          <key>CFBundleVersion</key>
+          <string>${VERSION}</string>
+          <key>NSHighResolutionCapable</key>
+          <true/>
+        </dict>
+        </plist>
+        PLIST
+          plutil -lint "$app_bundle/Contents/Info.plist"
+        else
+          cp -R publish/. "$package_name/"
+        fi
+
+        tar -czf "$package_name.tar.gz" "$package_name"
+
+    - name: Upload release package
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-${{ matrix.rid }}
+        path: DaramRenamer.MewUI-${{ needs.version.outputs.value }}-${{ matrix.rid }}.${{ matrix.archive_extension }}
+        if-no-files-found: error
+
+  release:
+    needs: [ version, publish ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Download release packages
+      uses: actions/download-artifact@v4
+      with:
+        path: release-assets
+
+    - name: Publish GitHub Release
+      env:
+        # Set RELEASE_TOKEN to a token with Contents and Workflows write access
+        # if the release commit changes workflow files relative to the default branch.
+        GH_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
+        VERSION: ${{ needs.version.outputs.value }}
+      run: |
+        set -euo pipefail
+
+        mapfile -t assets < <(find release-assets -type f \( -name '*.zip' -o -name '*.tar.gz' \) -print | sort)
+        if (( ${#assets[@]} == 0 )); then
+          echo "No release packages were downloaded." >&2
+          exit 1
+        fi
+
+        gh release create "$VERSION" "${assets[@]}" \
+          --target "$GITHUB_SHA" \
+          --title "DaramRenamer $VERSION" \
+          --generate-notes

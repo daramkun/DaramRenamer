@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Aprillz.MewUI;
 
 namespace DaramRenamer.MewUI;
@@ -23,7 +24,7 @@ internal sealed class MewUIPreferences
                 if (File.Exists(ConfigPath))
                 {
                     var json = NormalizeLegacySettings(File.ReadAllText(ConfigPath, Encoding.UTF8));
-                    _instance = JsonSerializer.Deserialize<MewUIPreferences>(json);
+                    _instance = JsonSerializer.Deserialize(json, MewUIPreferencesJsonContext.Default.MewUIPreferences);
                 }
 
                 if (_instance is not null && !string.IsNullOrWhiteSpace(_instance.CurrentLanguage))
@@ -82,10 +83,10 @@ internal sealed class MewUIPreferences
     public void Save()
     {
         Directory.CreateDirectory(Path.GetDirectoryName(ConfigPath)!);
-        File.WriteAllText(ConfigPath, JsonSerializer.Serialize(this, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        }), Encoding.UTF8);
+        File.WriteAllText(
+            ConfigPath,
+            JsonSerializer.Serialize(this, MewUIPreferencesJsonContext.Default.MewUIPreferences),
+            Encoding.UTF8);
     }
 
     private ShortcutSetting GetShortcut(int index) =>
@@ -187,4 +188,10 @@ internal sealed class ShortcutSetting
 {
     public string KeyBinding { get; set; } = string.Empty;
     public string Command { get; set; } = string.Empty;
+}
+
+[JsonSourceGenerationOptions(WriteIndented = true)]
+[JsonSerializable(typeof(MewUIPreferences))]
+internal partial class MewUIPreferencesJsonContext : JsonSerializerContext
+{
 }

@@ -136,7 +136,10 @@ internal sealed class CommandEditorWindow : Window
         var enumType = Nullable.GetUnderlyingType(option.ValueType) ?? option.ValueType;
         if (enumType.IsEnum)
         {
-            var values = Enum.GetValues(enumType).Cast<object>().ToArray();
+            var underlyingValues = Enum.GetValuesAsUnderlyingType(enumType);
+            var values = new object[underlyingValues.Length];
+            for (var index = 0; index < underlyingValues.Length; ++index)
+                values[index] = Enum.ToObject(enumType, underlyingValues.GetValue(index)!);
             var current = option.GetValue(_target);
             var selectedIndex = Array.IndexOf(values, current);
 

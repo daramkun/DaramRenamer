@@ -1,5 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿// Native AOT uses MewUI's cross-platform picker below, which selects one folder at a time.
+#if !DAR_RENAMER_NATIVE_AOT
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+#endif
 using Aprillz.MewUI;
 
 namespace DaramRenamer.MewUI;
@@ -12,8 +15,10 @@ internal static class MultiFolderOpenDialog
 
     public static IReadOnlyList<string> Show(Window owner, string title)
     {
+#if !DAR_RENAMER_NATIVE_AOT
         if (OperatingSystem.IsWindows())
             return ShowWindows(owner, title);
+#endif
 
         var folder = FileDialog.SelectFolder(new FolderDialogOptions
         {
@@ -23,6 +28,7 @@ internal static class MultiFolderOpenDialog
         return string.IsNullOrEmpty(folder) ? Array.Empty<string>() : [folder];
     }
 
+#if !DAR_RENAMER_NATIVE_AOT
     [SupportedOSPlatform("windows")]
     private static IReadOnlyList<string> ShowWindows(Window owner, string title)
     {
@@ -138,4 +144,5 @@ internal static class MultiFolderOpenDialog
         [PreserveSig] int GetAttributes(uint attributes, out uint result);
         [PreserveSig] int Compare(IShellItem item, uint hint, out int order);
     }
+#endif
 }

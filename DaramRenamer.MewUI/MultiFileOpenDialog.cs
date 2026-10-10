@@ -1,5 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿// The Windows shell picker uses built-in COM, so Native AOT uses MewUI's AOT-compatible picker below.
+#if !DAR_RENAMER_NATIVE_AOT
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+#endif
 using Aprillz.MewUI;
 
 namespace DaramRenamer.MewUI;
@@ -12,8 +15,10 @@ internal static class MultiFileOpenDialog
 
     public static IReadOnlyList<string> Show(Window owner, string title, string filter)
     {
+#if !DAR_RENAMER_NATIVE_AOT
         if (OperatingSystem.IsWindows())
             return ShowWindows(owner, title, filter);
+#endif
 
         return FileDialog.OpenFiles(new OpenFileDialogOptions
         {
@@ -24,6 +29,7 @@ internal static class MultiFileOpenDialog
         }) ?? Array.Empty<string>();
     }
 
+#if !DAR_RENAMER_NATIVE_AOT
     [SupportedOSPlatform("windows")]
     private static IReadOnlyList<string> ShowWindows(Window owner, string title, string filter)
     {
@@ -168,4 +174,5 @@ internal static class MultiFileOpenDialog
         [PreserveSig] int GetAttributes(uint attributes, out uint result);
         [PreserveSig] int Compare(IShellItem item, uint hint, out int order);
     }
+#endif
 }

@@ -126,6 +126,7 @@ jobs:
       run: |
         $packageName = "DaramRenamer-$env:VERSION-$env:RID"
         New-Item -ItemType Directory -Path $packageName | Out-Null
+        Get-ChildItem -Path "publish" -Filter "*.pdb" -File -Recurse | Remove-Item -Force
         Copy-Item -Path "publish\*" -Destination $packageName -Recurse
         Compress-Archive -Path $packageName -DestinationPath "$packageName.zip"
 
@@ -136,6 +137,7 @@ jobs:
         RID: ${{ matrix.rid }}
       run: |
         set -euo pipefail
+        find publish -type f -name '*.pdb' -exec rm -f {} +
 
         package_name="DaramRenamer-${VERSION}-${RID}"
         mkdir -p "$package_name"

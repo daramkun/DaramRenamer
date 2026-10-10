@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net10.0-windows</TargetFramework>
-        <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <OutputType>Exe</OutputType>
+        <OutputType Condition="'$(OS)' == 'Windows_NT'">WinExe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>DaramRenamer.MewUI</RootNamespace>
         <AssemblyName>DaramRenamer.MewUI</AssemblyName>
-        <ApplicationIcon>..\DaramRenamer.Windows\Resources\ProgramIcon.ico</ApplicationIcon>
-        <ApplicationManifest>DaramRenamer.MewUI.manifest</ApplicationManifest>
+        <ApplicationIcon Condition="'$(OS)' == 'Windows_NT'">..\DaramRenamer.Windows\Resources\ProgramIcon.ico</ApplicationIcon>
+        <ApplicationManifest Condition="'$(OS)' == 'Windows_NT'">DaramRenamer.MewUI.manifest</ApplicationManifest>
         <Version>2024.7.3</Version>
         <Copyright>Copyright ⓒ 2013-2024 Jin Jae-yeon</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aprillz.MewUI.Windows" Version="0.22.1" />
+        <PackageReference Include="Aprillz.MewUI" Version="0.22.1" />
         <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
         <ProjectReference Include="..\DaramRenamer.Base\DaramRenamer.Base.csproj" />
         <Content Include="..\DaramRenamer.Windows\Resources\ToolBarIcons\*.png">

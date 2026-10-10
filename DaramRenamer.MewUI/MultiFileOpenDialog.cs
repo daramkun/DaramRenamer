@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using Aprillz.MewUI;
 
 namespace DaramRenamer.MewUI;
@@ -10,6 +11,21 @@ internal static class MultiFileOpenDialog
     private const uint FileSystemPath = 0x80058000;
 
     public static IReadOnlyList<string> Show(Window owner, string title, string filter)
+    {
+        if (OperatingSystem.IsWindows())
+            return ShowWindows(owner, title, filter);
+
+        return FileDialog.OpenFiles(new OpenFileDialogOptions
+        {
+            Owner = owner,
+            Title = title,
+            Filters = FileFilter.Parse(filter),
+            Multiselect = true
+        }) ?? Array.Empty<string>();
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static IReadOnlyList<string> ShowWindows(Window owner, string title, string filter)
     {
         var type = Type.GetTypeFromCLSID(FileOpenDialogClassId, throwOnError: true);
         var dialog = (IFileOpenDialog)Activator.CreateInstance(type!)!;

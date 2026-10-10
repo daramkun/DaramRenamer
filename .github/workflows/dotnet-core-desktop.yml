@@ -39,3 +39,27 @@ jobs:
       run: dotnet test DaramRenamer.slnx --no-build /p:Configuration=$env:Configuration /p:Platform="Any CPU"
       env:
         Configuration: ${{ matrix.configuration }}
+
+  cross-platform-mewui:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: Install .NET 10.x
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore MewUI application
+      run: dotnet restore DaramRenamer.MewUI/DaramRenamer.MewUI.csproj
+
+    - name: Build MewUI application
+      run: dotnet build DaramRenamer.MewUI/DaramRenamer.MewUI.csproj --no-restore --configuration Release

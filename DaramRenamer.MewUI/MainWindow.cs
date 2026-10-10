@@ -46,13 +46,16 @@ internal sealed class MainWindow : Window
     public MainWindow()
     {
         var preferences = MewUIPreferences.Instance;
-        FileItem.FileOperator = new WindowsNativeFileOperator();
+        FileItem.FileOperator = OperatingSystem.IsWindows()
+            ? new WindowsNativeFileOperator()
+            : new DefaultFileOperator();
         foreach (var descriptor in DaramRenamerRegistry.Conditions.OrderBy(item => item.Order))
             if (descriptor.Create() is ICondition condition)
                 _conditions[descriptor.Id] = condition;
 
         this.Title(BuildTitle());
-        this.Icon(IconSource.FromFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ProgramIcon.ico")));
+        if (OperatingSystem.IsWindows())
+            this.Icon(IconSource.FromFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ProgramIcon.ico")));
         this.Padding(0);
         this.Resizable(
             preferences.SaveWindowState && preferences.Width >= 240 ? preferences.Width : 720,
@@ -114,7 +117,7 @@ internal sealed class MainWindow : Window
     {
         _isAdministrator = await IsAdministrator();
         _updateAvailable = false;
-        if (!MewUIPreferences.Instance.DisableCheckUpdate)
+        if (OperatingSystem.IsWindows() && !MewUIPreferences.Instance.DisableCheckUpdate)
             _updateAvailable = await CheckUpdateAsync();
 
         this.Title(BuildTitle(_updateAvailable, _isAdministrator));
@@ -137,8 +140,9 @@ internal sealed class MainWindow : Window
         });
     }
 
-    private static async Task<bool> IsAdministrator() => await Task.Run(() =>
-        new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator));
+    private static Task<bool> IsAdministrator() => Task.Run(() => OperatingSystem.IsWindows()
+        ? new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator)
+        : string.Equals(Environment.UserName, "root", StringComparison.Ordinal));
 
     private void OnShortcutKeyDown(KeyEventArgs args)
     {
@@ -203,7 +207,8 @@ internal sealed class MainWindow : Window
     private void ConfigureFileColumnsAndContextMenu()
     {
         _files.Columns<FileItem>(
-            FileColumn(Strings.Instance["OriginalName"], 225, item => item.OriginalFilename, showIcon: true),
+            FileColumn(Strings.Instance["OriginalName"], 225, item => item.OriginalFilename,
+                showIcon: OperatingSystem.IsWindows()),
             FileColumn(Strings.Instance["ChangedName"], 230, item => item.ChangedFilename),
             FileColumn(Strings.Instance["OriginalPath"], 105, item => item.OriginalPath),
             FileColumn(Strings.Instance["ChangedPath"], 110, item => item.ChangedPath));
@@ -244,9 +249,10 @@ internal sealed class MainWindow : Window
 
         var conditionsMenu = BuildConditionsMenu();
         var toolsMenu = new Menu()
-            .Item(RegisterAction("tools.preferences", Strings.Instance["Menu_Tools_Preferences"], ShowPreferences))
-            .Separator()
-            .Item(RegisterAction("tools.update", Strings.Instance["Menu_Tools_CheckUpdate"], CheckForUpdates));
+            .Item(RegisterAction("tools.preferences", Strings.Instance["Menu_Tools_Preferences"], ShowPreferences));
+        if (OperatingSystem.IsWindows())
+            toolsMenu.Separator()
+                .Item(RegisterAction("tools.update", Strings.Instance["Menu_Tools_CheckUpdate"], CheckForUpdates));
 
         var helpMenu = new Menu()
             .Item(RegisterAction("help.license", Strings.Instance["Menu_Help_License"], ShowLicenses))
@@ -424,7 +430,9 @@ internal sealed class MainWindow : Window
                     if (showIcon)
                     {
                         var children = ((StackPanel)element).Children;
-                        var iconPath = WindowsShellIconCache.GetIconFile(item.OriginalFullPath, item.IsDirectory);
+                        var iconPath = OperatingSystem.IsWindows()
+                            ? WindowsShellIconCache.GetIconFile(item.OriginalFullPath, item.IsDirectory)
+                            : string.Empty;
                         if (!string.IsNullOrEmpty(iconPath))
                             ((Image)children[0]).SourceFile(iconPath);
                         ((Label)children[1]).Text(text).ToolTip(text);
@@ -970,6 +978,9 @@ internal sealed class MainWindow : Window
 
     private async void CheckForUpdates()
     {
+        if (!OperatingSystem.IsWindows())
+            return;
+
         var update = await CheckUpdateAsync();
         if (update is null)
         {

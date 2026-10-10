@@ -164,7 +164,7 @@ internal sealed class MewUIPreferences
                 using var probe = File.Create(Path.Combine(baseDirectory, Path.GetRandomFileName()), 1,
                     FileOptions.DeleteOnClose);
             }
-            catch (UnauthorizedAccessException)
+            catch (Exception exception) when (exception is UnauthorizedAccessException or IOException)
             {
                 isReadOnly = true;
             }
@@ -174,7 +174,10 @@ internal sealed class MewUIPreferences
             return Path.Combine(baseDirectory, "DaramRenamer.config.json");
 
         var localDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        var fallbackDirectory = Path.Combine(localDirectory, "DaramRenamer", baseDirectory.Replace(":", string.Empty));
+        var installationKey = OperatingSystem.IsWindows()
+            ? baseDirectory.Replace(":", string.Empty)
+            : Path.GetFileName(Path.TrimEndingDirectorySeparator(baseDirectory));
+        var fallbackDirectory = Path.Combine(localDirectory, "DaramRenamer", installationKey);
         Directory.CreateDirectory(fallbackDirectory);
         return Path.Combine(fallbackDirectory, "DaramRenamer.config.json");
     }

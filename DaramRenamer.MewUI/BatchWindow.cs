@@ -36,7 +36,8 @@ internal sealed class BatchWindow : Window
         _conditions = conditions;
 
         this.Title(Strings.Instance["BatchWindow_Title"]);
-        this.Icon(IconSource.FromFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ProgramIcon.ico")));
+        if (OperatingSystem.IsWindows())
+            this.Icon(IconSource.FromFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ProgramIcon.ico")));
         this.Resizable(800, 450);
 
         _tree

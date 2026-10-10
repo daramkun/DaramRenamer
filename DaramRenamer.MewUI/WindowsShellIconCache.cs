@@ -2,11 +2,13 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace DaramRenamer.MewUI;
 
+[SupportedOSPlatform("windows")]
 internal static class WindowsShellIconCache
 {
     private const uint ShgfiIcon = 0x000000100;

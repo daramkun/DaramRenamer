@@ -11,10 +11,13 @@ internal static class Program
         AppDomain.CurrentDomain.UnhandledException += (_, args) =>
             File.WriteAllText("UnhandledException.log", args.ExceptionObject?.ToString() ?? string.Empty);
 
-        if (Directory.Exists("DaramRenamer-Update"))
-            Directory.Delete("DaramRenamer-Update", recursive: true);
-        if (File.Exists("DaramRenamer-Update.bat"))
-            File.Delete("DaramRenamer-Update.bat");
+        if (OperatingSystem.IsWindows())
+        {
+            if (Directory.Exists("DaramRenamer-Update"))
+                Directory.Delete("DaramRenamer-Update", recursive: true);
+            if (File.Exists("DaramRenamer-Update.bat"))
+                File.Delete("DaramRenamer-Update.bat");
+        }
 
         var preferences = MewUIPreferences.Instance;
         var strings = Strings.Instance;
@@ -30,11 +33,21 @@ internal static class Program
 
         try
         {
-            var application = Application.Create().UseWin32();
-            if (preferences.HaredwareAccelerated)
-                application.UseDirect2D();
+            var application = Application.Create();
+            if (OperatingSystem.IsWindows())
+            {
+                application.UseWin32();
+                if (preferences.HaredwareAccelerated)
+                    application.UseDirect2D();
+                else
+                    application.UseGdi();
+            }
+            else if (OperatingSystem.IsLinux())
+                application.UseX11().UseMewVGX11();
+            else if (OperatingSystem.IsMacOS())
+                application.UseMacOS().UseMewVGMetal();
             else
-                application.UseGdi();
+                throw new PlatformNotSupportedException("DaramRenamer MewUI supports Windows, Linux/X11, and macOS.");
 
             application.Run(new MainWindow());
         }

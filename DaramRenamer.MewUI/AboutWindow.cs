@@ -52,9 +52,13 @@ internal sealed class AboutWindow : Window
 
     private static void OpenRepository()
     {
-        Process.Start(new ProcessStartInfo("https://github.com/daramkun/DaramRenamer")
-        {
-            UseShellExecute = true
-        });
+        var url = "https://github.com/daramkun/DaramRenamer";
+        var startInfo = OperatingSystem.IsWindows()
+            ? new ProcessStartInfo(url) { UseShellExecute = true }
+            : new ProcessStartInfo(OperatingSystem.IsMacOS() ? "open" : "xdg-open")
+            {
+                ArgumentList = { url }
+            };
+        Process.Start(startInfo);
     }
 }

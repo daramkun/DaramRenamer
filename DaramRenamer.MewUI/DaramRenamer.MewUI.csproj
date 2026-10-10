@@ -26,18 +26,15 @@
         <PackageReference Include="Aprillz.MewUI" Version="0.22.1" />
         <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
         <ProjectReference Include="..\DaramRenamer.Base\DaramRenamer.Base.csproj" />
-        <Content Include="Resources\ToolBarIcons\*.png">
-            <Link>Resources\ToolBarIcons\%(Filename)%(Extension)</Link>
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Icon.jpg">
-            <Link>Resources\Icon.jpg</Link>
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\ProgramIcon.ico">
-            <Link>Resources\ProgramIcon.ico</Link>
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
+        <EmbeddedResource Include="Resources\ToolBarIcons\*.png">
+            <LogicalName>DaramRenamer.MewUI.Resources.ToolBarIcons.%(Filename)%(Extension)</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icon.jpg">
+            <LogicalName>DaramRenamer.MewUI.Resources.Icon.jpg</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\ProgramIcon.ico">
+            <LogicalName>DaramRenamer.MewUI.Resources.ProgramIcon.ico</LogicalName>
+        </EmbeddedResource>
         <EmbeddedResource Include="..\LICENSE.md">
             <Link>Resources\LICENSE.md</Link>
             <LogicalName>DaramRenamer.MewUI.Resources.LICENSE.md</LogicalName>

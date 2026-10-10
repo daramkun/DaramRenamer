@@ -26,7 +26,9 @@ internal sealed class AboutWindow : Window
             .CenterVertical()
             .Children(
                 new Image()
-                    .SourceFile(Path.Combine(AppContext.BaseDirectory, "Resources", "Icon.jpg"))
+                    .SourceResource(
+                        typeof(AboutWindow).Assembly,
+                        "DaramRenamer.MewUI.Resources.Icon.jpg")
                     .Size(96, 96)
                     .Margin(0, 0, 0, 8),
                 new Label()

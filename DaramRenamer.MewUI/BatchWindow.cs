@@ -37,7 +37,9 @@ internal sealed class BatchWindow : Window
 
         this.Title(Strings.Instance["BatchWindow_Title"]);
         if (OperatingSystem.IsWindows())
-            this.Icon(IconSource.FromFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ProgramIcon.ico")));
+            this.Icon(IconSource.FromResource(
+                typeof(BatchWindow).Assembly,
+                "DaramRenamer.MewUI.Resources.ProgramIcon.ico"));
         this.Resizable(800, 450);
 
         _tree

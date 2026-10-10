@@ -55,7 +55,9 @@ internal sealed class MainWindow : Window
 
         this.Title(BuildTitle());
         if (OperatingSystem.IsWindows())
-            this.Icon(IconSource.FromFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ProgramIcon.ico")));
+            this.Icon(IconSource.FromResource(
+                typeof(MainWindow).Assembly,
+                "DaramRenamer.MewUI.Resources.ProgramIcon.ico"));
         this.Padding(0);
         this.Resizable(
             preferences.SaveWindowState && preferences.Width >= 240 ? preferences.Width : 720,
@@ -402,7 +404,9 @@ internal sealed class MainWindow : Window
 
     private static Button ToolbarButton(string icon, string tooltipKey, Action action) => new Button()
         .Content(new Image()
-            .SourceFile(Path.Combine(AppContext.BaseDirectory, "Resources", "ToolBarIcons", icon))
+            .SourceResource(
+                typeof(MainWindow).Assembly,
+                $"DaramRenamer.MewUI.Resources.ToolBarIcons.{icon}")
             .Size(16, 16))
         .ToolTip(Strings.Instance[tooltipKey])
         .OnClick(action);

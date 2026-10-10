@@ -14,6 +14,9 @@ namespace DaramRenamer.MewUI;
 
 internal sealed class MainWindow : Window
 {
+    private const double MenuBarHeight = 24;
+    private const double ToolbarToListSpacing = 4;
+
     private static readonly CommandCategory[] CommandCategories =
     [
         CommandCategory.Filename,
@@ -190,11 +193,11 @@ internal sealed class MainWindow : Window
     private Grid BuildUi()
     {
         return new Grid()
-            .Rows("20,Auto,*")
+            .Rows($"{MenuBarHeight},Auto,*")
             .Children(
                 BuildMenuBar().Row(0),
                 BuildToolBar().Row(1),
-                _files.Row(2));
+                _files.Margin(0, ToolbarToListSpacing, 0, 0).Row(2));
     }
 
     private void ConfigureFileColumnsAndContextMenu()
@@ -250,7 +253,7 @@ internal sealed class MainWindow : Window
             .Item(RegisterAction("help.about", Strings.Instance["Menu_Help_About"], ShowAbout));
 
         return new MenuBar()
-            .Height(20)
+            .Height(MenuBarHeight)
             .FontFamily("Segoe UI")
             .FontSize(12)
             .Items(

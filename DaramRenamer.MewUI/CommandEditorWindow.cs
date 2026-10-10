@@ -7,6 +7,7 @@ namespace DaramRenamer.MewUI;
 internal sealed class CommandEditorWindow : Window
 {
     private const double OptionRowHeight = 24;
+    private const double OptionRowSpacing = 4;
     private const double RadioButtonSpacing = 2;
 
     private readonly object _target;
@@ -28,6 +29,7 @@ internal sealed class CommandEditorWindow : Window
 
         this.Title(Strings.Instance[descriptor.LocalizationKey]);
         this.FitContentHeight(480, 480);
+        this.Padding(0);
         this.ShowInTaskbar(false);
         this.StartCenterOwner();
         this.OnPreviewKeyDown(args =>
@@ -72,10 +74,13 @@ internal sealed class CommandEditorWindow : Window
 
         var content = new StackPanel()
             .Vertical()
+            .Spacing(OptionRowSpacing)
             .Padding(15)
             .Children(fields);
 
         var buttons = new Border()
+            .HorizontalAlignment(HorizontalAlignment.Stretch)
+            .VerticalAlignment(VerticalAlignment.Stretch)
             .BorderThickness(new Thickness(0, 1, 0, 0))
             .BorderBrush(new Color(227, 227, 227))
             .Background(new Color(240, 240, 240))
@@ -102,6 +107,9 @@ internal sealed class CommandEditorWindow : Window
                         .OnClick(() => Complete(false))));
 
         return new Grid()
+            .HorizontalAlignment(HorizontalAlignment.Stretch)
+            .VerticalAlignment(VerticalAlignment.Stretch)
+            .Columns("*")
             .Rows("*,Auto")
             .Children(
                 content.Row(0),

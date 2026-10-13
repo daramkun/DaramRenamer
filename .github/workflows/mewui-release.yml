@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: [ release ]
+    branches: [ release, prerelease ]
 
 permissions:
   contents: read
@@ -26,7 +26,7 @@ jobs:
 
         month_prefix="$(TZ=Asia/Seoul date +'%Y.%-m')"
         existing_tags="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
-          --jq '.[] | select(.draft == false and .prerelease == false) | .tag_name')"
+          --jq '.[] | select(.draft == false) | .tag_name')"
 
         next_number=1
         while IFS= read -r tag; do
@@ -44,6 +44,26 @@ jobs:
         done <<< "$existing_tags"
 
         version="${month_prefix}.${next_number}"
+        if [[ "$GITHUB_REF_NAME" == "prerelease" ]]; then
+          next_prerelease_number=1
+          prerelease_prefix="${version}-pre."
+          while IFS= read -r tag; do
+            case "$tag" in
+              "$prerelease_prefix"*) suffix="${tag#"$prerelease_prefix"}" ;;
+              *) continue ;;
+            esac
+
+            if [[ "$suffix" =~ ^[1-9][0-9]*$ ]]; then
+              number=$((10#$suffix))
+              if (( number >= next_prerelease_number )); then
+                next_prerelease_number=$((number + 1))
+              fi
+            fi
+          done <<< "$existing_tags"
+
+          version="${prerelease_prefix}${next_prerelease_number}"
+        fi
+
         echo "value=$version" >> "$GITHUB_OUTPUT"
         echo "Release version: $version"
 
@@ -203,6 +223,7 @@ jobs:
         # if the release commit changes workflow files relative to the default branch.
         GH_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
         VERSION: ${{ needs.version.outputs.value }}
+        IS_PRERELEASE: ${{ github.ref_name == 'prerelease' }}
       run: |
         set -euo pipefail
 
@@ -212,7 +233,15 @@ jobs:
           exit 1
         fi
 
-        gh release create "$VERSION" "${assets[@]}" \
-          --target "$GITHUB_SHA" \
-          --title "DaramRenamer $VERSION" \
-          --generate-notes
+        if [[ "$IS_PRERELEASE" == "true" ]]; then
+          gh release create "$VERSION" "${assets[@]}" \
+            --target "$GITHUB_SHA" \
+            --title "DaramRenamer $VERSION" \
+            --generate-notes \
+            --prerelease
+        else
+          gh release create "$VERSION" "${assets[@]}" \
+            --target "$GITHUB_SHA" \
+            --title "DaramRenamer $VERSION" \
+            --generate-notes
+        fi

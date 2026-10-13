@@ -128,7 +128,7 @@ jobs:
         New-Item -ItemType Directory -Path $packageName | Out-Null
         Get-ChildItem -Path "publish" -Filter "*.pdb" -File -Recurse | Remove-Item -Force
         Copy-Item -Path "publish\*" -Destination $packageName -Recurse
-        Compress-Archive -Path $packageName -DestinationPath "$packageName.zip"
+        Compress-Archive -Path "${packageName}\*" -DestinationPath "${packageName}.zip"
 
     - name: Package Linux or macOS application
       if: runner.os != 'Windows'

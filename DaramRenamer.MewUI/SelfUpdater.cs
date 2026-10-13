@@ -54,10 +54,11 @@ internal static class SelfUpdater
                 TarFile.ExtractToDirectory(gzip, extractionDirectory, overwriteFiles: false);
             }
 
-            var packageDirectory = Path.Combine(
+            var namedPackageDirectory = Path.Combine(
                 extractionDirectory, $"DaramRenamer-{information.StableLatestVersion}-{runtimeIdentifier}");
-            if (!Directory.Exists(packageDirectory))
-                throw new InvalidDataException("The update archive does not contain the expected application folder.");
+            var packageDirectory = Directory.Exists(namedPackageDirectory)
+                ? namedPackageDirectory
+                : extractionDirectory;
 
             var (payloadDirectory, targetDirectory, launchExecutable, launchTarget, helperExecutable) =
                 GetUpdatePaths(packageDirectory, runtimeIdentifier);

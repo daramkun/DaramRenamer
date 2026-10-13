@@ -10,7 +10,8 @@
 
     <ItemGroup>
       <PackageReference Include="System.IO.Hashing" Version="10.0.0" />
-      <PackageReference Include="TagLibSharp" Version="2.3.0" />
+      <PackageReference Include="z440.atl.core" Version="7.18.0" />
+      <PackageReference Include="MetadataExtractor" Version="2.9.3" />
       <PackageReference Include="ZLinq" Version="1.5.4" />
       <PackageReference Include="ZLinq.DropInGenerator" Version="1.5.4">
         <PrivateAssets>all</PrivateAssets>

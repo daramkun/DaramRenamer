@@ -19,11 +19,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!-- TagLibSharp resolves media handlers through Type values and Activator.CreateInstance. -->
-        <TrimmerRootAssembly Include="TagLibSharp" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Aprillz.MewUI" Version="0.22.1" />
         <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
         <ProjectReference Include="..\DaramRenamer.Base\DaramRenamer.Base.csproj" />

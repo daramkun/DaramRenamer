@@ -990,13 +990,22 @@ internal sealed class MainWindow : Window
             return;
         }
 
-        var version = Assembly.GetEntryAssembly()?.GetName().Version;
-        var currentVersion = version is null
-            ? "UNKNOWN VERSION"
-            : $"{version.Major}.{version.Minor}.{version.Build}";
-        if (information.Value.StableLatestVersion == currentVersion)
+        var versionComparison = CompareStableVersionToCurrent(information.Value.StableLatestVersion);
+        if (versionComparison is null)
+        {
+            ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["UpdateCheckErrorText"], owner: this));
+            return;
+        }
+
+        if (versionComparison <= 0)
         {
             ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["ThisIsLatestVersionText"], owner: this));
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(information.Value.StableLatestUrl))
+        {
+            ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(Strings.Instance["UpdateCheckErrorText"], owner: this));
             return;
         }
 
@@ -1032,9 +1041,28 @@ internal sealed class MainWindow : Window
         if (information is null)
             return null;
 
-        var version = Assembly.GetEntryAssembly()?.GetName().Version;
-        var currentVersion = version is null ? "UNKNOWN VERSION" : $"{version.Major}.{version.Minor}.{version.Build}";
-        return information.Value.StableLatestVersion != currentVersion;
+        var versionComparison = CompareStableVersionToCurrent(information.Value.StableLatestVersion);
+        if (versionComparison is null)
+            return null;
+        if (versionComparison <= 0)
+            return false;
+
+        return string.IsNullOrWhiteSpace(information.Value.StableLatestUrl) ? null : true;
+    }
+
+    private static int? CompareStableVersionToCurrent(string stableLatestVersion)
+    {
+        var currentVersion = Assembly.GetEntryAssembly()?.GetName().Version;
+        if (currentVersion is null || currentVersion.Build < 0 ||
+            !Version.TryParse(stableLatestVersion, out var latestVersion) ||
+            latestVersion.Build < 0 || latestVersion.Revision >= 0)
+            return null;
+
+        var currentReleaseVersion = new Version(
+            currentVersion.Major,
+            currentVersion.Minor,
+            currentVersion.Build);
+        return latestVersion.CompareTo(currentReleaseVersion);
     }
 
     private void ShowLicenses() => ShowOwnedWindow(new LicenseWindow());

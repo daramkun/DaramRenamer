@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace DaramRenamer;
 
-public readonly record struct UpdateInformation(string StableLatestVersion, string StableLatestUrl);
+public readonly record struct UpdateInformation(string StableLatestVersion, string? StableLatestUrl);
 
 public static class UpdateInformationBank
 {
@@ -69,7 +69,7 @@ public static class UpdateInformationBank
                 return new UpdateInformation(version, uri.AbsoluteUri);
         }
 
-        return null;
+        return new UpdateInformation(version, null);
     }
 
     private static string? GetArchiveExtension(string runtimeIdentifier) =>

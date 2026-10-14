@@ -32,21 +32,25 @@ public class UpdateInformationBankTests
     }
 
     [TestMethod]
-    public void ReturnsNullWhenReleaseHasNoAssetForRuntimeIdentifier()
+    public void RetainsVersionWhenReleaseHasNoAssetForRuntimeIdentifier()
     {
         const string json = """
                             {
-                              "tag_name": "2026.10.1",
+                              "tag_name": "2024.7.3",
                               "assets": [
                                 {
-                                  "name": "DaramRenamer-2026.10.1-win-x64.zip",
-                                  "browser_download_url": "https://github.com/daramkun/DaramRenamer/releases/download/2026.10.1/DaramRenamer-2026.10.1-win-x64.zip"
+                                  "name": "DaramRenamer_2024.7.3.zip",
+                                  "browser_download_url": "https://github.com/daramkun/DaramRenamer/releases/download/2024.7.3/DaramRenamer_2024.7.3.zip"
                                 }
                               ]
                             }
                             """;
 
-        Assert.IsNull(UpdateInformationBank.ParseReleaseJson(json, "osx-arm64"));
+        var update = UpdateInformationBank.ParseReleaseJson(json, "win-x64");
+
+        Assert.IsNotNull(update);
+        Assert.AreEqual("2024.7.3", update.Value.StableLatestVersion);
+        Assert.IsNull(update.Value.StableLatestUrl);
         Assert.IsNull(UpdateInformationBank.ParseReleaseJson(json, "osx-x64"));
     }
 }

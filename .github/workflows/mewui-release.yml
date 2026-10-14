@@ -91,26 +91,23 @@ jobs:
       matrix:
         include:
           - runner_os: windows
-            runner_arch: x64
+            runner_label: windows-2022
             rid: win-x64
             archive_extension: zip
           - runner_os: linux
-            runner_arch: x64
+            runner_label: ubuntu-24.04
             rid: linux-x64
             archive_extension: tar.gz
           - runner_os: macos
-            runner_arch: arm64
+            runner_label: macos-15
             rid: osx-arm64
             archive_extension: tar.gz
-          # The x64 runner needs the Visual Studio C++ ARM64 build tools to cross-compile this RID.
+          # The Windows Server 2022 runner includes the C++ ARM64 tools needed to cross-compile this RID.
           - runner_os: windows
-            runner_arch: x64
+            runner_label: windows-2022
             rid: win-arm64
             archive_extension: zip
-    runs-on:
-      - self-hosted
-      - ${{ matrix.runner_os }}
-      - ${{ matrix.runner_arch }}
+    runs-on: ${{ matrix.runner_label }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4

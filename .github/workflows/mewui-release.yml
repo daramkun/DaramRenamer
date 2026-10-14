@@ -237,12 +237,12 @@ jobs:
         if [[ "$IS_PRERELEASE" == "true" ]]; then
           gh release create "$VERSION" "${assets[@]}" \
             --target "$GITHUB_SHA" \
-            --title "DaramRenamer $VERSION" \
+            --title "$VERSION" \
             --generate-notes \
             --prerelease
         else
           gh release create "$VERSION" "${assets[@]}" \
             --target "$GITHUB_SHA" \
-            --title "DaramRenamer $VERSION" \
+            --title "$VERSION" \
             --generate-notes
         fi

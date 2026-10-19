@@ -408,7 +408,9 @@ internal sealed class MainWindow : Window
             .SourceResource(
                 typeof(MainWindow).Assembly,
                 $"DaramRenamer.MewUI.Resources.ToolBarIcons.{icon}")
-            .Size(16, 16))
+            .Size(16, 16)
+            .CenterVertical())
+        .CenterVertical()
         .ToolTip(Strings.Instance[tooltipKey])
         .OnClick(action);
 

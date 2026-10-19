@@ -30,10 +30,12 @@ internal sealed class AboutWindow : Window
                         typeof(AboutWindow).Assembly,
                         "DaramRenamer.MewUI.Resources.Icon.jpg")
                     .Size(96, 96)
+                    .CenterHorizontal()
                     .Margin(0, 0, 0, 8),
                 new Label()
                     .Text(Strings.Instance["DaramRenamer"])
                     .FontSize(24)
+                    .CenterHorizontal()
                     .Bold(),
                 new StackPanel()
                     .Horizontal()
@@ -44,11 +46,13 @@ internal sealed class AboutWindow : Window
                         new Label().Text($": {versionText}")),
                 new Label()
                     .Text(copyright)
-                    .FontSize(8),
+                    .FontSize(8)
+                    .CenterHorizontal(),
                 new Button()
                     .Content(Strings.Instance["GitHub Repository"])
                     .WithTheme((theme, button) => button.Foreground(MewUITheme.AccentFor(theme)))
                     .OnClick(OpenRepository)
+                    .CenterHorizontal()
                     .Margin(0, 8, 0, 0)));
     }
 

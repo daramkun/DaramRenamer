@@ -53,6 +53,7 @@ internal sealed class BatchWindow : Window
             .OnDrop(OnBatchFileDropped)
             .ContextMenu(BuildItemContextMenu());
 
+        AllowDrop = true;
         this.Content(BuildUi());
         RefreshTree();
         Strings.Instance.Loaded += OnStringsLoaded;

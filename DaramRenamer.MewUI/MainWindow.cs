@@ -97,6 +97,7 @@ internal sealed class MainWindow : Window
         _files.SelectionMode = ItemsSelectionMode.Extended;
         ConfigureFileColumnsAndContextMenu();
 
+        AllowDrop = true;
         this.Content(BuildUi());
         this.OnLoaded(OnMainWindowLoaded)
             .OnPreviewKeyDown(OnShortcutKeyDown)
@@ -692,7 +693,7 @@ internal sealed class MainWindow : Window
             }
 
             foreach (var root in batchRoots)
-                Parallel.ForEach(FileItem.Files, item => root.Execute(item));
+                Parallel.ForEach(FileItem.Files, (item, _, index) => root.Execute(item, (int)index));
 
             RefreshFiles(_selectedFile);
         }
@@ -900,14 +901,14 @@ internal sealed class MainWindow : Window
             Parallel.ForEach(targets, (item, state, index) =>
             {
                 if (conditions.All(condition => condition.IsSatisfyThisCondition(item)))
-                    command.DoCommand(item);
+                    command.DoCommand(item, (int)index);
             });
             return;
         }
 
         for (var index = 0; index < targets.Length; ++index)
             if (conditions.All(condition => condition.IsSatisfyThisCondition(targets[index])))
-                command.DoCommand(targets[index]);
+                command.DoCommand(targets[index], index);
     }
 
     private void ToggleCondition(ItemDescriptor descriptor, ICondition condition)
@@ -965,7 +966,7 @@ internal sealed class MainWindow : Window
         if (FileItem.Files.Count == 0)
             return;
 
-        Parallel.ForEach(FileItem.Files, item => root.Execute(item));
+        Parallel.ForEach(FileItem.Files, (item, _, index) => root.Execute(item, (int)index));
         RefreshFiles(_selectedFile);
     }
 

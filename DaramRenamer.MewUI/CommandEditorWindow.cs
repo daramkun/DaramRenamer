@@ -1,5 +1,6 @@
 ﻿using Aprillz.MewUI;
 using Aprillz.MewUI.Controls;
+using DaramRenamer.Commands;
 using DaramRenamer.Registry;
 
 namespace DaramRenamer.MewUI;
@@ -14,7 +15,7 @@ internal sealed class CommandEditorWindow : Window
     private readonly Action<bool> _completed;
     private readonly Action? _valueChanged;
     private readonly string _enumRadioGroupId = Guid.NewGuid().ToString("N");
-    private TextBox? _firstTextBox;
+    private TextBase? _firstTextBox;
     private bool _didComplete;
 
     public CommandEditorWindow(
@@ -194,7 +195,9 @@ internal sealed class CommandEditorWindow : Window
             return comboBox;
         }
 
-        var textBox = new TextBox().Text(option.SerializeValue(_target));
+        TextBase textBox = IsRegexOption(option)
+            ? CreateRegexTextBox(option.SerializeValue(_target))
+            : new TextBox().Text(option.SerializeValue(_target));
         _firstTextBox ??= textBox;
         textBox.OnTextChanged(value =>
         {
@@ -208,6 +211,18 @@ internal sealed class CommandEditorWindow : Window
                 // Leave temporarily invalid input in the editor until it can be parsed.
             }
         });
+        return textBox;
+    }
+
+    private bool IsRegexOption(IOptionDescriptor option) =>
+        (_target is ReplaceRegexCommand && option.Id == nameof(ReplaceRegexCommand.Find)) ||
+        (_target is ArrangeRegexCommand && option.Id == nameof(ArrangeRegexCommand.Regex));
+
+    // TextBox exposes no styling hook, so a non-wrapping MultiLineTextBox stands in as a single-line editor.
+    private static MultiLineTextBox CreateRegexTextBox(string text)
+    {
+        var textBox = new MultiLineTextBox().Text(text).Wrap(false);
+        textBox.Extensions.Classifiers.Add(new RegexSyntaxHighlighter());
         return textBox;
     }
 

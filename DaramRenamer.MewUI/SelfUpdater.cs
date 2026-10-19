@@ -12,11 +12,18 @@ internal static class SelfUpdater
     private const string CleanupUpdateCommand = "--cleanup-update";
     private static readonly HttpClient HttpClient = CreateHttpClient();
 
+    public static bool IsManagedByWinget { get; } =
+        OperatingSystem.IsWindows() &&
+        AppContext.BaseDirectory.Contains(
+            @"\Microsoft\WinGet\Packages\", StringComparison.OrdinalIgnoreCase);
+
     public static async Task DownloadAndStartAsync(
         UpdateInformation information,
         string runtimeIdentifier,
         int currentProcessId)
     {
+        if (IsManagedByWinget)
+            throw new InvalidOperationException("This installation is managed by winget.");
         if (!IsSupportedRuntime(runtimeIdentifier))
             throw new PlatformNotSupportedException($"Updates are not available for {runtimeIdentifier}.");
         if (!IsReleaseVersion(information.StableLatestVersion))

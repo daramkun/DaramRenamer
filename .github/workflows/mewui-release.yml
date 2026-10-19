@@ -246,3 +246,18 @@ jobs:
             --title "$VERSION" \
             --generate-notes
         fi
+
+  winget:
+    needs: [ version, release ]
+    if: github.ref_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Submit to winget-pkgs
+      uses: vedantmgoyal9/winget-releaser@v2
+      with:
+        identifier: DaramRenamer.DaramRenamer
+        version: ${{ needs.version.outputs.value }}
+        release-tag: ${{ needs.version.outputs.value }}
+        installers-regex: '-win-(x64|arm64)\.zip$'
+        # Classic PAT with public_repo scope; requires a fork of microsoft/winget-pkgs.
+        token: ${{ secrets.WINGET_TOKEN }}

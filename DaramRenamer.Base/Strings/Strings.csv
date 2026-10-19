@@ -21,6 +21,7 @@ UpdateCheckError,Version checking error,버전 확인 오류,Fout bij versiecont
 NewLatestVersionAvailableText,New version software is available.,새로운 업데이트가 있습니다.,Een nieuwe softwareversie is beschikbaar.,新版本软件可用。
 UpdateCheckErrorText,Program has problem about checking version.,버전 확인에 문제가 발생했습니다.,Er is een fout opgetreden bij het controleren op nieuwe versies.,程序检查版本有问题。
 ThisIsLatestVersionText,This version is latest.,현재 버전이 최신 버전입니다.,Deze versie is de meest recente.,这个版本是最新的。
+UpdateViaWingetText,A new version is available. Update it with "winget upgrade DaramRenamer.DaramRenamer".,새로운 업데이트가 있습니다. "winget upgrade DaramRenamer.DaramRenamer" 명령으로 업데이트하세요.,Er is een nieuwe versie beschikbaar. Werk bij met "winget upgrade DaramRenamer.DaramRenamer".,有新版本可用。请使用 "winget upgrade DaramRenamer.DaramRenamer" 更新。
 RestoreSelectedErrorMessage,No Item selected.,선택된 항목이 없습니다.,Geen item geselecteerd.,未选择任何项目。
 RestoreSelectedErrorMessageDetail,Please select items from List box for restore to original filename and path.,원본 파일명과 경로로 되돌릴 리스트박스의 항목을 선택하세요.,Selecteer items uit de lijst om de oorspronkelijke bestandsnaam en pad te herstellen.,请从列表框中选择项目以恢复到原始文件名和路径。
 Menu_File_File,_File,파일(_F),_Bestand,文件(_F)

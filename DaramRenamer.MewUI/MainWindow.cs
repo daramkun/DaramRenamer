@@ -1009,6 +1009,13 @@ internal sealed class MainWindow : Window
             return;
         }
 
+        if (SelfUpdater.IsManagedByWinget)
+        {
+            ModalDialog.RunWithOwner(this, () => MessageBox.Confirm(
+                Strings.Instance["UpdateViaWingetText"], owner: this));
+            return;
+        }
+
         var choice = ShowDropChoice(
             Strings.Instance["NewLatestVersionAvailableText"],
             information.Value.StableLatestVersion,

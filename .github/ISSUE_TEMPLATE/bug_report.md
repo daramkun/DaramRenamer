@@ -25,9 +25,9 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment (please replace the following information to your infos):**
  - OS: Windows 10 (21H2)
- - Version: 2022.1.2
+ - Version: 2026.10.1
+ - Install method: winget / zip
  - Region & Language: ko-KR
- - .NET Runtime: .NET6.0 Windows x64
 
 **Additional context**
 Add any other context about the problem here.

@@ -9,8 +9,8 @@
         <AssemblyName>DaramRenamer</AssemblyName>
         <ApplicationIcon Condition="'$(OS)' == 'Windows_NT'">Resources\ProgramIcon.ico</ApplicationIcon>
         <ApplicationManifest Condition="'$(OS)' == 'Windows_NT'">DaramRenamer.MewUI.manifest</ApplicationManifest>
-        <Version Condition="'$(Version)' == ''">2024.7.3</Version>
-        <Copyright>Copyright ⓒ 2013-2024 Jin Jae-yeon</Copyright>
+        <Version Condition="'$(Version)' == ''">2026.10.1</Version>
+        <Copyright>Copyright ⓒ 2013-2026 Jin Jae-yeon</Copyright>
     </PropertyGroup>
 
     <PropertyGroup>

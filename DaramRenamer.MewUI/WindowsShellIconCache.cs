@@ -24,13 +24,17 @@ internal static class WindowsShellIconCache
 
     public static string GetIconFile(string path, bool isDirectory)
     {
-        var extension = Path.GetExtension(path);
-        var cacheKey = isDirectory
-            ? "<directory>"
-            : extension.Equals(".exe", StringComparison.OrdinalIgnoreCase) ||
-              extension.Equals(".ico", StringComparison.OrdinalIgnoreCase)
+        string cacheKey;
+        if (isDirectory)
+            cacheKey = "<directory>";
+        else
+        {
+            var extension = Path.GetExtension(path);
+            cacheKey = extension.Equals(".exe", StringComparison.OrdinalIgnoreCase) ||
+                       extension.Equals(".ico", StringComparison.OrdinalIgnoreCase)
                 ? path
                 : extension;
+        }
 
         return Cache.GetOrAdd(cacheKey, _ => CreateIconFile(path, isDirectory, cacheKey));
     }

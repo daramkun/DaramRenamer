@@ -25,6 +25,6 @@ public class DeleteExtensionCommand : ICommand
         if (!ApplyToDirectory && item.IsDirectory)
             return;
 
-        item.ChangedName = item.ChangedNameWithoutExtension;
+        item.ChangedName = Path.GetFileNameWithoutExtension(item.ChangedName);
     }
 }

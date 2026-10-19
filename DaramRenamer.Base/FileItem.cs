@@ -73,8 +73,8 @@ public class FileItem : IComparable<FileItem>, INotifyPropertyChanged
         }
     }
     
-    public string ChangedNameWithoutExtension => Path.GetFileNameWithoutExtension(ChangedName);
-    public string ChangedExtension => Path.GetExtension(ChangedName);
+    public string ChangedNameWithoutExtension => IsDirectory ? ChangedName : Path.GetFileNameWithoutExtension(ChangedName);
+    public string ChangedExtension => IsDirectory ? string.Empty : Path.GetExtension(ChangedName);
 
     public FileItem(string path, bool checkIsDirectory = true)
     {

@@ -38,6 +38,6 @@ public class ReplaceExtensionCommand : ICommand
         if (!ApplyToDirectory && item.IsDirectory)
             return;
 
-        item.ChangedName = $"{item.ChangedNameWithoutExtension}{(Extension[0] != '.' ? "." : "")}{Extension}";
+        item.ChangedName = $"{Path.GetFileNameWithoutExtension(item.ChangedName)}{(Extension[0] != '.' ? "." : "")}{Extension}";
     }
 }

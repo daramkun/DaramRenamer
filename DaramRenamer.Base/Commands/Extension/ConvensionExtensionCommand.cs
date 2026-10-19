@@ -35,8 +35,8 @@ public class ConvensionExtensionCommand : ICommand
         if (!ApplyToDirectory && item.IsDirectory)
             return;
 
-        var name = item.ChangedNameWithoutExtension;
-        var ext = item.ChangedExtension;
+        var name = Path.GetFileNameWithoutExtension(item.ChangedName);
+        var ext = Path.GetExtension(item.ChangedName);
         item.ChangedName = Convension switch
         {
             ConvensionBinary.Upper => $"{name}{ext.ToUpper()}",

@@ -422,19 +422,18 @@ internal sealed class MainWindow : Window
         {
             CellTemplate = new DelegateTemplate<FileItem>(
                 _ => showIcon
-                    ? new StackPanel()
-                        .Horizontal()
-                        .Spacing(4)
+                    ? new Grid()
+                        .Columns("Auto,*")
                         .Children(
-                            new Image().Size(16, 16),
-                            MewUITheme.CellText())
+                            new Image().Size(16, 16).Margin(0, 0, 4, 0),
+                            MewUITheme.CellText().Column(1))
                     : MewUITheme.CellText(),
                 (element, item, _, _) =>
                 {
                     var text = value(item);
                     if (showIcon)
                     {
-                        var children = ((StackPanel)element).Children;
+                        var children = ((Grid)element).Children;
                         var iconPath = OperatingSystem.IsWindows()
                             ? WindowsShellIconCache.GetIconFile(item.OriginalFullPath, item.IsDirectory)
                             : string.Empty;

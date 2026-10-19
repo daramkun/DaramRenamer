@@ -22,5 +22,6 @@ internal static class MewUITheme
     public static Label CellText() => new Label()
         .FontFamily("Segoe UI")
         .FontSize(12)
+        .TextTrimming(TextTrimming.CharacterEllipsis)
         .WithTheme((theme, label) => label.Foreground(AccentFor(theme)));
 }

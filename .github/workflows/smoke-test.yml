@@ -13,14 +13,22 @@ permissions:
 
 jobs:
   smoke:
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            rid: win-x64
+          - runner: windows-11-arm
+            rid: win-arm64
+    runs-on: ${{ matrix.runner }}
     steps:
     - name: Download release
       shell: pwsh
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        gh release download "${{ inputs.version }}" -R $env:GITHUB_REPOSITORY -p "*win-x64.zip" -D dl
+        gh release download "${{ inputs.version }}" -R $env:GITHUB_REPOSITORY -p "*${{ matrix.rid }}.zip" -D dl
         Expand-Archive dl\*.zip app
 
     - name: Launch and observe

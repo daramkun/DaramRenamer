@@ -118,10 +118,25 @@ internal sealed class MainWindow : Window
 
     private async void OnMainWindowLoaded()
     {
-        _isAdministrator = await IsAdministrator();
+        try
+        {
+            _isAdministrator = await IsAdministrator();
+        }
+        catch
+        {
+            _isAdministrator = false;
+        }
+
         _updateAvailable = false;
-        if (!MewUIPreferences.Instance.DisableCheckUpdate)
-            _updateAvailable = await CheckUpdateAsync();
+        try
+        {
+            if (!MewUIPreferences.Instance.DisableCheckUpdate)
+                _updateAvailable = await CheckUpdateAsync();
+        }
+        catch
+        {
+            _updateAvailable = false;
+        }
 
         this.Title(BuildTitle(_updateAvailable, _isAdministrator));
     }

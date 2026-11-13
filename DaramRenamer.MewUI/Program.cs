@@ -12,7 +12,17 @@ internal static class Program
             return exitCode;
 
         AppDomain.CurrentDomain.UnhandledException += (_, args) =>
-            File.WriteAllText("UnhandledException.log", args.ExceptionObject?.ToString() ?? string.Empty);
+        {
+            try
+            {
+                File.WriteAllText(Path.Combine(Path.GetTempPath(), "DaramRenamer.UnhandledException.log"),
+                    args.ExceptionObject?.ToString() ?? string.Empty);
+            }
+            catch
+            {
+                // Logging must never mask the original failure.
+            }
+        };
 
         var preferences = MewUIPreferences.Instance;
         var strings = Strings.Instance;
@@ -32,9 +42,21 @@ internal static class Program
             if (OperatingSystem.IsWindows())
             {
                 application.UseWin32();
-                if (preferences.HaredwareAccelerated)
-                    application.UseDirect2D();
-                else
+                var useGdi = !preferences.HaredwareAccelerated;
+                if (!useGdi)
+                {
+                    try
+                    {
+                        application.UseDirect2D();
+                    }
+                    catch
+                    {
+                        // Direct2D is unavailable (e.g. headless VM); fall back to software rendering.
+                        useGdi = true;
+                    }
+                }
+
+                if (useGdi)
                     application.UseGdi();
             }
             else if (OperatingSystem.IsLinux())

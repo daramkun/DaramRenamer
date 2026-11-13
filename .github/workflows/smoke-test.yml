@@ -30,6 +30,7 @@ jobs:
         [Console]::OutputEncoding | Out-Null
         $p = Start-Process "app\DaramRenamer.exe" -PassThru
         Start-Sleep 10
+        $crashed = $p.HasExited
         if ($p.HasExited) {
           "EXITED code: $($p.ExitCode) (0x{0:X})" -f $p.ExitCode
         } else {
@@ -41,4 +42,4 @@ jobs:
         Get-WinEvent -FilterHashtable @{LogName='Application';StartTime=(Get-Date).AddMinutes(-5)} -ErrorAction SilentlyContinue |
           Where-Object { $_.ProviderName -in 'Application Error','.NET Runtime','Windows Error Reporting' } |
           Select-Object -First 5 | ForEach-Object { $_.Message }
-        if ($p.HasExited) { exit 1 }
+        if ($crashed) { exit 1 }

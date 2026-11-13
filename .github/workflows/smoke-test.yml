@@ -1,0 +1,44 @@
+name: Smoke test release (headless Windows)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release tag to test
+        required: true
+        default: '2026.11.1'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: windows-latest
+    steps:
+    - name: Download release
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh release download "${{ inputs.version }}" -R $env:GITHUB_REPOSITORY -p "*win-x64.zip" -D dl
+        Expand-Archive dl\*.zip app
+
+    - name: Launch and observe
+      shell: pwsh
+      run: |
+        Get-CimInstance Win32_VideoController | Select-Object Name | Format-List
+        [Console]::OutputEncoding | Out-Null
+        $p = Start-Process "app\DaramRenamer.exe" -PassThru
+        Start-Sleep 10
+        if ($p.HasExited) {
+          "EXITED code: $($p.ExitCode) (0x{0:X})" -f $p.ExitCode
+        } else {
+          "RUNNING after 10s"
+          Stop-Process $p -Force
+        }
+        Get-ChildItem "$env:TEMP\DaramRenamer.UnhandledException.log", "app\UnhandledException.log" -ErrorAction SilentlyContinue |
+          ForEach-Object { "--- $($_.FullName)"; Get-Content $_ }
+        Get-WinEvent -FilterHashtable @{LogName='Application';StartTime=(Get-Date).AddMinutes(-5)} -ErrorAction SilentlyContinue |
+          Where-Object { $_.ProviderName -in 'Application Error','.NET Runtime','Windows Error Reporting' } |
+          Select-Object -First 5 | ForEach-Object { $_.Message }
+        if ($p.HasExited) { exit 1 }

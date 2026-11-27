@@ -19,7 +19,7 @@ internal static class MewUITheme
         ? new Color(190, 184, 255)
         : Accent;
 
-    public static Label CellText() => new Label()
+    public static TextBlock CellText() => new TextBlock()
         .FontFamily("Segoe UI")
         .FontSize(12)
         .TextTrimming(TextTrimming.CharacterEllipsis)

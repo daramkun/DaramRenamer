@@ -75,6 +75,7 @@ using DaramRenamer.Registry;
 
 [assembly: CommandDefinition(typeof(AddIndexCommand), "number.add_index", "Command_Name_AddIndex", "DaramRenamer.Commands.Number.AddIndexCommand")]
 [assembly: OptionDefinition(typeof(AddIndexCommand), nameof(AddIndexCommand.Position), "Command_Argument_AddIndex_Position")]
+[assembly: OptionDefinition(typeof(AddIndexCommand), nameof(AddIndexCommand.PadZero), "Command_Argument_AddIndex_PadZero")]
 
 [assembly: CommandDefinition(typeof(DeleteNoNumberCommand), "number.delete_no_number", "Command_Name_DeleteNoNumber", "DaramRenamer.Commands.Number.DeleteNoNumberCommand")]
 [assembly: OptionDefinition(typeof(DeleteNoNumberCommand), nameof(DeleteNoNumberCommand.Wordly), "Command_Argument_DeleteNoNumber_Wordly")]

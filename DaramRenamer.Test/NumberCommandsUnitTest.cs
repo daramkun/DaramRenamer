@@ -22,6 +22,20 @@ public class NumberCommandsUnitTest
     }
 
     [TestMethod]
+    public void AddIndexCommandPadsZerosToTargetCountWidth()
+    {
+        var items = Enumerable.Range(0, 120).Select(_ => CommandTestHelpers.CreateItem("name.txt")).ToArray();
+        var command = new AddIndexCommand { PadZero = true };
+        command.SetTargets(items);
+
+        command.Apply(items[0], 0);
+        command.Apply(items[119], 119);
+
+        Assert.AreEqual("name001.txt", items[0].ChangedName);
+        Assert.AreEqual("name120.txt", items[119].ChangedName);
+    }
+
+    [TestMethod]
     public void DeleteNoNumberCommandCollectsDigitsAcrossFilename()
     {
         var item = CommandTestHelpers.CreateItem("source.txt", changedName: "A12-03.txt");

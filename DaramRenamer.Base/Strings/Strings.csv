@@ -139,6 +139,7 @@ Command_Argument_AddDate_Position,Position,추가할 위치,Positie,位置
 Command_Name_DeleteDate,Delete Date,날짜 제거,Datum wissen,删除日期
 Command_Name_AddIndex,Add Index,색인 추가,Volgnummer toevoegen,添加索引
 Command_Argument_AddIndex_Position,Position,추가할 위치,Positie,位置
+Command_Argument_AddIndex_PadZero,Pad with zeros,자릿수 맞춤 (0 채우기),Opvullen met nullen,补齐位数
 Command_Name_Increase,Increase Number,숫자 증감,Nummering,增加数量
 Command_Argument_Increase_Count,Increase,증감 숫자,Toename,增加
 Command_Argument_Increase_Position,Position,증감할 위치,Positie,位置

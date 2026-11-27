@@ -456,10 +456,10 @@ internal sealed class MainWindow : Window
                             : string.Empty;
                         if (!string.IsNullOrEmpty(iconPath))
                             ((Image)children[0]).SourceFile(iconPath);
-                        ((Label)children[1]).Text(text).ToolTip(text);
+                        ((TextBlock)children[1]).Text(text).ToolTip(text);
                     }
                     else
-                        ((Label)element).Text(text).ToolTip(text);
+                        ((TextBlock)element).Text(text).ToolTip(text);
                 })
         }
             .Header(header)

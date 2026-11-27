@@ -10,7 +10,7 @@ internal sealed class ApplyWindow : Window
     private readonly Action _refreshMainWindow;
     private readonly ConcurrentQueue<(FileItem Item, ErrorCode Error)> _pendingProgress = new();
     private readonly List<string> _failureItems = [];
-    private readonly Label _currentPath = new();
+    private readonly TextBlock _currentPath = new();
     private readonly Label _progressText = new();
     private readonly ProgressBar _progress = new();
     private readonly ListBox _failures = new();

@@ -851,6 +851,9 @@ internal sealed class MainWindow : Window
         ModalDialog.Show(editor, this);
     }
 
+    // Option values last confirmed per command, remembered for the lifetime of the process.
+    private readonly Dictionary<string, Dictionary<string, object?>> _lastCommandOptions = new();
+
     private void RunCommand(ICommand? command, FileItem? designatedFile = null)
     {
         if (command is null)
@@ -862,12 +865,19 @@ internal sealed class MainWindow : Window
 
         var targetCommand = command;
         var hasOptions = descriptor?.Options.Count > 0;
+        if (descriptor is not null && hasOptions && _lastCommandOptions.TryGetValue(descriptor.Id, out var lastOptions))
+            foreach (var option in descriptor.Options)
+                if (lastOptions.TryGetValue(option.Id, out var value))
+                    option.SetValue(targetCommand, value);
         var snapshot = _undoManager.SaveTemporary(FileItem.Files);
         Action<bool> complete = accepted =>
         {
             FileItem.Files = _undoManager.LoadTemporary(snapshot);
             if (accepted)
             {
+                if (descriptor is not null && hasOptions)
+                    _lastCommandOptions[descriptor.Id] = descriptor.Options
+                        .ToDictionary(option => option.Id, option => option.GetValue(targetCommand));
                 _undoManager.SaveToUndoStack(FileItem.Files);
                 ApplyCommand(targetCommand, designatedFile);
             }
